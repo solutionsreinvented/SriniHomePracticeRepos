@@ -1,0 +1,17 @@
+﻿<Window x:Class="SRi.AppsWithDatabases.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SRi.AppsWithDatabases"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Expander Header="Expander" HorizontalAlignment="Left" Height="100" Margin="555,189,0,0" VerticalAlignment="Top" Width="100">
+            <Grid Background="#FFE5E5E5"/>
+        </Expander>
+        <DataGrid HorizontalAlignment="Left" Height="100" Margin="193,133,0,0" VerticalAlignment="Top" Width="100"/>
+        <Slider HorizontalAlignment="Left" Margin="193,323,0,0" VerticalAlignment="Top" Width="462"/>
+
+    </Grid>
+</Window>
