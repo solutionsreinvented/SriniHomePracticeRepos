@@ -65,7 +65,7 @@ namespace AllCorePracticeApp
                 brushDictionary.Add((ResourceKey)Enum.Parse(typeof(ResourceKey), key), ParseStringToBrush(deserialized[key]));
             }
 
-            Background = brushDictionary[ResourceKey.DisabledForeground];
+            ///Background = brushDictionary[ResourceKey.DisabledForeground];
 
         }
 
