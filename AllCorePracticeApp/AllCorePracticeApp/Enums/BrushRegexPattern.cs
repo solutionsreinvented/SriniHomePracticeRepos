@@ -2,7 +2,7 @@
 
 namespace AllCorePracticeApp.Enums
 {
-    public enum GradientRegexPattern
+    public enum BrushRegexPattern
     {
         /// The RegEx used in this description is partial and only checks for integer values 0-360 with word boundaries
         /// and also does not omit the negative values. So this needs to updated to cater for gradient stops and fractional portion of the angle.
@@ -13,6 +13,8 @@ namespace AllCorePracticeApp.Enums
         GradientStopsOnly,
 
         ///[Description(@"(#[0-9,A-F]{6,8} [0-1]\.[0-9]+)+")]
-        GradientStopsWithStartAndEndPoint
+        GradientStopsWithStartAndEndPoints,
+        [Description(@"^#(?:[A-F0-9]{6}|[A-F0-9]{8})$")]
+        SolidColor
     }
 }

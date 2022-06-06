@@ -27,11 +27,11 @@ namespace AllCorePracticeApp
 
         }
 
-        private Dictionary<GradientRegexPattern, string> GetPatternsCollection()
+        private Dictionary<BrushRegexPattern, string> GetPatternsCollection()
         {
-            var patternCollection = new Dictionary<GradientRegexPattern, string>();
+            var patternCollection = new Dictionary<BrushRegexPattern, string>();
 
-            foreach (GradientRegexPattern patternKey in Enum.GetValues(typeof(GradientRegexPattern)))
+            foreach (BrushRegexPattern patternKey in Enum.GetValues(typeof(BrushRegexPattern)))
             {
                 string patternDescription = patternKey.GetDescription();
                 patternCollection.Add(patternKey, patternDescription);
