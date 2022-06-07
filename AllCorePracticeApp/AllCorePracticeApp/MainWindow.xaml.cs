@@ -1,4 +1,5 @@
 ﻿using AllCorePracticeApp.Enums;
+using AllCorePracticeApp.Extensions;
 using ReInvented.Shared;
 using SRi.XamlUIThickenerApp.DataAccess;
 using System;
@@ -27,13 +28,13 @@ namespace AllCorePracticeApp
 
         }
 
-        private Dictionary<BrushRegexPattern, string> GetPatternsCollection()
+        private Dictionary<BrushKind, string> GetPatternsCollection()
         {
-            var patternCollection = new Dictionary<BrushRegexPattern, string>();
+            var patternCollection = new Dictionary<BrushKind, string>();
 
-            foreach (BrushRegexPattern patternKey in Enum.GetValues(typeof(BrushRegexPattern)))
+            foreach (BrushKind patternKey in Enum.GetValues(typeof(BrushKind)))
             {
-                string patternDescription = patternKey.GetDescription();
+                string patternDescription = patternKey.GetRegularExpression(); ///patternKey.GetDescription();
                 patternCollection.Add(patternKey, patternDescription);
             }
 

@@ -1,10 +1,10 @@
 {
   "DisabledForeground": "#990000 0.1 #FF5B00 0.295 #D4D925 0.306 #FFEE63 0.415 #C0FCEC 0.587 #CFCFC0 0.670 #F0FCEC 0.730 #C0FCEC 0.850 #CFCFC0 1.0",
-  "StaticBackground": "#FFFFFF 0.2 #00FFCC 0.65 #FC2829 1.0",
+  "StaticBackground": "#0E1013",
   "MouseOverBackground": "#A2AEFF",
   "PressedBackground": "#C3CFC3",
   "DisabledBackground": "#CACACB",
-  "StaticForeground": "#F0FCEC 0.2 #C0FCEC 0.65 #CFCFC0 1.0",
+  "StaticForeground": "#80868B",
   "MouseOverForeground": "#896598",
   "PressedForeground": "#888988"
   ///"Foreground": "#882626 (0.5, 0.1)"

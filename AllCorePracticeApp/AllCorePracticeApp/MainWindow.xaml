@@ -16,6 +16,7 @@
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
@@ -23,7 +24,8 @@
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
-            <RowDefinition Height="3*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
 
         <Button
@@ -64,6 +66,27 @@
                 </ContentControl.Resources>
             </ContentControl>
         </Grid>
+
+        <StackPanel Grid.Row="3">
+            <TextBox
+                Width="200"
+                Height="28"
+                Margin="0,0,0,10"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Style="{StaticResource TextBoxWithPlaceHolderStyle}"
+                Tag="Email" />
+
+            <TextBox
+                Width="200"
+                Height="28"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                ap:TextBlockPlaceHolderProperty.Value="Password"
+                Style="{StaticResource TextBoxWithPlaceHolderStyle}"
+                Tag="Password" />
+
+        </StackPanel>
 
     </Grid>
 
