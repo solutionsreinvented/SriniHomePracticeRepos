@@ -1,15 +1,20 @@
 ﻿using AllCorePracticeApp.Enums;
 using AllCorePracticeApp.Extensions;
-using ReInvented.Shared;
-using SRi.XamlUIThickenerApp.DataAccess;
+
+using ReInvented.DataAccess;
+using ReInvented.Shared.Attributes;
+
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
+
+using static System.Environment;
 
 namespace AllCorePracticeApp
 {
@@ -43,9 +48,13 @@ namespace AllCorePracticeApp
 
         private void GenerateGradientBrush()
         {
+            var appDataDirectory = GetFolderPath(SpecialFolder.LocalApplicationData);
+
+
+
             Dictionary<ResourceKey, Brush> brushDictionary;
 
-            var path = @"C:\Users\srini\source\repos\AllCorePracticeApp\AllCorePracticeApp\Json\Default.json";
+            var path = @"C:\Source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\Json\Default.json";
 
             var gradientStops = new GradientStopCollection()
             {

@@ -11,11 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="ReInvented.Shared">
-      <HintPath>..\..\..\local-source\ProdActivity\ReInvented.Shared.dll</HintPath>
+    <Reference Include="ReInvented.DataAccess">
+      <HintPath>..\..\..\..\Users\masanams\Desktop\ReInvented.DataAccess.dll</HintPath>
     </Reference>
-    <Reference Include="SRi.XamlUIThickenerApp.DataAccess">
-      <HintPath>..\..\..\local-source\ProdActivity\SRi.XamlUIThickenerApp.DataAccess.dll</HintPath>
+    <Reference Include="ReInvented.Shared">
+      <HintPath>..\..\..\..\Users\masanams\Desktop\ReInvented.Shared.dll</HintPath>
     </Reference>
   </ItemGroup>
 

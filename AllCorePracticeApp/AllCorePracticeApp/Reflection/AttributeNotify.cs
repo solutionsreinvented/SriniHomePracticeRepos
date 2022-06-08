@@ -1,4 +1,4 @@
-﻿using ReInvented.Shared.Store;
+﻿using ReInvented.Shared.Stores;
 
 namespace AllCorePracticeApp.Reflection
 {
