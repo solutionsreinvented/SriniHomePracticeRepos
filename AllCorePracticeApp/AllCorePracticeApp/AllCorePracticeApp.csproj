@@ -12,10 +12,10 @@
 
   <ItemGroup>
     <Reference Include="ReInvented.DataAccess">
-      <HintPath>..\..\..\..\Users\masanams\Desktop\ReInvented.DataAccess.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\ReInvented.DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.Shared">
-      <HintPath>..\..\..\..\Users\masanams\Desktop\ReInvented.Shared.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\ReInvented.Shared.dll</HintPath>
     </Reference>
   </ItemGroup>
 

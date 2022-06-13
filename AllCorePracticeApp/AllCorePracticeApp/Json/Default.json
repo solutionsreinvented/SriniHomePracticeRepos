@@ -1,7 +1,7 @@
 {
   "DisabledForeground": "#990000 0.1 #FF5B00 0.295 #D4D925 0.306 #FFEE63 0.415 #C0FCEC 0.587 #CFCFC0 0.670 #F0FCEC 0.730 #C0FCEC 0.850 #CFCFC0 1.0",
   "StaticBackground": "#0E1013",
-  "MouseOverBackground": "#A2AEFF",
+  "MouseOverBackground": "#990000 0.1 #FF5B00 0.295 #D4D925 0.306 (0.1 0.0) (1.0 1.0)",
   "PressedBackground": "#C3CFC3",
   "DisabledBackground": "#CACACB",
   "StaticForeground": "#80868B",
