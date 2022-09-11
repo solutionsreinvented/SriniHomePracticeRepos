@@ -18,7 +18,19 @@
 
     <Grid>
 
-        <ContentControl Content="{Binding CurrentViewModel}" />
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+
+        <ContentControl Grid.Row="0" Content="{Binding CurrentViewModel}" />
+
+        <DataGrid
+            Grid.Row="1"
+            Margin="20"
+            AutoGenerateColumns="True"
+            ItemsSource="{Binding C.Flats}" />
 
     </Grid>
 </Window>

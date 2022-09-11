@@ -45,7 +45,7 @@ namespace ApartmentFinanceManager.Models
         /// <summary>
         /// Flat number.
         /// </summary>
-        public int Number { get => Get<int>(); set => Set(value); }
+        public string Number { get => Get<string>(); set => Set(value); }
 
         public string OwnedBy { get => Get<string>(); set => Set(value); }
 
