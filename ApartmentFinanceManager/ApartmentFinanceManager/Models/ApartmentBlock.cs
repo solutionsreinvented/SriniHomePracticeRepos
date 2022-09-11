@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace ApartmentFinanceManager.Models
 {
-    public class Block : PropertyStore
+    public class ApartmentBlock : PropertyStore
     {
-        public Block()
+        public ApartmentBlock()
         {
 
         }

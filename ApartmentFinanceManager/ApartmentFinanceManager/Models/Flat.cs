@@ -9,30 +9,30 @@ namespace ApartmentFinanceManager.Models
 {
     public class Flat : PropertyStore
     {
-        private readonly Block _block;
+        private readonly ApartmentBlock _block;
 
         #region Constructors
 
-        public Flat(Block block, string ownedBy)
+        public Flat(ApartmentBlock block, string ownedBy)
             : this(block, ownedBy, DateTime.Today)
         {
 
         }
 
-        public Flat(Block block, string ownedBy, DateTime accountOpenedOn)
+        public Flat(ApartmentBlock block, string ownedBy, DateTime accountOpenedOn)
         {
             _block = block;
             OwnedBy = ownedBy;
             AccountOpenedOn = accountOpenedOn;
         }
 
-        public Flat(Block block, string ownedBy, string coOwnedBy)
+        public Flat(ApartmentBlock block, string ownedBy, string coOwnedBy)
             : this(block, ownedBy, coOwnedBy, DateTime.Today)
         {
 
         }
 
-        public Flat(Block block, string ownedBy, string coOwnedBy, DateTime accountOpenedOn)
+        public Flat(ApartmentBlock block, string ownedBy, string coOwnedBy, DateTime accountOpenedOn)
         {
             _block = block;
             OwnedBy = ownedBy;

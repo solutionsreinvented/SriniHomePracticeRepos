@@ -6,11 +6,11 @@ using ApartmentFinanceManager.Models;
 
 namespace ApartmentFinanceManager.Services
 {
-    internal static class GenerateBlockInitialData
+    internal static class BlockInitialDataProvider
     {
-        public static Block Generate()
+        public static ApartmentBlock Generate()
         {
-            var block = new Block() { Name = "C" };
+            var block = new ApartmentBlock() { Name = "C" };
 
             List<Flat> flats = new List<Flat>()
             {

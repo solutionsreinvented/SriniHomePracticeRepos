@@ -12,25 +12,12 @@
     DataContext="{DynamicResource MainViewModel}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+
     <Window.Resources>
         <vm:MainViewModel x:Key="MainViewModel" />
     </Window.Resources>
 
     <Grid>
-
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-
-
         <ContentControl Grid.Row="0" Content="{Binding CurrentViewModel}" />
-
-        <DataGrid
-            Grid.Row="1"
-            Margin="20"
-            AutoGenerateColumns="True"
-            ItemsSource="{Binding C.Flats}" />
-
     </Grid>
 </Window>
