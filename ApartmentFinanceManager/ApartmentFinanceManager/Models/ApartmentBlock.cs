@@ -1,4 +1,4 @@
-﻿using ReInvented.Shared.Store;
+﻿using ReInvented.Shared.Stores;
 using System.Collections.Generic;
 
 namespace ApartmentFinanceManager.Models

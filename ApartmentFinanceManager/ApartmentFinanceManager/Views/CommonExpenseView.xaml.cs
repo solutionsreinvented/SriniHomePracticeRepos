@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ApartmentFinanceManager.Views
 {
     /// <summary>
-    /// Interaction logic for AddPaymentView.xaml
+    /// Interaction logic for CommonExpenseView.xaml
     /// </summary>
-    public partial class AddPaymentView : UserControl
+    public partial class CommonExpenseView : UserControl
     {
-        public AddPaymentView()
+        public CommonExpenseView()
         {
             InitializeComponent();
         }

@@ -1,0 +1,8 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shared="http://schemas.reinvented.com/shared">
+    <Style TargetType="{x:Type TextBox}">
+        <Setter Property="shared:TextBoxProperties.SelectAll" Value="True" />
+    </Style>
+</ResourceDictionary>

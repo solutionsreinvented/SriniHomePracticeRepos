@@ -2,14 +2,17 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="ReInvented.DataAccess">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\ApplicationData\Libraries\ReInvented.DataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="ReInvented.Shared">
-      <HintPath>..\..\..\local-source\ProdActivity\ReInvented.Shared.dll</HintPath>
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\ApplicationData\Libraries\ReInvented.Shared.dll</HintPath>
     </Reference>
   </ItemGroup>
 

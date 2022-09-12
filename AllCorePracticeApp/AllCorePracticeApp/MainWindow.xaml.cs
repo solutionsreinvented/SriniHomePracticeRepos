@@ -66,7 +66,7 @@ namespace AllCorePracticeApp
 
             JsonDataSerializer<Dictionary<string, string>> serializer = new JsonDataSerializer<Dictionary<string, string>>();
 
-            var deserialized = serializer.Deserialiaze(path);
+            var deserialized = serializer.Deserialize(path);
 
             brushDictionary = new Dictionary<ResourceKey, Brush>();
 

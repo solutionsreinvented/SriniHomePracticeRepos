@@ -2,7 +2,7 @@
 
 using ApartmentFinanceManager.Enums;
 
-using ReInvented.Shared.Store;
+using ReInvented.Shared.Stores;
 
 namespace ApartmentFinanceManager.Models
 {
@@ -13,26 +13,26 @@ namespace ApartmentFinanceManager.Models
 
         }
 
-        public Expense(ExpenseCategory expenseCategory, decimal amount)
-            : this(expenseCategory, amount, DateOnly.FromDateTime(DateTime.Today))
+        public Expense(TransactionCategory expenseCategory, decimal amount)
+            : this(expenseCategory, amount, DateTime.Today)
         {
 
         }
 
-        public Expense(ExpenseCategory expenseCategory, decimal amount, DateOnly occuredOn)
+        public Expense(TransactionCategory expenseCategory, decimal amount, DateTime occuredOn)
         {
             ExpenseCategory = expenseCategory;
             Amount = amount;
             OccuredOn = occuredOn;
         }
         /// <summary>
-        /// Date(only) on which the expenditure is recorded.
+        /// Date on which the expenditure is recorded.
         /// </summary>
-        public DateOnly OccuredOn { get => Get<DateOnly>(); set => Set(value); }
+        public DateTime OccuredOn { get => Get(DateTime.Today); set => Set(value); }
         /// <summary>
-        /// Category <see cref="Enums.ExpenseCategory"/> of the expense.
+        /// Category <see cref="TransactionCategory"/> of the expense.
         /// </summary>
-        public ExpenseCategory ExpenseCategory { get => Get(ExpenseCategory.Maintenance); set => Set(value); }
+        public TransactionCategory ExpenseCategory { get => Get(TransactionCategory.Maintenance); set => Set(value); }
         /// <summary>
         /// Amount spent.
         /// </summary>
