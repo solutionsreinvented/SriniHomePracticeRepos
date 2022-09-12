@@ -5,13 +5,22 @@ namespace ApartmentFinanceManager.Models
 {
     public class ApartmentBlock : PropertyStore
     {
+        #region Default Constructor
+
         public ApartmentBlock()
         {
 
         }
 
-        public string Name { get; set; }
+        #endregion
 
-        public List<Flat> Flats { get; set; }
+        #region Public Properties
+
+        public string Name { get => Get<string>(); set => Set(value); }
+
+        public List<Flat> Flats { get => Get<List<Flat>>(); set => Set(value); }
+
+        #endregion
+
     }
 }

@@ -18,7 +18,10 @@
         <vm:MainViewModel x:Key="MainViewModel" />
     </Window.Resources>
 
-    <Grid Margin="25">
+    <Grid
+        MaxWidth="750"
+        MaxHeight="650"
+        Margin="25">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
@@ -29,7 +32,8 @@
         <UniformGrid
             Grid.Row="1"
             Width="300"
-            HorizontalAlignment="Right"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
             Columns="2">
             <Button
                 Height="26"

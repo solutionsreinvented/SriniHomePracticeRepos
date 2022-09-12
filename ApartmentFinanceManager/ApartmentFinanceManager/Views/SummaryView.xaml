@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
     MinWidth="650"
     MinHeight="500"
     MaxWidth="850"
@@ -33,7 +34,11 @@
 
         <!--#endregion-->
 
-        <Grid MaxWidth="750" Margin="5,10">
+        <Grid
+            MaxWidth="750"
+            Margin="5,10"
+            HorizontalAlignment="Center"
+            Visibility="{Binding ShowContent, Converter={shared:BoolToVisibilityConverter}}">
 
             <!--#region Grid Definitions-->
 
@@ -122,23 +127,27 @@
                 <Button
                     Height="24"
                     Margin="0,0,10,0"
+                    Padding="10,0"
                     Command="{Binding AddExpenseCommand}"
                     Content="Add Expense to Flat"
                     IsEnabled="{Binding CanProcessFlat}" />
 
                 <Button
                     Margin="10,0"
+                    Padding="10,0"
                     Command="{Binding AddPaymentCommand}"
                     Content="Add Payment by Flat"
                     IsEnabled="{Binding CanProcessFlat}" />
 
                 <Button
                     Margin="10,0"
+                    Padding="10,0"
                     Command="{Binding AddCommonExpenseCommand}"
                     Content="Add Common Expense" />
 
                 <Button
                     Margin="10,0,0,0"
+                    Padding="10,0"
                     Command="{Binding GenerateReportCommand}"
                     Content="Generate Summary"
                     IsEnabled="{Binding CanProcessFlat}" />

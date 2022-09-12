@@ -1,9 +1,8 @@
 ﻿using ApartmentFinanceManager.Enums;
-
+using Newtonsoft.Json;
 using ReInvented.Shared.Stores;
 
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -11,7 +10,11 @@ namespace ApartmentFinanceManager.Models
 {
     public class Flat : PropertyStore
     {
+        #region Private Fields
+
         private readonly ApartmentBlock _block;
+
+        #endregion
 
         #region Constructors
 
@@ -26,7 +29,7 @@ namespace ApartmentFinanceManager.Models
 
         }
 
-        public Flat(ApartmentBlock block, string ownedBy, DateTime accountOpenedOn) 
+        public Flat(ApartmentBlock block, string ownedBy, DateTime accountOpenedOn)
             : this()
         {
             _block = block;
@@ -40,7 +43,7 @@ namespace ApartmentFinanceManager.Models
 
         }
 
-        public Flat(ApartmentBlock block, string ownedBy, string coOwnedBy, DateTime accountOpenedOn) 
+        public Flat(ApartmentBlock block, string ownedBy, string coOwnedBy, DateTime accountOpenedOn)
             : this()
         {
             _block = block;
@@ -50,6 +53,8 @@ namespace ApartmentFinanceManager.Models
         }
 
         #endregion
+
+        #region Public Properties
 
         /// <summary>
         /// Flat number.
@@ -72,10 +77,6 @@ namespace ApartmentFinanceManager.Models
         /// </summary>
         public ResidentType ResidentType { get => Get(ResidentType.Owner); set => Set(value); }
         /// <summary>
-        /// Provides the complete description of the flat.
-        /// </summary>
-        public string Description => $"{_block?.Name}{Number}";
-        /// <summary>
         /// Date on which the flat account is started.
         /// </summary>
         public DateTime AccountOpenedOn { get => Get<DateTime>(); set => Set(value); }
@@ -88,14 +89,6 @@ namespace ApartmentFinanceManager.Models
         /// </summary>
         public decimal OpeningBalance { get => Get<decimal>(); set => Set(value); }
         /// <summary>
-        /// Outstanding balance pending as on the selected date.
-        /// </summary>
-        public decimal OutstandingOnSpecifiedDate => GetOutstandingBalanceOnSpecifiedDate(DateSpecified);
-        /// <summary>
-        /// Outstanding balance pending calculated till date.
-        /// </summary>
-        public decimal OutstandingTillDate => GetOutstandingBalanceOnSpecifiedDate();
-        /// <summary>
         /// Keeps track of the all the expenses occured for this flat.
         /// </summary>
         public ObservableCollection<Expense> Expenses { get => Get<ObservableCollection<Expense>>(); set => Set(value); }
@@ -103,6 +96,51 @@ namespace ApartmentFinanceManager.Models
         /// Keeps track of the all the payments made by the flat owner.
         /// </summary>
         public ObservableCollection<Payment> Payments { get => Get<ObservableCollection<Payment>>(); set => Set(value); }
+
+        #endregion
+
+        #region Read-only Properties
+
+        /// <summary>
+        /// Provides the complete description of the flat.
+        /// </summary>
+        [JsonProperty]
+        public string Description => $"{_block?.Name}{Number}";
+        /// <summary>
+        /// Outstanding balance pending as on the selected date.
+        /// </summary>
+        public decimal OutstandingOnSpecifiedDate => GetOutstandingBalanceOnSpecifiedDate(DateSpecified);
+        /// <summary>
+        /// Outstanding balance pending calculated till date.
+        /// </summary>
+        public decimal OutstandingTillDate => GetOutstandingBalanceOnSpecifiedDate();
+
+        #endregion
+
+        public bool HasAMatchingExistingExpense(Expense expense)
+        {
+            bool hasAMatch = false;
+
+            if (Expenses != null)
+            {
+                hasAMatch = Expenses.FirstOrDefault(e => e.OccuredOn == expense.OccuredOn &&
+                                                         e.Amount == expense.Amount &&
+                                                         e.Category == expense.Category) != null;
+            }
+
+            return hasAMatch;
+        }
+
+        public void AddExpense(Expense expense)
+        {
+            if (Expenses == null)
+            {
+                Expenses = new ObservableCollection<Expense>();
+            }
+
+            Expenses.Add(expense);
+        }
+
 
         #region Helper Methods
 
@@ -123,7 +161,7 @@ namespace ApartmentFinanceManager.Models
                                                     - paymentsTillSpecifiedDate;
 
             return outstandingOnSpecifiedDate;
-        } 
+        }
 
         #endregion
     }

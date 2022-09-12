@@ -13,7 +13,7 @@ namespace ApartmentFinanceManager.ViewModels
 
         #region Private Fields
 
-        private readonly BaseViewModel _sender;
+        private readonly SummaryViewModel _sender;
         private readonly NavigationService _navigationService;
 
         #endregion
@@ -28,7 +28,7 @@ namespace ApartmentFinanceManager.ViewModels
                                       ApartmentBlock apartmentToBeProcessed)
             : this()
         {
-            _sender = sender;
+            _sender = (SummaryViewModel)sender;
             _navigationService = navigationService;
 
             ApartmentBlockToBeProcessed = apartmentToBeProcessed;

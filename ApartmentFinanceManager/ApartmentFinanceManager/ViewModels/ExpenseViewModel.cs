@@ -4,6 +4,7 @@ using ApartmentFinanceManager.Services;
 using ReInvented.Shared.Commands;
 
 using System;
+using System.Linq;
 using System.Windows.Input;
 
 namespace ApartmentFinanceManager.ViewModels
@@ -12,7 +13,7 @@ namespace ApartmentFinanceManager.ViewModels
     {
         #region Private Fields
 
-        private readonly BaseViewModel _sender;
+        private readonly SummaryViewModel _sender;
         private readonly NavigationService _navigationService;
 
         #endregion
@@ -31,7 +32,7 @@ namespace ApartmentFinanceManager.ViewModels
         public ExpenseViewModel(BaseViewModel sender, NavigationService navigationService, Flat flatToBeProcessed)
             : this()
         {
-            _sender = sender;
+            _sender = (SummaryViewModel)sender;
             _navigationService = navigationService;
             FlatToBeProcessed = flatToBeProcessed;
         }
@@ -63,7 +64,15 @@ namespace ApartmentFinanceManager.ViewModels
 
         private void OnSaveExpense()
         {
-            throw new NotImplementedException();
+            Flat? senderFlat = _sender.ApartmentBlock.Flats.FirstOrDefault(f => f.Description == FlatToBeProcessed.Description);
+
+            if (!senderFlat.HasAMatchingExistingExpense(Expense))
+            {
+                senderFlat.AddExpense(Expense);
+            }
+
+            _navigationService.CurrentViewModel = _sender;
+
         }
 
         #endregion

@@ -30,15 +30,14 @@ namespace ApartmentFinanceManager.ViewModels
         public SummaryViewModel(NavigationService navigationService) : this()
         {
             _navigationService = navigationService;
-            ApartmentBlock = BlockInitialDataProvider.Generate();
+            ///ApartmentBlock = BlockInitialDataProvider.Generate();
         }
 
         #endregion
 
-
         #region Public Properties
 
-        public ApartmentBlock ApartmentBlock { get => Get<ApartmentBlock>(); set => Set(value); }
+        public ApartmentBlock ApartmentBlock { get => Get<ApartmentBlock>(); set { Set(value); ShowContent = value != null; } }
 
         public Flat SelectedFlat
         {
@@ -51,6 +50,7 @@ namespace ApartmentFinanceManager.ViewModels
         }
 
         public bool CanProcessFlat { get => Get<bool>(); set => Set(value); }
+        public bool ShowContent { get => Get<bool>(); set => Set(value); }
 
         #endregion
 

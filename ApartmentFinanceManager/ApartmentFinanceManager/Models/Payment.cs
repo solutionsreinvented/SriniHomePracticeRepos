@@ -22,7 +22,7 @@ namespace ApartmentFinanceManager.Models
         public Payment(TransactionCategory paymentCategory, decimal amount, DateTime receivedOn)
             : this()
         {
-            PaymentCategory = paymentCategory;
+            Category = paymentCategory;
             Amount = amount;
             ReceivedOn = receivedOn;
         }
@@ -34,7 +34,7 @@ namespace ApartmentFinanceManager.Models
         /// <summary>
         /// Category <see cref="TransactionCategory"/> of the payment.
         /// </summary>
-        public TransactionCategory PaymentCategory { get => Get(TransactionCategory.Maintenance); set => Set(value); }
+        public TransactionCategory Category { get => Get(TransactionCategory.Maintenance); set => Set(value); }
         /// <summary>
         /// Amount spent.
         /// </summary>
