@@ -3,7 +3,6 @@ using ApartmentFinanceManager.Services;
 
 using ReInvented.Shared.Commands;
 
-using System;
 using System.Windows.Input;
 
 namespace ApartmentFinanceManager.ViewModels
@@ -70,19 +69,19 @@ namespace ApartmentFinanceManager.ViewModels
 
         private void OnAddExpense()
         {
-            ExpenseViewModel addExpenseViewModel = new ExpenseViewModel(this, _navigationService, SelectedFlat);
-            _navigationService.CurrentViewModel = addExpenseViewModel;
+            ExpenseViewModel expenseViewModel = new ExpenseViewModel(this, _navigationService, SelectedFlat);
+            _navigationService.CurrentViewModel = expenseViewModel;
         }
 
         private void OnAddPayment()
         {
-            PaymentViewModel addPaymentViewModel = new PaymentViewModel(this, _navigationService, SelectedFlat);
-            _navigationService.CurrentViewModel = addPaymentViewModel;
+            PaymentViewModel paymentViewModel = new PaymentViewModel(this, _navigationService, SelectedFlat);
+            _navigationService.CurrentViewModel = paymentViewModel;
         }
 
         private void OnAddCommonExpense()
         {
-            CommonExpenseViewModel commonExpenseViewModel = new CommonExpenseViewModel(this, _navigationService, ApartmentBlock);
+            CommonExpenseViewModel commonExpenseViewModel = new CommonExpenseViewModel(this, _navigationService);
             _navigationService.CurrentViewModel = commonExpenseViewModel;
         }
 

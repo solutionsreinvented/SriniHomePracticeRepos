@@ -3,6 +3,8 @@ using ApartmentFinanceManager.Services;
 
 using ReInvented.Shared.Commands;
 
+using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ApartmentFinanceManager.ViewModels
@@ -11,7 +13,7 @@ namespace ApartmentFinanceManager.ViewModels
     {
         #region Private Fields
 
-        private readonly BaseViewModel _sender;
+        private readonly SummaryViewModel _sender;
         private readonly NavigationService _navigationService;
 
         #endregion
@@ -27,7 +29,7 @@ namespace ApartmentFinanceManager.ViewModels
 
         #region Parameterized Constructor
 
-        public PaymentViewModel(BaseViewModel sender, NavigationService navigationService, Flat flatToBeProcessed)
+        public PaymentViewModel(SummaryViewModel sender, NavigationService navigationService, Flat flatToBeProcessed)
             : this()
         {
             _sender = sender;
@@ -50,18 +52,55 @@ namespace ApartmentFinanceManager.ViewModels
 
         public ICommand SavePaymentCommand { get; set; }
 
-        public ICommand CancelCommand { get; set; }
+        public ICommand AddExpenseCommand { get; set; }
+
+        public ICommand AddCommonExpenseCommand { get; set; }
+
+        public ICommand GenerateReportCommand { get; set; }
+
+        public ICommand GoToSummaryCommand { get; set; }
 
         #endregion
 
         #region Command Handlers
 
-        private void OnCancel()
+        private void OnSavePayment()
         {
-            _navigationService.CurrentViewModel = _sender;
+            Flat targetFlat = _sender.ApartmentBlock.Flats.FirstOrDefault(f => f.Description == FlatToBeProcessed.Description);
+
+            if (!targetFlat.ContainsSimilar(Payment))
+            {
+                AddPaymentTo(targetFlat);
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("It appears that the entry already exists. Do you still want to add this?", "Duplicate entry identified", MessageBoxButton.YesNo);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    AddPaymentTo(targetFlat);
+                }
+            }
         }
 
-        private void OnSavePayment()
+        private void OnAddExpense()
+        {
+            ExpenseViewModel expenseViewModel = new ExpenseViewModel(_sender, _navigationService, FlatToBeProcessed);
+            _navigationService.CurrentViewModel = expenseViewModel;
+        }
+
+        private void OnAddCommonExpense()
+        {
+            CommonExpenseViewModel commonExpenseViewModel = new CommonExpenseViewModel(_sender, _navigationService);
+            _navigationService.CurrentViewModel = commonExpenseViewModel;
+        }
+
+        private void OnGenerateReport()
+        {
+
+        }
+
+        private void OnGoToSummary()
         {
             _navigationService.CurrentViewModel = _sender;
         }
@@ -74,7 +113,20 @@ namespace ApartmentFinanceManager.ViewModels
         {
             Payment = new Payment();
             SavePaymentCommand = new RelayCommand(OnSavePayment, true);
-            CancelCommand = new RelayCommand(OnCancel, true);
+            AddExpenseCommand = new RelayCommand(OnAddExpense, true);
+            AddCommonExpenseCommand = new RelayCommand(OnAddCommonExpense, true);
+
+            GenerateReportCommand = new RelayCommand(OnGenerateReport, true);
+            GoToSummaryCommand = new RelayCommand(OnGoToSummary, true);
+        }
+
+        private void AddPaymentTo(Flat flat)
+        {
+            flat.AddPayment(Payment);
+
+            _ = MessageBox.Show("Payment added successfully!", "Entry successful", MessageBoxButton.OK);
+
+            Payment = new Payment();
         }
 
         #endregion

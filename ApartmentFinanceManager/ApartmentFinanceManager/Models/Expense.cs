@@ -19,14 +19,14 @@ namespace ApartmentFinanceManager.Models
 
         #region Paramterized Constructors
 
-        public Expense(TransactionCategory expenseCategory, decimal amount)
-            : this(expenseCategory, amount, DateTime.Today)
+        public Expense(TransactionCategory category, decimal amount)
+            : this(category, amount, DateTime.Today)
         {
 
         }
-        public Expense(TransactionCategory expenseCategory, decimal amount, DateTime occuredOn)
+        public Expense(TransactionCategory category, decimal amount, DateTime occuredOn)
         {
-            Category = expenseCategory;
+            Category = category;
             Amount = amount;
             OccuredOn = occuredOn;
         }
@@ -38,7 +38,7 @@ namespace ApartmentFinanceManager.Models
         /// <summary>
         /// Date on which the expenditure is recorded.
         /// </summary>
-        public DateTime OccuredOn { get => Get(DateTime.Today); set => Set(value); }
+        public DateTime OccuredOn { get => Get(DateTime.Today); set { Set(value); RaisePropertyChanged(nameof(IsDataValid)); } }
         /// <summary>
         /// Category <see cref="TransactionCategory"/> of the expense.
         /// </summary>
@@ -46,8 +46,42 @@ namespace ApartmentFinanceManager.Models
         /// <summary>
         /// Amount spent.
         /// </summary>
-        public decimal Amount { get => Get<decimal>(); set => Set(value); }
+        public decimal Amount { get => Get<decimal>(); set { Set(value); RaisePropertyChanged(nameof(IsDataValid)); } }
+
+        public bool IsDataValid => OccuredOn <= DateTime.Today && Amount > 0.0m;
 
         #endregion
+
+        #region Equality
+
+        public override int GetHashCode()
+        {
+            return $"{OccuredOn}{Category}{Amount}".GetHashCode();
+        }
+
+        public bool Equals(Expense expense)
+        {
+            return expense != null &&
+                   OccuredOn == expense.OccuredOn && Category == expense.Category && Amount == expense.Amount;
+        }
+
+
+        public override bool Equals(object obj)
+        {
+            return !(obj is null) && obj is Expense expense && Equals(expense);
+        }
+
+        public static bool operator ==(Expense a, Expense b)
+        {
+            return ReferenceEquals(a, b) || (!(a is null) && !(b is null) && a.Equals(b));
+        }
+
+        public static bool operator !=(Expense a, Expense b)
+        {
+            return !(a == b);
+        }
+
+        #endregion
+
     }
 }

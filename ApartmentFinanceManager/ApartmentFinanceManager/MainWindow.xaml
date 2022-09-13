@@ -10,43 +10,122 @@
     Height="650"
     Background="#4a4e69"
     DataContext="{DynamicResource MainViewModel}"
+    MouseDown="OnMouseDown"
+    ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowState="Maximized"
+    WindowStyle="None"
     mc:Ignorable="d">
 
     <Window.Resources>
         <vm:MainViewModel x:Key="MainViewModel" />
     </Window.Resources>
 
-    <Grid
-        MaxWidth="750"
-        MaxHeight="650"
-        Margin="25">
+    <Grid>
+
+        <!--#region Grid Definitions-->
+
         <Grid.RowDefinitions>
-            <RowDefinition />
             <RowDefinition Height="Auto" />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
-        <ContentControl Grid.Row="0" Content="{Binding CurrentViewModel}" />
+        <!--#endregion-->
 
-        <UniformGrid
+        <!--#region Window Header-->
+
+        <Grid Height="38" Background="#22223b">
+
+            <!--#region Main Menu-->
+
+            <Menu
+                Height="32"
+                Margin="5"
+                Padding="0,5"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Background="#4a4e69"
+                BorderThickness="0.1">
+
+                <MenuItem
+                    Width="80"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Background="#4a4e69"
+                    Foreground="NavajoWhite"
+                    Header="Start Here">
+
+                    <MenuItem.Resources>
+                        <Style TargetType="{x:Type MenuItem}">
+                            <Setter Property="Background" Value="#4a4e69" />
+                            <Setter Property="Padding" Value="0,2" />
+                            <Setter Property="Height" Value="32" />
+                        </Style>
+                    </MenuItem.Resources>
+
+                    <MenuItem Command="{Binding RetrieveDataCommand}" Header="Read Existing Data" />
+                    <MenuItem Command="{Binding GenerateDataCommand}" Header="Generate Data" />
+                    <MenuItem Command="{Binding SaveDataCommand}" Header="Save Data" />
+                </MenuItem>
+            </Menu>
+
+            <!--#endregion-->
+
+            <!--#region Title-->
+
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontWeight="DemiBold"
+                Foreground="NavajoWhite"
+                Text="SLV Parkview Finance Manager" />
+            <!--#endregion-->
+
+            <!--#region Window Controls-->
+
+            <StackPanel
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <Button
+                    Margin="5,0"
+                    Click="OnMinimizeButtonClick"
+                    Content="Minimize"
+                    Foreground="NavajoWhite" />
+                <Button
+                    x:Name="btnMaximizeOrRestore"
+                    Margin="5,0"
+                    Click="OnMaximizeOrRestoreButtonClick"
+                    Content="Maximize"
+                    Foreground="NavajoWhite" />
+                <Button
+                    Margin="5,0"
+                    Click="OnCloseButtonClick"
+                    Command="{Binding CloseCommand}"
+                    Content="Close"
+                    Foreground="NavajoWhite" />
+
+            </StackPanel>
+
+            <!--#endregion-->
+
+        </Grid>
+
+        <!--#endregion-->
+
+        <!--#region Main Content-->
+
+        <Grid
             Grid.Row="1"
-            Width="300"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Columns="2">
-            <Button
-                Height="26"
-                Margin="5"
-                Command="{Binding SaveDataCommand}"
-                Content="Save Data" />
-            <Button
-                Height="26"
-                Margin="5"
-                Command="{Binding RetrieveDataCommand}"
-                Content="Retrieve Data" />
-        </UniformGrid>
+            MaxWidth="900"
+            MaxHeight="650"
+            Margin="25">
 
+            <ContentControl Content="{Binding CurrentViewModel}" />
+
+        </Grid>
+
+        <!--#endregion-->
 
     </Grid>
 

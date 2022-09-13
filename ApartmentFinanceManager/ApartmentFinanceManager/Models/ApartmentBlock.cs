@@ -21,6 +21,5 @@ namespace ApartmentFinanceManager.Models
         public List<Flat> Flats { get => Get<List<Flat>>(); set => Set(value); }
 
         #endregion
-
     }
 }

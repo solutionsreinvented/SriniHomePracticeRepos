@@ -10,7 +10,7 @@ namespace ApartmentFinanceManager.Services
     {
         public static ApartmentBlock Generate()
         {
-            ApartmentBlock? block = new ApartmentBlock() { Name = "C" };
+            ApartmentBlock block = new ApartmentBlock() { Name = "C" };
 
             List<Flat> flats = new List<Flat>()
             {

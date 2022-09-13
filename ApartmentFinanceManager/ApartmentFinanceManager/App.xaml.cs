@@ -23,13 +23,7 @@ namespace ApartmentFinanceManager
             MainWindow = new MainWindow();
 
             MainWindow.Show();
-
-            ///var spentOn = new DateOnly(2022, 10, 3);
-
-            ///Expense Expense = new Expense(Enums.ExpenseCategory.Maintenance, 2800m);///, spentOn);
         }
-
-
 
     }
 }

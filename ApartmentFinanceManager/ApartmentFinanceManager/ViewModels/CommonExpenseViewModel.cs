@@ -4,6 +4,7 @@ using ApartmentFinanceManager.Services;
 using ReInvented.Shared.Commands;
 
 using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ApartmentFinanceManager.ViewModels
@@ -18,24 +19,30 @@ namespace ApartmentFinanceManager.ViewModels
 
         #endregion
 
+        #region Default Constructor
+
         private CommonExpenseViewModel()
         {
             Initialize();
         }
 
-        public CommonExpenseViewModel(BaseViewModel sender,
-                                      NavigationService navigationService,
-                                      ApartmentBlock apartmentToBeProcessed)
-            : this()
+        #endregion
+
+        #region Parameterized Constructor
+
+        public CommonExpenseViewModel(SummaryViewModel sender, NavigationService navigationService) : this()
         {
-            _sender = (SummaryViewModel)sender;
+            _sender = sender;
             _navigationService = navigationService;
 
-            ApartmentBlockToBeProcessed = apartmentToBeProcessed;
+            ApartmentBlockToBeProcessed = _sender.ApartmentBlock;
         }
 
+        #endregion
 
         #region Public Properties
+
+        public bool AllowDuplicateEntry { get => Get<bool>(); set => Set(value); }
 
         public Expense Expense { get => Get<Expense>(); set => Set(value); }
 
@@ -47,20 +54,44 @@ namespace ApartmentFinanceManager.ViewModels
 
         public ICommand SaveExpenseCommand { get => Get<ICommand>(); set => Set(value); }
 
-        public ICommand CancelCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand GoToSummaryCommand { get => Get<ICommand>(); set => Set(value); }
 
         #endregion
 
         #region Command Handlers
 
-        private void OnCancel()
-        {
-            _navigationService.CurrentViewModel = _sender;
-        }
-
         private void OnSaveExpense()
         {
-            throw new NotImplementedException();
+            if (AllowDuplicateEntry)
+            {
+                _sender.ApartmentBlock.Flats.ForEach(f => f.AddExpense(Expense));
+            }
+            else
+            {
+                foreach (Flat flat in _sender.ApartmentBlock.Flats)
+                {
+                    if (!flat.ContainsSimilar(Expense))
+                    {
+                        flat.AddExpense(Expense);
+                    }
+                    else
+                    {
+                        MessageBoxResult result = MessageBox.Show($"It appears that the entry already exists for {flat.Description}. Do you still want to add this?", "Duplicate entry identified", MessageBoxButton.YesNo);
+
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            flat.AddExpense(Expense);
+                        }
+                    }
+                }
+            }
+
+            Expense = new Expense();
+        }
+
+        private void OnGoToSummary()
+        {
+            _navigationService.CurrentViewModel = _sender;
         }
 
         #endregion
@@ -70,8 +101,9 @@ namespace ApartmentFinanceManager.ViewModels
         private void Initialize()
         {
             Expense = new Expense();
+
             SaveExpenseCommand = new RelayCommand(OnSaveExpense, true);
-            CancelCommand = new RelayCommand(OnCancel, true);
+            GoToSummaryCommand = new RelayCommand(OnGoToSummary, true);
         }
 
         #endregion

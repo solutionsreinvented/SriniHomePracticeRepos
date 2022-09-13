@@ -14,6 +14,7 @@
     d:DesignWidth="850"
     Foreground="NavajoWhite"
     mc:Ignorable="d">
+
     <Grid Margin="10">
 
         <!--#region Grid Definitions-->
@@ -125,13 +126,14 @@
 
         <!--#endregion-->
 
-        <!--#region Add Payment Detail-->
+        <!--#region Add Common Expense Detail-->
 
         <GroupBox
             Grid.Row="2"
             Margin="20,0,20,20"
             BorderThickness="0.2"
             Header="Add New Expense">
+
             <Grid Margin="10" DataContext="{Binding Expense}">
 
                 <!--#region Grid Definitions-->
@@ -149,6 +151,8 @@
                 </Grid.RowDefinitions>
 
                 <!--#endregion-->
+
+                <!--#region Data Entry Fields-->
 
                 <TextBlock
                     Grid.Row="0"
@@ -177,7 +181,7 @@
                     Margin="0,2"
                     Padding="5,0"
                     VerticalContentAlignment="Center"
-                    Text="{Binding Amount, StringFormat={}{0:N2}}" />
+                    Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N2}}" />
 
                 <TextBlock
                     Grid.Row="2"
@@ -192,7 +196,9 @@
                     Margin="0,2"
                     VerticalContentAlignment="Center"
                     ItemsSource="{shared:EnumBindingResource enums:TransactionCategory}"
-                    SelectedItem="{Binding ExpenseCategory}" />
+                    SelectedItem="{Binding Category}" />
+
+                <!--#endregion-->
 
             </Grid>
 
@@ -202,30 +208,36 @@
         <!--#endregion-->
 
         <!--#region Buttons Group-->
-
-        <StackPanel
+        <Grid
             Grid.Row="3"
             Height="26"
-            Margin="20,0,20,20"
-            HorizontalAlignment="Right"
-            Orientation="Horizontal">
+            Margin="20,0,20,20">
 
-            <StackPanel.Resources>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Width" Value="100" />
-                    <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}" />
-                    <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=UserControl}}" />
-                </Style>
-            </StackPanel.Resources>
+            <CheckBox
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Content="Allow duplicate entries?"
+                Foreground="NavajoWhite"
+                IsChecked="{Binding AllowDuplicateEntry}" />
 
-            <Button
-                Margin="5,0"
-                Command="{Binding SaveExpenseCommand}"
-                Content="Save Expense" />
-            <Button Command="{Binding CancelCommand}" Content="Cancel" />
-        </StackPanel>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
 
+                <Button
+                    Margin="5,0"
+                    Command="{Binding SaveExpenseCommand}"
+                    Content="Save Expense"
+                    IsEnabled="{Binding Expense.IsDataValid}" />
+                <Button
+                    Margin="5,0,0,0"
+                    Command="{Binding GoToSummaryCommand}"
+                    Content="Switch to Summary" />
+
+            </StackPanel>
+
+        </Grid>
         <!--#endregion-->
 
     </Grid>
+
 </UserControl>

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
@@ -13,11 +13,11 @@
 
   <ItemGroup>
     <Reference Include="ReInvented.DataAccess">
-      <HintPath>F:\06. ReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.DataAccess\bin\Debug\ReInvented.DataAccess.dll</HintPath>
+      <HintPath>bin\Debug\netcoreapp3.1\ReInvented.DataAccess.dll</HintPath>
       <Private>true</Private>
     </Reference>
     <Reference Include="ReInvented.Shared">
-      <HintPath>F:\06. ReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Shared\bin\Debug\ReInvented.Shared.dll</HintPath>
+      <HintPath>bin\Debug\netcoreapp3.1\ReInvented.Shared.dll</HintPath>
       <Private>true</Private>
     </Reference>
   </ItemGroup>

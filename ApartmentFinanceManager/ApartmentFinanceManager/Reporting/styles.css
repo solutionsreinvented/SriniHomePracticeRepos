@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+table {
+    border-collapse: collapse
+}
+
+th {
+    text-align: left
+}
+
+body,
+html {
+    height: 100%;
+    font-family: sans-serif
+}
+
+.limiter {
+    width: 1366px;
+    margin: 0 auto
+}
+
+.container-table {
+    width: 100%;
+    min-height: 100vh;
+    background: #fff;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 33px 30px
+}
+
+.wrap-table {
+    width: 1170px
+}
+
+.table-div {
+    background-color: #fff
+}
+
+table {
+    width: 100%
+}
+
+th,
+td {
+    font-weight: unset;
+    padding-right: 10px
+}
+
+.column-one {
+    width: 33%;
+    padding-left: 40px
+}
+
+.column-two {
+    width: 13%
+}
+
+.column-three {
+    width: 22%
+}
+
+.column-four {
+    width: 19%
+}
+
+.column-five {
+    width: 13%;
+}
+
+.table-div-head th {
+    padding-top: 18px;
+    padding-bottom: 18px
+}
+
+.table-div-body td {
+    padding-top: 16px;
+    padding-bottom: 16px
+}
+
+.table-div {
+    position: relative;
+    padding-top: 60px
+}
+
+.table-div-head {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0
+}
+
+.table-div-body {
+    max-height: 585px;
+    overflow: auto
+}
+
+.table-div th {
+    font-family: Lato-Bold;
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.4;
+    background-color: #6c7ae0
+}
+
+.table-div td {
+    font-family: Lato-Regular;
+    font-size: 15px;
+    color: gray;
+    line-height: 1.4
+}
+
+.table-div .table-div-body tr:nth-child(even) {
+    background-color: #f8f6ff
+}

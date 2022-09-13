@@ -1,5 +1,7 @@
 ﻿using ApartmentFinanceManager.Enums;
+
 using Newtonsoft.Json;
+
 using ReInvented.Shared.Stores;
 
 using System;
@@ -20,7 +22,7 @@ namespace ApartmentFinanceManager.Models
 
         private Flat()
         {
-            DateSpecified = DateTime.Today;
+            Description = $"{_block?.Name}{Number}";
         }
 
         public Flat(ApartmentBlock block, string ownedBy)
@@ -61,6 +63,10 @@ namespace ApartmentFinanceManager.Models
         /// </summary>
         public string Number { get => Get<string>(); set => Set(value); }
         /// <summary>
+        /// Provides the complete description of the flat.
+        /// </summary>
+        public string Description { get => Get<string>(); set => Set(value); } /// => $"{_block?.Name}{Number}";
+        /// <summary>
         /// Name of the primary owner.
         /// </summary>
         public string OwnedBy { get => Get<string>(); set => Set(value); }
@@ -83,7 +89,7 @@ namespace ApartmentFinanceManager.Models
         /// <summary>
         /// Date for which the results to be calculated.
         /// </summary>
-        public DateTime? DateSpecified { get => Get<DateTime>(); set => Set(value); }
+        public DateTime? DateSpecified { get => Get(DateTime.Today); set { Set(value); RaisePropertyChanged(nameof(OutstandingOnSpecifiedDate)); } }
         /// <summary>
         /// Outstanding balance pending as of the date of opening this account.
         /// </summary>
@@ -102,11 +108,6 @@ namespace ApartmentFinanceManager.Models
         #region Read-only Properties
 
         /// <summary>
-        /// Provides the complete description of the flat.
-        /// </summary>
-        [JsonProperty]
-        public string Description => $"{_block?.Name}{Number}";
-        /// <summary>
         /// Outstanding balance pending as on the selected date.
         /// </summary>
         public decimal OutstandingOnSpecifiedDate => GetOutstandingBalanceOnSpecifiedDate(DateSpecified);
@@ -117,20 +118,35 @@ namespace ApartmentFinanceManager.Models
 
         #endregion
 
-        public bool HasAMatchingExistingExpense(Expense expense)
+        #region Public Functions
+
+        /// <summary>
+        /// Identifies if a duplicate <see cref="Expense"/> entry exists in the <see cref="Expenses"/> list of the flat.
+        /// </summary>
+        /// <param name="expense"><see cref="Expense"/> entry that is newly created.</param>
+        /// <returns>True or False indicating if the entry exists.</returns>
+        public bool ContainsSimilar(Expense expense)
         {
-            bool hasAMatch = false;
-
-            if (Expenses != null)
-            {
-                hasAMatch = Expenses.FirstOrDefault(e => e.OccuredOn == expense.OccuredOn &&
-                                                         e.Amount == expense.Amount &&
-                                                         e.Category == expense.Category) != null;
-            }
-
-            return hasAMatch;
+            return Expenses?.FirstOrDefault(e => e.Equals(expense)) != null;
+        }
+        /// <summary>
+        /// Identifies if a duplicate <see cref="Payment"/> entry exists in the <see cref="Payments"/> list of the flat.
+        /// </summary>s
+        /// <param name="payment"><see cref="Payment"/> entry that is newly created.</param>
+        /// <returns>True or False indicating if the entry exists.</returns>
+        public bool ContainsSimilar(Payment payment)
+        {
+            return Payments?.FirstOrDefault(e => e.Equals(payment)) != null;
         }
 
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        /// Adds the specified <see cref="Expense"/> entry to the flat's <see cref="Expenses"/> list and raises notifications.
+        /// </summary>
+        /// <param name="expense">A newly created <see cref="Expense"/> item.</param>
         public void AddExpense(Expense expense)
         {
             if (Expenses == null)
@@ -139,21 +155,70 @@ namespace ApartmentFinanceManager.Models
             }
 
             Expenses.Add(expense);
+            RaiseMultiplePropertiesChanged(nameof(OutstandingTillDate), nameof(OutstandingOnSpecifiedDate));
+        }
+        /// <summary>
+        /// Adds the specified <see cref="Payment"/> entry to the flat's <see cref="Payments"/> list and raises notifications.
+        /// </summary>
+        /// <param name="payment">A newly created <see cref="Payment"/> item.</param>
+        public void AddPayment(Payment payment)
+        {
+            if (Payments == null)
+            {
+                Payments = new ObservableCollection<Payment>();
+            }
+
+            Payments.Add(payment);
+            RaiseMultiplePropertiesChanged(nameof(OutstandingTillDate), nameof(OutstandingOnSpecifiedDate));
+        }
+
+        #endregion
+
+        #region Equality
+
+        public override int GetHashCode()
+        {
+            return $"{Number}{OwnedBy}{CoOwnedBy}".GetHashCode();
+        }
+
+        public bool Equals(Flat flat)
+        {
+            return flat != null &&
+                   Description == flat.Description && OwnedBy == flat.OwnedBy &&
+                   CoOwnedBy == flat.CoOwnedBy && TenantName == flat.TenantName &&
+                   ResidentType == flat.ResidentType && Number == flat.Number;
         }
 
 
+        public override bool Equals(object obj)
+        {
+            return !(obj is null) && obj is Flat flat && Equals(flat);
+        }
+
+        public static bool operator ==(Flat a, Flat b)
+        {
+            return ReferenceEquals(a, b) || (!(a is null) && !(b is null) && a.Equals(b));
+        }
+
+        public static bool operator !=(Flat a, Flat b)
+        {
+            return !(a == b);
+        }
+
+        #endregion
+
         #region Helper Methods
 
-        private decimal GetOutstandingBalanceOnSpecifiedDate(DateTime? calculateTill = null)
+        private decimal GetOutstandingBalanceOnSpecifiedDate(DateTime? calculatedTill = null)
         {
-            if (DateSpecified == null)
+            if (calculatedTill == null)
             {
-                DateSpecified = DateTime.Today;
+                calculatedTill = DateTime.Today;
             }
 
-            decimal expensesTillSpecifiedDate = Expenses == null ? 0.0m : Expenses.Where(e => e.OccuredOn <= DateSpecified).Sum(e => e.Amount);
+            decimal expensesTillSpecifiedDate = Expenses == null ? 0.0m : Expenses.Where(e => e.OccuredOn <= calculatedTill).Sum(e => e.Amount);
 
-            decimal paymentsTillSpecifiedDate = Payments == null ? 0.0m : Payments.Where(p => p.ReceivedOn <= DateSpecified).Sum(p => p.Amount);
+            decimal paymentsTillSpecifiedDate = Payments == null ? 0.0m : Payments.Where(p => p.ReceivedOn <= calculatedTill).Sum(p => p.Amount);
 
 
             decimal outstandingOnSpecifiedDate = OpeningBalance

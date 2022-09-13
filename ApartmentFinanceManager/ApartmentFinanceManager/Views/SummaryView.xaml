@@ -7,11 +7,12 @@
     xmlns:shared="http://schemas.reinvented.com/shared"
     MinWidth="650"
     MinHeight="500"
-    MaxWidth="850"
+    MaxWidth="900"
     MaxHeight="600"
     VerticalAlignment="Center"
     d:DesignHeight="500"
     d:DesignWidth="850"
+    Foreground="NavajoWhite"
     mc:Ignorable="d">
 
     <Grid>
@@ -33,6 +34,8 @@
         </Border>
 
         <!--#endregion-->
+
+        <!--#region Content Host-->
 
         <Grid
             MaxWidth="750"
@@ -62,12 +65,6 @@
                 RowHeaderWidth="0"
                 SelectedItem="{Binding SelectedFlat}"
                 VerticalScrollBarVisibility="Auto">
-
-                <!--<DataGrid.Resources>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Margin" Value="10,0,0,0" />
-                </Style>
-            </DataGrid.Resources>-->
 
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Width="Auto" Header="Flat Number">
@@ -129,14 +126,14 @@
                     Margin="0,0,10,0"
                     Padding="10,0"
                     Command="{Binding AddExpenseCommand}"
-                    Content="Add Expense to Flat"
+                    Content="Add Expense"
                     IsEnabled="{Binding CanProcessFlat}" />
 
                 <Button
                     Margin="10,0"
                     Padding="10,0"
                     Command="{Binding AddPaymentCommand}"
-                    Content="Add Payment by Flat"
+                    Content="Add Payment"
                     IsEnabled="{Binding CanProcessFlat}" />
 
                 <Button
@@ -157,6 +154,8 @@
             <!--#endregion-->
 
         </Grid>
+
+        <!--#endregion-->
 
     </Grid>
 
