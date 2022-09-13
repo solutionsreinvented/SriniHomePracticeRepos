@@ -87,7 +87,7 @@ namespace ApartmentFinanceManager.ViewModels
 
         private void OnGenerateReport()
         {
-            ReportViewModel reportViewModel = new ReportViewModel(_navigationService, SelectedFlat);
+            ReportViewModel reportViewModel = new ReportViewModel(this, _navigationService, SelectedFlat);
             _navigationService.CurrentViewModel = reportViewModel;
         }
 

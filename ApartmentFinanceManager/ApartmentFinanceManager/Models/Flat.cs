@@ -1,10 +1,10 @@
 ﻿using ApartmentFinanceManager.Enums;
-
-using Newtonsoft.Json;
+using ApartmentFinanceManager.Services;
 
 using ReInvented.Shared.Stores;
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -65,9 +65,9 @@ namespace ApartmentFinanceManager.Models
         /// <summary>
         /// Provides the complete description of the flat.
         /// </summary>
-        public string Description { get => Get<string>(); set => Set(value); } /// => $"{_block?.Name}{Number}";
+        public string Description { get => Get<string>(); set => Set(value); }
         /// <summary>
-        /// Name of the primary owner.
+        /// Primary owner of the flat.
         /// </summary>
         public string OwnedBy { get => Get<string>(); set => Set(value); }
         /// <summary>
@@ -89,7 +89,7 @@ namespace ApartmentFinanceManager.Models
         /// <summary>
         /// Date for which the results to be calculated.
         /// </summary>
-        public DateTime? DateSpecified { get => Get(DateTime.Today); set { Set(value); RaisePropertyChanged(nameof(OutstandingOnSpecifiedDate)); } }
+        public DateTime DateSpecified { get => Get(DateTime.Today); set { Set(value); RaisePropertyChanged(nameof(OutstandingOnSpecifiedDate)); } }
         /// <summary>
         /// Outstanding balance pending as of the date of opening this account.
         /// </summary>
@@ -115,6 +115,10 @@ namespace ApartmentFinanceManager.Models
         /// Outstanding balance pending calculated till date.
         /// </summary>
         public decimal OutstandingTillDate => GetOutstandingBalanceOnSpecifiedDate();
+        /// <summary>
+        /// Summary of transactions since the inception of the account till the required date.
+        /// </summary>
+        public List<FlatTransactionRecord> TransactionsSummary => FlatTransactionsSummarizer.Generate(this, DateSpecified);
 
         #endregion
 

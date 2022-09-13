@@ -97,7 +97,8 @@ namespace ApartmentFinanceManager.ViewModels
 
         private void OnGenerateReport()
         {
-
+            ReportViewModel reportViewModel = new ReportViewModel(_sender, _navigationService, FlatToBeProcessed);
+            _navigationService.CurrentViewModel = reportViewModel;
         }
 
         private void OnGoToSummary()
