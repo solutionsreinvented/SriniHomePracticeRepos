@@ -33,26 +33,42 @@ namespace SlvParkview.FinanceManager.Services
 
                 if ((expenses != null && expenses.Count > 0) || (payments != null && payments.Count > 0))
                 {
-                    TransactionRecord transactionRecord = new TransactionRecord
-                    {
-                        TransactionDate = date
-                    };
+                    int maxRecords = Math.Max(expenses == null ? 0 : expenses.Count, payments == null ? 0 : payments.Count);
 
-                    if (expenses != null && expenses.Count > 0)
+                    if (maxRecords > 0)
                     {
-                        transactionRecord.Expenses = expenses;
-                        outstanding += expenses.Sum(e => e.Amount);
+                        int counter = 1;
+
+                        while (counter <= maxRecords)
+                        {
+                            TransactionRecord transactionRecord = new TransactionRecord
+                            {
+                                TransactionDate = date
+                            };
+
+                            if (expenses != null && expenses.Count > 0)
+                            {
+                                if (counter <= expenses.Count)
+                                {
+                                    transactionRecord.Expenses = expenses;
+                                    outstanding += expenses.Sum(e => e.Amount);
+                                }
+                            }
+
+                            if (payments != null && payments.Count > 0)
+                            {
+                                transactionRecord.Payments = payments;
+                                outstanding -= payments.Sum(p => p.Amount);
+                            }
+
+                            transactionRecord.Outstanding = outstanding;
+
+                            transactionRecords.Add(transactionRecord);
+                        }
+
+
                     }
 
-                    if (payments != null && payments.Count > 0)
-                    {
-                        transactionRecord.Payments = payments;
-                        outstanding -= payments.Sum(p => p.Amount);
-                    }
-
-                    transactionRecord.Outstanding = outstanding;
-
-                    transactionRecords.Add(transactionRecord);
                 }
 
                 date = date.AddDays(1);
