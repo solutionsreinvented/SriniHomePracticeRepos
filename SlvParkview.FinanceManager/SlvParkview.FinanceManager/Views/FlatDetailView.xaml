@@ -159,12 +159,12 @@
             <TextBlock
                 Grid.Row="5"
                 Grid.Column="2"
-                Text="Outstanding till date: " />
+                Text="Current outstanding: " />
 
             <TextBox
                 Grid.Row="5"
                 Grid.Column="3"
-                Text="{Binding OutstandingTillDate, Mode=OneWay, StringFormat={}{0:N2}}" />
+                Text="{Binding CurrentOutstanding, Mode=OneWay, StringFormat={}{0:N2}}" />
 
             <!--#endregion-->
 

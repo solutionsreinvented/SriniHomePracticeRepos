@@ -126,7 +126,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
             _ = MessageBox.Show("Expense added successfully!", "Entry successful", MessageBoxButton.OK);
 
-            Expense = new Expense();
+            Expense = Expense.Clone(Expense);
         }
 
         #endregion

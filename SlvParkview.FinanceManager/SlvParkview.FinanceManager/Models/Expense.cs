@@ -83,5 +83,19 @@ namespace SlvParkview.FinanceManager.Models
 
         #endregion
 
+        #region Prototypes
+
+        public static Expense Clone(Expense expense)
+        {
+            return new Expense()
+            {
+                OccuredOn = expense.OccuredOn,
+                Amount = expense.Amount,
+                Category = expense.Category,
+            };
+        }
+
+        #endregion
+
     }
 }

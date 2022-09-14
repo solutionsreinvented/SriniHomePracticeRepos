@@ -126,7 +126,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
             _ = MessageBox.Show("Payment added successfully!", "Entry successful", MessageBoxButton.OK);
 
-            Payment = new Payment();
+            Payment = Payment.Clone(Payment);
         }
 
         #endregion

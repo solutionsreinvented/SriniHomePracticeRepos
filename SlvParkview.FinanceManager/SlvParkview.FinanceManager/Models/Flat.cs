@@ -118,7 +118,7 @@ namespace SlvParkview.FinanceManager.Models
         /// <summary>
         /// Summary of transactions since the inception of the account till the required date.
         /// </summary>
-        public List<FlatTransactionRecord> TransactionsSummary => FlatTransactionsSummarizer.Generate(this, DateSpecified);
+        public List<TransactionRecord> TransactionsSummary => FlatTransactionsSummarizer.Generate(this, DateSpecified);
 
         #endregion
 

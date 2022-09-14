@@ -183,7 +183,7 @@
     <Compile Include="Models\Block.cs" />
     <Compile Include="Models\Expense.cs" />
     <Compile Include="Models\Flat.cs" />
-    <Compile Include="Models\FlatTransactionRecord.cs" />
+    <Compile Include="Models\TransactionRecord.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -211,10 +211,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Reporting\Flat Summary.html" />
-    <Content Include="Reporting\styles.css" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

@@ -35,6 +35,8 @@ namespace SlvParkview.FinanceManager.Models
 
         #endregion
 
+        #region Public Properties
+
         public PaymentMode Mode { get => Get(PaymentMode.Cash); set => Set(value); }
         /// <summary>
         /// Date on which the payment is made.
@@ -49,7 +51,13 @@ namespace SlvParkview.FinanceManager.Models
         /// </summary>
         public decimal Amount { get => Get<decimal>(); set { Set(value); RaisePropertyChanged(nameof(IsDataValid)); } }
 
+        #endregion
+
+        #region Read-only Properties
+
         public bool IsDataValid => Amount > 0.0m && ReceivedOn <= DateTime.Today;
+
+        #endregion
 
         #region Equality
 
@@ -81,5 +89,19 @@ namespace SlvParkview.FinanceManager.Models
 
         #endregion
 
+        #region Prototypes
+
+        public static Payment Clone(Payment payment)
+        {
+            return new Payment()
+            {
+                ReceivedOn = payment.ReceivedOn,
+                Amount = payment.Amount,
+                Category = payment.Category,
+                Mode = payment.Mode
+            };
+        }
+
+        #endregion
     }
 }

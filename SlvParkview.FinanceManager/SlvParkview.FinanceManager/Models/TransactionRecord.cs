@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SlvParkview.FinanceManager.Models
 {
-    public class FlatTransactionRecord
+    public class TransactionRecord
     {
         public DateTime TransactionDate { get; set; }
 

@@ -45,7 +45,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public Flat FlatToBeProcessed { get => Get<Flat>(); set => Set(value); }
 
-        public List<FlatTransactionRecord> TransactionsSummary => FlatToBeProcessed.TransactionsSummary;
+        public List<TransactionRecord> TransactionsSummary { get => Get<List<TransactionRecord>>(); private set => Set(value); }
 
         public DateTime ReportTill { get => Get(DateTime.Today); set => Set(value); }
 
@@ -91,11 +91,10 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void OnGenerate()
         {
-            if (!Directory.Exists(ServiceProvider.ReportsDirectory))
-            {
-                Directory.CreateDirectory(ServiceProvider.ReportsDirectory);
-            }
+            CreateRequiredDirectories();
+            TransactionsSummary = FlatToBeProcessed.TransactionsSummary;
         }
+
 
         private void OnGoToSummary()
         {
@@ -113,6 +112,36 @@ namespace SlvParkview.FinanceManager.ViewModels
             AddCommonExpenseCommand = new RelayCommand(OnAddCommonExpense, true);
             GenerateCommand = new RelayCommand(OnGenerate, true);
             GoToSummaryCommand = new RelayCommand(OnGoToSummary, true);
+        }
+
+        /// <summary>
+        /// Creates the required directories to store the json and html files of the report(s).
+        /// </summary>
+        private void CreateRequiredDirectories()
+        {
+            /// Create if the Reports directory does not exists.
+            if (!Directory.Exists(ServiceProvider.ReportsDirectory))
+            {
+                _ = Directory.CreateDirectory(ServiceProvider.ReportsDirectory);
+            }
+
+            /// Create if a separate directory for the selected flat does not exists.
+
+            string flatDirectory = Path.Combine(ServiceProvider.ReportsDirectory, FlatToBeProcessed.Description);
+
+            if (!Directory.Exists(flatDirectory))
+            {
+                _ = Directory.CreateDirectory(flatDirectory);
+            }
+
+            /// Create a directory with requested date if it does not exists.
+            
+            string todayDirectory = Path.Combine(flatDirectory, ReportTill.ToString("dd MMM yyyy"));
+
+            if (!Directory.Exists(todayDirectory))
+            {
+                _ = Directory.CreateDirectory(todayDirectory);
+            }
         }
 
         #endregion

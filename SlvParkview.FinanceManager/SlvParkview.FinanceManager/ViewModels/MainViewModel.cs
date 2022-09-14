@@ -12,10 +12,11 @@ namespace SlvParkview.FinanceManager.ViewModels
 {
     public class MainViewModel : PropertyStore
     {
-        private string _filePath;
 
         #region Private Fields
 
+        private string _filePath;
+        private SummaryViewModel _summaryViewModel;
         private NavigationService _navigationService;
         private IDataSerializer<Block> _dataSerializer;
 
@@ -36,6 +37,12 @@ namespace SlvParkview.FinanceManager.ViewModels
         public ThemeViewModel ThemeViewModel { get; set; }
 
         public BaseViewModel CurrentViewModel { get => Get<BaseViewModel>(); set => Set(value); }
+
+        #endregion
+
+        #region Read-only Properties
+
+        public bool AllowSave { get => Get<bool>(); private set => Set(value); }
 
         #endregion
 
@@ -68,6 +75,8 @@ namespace SlvParkview.FinanceManager.ViewModels
             SummaryViewModel summaryViewModel = new SummaryViewModel(_navigationService) { Block = deserializedData };
 
             _navigationService.CurrentViewModel = summaryViewModel;
+
+            AllowSave = true;
         }
 
         private void OnGenerateData()
@@ -79,11 +88,12 @@ namespace SlvParkview.FinanceManager.ViewModels
         {
             _dataSerializer = new JsonDataSerializer<Block>();
 
-            string serializedData = _dataSerializer.Serialize(((SummaryViewModel)CurrentViewModel).Block);
+            ///string serializedData = _dataSerializer.Serialize(((SummaryViewModel)CurrentViewModel).Block);
+
+            string serializedData = _dataSerializer.Serialize(_summaryViewModel.Block);
 
             File.WriteAllText(_filePath, serializedData);
         }
-
 
         #endregion
 
@@ -96,18 +106,24 @@ namespace SlvParkview.FinanceManager.ViewModels
             _navigationService.CurrentViewModelChanged -= OnNavigationServiceCurrentViewModelChanged;
             _navigationService.CurrentViewModelChanged += OnNavigationServiceCurrentViewModelChanged;
         }
+
         private void Initialize()
         {
             _filePath = Path.Combine(ServiceProvider.AppDirectory, "C Block Data.json");
 
             ThemeViewModel = new ThemeViewModel();
-            BaseViewModel summaryViewModel = new SummaryViewModel(_navigationService);
+            ///BaseViewModel summaryViewModel = new SummaryViewModel(_navigationService);
+
+            _summaryViewModel = new SummaryViewModel(_navigationService);
+
+
+            AllowSave = false;
 
             SaveDataCommand = new RelayCommand(OnSaveData, true);
             GenerateDataCommand = new RelayCommand(OnGenerateData, true);
             RetrieveDataCommand = new RelayCommand(OnRetrieveData, true);
 
-            _navigationService.CurrentViewModel = summaryViewModel;
+            _navigationService.CurrentViewModel = _summaryViewModel;
         }
 
         #endregion

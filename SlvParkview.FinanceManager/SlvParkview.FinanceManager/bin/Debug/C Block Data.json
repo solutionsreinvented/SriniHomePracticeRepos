@@ -100,11 +100,11 @@
       "Number": "023",
       "AccountOpenedOn": "2022-09-01T00:00:00",
       "DateSpecified": "2022-09-13T00:00:00+05:30",
-      "OpeningBalance": 18208.0,
+      "OpeningBalance": 15683.0,
       "Expenses": null,
       "Payments": null,
-      "OutstandingOnSpecifiedDate": 18208.0,
-      "OutstandingTillDate": 18208.0
+      "OutstandingOnSpecifiedDate": 15683.0,
+      "OutstandingTillDate": 15683.0
     },
     {
       "Description": "C024",

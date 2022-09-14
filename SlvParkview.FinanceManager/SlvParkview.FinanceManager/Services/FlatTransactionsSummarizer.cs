@@ -8,51 +8,58 @@ namespace SlvParkview.FinanceManager.Services
 {
     public static class FlatTransactionsSummarizer
     {
-        public static List<FlatTransactionRecord> Generate(Flat flat)
+        public static List<TransactionRecord> Generate(Flat flat)
         {
             return Generate(flat, DateTime.Today);
         }
 
-        public static List<FlatTransactionRecord> Generate(Flat flat, DateTime summarizeTill)
+        public static List<TransactionRecord> Generate(Flat flat, DateTime summarizeTill)
         {
-            if (flat.Expenses == null && flat.Payments == null) return null;
+            if (flat.Expenses == null && flat.Payments == null)
+            {
+                return null;
+            }
 
-            List<FlatTransactionRecord> transactionRecords = new List<FlatTransactionRecord>();
+            List<TransactionRecord> transactionRecords = new List<TransactionRecord>();
 
             DateTime date = flat.AccountOpenedOn;
 
+            decimal outstanding = flat.OpeningBalance;
+
             while (date <= summarizeTill)
             {
-                List<Expense> expenses = flat.Expenses.Where(e => e.OccuredOn == date).ToList();
-                List<Payment> payments = flat.Payments.Where(e => e.ReceivedOn == date).ToList();
+                List<Expense> expenses = flat.Expenses?.Where(e => e.OccuredOn == date).ToList();
+                List<Payment> payments = flat.Payments?.Where(e => e.ReceivedOn == date).ToList();
 
-                decimal outstanding = flat.OpeningBalance;
-
-                if (expenses != null || payments != null)
+                if ((expenses != null && expenses.Count > 0) || (payments != null && payments.Count > 0))
                 {
-                    FlatTransactionRecord transactionRecord = new FlatTransactionRecord();
-                    transactionRecord.TransactionDate = date;
+                    TransactionRecord transactionRecord = new TransactionRecord
+                    {
+                        TransactionDate = date
+                    };
 
-                    if (expenses != null)
+                    if (expenses != null && expenses.Count > 0)
                     {
                         transactionRecord.Expenses = expenses;
                         outstanding += expenses.Sum(e => e.Amount);
                     }
 
-                    if (payments != null)
+                    if (payments != null && payments.Count > 0)
                     {
                         transactionRecord.Payments = payments;
-                        outstanding += payments.Sum(p => p.Amount);
+                        outstanding -= payments.Sum(p => p.Amount);
                     }
 
                     transactionRecord.Outstanding = outstanding;
 
+                    transactionRecords.Add(transactionRecord);
                 }
 
+                date = date.AddDays(1);
             }
 
 
-            return new List<FlatTransactionRecord>();
+            return transactionRecords;
         }
     }
 }

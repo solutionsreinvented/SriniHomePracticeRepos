@@ -90,35 +90,17 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SlvParkview.FinanceManager.exe" size="77760">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SlvParkview.FinanceManager.exe" size="78784">
       <assemblyIdentity name="SlvParkview.FinanceManager" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>BZjqFMWOskGVBUh8FJnaVu8YkQIL/ZCgjCUqL9uMpwI=</dsig:DigestValue>
+        <dsig:DigestValue>JgpEymP5uAyR5u3JBFoOJtcoTYDnuTpPYnAbg7CJvto=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Reporting\Flat Summary.html" size="11576">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>KgKo122LBjktaBUkc3bjbS6hnaNd5fGw7WQowLgnJO4=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="Reporting\styles.css" size="1711">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>QcZQcx3W5yX0L1iP+fx5RIMTCwkylU2VE7PUj6us3y4=</dsig:DigestValue>
-    </hash>
-  </file>
   <file name="SlvParkview.FinanceManager.exe.config" size="189">
     <hash>
       <dsig:Transforms>
