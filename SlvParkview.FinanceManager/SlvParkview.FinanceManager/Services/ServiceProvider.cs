@@ -10,6 +10,8 @@ namespace SlvParkview.FinanceManager.Services
 
         public static string AppDataDirectory => Path.Combine(AppDirectory, "ApplicationData");
 
+        public static string ReportsDirectory => Path.Combine(AppDirectory, "Reports");
+
         public static string AssetsDirectory => Path.Combine(AppDataDirectory, "Assets");
 
         public static string IconsDirectory => Path.Combine(AssetsDirectory, "Icons");

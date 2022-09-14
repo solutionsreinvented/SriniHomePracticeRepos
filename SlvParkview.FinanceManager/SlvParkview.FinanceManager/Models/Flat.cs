@@ -114,7 +114,7 @@ namespace SlvParkview.FinanceManager.Models
         /// <summary>
         /// Outstanding balance pending calculated till date.
         /// </summary>
-        public decimal OutstandingTillDate => GetOutstandingBalanceOnSpecifiedDate();
+        public decimal CurrentOutstanding => GetOutstandingBalanceOnSpecifiedDate();
         /// <summary>
         /// Summary of transactions since the inception of the account till the required date.
         /// </summary>
@@ -159,7 +159,7 @@ namespace SlvParkview.FinanceManager.Models
             }
 
             Expenses.Add(expense);
-            RaiseMultiplePropertiesChanged(nameof(OutstandingTillDate), nameof(OutstandingOnSpecifiedDate));
+            RaiseMultiplePropertiesChanged(nameof(CurrentOutstanding), nameof(OutstandingOnSpecifiedDate));
         }
         /// <summary>
         /// Adds the specified <see cref="Payment"/> entry to the flat's <see cref="Payments"/> list and raises notifications.
@@ -173,7 +173,7 @@ namespace SlvParkview.FinanceManager.Models
             }
 
             Payments.Add(payment);
-            RaiseMultiplePropertiesChanged(nameof(OutstandingTillDate), nameof(OutstandingOnSpecifiedDate));
+            RaiseMultiplePropertiesChanged(nameof(CurrentOutstanding), nameof(OutstandingOnSpecifiedDate));
         }
 
         #endregion

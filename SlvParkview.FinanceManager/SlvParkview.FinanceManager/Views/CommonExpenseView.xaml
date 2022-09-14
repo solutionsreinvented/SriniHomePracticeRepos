@@ -6,13 +6,14 @@
     xmlns:enums="clr-namespace:SlvParkview.FinanceManager.Enums"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:theme="http://schemas.reinvented.com/ui/themes"
     MinWidth="650"
     MinHeight="420"
     MaxWidth="850"
     MaxHeight="450"
     d:DesignHeight="420"
     d:DesignWidth="850"
-    Foreground="NavajoWhite"
+    Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
     mc:Ignorable="d">
 
     <Grid Margin="10">
@@ -32,7 +33,7 @@
 
         <Border
             Grid.RowSpan="4"
-            Background="#22223b"
+            Background="{theme:ThemeResource ResourceKey=StaticBackgroundBrush}"
             BorderThickness="2"
             CornerRadius="5">
             <Border.Effect>
@@ -218,7 +219,6 @@
                 VerticalAlignment="Center"
                 VerticalContentAlignment="Center"
                 Content="Allow duplicate entries?"
-                Foreground="NavajoWhite"
                 IsChecked="{Binding AllowDuplicateEntry}" />
 
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">

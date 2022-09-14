@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:theme="http://schemas.reinvented.com/ui/themes"
     MinWidth="650"
     MinHeight="500"
     MaxWidth="900"
@@ -12,7 +13,7 @@
     VerticalAlignment="Center"
     d:DesignHeight="500"
     d:DesignWidth="850"
-    Foreground="NavajoWhite"
+    Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
     mc:Ignorable="d">
 
     <Grid>
@@ -20,7 +21,7 @@
         <!--#region Effects-->
 
         <Border
-            Background="#22223b"
+            Background="{theme:ThemeResource ResourceKey=StaticBackgroundBrush}"
             BorderThickness="2"
             CornerRadius="5">
             <Border.Effect>
@@ -37,11 +38,7 @@
 
         <!--#region Content Host-->
 
-        <Grid
-            MaxWidth="750"
-            Margin="5,10"
-            HorizontalAlignment="Center"
-            Visibility="{Binding ShowContent, Converter={shared:BoolToVisibilityConverter}}">
+        <Grid Margin="10" Visibility="{Binding ShowContent, Converter={shared:BoolToVisibilityConverter}}">
 
             <!--#region Grid Definitions-->
 
@@ -64,9 +61,11 @@
                 ItemsSource="{Binding Block.Flats}"
                 RowHeaderWidth="0"
                 SelectedItem="{Binding SelectedFlat}"
+                SelectionUnit="FullRow"
                 VerticalScrollBarVisibility="Auto">
 
                 <DataGrid.Columns>
+
                     <DataGridTemplateColumn Width="Auto" Header="Flat Number">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -77,6 +76,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
                     <DataGridTemplateColumn Width="Auto" Header="Owner Name">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -84,6 +84,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
                     <DataGridTemplateColumn Width="Auto" Header="Co-owner Name">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -91,6 +92,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
                     <DataGridTemplateColumn Width="Auto" Header="Tenant Name">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -98,6 +100,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
                     <DataGridTemplateColumn Width="Auto" Header="Resident Type">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -108,6 +111,29 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="Auto" Header="Account Start Date">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    Margin="10,0"
+                                    HorizontalAlignment="Center"
+                                    Text="{Binding AccountOpenedOn, StringFormat={}{0:dd MMM yyyy}}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="Auto" Header="Current Outstanding">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    Margin="10,0"
+                                    HorizontalAlignment="Center"
+                                    Text="{Binding CurrentOutstanding, StringFormat={}{0:N1}}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
                 </DataGrid.Columns>
 
             </DataGrid>
@@ -118,7 +144,7 @@
 
             <UniformGrid
                 Grid.Row="1"
-                Margin="0,15,0,5"
+                Margin="0,10,0,5"
                 Columns="4">
 
                 <Button

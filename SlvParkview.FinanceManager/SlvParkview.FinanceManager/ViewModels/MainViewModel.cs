@@ -33,6 +33,8 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         #region Public Properties
 
+        public ThemeViewModel ThemeViewModel { get; set; }
+
         public BaseViewModel CurrentViewModel { get => Get<BaseViewModel>(); set => Set(value); }
 
         #endregion
@@ -98,7 +100,9 @@ namespace SlvParkview.FinanceManager.ViewModels
         {
             _filePath = Path.Combine(ServiceProvider.AppDirectory, "C Block Data.json");
 
+            ThemeViewModel = new ThemeViewModel();
             BaseViewModel summaryViewModel = new SummaryViewModel(_navigationService);
+
             SaveDataCommand = new RelayCommand(OnSaveData, true);
             GenerateDataCommand = new RelayCommand(OnGenerateData, true);
             RetrieveDataCommand = new RelayCommand(OnRetrieveData, true);

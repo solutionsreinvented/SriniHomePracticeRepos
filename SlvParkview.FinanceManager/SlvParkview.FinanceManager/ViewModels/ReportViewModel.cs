@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Services;
+using System.IO;
 
 namespace SlvParkview.FinanceManager.ViewModels
 {
@@ -68,19 +69,6 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         #endregion
 
-        #region Private Helpers
-
-        private void Initialize()
-        {
-            AddExpenseCommand = new RelayCommand(OnAddExpense, true);
-            AddPaymentCommand = new RelayCommand(OnAddPayment, true);
-            AddCommonExpenseCommand = new RelayCommand(OnAddCommonExpense, true);
-            GenerateCommand = new RelayCommand(OnGenerate, true);
-            GoToSummaryCommand = new RelayCommand(OnGoToSummary, true);
-        }
-
-        #endregion
-
         #region Command Handlers
 
         private void OnAddExpense()
@@ -103,12 +91,28 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void OnGenerate()
         {
-            throw new NotImplementedException();
+            if (!Directory.Exists(ServiceProvider.ReportsDirectory))
+            {
+                Directory.CreateDirectory(ServiceProvider.ReportsDirectory);
+            }
         }
 
         private void OnGoToSummary()
         {
             _navigationService.CurrentViewModel = _sender;
+        }
+
+        #endregion
+
+        #region Private Helpers
+
+        private void Initialize()
+        {
+            AddExpenseCommand = new RelayCommand(OnAddExpense, true);
+            AddPaymentCommand = new RelayCommand(OnAddPayment, true);
+            AddCommonExpenseCommand = new RelayCommand(OnAddCommonExpense, true);
+            GenerateCommand = new RelayCommand(OnGenerate, true);
+            GoToSummaryCommand = new RelayCommand(OnGoToSummary, true);
         }
 
         #endregion

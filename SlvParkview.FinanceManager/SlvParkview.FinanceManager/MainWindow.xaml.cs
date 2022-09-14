@@ -20,6 +20,11 @@ namespace SlvParkview.FinanceManager
 
         private void OnMaximizeOrRestoreButtonClick(object sender, RoutedEventArgs e)
         {
+            //if (WindowState == WindowState.Normal)
+            //{
+            //    Margin = new Thickness(25);
+            //}
+
             WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
 
             btnMaximizeOrRestore.Content = WindowState == WindowState.Maximized ? "Restore" : "Maximize";

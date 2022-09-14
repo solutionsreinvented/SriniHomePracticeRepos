@@ -1,0 +1,72 @@
+{
+  "StaticForegroundBrush": "#88ECECEC",
+  "MouseOverForegroundBrush": "#AAFCFCFC",
+  "PressedForegroundBrush": "#AAFCFCFC",
+  "DisabledForegroundBrush": "#CCC1C1C1",
+
+  "DefaultedControlBackgroundBrush": "#FF1A1A1A",
+  "DefaultedControlBorderBrush": "#FF4A4A4A",
+
+  "StaticBackgroundBrush": "#FF1F1F1F",
+  "MouseOverBackgroundBrush": "#574b90",
+  "PressedBackgroundBrush": "#FF1C1C1F",
+  "DisabledBackgroundBrush": "#FF4A4A4A",
+
+  "StaticBorderBrush": "#FF5F5F5F",
+  "MouseOverBorderBrush": "#FF007ACC",
+  "PressedBorderBrush": "#FF5F5F5F",
+  "DisabledBorderBrush": "#FF4A4A4A",
+
+  "StaticGlyphBrush": "#88ECECEC",
+  "MouseOverGlyphBrush": "#99BCBCBC",
+  "PressedGlyphBrush": "#FF000000",
+  "DisabledGlyphBrush": "#FFBFBFBF",
+
+  "StaticEditableBackgroundBrush": "#FFFFFFFF",
+  "MouseOverEditableBackgroundBrush": "#FFFFFFFF",
+  "PressedEditableBackgroundBrush": "#FFFFFFFF",
+  "DisabledEditableBackgroundBrush": "#FFFFFFFF",
+
+  "StaticEditableBorderBrush": "#FFABADB3",
+  "MouseOverEditableBorderBrush": "#FF7EB4EA",
+  "PressedEditableBorderBrush": "#FF569DE5",
+  "DisabledEditableBorderBrush": "#FFBFBFBF",
+
+  "StaticEditableButtonBackgroundBrush": "Transparent",
+  "DisabledEditableButtonBackgroundBrush": "Transparent",
+  "StaticEditableButtonBorderBrush": "Transparent",
+  "MouseOverEditableButtonBorderBrush": "#FF7EB4EA",
+  "PressedEditableButtonBorderBrush": "#FF569DE5",
+  "DisabledEditableButtonBorderBrush": "Transparent",
+
+  "SelectedItemActiveBackgroundBrush": "#3D26A0DA",
+  "SelectedItemInactiveBackgroundBrush": "#3DDADADA",
+  "SelectedItemActiveBorderBrush": "#FF26A0DA",
+  "SelectedItemInactiveBorderBrush": "#FFDADADA",
+
+  "StaticThumbBrush": "#88ECECEC",
+  "MouseOverThumbBrush": "#A6A6A6",
+  "PressedThumbBrush": "#606060",
+
+  "MenuStaticForegroundBrush": "#FF212121",
+  "MenuDisabledForegroundBrush": "#FF707070",
+
+  "MenuItemSelectedBackgroundBrush": "#3D26A0DA",
+  "MenuItemSelectedBorderBrush": "#FF26A0DA",
+
+  "MenuItemHighlightBackgroundBrush": "#3D26A0DA",
+  "MenuItemHighlightDisabledBackgroundBrush": "#0A000000",
+  "MenuItemHighlightBorderBrush": "#FF26A0DA",
+  "MenuItemHighlightDisabledBorderBrush": "#21000000",
+
+  "CalendarDayTodayBackgroundBrush": "Red",
+  "CalendarDaySelectedBackgroundBrush": "Green",
+  "CalendarDayHighlightBackgroundBrush": "Blue",
+
+  "StaticBackgroundGradientBrush": "#FFF0F0F0 0.0 #FFE5E5E5 1.0",
+  "MouseOverBackgroundGradientBrush": "#FF4F4F4F 0.0 #FF2F2F2F 1.0",
+  "PressedBackgroundGradientBrush": "#FFDAECFC 0.0 #FFC4E0FC 1.0",
+  "MouseOverEditableButtonBackgroundGradientBrush": "#FFEBF4FC 0.0 #FFDCECFC 1.0",
+  "PressedEditableButtonBackgroundGradientBrush": "#FFDAEBFC 0.0 #FFC4E0FC 1.0"
+
+}
