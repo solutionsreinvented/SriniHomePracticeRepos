@@ -1,0 +1,27 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:views="clr-namespace:SlvParkview.FinanceManager.Views"
+    xmlns:vm="clr-namespace:SlvParkview.FinanceManager.ViewModels">
+
+    <DataTemplate DataType="{x:Type vm:SummaryViewModel}">
+        <views:SummaryView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:PaymentViewModel}">
+        <views:PaymentView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:ExpenseViewModel}">
+        <views:ExpenseView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:CommonExpenseViewModel}">
+        <views:CommonExpenseView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:ReportViewModel}">
+        <views:ReportView />
+    </DataTemplate>
+
+</ResourceDictionary>

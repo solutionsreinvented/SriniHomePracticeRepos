@@ -57,7 +57,7 @@
             VerticalAlignment="Center"
             FontSize="14"
             FontWeight="DemiBold"
-            Text="Flat Transactions Summary" />
+            Text="Report" />
 
         <!--#endregion-->
 
@@ -73,8 +73,9 @@
             Grid.Row="2"
             Margin="20,0,20,20"
             BorderThickness="0.2"
-            Header="Add New Expense">
-            <Grid Margin="10" DataContext="{Binding Expense}">
+            Header="Report Generation Options">
+
+            <Grid Margin="10">
 
                 <!--#region Grid Definitions-->
 
@@ -98,7 +99,7 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Margin="0,5"
-                    Text="Expense occured on: " />
+                    Text="Generate report for transactions till: " />
 
                 <DatePicker
                     Grid.Row="0"
@@ -106,37 +107,31 @@
                     Height="30"
                     Margin="0,2"
                     VerticalContentAlignment="Center"
-                    SelectedDate="{Binding OccuredOn}" />
+                    SelectedDate="{Binding ReportTill}" />
 
-                <TextBlock
+                <CheckBox
                     Grid.Row="1"
                     Grid.Column="0"
-                    Margin="0,5"
-                    Text="Total amount of expense (INR): " />
-
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
                     Height="26"
-                    Margin="0,2"
-                    Padding="5,0"
+                    Margin="0,5"
+                    VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
-                    Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N2}}" />
+                    Content="Include the flat information in the report"
+                    Foreground="NavajoWhite"
+                    IsChecked="{Binding IncludeFlatInformation, UpdateSourceTrigger=PropertyChanged}" />
 
-                <TextBlock
+                <CheckBox
                     Grid.Row="2"
                     Grid.Column="0"
-                    Margin="0,5"
-                    Text="Category of the expense: " />
-
-                <ComboBox
-                    Grid.Row="2"
-                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
                     Height="26"
-                    Margin="0,2"
+                    Margin="0,5"
+                    VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
-                    ItemsSource="{shared:EnumBindingResource enums:TransactionCategory}"
-                    SelectedItem="{Binding Category}" />
+                    Content="Show transactions history"
+                    Foreground="NavajoWhite"
+                    IsChecked="{Binding ShowTransactionHistory, UpdateSourceTrigger=PropertyChanged}" />
 
                 <!--#endregion-->
 
@@ -148,37 +143,37 @@
         <!--#endregion-->
 
         <!--#region Buttons Group-->
-
-        <StackPanel
+        <Grid
             Grid.Row="3"
             Height="26"
-            Margin="20,0,20,20"
-            HorizontalAlignment="Right"
-            Orientation="Horizontal">
+            Margin="20,0,20,20">
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+
+                <Button
+                    Margin="5,0"
+                    Command="{Binding AddExpenseCommand}"
+                    Content="Add Expense" />
+                <Button
+                    Margin="5,0"
+                    Command="{Binding AddPaymentCommand}"
+                    Content="Add Payment" />
+                <Button
+                    Margin="5,0"
+                    Command="{Binding AddCommonExpenseCommand}"
+                    Content="Add Common Expense" />
+                <Button
+                    Margin="5,0,0,0"
+                    Command="{Binding GoToSummaryCommand}"
+                    Content="Switch to Summary" />
+            </StackPanel>
 
             <Button
                 Margin="5,0"
-                Command="{Binding SaveExpenseCommand}"
-                Content="Save Expense"
-                IsEnabled="{Binding Expense.IsDataValid}" />
-            <Button
-                Margin="5,0"
-                Command="{Binding AddPaymentCommand}"
-                Content="Add Payment" />
-            <Button
-                Margin="5,0"
-                Command="{Binding AddCommonExpenseCommand}"
-                Content="Add Common Expense" />
-            <Button
-                Margin="5,0"
-                Command="{Binding GenerateReportCommand}"
+                HorizontalAlignment="Left"
+                Command="{Binding GenerateCommand}"
                 Content="Generate Report" />
-            <Button
-                Margin="5,0,0,0"
-                Command="{Binding GoToSummaryCommand}"
-                Content="Switch to Summary" />
-        </StackPanel>
 
+        </Grid>
         <!--#endregion-->
 
     </Grid>

@@ -56,7 +56,7 @@ namespace ApartmentFinanceManager.ViewModels
 
         public ICommand AddCommonExpenseCommand { get; set; }
 
-        public ICommand GenerateReportCommand { get; set; }
+        public ICommand GenerateReportsCommand { get; set; }
 
         public ICommand GoToSummaryCommand { get; set; }
 
@@ -66,7 +66,7 @@ namespace ApartmentFinanceManager.ViewModels
 
         private void OnSavePayment()
         {
-            Flat targetFlat = _sender.ApartmentBlock.Flats.FirstOrDefault(f => f.Description == FlatToBeProcessed.Description);
+            Flat targetFlat = _sender.Block.Flats.FirstOrDefault(f => f.Description == FlatToBeProcessed.Description);
 
             if (!targetFlat.ContainsSimilar(Payment))
             {
@@ -95,7 +95,7 @@ namespace ApartmentFinanceManager.ViewModels
             _navigationService.CurrentViewModel = commonExpenseViewModel;
         }
 
-        private void OnGenerateReport()
+        private void OnGenerateReports()
         {
             ReportViewModel reportViewModel = new ReportViewModel(_sender, _navigationService, FlatToBeProcessed);
             _navigationService.CurrentViewModel = reportViewModel;
@@ -117,7 +117,7 @@ namespace ApartmentFinanceManager.ViewModels
             AddExpenseCommand = new RelayCommand(OnAddExpense, true);
             AddCommonExpenseCommand = new RelayCommand(OnAddCommonExpense, true);
 
-            GenerateReportCommand = new RelayCommand(OnGenerateReport, true);
+            GenerateReportsCommand = new RelayCommand(OnGenerateReports, true);
             GoToSummaryCommand = new RelayCommand(OnGoToSummary, true);
         }
 

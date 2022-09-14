@@ -1,15 +1,14 @@
-﻿using ApartmentFinanceManager.Models;
-using ApartmentFinanceManager.Services;
-
-using ReInvented.Shared.Commands;
+﻿using ReInvented.Shared.Commands;
 
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using SlvParkview.FinanceManager.Services;
+using SlvParkview.FinanceManager.Models;
 
-namespace ApartmentFinanceManager.ViewModels
+namespace SlvParkview.FinanceManager.ViewModels
 {
-    public class ExpenseViewModel : BaseViewModel
+    public class PaymentViewModel : BaseViewModel
     {
         #region Private Fields
 
@@ -20,7 +19,7 @@ namespace ApartmentFinanceManager.ViewModels
 
         #region Default Constructor
 
-        private ExpenseViewModel()
+        private PaymentViewModel()
         {
             Initialize();
         }
@@ -29,7 +28,7 @@ namespace ApartmentFinanceManager.ViewModels
 
         #region Parameterized Constructor
 
-        public ExpenseViewModel(SummaryViewModel sender, NavigationService navigationService, Flat flatToBeProcessed)
+        public PaymentViewModel(SummaryViewModel sender, NavigationService navigationService, Flat flatToBeProcessed)
             : this()
         {
             _sender = sender;
@@ -42,7 +41,7 @@ namespace ApartmentFinanceManager.ViewModels
 
         #region Public Properties
 
-        public Expense Expense { get => Get<Expense>(); set => Set(value); }
+        public Payment Payment { get => Get<Payment>(); set => Set(value); }
 
         public Flat FlatToBeProcessed { get => Get<Flat>(); set => Set(value); }
 
@@ -50,27 +49,27 @@ namespace ApartmentFinanceManager.ViewModels
 
         #region Public Commands
 
-        public ICommand SaveExpenseCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand SavePaymentCommand { get; set; }
 
-        public ICommand AddPaymentCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand AddExpenseCommand { get; set; }
 
-        public ICommand AddCommonExpenseCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand AddCommonExpenseCommand { get; set; }
 
-        public ICommand GenerateReportsCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand GenerateReportsCommand { get; set; }
 
-        public ICommand GoToSummaryCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand GoToSummaryCommand { get; set; }
 
         #endregion
 
         #region Command Handlers
 
-        private void OnSaveExpense()
+        private void OnSavePayment()
         {
             Flat targetFlat = _sender.Block.Flats.FirstOrDefault(f => f.Description == FlatToBeProcessed.Description);
 
-            if (!targetFlat.ContainsSimilar(Expense))
+            if (!targetFlat.ContainsSimilar(Payment))
             {
-                AddExpenseTo(targetFlat);
+                AddPaymentTo(targetFlat);
             }
             else
             {
@@ -78,15 +77,15 @@ namespace ApartmentFinanceManager.ViewModels
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    AddExpenseTo(targetFlat);
+                    AddPaymentTo(targetFlat);
                 }
             }
         }
 
-        private void OnAddPayment()
+        private void OnAddExpense()
         {
-            PaymentViewModel paymentViewModel = new PaymentViewModel(_sender, _navigationService, FlatToBeProcessed);
-            _navigationService.CurrentViewModel = paymentViewModel;
+            ExpenseViewModel expenseViewModel = new ExpenseViewModel(_sender, _navigationService, FlatToBeProcessed);
+            _navigationService.CurrentViewModel = expenseViewModel;
         }
 
         private void OnAddCommonExpense()
@@ -108,29 +107,30 @@ namespace ApartmentFinanceManager.ViewModels
 
         #endregion
 
-        #region Private Helpers
+        #region Helper Methods
 
         private void Initialize()
         {
-            Expense = new Expense();
-            SaveExpenseCommand = new RelayCommand(OnSaveExpense, true);
-            AddPaymentCommand = new RelayCommand(OnAddPayment, true);
+            Payment = new Payment();
+            SavePaymentCommand = new RelayCommand(OnSavePayment, true);
+            AddExpenseCommand = new RelayCommand(OnAddExpense, true);
             AddCommonExpenseCommand = new RelayCommand(OnAddCommonExpense, true);
 
             GenerateReportsCommand = new RelayCommand(OnGenerateReports, true);
             GoToSummaryCommand = new RelayCommand(OnGoToSummary, true);
         }
 
-        private void AddExpenseTo(Flat flat)
+        private void AddPaymentTo(Flat flat)
         {
-            flat.AddExpense(Expense);
+            flat.AddPayment(Payment);
 
-            _ = MessageBox.Show("Expense added successfully!", "Entry successful", MessageBoxButton.OK);
+            _ = MessageBox.Show("Payment added successfully!", "Entry successful", MessageBoxButton.OK);
 
-            Expense = new Expense();
+            Payment = new Payment();
         }
 
         #endregion
 
     }
+
 }

@@ -187,8 +187,8 @@
                 Content="Add Common Expense" />
             <Button
                 Margin="5,0"
-                Command="{Binding GenerateReportCommand}"
-                Content="Generate Report" />
+                Command="{Binding GenerateReportsCommand}"
+                Content="Generate Reports" />
             <Button
                 Margin="5,0,0,0"
                 Command="{Binding GoToSummaryCommand}"

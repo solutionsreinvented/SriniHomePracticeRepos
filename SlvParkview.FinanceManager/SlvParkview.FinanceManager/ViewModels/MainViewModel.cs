@@ -1,15 +1,14 @@
-﻿using ApartmentFinanceManager.Models;
-using ApartmentFinanceManager.Services;
-
-using ReInvented.DataAccess;
+﻿using ReInvented.DataAccess;
 using ReInvented.DataAccess.Interfaces;
 using ReInvented.Shared.Commands;
 using ReInvented.Shared.Stores;
 
 using System.IO;
 using System.Windows.Input;
+using SlvParkview.FinanceManager.Models;
+using SlvParkview.FinanceManager.Services;
 
-namespace ApartmentFinanceManager.ViewModels
+namespace SlvParkview.FinanceManager.ViewModels
 {
     public class MainViewModel : PropertyStore
     {

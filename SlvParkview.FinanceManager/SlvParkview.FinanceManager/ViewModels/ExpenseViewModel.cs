@@ -1,13 +1,12 @@
-﻿using ApartmentFinanceManager.Models;
-using ApartmentFinanceManager.Services;
-
-using ReInvented.Shared.Commands;
+﻿using ReInvented.Shared.Commands;
 
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using SlvParkview.FinanceManager.Models;
+using SlvParkview.FinanceManager.Services;
 
-namespace ApartmentFinanceManager.ViewModels
+namespace SlvParkview.FinanceManager.ViewModels
 {
     public class ExpenseViewModel : BaseViewModel
     {

@@ -1,14 +1,14 @@
-﻿using ApartmentFinanceManager.Enums;
-using ApartmentFinanceManager.Services;
-
+﻿
 using ReInvented.Shared.Stores;
 
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using SlvParkview.FinanceManager.Services;
+using SlvParkview.FinanceManager.Enums;
 
-namespace ApartmentFinanceManager.Models
+namespace SlvParkview.FinanceManager.Models
 {
     public class Flat : PropertyStore
     {

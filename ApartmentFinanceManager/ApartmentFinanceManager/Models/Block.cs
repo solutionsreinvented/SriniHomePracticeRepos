@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace ApartmentFinanceManager.Models
 {
-    public class ApartmentBlock : PropertyStore
+    public class Block : PropertyStore
     {
         #region Default Constructor
 
-        public ApartmentBlock()
+        public Block()
         {
 
         }

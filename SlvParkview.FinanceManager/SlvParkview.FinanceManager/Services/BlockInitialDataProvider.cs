@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using static ApartmentFinanceManager.Enums.ResidentType;
-using ApartmentFinanceManager.Models;
+using static SlvParkview.FinanceManager.Enums.ResidentType;
+using SlvParkview.FinanceManager.Models;
 
-namespace ApartmentFinanceManager.Services
+namespace SlvParkview.FinanceManager.Services
 {
     internal static class BlockInitialDataProvider
     {
