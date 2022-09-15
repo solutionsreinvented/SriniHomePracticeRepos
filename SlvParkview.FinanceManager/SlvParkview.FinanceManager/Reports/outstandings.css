@@ -1,0 +1,100 @@
+body {}
+
+h2 {
+    align-self: center;
+    padding: 50px;
+}
+
+#header {
+    min-width: 600px;
+    width: 60%;
+    height: 300px;
+    margin: 0 auto;
+
+    padding-top: 10px;
+}
+
+#summary {
+    min-width: 600px;
+    width: 60%;
+    height: auto;
+    margin: 0 auto;
+    
+    padding: 00px;
+}
+
+.flat-info,
+.outstanding-table {
+    border-collapse: collapse;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    padding: 20px 30px;
+    min-width: 600px;
+    max-height: 80%;
+    width: 90%;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.transaction-row {
+    height: 20px;
+}
+
+.outstanding-table .date-col {
+    vertical-align: middle;
+}
+
+.date-col {
+    width: 20%;
+}
+
+.exp-col {
+    width: 36%;
+    text-align: center;
+}
+
+.pay-col {
+    width: 24%;
+    text-align: center;
+}
+
+.exp-col1,
+.exp-col2,
+.exp-col3 {
+    width: 10%;
+}
+
+.pay-col1, .pay-col2 {
+    width: 10%;
+}
+
+.outstand-col {
+    width: 20;
+}
+
+#summary td {
+    padding: 5px;
+    text-align: center;
+}
+
+.flat-info td,
+.outstanding-table td {
+    border-right: 1px solid;
+    padding: 0px 20px;
+    border: 1px solid;
+}
+
+.flat-info .col-desc {
+    width: 70%;
+}
+
+.flat-info .col-value {
+    width: 30%;
+}
+
+.flat-info .col-desc,
+.col-value {
+    font-weight: bold;
+    font-size: 1.15em;
+    padding: 10px 20px;
+}
