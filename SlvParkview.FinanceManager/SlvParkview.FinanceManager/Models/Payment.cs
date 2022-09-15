@@ -69,7 +69,8 @@ namespace SlvParkview.FinanceManager.Models
         public bool Equals(Payment payment)
         {
             return payment != null &&
-                   ReceivedOn == payment.ReceivedOn && Category == payment.Category && Amount == payment.Amount;
+                   ReceivedOn == payment.ReceivedOn && Category == payment.Category &&
+                   Amount == payment.Amount && Mode == payment.Mode;
         }
 
         public override bool Equals(object obj)
@@ -101,7 +102,6 @@ namespace SlvParkview.FinanceManager.Models
                 Mode = payment.Mode
             };
         }
-
         #endregion
     }
 }

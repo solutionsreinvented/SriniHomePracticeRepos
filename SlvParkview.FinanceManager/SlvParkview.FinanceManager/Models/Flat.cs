@@ -115,10 +115,10 @@ namespace SlvParkview.FinanceManager.Models
         /// Outstanding balance pending calculated till date.
         /// </summary>
         public decimal CurrentOutstanding => GetOutstandingBalanceOnSpecifiedDate();
-        /// <summary>
-        /// Summary of transactions since the inception of the account till the required date.
-        /// </summary>
-        public List<TransactionRecord> TransactionsSummary => FlatTransactionsSummarizer.Generate(this, DateSpecified);
+        ///// <summary>
+        ///// Summary of transactions since the inception of the account till the required date.
+        ///// </summary>
+        //public List<TransactionRecord> TransactionsSummary => ReportsProvider.GenerateTransactionHistory(this, DateSpecified);
 
         #endregion
 

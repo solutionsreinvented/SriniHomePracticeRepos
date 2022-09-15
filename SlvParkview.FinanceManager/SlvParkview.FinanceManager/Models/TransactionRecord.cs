@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ReInvented.Shared.Stores;
+
+using System;
 
 namespace SlvParkview.FinanceManager.Models
 {
-    public class TransactionRecord
+    public class TransactionRecord : PropertyStore
     {
-        public DateTime TransactionDate { get; set; }
+        public DateTime TransactionDate { get => Get<DateTime>(); set => Set(value); }
 
-        public List<Expense> Expenses { get; set; }
+        public Expense Expense { get => Get<Expense>(); set => Set(value); }
 
-        public List<Payment> Payments { get; set; }
+        public Payment Payment { get => Get<Payment>(); set => Set(value); }
 
-        public decimal Outstanding { get; set; }
+        public decimal Outstanding { get => Get<decimal>(); set => Set(value); }
+
+        public PrintableTransaction PrintableTransaction => PrintableTransaction.Parse(this);
+
     }
 }

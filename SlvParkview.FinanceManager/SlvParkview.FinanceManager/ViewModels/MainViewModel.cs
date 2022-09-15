@@ -72,9 +72,9 @@ namespace SlvParkview.FinanceManager.ViewModels
             _dataSerializer = new JsonDataSerializer<Block>();
             Block deserializedData = _dataSerializer.Deserialize(_filePath);
 
-            SummaryViewModel summaryViewModel = new SummaryViewModel(_navigationService) { Block = deserializedData };
+            _summaryViewModel = new SummaryViewModel(_navigationService) { Block = deserializedData };
 
-            _navigationService.CurrentViewModel = summaryViewModel;
+            _navigationService.CurrentViewModel = _summaryViewModel;
 
             AllowSave = true;
         }

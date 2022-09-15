@@ -7,6 +7,8 @@ using System.Windows.Input;
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Services;
 using System.IO;
+using ReInvented.DataAccess;
+using ReInvented.DataAccess.Interfaces;
 
 namespace SlvParkview.FinanceManager.ViewModels
 {
@@ -14,6 +16,7 @@ namespace SlvParkview.FinanceManager.ViewModels
     {
         #region Private Fields
 
+        private string _reportTargetDirectory;
         private readonly SummaryViewModel _sender;
         private readonly NavigationService _navigationService;
 
@@ -45,7 +48,11 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public Flat FlatToBeProcessed { get => Get<Flat>(); set => Set(value); }
 
-        public List<TransactionRecord> TransactionsSummary { get => Get<List<TransactionRecord>>(); private set => Set(value); }
+        public List<PrintableTransaction> TransactionsSummary
+        {
+            get => Get<List<PrintableTransaction>>();
+            private set => Set(value);
+        }
 
         public DateTime ReportTill { get => Get(DateTime.Today); set => Set(value); }
 
@@ -91,8 +98,15 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void OnGenerate()
         {
+            IDataSerializer<List<PrintableTransaction>> dataSerializer = new JsonDataSerializer<List<PrintableTransaction>>();
+            string fileName = $"outstandings{ReportTill:ddMMyyyy}.json";
+
             CreateRequiredDirectories();
-            TransactionsSummary = FlatToBeProcessed.TransactionsSummary;
+
+            TransactionsSummary = ReportsProvider.GetPrintableTransactions(ReportsProvider.GenerateTransactionHistory(FlatToBeProcessed, ReportTill));
+
+            string serializedData = dataSerializer.Serialize(TransactionsSummary);
+            File.WriteAllText(Path.Combine(_reportTargetDirectory, fileName), serializedData);
         }
 
 
@@ -135,13 +149,14 @@ namespace SlvParkview.FinanceManager.ViewModels
             }
 
             /// Create a directory with requested date if it does not exists.
-            
+
             string todayDirectory = Path.Combine(flatDirectory, ReportTill.ToString("dd MMM yyyy"));
 
             if (!Directory.Exists(todayDirectory))
             {
                 _ = Directory.CreateDirectory(todayDirectory);
             }
+            _reportTargetDirectory = todayDirectory;
         }
 
         #endregion

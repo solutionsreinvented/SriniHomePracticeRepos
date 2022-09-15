@@ -98,9 +98,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Enums\ReportType.cs" />
+    <Compile Include="Models\PrintableTransaction.cs" />
     <Compile Include="Repositories\FlatRepository.cs" />
     <Compile Include="Services\BlockInitialDataProvider.cs" />
-    <Compile Include="Services\FlatTransactionsSummarizer.cs" />
+    <Compile Include="Services\ReportsProvider.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ServiceProvider.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
 
 using ReInvented.Shared.Stores;
 
@@ -48,6 +51,8 @@ namespace SlvParkview.FinanceManager.Models
         /// </summary>
         public decimal Amount { get => Get<decimal>(); set { Set(value); RaisePropertyChanged(nameof(IsDataValid)); } }
 
+        [JsonIgnore]
+        [XmlIgnore]
         public bool IsDataValid => OccuredOn <= DateTime.Today && Amount > 0.0m;
 
         #endregion
