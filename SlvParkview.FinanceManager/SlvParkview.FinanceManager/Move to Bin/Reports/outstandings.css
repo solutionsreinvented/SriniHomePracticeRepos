@@ -1,0 +1,87 @@
+* {
+    font-size: 0.92em;
+}
+
+#header,
+#summary {
+    min-width: 600px;
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+.col-flat-info-heading {
+    text-align: center;
+    font-weight: bold;
+}
+
+.flat-info,
+.transactions-table {
+    border-collapse: collapse;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    padding: 20px 30px;
+    min-width: 600px;
+    max-height: 80%;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.flat-info thead td,
+.transactions-table thead td {
+    font-weight: bold;
+    background-color: #e9edc9;
+}
+
+.date-col {
+    vertical-align: middle;
+    width: 24%;
+}
+
+.pay-col {
+    width: 37%;
+    text-align: center;
+}
+
+.exp-col {
+    width: 25%;
+    text-align: center;
+}
+
+.outstand-col {
+    width: 16%;
+}
+
+.flat-info td,
+.transactions-table td {
+    text-align: center;
+    padding: 5px 20px;
+    border: 1px solid;
+}
+
+.flat-desc,
+.resident-type,
+.opening-date,
+.owner-name,
+.opening-balance,
+.tenant-name,
+.current-outstanding {
+    width: 23%;
+}
+
+.flat-desc-cap,
+.resident-type-cap,
+.opening-date-cap,
+.owner-name-cap,
+.coowner-name-cap,
+.opening-balance-cap,
+.tenant-name-cap,
+.current-outstanding-cap {
+    width: 27%;
+    font-weight: bold;
+}
+
+.flat-info-body td {
+    text-align: left;
+}

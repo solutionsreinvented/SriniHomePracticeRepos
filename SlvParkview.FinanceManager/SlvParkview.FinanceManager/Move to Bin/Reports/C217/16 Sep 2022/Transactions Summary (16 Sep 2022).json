@@ -1,0 +1,98 @@
+{
+  "FlatInfo": {
+    "Number": "217",
+    "Description": "C217",
+    "OwnedBy": "Srinivasa Rao Masanam",
+    "CoOwnedBy": "-",
+    "TenantName": "-",
+    "ResidentType": "Owner",
+    "AccountOpenedOn": "01 September 2022",
+    "DateSpecified": "13 September 2022",
+    "OpeningBalance": "2,800.00",
+    "OutstandingOnSpecifiedDate": "3,600.00",
+    "CurrentOutstanding": "(2,000.00)"
+  },
+  "Transactions": [
+    {
+      "TransactionDate": "05 September 2022",
+      "PaymentAmount": "2,000.00",
+      "PaymentMode": "Cash",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "2,000.00",
+      "ExpenseCategory": "Maintenance",
+      "Outstanding": "2,800.00"
+    },
+    {
+      "TransactionDate": "05 September 2022",
+      "PaymentAmount": "2,000.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "800.00"
+    },
+    {
+      "TransactionDate": "05 September 2022",
+      "PaymentAmount": "2,000.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(1,200.00)"
+    },
+    {
+      "TransactionDate": "06 September 2022",
+      "PaymentAmount": "-",
+      "PaymentMode": "-",
+      "PaymentCategory": "-",
+      "ExpenseAmount": "2,000.00",
+      "ExpenseCategory": "Maintenance",
+      "Outstanding": "800.00"
+    },
+    {
+      "TransactionDate": "06 September 2022",
+      "PaymentAmount": "-",
+      "PaymentMode": "-",
+      "PaymentCategory": "-",
+      "ExpenseAmount": "2,000.00",
+      "ExpenseCategory": "Maintenance",
+      "Outstanding": "2,800.00"
+    },
+    {
+      "TransactionDate": "12 September 2022",
+      "PaymentAmount": "2,000.00",
+      "PaymentMode": "Cash",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "800.00"
+    },
+    {
+      "TransactionDate": "13 September 2022",
+      "PaymentAmount": "-",
+      "PaymentMode": "-",
+      "PaymentCategory": "-",
+      "ExpenseAmount": "2,800.00",
+      "ExpenseCategory": "Maintenance",
+      "Outstanding": "3,600.00"
+    },
+    {
+      "TransactionDate": "15 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "800.00"
+    },
+    {
+      "TransactionDate": "15 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Cash",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(2,000.00)"
+    }
+  ]
+}

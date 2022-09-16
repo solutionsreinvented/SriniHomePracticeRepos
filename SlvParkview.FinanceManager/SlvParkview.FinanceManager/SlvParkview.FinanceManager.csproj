@@ -99,10 +99,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Enums\ReportType.cs" />
+    <Compile Include="Extensions\DecimalExtensions.cs" />
+    <Compile Include="Extensions\FlatExtensions.cs" />
+    <Compile Include="Models\OutstandingsReport.cs" />
+    <Compile Include="Models\PrintableFlat.cs" />
     <Compile Include="Models\PrintableTransaction.cs" />
     <Compile Include="Repositories\FlatRepository.cs" />
     <Compile Include="Services\BlockInitialDataProvider.cs" />
-    <Compile Include="Services\ReportsProvider.cs" />
+    <Compile Include="Services\ReportsGenerator.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ServiceProvider.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -110,6 +114,7 @@
     <Compile Include="ViewModels\ExpenseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PaymentViewModel.cs" />
+    <Compile Include="ViewModels\ReportViewerViewModel.cs" />
     <Compile Include="ViewModels\ReportViewModel.cs" />
     <Compile Include="ViewModels\SummaryViewModel.cs" />
     <Compile Include="ViewModels\ThemeViewModel.cs" />
@@ -127,6 +132,9 @@
     </Compile>
     <Compile Include="Views\ReportView.xaml.cs">
       <DependentUpon>ReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportViewerView.xaml.cs">
+      <DependentUpon>ReportViewerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SummaryView.xaml.cs">
       <DependentUpon>SummaryView.xaml</DependentUpon>
@@ -175,6 +183,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\ReportViewerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SummaryView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -209,7 +221,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="SlvParkview.FinanceManager_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

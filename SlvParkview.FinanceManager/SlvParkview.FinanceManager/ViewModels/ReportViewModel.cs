@@ -9,6 +9,7 @@ using SlvParkview.FinanceManager.Services;
 using System.IO;
 using ReInvented.DataAccess;
 using ReInvented.DataAccess.Interfaces;
+using System.Windows;
 
 namespace SlvParkview.FinanceManager.ViewModels
 {
@@ -47,6 +48,8 @@ namespace SlvParkview.FinanceManager.ViewModels
         #region Public Properties
 
         public Flat FlatToBeProcessed { get => Get<Flat>(); set => Set(value); }
+
+        public OutstandingsReport OutstandingsReport { get => Get<OutstandingsReport>(); set => Set(value); }
 
         public List<PrintableTransaction> TransactionsSummary
         {
@@ -95,20 +98,6 @@ namespace SlvParkview.FinanceManager.ViewModels
             CommonExpenseViewModel commonExpenseViewModel = new CommonExpenseViewModel(_sender, _navigationService);
             _navigationService.CurrentViewModel = commonExpenseViewModel;
         }
-
-        private void OnGenerate()
-        {
-            IDataSerializer<List<PrintableTransaction>> dataSerializer = new JsonDataSerializer<List<PrintableTransaction>>();
-            string fileName = $"outstandings{ReportTill:ddMMyyyy}.json";
-
-            CreateRequiredDirectories();
-
-            TransactionsSummary = ReportsProvider.GetPrintableTransactions(ReportsProvider.GenerateTransactionHistory(FlatToBeProcessed, ReportTill));
-
-            string serializedData = dataSerializer.Serialize(TransactionsSummary);
-            File.WriteAllText(Path.Combine(_reportTargetDirectory, fileName), serializedData);
-        }
-
 
         private void OnGoToSummary()
         {
@@ -159,7 +148,38 @@ namespace SlvParkview.FinanceManager.ViewModels
             _reportTargetDirectory = todayDirectory;
         }
 
+        private void CreateHtmlFile(string fileName)
+        {
+            File.Copy(Path.Combine(ServiceProvider.ReportsDirectory, "outstandings-template.html"), Path.Combine(_reportTargetDirectory, fileName).Replace("json", "html"), true);
+        }
+
+        private void CreateJsonFile(string fileName, string serializedData)
+        {
+            File.WriteAllText(Path.Combine(_reportTargetDirectory, fileName), serializedData);
+        }
+
         #endregion
 
+        private void OnGenerate()
+        {
+            IDataSerializer<OutstandingsReport> dataSerializer = new JsonDataSerializer<OutstandingsReport>();
+            string fileName = $"Transactions Summary ({ReportTill:dd MMM yyyy}).json";
+
+            CreateRequiredDirectories();
+
+            CreateHtmlFile(fileName);
+
+            OutstandingsReport = ReportsGenerator.GetOutstandingsReport(FlatToBeProcessed, ReportTill);
+
+            string serializedData = dataSerializer.Serialize(OutstandingsReport);
+
+            CreateJsonFile(fileName, serializedData);
+
+            _ = MessageBox.Show("Report generated successfully!", "Report Generation", MessageBoxButton.OK);
+
+            //ReportViewerViewModel reportViewerViewModel = 
+            //    new ReportViewerViewModel(_sender, _navigationService, Path.Combine(_reportTargetDirectory, fileName.Replace("json", "html")));
+            //_navigationService.CurrentViewModel = reportViewerViewModel;
+        }
     }
 }

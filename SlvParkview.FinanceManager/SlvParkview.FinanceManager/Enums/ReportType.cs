@@ -7,8 +7,8 @@ namespace SlvParkview.FinanceManager.Enums
     [TypeConverter(typeof(EnumToDescriptionTypeConverter))]
     public enum ReportType
     {
-        [Description("Outstandings Summary")]
-        OutstandingsSummary,
+        [Description("Transactions Summary")]
+        TransactionsSummary,
         [Description("Flat Transactions Summary")]
         FlatTransactionsSummary
     }

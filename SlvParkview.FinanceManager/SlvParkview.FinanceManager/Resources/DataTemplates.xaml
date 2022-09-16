@@ -24,4 +24,8 @@
         <views:ReportView />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:ReportViewerViewModel}">
+        <views:ReportViewerView />
+    </DataTemplate>
+
 </ResourceDictionary>

@@ -2,10 +2,8 @@
 using ReInvented.Shared.Stores;
 
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using SlvParkview.FinanceManager.Services;
 using SlvParkview.FinanceManager.Enums;
 
 namespace SlvParkview.FinanceManager.Models
