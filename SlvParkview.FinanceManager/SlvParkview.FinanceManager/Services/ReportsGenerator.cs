@@ -3,6 +3,8 @@ using SlvParkview.FinanceManager.Extensions;
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Reporting;
 using System;
+using System.Globalization;
+using System.Linq;
 
 namespace SlvParkview.FinanceManager.Services
 {
@@ -21,6 +23,13 @@ namespace SlvParkview.FinanceManager.Services
 
 
         #region Reports
+
+        //public static MonthlyPaymentsReport GetMonthlyPaymentsReport(Block block, int forMonth)
+        //{
+        //    MonthlyPaymentsReport monthlyPaymentsReport = new MonthlyPaymentsReport() { ReportedMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(forMonth) };
+
+        //    block.Flats.ForEach(f => monthlyPaymentsReport.Payments.AddRange(f.Payments.Where(p => p.ReceivedOn.Month == forMonth)) )
+        //}
 
         public static OverviewReport GetOverviewReport(Block block)
         {

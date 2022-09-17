@@ -19,7 +19,7 @@ namespace SlvParkview.FinanceManager.ViewModels
         private SummaryViewModel()
         {
             Initialize();
-        }
+        } 
 
         #endregion
 

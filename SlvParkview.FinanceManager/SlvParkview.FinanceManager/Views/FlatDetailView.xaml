@@ -3,10 +3,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:enums="clr-namespace:SlvParkview.FinanceManager.Enums"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
     MinWidth="650"
-    MinHeight="200"
-    MaxHeight="220"
+    MinHeight="240"
+    MaxHeight="250"
     d:DesignHeight="220"
     d:DesignWidth="650"
     mc:Ignorable="d">
@@ -30,9 +32,15 @@
                     <Setter Property="VerticalContentAlignment" Value="Center" />
                     <Setter Property="Padding" Value="5,2" />
                     <Setter Property="Margin" Value="0,2,5,2" />
-                    <Setter Property="Height" Value="28" />
+                    <Setter Property="Height" Value="26" />
                     <Setter Property="IsEnabled" Value="False" />
                 </Style>
+
+                <Style BasedOn="{StaticResource ComboBoxStyle}" TargetType="{x:Type ComboBox}">
+                    <Setter Property="Margin" Value="0,2,5,2" />
+                    <Setter Property="Height" Value="26" />
+                </Style>
+
             </Grid.Resources>
 
             <!--#endregion-->
@@ -47,6 +55,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -78,6 +87,7 @@
             <TextBox
                 Grid.Row="2"
                 Grid.Column="1"
+                IsEnabled="{Binding CanEditFlatDetails}"
                 Text="{Binding OwnedBy}" />
 
             <TextBlock
@@ -88,6 +98,7 @@
             <TextBox
                 Grid.Row="3"
                 Grid.Column="1"
+                IsEnabled="{Binding CanEditFlatDetails}"
                 Text="{Binding CoOwnedBy}" />
 
             <TextBlock
@@ -98,6 +109,7 @@
             <TextBox
                 Grid.Row="4"
                 Grid.Column="1"
+                IsEnabled="{Binding CanChangeTenantName}"
                 Text="{Binding TenantName}" />
 
             <TextBlock
@@ -105,10 +117,19 @@
                 Grid.Column="0"
                 Text="Flat is occupied by: " />
 
-            <TextBox
+            <ComboBox
                 Grid.Row="5"
                 Grid.Column="1"
-                Text="{Binding ResidentType}" />
+                Height="26"
+                IsEnabled="{Binding CanEditFlatDetails}"
+                ItemsSource="{shared:EnumBindingResource enums:ResidentType}"
+                SelectedItem="{Binding ResidentType}">
+                <ComboBox.Resources>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Margin" Value="0" />
+                    </Style>
+                </ComboBox.Resources>
+            </ComboBox>
 
             <!--#endregion-->
 
@@ -167,6 +188,14 @@
                 Text="{Binding CurrentOutstanding, Mode=OneWay, StringFormat={}{0:N2}}" />
 
             <!--#endregion-->
+
+            <CheckBox
+                Grid.Row="6"
+                Grid.ColumnSpan="4"
+                Margin="0,10,0,0"
+                VerticalContentAlignment="Center"
+                Content="Modify flat details"
+                IsChecked="{Binding CanEditFlatDetails}" />
 
         </Grid>
 

@@ -11,6 +11,7 @@ using ReInvented.DataAccess;
 using ReInvented.DataAccess.Interfaces;
 using System.Windows;
 using SlvParkview.FinanceManager.Reporting;
+using SlvParkview.FinanceManager.Enums;
 
 namespace SlvParkview.FinanceManager.ViewModels
 {
@@ -47,6 +48,8 @@ namespace SlvParkview.FinanceManager.ViewModels
         #endregion
 
         #region Public Properties
+
+        public ReportType ReportType { get => Get(ReportType.BlockOverview); set => Set(value); }
 
         public Flat FlatToBeProcessed { get => Get<Flat>(); set => Set(value); }
 

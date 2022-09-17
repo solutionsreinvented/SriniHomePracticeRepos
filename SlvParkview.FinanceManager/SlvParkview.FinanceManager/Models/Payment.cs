@@ -1,8 +1,10 @@
-﻿using ReInvented.Shared.Stores;
+﻿using Newtonsoft.Json;
+using ReInvented.Shared.Stores;
 
 using SlvParkview.FinanceManager.Enums;
 
 using System;
+using System.Xml.Serialization;
 
 namespace SlvParkview.FinanceManager.Models
 {
@@ -57,6 +59,8 @@ namespace SlvParkview.FinanceManager.Models
 
         #region Read-only Properties
 
+        [JsonIgnore]
+        [XmlIgnore]
         public bool IsDataValid => Amount > 0.0m && ReceivedOn <= DateTime.Today;
 
         #endregion

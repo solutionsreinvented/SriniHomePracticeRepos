@@ -104,6 +104,8 @@
     <Compile Include="Reporting\FlatTransactionsReport.cs" />
     <Compile Include="Reporting\FlatInfo.cs" />
     <Compile Include="Interfaces\IReport.cs" />
+    <Compile Include="Reporting\MonthlyPaymentRecord.cs" />
+    <Compile Include="Reporting\MonthlyPaymentsReport.cs" />
     <Compile Include="Reporting\OverviewReport.cs" />
     <Compile Include="Reporting\Report.cs" />
     <Compile Include="Reporting\TransactionInfo.cs" />
@@ -116,6 +118,7 @@
     <Compile Include="ViewModels\CommonExpenseViewModel.cs" />
     <Compile Include="ViewModels\ExpenseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ModifyFlatViewModel.cs" />
     <Compile Include="ViewModels\PaymentViewModel.cs" />
     <Compile Include="ViewModels\ReportViewerViewModel.cs" />
     <Compile Include="ViewModels\ReportViewModel.cs" />

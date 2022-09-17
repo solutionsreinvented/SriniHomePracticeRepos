@@ -5,6 +5,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using SlvParkview.FinanceManager.Enums;
+using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace SlvParkview.FinanceManager.Models
 {
@@ -77,9 +79,21 @@ namespace SlvParkview.FinanceManager.Models
         /// </summary>
         public string TenantName { get => Get<string>(); set => Set(value); }
         /// <summary>
+        /// Indicates whether the use can modify the selected flat details.
+        /// </summary>
+        [JsonIgnore]
+        [XmlIgnore]
+        public bool CanEditFlatDetails { get => Get(false); set { Set(value); RaisePropertyChanged(nameof(CanChangeTenantName)); } }
+        /// <summary>
+        /// Allows to change/enter the tenant name only when the <see cref="ResidentType"/> is a <see cref="ResidentType.Tenant"/>.
+        /// </summary>
+        [JsonIgnore]
+        [XmlIgnore]
+        public bool CanChangeTenantName => CanEditFlatDetails && ResidentType == ResidentType.Tenant;
+        /// <summary>
         /// Indicates whether flat is occupied by the owner(s) or a tenant.
         /// </summary>
-        public ResidentType ResidentType { get => Get(ResidentType.Owner); set => Set(value); }
+        public ResidentType ResidentType { get => Get(ResidentType.Owner); set { Set(value); RaisePropertyChanged(nameof(CanChangeTenantName)); } }
         /// <summary>
         /// Date on which the flat account is started.
         /// </summary>
