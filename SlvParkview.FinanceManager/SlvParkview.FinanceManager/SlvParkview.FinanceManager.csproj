@@ -60,7 +60,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -101,9 +101,12 @@
     <Compile Include="Enums\ReportType.cs" />
     <Compile Include="Extensions\DecimalExtensions.cs" />
     <Compile Include="Extensions\FlatExtensions.cs" />
-    <Compile Include="Models\OutstandingsReport.cs" />
-    <Compile Include="Models\PrintableFlat.cs" />
-    <Compile Include="Models\PrintableTransaction.cs" />
+    <Compile Include="Reporting\FlatTransactionsReport.cs" />
+    <Compile Include="Reporting\FlatInfo.cs" />
+    <Compile Include="Interfaces\IReport.cs" />
+    <Compile Include="Reporting\OverviewReport.cs" />
+    <Compile Include="Reporting\Report.cs" />
+    <Compile Include="Reporting\TransactionInfo.cs" />
     <Compile Include="Repositories\FlatRepository.cs" />
     <Compile Include="Services\BlockInitialDataProvider.cs" />
     <Compile Include="Services\ReportsGenerator.cs" />
@@ -197,7 +200,7 @@
     <Compile Include="Models\Block.cs" />
     <Compile Include="Models\Expense.cs" />
     <Compile Include="Models\Flat.cs" />
-    <Compile Include="Models\TransactionRecord.cs" />
+    <Compile Include="Reporting\TransactionRecord.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -10,7 +10,7 @@
     "DateSpecified": "13 September 2022",
     "OpeningBalance": "2,800.00",
     "OutstandingOnSpecifiedDate": "3,600.00",
-    "CurrentOutstanding": "(2,000.00)"
+    "CurrentOutstanding": "(79,600.00)"
   },
   "Transactions": [
     {
@@ -93,6 +93,258 @@
       "ExpenseAmount": "-",
       "ExpenseCategory": "-",
       "Outstanding": "(2,000.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,000.00",
+      "PaymentMode": "Cash",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(4,000.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Cash",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(6,800.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Cash",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(9,600.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(12,400.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Cash",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(15,200.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Cash",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(18,000.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Cash",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(20,800.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Cash",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(23,600.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Cheque",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(26,400.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(29,200.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Cash",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(32,000.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(34,800.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(37,600.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(40,400.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(43,200.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(46,000.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(48,800.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(51,600.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(54,400.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(57,200.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(60,000.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(62,800.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(65,600.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(68,400.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(71,200.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(74,000.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(76,800.00)"
+    },
+    {
+      "TransactionDate": "16 September 2022",
+      "PaymentAmount": "2,800.00",
+      "PaymentMode": "Online",
+      "PaymentCategory": "Maintenance",
+      "ExpenseAmount": "-",
+      "ExpenseCategory": "-",
+      "Outstanding": "(79,600.00)"
     }
   ]
 }

@@ -1,8 +1,8 @@
 ﻿using ReInvented.Shared.Stores;
-
+using SlvParkview.FinanceManager.Models;
 using System;
 
-namespace SlvParkview.FinanceManager.Models
+namespace SlvParkview.FinanceManager.Reporting
 {
     public class TransactionRecord : PropertyStore
     {
@@ -14,7 +14,7 @@ namespace SlvParkview.FinanceManager.Models
 
         public decimal Outstanding { get => Get<decimal>(); set => Set(value); }
 
-        public PrintableTransaction PrintableTransaction => PrintableTransaction.Parse(this);
+        public TransactionInfo TransactionInfo => TransactionInfo.Parse(this);
 
     }
 }

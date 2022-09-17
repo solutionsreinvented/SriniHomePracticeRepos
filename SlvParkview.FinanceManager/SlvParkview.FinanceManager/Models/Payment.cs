@@ -51,6 +51,8 @@ namespace SlvParkview.FinanceManager.Models
         /// </summary>
         public decimal Amount { get => Get<decimal>(); set { Set(value); RaisePropertyChanged(nameof(IsDataValid)); } }
 
+        //public string ReferenceId { get => Get<string>(); set => Set(value); }
+
         #endregion
 
         #region Read-only Properties

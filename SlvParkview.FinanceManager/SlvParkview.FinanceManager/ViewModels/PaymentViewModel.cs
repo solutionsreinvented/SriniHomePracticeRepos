@@ -126,13 +126,13 @@ namespace SlvParkview.FinanceManager.ViewModels
 
             _ = MessageBox.Show("Payment added successfully!", "Entry successful", MessageBoxButton.OK);
 
-            Payment = new Payment()
-            {
-                ReceivedOn = Payment.ReceivedOn,
-                Mode = Payment.Mode,
-                Amount = Payment.Amount,
-                Category = Payment.Category
-            };
+            Payment = new Payment();
+            //{
+            //    ReceivedOn = Payment.ReceivedOn,
+            //    Mode = Payment.Mode,
+            //    Amount = Payment.Amount,
+            //    Category = Payment.Category
+            //};
 
             ///Payment = Payment.Clone(Payment);
         }

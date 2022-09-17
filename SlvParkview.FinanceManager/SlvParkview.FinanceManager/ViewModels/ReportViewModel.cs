@@ -10,6 +10,7 @@ using System.IO;
 using ReInvented.DataAccess;
 using ReInvented.DataAccess.Interfaces;
 using System.Windows;
+using SlvParkview.FinanceManager.Reporting;
 
 namespace SlvParkview.FinanceManager.ViewModels
 {
@@ -49,11 +50,13 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public Flat FlatToBeProcessed { get => Get<Flat>(); set => Set(value); }
 
-        public OutstandingsReport OutstandingsReport { get => Get<OutstandingsReport>(); set => Set(value); }
+        public FlatTransactionsReport FlatTransactionsReport { get => Get<FlatTransactionsReport>(); set => Set(value); }
 
-        public List<PrintableTransaction> TransactionsSummary
+        public OverviewReport OverviewReport { get => Get<OverviewReport>(); set => Set(value); }
+
+        public List<TransactionInfo> TransactionsSummary
         {
-            get => Get<List<PrintableTransaction>>();
+            get => Get<List<TransactionInfo>>();
             private set => Set(value);
         }
 
@@ -162,16 +165,16 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void OnGenerate()
         {
-            IDataSerializer<OutstandingsReport> dataSerializer = new JsonDataSerializer<OutstandingsReport>();
+            IDataSerializer<FlatTransactionsReport> dataSerializer = new JsonDataSerializer<FlatTransactionsReport>();
             string fileName = $"Transactions Summary ({ReportTill:dd MMM yyyy}).json";
 
             CreateRequiredDirectories();
 
             CreateHtmlFile(fileName);
 
-            OutstandingsReport = ReportsGenerator.GetOutstandingsReport(FlatToBeProcessed, ReportTill);
+            FlatTransactionsReport = ReportsGenerator.GetFlatTransactionsReport(FlatToBeProcessed, ReportTill);
 
-            string serializedData = dataSerializer.Serialize(OutstandingsReport);
+            string serializedData = dataSerializer.Serialize(FlatTransactionsReport);
 
             CreateJsonFile(fileName, serializedData);
 

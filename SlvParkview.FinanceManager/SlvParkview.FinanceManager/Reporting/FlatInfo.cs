@@ -1,13 +1,8 @@
 ﻿using ReInvented.Shared.Stores;
 
-using SlvParkview.FinanceManager.Enums;
-using SlvParkview.FinanceManager.Extensions;
-
-using System;
-
-namespace SlvParkview.FinanceManager.Models
+namespace SlvParkview.FinanceManager.Reporting
 {
-    public class PrintableFlat : PropertyStore
+    public class FlatInfo : PropertyStore
     {
         #region Public Properties
 
@@ -62,26 +57,6 @@ namespace SlvParkview.FinanceManager.Models
         public string CurrentOutstanding { get => Get<string>(); set => Set(value); }
 
         #endregion
-
-        public static PrintableFlat MapFrom(Flat flat)
-        {
-            string dateFormat = "dd MMMM yyyy";
-
-            return new PrintableFlat()
-            {
-                AccountOpenedOn = flat.AccountOpenedOn.ToString(dateFormat),
-                CoOwnedBy = flat.CoOwnedBy ?? "-",
-                CurrentOutstanding = flat.CurrentOutstanding.FormatNumber("N2"),
-                DateSpecified = flat.DateSpecified.ToString(dateFormat),
-                Description = flat.Description,
-                Number = flat.Number.ToString(),
-                OpeningBalance = flat.OpeningBalance.FormatNumber("N2"),
-                OutstandingOnSpecifiedDate = flat.OutstandingOnSpecifiedDate.FormatNumber("N2"),
-                OwnedBy = flat.OwnedBy,
-                ResidentType = flat.ResidentType.ToString(),
-                TenantName = flat.TenantName ?? "-"
-            };
-        }
 
     }
 

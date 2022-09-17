@@ -4,9 +4,9 @@ using SlvParkview.FinanceManager.Extensions;
 
 using System;
 
-namespace SlvParkview.FinanceManager.Models
+namespace SlvParkview.FinanceManager.Reporting
 {
-    public class PrintableTransaction : PropertyStore
+    public class TransactionInfo : PropertyStore
     {
         public string TransactionDate { get => Get<string>(); set => Set(value); }
 
@@ -22,12 +22,12 @@ namespace SlvParkview.FinanceManager.Models
 
         public string Outstanding { get => Get<string>(); set => Set(value); }
 
-        public static PrintableTransaction Parse(TransactionRecord record)
+        public static TransactionInfo Parse(TransactionRecord record)
         {
             string blank = "-";
             string numberFormat = "N2";
 
-            return new PrintableTransaction()
+            return new TransactionInfo()
             {
                 TransactionDate = record.TransactionDate.ToString("dd MMMM yyyy"),
                 PaymentAmount = record.Payment != null ? record.Payment.Amount.FormatNumber(numberFormat) : blank,

@@ -126,12 +126,12 @@ namespace SlvParkview.FinanceManager.ViewModels
 
             _ = MessageBox.Show("Expense added successfully!", "Entry successful", MessageBoxButton.OK);
 
-            Expense = new Expense()
-            {
-                OccuredOn = Expense.OccuredOn,
-                Amount = Expense.Amount,
-                Category = Expense.Category,
-            };
+            Expense = new Expense();
+            //{
+            //    OccuredOn = Expense.OccuredOn,
+            //    Amount = Expense.Amount,
+            //    Category = Expense.Category,
+            //};
 
             ///Expense = Expense.Clone(Expense);
         }

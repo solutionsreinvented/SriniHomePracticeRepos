@@ -12,9 +12,17 @@
       "DateSpecified": "2022-09-13T00:00:00+05:30",
       "OpeningBalance": 4600.0,
       "Expenses": null,
-      "Payments": null,
+      "Payments": [
+        {
+          "Mode": 1,
+          "ReceivedOn": "2022-09-14T00:00:00",
+          "Category": 1,
+          "Amount": 3000.00,
+          "IsDataValid": true
+        }
+      ],
       "OutstandingOnSpecifiedDate": 4600.0,
-      "CurrentOutstanding": 4600.0
+      "CurrentOutstanding": 1600.00
     },
     {
       "Number": "018",
@@ -27,9 +35,17 @@
       "DateSpecified": "2022-09-13T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": null,
-      "Payments": null,
-      "OutstandingOnSpecifiedDate": 2800.0,
-      "CurrentOutstanding": 2800.0
+      "Payments": [
+        {
+          "Mode": 0,
+          "ReceivedOn": "2022-09-11T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00,
+          "IsDataValid": true
+        }
+      ],
+      "OutstandingOnSpecifiedDate": 0.00,
+      "CurrentOutstanding": 0.00
     },
     {
       "Number": "019",
@@ -57,9 +73,17 @@
       "DateSpecified": "2022-09-13T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": null,
-      "Payments": null,
-      "OutstandingOnSpecifiedDate": 2800.0,
-      "CurrentOutstanding": 2800.0
+      "Payments": [
+        {
+          "Mode": 0,
+          "ReceivedOn": "2022-09-12T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00,
+          "IsDataValid": true
+        }
+      ],
+      "OutstandingOnSpecifiedDate": 0.00,
+      "CurrentOutstanding": 0.00
     },
     {
       "Number": "021",
@@ -72,9 +96,17 @@
       "DateSpecified": "2022-09-13T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": null,
-      "Payments": null,
-      "OutstandingOnSpecifiedDate": 2800.0,
-      "CurrentOutstanding": 2800.0
+      "Payments": [
+        {
+          "Mode": 0,
+          "ReceivedOn": "2022-09-12T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00,
+          "IsDataValid": true
+        }
+      ],
+      "OutstandingOnSpecifiedDate": 0.00,
+      "CurrentOutstanding": 0.00
     },
     {
       "Number": "022",
@@ -87,9 +119,17 @@
       "DateSpecified": "2022-09-13T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": null,
-      "Payments": null,
-      "OutstandingOnSpecifiedDate": 2800.0,
-      "CurrentOutstanding": 2800.0
+      "Payments": [
+        {
+          "Mode": 0,
+          "ReceivedOn": "2022-09-12T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00,
+          "IsDataValid": true
+        }
+      ],
+      "OutstandingOnSpecifiedDate": 0.00,
+      "CurrentOutstanding": 0.00
     },
     {
       "Number": "023",
@@ -147,9 +187,17 @@
       "DateSpecified": "2022-09-13T00:00:00+05:30",
       "OpeningBalance": 5600.0,
       "Expenses": null,
-      "Payments": null,
-      "OutstandingOnSpecifiedDate": 5600.0,
-      "CurrentOutstanding": 5600.0
+      "Payments": [
+        {
+          "Mode": 0,
+          "ReceivedOn": "2022-09-05T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00,
+          "IsDataValid": true
+        }
+      ],
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "119",
@@ -177,9 +225,24 @@
       "DateSpecified": "2022-09-13T00:00:00+05:30",
       "OpeningBalance": 5600.0,
       "Expenses": null,
-      "Payments": null,
-      "OutstandingOnSpecifiedDate": 5600.0,
-      "CurrentOutstanding": 5600.0
+      "Payments": [
+        {
+          "Mode": 0,
+          "ReceivedOn": "2022-09-05T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00,
+          "IsDataValid": true
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2022-09-16T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00,
+          "IsDataValid": true
+        }
+      ],
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 0.00
     },
     {
       "Number": "121",
@@ -251,68 +314,10 @@
       "AccountOpenedOn": "2022-09-01T00:00:00",
       "DateSpecified": "2022-09-13T00:00:00+05:30",
       "OpeningBalance": 2800.0,
-      "Expenses": [
-        {
-          "OccuredOn": "2022-09-05T00:00:00",
-          "Category": 1,
-          "Amount": 2000.00
-        },
-        {
-          "OccuredOn": "2022-09-13T00:00:00",
-          "Category": 1,
-          "Amount": 2800.00
-        },
-        {
-          "OccuredOn": "2022-09-06T00:00:00",
-          "Category": 1,
-          "Amount": 2000.00
-        },
-        {
-          "OccuredOn": "2022-09-06T00:00:00",
-          "Category": 1,
-          "Amount": 2000.00
-        }
-      ],
-      "Payments": [
-        {
-          "Mode": 1,
-          "ReceivedOn": "2022-09-15T00:00:00+05:30",
-          "Category": 1,
-          "Amount": 2800.00
-        },
-        {
-          "Mode": 0,
-          "ReceivedOn": "2022-09-15T00:00:00+05:30",
-          "Category": 1,
-          "Amount": 2800.00
-        },
-        {
-          "Mode": 0,
-          "ReceivedOn": "2022-09-12T00:00:00",
-          "Category": 1,
-          "Amount": 2000.00
-        },
-        {
-          "Mode": 0,
-          "ReceivedOn": "2022-09-05T00:00:00",
-          "Category": 1,
-          "Amount": 2000.00
-        },
-        {
-          "Mode": 1,
-          "ReceivedOn": "2022-09-05T00:00:00",
-          "Category": 1,
-          "Amount": 2000.00
-        },
-        {
-          "Mode": 1,
-          "ReceivedOn": "2022-09-05T00:00:00",
-          "Category": 1,
-          "Amount": 2000.00
-        }
-      ],
-      "OutstandingOnSpecifiedDate": 3600.00,
-      "CurrentOutstanding": -2000.00
+      "Expenses": null,
+      "Payments": null,
+      "OutstandingOnSpecifiedDate": 2800.0,
+      "CurrentOutstanding": 2800.0
     },
     {
       "Number": "218",
@@ -370,9 +375,17 @@
       "DateSpecified": "2022-09-13T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": null,
-      "Payments": null,
+      "Payments": [
+        {
+          "Mode": 1,
+          "ReceivedOn": "2022-09-14T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00,
+          "IsDataValid": true
+        }
+      ],
       "OutstandingOnSpecifiedDate": 2800.0,
-      "CurrentOutstanding": 2800.0
+      "CurrentOutstanding": 0.00
     },
     {
       "Number": "222",
@@ -400,9 +413,17 @@
       "DateSpecified": "2022-09-13T00:00:00+05:30",
       "OpeningBalance": 1400.0,
       "Expenses": null,
-      "Payments": null,
+      "Payments": [
+        {
+          "Mode": 0,
+          "ReceivedOn": "2022-09-14T00:00:00",
+          "Category": 1,
+          "Amount": 1400.00,
+          "IsDataValid": true
+        }
+      ],
       "OutstandingOnSpecifiedDate": 1400.0,
-      "CurrentOutstanding": 1400.0
+      "CurrentOutstanding": 0.00
     },
     {
       "Number": "224",
@@ -415,9 +436,17 @@
       "DateSpecified": "2022-09-13T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": null,
-      "Payments": null,
+      "Payments": [
+        {
+          "Mode": 1,
+          "ReceivedOn": "2022-09-15T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00,
+          "IsDataValid": true
+        }
+      ],
       "OutstandingOnSpecifiedDate": 2800.0,
-      "CurrentOutstanding": 2800.0
+      "CurrentOutstanding": 0.00
     },
     {
       "Number": "317",
@@ -475,9 +504,17 @@
       "DateSpecified": "2022-09-13T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": null,
-      "Payments": null,
-      "OutstandingOnSpecifiedDate": 2800.0,
-      "CurrentOutstanding": 2800.0
+      "Payments": [
+        {
+          "Mode": 0,
+          "ReceivedOn": "2022-09-13T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00,
+          "IsDataValid": true
+        }
+      ],
+      "OutstandingOnSpecifiedDate": 0.00,
+      "CurrentOutstanding": 0.00
     },
     {
       "Number": "321",
@@ -520,9 +557,17 @@
       "DateSpecified": "2022-09-13T00:00:00+05:30",
       "OpeningBalance": 21490.0,
       "Expenses": null,
-      "Payments": null,
-      "OutstandingOnSpecifiedDate": 21490.0,
-      "CurrentOutstanding": 21490.0
+      "Payments": [
+        {
+          "Mode": 0,
+          "ReceivedOn": "2022-09-05T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00,
+          "IsDataValid": true
+        }
+      ],
+      "OutstandingOnSpecifiedDate": 18690.00,
+      "CurrentOutstanding": 18690.00
     },
     {
       "Number": "324",

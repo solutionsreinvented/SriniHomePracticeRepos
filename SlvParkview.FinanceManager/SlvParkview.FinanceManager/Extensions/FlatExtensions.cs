@@ -1,5 +1,5 @@
 ﻿using SlvParkview.FinanceManager.Models;
-
+using SlvParkview.FinanceManager.Reporting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +15,9 @@ namespace SlvParkview.FinanceManager.Extensions
         /// </summary>
         /// <param name="transactionRecords">A <see cref="List{TransactionRecord}"/> from which the summary to be prepared.</param>
         /// <returns>A <see cref="List{PrintableTransaction}"/> to facilitate the preparation of an html table.</returns>
-        public static List<PrintableTransaction> GetPrintableTransactions(this Flat flat)
+        public static List<TransactionInfo> GetTransactionsHistory(this Flat flat)
         {
-            return GetPrintableTransactions(flat, DateTime.Today);
+            return GetTransactionHistory(flat, DateTime.Today);
         }
 
         /// <summary>
@@ -26,9 +26,9 @@ namespace SlvParkview.FinanceManager.Extensions
         /// <param name="flat">Flat for which the transactions summary to be prepared.</param>
         /// <param name="summarizeTill">Date up to which the transactions to be considered.</param>
         /// <returns>A <see cref="List{PrintableTransaction}"/> to facilitate the preparation of an html table.</returns>
-        public static List<PrintableTransaction> GetPrintableTransactions(this Flat flat, DateTime summarizeTill)
+        public static List<TransactionInfo> GetTransactionHistory(this Flat flat, DateTime summarizeTill)
         {
-            return GetPrintableTransactions(GetTransactions(flat, summarizeTill));
+            return GetTransactionsHistory(GetTransactions(flat, summarizeTill));
         }
 
         /// <summary>
@@ -36,11 +36,11 @@ namespace SlvParkview.FinanceManager.Extensions
         /// </summary>
         /// <param name="transactionRecords">A <see cref="List{TransactionRecord}"/> from which the summary to be prepared.</param>
         /// <returns>A <see cref="List{PrintableTransaction}"/> to facilitate the preparation of an html table.</returns>
-        public static List<PrintableTransaction> GetPrintableTransactions(List<TransactionRecord> transactionRecords)
+        public static List<TransactionInfo> GetTransactionsHistory(List<TransactionRecord> transactionRecords)
         {
-            List<PrintableTransaction> printableTransactions = new List<PrintableTransaction>();
+            List<TransactionInfo> printableTransactions = new List<TransactionInfo>();
 
-            transactionRecords.ForEach(t => printableTransactions.Add(t.PrintableTransaction));
+            transactionRecords.ForEach(t => printableTransactions.Add(t.TransactionInfo));
 
             return printableTransactions;
         }
@@ -131,6 +131,30 @@ namespace SlvParkview.FinanceManager.Extensions
 
 
             return transactionRecords;
+        }
+
+        #endregion
+
+        #region Parsers
+
+        public static FlatInfo ParseToFlatInfo(this Flat flat)
+        {
+            string dateFormat = "dd MMMM yyyy";
+
+            return new FlatInfo()
+            {
+                AccountOpenedOn = flat.AccountOpenedOn.ToString(dateFormat),
+                CoOwnedBy = flat.CoOwnedBy ?? "-",
+                CurrentOutstanding = flat.CurrentOutstanding.FormatNumber("N2"),
+                DateSpecified = flat.DateSpecified.ToString(dateFormat),
+                Description = flat.Description,
+                Number = flat.Number.ToString(),
+                OpeningBalance = flat.OpeningBalance.FormatNumber("N2"),
+                OutstandingOnSpecifiedDate = flat.OutstandingOnSpecifiedDate.FormatNumber("N2"),
+                OwnedBy = flat.OwnedBy,
+                ResidentType = flat.ResidentType.ToString(),
+                TenantName = flat.TenantName ?? "-"
+            };
         }
 
         #endregion
