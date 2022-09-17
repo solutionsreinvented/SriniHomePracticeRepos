@@ -122,12 +122,16 @@
 
         <!--#region Main Content-->
 
-        <Grid
+        <!--<Grid
             Grid.Row="1"
             MaxWidth="900"
             MaxHeight="650"
-            Margin="25">
+            Margin="25">-->
 
+        <Grid
+            Grid.Row="1"
+            MaxWidth="900"
+            Margin="25">
             <ContentControl Content="{Binding CurrentViewModel}" />
 
         </Grid>

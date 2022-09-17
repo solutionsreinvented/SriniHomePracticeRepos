@@ -28,4 +28,8 @@
         <views:ReportViewerView />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:EditFlatViewModel}">
+        <views:EditFlatView />
+    </DataTemplate>
+
 </ResourceDictionary>

@@ -118,7 +118,7 @@
     <Compile Include="ViewModels\CommonExpenseViewModel.cs" />
     <Compile Include="ViewModels\ExpenseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\ModifyFlatViewModel.cs" />
+    <Compile Include="ViewModels\EditFlatViewModel.cs" />
     <Compile Include="ViewModels\PaymentViewModel.cs" />
     <Compile Include="ViewModels\ReportViewerViewModel.cs" />
     <Compile Include="ViewModels\ReportViewModel.cs" />
@@ -132,6 +132,9 @@
     </Compile>
     <Compile Include="Views\FlatDetailView.xaml.cs">
       <DependentUpon>FlatDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditFlatView.xaml.cs">
+      <DependentUpon>EditFlatView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PaymentView.xaml.cs">
       <DependentUpon>PaymentView.xaml</DependentUpon>
@@ -178,6 +181,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\FlatDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EditFlatView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -189,6 +189,8 @@
 
             <!--#endregion-->
 
+            <!--#region Allow Flat Modifications-->
+
             <CheckBox
                 Grid.Row="6"
                 Grid.ColumnSpan="4"
@@ -196,6 +198,8 @@
                 VerticalContentAlignment="Center"
                 Content="Modify flat details"
                 IsChecked="{Binding CanEditFlatDetails}" />
+
+            <!--#endregion-->
 
         </Grid>
 

@@ -12,7 +12,7 @@ namespace SlvParkview.FinanceManager.ViewModels
     {
         #region Private Fields
 
-        private readonly SummaryViewModel _sender;
+        private readonly SummaryViewModel _summaryViewModel;
         private readonly NavigationService _navigationService;
 
         #endregion
@@ -31,7 +31,7 @@ namespace SlvParkview.FinanceManager.ViewModels
         public ExpenseViewModel(SummaryViewModel sender, NavigationService navigationService, Flat flatToBeProcessed)
             : this()
         {
-            _sender = sender;
+            _summaryViewModel = sender;
             _navigationService = navigationService;
 
             FlatToBeProcessed = flatToBeProcessed;
@@ -65,7 +65,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void OnSaveExpense()
         {
-            Flat targetFlat = _sender.Block.Flats.FirstOrDefault(f => f.Description == FlatToBeProcessed.Description);
+            Flat targetFlat = _summaryViewModel.Block.Flats.FirstOrDefault(f => f.Description == FlatToBeProcessed.Description);
 
             if (!targetFlat.ContainsSimilar(Expense))
             {
@@ -84,25 +84,25 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void OnAddPayment()
         {
-            PaymentViewModel paymentViewModel = new PaymentViewModel(_sender, _navigationService, FlatToBeProcessed);
+            PaymentViewModel paymentViewModel = new PaymentViewModel(_summaryViewModel, _navigationService, FlatToBeProcessed);
             _navigationService.CurrentViewModel = paymentViewModel;
         }
 
         private void OnAddCommonExpense()
         {
-            CommonExpenseViewModel commonExpenseViewModel = new CommonExpenseViewModel(_sender, _navigationService);
+            CommonExpenseViewModel commonExpenseViewModel = new CommonExpenseViewModel(_summaryViewModel, _navigationService);
             _navigationService.CurrentViewModel = commonExpenseViewModel;
         }
 
         private void OnGenerateReports()
         {
-            ReportViewModel reportViewModel = new ReportViewModel(_sender, _navigationService, FlatToBeProcessed);
+            ReportViewModel reportViewModel = new ReportViewModel(_summaryViewModel, _navigationService, FlatToBeProcessed);
             _navigationService.CurrentViewModel = reportViewModel;
         }
 
         private void OnGoToSummary()
         {
-            _navigationService.CurrentViewModel = _sender;
+            _navigationService.CurrentViewModel = _summaryViewModel;
         }
 
         #endregion

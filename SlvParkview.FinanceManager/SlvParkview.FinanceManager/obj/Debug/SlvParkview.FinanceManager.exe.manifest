@@ -90,14 +90,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SlvParkview.FinanceManager.exe" size="89088">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SlvParkview.FinanceManager.exe" size="98304">
       <assemblyIdentity name="SlvParkview.FinanceManager" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>A4rZhGIk9xiWxJW2aHq/VzmGS8R0927s6YXJS0tjzmw=</dsig:DigestValue>
+        <dsig:DigestValue>kZc60eZatxjwxeHUE/YMeObBT+MUHym4tvpT3cTb6+M=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

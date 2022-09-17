@@ -145,11 +145,18 @@
             <UniformGrid
                 Grid.Row="1"
                 Margin="0,10,0,5"
-                Columns="4">
+                Columns="5">
 
                 <Button
                     Height="24"
                     Margin="0,0,10,0"
+                    Padding="10,0"
+                    Command="{Binding EditFlatCommand}"
+                    Content="Edit Flat Details"
+                    IsEnabled="{Binding CanProcessFlat}" />
+
+                <Button
+                    Margin="10,0"
                     Padding="10,0"
                     Command="{Binding AddExpenseCommand}"
                     Content="Add Expense"

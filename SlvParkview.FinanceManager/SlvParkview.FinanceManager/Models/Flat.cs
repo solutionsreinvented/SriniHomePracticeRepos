@@ -93,7 +93,16 @@ namespace SlvParkview.FinanceManager.Models
         /// <summary>
         /// Indicates whether flat is occupied by the owner(s) or a tenant.
         /// </summary>
-        public ResidentType ResidentType { get => Get(ResidentType.Owner); set { Set(value); RaisePropertyChanged(nameof(CanChangeTenantName)); } }
+        public ResidentType ResidentType
+        {
+            get => Get(ResidentType.Owner);
+            set
+            {
+                Set(value);
+                UpdateTenantName();
+                RaisePropertyChanged(nameof(CanChangeTenantName));
+            }
+        }
         /// <summary>
         /// Date on which the flat account is started.
         /// </summary>
@@ -225,6 +234,13 @@ namespace SlvParkview.FinanceManager.Models
 
         #region Helper Methods
 
+        private void UpdateTenantName()
+        {
+            //if (ResidentType == ResidentType.Owner)
+            //{
+            //    TenantName = "";
+            //}
+        }
         private decimal GetOutstandingBalanceOnSpecifiedDate(DateTime? calculatedTill = null)
         {
             if (calculatedTill == null)
