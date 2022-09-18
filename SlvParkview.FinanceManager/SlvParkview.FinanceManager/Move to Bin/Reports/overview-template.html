@@ -4,13 +4,51 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SLV Parkview Maintenance Overall Summary</title>
+    <title>Transactions Summary of a Selected Flat</title>
+
+    <link rel="stylesheet" href="Styles/overview.css" />
   </head>
+
   <body>
-    <div id="flat-info">
-      <table></table>
+    <!--     <div id="generated-on">
+
     </div>
 
-    <script src="overview.js"></script>
+    <div id="apartment-name"></div> -->
+
+    <div id="container">
+      <!-- #region Transactions Table -->
+      <table class="overview-table">
+        <thead>
+          <tr class="main-heading-row">
+            <td colspan="7">Summary of Outstandings</td>
+          </tr>
+          <tr>
+            <td class="flat-number-header">Flat Number</td>
+            <td class="owner-header">Owner Name</td>
+            <td class="coowner-header">Co-owner Name</td>
+            <td class="tenant-header">Tenant Name</td>
+            <td class="resident-type-header">Resident Type</td>
+            <td class="start-date-header">Account Start Date</td>
+            <td class="outstanding-header">Current Outstanding</td>
+          </tr>
+        </thead>
+
+        <tbody class="summary-body">
+          <tr>
+            <td class="flat-number">C217</td>
+            <td class="owner">Srinivasa Rao M</td>
+            <td class="coowner">-</td>
+            <td class="tenant">-</td>
+            <td class="resident-type">Owner</td>
+            <td class="start-date">01 Sep 2022</td>
+            <td class="outstanding">(2,800.00)</td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- #endregion -->
+    </div>
+
+    <script src="Scripts/overview.js"></script>
   </body>
 </html>

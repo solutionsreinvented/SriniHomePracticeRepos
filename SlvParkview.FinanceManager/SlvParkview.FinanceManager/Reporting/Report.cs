@@ -3,12 +3,20 @@ using System;
 
 namespace SlvParkview.FinanceManager.Reporting
 {
-    public class Report : PropertyStore, IReport
+    public abstract class Report : PropertyStore, IReport
     {
         public Report()
         {
 
         }
+
+        public abstract void Generate();
+
+        protected private abstract void CreateRequiredDirectories();
+
+        protected private abstract void CreateHtmlFile();
+
+        protected private abstract void CreateJsonFile();
 
         public string GeneratedOn => DateTime.Today.ToString("dd MMM yyyy");
 

@@ -156,7 +156,8 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void CreateHtmlFile(string fileName)
         {
-            File.Copy(Path.Combine(ServiceProvider.ReportsDirectory, "outstandings-template.html"), Path.Combine(_reportTargetDirectory, fileName).Replace("json", "html"), true);
+            File.Copy(Path.Combine(ServiceProvider.ReportsDirectory, "transacts-history-template.html"), 
+                                   Path.Combine(_reportTargetDirectory, fileName).Replace("json", "html"), true);
         }
 
         private void CreateJsonFile(string fileName, string serializedData)

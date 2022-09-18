@@ -5,5 +5,7 @@
         string GeneratedOn { get; }
 
         string ApartmentName { get; }
+
+        void Generate();
     }
 }
