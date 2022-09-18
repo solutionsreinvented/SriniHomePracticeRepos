@@ -105,8 +105,8 @@
     <Compile Include="Reporting\FlatInfo.cs" />
     <Compile Include="Interfaces\IReport.cs" />
     <Compile Include="Reporting\MonthlyPaymentRecord.cs" />
-    <Compile Include="Reporting\MonthlyPaymentsReport.cs" />
-    <Compile Include="Reporting\OverviewReport.cs" />
+    <Compile Include="Reporting\MonthwisePaymentsReport.cs" />
+    <Compile Include="Reporting\BlockOustandingsReport.cs" />
     <Compile Include="Reporting\Report.cs" />
     <Compile Include="Reporting\TransactionInfo.cs" />
     <Compile Include="Repositories\FlatRepository.cs" />
@@ -250,5 +250,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

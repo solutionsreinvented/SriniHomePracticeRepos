@@ -9,13 +9,13 @@ using System.IO;
 
 namespace SlvParkview.FinanceManager.Reporting
 {
-    public class FlatTransactionsReport : Report
+    public class BlockOustandingsReport : Report, IReport
     {
         #region Private Fields
 
-        private const string _fileName = "Transactions History";
+        private const string _fileName = "Block Outstandings";
 
-        private readonly Flat _flat;
+        private readonly Block _block;
 
         private readonly DateTime _reportTill;
 
@@ -23,7 +23,7 @@ namespace SlvParkview.FinanceManager.Reporting
 
         #region Default Constructor
 
-        public FlatTransactionsReport()
+        public BlockOustandingsReport()
         {
 
         }
@@ -32,9 +32,9 @@ namespace SlvParkview.FinanceManager.Reporting
 
         #region Parameterized Constructor
 
-        public FlatTransactionsReport(Flat flat, DateTime reportTill)
+        public BlockOustandingsReport(Block block, DateTime reportTill)
         {
-            _flat = flat;
+            _block = block;
             _reportTill = reportTill;
         }
 
@@ -43,29 +43,22 @@ namespace SlvParkview.FinanceManager.Reporting
         #region Read-only Properties
 
         [JsonProperty]
-        public FlatInfo FlatInfo { get => Get<FlatInfo>(); private set => Set(value); }
-
-        [JsonProperty]
-        public List<TransactionInfo> Transactions { get => Get<List<TransactionInfo>>(); private set => Set(value); }
+        public List<FlatInfo> FlatInfoCollection { get => Get<List<FlatInfo>>(); private set => Set(value); }
 
         #endregion
 
         #region Private Helper Methods
 
+        /// <summary>
+        /// Creates the required directories to store the json and html files of the report(s).
+        /// </summary>
         private protected override void CreateRequiredDirectories()
         {
             base.CreateRequiredDirectories();
 
-            string flatwiseReportsDirectory = Path.Combine(ServiceProvider.FlatWiseReportsDirectory);
-
-            if (!Directory.Exists(flatwiseReportsDirectory))
-            {
-                _ = Directory.CreateDirectory(flatwiseReportsDirectory);
-            }
-
             /// Create if a separate directory for the selected flat does not exists.
 
-            _reportTargetDirectory = Path.Combine(flatwiseReportsDirectory, _flat.Description);
+            _reportTargetDirectory = Path.Combine(ServiceProvider.BlockOustandingsReportsDirectory);
 
             if (!Directory.Exists(_reportTargetDirectory))
             {
@@ -94,7 +87,7 @@ namespace SlvParkview.FinanceManager.Reporting
 
         private protected override string GetSerializedData()
         {
-            IDataSerializer<FlatTransactionsReport> serializer = new JsonDataSerializer<FlatTransactionsReport>();
+            IDataSerializer<BlockOustandingsReport> serializer = new JsonDataSerializer<BlockOustandingsReport>();
 
             return serializer.Serialize(this);
         }

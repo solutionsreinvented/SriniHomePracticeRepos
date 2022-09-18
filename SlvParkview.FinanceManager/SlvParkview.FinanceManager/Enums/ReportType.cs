@@ -10,6 +10,8 @@ namespace SlvParkview.FinanceManager.Enums
         [Description("Flat Transactions History")]
         FlatTransactionsHistory,
         [Description("Block Overview")]
-        BlockOverview
+        BlockOutstandings,
+        [Description("Payments in a Month")]
+        PaymentsInAMonth,
     }
 }

@@ -49,19 +49,15 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         #region Public Properties
 
-        public ReportType ReportType { get => Get(ReportType.BlockOverview); set => Set(value); }
+        public ReportType ReportType { get => Get(ReportType.PaymentsInAMonth); set => Set(value); }
 
         public Flat FlatToBeProcessed { get => Get<Flat>(); set => Set(value); }
 
         public FlatTransactionsReport FlatTransactionsReport { get => Get<FlatTransactionsReport>(); set => Set(value); }
 
-        public OverviewReport OverviewReport { get => Get<OverviewReport>(); set => Set(value); }
+        public BlockOustandingsReport OverviewReport { get => Get<BlockOustandingsReport>(); set => Set(value); }
 
-        public List<TransactionInfo> TransactionsSummary
-        {
-            get => Get<List<TransactionInfo>>();
-            private set => Set(value);
-        }
+        public Report Report { get => Get<Report>(); set => Set(value); }
 
         public DateTime ReportTill { get => Get(DateTime.Today); set => Set(value); }
 
@@ -70,6 +66,17 @@ namespace SlvParkview.FinanceManager.ViewModels
         public bool ShowTransactionHistory { get => Get(true); set => Set(value); }
 
         #endregion
+
+        #region Read-only Properties
+
+        public List<TransactionInfo> TransactionsSummary
+        {
+            get => Get<List<TransactionInfo>>();
+            private set => Set(value);
+        }
+
+        #endregion
+
 
         #region Public Commands
 
@@ -156,7 +163,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void CreateHtmlFile(string fileName)
         {
-            File.Copy(Path.Combine(ServiceProvider.ReportsDirectory, "transacts-history-template.html"), 
+            File.Copy(Path.Combine(ServiceProvider.ReportsDirectory, "transacts-history-template.html"),
                                    Path.Combine(_reportTargetDirectory, fileName).Replace("json", "html"), true);
         }
 
