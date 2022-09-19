@@ -9,6 +9,10 @@ using System.IO;
 
 namespace SlvParkview.FinanceManager.Reporting
 {
+    /// <summary>
+    /// Creates a report which contains the transactions (both payments and expenses) history for a specified flat
+    /// calculated till the specified date.
+    /// </summary>
     public class FlatTransactionsReport : Report
     {
         #region Private Fields
@@ -52,11 +56,18 @@ namespace SlvParkview.FinanceManager.Reporting
 
         #region Private Helper Methods
 
+        private protected override void GenerateContents()
+        {
+            throw new NotImplementedException();
+        }
+
         private protected override void CreateRequiredDirectories()
         {
             base.CreateRequiredDirectories();
 
-            string flatwiseReportsDirectory = Path.Combine(ServiceProvider.FlatWiseReportsDirectory);
+            /// Create a new directory for Flatwise Reports if it does not exists.
+            
+            string flatwiseReportsDirectory = Path.Combine(ServiceProvider.FlatwiseReportsDirectory);
 
             if (!Directory.Exists(flatwiseReportsDirectory))
             {
@@ -75,7 +86,7 @@ namespace SlvParkview.FinanceManager.Reporting
 
         private protected override void CreateHtmlFile()
         {
-            string fileName = $"{_fileName}({_reportTill:dd MMM yyyy}).html";
+            string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).html";
 
             File.Copy(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"),
                                    Path.Combine(_reportTargetDirectory, fileName), true);
@@ -83,7 +94,7 @@ namespace SlvParkview.FinanceManager.Reporting
 
         private protected override void CreateJsonFile()
         {
-            string fileName = $"{_fileName}({_reportTill:dd MMM yyyy}).json";
+            string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).json";
 
             File.WriteAllText(Path.Combine(_reportTargetDirectory, fileName), GetSerializedData());
         }

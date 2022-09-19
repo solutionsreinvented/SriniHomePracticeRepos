@@ -1,14 +1,21 @@
 ﻿using Newtonsoft.Json;
+
 using ReInvented.DataAccess;
 using ReInvented.DataAccess.Interfaces;
+
+using SlvParkview.FinanceManager.Extensions;
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Services;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 
 namespace SlvParkview.FinanceManager.Reporting
 {
+    /// <summary>
+    /// Creates a report that consists of flat wise outstanding (for a given block) calculated as on the specified date.
+    /// </summary>
     public class BlockOustandingsReport : Report, IReport
     {
         #region Private Fields
@@ -49,15 +56,25 @@ namespace SlvParkview.FinanceManager.Reporting
 
         #region Private Helper Methods
 
-        /// <summary>
-        /// Creates the required directories to store the json and html files of the report(s).
-        /// </summary>
+        private protected override void GenerateContents()
+        {
+            FlatInfoCollection = new List<FlatInfo>();
+
+            if (_block != null && _block.Flats != null)
+            {
+                foreach (Flat flat in _block.Flats)
+                {
+                    flat.DateSpecified = _reportTill;
+                    FlatInfoCollection.Add(flat.ParseToFlatInfo());
+                }
+            }
+        }
+
         private protected override void CreateRequiredDirectories()
         {
             base.CreateRequiredDirectories();
 
-            /// Create if a separate directory for the selected flat does not exists.
-
+            /// Create the directory to store Block Outstandings Reports if it does not exists.
             _reportTargetDirectory = Path.Combine(ServiceProvider.BlockOustandingsReportsDirectory);
 
             if (!Directory.Exists(_reportTargetDirectory))
@@ -68,7 +85,7 @@ namespace SlvParkview.FinanceManager.Reporting
 
         private protected override void CreateHtmlFile()
         {
-            string fileName = $"{_fileName}({_reportTill:dd MMM yyyy}).html";
+            string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).html";
 
             File.Copy(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"),
                                    Path.Combine(_reportTargetDirectory, fileName), true);
@@ -76,7 +93,7 @@ namespace SlvParkview.FinanceManager.Reporting
 
         private protected override void CreateJsonFile()
         {
-            string fileName = $"{_fileName}({_reportTill:dd MMM yyyy}).json";
+            string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).json";
 
             File.WriteAllText(Path.Combine(_reportTargetDirectory, fileName), GetSerializedData());
         }

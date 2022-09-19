@@ -1,24 +1,51 @@
 ﻿using Newtonsoft.Json;
+
+using ReInvented.DataAccess;
+using ReInvented.DataAccess.Interfaces;
+
+using SlvParkview.FinanceManager.Enums;
 using SlvParkview.FinanceManager.Models;
+using SlvParkview.FinanceManager.Services;
+
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace SlvParkview.FinanceManager.Reporting
 {
+    /// <summary>
+    /// Creates a report which comprises of the payments received from each flat (of a given block) in a specified month.
+    /// </summary>
     public class MonthwisePaymentsReport : Report, IReport
     {
         #region Private Fields
 
+        private const string _fileName = "Monthwise Payments";
+
         private readonly Block _block;
-        private readonly int _monthOfTheYear;
+
+        private readonly Month _forMonth;
+
+        private readonly int _year;
+
+        #endregion
+
+        #region Default Constructor
+
+        public MonthwisePaymentsReport()
+        {
+
+        }
 
         #endregion
 
         #region Parameterized Constructor
 
-        public MonthwisePaymentsReport(Block block, int monthOfTheYear)
+        public MonthwisePaymentsReport(Block block, Month forMonth, int year)
         {
             _block = block;
-            _monthOfTheYear = monthOfTheYear;
+            _forMonth = forMonth;
+            _year = year;
         }
 
         #endregion
@@ -29,30 +56,69 @@ namespace SlvParkview.FinanceManager.Reporting
         public string ReportedMonth { get => Get<string>(); private set => Set(value); }
 
         [JsonProperty]
-        public List<MonthlyPaymentRecord> Payments { get => Get<List<MonthlyPaymentRecord>>(); private set => Set(value); } 
+        public List<MonthlyPaymentRecord> Payments { get => Get<List<MonthlyPaymentRecord>>(); private set => Set(value); }
 
         #endregion
 
-        private protected override string GetSerializedData()
+        #region Private Helper Methods
+
+        private protected override void GenerateContents()
         {
-            throw new System.NotImplementedException();
+            ReportedMonth = _forMonth.ToString();
+            Payments = new List<MonthlyPaymentRecord>();
+
+            if (_block != null && _block.Flats != null)
+            {
+                foreach (Flat flat in _block.Flats)
+                {
+                    var flatPayments = flat.Payments
+                                           .Where(p => p.ReceivedOn.Month == (int)_forMonth && p.ReceivedOn.Year == _year);
+                    Payments.AddRange(flatPayments.ToList())
+                }
+            }
         }
 
         private protected override void CreateHtmlFile()
         {
-            throw new System.NotImplementedException();
+            string fileName = $"{_fileName} ({_forMonth}{_year}).html";
+
+            File.Copy(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"),
+                                   Path.Combine(_reportTargetDirectory, fileName), true);
         }
 
         private protected override void CreateJsonFile()
         {
-            throw new System.NotImplementedException();
+            string fileName = $"{_fileName} ({_forMonth}{_year}).json";
+
+            File.WriteAllText(Path.Combine(_reportTargetDirectory, fileName), GetSerializedData());
         }
 
         private protected override void CreateRequiredDirectories()
         {
             base.CreateRequiredDirectories();
 
-            throw new System.NotImplementedException();
+            /// Create a new directory to store Monthwise Payments reports if it does not exists.
+
+            _reportTargetDirectory = Path.Combine(ServiceProvider.MonthwisePaymentsDirectory);
+
+            if (!Directory.Exists(_reportTargetDirectory))
+            {
+                _ = Directory.CreateDirectory(_reportTargetDirectory);
+            }
         }
+
+        #endregion
+
+        #region Private Helper Functions
+
+        private protected override string GetSerializedData()
+        {
+            IDataSerializer<MonthwisePaymentsReport> serializer = new JsonDataSerializer<MonthwisePaymentsReport>();
+
+            return serializer.Serialize(this);
+        }
+
+        #endregion
+
     }
 }

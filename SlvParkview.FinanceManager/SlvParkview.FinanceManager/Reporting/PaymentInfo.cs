@@ -1,10 +1,10 @@
 ﻿namespace SlvParkview.FinanceManager.Reporting
 {
-    public class MonthlyPaymentRecord
+    public class PaymentInfo
     {
         public string FlatNumber { get; set; }
 
-        public string PaidOn { get; set; }
+        public string PaymentReceivedOn { get; set; }
 
         public string Amount { get; set; }
 

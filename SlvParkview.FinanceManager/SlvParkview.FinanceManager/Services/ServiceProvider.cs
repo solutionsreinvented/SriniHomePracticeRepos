@@ -16,9 +16,9 @@ namespace SlvParkview.FinanceManager.Services
 
         public static string BlockOustandingsReportsDirectory => Path.Combine(ReportsDirectory, "Block Outstandings");
 
-        public static string FlatWiseReportsDirectory => Path.Combine(ReportsDirectory, "Flatwise Reports");
+        public static string FlatwiseReportsDirectory => Path.Combine(ReportsDirectory, "Flatwise Reports");
 
-        public static string MonthWiseReportsDirectory => Path.Combine(ReportsDirectory, "Monthwise Reports");
+        public static string MonthwisePaymentsDirectory => Path.Combine(ReportsDirectory, "Monthwise Payments");
 
         public static string AssetsDirectory => Path.Combine(AppDataDirectory, "Assets");
 

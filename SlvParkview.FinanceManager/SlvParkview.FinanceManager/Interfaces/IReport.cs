@@ -6,6 +6,6 @@
 
         string ApartmentName { get; }
 
-        void Generate();
+        void Create();
     }
 }
