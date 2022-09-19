@@ -121,3 +121,7 @@ C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvPa
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\FlatInfoView.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReportingView.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReportingView.baml
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\BlockOutstandingsReportView.g.cs
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\BlockOutstandingsReportView.baml
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\BlockInfoView.baml
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\BlockInfoView.g.cs

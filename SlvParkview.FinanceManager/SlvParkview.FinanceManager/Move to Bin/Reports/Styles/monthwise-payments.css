@@ -1,0 +1,77 @@
+* {
+    font-size: 0.92em;
+}
+
+#generated-on,
+#apartment-name,
+#container
+{
+    min-width: 600px;
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+.main-heading-row {
+    text-align: center;
+    font-weight: bold;
+}
+
+.overview-table {
+    border-collapse: collapse;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    padding: 20px 30px;
+    min-width: 600px;
+    max-height: 80%;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.overview-table thead td {
+    font-weight: bold;
+    background-color: #e9edc9;
+}
+
+.flat-number-header {
+    vertical-align: middle;
+    width: 11%;
+}
+
+.owner-header {
+    vertical-align: middle;
+    width: 17%;
+}
+
+.coowner-header {
+    vertical-align: middle;
+    width: 17%;
+}
+
+.tenant-header {
+    vertical-align: middle;
+    width: 17%;
+}
+
+.resident-type-header {
+    vertical-align: middle;
+    width: 17%;
+}
+
+.start-date-header {
+    vertical-align: middle;
+    width: 10%;
+}
+
+.outstanding-header {
+    vertical-align: middle;
+    width: 11%;
+}
+
+
+.overview-table td {
+    text-align: center;
+    padding: 5px 20px;
+    border: 1px solid;
+}

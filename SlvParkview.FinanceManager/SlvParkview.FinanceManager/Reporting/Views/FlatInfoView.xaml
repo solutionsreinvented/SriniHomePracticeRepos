@@ -39,10 +39,6 @@
                     <Setter Property="IsEnabled" Value="False" />
                 </Style>
 
-                <Style BasedOn="{StaticResource ComboBoxStyle}" TargetType="{x:Type ComboBox}">
-                    <Setter Property="Margin" Value="0,2,5,2" />
-                    <Setter Property="Height" Value="26" />
-                </Style>
 
             </Grid.Resources>
 

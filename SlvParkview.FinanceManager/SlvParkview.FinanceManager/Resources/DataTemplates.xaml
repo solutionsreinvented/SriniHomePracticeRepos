@@ -36,9 +36,9 @@
 
     <!--#region Reporting-->
 
-    <!--<DataTemplate DataType="{x:Type vmreps:BlockOutstandingsReportViewModel}">
+    <DataTemplate DataType="{x:Type vmreps:BlockOutstandingsReportViewModel}">
         <viewreps:BlockOutstandingsReportView />
-    </DataTemplate>-->
+    </DataTemplate>
 
     <DataTemplate DataType="{x:Type vmreps:FlatTransactionsHistoryReportViewModel}">
         <viewreps:FlatTransactionsHistoryReportView />

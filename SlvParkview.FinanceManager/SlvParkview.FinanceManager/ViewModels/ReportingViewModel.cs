@@ -42,14 +42,14 @@ namespace SlvParkview.FinanceManager.ViewModels
             _summaryViewModel = summaryViewModel;
             _navigationService = navigationService;
 
-            ReportType = ReportType.FlatTransactionsHistory;
+            ReportType = ReportType.BlockOutstandings;
         }
 
         #endregion
 
         #region Public Properties
 
-        public ReportType ReportType { get => Get(ReportType.FlatTransactionsHistory); set { Set(value); UpdateReportViewModel(); } }
+        public ReportType ReportType { get => Get<ReportType>(); set { Set(value); UpdateReportViewModel(); } }
 
         public ReportViewModelBase CurrentReportViewModel { get => Get<ReportViewModelBase>(); set => Set(value); }
 
@@ -102,7 +102,7 @@ namespace SlvParkview.FinanceManager.ViewModels
         {
             if (ReportType == ReportType.BlockOutstandings)
             {
-                CurrentReportViewModel = new BlockOustandingsReportViewModel(_summaryViewModel);
+                CurrentReportViewModel = new BlockOutstandingsReportViewModel(_summaryViewModel);
             }
             else if (ReportType == ReportType.PaymentsInAMonth)
             {

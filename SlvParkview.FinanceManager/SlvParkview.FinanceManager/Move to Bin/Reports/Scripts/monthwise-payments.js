@@ -70,9 +70,7 @@ function updateTransactionDetails() {
   summaryTableBody.innerHTML = "";
 
   if (transactions.length > 0) {
-
     for (i = 0; i < transactions.length; i++) {
-
       summaryTableBody.innerHTML += `
             <tr class="transaction-row">
                 <td>${transactions[i].TransactionDate.toString()}</td>
@@ -84,15 +82,11 @@ function updateTransactionDetails() {
                 <td>${transactions[i].Outstanding}</td>
             </tr>
             `;
-            
     }
 
     endOfData = "**** End of Data ****";
-
   } else {
-
     endOfData = "**** No Records Found ****";
-
   }
 
   summaryTableBody.innerHTML += `<tr class="end-of-data">

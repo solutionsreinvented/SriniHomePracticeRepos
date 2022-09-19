@@ -107,14 +107,20 @@
     <Compile Include="Reporting\Models\FlatInfo.cs" />
     <Compile Include="Reporting\Interfaces\IReport.cs" />
     <Compile Include="Reporting\Models\MonthwisePaymentsReport.cs" />
-    <Compile Include="Reporting\Models\BlockOustandingsReport.cs" />
+    <Compile Include="Reporting\Models\BlockOutstandingsReport.cs" />
     <Compile Include="Reporting\Models\PaymentInfo.cs" />
     <Compile Include="Reporting\Models\Report.cs" />
     <Compile Include="Reporting\Models\TransactionInfo.cs" />
-    <Compile Include="Reporting\ViewModels\BlockOustandingsReportViewModel.cs" />
+    <Compile Include="Reporting\ViewModels\BlockOutstandingsReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\FlatTransactionsHistoryReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\MonthwisePaymentsReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\ReportViewModelBase.cs" />
+    <Compile Include="Reporting\Views\BlockOutstandingsReportView.xaml.cs">
+      <DependentUpon>BlockOutstandingsReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\Views\BlockInfoView.xaml.cs">
+      <DependentUpon>BlockInfoView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\FlatRepository.cs" />
     <Compile Include="Services\BlockInitialDataProvider.cs" />
     <Compile Include="Services\ReportsGenerator.cs" />
@@ -176,6 +182,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Reporting\Views\BlockOutstandingsReportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Reporting\Views\BlockInfoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\DataTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

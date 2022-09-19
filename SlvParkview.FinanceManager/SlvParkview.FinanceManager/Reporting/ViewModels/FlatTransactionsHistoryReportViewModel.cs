@@ -7,30 +7,46 @@ using System.Linq;
 
 namespace SlvParkview.FinanceManager.Reporting.ViewModels
 {
+    /// <summary>
+    /// View Model for generating the complete history of transactions of specified flat up to a specified date.
+    /// </summary>
     public class FlatTransactionsHistoryReportViewModel : ReportViewModelBase
     {
 
-        public FlatTransactionsHistoryReportViewModel(SummaryViewModel summaryViewModel) 
+        #region Parameterized Constructor
+
+        public FlatTransactionsHistoryReportViewModel(SummaryViewModel summaryViewModel)
             : base(summaryViewModel)
         {
 
         }
 
+        #endregion
+
+        #region Public Properties
+
+        public DateTime ReportTill { get => Get<DateTime>(); set { Set(value); UpdateReport(); } }
+
+        public Flat SelectedFlat { get => Get<Flat>(); set { Set(value); UpdateReport(); } }
+
+        #endregion
+
+        #region Private Helpers
+
         private protected override void Initialize()
         {
             base.Initialize();
 
+            ReportTill = DateTime.Today;
             SelectedFlat = _summaryViewModel.SelectedFlat ?? (Block.Flats?.First());
         }
-
-        public DateTime ReportTill { get => Get(DateTime.Today); set { Set(value); UpdateReport(); } }
-
-        public Flat SelectedFlat { get => Get<Flat>(); set { Set(value); UpdateReport(); } }
 
         private void UpdateReport()
         {
             Report = new FlatTransactionsHistoryReport(SelectedFlat, ReportTill);
             Report.GenerateContents();
         }
+
+        #endregion
     }
 }

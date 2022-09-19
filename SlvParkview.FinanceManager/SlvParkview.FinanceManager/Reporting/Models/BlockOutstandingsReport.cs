@@ -17,7 +17,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
     /// <summary>
     /// Creates a report that consists of flat wise outstanding (for a given block) calculated as on the specified date.
     /// </summary>
-    public class BlockOustandingsReport : Report, IReport
+    public class BlockOutstandingsReport : Report, IReport
     {
         #region Private Fields
 
@@ -31,7 +31,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         #region Default Constructor
 
-        public BlockOustandingsReport()
+        public BlockOutstandingsReport()
         {
 
         }
@@ -40,7 +40,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         #region Parameterized Constructor
 
-        public BlockOustandingsReport(Block block, DateTime reportTill)
+        public BlockOutstandingsReport(Block block, DateTime reportTill)
         {
             _block = block;
             _reportTill = reportTill;
@@ -109,7 +109,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private protected override string GetSerializedData()
         {
-            IDataSerializer<BlockOustandingsReport> serializer = new JsonDataSerializer<BlockOustandingsReport>();
+            IDataSerializer<BlockOutstandingsReport> serializer = new JsonDataSerializer<BlockOutstandingsReport>();
 
             return serializer.Serialize(this);
         }
