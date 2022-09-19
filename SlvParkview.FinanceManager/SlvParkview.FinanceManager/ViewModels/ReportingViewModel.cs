@@ -42,7 +42,7 @@ namespace SlvParkview.FinanceManager.ViewModels
             _summaryViewModel = summaryViewModel;
             _navigationService = navigationService;
 
-            ReportType = ReportType.BlockOutstandings;
+            ReportType = ReportType.FlatTransactionsHistory;
         }
 
         #endregion

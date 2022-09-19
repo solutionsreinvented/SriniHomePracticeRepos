@@ -153,31 +153,7 @@
 
                     <!--#endregion-->
 
-                    <!--#region Account Created Column-->
-
-                    <DataGridTemplateColumn Width="Auto" Header="Created On">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding AccountOpenedOn, StringFormat={}{0:dd MMM yyyy}}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                    <!--#endregion-->
-
-                    <!--#region Opening Balance Column-->
-
-                    <!--<DataGridTemplateColumn Width="Auto" Header="Opening Balance">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding OpeningBalance}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>-->
-
-                    <!--#endregion-->
-
-                    <!--#region Current Outstanding Column-->
+                    <!--#region Outstanding On Specified Date Column-->
 
                     <DataGridTemplateColumn Width="Auto" Header="Outstanding">
                         <DataGridTemplateColumn.CellTemplate>

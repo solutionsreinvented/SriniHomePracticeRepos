@@ -21,10 +21,13 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
             ReportTill = DateTime.Today;
         }
 
+        public string OutstandingHeader { get => Get<string>(); private set => Set(value); }
+
         public DateTime ReportTill { get => Get<DateTime>(); set { Set(value); UpdateReport(); } }
 
         private void UpdateReport()
         {
+            OutstandingHeader = $"Outstanding as on {ReportTill:dd-MMM-yyyy}";
             Report = new BlockOutstandingsReport(Block, ReportTill);
             Report.GenerateContents();
         }
