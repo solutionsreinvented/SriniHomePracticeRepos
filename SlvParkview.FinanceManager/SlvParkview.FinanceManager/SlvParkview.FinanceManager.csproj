@@ -102,12 +102,13 @@
     <Compile Include="Enums\ReportType.cs" />
     <Compile Include="Extensions\DecimalExtensions.cs" />
     <Compile Include="Extensions\FlatExtensions.cs" />
-    <Compile Include="Reporting\FlatTransactionsReport.cs" />
+    <Compile Include="Extensions\PaymentExtensions.cs" />
+    <Compile Include="Reporting\FlatTransactionsHistoryReport.cs" />
     <Compile Include="Reporting\FlatInfo.cs" />
     <Compile Include="Interfaces\IReport.cs" />
-    <Compile Include="Reporting\MonthlyPaymentRecord.cs" />
     <Compile Include="Reporting\MonthwisePaymentsReport.cs" />
     <Compile Include="Reporting\BlockOustandingsReport.cs" />
+    <Compile Include="Reporting\PaymentInfo.cs" />
     <Compile Include="Reporting\Report.cs" />
     <Compile Include="Reporting\TransactionInfo.cs" />
     <Compile Include="Repositories\FlatRepository.cs" />
@@ -139,6 +140,12 @@
     </Compile>
     <Compile Include="Views\PaymentView.xaml.cs">
       <DependentUpon>PaymentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\FlatInfoView.xaml.cs">
+      <DependentUpon>FlatInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\FlatTransactionsHistoryReportView.xaml.cs">
+      <DependentUpon>FlatTransactionsHistoryReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ReportView.xaml.cs">
       <DependentUpon>ReportView.xaml</DependentUpon>
@@ -192,6 +199,14 @@
     <Page Include="Views\PaymentView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\FlatInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reports\FlatTransactionsHistoryReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ReportView.xaml">
       <Generator>MSBuild:Compile</Generator>

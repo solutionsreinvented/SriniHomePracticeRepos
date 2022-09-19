@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using ReInvented.DataAccess;
 using ReInvented.DataAccess.Interfaces;
+
+using SlvParkview.FinanceManager.Extensions;
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Services;
 using System;
@@ -13,7 +15,7 @@ namespace SlvParkview.FinanceManager.Reporting
     /// Creates a report which contains the transactions (both payments and expenses) history for a specified flat
     /// calculated till the specified date.
     /// </summary>
-    public class FlatTransactionsReport : Report
+    public class FlatTransactionsHistoryReport : Report
     {
         #region Private Fields
 
@@ -27,7 +29,7 @@ namespace SlvParkview.FinanceManager.Reporting
 
         #region Default Constructor
 
-        public FlatTransactionsReport()
+        public FlatTransactionsHistoryReport()
         {
 
         }
@@ -36,7 +38,7 @@ namespace SlvParkview.FinanceManager.Reporting
 
         #region Parameterized Constructor
 
-        public FlatTransactionsReport(Flat flat, DateTime reportTill)
+        public FlatTransactionsHistoryReport(Flat flat, DateTime reportTill)
         {
             _flat = flat;
             _reportTill = reportTill;
@@ -58,7 +60,11 @@ namespace SlvParkview.FinanceManager.Reporting
 
         private protected override void GenerateContents()
         {
-            throw new NotImplementedException();
+            if (_flat != null)
+            {
+                FlatInfo = _flat.ParseToFlatInfo();
+                Transactions = _flat.GetTransactionsHistoryBasic(_reportTill);
+            }
         }
 
         private protected override void CreateRequiredDirectories()
@@ -105,7 +111,7 @@ namespace SlvParkview.FinanceManager.Reporting
 
         private protected override string GetSerializedData()
         {
-            IDataSerializer<FlatTransactionsReport> serializer = new JsonDataSerializer<FlatTransactionsReport>();
+            IDataSerializer<FlatTransactionsHistoryReport> serializer = new JsonDataSerializer<FlatTransactionsHistoryReport>();
 
             return serializer.Serialize(this);
         }

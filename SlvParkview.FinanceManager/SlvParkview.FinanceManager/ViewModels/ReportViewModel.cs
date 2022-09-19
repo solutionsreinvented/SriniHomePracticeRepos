@@ -20,7 +20,9 @@ namespace SlvParkview.FinanceManager.ViewModels
         #region Private Fields
 
         private string _reportTargetDirectory;
-        private readonly SummaryViewModel _sender;
+
+        private readonly SummaryViewModel _summaryViewModel;
+
         private readonly NavigationService _navigationService;
 
         #endregion
@@ -39,7 +41,7 @@ namespace SlvParkview.FinanceManager.ViewModels
         public ReportViewModel(SummaryViewModel sender, NavigationService navigationService, Flat flatToBeProcessed)
             : this()
         {
-            _sender = sender;
+            _summaryViewModel = sender;
             _navigationService = navigationService;
 
             FlatToBeProcessed = flatToBeProcessed;
@@ -49,15 +51,15 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         #region Public Properties
 
-        public ReportType ReportType { get => Get(ReportType.PaymentsInAMonth); set => Set(value); }
+        public ReportType ReportType { get => Get(ReportType.BlockOutstandings); set => Set(value); }
 
         public Flat FlatToBeProcessed { get => Get<Flat>(); set => Set(value); }
 
-        public FlatTransactionsReport FlatTransactionsReport { get => Get<FlatTransactionsReport>(); set => Set(value); }
+        public FlatTransactionsHistoryReport FlatTransactionsReport { get => Get<FlatTransactionsHistoryReport>(); set => Set(value); }
 
         public BlockOustandingsReport OverviewReport { get => Get<BlockOustandingsReport>(); set => Set(value); }
 
-        public Report Report { get => Get<Report>(); set => Set(value); }
+        public IReport Report { get => Get<IReport>(); set => Set(value); }
 
         public DateTime ReportTill { get => Get(DateTime.Today); set => Set(value); }
 
@@ -77,7 +79,6 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         #endregion
 
-
         #region Public Commands
 
         public ICommand AddExpenseCommand { get => Get<ICommand>(); set => Set(value); }
@@ -96,25 +97,25 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void OnAddExpense()
         {
-            ExpenseViewModel expenseViewModel = new ExpenseViewModel(_sender, _navigationService, FlatToBeProcessed);
+            ExpenseViewModel expenseViewModel = new ExpenseViewModel(_summaryViewModel, _navigationService, FlatToBeProcessed);
             _navigationService.CurrentViewModel = expenseViewModel;
         }
 
         private void OnAddPayment()
         {
-            PaymentViewModel paymentViewModel = new PaymentViewModel(_sender, _navigationService, FlatToBeProcessed);
+            PaymentViewModel paymentViewModel = new PaymentViewModel(_summaryViewModel, _navigationService, FlatToBeProcessed);
             _navigationService.CurrentViewModel = paymentViewModel;
         }
 
         private void OnAddCommonExpense()
         {
-            CommonExpenseViewModel commonExpenseViewModel = new CommonExpenseViewModel(_sender, _navigationService);
+            CommonExpenseViewModel commonExpenseViewModel = new CommonExpenseViewModel(_summaryViewModel, _navigationService);
             _navigationService.CurrentViewModel = commonExpenseViewModel;
         }
 
         private void OnGoToSummary()
         {
-            _navigationService.CurrentViewModel = _sender;
+            _navigationService.CurrentViewModel = _summaryViewModel;
         }
 
         #endregion
@@ -130,70 +131,25 @@ namespace SlvParkview.FinanceManager.ViewModels
             GoToSummaryCommand = new RelayCommand(OnGoToSummary, true);
         }
 
-        /// <summary>
-        /// Creates the required directories to store the json and html files of the report(s).
-        /// </summary>
-        private void CreateRequiredDirectories()
-        {
-            /// Create if the Reports directory does not exists.
-            if (!Directory.Exists(ServiceProvider.ReportsDirectory))
-            {
-                _ = Directory.CreateDirectory(ServiceProvider.ReportsDirectory);
-            }
-
-            /// Create if a separate directory for the selected flat does not exists.
-
-            string flatDirectory = Path.Combine(ServiceProvider.ReportsDirectory, FlatToBeProcessed.Description);
-
-            if (!Directory.Exists(flatDirectory))
-            {
-                _ = Directory.CreateDirectory(flatDirectory);
-            }
-
-            /// Create a directory with requested date if it does not exists.
-
-            string todayDirectory = Path.Combine(flatDirectory, ReportTill.ToString("dd MMM yyyy"));
-
-            if (!Directory.Exists(todayDirectory))
-            {
-                _ = Directory.CreateDirectory(todayDirectory);
-            }
-            _reportTargetDirectory = todayDirectory;
-        }
-
-        private void CreateHtmlFile(string fileName)
-        {
-            File.Copy(Path.Combine(ServiceProvider.ReportsDirectory, "transacts-history-template.html"),
-                                   Path.Combine(_reportTargetDirectory, fileName).Replace("json", "html"), true);
-        }
-
-        private void CreateJsonFile(string fileName, string serializedData)
-        {
-            File.WriteAllText(Path.Combine(_reportTargetDirectory, fileName), serializedData);
-        }
-
         #endregion
 
         private void OnGenerate()
         {
-            IDataSerializer<FlatTransactionsReport> dataSerializer = new JsonDataSerializer<FlatTransactionsReport>();
-            string fileName = $"Transactions Summary ({ReportTill:dd MMM yyyy}).json";
+            if (ReportType == ReportType.BlockOutstandings)
+            {
+                Report = new BlockOustandingsReport(_summaryViewModel.Block, ReportTill);
+            }
+            else if(ReportType == ReportType.PaymentsInAMonth)
+            {
+                Report = new MonthwisePaymentsReport(_summaryViewModel.Block, (Month)ReportTill.Month, ReportTill.Year);
+            }
+            else if (ReportType == ReportType.FlatTransactionsHistory)
+            {
+                Report = new FlatTransactionsHistoryReport(FlatToBeProcessed, ReportTill);
+            }
 
-            CreateRequiredDirectories();
+            Report.Create();
 
-            CreateHtmlFile(fileName);
-
-            FlatTransactionsReport = ReportsGenerator.GetFlatTransactionsReport(FlatToBeProcessed, ReportTill);
-
-            string serializedData = dataSerializer.Serialize(FlatTransactionsReport);
-
-            CreateJsonFile(fileName, serializedData);
-
-            _ = MessageBox.Show("Report generated successfully!", "Report Generation", MessageBoxButton.OK);
-
-            //ReportViewerViewModel reportViewerViewModel = 
-            //    new ReportViewerViewModel(_sender, _navigationService, Path.Combine(_reportTargetDirectory, fileName.Replace("json", "html")));
-            //_navigationService.CurrentViewModel = reportViewerViewModel;
         }
     }
 }

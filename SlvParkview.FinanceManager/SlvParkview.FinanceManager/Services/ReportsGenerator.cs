@@ -28,31 +28,31 @@ namespace SlvParkview.FinanceManager.Services
         //    block.Flats.ForEach(f => monthlyPaymentsReport.Payments.AddRange(f.Payments.Where(p => p.ReceivedOn.Month == forMonth)) )
         //}
 
-        public static BlockOustandingsReport GetOverviewReport(Block block)
-        {
-            BlockOustandingsReport overviewReport = new OverviewReport();
+        //public static BlockOustandingsReport GetOverviewReport(Block block)
+        //{
+        //    BlockOustandingsReport overviewReport = new OverviewReport();
 
-            if (block != null && block.Flats != null)
-            {
-                block.Flats.ForEach(f => overviewReport.FlatInfoCollection.Add(f.ParseToFlatInfo()));
-            }
-            return overviewReport;
-        }
+        //    if (block != null && block.Flats != null)
+        //    {
+        //        block.Flats.ForEach(f => overviewReport.FlatInfoCollection.Add(f.ParseToFlatInfo()));
+        //    }
+        //    return overviewReport;
+        //}
 
 
-        public static FlatTransactionsReport GetFlatTransactionsReport(Flat flat)
-        {
-            return GetFlatTransactionsReport(flat, DateTime.Today);
-        }
+        //public static FlatTransactionsHistoryReport GetFlatTransactionsReport(Flat flat)
+        //{
+        //    return GetFlatTransactionsReport(flat, DateTime.Today);
+        //}
 
-        public static FlatTransactionsReport GetFlatTransactionsReport(Flat flat, DateTime generateTill)
-        {
-            return new FlatTransactionsReport()
-            {
-                FlatInfo = flat.ParseToFlatInfo(),/// PrintableFlat.MapFrom(flat),
-                Transactions = flat.GetTransactionHistory(generateTill)
-            };
-        }
+        //public static FlatTransactionsHistoryReport GetFlatTransactionsReport(Flat flat, DateTime generateTill)
+        //{
+        //    return new FlatTransactionsHistoryReport()
+        //    {
+        //        FlatInfo = flat.ParseToFlatInfo(),/// PrintableFlat.MapFrom(flat),
+        //        Transactions = flat.GetTransactionsHistoryBasic(generateTill)
+        //    };
+        //}
 
         #endregion
     }

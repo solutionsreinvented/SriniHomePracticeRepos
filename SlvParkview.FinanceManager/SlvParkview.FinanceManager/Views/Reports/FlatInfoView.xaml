@@ -1,0 +1,179 @@
+﻿<UserControl
+    x:Class="SlvParkview.FinanceManager.Views.Reports.FlatInfoView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:SlvParkview.FinanceManager.Reporting"
+    MinWidth="650"
+    MinHeight="240"
+    MaxHeight="250"
+    d:DesignHeight="220"
+    d:DesignWidth="650"
+    IsEnabled="False"
+    mc:Ignorable="d">
+
+    <UserControl.DataContext>
+        <models:FlatInfo />
+    </UserControl.DataContext>
+
+    <!--#region Flat Details Host-->
+
+    <GroupBox
+        Margin="20,0,20,10"
+        BorderThickness="0.2"
+        Header="Details of the flat">
+
+        <Grid Margin="10">
+
+            <!--#region Grid Resources-->
+
+            <Grid.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Margin" Value="0,5" />
+                </Style>
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="Padding" Value="5,2" />
+                    <Setter Property="Margin" Value="0,2,5,2" />
+                    <Setter Property="Height" Value="26" />
+                    <Setter Property="IsEnabled" Value="False" />
+                </Style>
+
+                <Style BasedOn="{StaticResource ComboBoxStyle}" TargetType="{x:Type ComboBox}">
+                    <Setter Property="Margin" Value="0,2,5,2" />
+                    <Setter Property="Height" Value="26" />
+                </Style>
+
+            </Grid.Resources>
+
+            <!--#endregion-->
+
+            <!--#region Grid Definitions-->
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!--#endregion-->
+
+            <!--#region Column 1 Data-->
+
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="0,5"
+                Text="Flat number: " />
+
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="{Binding Description, Mode=OneWay}" />
+
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="Name of the owner: " />
+
+            <TextBox
+                Grid.Row="2"
+                Grid.Column="1"
+                Text="{Binding OwnedBy}" />
+
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="0"
+                Text="Name of the co-owner: " />
+
+            <TextBox
+                Grid.Row="3"
+                Grid.Column="1"
+                Text="{Binding CoOwnedBy}" />
+
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="0"
+                Text="Name of the tenant: " />
+
+            <TextBox
+                Grid.Row="4"
+                Grid.Column="1"
+                Text="{Binding TenantName}" />
+
+            <TextBlock
+                Grid.Row="5"
+                Grid.Column="0"
+                Text="Flat is occupied by: " />
+
+            <TextBox
+                Grid.Row="5"
+                Grid.Column="1"
+                Height="26"
+                Text="{Binding ResidentType}" />
+
+            <!--#endregion-->
+
+            <!--#region Column 2 Data-->
+
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="2"
+                Text="Account incorporated on: " />
+
+            <TextBox
+                Grid.Row="2"
+                Grid.Column="3"
+                Text="{Binding AccountOpenedOn, Mode=OneWay, StringFormat={}{0:dd-MMM-yyyy}}" />
+
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="2"
+                Text="Opening balance: " />
+
+            <TextBox
+                Grid.Row="3"
+                Grid.Column="3"
+                Text="{Binding OpeningBalance, StringFormat={}{0:N2}}" />
+
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="2"
+                Text="Oustanding on specified date: " />
+
+            <TextBox
+                Grid.Row="4"
+                Grid.Column="3"
+                Text="{Binding OutstandingOnSpecifiedDate, Mode=OneWay, StringFormat={}{0:N2}}" />
+
+            <TextBlock
+                Grid.Row="5"
+                Grid.Column="2"
+                Text="Current outstanding: " />
+
+            <TextBox
+                Grid.Row="5"
+                Grid.Column="3"
+                Text="{Binding CurrentOutstanding, Mode=OneWay, StringFormat={}{0:N2}}" />
+
+            <!--#endregion-->
+
+        </Grid>
+
+    </GroupBox>
+
+    <!--#endregion-->
+
+</UserControl>

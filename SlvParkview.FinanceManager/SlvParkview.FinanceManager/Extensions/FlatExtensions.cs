@@ -15,9 +15,9 @@ namespace SlvParkview.FinanceManager.Extensions
         /// </summary>
         /// <param name="transactionRecords">A <see cref="List{TransactionRecord}"/> from which the summary to be prepared.</param>
         /// <returns>A <see cref="List{PrintableTransaction}"/> to facilitate the preparation of an html table.</returns>
-        public static List<TransactionInfo> GetTransactionsHistory(this Flat flat)
+        public static List<TransactionInfo> GetTransactionsHistoryBasic(this Flat flat)
         {
-            return GetTransactionHistory(flat, DateTime.Today);
+            return GetTransactionsHistoryBasic(flat, DateTime.Today);
         }
 
         /// <summary>
@@ -26,9 +26,9 @@ namespace SlvParkview.FinanceManager.Extensions
         /// <param name="flat">Flat for which the transactions summary to be prepared.</param>
         /// <param name="summarizeTill">Date up to which the transactions to be considered.</param>
         /// <returns>A <see cref="List{PrintableTransaction}"/> to facilitate the preparation of an html table.</returns>
-        public static List<TransactionInfo> GetTransactionHistory(this Flat flat, DateTime summarizeTill)
+        public static List<TransactionInfo> GetTransactionsHistoryBasic(this Flat flat, DateTime summarizeTill)
         {
-            return GetTransactionsHistory(GetTransactions(flat, summarizeTill));
+            return GetTransactionsHistory(GetTransactionsHistoryDetailed(flat, summarizeTill));
         }
 
         /// <summary>
@@ -54,9 +54,9 @@ namespace SlvParkview.FinanceManager.Extensions
         /// </summary>
         /// <param name="flat">Flat for which the transactions summary to be prepared.</param>
         /// <returns>A <see cref="List{TransactionRecord}"/> with full <see cref="Expense"/> and <see cref="Payment"/> details summarized date wise.</returns>
-        public static List<TransactionRecord> GetTransactions(this Flat flat)
+        public static List<TransactionRecord> GetTransactionsHistoryDetailed(this Flat flat)
         {
-            return GetTransactions(flat, DateTime.Today);
+            return GetTransactionsHistoryDetailed(flat, DateTime.Today);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace SlvParkview.FinanceManager.Extensions
         /// <param name="flat">Flat for which the transactions summary to be prepared.</param>
         /// <param name="summarizeTill">Date up to which the transactions to be considered.</param>
         /// <returns>A <see cref="List{TransactionRecord}"/> with full <see cref="Expense"/> and <see cref="Payment"/> details summarized date wise.</returns>
-        public static List<TransactionRecord> GetTransactions(this Flat flat, DateTime summarizeTill)
+        public static List<TransactionRecord> GetTransactionsHistoryDetailed(this Flat flat, DateTime summarizeTill)
         {
             List<Expense> allExpenses = flat.Expenses?
                                             .Where(e => e.OccuredOn >= flat.AccountOpenedOn && e.OccuredOn <= summarizeTill).ToList();

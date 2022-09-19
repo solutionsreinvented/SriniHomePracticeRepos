@@ -4,6 +4,7 @@ using ReInvented.DataAccess;
 using ReInvented.DataAccess.Interfaces;
 
 using SlvParkview.FinanceManager.Enums;
+using SlvParkview.FinanceManager.Extensions;
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Services;
 
@@ -56,7 +57,7 @@ namespace SlvParkview.FinanceManager.Reporting
         public string ReportedMonth { get => Get<string>(); private set => Set(value); }
 
         [JsonProperty]
-        public List<MonthlyPaymentRecord> Payments { get => Get<List<MonthlyPaymentRecord>>(); private set => Set(value); }
+        public List<PaymentInfo> Payments { get => Get<List<PaymentInfo>>(); private set => Set(value); }
 
         #endregion
 
@@ -65,15 +66,15 @@ namespace SlvParkview.FinanceManager.Reporting
         private protected override void GenerateContents()
         {
             ReportedMonth = _forMonth.ToString();
-            Payments = new List<MonthlyPaymentRecord>();
+            Payments = new List<PaymentInfo>();
 
             if (_block != null && _block.Flats != null)
             {
                 foreach (Flat flat in _block.Flats)
                 {
-                    var flatPayments = flat.Payments
-                                           .Where(p => p.ReceivedOn.Month == (int)_forMonth && p.ReceivedOn.Year == _year);
-                    Payments.AddRange(flatPayments.ToList())
+                    IEnumerable<Payment> flatPayments = flat.Payments
+                                                            .Where(p => p.ReceivedOn.Month == (int)_forMonth && p.ReceivedOn.Year == _year);
+                    flatPayments?.ToList().ForEach(p => Payments.Add(p.ParseToPaymentInfo(flat.Description)));
                 }
             }
         }
