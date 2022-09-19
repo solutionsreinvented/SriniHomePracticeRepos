@@ -83,7 +83,7 @@
 
                     <!--#region Owner Name Column-->
 
-                    <DataGridTemplateColumn Width="Auto" Header="Owner Name">
+                    <DataGridTemplateColumn Width="*" Header="Owner Name">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="10,0" Text="{Binding OwnedBy}" />
@@ -95,7 +95,7 @@
 
                     <!--#region Coowner Name Column-->
 
-                    <DataGridTemplateColumn Width="Auto" Header="Co-owner Name">
+                    <DataGridTemplateColumn Width="*" Header="Co-owner Name">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="10,0" Text="{Binding CoOwnedBy}" />
@@ -107,7 +107,7 @@
 
                     <!--#region Tenant Name Column-->
 
-                    <DataGridTemplateColumn Width="Auto" Header="Tenant Name">
+                    <DataGridTemplateColumn Width="*" Header="Tenant Name">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="10,0" Text="{Binding TenantName}" />
@@ -119,7 +119,7 @@
 
                     <!--#region Resident Type Column-->
 
-                    <DataGridTemplateColumn Width="Auto" Header="Resident Type">
+                    <DataGridTemplateColumn Width="*" Header="Resident Type">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock
@@ -129,36 +129,6 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-
-                    <!--#endregion-->
-
-                    <!--#region Account Start Date Column-->
-
-                    <!--<DataGridTemplateColumn Width="Auto" Header="Account Start Date">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock
-                                    Margin="10,0"
-                                    HorizontalAlignment="Center"
-                                    Text="{Binding AccountOpenedOn, StringFormat={}{0:dd MMM yyyy}}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>-->
-
-                    <!--#endregion-->
-
-                    <!--#region Current Outstanding Column-->
-
-                    <!--<DataGridTemplateColumn Width="Auto" Header="Current Outstanding">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock
-                                    Margin="10,0"
-                                    HorizontalAlignment="Center"
-                                    Text="{Binding CurrentOutstanding, StringFormat={}{0:N1}}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>-->
 
                     <!--#endregion-->
 

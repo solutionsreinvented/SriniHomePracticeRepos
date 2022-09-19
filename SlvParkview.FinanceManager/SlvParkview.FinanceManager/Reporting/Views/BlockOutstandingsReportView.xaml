@@ -182,7 +182,7 @@
                     <DataGridTemplateColumn Width="Auto" Header="Outstanding">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding OpeningBalance}" />
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding OutstandingOnSpecifiedDate}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
