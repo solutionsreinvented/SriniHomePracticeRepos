@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:SlvParkview.FinanceManager.Reporting.Models"
     xmlns:viewreps="clr-namespace:SlvParkview.FinanceManager.Reporting.Views"
     Height="650"
     MinHeight="600"
@@ -106,7 +107,7 @@
 
                     <!--#region Owner Column-->
 
-                    <DataGridTemplateColumn Width="Auto" Header="Owner Name">
+                    <DataGridTemplateColumn Width="*" Header="Owner Name">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="5,0" Text="{Binding OwnedBy}" />
@@ -118,7 +119,7 @@
 
                     <!--#region Coowner Column-->
 
-                    <DataGridTemplateColumn Width="Auto" Header="Coowner Name">
+                    <DataGridTemplateColumn Width="*" Header="Coowner Name">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="5,0" Text="{Binding CoOwnedBy}" />
@@ -130,7 +131,7 @@
 
                     <!--#region Tenant Column-->
 
-                    <DataGridTemplateColumn Width="Auto" Header="Tenant Name">
+                    <DataGridTemplateColumn Width="*" Header="Tenant Name">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="5,0" Text="{Binding TenantName}" />
@@ -140,41 +141,54 @@
 
                     <!--#endregion-->
 
-                    <!--#region Expense Amount Column-->
+                    <!--#region Resident Type Column-->
 
-                    <DataGridTemplateColumn Width="Auto" Header="Expense">
+                    <DataGridTemplateColumn Width="Auto" Header="Resident Type">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding ExpenseAmount}" />
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding ResidentType}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
                     <!--#endregion-->
 
-                    <!--#region Expense Category Column-->
+                    <!--#region Account Created Column-->
 
-                    <DataGridTemplateColumn Width="Auto" Header="Expense Category">
+                    <DataGridTemplateColumn Width="Auto" Header="Created On">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding ExpenseCategory}" />
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding AccountOpenedOn, StringFormat={}{0:dd MMM yyyy}}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
                     <!--#endregion-->
 
-                    <!--#region Outstanding Column-->
+                    <!--#region Opening Balance Column-->
 
-                    <DataGridTemplateColumn Width="*" Header="Outstanding">
+                    <!--<DataGridTemplateColumn Width="Auto" Header="Opening Balance">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding Outstanding}" />
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding OpeningBalance}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>-->
+
+                    <!--#endregion-->
+
+                    <!--#region Current Outstanding Column-->
+
+                    <DataGridTemplateColumn Width="Auto" Header="Outstanding">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding OpeningBalance}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
                     <!--#endregion-->
+
 
                 </DataGrid.Columns>
 

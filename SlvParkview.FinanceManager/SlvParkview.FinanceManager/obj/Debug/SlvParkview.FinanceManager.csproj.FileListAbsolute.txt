@@ -83,7 +83,6 @@ C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManage
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ExpenseView.g.cs
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\FlatDetailView.g.cs
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\PaymentView.g.cs
-C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReportView.g.cs
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReportViewerView.g.cs
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\SummaryView.g.cs
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\App.g.cs
@@ -102,7 +101,6 @@ C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManage
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\CommonExpenseView.baml
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ExpenseView.baml
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\PaymentView.baml
-C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReportView.baml
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReportViewerView.baml
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.g.resources
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.Properties.Resources.resources
@@ -125,3 +123,13 @@ C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvPa
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\BlockOutstandingsReportView.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\BlockInfoView.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\BlockInfoView.g.cs
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\BlockInfoView.baml
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\BlockOutstandingsReportView.g.cs
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\BlockInfoView.g.cs
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\FlatInfoView.g.cs
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\FlatTransactionsHistoryReportView.g.cs
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReportingView.g.cs
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\BlockOutstandingsReportView.baml
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\FlatInfoView.baml
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\FlatTransactionsHistoryReportView.baml
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReportingView.baml

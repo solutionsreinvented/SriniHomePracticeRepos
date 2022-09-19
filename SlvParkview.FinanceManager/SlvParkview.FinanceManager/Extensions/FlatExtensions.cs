@@ -141,7 +141,7 @@ namespace SlvParkview.FinanceManager.Extensions
 
         public static FlatInfo ParseToFlatInfo(this Flat flat)
         {
-            string dateFormat = "dd MMMM yyyy";
+            string dateFormat = "dd MMM yyyy";
 
             return new FlatInfo()
             {
