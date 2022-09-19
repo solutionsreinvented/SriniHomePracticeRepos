@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace SlvParkview.FinanceManager.Reporting
+namespace SlvParkview.FinanceManager.Reporting.Models
 {
     /// <summary>
     /// Creates a report which contains the transactions (both payments and expenses) history for a specified flat
@@ -56,16 +56,20 @@ namespace SlvParkview.FinanceManager.Reporting
 
         #endregion
 
-        #region Private Helper Methods
+        #region Public Methods
 
-        private protected override void GenerateContents()
+        public override void GenerateContents()
         {
             if (_flat != null)
             {
                 FlatInfo = _flat.ParseToFlatInfo();
                 Transactions = _flat.GetTransactionsHistoryBasic(_reportTill);
             }
-        }
+        } 
+
+        #endregion
+
+        #region Private Helper Methods
 
         private protected override void CreateRequiredDirectories()
         {

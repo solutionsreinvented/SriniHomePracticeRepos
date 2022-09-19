@@ -1,5 +1,7 @@
 ﻿using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Reporting;
+using SlvParkview.FinanceManager.Reporting.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

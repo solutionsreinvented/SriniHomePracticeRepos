@@ -5,13 +5,14 @@ using ReInvented.DataAccess.Interfaces;
 
 using SlvParkview.FinanceManager.Extensions;
 using SlvParkview.FinanceManager.Models;
+using SlvParkview.FinanceManager.Reporting.Interfaces;
 using SlvParkview.FinanceManager.Services;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace SlvParkview.FinanceManager.Reporting
+namespace SlvParkview.FinanceManager.Reporting.Models
 {
     /// <summary>
     /// Creates a report that consists of flat wise outstanding (for a given block) calculated as on the specified date.
@@ -54,9 +55,9 @@ namespace SlvParkview.FinanceManager.Reporting
 
         #endregion
 
-        #region Private Helper Methods
+        #region Public Methods
 
-        private protected override void GenerateContents()
+        public override void GenerateContents()
         {
             FlatInfoCollection = new List<FlatInfo>();
 
@@ -68,7 +69,11 @@ namespace SlvParkview.FinanceManager.Reporting
                     FlatInfoCollection.Add(flat.ParseToFlatInfo());
                 }
             }
-        }
+        } 
+
+        #endregion
+
+        #region Private Helper Methods
 
         private protected override void CreateRequiredDirectories()
         {

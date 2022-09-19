@@ -72,7 +72,7 @@
 
         <GroupBox
             Grid.Row="2"
-            Margin="20,0,20,20"
+            Margin="20,0,20,10"
             BorderThickness="0.2"
             Header="Add New Expense">
             <Grid Margin="10" DataContext="{Binding Expense}">
@@ -150,35 +150,59 @@
 
         <!--#region Buttons Group-->
 
-        <StackPanel
+        <Grid
             Grid.Row="3"
             Height="26"
-            Margin="20,0,20,20"
-            HorizontalAlignment="Right"
-            Orientation="Horizontal">
+            Margin="20,0,20,10">
+
+            <!--#region Grid Definitions-->
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <!--#endregion-->
+
+            <!--#region Buttons-->
 
             <Button
+                Grid.Column="0"
+                Margin="0,0,5,0"
+                Command="{Binding GenerateReportsCommand}"
+                Content="Generate Reports" />
+
+            <Button
+                Grid.Column="1"
+                Margin="5,0"
+                Command="{Binding AddPaymentCommand}"
+                Content="Add Payment" />
+
+            <Button
+                Grid.Column="2"
+                Margin="5,0"
+                Command="{Binding AddCommonExpenseCommand}"
+                Content="Add Common Expense" />
+
+            <Button
+                Grid.Column="3"
                 Margin="5,0"
                 Command="{Binding SaveExpenseCommand}"
                 Content="Save Expense"
                 IsEnabled="{Binding Expense.IsDataValid}" />
+
             <Button
-                Margin="5,0"
-                Command="{Binding AddPaymentCommand}"
-                Content="Add Payment" />
-            <Button
-                Margin="5,0"
-                Command="{Binding AddCommonExpenseCommand}"
-                Content="Add Common Expense" />
-            <Button
-                Margin="5,0"
-                Command="{Binding GenerateReportsCommand}"
-                Content="Generate Reports" />
-            <Button
+                Grid.Column="4"
                 Margin="5,0,0,0"
                 Command="{Binding GoToSummaryCommand}"
                 Content="Switch to Summary" />
-        </StackPanel>
+
+            <!--#endregion-->
+
+        </Grid>
 
         <!--#endregion-->
 

@@ -96,7 +96,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void OnGenerateReports()
         {
-            ReportViewModel reportViewModel = new ReportViewModel(_summaryViewModel, _navigationService, FlatToBeProcessed);
+            ReportingViewModel reportViewModel = new ReportingViewModel(_summaryViewModel, _navigationService);
             _navigationService.CurrentViewModel = reportViewModel;
         }
 

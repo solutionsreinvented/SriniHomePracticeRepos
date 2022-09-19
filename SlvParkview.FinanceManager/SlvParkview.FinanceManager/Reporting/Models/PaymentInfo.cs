@@ -1,4 +1,4 @@
-﻿namespace SlvParkview.FinanceManager.Reporting
+﻿namespace SlvParkview.FinanceManager.Reporting.Models
 {
     public class PaymentInfo
     {

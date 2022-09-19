@@ -1,28 +1,27 @@
 ﻿<UserControl
-    x:Class="SlvParkview.FinanceManager.Views.Reports.FlatInfoView"
+    x:Class="SlvParkview.FinanceManager.Reporting.Views.FlatInfoView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="clr-namespace:SlvParkview.FinanceManager.Reporting"
+    xmlns:models="clr-namespace:SlvParkview.FinanceManager.Reporting.Models"
     MinWidth="650"
-    MinHeight="240"
+    MinHeight="170"
     MaxHeight="250"
-    d:DesignHeight="220"
+    d:DesignHeight="170"
     d:DesignWidth="650"
-    IsEnabled="False"
     mc:Ignorable="d">
 
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <models:FlatInfo />
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
 
     <!--#region Flat Details Host-->
 
     <GroupBox
-        Margin="20,0,20,10"
         BorderThickness="0.2"
-        Header="Details of the flat">
+        Header="Details of the flat"
+        IsEnabled="False">
 
         <Grid Margin="10">
 
@@ -59,7 +58,6 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -113,24 +111,26 @@
                 Grid.Column="1"
                 Text="{Binding TenantName}" />
 
-            <TextBlock
-                Grid.Row="5"
-                Grid.Column="0"
-                Text="Flat is occupied by: " />
-
-            <TextBox
-                Grid.Row="5"
-                Grid.Column="1"
-                Height="26"
-                Text="{Binding ResidentType}" />
-
             <!--#endregion-->
 
             <!--#region Column 2 Data-->
 
             <TextBlock
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="10,5"
+                Text="Flat is occupied by: " />
+
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="3"
+                Height="26"
+                Text="{Binding ResidentType}" />
+
+            <TextBlock
                 Grid.Row="2"
                 Grid.Column="2"
+                Margin="10,5"
                 Text="Account incorporated on: " />
 
             <TextBox
@@ -141,6 +141,7 @@
             <TextBlock
                 Grid.Row="3"
                 Grid.Column="2"
+                Margin="10,5"
                 Text="Opening balance: " />
 
             <TextBox
@@ -151,20 +152,11 @@
             <TextBlock
                 Grid.Row="4"
                 Grid.Column="2"
-                Text="Oustanding on specified date: " />
-
-            <TextBox
-                Grid.Row="4"
-                Grid.Column="3"
-                Text="{Binding OutstandingOnSpecifiedDate, Mode=OneWay, StringFormat={}{0:N2}}" />
-
-            <TextBlock
-                Grid.Row="5"
-                Grid.Column="2"
+                Margin="10,5"
                 Text="Current outstanding: " />
 
             <TextBox
-                Grid.Row="5"
+                Grid.Row="4"
                 Grid.Column="3"
                 Text="{Binding CurrentOutstanding, Mode=OneWay, StringFormat={}{0:N2}}" />
 

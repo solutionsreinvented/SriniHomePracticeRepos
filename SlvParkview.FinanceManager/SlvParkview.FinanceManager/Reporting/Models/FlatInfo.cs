@@ -1,6 +1,6 @@
 ﻿using ReInvented.Shared.Stores;
 
-namespace SlvParkview.FinanceManager.Reporting
+namespace SlvParkview.FinanceManager.Reporting.Models
 {
     public class FlatInfo : PropertyStore
     {

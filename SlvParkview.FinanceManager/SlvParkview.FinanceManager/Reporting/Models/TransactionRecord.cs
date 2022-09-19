@@ -2,7 +2,7 @@
 using SlvParkview.FinanceManager.Models;
 using System;
 
-namespace SlvParkview.FinanceManager.Reporting
+namespace SlvParkview.FinanceManager.Reporting.Models
 {
     public class TransactionRecord : PropertyStore
     {

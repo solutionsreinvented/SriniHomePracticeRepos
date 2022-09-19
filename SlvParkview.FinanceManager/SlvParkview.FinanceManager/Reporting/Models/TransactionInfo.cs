@@ -2,9 +2,7 @@
 
 using SlvParkview.FinanceManager.Extensions;
 
-using System;
-
-namespace SlvParkview.FinanceManager.Reporting
+namespace SlvParkview.FinanceManager.Reporting.Models
 {
     public class TransactionInfo : PropertyStore
     {

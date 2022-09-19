@@ -1,0 +1,120 @@
+﻿<UserControl
+    x:Class="SlvParkview.FinanceManager.Views.ReportingView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:enums="clr-namespace:SlvParkview.FinanceManager.Enums"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:theme="http://schemas.reinvented.com/ui/themes"
+    MinWidth="650"
+    MinHeight="600"
+    MaxWidth="900"
+    MaxHeight="800"
+    d:DesignHeight="600"
+    d:DesignWidth="850"
+    Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
+    mc:Ignorable="d">
+
+    <Grid Margin="10">
+
+        <!--#region Grid Definitions-->
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--#endregion-->
+
+        <!--#region Effects-->
+
+        <Border
+            Grid.RowSpan="4"
+            Background="{theme:ThemeResource ResourceKey=StaticBackgroundBrush}"
+            BorderThickness="2"
+            CornerRadius="5">
+            <Border.Effect>
+                <DropShadowEffect
+                    BlurRadius="5"
+                    Direction="45"
+                    Opacity="0.6"
+                    ShadowDepth="2"
+                    Color="Gray" />
+            </Border.Effect>
+        </Border>
+
+        <!--#endregion-->
+
+        <!--#region Title-->
+
+        <TextBlock
+            Grid.Row="0"
+            Margin="0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="14"
+            FontWeight="DemiBold"
+            Text="Generate Report" />
+
+        <!--#endregion-->
+
+        <!--#region Report Type Selection-->
+
+        <Grid Grid.Row="1" Margin="20,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                Grid.Column="0"
+                Margin="0,0,20,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Text="Choose report type:" />
+            <ComboBox
+                Grid.Column="1"
+                HorizontalContentAlignment="Left"
+                ItemsSource="{shared:EnumBindingResource enums:ReportType}"
+                SelectedItem="{Binding ReportType}" />
+        </Grid>
+
+        <!--#endregion-->
+
+        <!--#region Flat Information-->
+
+        <ContentControl
+            Grid.Row="2"
+            Margin="20,0,20,20"
+            Content="{Binding CurrentReportViewModel}" />
+
+        <!--#endregion-->
+
+        <!--#region Buttons Group-->
+
+        <Grid
+            Grid.Row="3"
+            Height="26"
+            Margin="15,0,15,20"
+            VerticalAlignment="Bottom">
+
+            <Button
+                HorizontalAlignment="Right"
+                Command="{Binding GoToSummaryCommand}"
+                Content="Switch to Summary" />
+
+            <Button
+                HorizontalAlignment="Left"
+                Command="{Binding GenerateCommand}"
+                Content="Generate Report" />
+
+        </Grid>
+
+        <!--#endregion-->
+
+    </Grid>
+
+</UserControl>

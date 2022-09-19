@@ -103,14 +103,18 @@
     <Compile Include="Extensions\DecimalExtensions.cs" />
     <Compile Include="Extensions\FlatExtensions.cs" />
     <Compile Include="Extensions\PaymentExtensions.cs" />
-    <Compile Include="Reporting\FlatTransactionsHistoryReport.cs" />
-    <Compile Include="Reporting\FlatInfo.cs" />
-    <Compile Include="Interfaces\IReport.cs" />
-    <Compile Include="Reporting\MonthwisePaymentsReport.cs" />
-    <Compile Include="Reporting\BlockOustandingsReport.cs" />
-    <Compile Include="Reporting\PaymentInfo.cs" />
-    <Compile Include="Reporting\Report.cs" />
-    <Compile Include="Reporting\TransactionInfo.cs" />
+    <Compile Include="Reporting\Models\FlatTransactionsHistoryReport.cs" />
+    <Compile Include="Reporting\Models\FlatInfo.cs" />
+    <Compile Include="Reporting\Interfaces\IReport.cs" />
+    <Compile Include="Reporting\Models\MonthwisePaymentsReport.cs" />
+    <Compile Include="Reporting\Models\BlockOustandingsReport.cs" />
+    <Compile Include="Reporting\Models\PaymentInfo.cs" />
+    <Compile Include="Reporting\Models\Report.cs" />
+    <Compile Include="Reporting\Models\TransactionInfo.cs" />
+    <Compile Include="Reporting\ViewModels\BlockOustandingsReportViewModel.cs" />
+    <Compile Include="Reporting\ViewModels\FlatTransactionsHistoryReportViewModel.cs" />
+    <Compile Include="Reporting\ViewModels\MonthwisePaymentsReportViewModel.cs" />
+    <Compile Include="Reporting\ViewModels\ReportViewModelBase.cs" />
     <Compile Include="Repositories\FlatRepository.cs" />
     <Compile Include="Services\BlockInitialDataProvider.cs" />
     <Compile Include="Services\ReportsGenerator.cs" />
@@ -123,7 +127,7 @@
     <Compile Include="ViewModels\EditFlatViewModel.cs" />
     <Compile Include="ViewModels\PaymentViewModel.cs" />
     <Compile Include="ViewModels\ReportViewerViewModel.cs" />
-    <Compile Include="ViewModels\ReportViewModel.cs" />
+    <Compile Include="ViewModels\ReportingViewModel.cs" />
     <Compile Include="ViewModels\SummaryViewModel.cs" />
     <Compile Include="ViewModels\ThemeViewModel.cs" />
     <Compile Include="Views\CommonExpenseView.xaml.cs">
@@ -141,14 +145,14 @@
     <Compile Include="Views\PaymentView.xaml.cs">
       <DependentUpon>PaymentView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Reports\FlatInfoView.xaml.cs">
+    <Compile Include="Reporting\Views\FlatInfoView.xaml.cs">
       <DependentUpon>FlatInfoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Reports\FlatTransactionsHistoryReportView.xaml.cs">
+    <Compile Include="Reporting\Views\FlatTransactionsHistoryReportView.xaml.cs">
       <DependentUpon>FlatTransactionsHistoryReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ReportView.xaml.cs">
-      <DependentUpon>ReportView.xaml</DependentUpon>
+    <Compile Include="Views\ReportingView.xaml.cs">
+      <DependentUpon>ReportingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ReportViewerView.xaml.cs">
       <DependentUpon>ReportViewerView.xaml</DependentUpon>
@@ -200,15 +204,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Reports\FlatInfoView.xaml">
+    <Page Include="Reporting\Views\FlatInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Reports\FlatTransactionsHistoryReportView.xaml">
+    <Page Include="Reporting\Views\FlatTransactionsHistoryReportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ReportView.xaml">
+    <Page Include="Views\ReportingView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -226,7 +230,7 @@
     <Compile Include="Models\Block.cs" />
     <Compile Include="Models\Expense.cs" />
     <Compile Include="Models\Flat.cs" />
-    <Compile Include="Reporting\TransactionRecord.cs" />
+    <Compile Include="Reporting\Models\TransactionRecord.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -70,11 +70,16 @@
 
         <!--#region Add Payment Detail-->
 
-        <Grid Grid.Row="2" Margin="20,0,20,20">
+        <Grid Grid.Row="2" Margin="20,0,20,10">
+
+            <!--#region Grid Definitions-->
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="1.5*" />
             </Grid.ColumnDefinitions>
+
+            <!--#endregion-->
 
             <!--#region Payments History Group-->
 
@@ -85,10 +90,15 @@
                 Header="Payments History">
 
                 <Grid>
+
+                    <!--#region Grid Definitions-->
+
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
+
+                    <!--#endregion-->
 
                     <!--#region Payments Data-->
 
@@ -157,14 +167,17 @@
 
                     <!--#endregion-->
 
-                    <StackPanel
-                        Grid.Row="1"
-                        HorizontalAlignment="Left"
-                        Orientation="Horizontal">
+                    <!--#region Payment Manipulation Buttons-->
+
+                    <UniformGrid Grid.Row="1" Columns="3">
+
                         <Button Content="Delete Payment" />
                         <Button Content="Edit Payment" />
                         <Button Content="Save Payment" />
-                    </StackPanel>
+
+                    </UniformGrid>
+
+                    <!--#endregion-->
 
                 </Grid>
 
@@ -182,10 +195,15 @@
                 Header="Expenses History">
 
                 <Grid>
+
+                    <!--#region Grid Definitions-->
+
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
+
+                    <!--#endregion-->
 
                     <!--#region Expenses Data-->
 
@@ -243,14 +261,17 @@
 
                     <!--#endregion-->
 
-                    <StackPanel
-                        Grid.Row="1"
-                        HorizontalAlignment="Left"
-                        Orientation="Horizontal">
+                    <!--#region Expenses Manipulation Buttons-->
+
+                    <UniformGrid Grid.Row="1" Columns="3">
+
                         <Button Content="Delete Expense" />
                         <Button Content="Edit Expense" />
                         <Button Content="Save Expense" />
-                    </StackPanel>
+
+                    </UniformGrid>
+
+                    <!--#endregion-->
 
                 </Grid>
 
@@ -264,39 +285,66 @@
 
         <!--#region Buttons Group-->
 
-        <StackPanel
+        <Grid
             Grid.Row="3"
             Height="26"
-            Margin="20,0,20,20"
-            HorizontalAlignment="Right"
-            Orientation="Horizontal">
+            Margin="20,0,20,10"
+            VerticalAlignment="Center">
+
+            <!--#region Grid Definitions-->
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition Width="1.2*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <!--#endregion-->
+
+            <!--#region Buttons-->
 
             <Button
+                Grid.Column="0"
+                Margin="0,0,5,0"
+                Command="{Binding GenerateReportsCommand}"
+                Content="Generate Reports" />
+
+            <Button
+                Grid.Column="1"
                 Margin="5,0"
                 Command="{Binding SaveFlatCommand}"
                 Content="Save Flat Details" />
 
             <Button
+                Grid.Column="2"
                 Margin="5,0"
                 Command="{Binding AddPaymentCommand}"
                 Content="Add Payment" />
+
             <Button
+                Grid.Column="3"
                 Margin="5,0"
                 Command="{Binding AddExpenseCommand}"
                 Content="Add Expense" />
+
             <Button
+                Grid.Column="4"
                 Margin="5,0"
                 Command="{Binding AddCommonExpenseCommand}"
                 Content="Add Common Expense" />
+
             <Button
-                Margin="5,0"
-                Command="{Binding GenerateReportsCommand}"
-                Content="Generate Reports" />
-            <Button
+                Grid.Column="5"
                 Margin="5,0,0,0"
                 Command="{Binding GoToSummaryCommand}"
                 Content="Switch to Summary" />
-        </StackPanel>
+
+            <!--#endregion-->
+
+        </Grid>
 
         <!--#endregion-->
 

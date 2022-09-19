@@ -6,13 +6,14 @@ using ReInvented.DataAccess.Interfaces;
 using SlvParkview.FinanceManager.Enums;
 using SlvParkview.FinanceManager.Extensions;
 using SlvParkview.FinanceManager.Models;
+using SlvParkview.FinanceManager.Reporting.Interfaces;
 using SlvParkview.FinanceManager.Services;
 
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace SlvParkview.FinanceManager.Reporting
+namespace SlvParkview.FinanceManager.Reporting.Models
 {
     /// <summary>
     /// Creates a report which comprises of the payments received from each flat (of a given block) in a specified month.
@@ -61,9 +62,9 @@ namespace SlvParkview.FinanceManager.Reporting
 
         #endregion
 
-        #region Private Helper Methods
+        #region Public Methods
 
-        private protected override void GenerateContents()
+        public override void GenerateContents()
         {
             ReportedMonth = _forMonth.ToString();
             Payments = new List<PaymentInfo>();
@@ -78,6 +79,10 @@ namespace SlvParkview.FinanceManager.Reporting
                 }
             }
         }
+
+        #endregion
+
+        #region Private Helper Methods
 
         private protected override void CreateHtmlFile()
         {

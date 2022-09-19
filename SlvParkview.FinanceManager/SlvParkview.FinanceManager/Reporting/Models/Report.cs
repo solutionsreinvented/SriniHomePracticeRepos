@@ -2,12 +2,13 @@
 
 using ReInvented.Shared.Stores;
 
+using SlvParkview.FinanceManager.Reporting.Interfaces;
 using SlvParkview.FinanceManager.Services;
 
 using System;
 using System.IO;
 
-namespace SlvParkview.FinanceManager.Reporting
+namespace SlvParkview.FinanceManager.Reporting.Models
 {
     public abstract class Report : PropertyStore, IReport
     {
@@ -39,12 +40,17 @@ namespace SlvParkview.FinanceManager.Reporting
         #region Public Methods
 
         /// <summary>
+        /// Generates the contents of for the selected type of reports.
+        /// </summary>
+        public abstract void GenerateContents();
+
+        /// <summary>
         /// Creates the required directories for generating various reports and then finally generates the report itself in HTML format.
         /// Creates a Json file also to store the data of the report.
         /// </summary>
-        public virtual void Create()
+        public virtual void SaveReport()
         {
-            GenerateContents();
+            ///GenerateContents();
             CreateRequiredDirectories();
             CreateJsonFile();
             CreateHtmlFile();
@@ -64,11 +70,6 @@ namespace SlvParkview.FinanceManager.Reporting
         #endregion
 
         #region Private Helper Methods
-
-        /// <summary>
-        /// Generates the contents of for the selected type of reports.
-        /// </summary>
-        private protected abstract void GenerateContents();
 
         /// <summary>
         /// Creates the main Reports directory and other required directories dependin on the type of report selected

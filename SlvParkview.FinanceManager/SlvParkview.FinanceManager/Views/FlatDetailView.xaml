@@ -138,6 +138,7 @@
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="2"
+                Margin="10,5"
                 Text="Retrieve results till: " />
 
             <DatePicker
@@ -150,6 +151,7 @@
             <TextBlock
                 Grid.Row="2"
                 Grid.Column="2"
+                Margin="10,5"
                 Text="Account incorporated on: " />
 
             <TextBox
@@ -160,6 +162,7 @@
             <TextBlock
                 Grid.Row="3"
                 Grid.Column="2"
+                Margin="10,5"
                 Text="Opening balance: " />
 
             <TextBox
@@ -170,6 +173,7 @@
             <TextBlock
                 Grid.Row="4"
                 Grid.Column="2"
+                Margin="10,5"
                 Text="Oustanding on specified date: " />
 
             <TextBox
@@ -180,6 +184,7 @@
             <TextBlock
                 Grid.Row="5"
                 Grid.Column="2"
+                Margin="10,5"
                 Text="Current outstanding: " />
 
             <TextBox
