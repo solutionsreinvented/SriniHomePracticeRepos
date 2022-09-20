@@ -102,13 +102,13 @@ namespace SlvParkview.FinanceManager.Reporting.Models
                                    Path.Combine(_reportTargetDirectory, fileName), true);
         }
 
-        private protected override void CreateJavaScriptFile()
-        {
-            string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).js";
+        //private protected override void CreateJavaScriptFile()
+        //{
+        //    string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).js";
 
-            File.Copy(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"),
-                                   Path.Combine(_reportTargetDirectory, fileName), true);
-        }
+        //    File.Copy(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"),
+        //                           Path.Combine(_reportTargetDirectory, fileName), true);
+        //}
 
         private protected override void CreateJsonFile()
         {

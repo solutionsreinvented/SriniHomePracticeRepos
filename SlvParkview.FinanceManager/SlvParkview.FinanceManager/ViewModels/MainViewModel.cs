@@ -7,6 +7,8 @@ using System.IO;
 using System.Windows.Input;
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Services;
+using System.Windows;
+using System;
 
 namespace SlvParkview.FinanceManager.ViewModels
 {
@@ -67,6 +69,9 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         #region Command Handlers
 
+        /// <summary>
+        /// Retrieves the existing data from a Json file.
+        /// </summary>
         private void OnRetrieveData()
         {
             _dataSerializer = new JsonDataSerializer<Block>();
@@ -84,15 +89,24 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         }
 
+        /// <summary>
+        /// Persists the contents of the entire Block.
+        /// </summary>
         private void OnSaveData()
         {
             _dataSerializer = new JsonDataSerializer<Block>();
 
-            ///string serializedData = _dataSerializer.Serialize(((SummaryViewModel)CurrentViewModel).Block);
-
             string serializedData = _dataSerializer.Serialize(_summaryViewModel.Block);
 
-            File.WriteAllText(_filePath, serializedData);
+            try
+            {
+                File.WriteAllText(_filePath, serializedData);
+                _ = MessageBox.Show("Data saved successfully!", "Save data", MessageBoxButton.OK);
+            }
+            catch (Exception ex)
+            {
+                _ = MessageBox.Show(ex.Message);
+            }
         }
 
         #endregion

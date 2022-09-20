@@ -152,7 +152,7 @@
                 Grid.Row="2"
                 Grid.Column="2"
                 Margin="10,5"
-                Text="Account incorporated on: " />
+                Text="Account created on: " />
 
             <TextBox
                 Grid.Row="2"

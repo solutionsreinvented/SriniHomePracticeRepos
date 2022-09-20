@@ -7,6 +7,7 @@ using SlvParkview.FinanceManager.Services;
 
 using System;
 using System.IO;
+using System.Windows;
 
 namespace SlvParkview.FinanceManager.Reporting.Models
 {
@@ -50,10 +51,18 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         /// </summary>
         public virtual void SaveReport()
         {
-            ///GenerateContents();
-            CreateRequiredDirectories();
-            CreateJsonFile();
-            CreateHtmlFile();
+            try
+            {
+                ///GenerateContents();
+                CreateRequiredDirectories();
+                CreateJsonFile();
+                CreateHtmlFile();
+                _ = MessageBox.Show("Report generated successfully!!!", "Generate report", MessageBoxButton.OK);
+            }
+            catch (Exception ex)
+            {
+                _ = MessageBox.Show(ex.Message, "Generate report", MessageBoxButton.OK);
+            }
         }
 
 
@@ -89,7 +98,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         /// </summary>
         private protected abstract void CreateHtmlFile();
 
-        private protected abstract void CreateJavaScriptFile();
+        //private protected abstract void CreateJavaScriptFile();
 
         /// <summary>
         /// Creates and stores the data of this report in a Json file.

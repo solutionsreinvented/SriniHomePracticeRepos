@@ -59,6 +59,9 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         public string ReportedMonth { get => Get<string>(); private set => Set(value); }
 
         [JsonProperty]
+        public string ReportedYear { get => Get<string>(); private set => Set(value); }
+
+        [JsonProperty]
         public List<PaymentInfo> Payments { get => Get<List<PaymentInfo>>(); private set => Set(value); }
 
         [JsonProperty]
@@ -71,6 +74,8 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         public override void GenerateContents()
         {
             ReportedMonth = _forMonth.ToString();
+            ReportedYear = _year.ToString();
+
             List<PaymentInfo> allPayments = new List<PaymentInfo>();
 
             if (_block != null && _block.Flats != null)
@@ -94,7 +99,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private protected override void CreateHtmlFile()
         {
-            string fileName = $"{_fileName} ({_forMonth}{_year}).html";
+            string fileName = $"{_fileName} ({_forMonth} {_year}).html";
 
             File.Copy(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"),
                                    Path.Combine(_reportTargetDirectory, fileName), true);
@@ -102,7 +107,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private protected override void CreateJsonFile()
         {
-            string fileName = $"{_fileName} ({_forMonth}{_year}).json";
+            string fileName = $"{_fileName} ({_forMonth} {_year}).json";
 
             File.WriteAllText(Path.Combine(_reportTargetDirectory, fileName), GetSerializedData());
         }

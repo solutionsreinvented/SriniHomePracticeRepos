@@ -4,7 +4,7 @@
   "PressedForegroundBrush": "#AAFCFCFC",
   "DisabledForegroundBrush": "#CCC1C1C1",
 
-  "DefaultedControlBackgroundBrush": "#FF1A1A1A",
+  "DefaultedControlBackgroundBrush": "#22223b",
   "DefaultedControlBorderBrush": "#FF4A4A4A",
 
   "StaticBackgroundBrush": "#22223b",

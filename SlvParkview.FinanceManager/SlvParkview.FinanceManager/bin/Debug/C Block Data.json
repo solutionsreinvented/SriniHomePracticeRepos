@@ -225,10 +225,16 @@
           "ReceivedOn": "2022-09-05T00:00:00",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2022-09-18T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00
+      "CurrentOutstanding": 0.00
     },
     {
       "Number": "121",
@@ -289,7 +295,7 @@
       "Payments": [
         {
           "Mode": 1,
-          "ReceivedOn": "2022-09-17T00:00:00+05:30",
+          "ReceivedOn": "2022-09-16T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
