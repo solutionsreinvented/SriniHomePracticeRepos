@@ -30,7 +30,7 @@
                 <Style TargetType="{x:Type TextBox}">
                     <Setter Property="VerticalContentAlignment" Value="Center" />
                     <Setter Property="Padding" Value="5,2" />
-                    <Setter Property="Margin" Value="0,2,5,2" />
+                    <!--<Setter Property="Margin" Value="0,2,5,2" />-->
                     <Setter Property="Height" Value="26" />
                     <Setter Property="IsEnabled" Value="False" />
                 </Style>
@@ -43,9 +43,9 @@
             <!--#region Grid Definitions-->
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="2.5*" />
                 <ColumnDefinition />
-                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="2.5*" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
@@ -56,6 +56,7 @@
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="0"
+                Margin="0,5"
                 Text="Name: " />
 
             <TextBox
@@ -67,7 +68,7 @@
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="2"
-                Margin="10,0,0,0"
+                Margin="10,5"
                 Text="Number of flats: " />
 
             <TextBox

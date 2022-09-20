@@ -11,6 +11,7 @@ using SlvParkview.FinanceManager.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace SlvParkview.FinanceManager.Reporting.Models
 {
@@ -53,6 +54,9 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         [JsonProperty]
         public List<FlatInfo> FlatInfoCollection { get => Get<List<FlatInfo>>(); private set => Set(value); }
 
+        [JsonProperty]
+        public string TotalOutstanding { get => Get<string>(); private set => Set(value); }
+
         #endregion
 
         #region Public Methods
@@ -69,7 +73,9 @@ namespace SlvParkview.FinanceManager.Reporting.Models
                     FlatInfoCollection.Add(flat.ParseToFlatInfo());
                 }
             }
-        } 
+
+            TotalOutstanding = FlatInfoCollection?.Sum(f => decimal.Parse(f.OutstandingOnSpecifiedDate)).FormatNumber("N1");
+        }
 
         #endregion
 
@@ -91,6 +97,14 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         private protected override void CreateHtmlFile()
         {
             string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).html";
+
+            File.Copy(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"),
+                                   Path.Combine(_reportTargetDirectory, fileName), true);
+        }
+
+        private protected override void CreateJavaScriptFile()
+        {
+            string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).js";
 
             File.Copy(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"),
                                    Path.Combine(_reportTargetDirectory, fileName), true);

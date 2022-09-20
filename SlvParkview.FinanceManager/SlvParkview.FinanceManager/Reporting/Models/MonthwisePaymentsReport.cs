@@ -9,6 +9,7 @@ using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Reporting.Interfaces;
 using SlvParkview.FinanceManager.Services;
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -60,6 +61,9 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         [JsonProperty]
         public List<PaymentInfo> Payments { get => Get<List<PaymentInfo>>(); private set => Set(value); }
 
+        [JsonProperty]
+        public string TotalPayment { get => Get<string>(); private set => Set(value); }
+
         #endregion
 
         #region Public Methods
@@ -67,17 +71,21 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         public override void GenerateContents()
         {
             ReportedMonth = _forMonth.ToString();
-            Payments = new List<PaymentInfo>();
+            List<PaymentInfo> allPayments = new List<PaymentInfo>();
 
             if (_block != null && _block.Flats != null)
             {
                 foreach (Flat flat in _block.Flats)
                 {
-                    IEnumerable<Payment> flatPayments = flat.Payments
+                    IEnumerable<Payment> flatPayments = flat.Payments?
                                                             .Where(p => p.ReceivedOn.Month == (int)_forMonth && p.ReceivedOn.Year == _year);
-                    flatPayments?.ToList().ForEach(p => Payments.Add(p.ParseToPaymentInfo(flat.Description)));
+
+                    flatPayments?.ToList().ForEach(p => allPayments.Add(p.ParseToPaymentInfo(flat.Description)));
                 }
             }
+
+            Payments = allPayments?.OrderBy(p => DateTime.Parse(p.ReceivedOn)).ToList();
+            TotalPayment = Payments.Sum(p => decimal.Parse(p.Amount)).FormatNumber("N1");
         }
 
         #endregion

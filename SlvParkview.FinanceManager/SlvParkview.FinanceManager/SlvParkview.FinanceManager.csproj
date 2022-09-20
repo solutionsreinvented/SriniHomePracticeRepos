@@ -103,6 +103,7 @@
     <Compile Include="Extensions\DecimalExtensions.cs" />
     <Compile Include="Extensions\FlatExtensions.cs" />
     <Compile Include="Extensions\PaymentExtensions.cs" />
+    <Compile Include="Factories\ReportViewModelFactory.cs" />
     <Compile Include="Reporting\Models\FlatTransactionsHistoryReport.cs" />
     <Compile Include="Reporting\Models\FlatInfo.cs" />
     <Compile Include="Reporting\Interfaces\IReport.cs" />

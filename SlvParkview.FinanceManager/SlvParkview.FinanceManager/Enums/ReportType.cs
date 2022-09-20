@@ -11,7 +11,7 @@ namespace SlvParkview.FinanceManager.Enums
         FlatTransactionsHistory,
         [Description("Block Outstandings")]
         BlockOutstandings,
-        [Description("Payments in a Month")]
-        PaymentsInAMonth,
+        [Description("Payments Received in a Month")]
+        PaymentsReceivedInAMonth,
     }
 }

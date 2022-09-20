@@ -151,29 +151,30 @@
                 <Button
                     Margin="0,0,5,0"
                     Command="{Binding GenerateReportsCommand}"
-                    Content="Generate Reports" />
+                    Content="_Generate Reports"
+                    IsDefault="True" />
 
                 <Button
                     Margin="5,0"
                     Command="{Binding AddExpenseCommand}"
-                    Content="Add Expense"
+                    Content="Add E_xpense"
                     IsEnabled="{Binding CanProcessFlat}" />
 
                 <Button
                     Margin="5,0"
                     Command="{Binding AddPaymentCommand}"
-                    Content="Add Payment"
+                    Content="Add _Payment"
                     IsEnabled="{Binding CanProcessFlat}" />
 
                 <Button
                     Margin="5,0"
                     Command="{Binding AddCommonExpenseCommand}"
-                    Content="Add Common Expense" />
+                    Content="Add _Common Expense" />
 
                 <Button
                     Margin="5,0,0,0"
                     Command="{Binding EditFlatCommand}"
-                    Content="Edit Flat Details"
+                    Content="Edit F_lat Details"
                     IsEnabled="{Binding CanProcessFlat}" />
 
                 <!--#endregion-->

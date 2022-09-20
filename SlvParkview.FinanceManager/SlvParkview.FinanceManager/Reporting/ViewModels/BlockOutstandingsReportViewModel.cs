@@ -5,14 +5,30 @@ using System;
 
 namespace SlvParkview.FinanceManager.Reporting.ViewModels
 {
+    /// <summary>
+    /// Reports the outstandings of each flat on a specified date for a specified block.
+    /// </summary>
     public class BlockOutstandingsReportViewModel : ReportViewModelBase
     {
+        #region Parameterized Constructor
 
-        public BlockOutstandingsReportViewModel(SummaryViewModel summaryViewModel) 
+        public BlockOutstandingsReportViewModel(SummaryViewModel summaryViewModel)
             : base(summaryViewModel)
         {
 
         }
+
+        #endregion
+
+        #region Public Properties
+
+        public DateTime ReportTill { get => Get<DateTime>(); set { Set(value); UpdateReport(); } }
+
+        public string OutstandingHeader { get => Get<string>(); private set => Set(value); }
+
+        #endregion
+
+        #region Private Helpers
 
         private protected override void Initialize()
         {
@@ -21,10 +37,6 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
             ReportTill = DateTime.Today;
         }
 
-        public string OutstandingHeader { get => Get<string>(); private set => Set(value); }
-
-        public DateTime ReportTill { get => Get<DateTime>(); set { Set(value); UpdateReport(); } }
-
         private void UpdateReport()
         {
             OutstandingHeader = $"Outstanding as on {ReportTill:dd-MMM-yyyy}";
@@ -32,5 +44,6 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
             Report.GenerateContents();
         }
 
+        #endregion
     }
 }

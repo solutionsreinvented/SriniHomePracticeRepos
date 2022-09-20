@@ -89,6 +89,8 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         /// </summary>
         private protected abstract void CreateHtmlFile();
 
+        private protected abstract void CreateJavaScriptFile();
+
         /// <summary>
         /// Creates and stores the data of this report in a Json file.
         /// </summary>

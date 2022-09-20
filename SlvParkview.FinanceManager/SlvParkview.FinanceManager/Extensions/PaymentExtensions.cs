@@ -9,10 +9,11 @@ namespace SlvParkview.FinanceManager.Extensions
         {
             return new PaymentInfo()
             {
-                Amount = payment.Amount.FormatNumber("N2"),
+                Amount = payment.Amount.FormatNumber("N1"),
                 FlatNumber = flatNumber,
                 Mode = payment.Mode.ToString(),
-                PaymentReceivedOn = payment.ReceivedOn.ToString("dd MMMM yyyy")
+                ReceivedOn = payment.ReceivedOn.ToString("dd-MM-yyyy"),
+                Category = payment.Category.ToString()
             };
         }
     }

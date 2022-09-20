@@ -1,18 +1,17 @@
-﻿
-using ReInvented.Shared.Commands;
-
-using System;
+﻿using ReInvented.Shared.Commands;
 using System.Collections.Generic;
 using System.Windows.Input;
-using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Services;
 using SlvParkview.FinanceManager.Enums;
-using SlvParkview.FinanceManager.Reporting.Interfaces;
 using SlvParkview.FinanceManager.Reporting.Models;
 using SlvParkview.FinanceManager.Reporting.ViewModels;
+using SlvParkview.FinanceManager.Factories;
 
 namespace SlvParkview.FinanceManager.ViewModels
 {
+    /// <summary>
+    /// ViewModel which handles the generation of different sorts of reports.
+    /// </summary>
     public class ReportingViewModel : BaseViewModel
     {
         #region Private Fields
@@ -96,28 +95,17 @@ namespace SlvParkview.FinanceManager.ViewModels
             GoToSummaryCommand = new RelayCommand(OnGoToSummary, true);
         }
 
-        #endregion
-
         private void UpdateReportViewModel()
         {
-            if (ReportType == ReportType.BlockOutstandings)
-            {
-                CurrentReportViewModel = new BlockOutstandingsReportViewModel(_summaryViewModel);
-            }
-            else if (ReportType == ReportType.PaymentsInAMonth)
-            {
-                CurrentReportViewModel = new MonthwisePaymentsReportViewModel(_summaryViewModel);
-            }
-            else if (ReportType == ReportType.FlatTransactionsHistory)
-            {
-                CurrentReportViewModel = new FlatTransactionsHistoryReportViewModel(_summaryViewModel);
-            }
+            CurrentReportViewModel = ReportViewModelFactory.Create(_summaryViewModel, ReportType);
         }
-
 
         private void OnGenerate()
         {
             CurrentReportViewModel.Report.SaveReport();
         }
+
+        #endregion
+
     }
 }

@@ -51,7 +51,7 @@
                     Width="120"
                     VerticalAlignment="Center"
                     Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
-                    Header="Start Here">
+                    Header="_Start Here">
 
                     <MenuItem.Resources>
                         <Style TargetType="{x:Type MenuItem}">
@@ -59,14 +59,14 @@
                         </Style>
                     </MenuItem.Resources>
 
-                    <MenuItem Command="{Binding RetrieveDataCommand}" Header="Read Existing Data" />
+                    <MenuItem Command="{Binding RetrieveDataCommand}" Header="_Read Existing Data" />
                     <MenuItem
                         Command="{Binding GenerateDataCommand}"
-                        Header="Generate Data"
+                        Header="_Generate Data"
                         IsEnabled="False" />
                     <MenuItem
                         Command="{Binding SaveDataCommand}"
-                        Header="Save Data"
+                        Header="_Save Data"
                         IsEnabled="{Binding AllowSave}"
                         ToolTip="{Binding SaveDataHint}"
                         ToolTipService.ShowOnDisabled="True" />

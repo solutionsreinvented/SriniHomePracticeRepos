@@ -84,7 +84,7 @@
 
         <!--#endregion-->
 
-        <!--#region Flat Information-->
+        <!--#region Report Presenter Control-->
 
         <ContentControl
             Grid.Row="2"
@@ -109,7 +109,8 @@
             <Button
                 HorizontalAlignment="Left"
                 Command="{Binding GenerateCommand}"
-                Content="Generate Report" />
+                Content="Generate Report"
+                IsDefault="True" />
 
         </Grid>
 

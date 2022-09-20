@@ -23,7 +23,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         public static TransactionInfo Parse(TransactionRecord record)
         {
             string blank = "-";
-            string numberFormat = "N2";
+            string numberFormat = "N1";
 
             return new TransactionInfo()
             {

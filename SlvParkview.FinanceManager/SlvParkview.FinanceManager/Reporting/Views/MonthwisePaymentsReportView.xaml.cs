@@ -3,7 +3,7 @@
 namespace SlvParkview.FinanceManager.Reporting.Views
 {
     /// <summary>
-    /// Interaction logic for BlockOutstandingsReportView.xaml
+    /// Interaction logic for MonthwisePaymentsReportView.xaml
     /// </summary>
     public partial class MonthwisePaymentsReportView : UserControl
     {

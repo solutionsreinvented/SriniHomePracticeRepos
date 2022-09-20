@@ -171,9 +171,9 @@
 
                     <UniformGrid Grid.Row="1" Columns="3">
 
-                        <Button Content="Delete Payment" />
-                        <Button Content="Edit Payment" />
-                        <Button Content="Save Payment" />
+                        <Button Content="D_elete Payment" />
+                        <Button Content="Ed_it Payment" />
+                        <Button Content="S_ave Payment" />
 
                     </UniformGrid>
 
@@ -265,9 +265,9 @@
 
                     <UniformGrid Grid.Row="1" Columns="3">
 
-                        <Button Content="Delete Expense" />
-                        <Button Content="Edit Expense" />
-                        <Button Content="Save Expense" />
+                        <Button Content="Dele_te Expense" />
+                        <Button Content="E_dit Expense" />
+                        <Button Content="Sa_ve Expense" />
 
                     </UniformGrid>
 
@@ -310,37 +310,38 @@
                 Grid.Column="0"
                 Margin="0,0,5,0"
                 Command="{Binding GenerateReportsCommand}"
-                Content="Generate Reports" />
+                Content="_Generate Reports" />
 
             <Button
                 Grid.Column="1"
                 Margin="5,0"
                 Command="{Binding SaveFlatCommand}"
-                Content="Save Flat Details" />
+                Content="Save F_lat Details"
+                IsDefault="True" />
 
             <Button
                 Grid.Column="2"
                 Margin="5,0"
                 Command="{Binding AddPaymentCommand}"
-                Content="Add Payment" />
+                Content="Add _Payment" />
 
             <Button
                 Grid.Column="3"
                 Margin="5,0"
                 Command="{Binding AddExpenseCommand}"
-                Content="Add Expense" />
+                Content="Add E_xpense" />
 
             <Button
                 Grid.Column="4"
                 Margin="5,0"
                 Command="{Binding AddCommonExpenseCommand}"
-                Content="Add Common Expense" />
+                Content="Add _Common Expense" />
 
             <Button
                 Grid.Column="5"
                 Margin="5,0,0,0"
                 Command="{Binding GoToSummaryCommand}"
-                Content="Switch to Summary" />
+                Content="S_witch to Summary" />
 
             <!--#endregion-->
 

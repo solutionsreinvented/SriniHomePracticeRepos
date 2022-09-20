@@ -226,12 +226,13 @@
                 <Button
                     Margin="5,0"
                     Command="{Binding SaveExpenseCommand}"
-                    Content="Save Expense"
+                    Content="Save E_xpense"
+                    IsDefault="True"
                     IsEnabled="{Binding Expense.IsDataValid}" />
                 <Button
                     Margin="5,0,0,0"
                     Command="{Binding GoToSummaryCommand}"
-                    Content="Switch to Summary" />
+                    Content="S_witch to Summary" />
 
             </StackPanel>
 
