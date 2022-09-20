@@ -133,3 +133,5 @@ C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManage
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\FlatInfoView.baml
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\FlatTransactionsHistoryReportView.baml
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReportingView.baml
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\MonthwisePaymentsReportView.g.cs
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\MonthwisePaymentsReportView.baml

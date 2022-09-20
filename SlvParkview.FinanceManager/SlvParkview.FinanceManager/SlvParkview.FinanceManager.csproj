@@ -115,6 +115,9 @@
     <Compile Include="Reporting\ViewModels\FlatTransactionsHistoryReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\MonthwisePaymentsReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\ReportViewModelBase.cs" />
+    <Compile Include="Reporting\Views\MonthwisePaymentsReportView.xaml.cs">
+      <DependentUpon>MonthwisePaymentsReportView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Reporting\Views\BlockOutstandingsReportView.xaml.cs">
       <DependentUpon>BlockOutstandingsReportView.xaml</DependentUpon>
     </Compile>
@@ -182,6 +185,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Reporting\Views\MonthwisePaymentsReportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Reporting\Views\BlockOutstandingsReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
