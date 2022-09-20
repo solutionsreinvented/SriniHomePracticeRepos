@@ -111,14 +111,6 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             }
         }
 
-        //private protected override void CreateHtmlFile()
-        //{
-        //    string fileName = $"{_fileName} ({_forMonth} {_year}).html";
-
-        //    File.Copy(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"),
-        //                           Path.Combine(_reportTargetDirectory, fileName), true);
-        //}
-
         private protected override void CreateHtmlFile()
         {
             string fileName = $"{_fileName} ({_forMonth} {_year}).html";
@@ -128,13 +120,6 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             List<string> finalHtmlFileContent = ConcatenateScriptTagIn(htmlContents, fileName);
 
             File.WriteAllLines(Path.Combine(_reportTargetDirectory, fileName), finalHtmlFileContent);
-        }
-
-        private protected override void CreateJsonFile()
-        {
-            string fileName = $"{_fileName} ({_forMonth} {_year}).json";
-
-            File.WriteAllText(Path.Combine(_reportTargetDirectory, fileName), GetSerializedData());
         }
 
         private protected override void CreateJavaScriptFile()
