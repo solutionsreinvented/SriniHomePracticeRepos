@@ -1,13 +1,16 @@
 ﻿using Newtonsoft.Json;
+
 using ReInvented.DataAccess;
 using ReInvented.DataAccess.Interfaces;
 
 using SlvParkview.FinanceManager.Extensions;
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Services;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace SlvParkview.FinanceManager.Reporting.Models
 {
@@ -65,7 +68,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
                 FlatInfo = _flat.ParseToFlatInfo();
                 Transactions = _flat.GetTransactionsHistoryBasic(_reportTill);
             }
-        } 
+        }
 
         #endregion
 
@@ -76,7 +79,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             base.CreateRequiredDirectories();
 
             /// Create a new directory for Flatwise Reports if it does not exists.
-            
+
             string flatwiseReportsDirectory = Path.Combine(ServiceProvider.FlatwiseReportsDirectory);
 
             if (!Directory.Exists(flatwiseReportsDirectory))
@@ -94,12 +97,23 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             }
         }
 
+        //private protected override void CreateHtmlFile()
+        //{
+        //    string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).html";
+
+        //    File.Copy(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"),
+        //                           Path.Combine(_reportTargetDirectory, fileName), true);
+        //}
+
         private protected override void CreateHtmlFile()
         {
             string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).html";
 
-            File.Copy(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"),
-                                   Path.Combine(_reportTargetDirectory, fileName), true);
+            string[] htmlContents = File.ReadAllLines(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"));
+
+            List<string> finalHtmlFileContent = ConcatenateScriptTagIn(htmlContents, fileName);
+
+            File.WriteAllLines(Path.Combine(_reportTargetDirectory, fileName), finalHtmlFileContent);
         }
 
         private protected override void CreateJsonFile()
@@ -107,6 +121,19 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).json";
 
             File.WriteAllText(Path.Combine(_reportTargetDirectory, fileName), GetSerializedData());
+        }
+
+        private protected override void CreateJavaScriptFile()
+        {
+            string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).js";
+
+            string jsFilePath = Path.Combine(ServiceProvider.ReportScriptsDirectory, $"{_fileName}.js");
+            string[] jsContents = File.ReadAllLines(jsFilePath);
+
+            string finalJavaScriptFileContent = ConcatenateJsonContentIn(jsContents);
+
+            File.WriteAllText(Path.Combine(_reportTargetDirectory, fileName), finalJavaScriptFileContent);
+
         }
 
         #endregion

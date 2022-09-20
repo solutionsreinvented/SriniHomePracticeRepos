@@ -97,21 +97,6 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         #region Private Helper Methods
 
-        private protected override void CreateHtmlFile()
-        {
-            string fileName = $"{_fileName} ({_forMonth} {_year}).html";
-
-            File.Copy(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"),
-                                   Path.Combine(_reportTargetDirectory, fileName), true);
-        }
-
-        private protected override void CreateJsonFile()
-        {
-            string fileName = $"{_fileName} ({_forMonth} {_year}).json";
-
-            File.WriteAllText(Path.Combine(_reportTargetDirectory, fileName), GetSerializedData());
-        }
-
         private protected override void CreateRequiredDirectories()
         {
             base.CreateRequiredDirectories();
@@ -124,6 +109,44 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             {
                 _ = Directory.CreateDirectory(_reportTargetDirectory);
             }
+        }
+
+        //private protected override void CreateHtmlFile()
+        //{
+        //    string fileName = $"{_fileName} ({_forMonth} {_year}).html";
+
+        //    File.Copy(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"),
+        //                           Path.Combine(_reportTargetDirectory, fileName), true);
+        //}
+
+        private protected override void CreateHtmlFile()
+        {
+            string fileName = $"{_fileName} ({_forMonth} {_year}).html";
+
+            string[] htmlContents = File.ReadAllLines(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"));
+
+            List<string> finalHtmlFileContent = ConcatenateScriptTagIn(htmlContents, fileName);
+
+            File.WriteAllLines(Path.Combine(_reportTargetDirectory, fileName), finalHtmlFileContent);
+        }
+
+        private protected override void CreateJsonFile()
+        {
+            string fileName = $"{_fileName} ({_forMonth} {_year}).json";
+
+            File.WriteAllText(Path.Combine(_reportTargetDirectory, fileName), GetSerializedData());
+        }
+
+        private protected override void CreateJavaScriptFile()
+        {
+            string fileName = $"{_fileName} ({_forMonth} {_year}).js";
+
+            string jsFilePath = Path.Combine(ServiceProvider.ReportScriptsDirectory, $"{_fileName}.js");
+            string[] jsContents = File.ReadAllLines(jsFilePath);
+
+            string finalJavaScriptFileContent = ConcatenateJsonContentIn(jsContents);
+
+            File.WriteAllText(Path.Combine(_reportTargetDirectory, fileName), finalJavaScriptFileContent);
         }
 
         #endregion

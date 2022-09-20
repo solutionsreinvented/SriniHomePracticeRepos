@@ -18,7 +18,7 @@
     font-weight: bold;
 }
 
-.overview-table {
+.table-header {
     border-collapse: collapse;
     border-top: 2px solid;
     border-bottom: 2px solid;
@@ -29,49 +29,64 @@
     margin: 0 auto;
 }
 
-.overview-table thead td {
+.table-header thead td {
     font-weight: bold;
     background-color: #e9edc9;
 }
 
 .flat-number-header {
     vertical-align: middle;
-    width: 11%;
+    width: 3%;
 }
 
 .owner-header {
     vertical-align: middle;
-    width: 17%;
+    width: 27%;
 }
 
 .coowner-header {
     vertical-align: middle;
-    width: 17%;
+    width: 25%;
 }
 
 .tenant-header {
     vertical-align: middle;
-    width: 17%;
+    width: 25%;
 }
 
 .resident-type-header {
-    vertical-align: middle;
-    width: 17%;
-}
-
-.start-date-header {
     vertical-align: middle;
     width: 10%;
 }
 
 .outstanding-header {
     vertical-align: middle;
-    width: 11%;
+    width: 10%;
 }
 
-
-.overview-table td {
-    text-align: center;
+.table-header td {
+    text-align: left;
     padding: 5px 20px;
     border: 1px solid;
+}
+
+.table-body td {
+    text-align: left;
+}
+
+.table-header .table-title{
+    text-align: center;
+}
+
+.table-body .total-outstanding .total-outstanding-desc {
+    text-align: right;
+    font-weight: bold;
+}
+
+.table-body .total-outstanding .total-outstanding-amount {
+    font-weight: bold;
+}
+
+.table-body .end-of-data td {
+    text-align: center;
 }

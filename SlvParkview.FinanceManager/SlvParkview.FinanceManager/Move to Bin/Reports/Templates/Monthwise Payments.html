@@ -1,54 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Transactions Summary of a Selected Flat</title>
 
-    <link rel="stylesheet" href="../Styles/monthwise-payments.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payments Received</title>
 
-  <body>
-    <!--     <div id="generated-on">
+  <link rel="stylesheet" href="../Styles/monthwise-payments.css" />
+</head>
 
-    </div>
+<body>
 
-    <div id="apartment-name"></div> -->
+  <div id="container">
 
-    <div id="container">
-      <!-- #region Transactions Table -->
-      <table class="overview-table">
-        <thead>
-          <tr class="main-heading-row">
-            <td colspan="7">Summary of Outstandings</td>
-          </tr>
-          <tr>
-            <td class="flat-number-header">Flat Number</td>
-            <td class="owner-header">Owner Name</td>
-            <td class="coowner-header">Co-owner Name</td>
-            <td class="tenant-header">Tenant Name</td>
-            <td class="resident-type-header">Resident Type</td>
-            <td class="start-date-header">Account Start Date</td>
-            <td class="outstanding-header">Current Outstanding</td>
-          </tr>
-        </thead>
+    <!-- #region Payments Table -->
 
-        <tbody class="summary-body">
-          <tr>
-            <td class="flat-number">C217</td>
-            <td class="owner">Srinivasa Rao M</td>
-            <td class="coowner">-</td>
-            <td class="tenant">-</td>
-            <td class="resident-type">Owner</td>
-            <td class="start-date">01 Sep 2022</td>
-            <td class="outstanding">(2,800.00)</td>
-          </tr>
-        </tbody>
-      </table>
-      <!-- #endregion -->
-    </div>
+    <table class="payments-table">
 
-    <script src="../Scripts/monthwise-payments.js"></script>
-  </body>
+      <thead class="table-header">
+
+        <tr class="main-heading-row">
+          <td class="table-title" colspan="5">Payments Received During</td>
+        </tr>
+        <tr>
+          <td class="flat-number-header">Flat Number</td>
+          <td class="paid-on-header">Date of Payment</td>
+          <td class="amount-header">Amount Paid</td>
+          <td class="payment-mode-header">Payment Mode</td>
+          <td class="payment-category-header">Payment Category</td>
+        </tr>
+
+      </thead>
+
+      <tbody class="table-body">
+
+        <tr>
+          <td class="flat-number">C217</td>
+          <td class="paid-on">Srinivasa Rao M</td>
+          <td class="amount">-</td>
+          <td class="payment-mode">-</td>
+          <td class="payment-category">Owner</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+    <!-- #endregion -->
+
+  </div>
+
+  <script src="../Scripts/monthwise-payments.js"></script>
+
+</body>
+
 </html>

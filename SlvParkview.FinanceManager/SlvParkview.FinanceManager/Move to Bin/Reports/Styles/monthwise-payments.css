@@ -18,7 +18,7 @@
     font-weight: bold;
 }
 
-.overview-table {
+.payments-table {
     border-collapse: collapse;
     border-top: 2px solid;
     border-bottom: 2px solid;
@@ -29,49 +29,51 @@
     margin: 0 auto;
 }
 
-.overview-table thead td {
+.payments-table thead td {
     font-weight: bold;
     background-color: #e9edc9;
 }
 
 .flat-number-header {
     vertical-align: middle;
-    width: 11%;
+    width: 20%;
 }
 
-.owner-header {
+.paid-on-header {
     vertical-align: middle;
-    width: 17%;
+    width: 20%;
 }
 
-.coowner-header {
+.amount-header {
     vertical-align: middle;
-    width: 17%;
+    width: 20%;
 }
 
-.tenant-header {
+.payment-mode-header {
     vertical-align: middle;
-    width: 17%;
+    width: 20%;
 }
 
-.resident-type-header {
+.payment-category-header {
     vertical-align: middle;
-    width: 17%;
+    width: 20%;
 }
 
-.start-date-header {
-    vertical-align: middle;
-    width: 10%;
-}
-
-.outstanding-header {
-    vertical-align: middle;
-    width: 11%;
-}
-
-
-.overview-table td {
+.payments-table td {
     text-align: center;
     padding: 5px 20px;
     border: 1px solid;
+}
+
+.table-body .total-collection .total-collection-desc {
+    text-align: right;
+    font-weight: bold;
+}
+
+.table-body .total-collection .total-collection-amount {
+    font-weight: bold;
+}
+
+.table-body .end-of-data td {
+    text-align: center;
 }

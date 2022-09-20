@@ -94,21 +94,36 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             }
         }
 
-        private protected override void CreateHtmlFile()
-        {
-            string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).html";
-
-            File.Copy(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"),
-                                   Path.Combine(_reportTargetDirectory, fileName), true);
-        }
-
-        //private protected override void CreateJavaScriptFile()
+        //private protected override void CreateHtmlFile()
         //{
-        //    string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).js";
+        //    string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).html";
 
         //    File.Copy(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"),
         //                           Path.Combine(_reportTargetDirectory, fileName), true);
         //}
+
+        private protected override void CreateHtmlFile()
+        {
+            string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).html";
+
+            string[] htmlContents = File.ReadAllLines(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"));
+
+            List<string> finalHtmlFileContent = ConcatenateScriptTagIn(htmlContents, fileName);
+
+            File.WriteAllLines(Path.Combine(_reportTargetDirectory, fileName), finalHtmlFileContent);
+        }
+
+        private protected override void CreateJavaScriptFile()
+        {
+            string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).js";
+
+            string jsFilePath = Path.Combine(ServiceProvider.ReportScriptsDirectory, $"{_fileName}.js");
+            string[] jsContents = File.ReadAllLines(jsFilePath);
+
+            string finalJavaScriptFileContent = ConcatenateJsonContentIn(jsContents);
+
+            File.WriteAllText(Path.Combine(_reportTargetDirectory, fileName), finalJavaScriptFileContent);
+        }
 
         private protected override void CreateJsonFile()
         {
