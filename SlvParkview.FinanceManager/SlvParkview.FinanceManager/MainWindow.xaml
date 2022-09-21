@@ -13,7 +13,7 @@
     Background="#4a4e69"
     DataContext="{DynamicResource MainViewModel}"
     MouseDown="OnMouseDown"
-    ResizeMode="NoResize"
+    ResizeMode="CanResize"
     WindowStartupLocation="CenterScreen"
     WindowState="Maximized"
     WindowStyle="None"

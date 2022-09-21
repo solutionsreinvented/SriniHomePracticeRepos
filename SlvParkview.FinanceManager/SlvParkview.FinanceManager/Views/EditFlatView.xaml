@@ -113,7 +113,7 @@
                         CanUserResizeRows="False"
                         HorizontalScrollBarVisibility="Disabled"
                         ItemsSource="{Binding TargetFlat.Payments}"
-                        SelectedItem="{Binding SelectedPayment, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding SelectedPayment}"
                         SelectionUnit="FullRow"
                         VerticalScrollBarVisibility="Auto">
 
@@ -171,21 +171,28 @@
 
                     </DataGrid>
 
-                    <TextBlock
+                    <!--<TextBlock
                         Grid.Row="0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Text="{Binding UpdateSourceTrigger=PropertyChanged}" />
+                        Text="{Binding UpdateSourceTrigger=PropertyChanged}" />-->
 
                     <!--#endregion-->
 
                     <!--#region Edit Selected Payment-->
 
-                    <views:EditPaymentView
+                    <ContentControl
                         Grid.Row="1"
                         Margin="5,5,5,10"
-                        DataContext="{Binding SelectedPayment, UpdateSourceTrigger=PropertyChanged}"
-                        Visibility="{Binding DataContext.CanModifyPayment, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={shared:BoolToVisibilityConverter}}" />
+                        Content="{Binding SelectedPayment}"
+                        DataContext="{Binding}"
+                        Visibility="{Binding CanModifyPayment, Converter={shared:BoolToVisibilityConverter}}" />
+
+                    <!--<views:EditPaymentView
+                        Grid.Row="1"
+                        Margin="5,5,5,10"
+                        DataContext="{Binding SelectedPayment}"
+                        Visibility="{Binding DataContext.CanModifyPayment, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={shared:BoolToVisibilityConverter}}" />-->
 
                     <!--#endregion-->
 
@@ -193,9 +200,9 @@
 
                     <UniformGrid Grid.Row="2" Columns="3">
 
-                        <Button Content="D_elete Payment" IsEnabled="{Binding CanModifyPayment}" />
+                        <!--<Button Content="D_elete Payment" IsEnabled="{Binding CanModifyPayment}" />
                         <Button Content="Ed_it Payment" IsEnabled="{Binding CanModifyPayment}" />
-                        <Button Content="S_ave Payment" IsEnabled="{Binding CanModifyPayment}" />
+                        <Button Content="S_ave Payment" IsEnabled="{Binding CanModifyPayment}" />-->
 
                     </UniformGrid>
 
