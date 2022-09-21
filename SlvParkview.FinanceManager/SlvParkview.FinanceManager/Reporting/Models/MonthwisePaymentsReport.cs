@@ -85,7 +85,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
                     IEnumerable<Payment> flatPayments = flat.Payments?
                                                             .Where(p => p.ReceivedOn.Month == (int)_forMonth && p.ReceivedOn.Year == _year);
 
-                    flatPayments?.ToList().ForEach(p => allPayments.Add(p.ParseToPaymentInfo(flat.Description)));
+                    flatPayments?.ToList().ForEach(p => allPayments.Add(p.ParseToPaymentInfo(flat)));
                 }
             }
 

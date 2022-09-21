@@ -126,7 +126,7 @@ function populatePayments() {
   var endOfData = "";
   tableBody.innerHTML = "";
 
-  document.title =  "Payments Received [" + jsonContents.ReportedMonth + " " + jsonContents.ReportedYear + "]";
+  document.title = "Payments Received [" + jsonContents.ReportedMonth + " " + jsonContents.ReportedYear + "]";
   tableTitle.innerHTML = "Payments Received [" + jsonContents.ReportedMonth + " " + jsonContents.ReportedYear + "]";
 
   if (payments.length > 0) {
@@ -135,14 +135,15 @@ function populatePayments() {
 
       tableBody.innerHTML += `
             <tr class="transaction-row">
-                <td>${payments[i].ReceivedOn}</td>
-                <td>${payments[i].FlatNumber}</td>
-                <td>${payments[i].Amount}</td>
-                <td>${payments[i].Mode}</td>
-                <td>${payments[i].Category}</td>
+              <td class="paid-on">${payments[i].ReceivedOn}</td>
+              <td class="flat-number">${payments[i].FlatNumber}</td>
+              <td class="owner-name">${payments[i].OwnerName}</td>
+              <td class="amount">${payments[i].Amount}</td>
+              <td class="payment-mode">${payments[i].Mode}</td>
+              <td class="payment-category">${payments[i].Category}</td>
             </tr>
             `;
-            
+
     }
 
     endOfData = "**** End of Data ****";
@@ -154,12 +155,12 @@ function populatePayments() {
   }
 
   tableBody.innerHTML += `<tr class="total-collection">
-            <td colspan="4" class="total-collection-desc">Total Payment Received:</td>
+            <td colspan="5" class="total-collection-desc">Total Payment Received:</td>
             <td colspan="1" class="total-collection-amount">${jsonContents.TotalPayment}</td>
         </tr>`;
 
   tableBody.innerHTML += `<tr class="end-of-data">
-            <td colspan="5">${endOfData}</td>
+            <td colspan="6">${endOfData}</td>
         </tr>`;
 }
 

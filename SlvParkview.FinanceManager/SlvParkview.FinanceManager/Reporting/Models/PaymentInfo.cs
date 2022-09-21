@@ -4,6 +4,8 @@
     {
         public string FlatNumber { get; set; }
 
+        public string OwnerName { get; set; }
+
         public string ReceivedOn { get; set; }
 
         public string Amount { get; set; }

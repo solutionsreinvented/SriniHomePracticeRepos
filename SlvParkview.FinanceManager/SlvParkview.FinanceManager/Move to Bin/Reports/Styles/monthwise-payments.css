@@ -34,29 +34,34 @@
     background-color: #e9edc9;
 }
 
-.flat-number-header {
-    vertical-align: middle;
-    width: 20%;
-}
-
 .paid-on-header {
     vertical-align: middle;
-    width: 20%;
+    width: 18%;
+}
+
+.flat-number-header {
+    vertical-align: middle;
+    width: 18%;
+}
+
+.owner-name-header {
+    vertical-align: middle;
+    width: 22%;
 }
 
 .amount-header {
     vertical-align: middle;
-    width: 20%;
+    width: 12%;
 }
 
 .payment-mode-header {
     vertical-align: middle;
-    width: 20%;
+    width: 16.5%;
 }
 
 .payment-category-header {
     vertical-align: middle;
-    width: 20%;
+    width: 17.5%;
 }
 
 .payments-table td {
@@ -76,4 +81,9 @@
 
 .table-body .end-of-data td {
     text-align: center;
+}
+
+.table-body .owner-name, 
+.table-header .owner-name-header {
+    text-align: left;
 }
