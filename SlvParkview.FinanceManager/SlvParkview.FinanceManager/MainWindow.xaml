@@ -67,9 +67,7 @@
                     <MenuItem
                         Command="{Binding SaveDataCommand}"
                         Header="_Save Data"
-                        IsEnabled="{Binding AllowSave}"
-                        ToolTip="{Binding SaveDataHint}"
-                        ToolTipService.ShowOnDisabled="True" />
+                        IsEnabled="{Binding AllowSave}" />
                 </MenuItem>
             </Menu>
 
@@ -109,7 +107,6 @@
                 <Button
                     Margin="5,0"
                     Click="OnCloseButtonClick"
-                    Command="{Binding CloseCommand}"
                     Content="Close" />
 
             </StackPanel>

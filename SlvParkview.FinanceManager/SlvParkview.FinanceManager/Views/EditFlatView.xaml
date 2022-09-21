@@ -8,12 +8,12 @@
     xmlns:shared="http://schemas.reinvented.com/shared"
     xmlns:theme="http://schemas.reinvented.com/ui/themes"
     xmlns:views="clr-namespace:SlvParkview.FinanceManager.Views"
-    MinWidth="650"
+    MinWidth="900"
     MinHeight="700"
-    MaxWidth="900"
+    MaxWidth="950"
     MaxHeight="700"
     d:DesignHeight="700"
-    d:DesignWidth="850"
+    d:DesignWidth="950"
     Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
     mc:Ignorable="d">
 
@@ -66,7 +66,7 @@
 
         <!--#region Flat Information-->
 
-        <views:FlatDetailView Grid.Row="1" DataContext="{Binding FlatToBeProcessed}" />
+        <views:FlatDetailView Grid.Row="1" DataContext="{Binding TargetFlat}" />
 
         <!--#endregion-->
 
@@ -112,8 +112,8 @@
                         CanUserDeleteRows="True"
                         CanUserResizeRows="False"
                         HorizontalScrollBarVisibility="Disabled"
-                        ItemsSource="{Binding FlatToBeProcessed.Payments}"
-                        SelectedItem="{Binding SelectedPayment}"
+                        ItemsSource="{Binding TargetFlat.Payments}"
+                        SelectedItem="{Binding SelectedPayment, UpdateSourceTrigger=PropertyChanged}"
                         SelectionUnit="FullRow"
                         VerticalScrollBarVisibility="Auto">
 
@@ -171,6 +171,12 @@
 
                     </DataGrid>
 
+                    <TextBlock
+                        Grid.Row="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Text="{Binding UpdateSourceTrigger=PropertyChanged}" />
+
                     <!--#endregion-->
 
                     <!--#region Edit Selected Payment-->
@@ -178,7 +184,7 @@
                     <views:EditPaymentView
                         Grid.Row="1"
                         Margin="5,5,5,10"
-                        DataContext="{Binding SelectedPayment}"
+                        DataContext="{Binding SelectedPayment, UpdateSourceTrigger=PropertyChanged}"
                         Visibility="{Binding DataContext.CanModifyPayment, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={shared:BoolToVisibilityConverter}}" />
 
                     <!--#endregion-->
@@ -231,7 +237,7 @@
                         CanUserDeleteRows="True"
                         CanUserResizeRows="False"
                         HorizontalScrollBarVisibility="Disabled"
-                        ItemsSource="{Binding FlatToBeProcessed.Expenses}"
+                        ItemsSource="{Binding TargetFlat.Expenses}"
                         SelectedItem="{Binding SelectedExpense}"
                         SelectionUnit="FullRow"
                         VerticalScrollBarVisibility="Auto">

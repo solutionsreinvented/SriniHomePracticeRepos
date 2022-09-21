@@ -5,6 +5,8 @@ FC:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvP
 FC:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Reporting\Views\BlockOutstandingsReportView.xaml;;
 FC:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Resources\DataTemplates.xaml;;
 FC:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Views\CommonExpenseView.xaml;;
+FC:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Views\EditExpenseView.xaml;;
+FC:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Views\EditPaymentView.xaml;;
 FC:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Views\ExpenseView.xaml;;
 FC:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Views\FlatDetailView.xaml;;
 FC:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Views\EditFlatView.xaml;;
@@ -13,6 +15,4 @@ FC:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvP
 FC:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Reporting\Views\FlatTransactionsHistoryReportView.xaml;;
 FC:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Views\ReportingView.xaml;;
 FC:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Views\ReportViewerView.xaml;;
-FC:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Views\EditPaymentView.xaml;;
-FC:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Views\EditExpenseView.xaml;;
 

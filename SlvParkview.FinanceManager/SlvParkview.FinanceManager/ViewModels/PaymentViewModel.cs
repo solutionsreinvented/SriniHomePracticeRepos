@@ -28,13 +28,13 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         #region Parameterized Constructor
 
-        public PaymentViewModel(SummaryViewModel sender, NavigationService navigationService, Flat flatToBeProcessed)
+        public PaymentViewModel(SummaryViewModel sender, NavigationService navigationService, Flat targetFlat)
             : this()
         {
             _summaryViewModel = sender;
             _navigationService = navigationService;
 
-            FlatToBeProcessed = flatToBeProcessed;
+            TargetFlat = targetFlat;
         }
 
         #endregion
@@ -43,7 +43,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public Payment Payment { get => Get<Payment>(); set => Set(value); }
 
-        public Flat FlatToBeProcessed { get => Get<Flat>(); set => Set(value); }
+        public Flat TargetFlat { get => Get<Flat>(); set => Set(value); }
 
         #endregion
 
@@ -65,7 +65,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void OnSavePayment()
         {
-            Flat targetFlat = _summaryViewModel.Block.Flats.FirstOrDefault(f => f.Description == FlatToBeProcessed.Description);
+            Flat targetFlat = _summaryViewModel.Block.Flats.FirstOrDefault(f => f.Description == TargetFlat.Description);
 
             if (!targetFlat.ContainsSimilar(Payment))
             {
@@ -84,7 +84,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void OnAddExpense()
         {
-            ExpenseViewModel expenseViewModel = new ExpenseViewModel(_summaryViewModel, _navigationService, FlatToBeProcessed);
+            ExpenseViewModel expenseViewModel = new ExpenseViewModel(_summaryViewModel, _navigationService, TargetFlat);
             _navigationService.CurrentViewModel = expenseViewModel;
         }
 

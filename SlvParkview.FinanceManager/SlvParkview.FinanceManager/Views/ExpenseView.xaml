@@ -64,7 +64,7 @@
 
         <!--#region Flat Information-->
 
-        <views:FlatDetailView Grid.Row="1" DataContext="{Binding FlatToBeProcessed}" />
+        <views:FlatDetailView Grid.Row="1" DataContext="{Binding TargetFlat}" />
 
         <!--#endregion-->
 

@@ -1,7 +1,8 @@
 ﻿using ReInvented.Shared.Commands;
+
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Services;
-using System;
+
 using System.Windows.Input;
 
 namespace SlvParkview.FinanceManager.ViewModels
@@ -32,11 +33,11 @@ namespace SlvParkview.FinanceManager.ViewModels
             _summaryViewModel = summaryViewModel;
             _navigationService = navigationService;
 
-            FlatToBeProcessed = selectedFlat;
+            TargetFlat = selectedFlat;
         }
         #endregion
 
-        public Flat FlatToBeProcessed { get => Get<Flat>(); set => Set(value); }
+        public Flat TargetFlat { get => Get<Flat>(); set => Set(value); }
 
         public Payment SelectedPayment { get => Get<Payment>(); set { Set(value); RaisePropertyChanged(nameof(CanModifyPayment)); } }
 
@@ -72,13 +73,13 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void OnAddExpense()
         {
-            ExpenseViewModel expenseViewModel = new ExpenseViewModel(_summaryViewModel, _navigationService, FlatToBeProcessed);
+            ExpenseViewModel expenseViewModel = new ExpenseViewModel(_summaryViewModel, _navigationService, TargetFlat);
             _navigationService.CurrentViewModel = expenseViewModel;
         }
 
         private void OnAddPayment()
         {
-            PaymentViewModel paymentViewModel = new PaymentViewModel(_summaryViewModel, _navigationService, FlatToBeProcessed);
+            PaymentViewModel paymentViewModel = new PaymentViewModel(_summaryViewModel, _navigationService, TargetFlat);
             _navigationService.CurrentViewModel = paymentViewModel;
         }
 
