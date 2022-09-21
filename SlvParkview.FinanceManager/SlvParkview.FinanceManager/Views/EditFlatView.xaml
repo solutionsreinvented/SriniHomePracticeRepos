@@ -17,6 +17,8 @@
     Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
     mc:Ignorable="d">
 
+    <!--#region Content Host-->
+
     <Grid Margin="10">
 
         <!--#region Grid Definitions-->
@@ -68,7 +70,7 @@
 
         <!--#endregion-->
 
-        <!--#region Add Payment Detail-->
+        <!--#region Transactions History-->
 
         <Grid Grid.Row="2" Margin="20,0,20,10">
 
@@ -86,7 +88,6 @@
             <GroupBox
                 Grid.Column="0"
                 BorderThickness="0.2"
-                DataContext="{Binding FlatToBeProcessed.Payments}"
                 Header="Payments History">
 
                 <Grid>
@@ -95,6 +96,7 @@
 
                     <Grid.RowDefinitions>
                         <RowDefinition />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
@@ -110,56 +112,60 @@
                         CanUserDeleteRows="True"
                         CanUserResizeRows="False"
                         HorizontalScrollBarVisibility="Disabled"
-                        ItemsSource="{Binding}"
+                        ItemsSource="{Binding FlatToBeProcessed.Payments}"
                         SelectedItem="{Binding SelectedPayment}"
                         SelectionUnit="FullRow"
                         VerticalScrollBarVisibility="Auto">
 
                         <DataGrid.Columns>
 
+                            <!--#region Date Column-->
+
                             <DataGridTemplateColumn Width="*" Header="Date">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock
-                                            Margin="5,0"
-                                            HorizontalAlignment="Center"
-                                            Text="{Binding ReceivedOn, StringFormat={}{0:dd-MM-yyyy}}" />
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding ReceivedOn, StringFormat={}{0:dd-MM-yyyy}}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+
+                            <!--#endregion-->
+
+                            <!--#region Amount Column-->
 
                             <DataGridTemplateColumn Width="0.7*" Header="Amount">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock
-                                            Margin="5,0"
-                                            HorizontalAlignment="Center"
-                                            Text="{Binding Amount, StringFormat={}{0:N2}}" />
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Amount, StringFormat={}{0:N2}}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+
+                            <!--#endregion-->
+
+                            <!--#region Category Column-->
 
                             <DataGridTemplateColumn Width="1.6*" Header="Category">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock
-                                            Margin="5,0"
-                                            HorizontalAlignment="Center"
-                                            Text="{Binding Category}" />
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Category}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
+                            <!--#endregion-->
+
+                            <!--#region Payment Mode Column-->
+
                             <DataGridTemplateColumn Width="0.7*" Header="Mode">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock
-                                            Margin="5,0"
-                                            HorizontalAlignment="Center"
-                                            Text="{Binding Mode}" />
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Mode}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+
+                            <!--#endregion-->
 
                         </DataGrid.Columns>
 
@@ -167,13 +173,23 @@
 
                     <!--#endregion-->
 
+                    <!--#region Edit Selected Payment-->
+
+                    <views:EditPaymentView
+                        Grid.Row="1"
+                        Margin="5,5,5,10"
+                        DataContext="{Binding SelectedPayment}"
+                        Visibility="{Binding DataContext.CanModifyPayment, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={shared:BoolToVisibilityConverter}}" />
+
+                    <!--#endregion-->
+
                     <!--#region Payment Manipulation Buttons-->
 
-                    <UniformGrid Grid.Row="1" Columns="3">
+                    <UniformGrid Grid.Row="2" Columns="3">
 
-                        <Button Content="D_elete Payment" />
-                        <Button Content="Ed_it Payment" />
-                        <Button Content="S_ave Payment" />
+                        <Button Content="D_elete Payment" IsEnabled="{Binding CanModifyPayment}" />
+                        <Button Content="Ed_it Payment" IsEnabled="{Binding CanModifyPayment}" />
+                        <Button Content="S_ave Payment" IsEnabled="{Binding CanModifyPayment}" />
 
                     </UniformGrid>
 
@@ -191,7 +207,6 @@
                 Grid.Column="1"
                 Margin="5,0,0,0"
                 BorderThickness="0.2"
-                DataContext="{Binding FlatToBeProcessed.Expenses}"
                 Header="Expenses History">
 
                 <Grid>
@@ -200,6 +215,7 @@
 
                     <Grid.RowDefinitions>
                         <RowDefinition />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
@@ -215,45 +231,48 @@
                         CanUserDeleteRows="True"
                         CanUserResizeRows="False"
                         HorizontalScrollBarVisibility="Disabled"
-                        ItemsSource="{Binding}"
+                        ItemsSource="{Binding FlatToBeProcessed.Expenses}"
                         SelectedItem="{Binding SelectedExpense}"
                         SelectionUnit="FullRow"
                         VerticalScrollBarVisibility="Auto">
 
                         <DataGrid.Columns>
 
+                            <!--#region Date Column-->
+
                             <DataGridTemplateColumn Width="*" Header="Date">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock
-                                            Margin="5,0"
-                                            HorizontalAlignment="Center"
-                                            Text="{Binding ReceivedOn, StringFormat={}{0:dd-MM-yyyy}}" />
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding ReceivedOn, StringFormat={}{0:dd-MM-yyyy}}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Width="0.7*" Header="Amount">
+                            <!--#endregion-->
+
+                            <!--#region Amount Column-->
+
+                            <DataGridTemplateColumn Width="0.8*" Header="Amount">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock
-                                            Margin="5,0"
-                                            HorizontalAlignment="Center"
-                                            Text="{Binding Amount, StringFormat={}{0:N2}}" />
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Amount, StringFormat={}{0:N2}}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+
+                            <!--#endregion-->
+
+                            <!--#region Category Column-->
 
                             <DataGridTemplateColumn Width="1.6*" Header="Category">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock
-                                            Margin="5,0"
-                                            HorizontalAlignment="Center"
-                                            Text="{Binding Category}" />
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Category}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+
+                            <!--#endregion-->
 
                         </DataGrid.Columns>
 
@@ -261,13 +280,23 @@
 
                     <!--#endregion-->
 
+                    <!--#region Edit Selected Expense-->
+
+                    <views:EditExpenseView
+                        Grid.Row="1"
+                        Margin="5,5,5,10"
+                        DataContext="{Binding SelectedExpense}"
+                        Visibility="{Binding DataContext.CanModifyExpense, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={shared:BoolToVisibilityConverter}}" />
+
+                    <!--#endregion-->
+
                     <!--#region Expenses Manipulation Buttons-->
 
-                    <UniformGrid Grid.Row="1" Columns="3">
+                    <UniformGrid Grid.Row="2" Columns="3">
 
-                        <Button Content="Dele_te Expense" />
-                        <Button Content="E_dit Expense" />
-                        <Button Content="Sa_ve Expense" />
+                        <Button Content="Dele_te Expense" IsEnabled="{Binding CanModifyExpense}" />
+                        <Button Content="E_dit Expense" IsEnabled="{Binding CanModifyExpense}" />
+                        <Button Content="Sa_ve Expense" IsEnabled="{Binding CanModifyExpense}" />
 
                     </UniformGrid>
 
@@ -297,8 +326,8 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
-                <ColumnDefinition />
                 <ColumnDefinition Width="1.2*" />
+                <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
@@ -350,5 +379,7 @@
         <!--#endregion-->
 
     </Grid>
+
+    <!--#endregion-->
 
 </UserControl>

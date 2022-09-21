@@ -143,6 +143,12 @@
     <Compile Include="Views\CommonExpenseView.xaml.cs">
       <DependentUpon>CommonExpenseView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EditExpenseView.xaml.cs">
+      <DependentUpon>EditExpenseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditPaymentView.xaml.cs">
+      <DependentUpon>EditPaymentView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ExpenseView.xaml.cs">
       <DependentUpon>ExpenseView.xaml</DependentUpon>
     </Compile>
@@ -209,6 +215,14 @@
     <Page Include="Views\CommonExpenseView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EditExpenseView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EditPaymentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ExpenseView.xaml">
       <Generator>MSBuild:Compile</Generator>

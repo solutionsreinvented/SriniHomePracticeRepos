@@ -38,9 +38,13 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public Flat FlatToBeProcessed { get => Get<Flat>(); set => Set(value); }
 
-        public Payment SelectedPayment { get => Get<Payment>(); set => Set(value); }
+        public Payment SelectedPayment { get => Get<Payment>(); set { Set(value); RaisePropertyChanged(nameof(CanModifyPayment)); } }
 
-        public Expense SelectedExpense { get => Get<Expense>(); set => Set(value); }
+        public Expense SelectedExpense { get => Get<Expense>(); set { Set(value); RaisePropertyChanged(nameof(CanModifyExpense)); } }
+
+        public bool CanModifyPayment => SelectedPayment != null;
+
+        public bool CanModifyExpense => SelectedExpense != null;
 
 
         #region Public Commands
