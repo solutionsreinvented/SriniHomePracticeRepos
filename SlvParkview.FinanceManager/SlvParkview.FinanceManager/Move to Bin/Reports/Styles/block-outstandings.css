@@ -93,22 +93,22 @@
 }
 
 .table-body .no-focus {
-    background: linear-gradient(90deg,#D2001A, #C6EBC5 0%);
+    background: linear-gradient(90deg,#FA7070, #C6EBC5 0%);
 }
 
 .table-body .low-focus {
-    background: linear-gradient(90deg,#D2001A, #C6EBC5 20%);
+    background: linear-gradient(90deg,#FA7070, #C6EBC5 20%);
 }
 .table-body .normal-focus {
-    background: linear-gradient(90deg,#D2001A, #C6EBC5 40%);
+    background: linear-gradient(90deg,#FA7070, #C6EBC5 40%);
 }
 .table-body .above-normal-focus {
-    background: linear-gradient(90deg,#D2001A, #C6EBC5 60%);
+    background: linear-gradient(90deg,#FA7070, #C6EBC5 60%);
 }
 .table-body .medium-focus {
-    background: linear-gradient(90deg,#D2001A, #C6EBC5 80%);
+    background: linear-gradient(90deg,#FA7070, #C6EBC5 80%);
 }
 .table-body .high-focus {
-    background: linear-gradient(45deg,#D2001A, #C6EBC5 100%);
+    background: linear-gradient(45deg,#FA7070, #C6EBC5 100%);
 }
 
