@@ -29,6 +29,7 @@
 }
 
 .table-header thead td {
+    font-size: 13px;
     font-weight: bold;
     background-color: #e9edc9;
 }
@@ -65,11 +66,12 @@
 
 .table-header td {
     text-align: left;
-    padding: 5px 20px;
+    padding: 5px 10px;
     border: 1px solid;
 }
 
 .table-body td {
+    font-size: 11px;
     text-align: left;
 }
 
