@@ -429,14 +429,17 @@ var tableHeader = document.querySelector(".table-header");
 var tableBody = document.querySelector(".table-body");
 // #endregion
 
-// #region Process Data
-populateOutstandings();
+// #region Data Required for Calculations
+var outstandings = jsonContents.FlatInfoCollection.map(outstandingOnly)
+var maxOutstanding = Math.max(...outstandings)
 // #endregion
+
+populateOutstandings();
 
 // #region Populate Outstandings
 
 function populateOutstandings() {
-  
+
   var endOfData = "";
   var flatInfoCollection = jsonContents.FlatInfoCollection;
 
@@ -449,9 +452,9 @@ function populateOutstandings() {
     document.querySelector(".table-title").innerHTML = "Summary of Outstandings as on " + reportTill;
 
     for (i = 0; i < flatInfoCollection.length; i++) {
-      
+
       tableBody.innerHTML += `
-            <tr">
+            <tr>
                 <td>${flatInfoCollection[i].Description}</td>
                 <td>${flatInfoCollection[i].OwnedBy}</td>
                 <td>${flatInfoCollection[i].CoOwnedBy}</td>
@@ -478,6 +481,66 @@ function populateOutstandings() {
   tableBody.innerHTML += `<tr class="end-of-data">
             <td colspan="6">${endOfData}</td>
         </tr>`;
+}
+
+// #endregion
+
+// #region Limits for Cell Backgrounds
+var noFocus = 0.0
+var lowFocus = 20.0
+var normalFocus = 40.0
+var aboveNormalFocus = 60.0
+var mediumFocus = 80.0
+// #endregion
+
+changeElementBackground()
+
+// #region Change Element Background
+
+function changeElementBackground(elementIndex) {
+
+  var flatCount = jsonContents.FlatInfoCollection.length;
+
+  for (index = 0; index < flatCount; index++) {
+
+    var tableRow = tableBody.children[index]
+
+    var nameCell = tableRow.children[1]
+    var outstandingCell = tableRow.children[tableRow.children.length - 1]
+
+    var currentItemPercentage = getPercentage(outstandings[index], maxOutstanding)
+    var focusClass
+
+    if (currentItemPercentage <= noFocus) {
+      focusClass = "no-focus"
+    } else if (currentItemPercentage <= lowFocus) {
+      focusClass = "low-focus"
+    } else if (currentItemPercentage <= normalFocus) {
+      focusClass = "normal-focus"
+    } else if (currentItemPercentage <= aboveNormalFocus) {
+      focusClass = "above-normal-focus"
+    } else if (currentItemPercentage <= mediumFocus) {
+      focusClass = "medium-focus"
+    } else {
+      focusClass = "high-focus"
+    }
+    nameCell.classList.add(focusClass)
+    outstandingCell.classList.add(focusClass)
+
+  }
+}
+
+// #endregion
+
+// #region Helper Functions for Cell Coloring
+
+function outstandingOnly(flatInfo) {
+  let outstanding = parseFloat(flatInfo.OutstandingOnSpecifiedDate.replace(",", ""))
+  return outstanding
+}
+
+function getPercentage(current, max) {
+  return current / max * 100;
 }
 
 // #endregion

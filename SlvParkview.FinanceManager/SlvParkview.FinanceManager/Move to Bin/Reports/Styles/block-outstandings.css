@@ -4,8 +4,7 @@
 
 #generated-on,
 #apartment-name,
-#container
-{
+#container {
     min-width: 600px;
     width: 80%;
     height: 100%;
@@ -74,7 +73,7 @@
     text-align: left;
 }
 
-.table-header .table-title{
+.table-header .table-title {
     text-align: center;
 }
 
@@ -90,3 +89,24 @@
 .table-body .end-of-data td {
     text-align: center;
 }
+
+.table-body .no-focus {
+    background: linear-gradient(90deg,#D2001A, #C6EBC5 0%);
+}
+
+.table-body .low-focus {
+    background: linear-gradient(90deg,#D2001A, #C6EBC5 20%);
+}
+.table-body .normal-focus {
+    background: linear-gradient(90deg,#D2001A, #C6EBC5 40%);
+}
+.table-body .above-normal-focus {
+    background: linear-gradient(90deg,#D2001A, #C6EBC5 60%);
+}
+.table-body .medium-focus {
+    background: linear-gradient(90deg,#D2001A, #C6EBC5 80%);
+}
+.table-body .high-focus {
+    background: linear-gradient(45deg,#D2001A, #C6EBC5 100%);
+}
+
