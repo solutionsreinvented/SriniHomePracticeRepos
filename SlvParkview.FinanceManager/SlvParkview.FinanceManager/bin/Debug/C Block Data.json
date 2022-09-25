@@ -435,7 +435,7 @@
       "Expenses": null,
       "Payments": [
         {
-          "Mode": 0,
+          "Mode": 1,
           "ReceivedOn": "2022-09-14T00:00:00",
           "Category": 1,
           "Amount": 1400.00
