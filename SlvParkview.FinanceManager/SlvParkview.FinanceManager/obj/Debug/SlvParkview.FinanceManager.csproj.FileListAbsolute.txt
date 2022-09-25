@@ -34,8 +34,6 @@ C:\Users\masanams\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceMan
 C:\Users\masanams\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.exe
 C:\Users\masanams\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.pdb
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.csproj.AssemblyReference.cache
-C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.exe
-C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.pdb
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Resources\Styles.baml
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\FlatDetailView.baml
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\SummaryView.baml
@@ -49,13 +47,6 @@ C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManage
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\SummaryView.g.cs
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\App.g.cs
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\GeneratedInternalTypeHelper.g.cs
-C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager_MarkupCompile.cache
-C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager_MarkupCompile.lref
-C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\SlvParkview.FinanceManager.exe.config
-C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\SlvParkview.FinanceManager.exe.manifest
-C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\SlvParkview.FinanceManager.application
-C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\SlvParkview.FinanceManager.exe
-C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\SlvParkview.FinanceManager.pdb
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Newtonsoft.Json.dll
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Newtonsoft.Json.xml
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\MainWindow.baml
@@ -64,12 +55,9 @@ C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManage
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ExpenseView.baml
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\PaymentView.baml
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReportViewerView.baml
-C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.g.resources
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.Properties.Resources.resources
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.csproj.GenerateResource.cache
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.csproj.CoreCompileInputs.cache
-C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.exe.manifest
-C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.application
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.csproj.CopyComplete
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\EditFlatView.g.cs
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\EditFlatView.baml
@@ -145,3 +133,15 @@ C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManage
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\EditPaymentView.g.cs
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\EditExpenseView.baml
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\EditPaymentView.baml
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Slv Parkview Finance Manager.exe.config
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Slv Parkview Finance Manager.exe.manifest
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Slv Parkview Finance Manager.application
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Slv Parkview Finance Manager.exe
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Slv Parkview Finance Manager.pdb
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager_MarkupCompile.cache
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager_MarkupCompile.lref
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager.g.resources
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager.exe.manifest
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager.application
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager.exe
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager.pdb

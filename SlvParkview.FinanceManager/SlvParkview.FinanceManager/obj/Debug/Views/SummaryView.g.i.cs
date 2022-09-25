@@ -71,7 +71,7 @@ namespace SlvParkview.FinanceManager.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SlvParkview.FinanceManager;component/views/summaryview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Slv Parkview Finance Manager;component/views/summaryview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Views\SummaryView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

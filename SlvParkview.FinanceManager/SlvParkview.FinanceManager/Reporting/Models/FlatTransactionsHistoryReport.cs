@@ -98,7 +98,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private protected override void CreateHtmlFile()
         {
-            string fileName = $"{GetFileName()}.js";
+            string fileName = $"{GetFileName()}.html";
 
             string[] htmlContents = File.ReadAllLines(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"));
 
