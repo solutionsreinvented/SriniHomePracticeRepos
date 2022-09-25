@@ -29,6 +29,8 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private readonly Month _forMonth;
 
+        private readonly PaymentModeFilter _paymentModeFilter;
+
         private readonly int _year;
 
         #endregion
@@ -44,10 +46,11 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         #region Parameterized Constructor
 
-        public MonthwisePaymentsReport(Block block, Month forMonth, int year)
+        public MonthwisePaymentsReport(Block block, Month forMonth, PaymentModeFilter paymentModeFilter, int year)
         {
             _block = block;
             _forMonth = forMonth;
+            _paymentModeFilter = paymentModeFilter;
             _year = year;
         }
 
@@ -85,7 +88,17 @@ namespace SlvParkview.FinanceManager.Reporting.Models
                     IEnumerable<Payment> flatPayments = flat.Payments?
                                                             .Where(p => p.ReceivedOn.Month == (int)_forMonth && p.ReceivedOn.Year == _year);
 
-                    flatPayments?.ToList().ForEach(p => allPayments.Add(p.ParseToPaymentInfo(flat)));
+                    if (_paymentModeFilter == PaymentModeFilter.All)
+                    {
+                        flatPayments?.ToList()
+                                     .ForEach(p => allPayments.Add(p.ParseToPaymentInfo(flat)));
+                    }
+                    else
+                    {
+                        flatPayments?.Where(p => p.Mode.ToString() == _paymentModeFilter.ToString())
+                                     .ToList()
+                                     .ForEach(p => allPayments.Add(p.ParseToPaymentInfo(flat)));
+                    }
                 }
             }
 
@@ -113,7 +126,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private protected override void CreateHtmlFile()
         {
-            string fileName = $"{_fileName} ({_forMonth} {_year}).html";
+            string fileName = $"{GetFileName()}.html";
 
             string[] htmlContents = File.ReadAllLines(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"));
 
@@ -124,7 +137,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private protected override void CreateJavaScriptFile()
         {
-            string fileName = $"{_fileName} ({_forMonth} {_year}).js";
+            string fileName = $"{GetFileName()}.js";
 
             string jsFilePath = Path.Combine(ServiceProvider.ReportScriptsDirectory, $"{_fileName}.js");
             string[] jsContents = File.ReadAllLines(jsFilePath);
@@ -143,6 +156,11 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             IDataSerializer<MonthwisePaymentsReport> serializer = new JsonDataSerializer<MonthwisePaymentsReport>();
 
             return serializer.Serialize(this);
+        }
+
+        private protected override string GetFileName()
+        {
+            return $"{_fileName} ({_forMonth} {_year} - {_paymentModeFilter})";
         }
 
         #endregion

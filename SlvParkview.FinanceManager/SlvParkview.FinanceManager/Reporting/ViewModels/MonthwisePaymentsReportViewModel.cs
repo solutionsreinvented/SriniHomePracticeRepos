@@ -32,6 +32,9 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
 
         public Month SelectedMonth { get => Get<Month>(); set { Set(value); UpdateReport(); } }
 
+        public PaymentModeFilter PaymentModeFilter { get => Get<PaymentModeFilter>(); set { Set(value); UpdateReport(); } }
+
+
         #endregion
 
         #region Private Helpers
@@ -43,11 +46,13 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
             SelectedYear = DateTime.Today.Year;
 
             SelectedMonth = (Month)DateTime.Today.Month;
+
+            PaymentModeFilter = PaymentModeFilter.All;
         }
 
         private void UpdateReport()
         {
-            Report = new MonthwisePaymentsReport(Block, SelectedMonth, SelectedYear);
+            Report = new MonthwisePaymentsReport(Block, SelectedMonth, PaymentModeFilter, SelectedYear);
             Report.GenerateContents();
         }
 

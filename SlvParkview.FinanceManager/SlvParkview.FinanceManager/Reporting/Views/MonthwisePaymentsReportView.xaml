@@ -42,9 +42,11 @@
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2.5*" />
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="1.25*" />
                     <ColumnDefinition Width="2.5*" />
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="2.5*" />
+                    <ColumnDefinition Width="1.5*" />
                 </Grid.ColumnDefinitions>
 
                 <!--#endregion-->
@@ -74,6 +76,18 @@
                     VerticalContentAlignment="Center"
                     ItemsSource="{shared:EnumBindingResource enums:Month}"
                     SelectedItem="{Binding SelectedMonth}" />
+
+                <TextBlock
+                    Grid.Column="4"
+                    Margin="10,5"
+                    Text="Filter by payment mode: " />
+
+                <ComboBox
+                    Grid.Column="5"
+                    Padding="5,2"
+                    VerticalContentAlignment="Center"
+                    ItemsSource="{shared:EnumBindingResource enums:PaymentModeFilter}"
+                    SelectedItem="{Binding PaymentModeFilter}" />
 
                 <!--#endregion-->
 
@@ -134,6 +148,22 @@
                         </DataGridTemplateColumn>
 
                         <!--#endregion-->
+
+                        <!--#region Flat Number Column-->
+
+                        <DataGridTemplateColumn Width="1.2*" Header="Owner Name">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                        Padding="5,0,0,0"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding OwnerName}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!--#endregion-->
+
 
                         <!--#region Received On Column-->
 

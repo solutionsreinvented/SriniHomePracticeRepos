@@ -91,6 +91,11 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         /// </summary>
         private protected abstract void CreateJavaScriptFile();
 
+        /// <summary>
+        /// Generates the filename for Html and JavaScript files without extension.
+        /// </summary>
+        private protected abstract string GetFileName();
+
         #endregion
 
         #region Private Virtual Methods

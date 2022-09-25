@@ -96,7 +96,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private protected override void CreateHtmlFile()
         {
-            string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).html";
+            string fileName = $"{GetFileName()}.html";
 
             string[] htmlContents = File.ReadAllLines(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"));
 
@@ -107,7 +107,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private protected override void CreateJavaScriptFile()
         {
-            string fileName = $"{_fileName} ({_reportTill:dd MMM yyyy}).js";
+            string fileName = $"{GetFileName()}.js";
 
             string jsFilePath = Path.Combine(ServiceProvider.ReportScriptsDirectory, $"{_fileName}.js");
             string[] jsContents = File.ReadAllLines(jsFilePath);
@@ -126,6 +126,11 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             IDataSerializer<BlockOutstandingsReport> serializer = new JsonDataSerializer<BlockOutstandingsReport>();
 
             return serializer.Serialize(this);
+        }
+
+        private protected override string GetFileName()
+        {
+            return $"{_fileName} ({_reportTill:dd MMM yyyy})";
         }
 
         #endregion

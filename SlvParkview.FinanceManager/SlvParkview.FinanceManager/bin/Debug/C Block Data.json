@@ -247,9 +247,16 @@
       "DateSpecified": "2022-09-13T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": null,
-      "Payments": null,
+      "Payments": [
+        {
+          "Mode": 0,
+          "ReceivedOn": "2022-09-20T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        }
+      ],
       "OutstandingOnSpecifiedDate": 2800.0,
-      "CurrentOutstanding": 2800.0
+      "CurrentOutstanding": 0.00
     },
     {
       "Number": "122",
@@ -314,9 +321,16 @@
       "DateSpecified": "2022-09-13T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": null,
-      "Payments": null,
+      "Payments": [
+        {
+          "Mode": 1,
+          "ReceivedOn": "2022-09-23T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        }
+      ],
       "OutstandingOnSpecifiedDate": 2800.0,
-      "CurrentOutstanding": 2800.0
+      "CurrentOutstanding": 0.00
     },
     {
       "Number": "218",
@@ -408,18 +422,18 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2022-09-21T00:00:00",
+      "DateSpecified": "2022-09-13T00:00:00+05:30",
       "OpeningBalance": 1400.0,
       "Expenses": null,
       "Payments": [
         {
-          "Mode": 1,
+          "Mode": 0,
           "ReceivedOn": "2022-09-14T00:00:00",
           "Category": 1,
           "Amount": 1400.00
         }
       ],
-      "OutstandingOnSpecifiedDate": 0.00,
+      "OutstandingOnSpecifiedDate": 1400.0,
       "CurrentOutstanding": 0.00
     },
     {
