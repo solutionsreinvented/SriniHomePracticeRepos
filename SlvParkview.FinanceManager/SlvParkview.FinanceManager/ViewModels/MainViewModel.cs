@@ -96,6 +96,7 @@ namespace SlvParkview.FinanceManager.ViewModels
         {
             _dataSerializer = new JsonDataSerializer<Block>();
 
+            _summaryViewModel.Block.LastUpdated = DateTime.Now;
             string serializedData = _dataSerializer.Serialize(_summaryViewModel.Block);
 
             try

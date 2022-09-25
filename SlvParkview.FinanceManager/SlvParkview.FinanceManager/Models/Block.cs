@@ -1,5 +1,5 @@
 ﻿using ReInvented.Shared.Stores;
-
+using System;
 using System.Collections.Generic;
 
 namespace SlvParkview.FinanceManager.Models
@@ -16,6 +16,8 @@ namespace SlvParkview.FinanceManager.Models
         #endregion
 
         #region Public Properties
+
+        public DateTime LastUpdated { get => Get<DateTime>(); set => Set(value); }
 
         public string Name { get => Get<string>(); set => Set(value); }
 
