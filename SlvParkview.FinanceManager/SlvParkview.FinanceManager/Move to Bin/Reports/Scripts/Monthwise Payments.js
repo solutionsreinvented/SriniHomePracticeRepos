@@ -2,6 +2,7 @@
 var jsonContents = {
   "ReportedMonth": "September",
   "ReportedYear": "2022",
+  "Filter": "All",
   "Payments": [
     {
       "FlatNumber": "C118",
@@ -126,8 +127,12 @@ function populatePayments() {
   var endOfData = "";
   tableBody.innerHTML = "";
 
-  document.title = "Payments Received [" + jsonContents.ReportedMonth + " " + jsonContents.ReportedYear + "]";
-  tableTitle.innerHTML = "Payments Received [" + jsonContents.ReportedMonth + " " + jsonContents.ReportedYear + "]";
+  document.title = "Payments Received (" + jsonContents.ReportedMonth + " " +
+    jsonContents.ReportedYear + " - " + jsonContents.Filter + ")";
+
+  // tableTitle.innerHTML = "Payments Received for " + jsonContents.ReportedMonth + " " + jsonContents.ReportedYear;
+
+  tableTitle.innerHTML = document.title
 
   if (payments.length > 0) {
 

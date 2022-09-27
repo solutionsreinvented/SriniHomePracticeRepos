@@ -65,10 +65,14 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         public string ReportedYear { get => Get<string>(); private set => Set(value); }
 
         [JsonProperty]
+        public string Filter { get => Get<string>(); private set => Set(value); }
+
+        [JsonProperty]
         public List<PaymentInfo> Payments { get => Get<List<PaymentInfo>>(); private set => Set(value); }
 
         [JsonProperty]
         public string TotalPayment { get => Get<string>(); private set => Set(value); }
+
 
         #endregion
 
@@ -78,6 +82,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         {
             ReportedMonth = _forMonth.ToString();
             ReportedYear = _year.ToString();
+            Filter = _paymentModeFilter.ToString();
 
             List<PaymentInfo> allPayments = new List<PaymentInfo>();
 
