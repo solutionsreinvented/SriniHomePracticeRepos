@@ -12,11 +12,11 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
     /// <summary>
     /// Reports the payments made by one or more flats of a specified <see cref="Block"/> during a specified <see cref="Month"/> and Year.
     /// </summary>
-    public class MonthwisePaymentsReportViewModel : ReportViewModelBase
+    public class PaymentsReportViewModel : ReportViewModelBase
     {
         #region Parameterized Constructor
 
-        public MonthwisePaymentsReportViewModel(SummaryViewModel summaryViewModel)
+        public PaymentsReportViewModel(SummaryViewModel summaryViewModel)
             : base(summaryViewModel)
         {
 
@@ -32,8 +32,11 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
 
         public Month SelectedMonth { get => Get<Month>(); set { Set(value); UpdateReport(); } }
 
+        public DateTime SelectedDate { get => Get<DateTime>(); set { Set(value); UpdateReport(); } }
+
         public PaymentModeFilter PaymentModeFilter { get => Get<PaymentModeFilter>(); set { Set(value); UpdateReport(); } }
 
+        public PaymentsReportType PaymentsReportType { get => Get<PaymentsReportType>(); set { Set(value); UpdateReport(); } }
 
         #endregion
 
@@ -44,15 +47,19 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
             base.Initialize();
 
             SelectedYear = DateTime.Today.Year;
-
             SelectedMonth = (Month)DateTime.Today.Month;
+            SelectedDate = DateTime.Today;
 
             PaymentModeFilter = PaymentModeFilter.All;
+            PaymentsReportType = PaymentsReportType.Monthwise;
         }
 
         private void UpdateReport()
         {
-            Report = new MonthwisePaymentsReport(Block, SelectedMonth, PaymentModeFilter, SelectedYear);
+            Report = PaymentsReportType == PaymentsReportType.Monthwise ?
+                     new MonthwisePaymentsReport(Block, SelectedMonth, PaymentModeFilter, SelectedYear) :
+                     (Interfaces.IReport)new PaymentsToASelectedDateReport(Block, SelectedDate);
+
             Report.GenerateContents();
         }
 

@@ -100,6 +100,7 @@
     </ApplicationDefinition>
     <Compile Include="Enums\Month.cs" />
     <Compile Include="Enums\PaymentModeFilter.cs" />
+    <Compile Include="Enums\PaymentsReportType.cs" />
     <Compile Include="Enums\ReportType.cs" />
     <Compile Include="Extensions\DecimalExtensions.cs" />
     <Compile Include="Extensions\FlatExtensions.cs" />
@@ -108,23 +109,31 @@
     <Compile Include="Reporting\Models\FlatTransactionsHistoryReport.cs" />
     <Compile Include="Reporting\Models\FlatInfo.cs" />
     <Compile Include="Reporting\Interfaces\IReport.cs" />
+    <Compile Include="Reporting\Models\PaymentsToASelectedDateReport.cs" />
     <Compile Include="Reporting\Models\MonthwisePaymentsReport.cs" />
+    <Compile Include="Reporting\Models\PaymentsReport.cs" />
     <Compile Include="Reporting\Models\BlockOutstandingsReport.cs" />
     <Compile Include="Reporting\Models\PaymentInfo.cs" />
     <Compile Include="Reporting\Models\Report.cs" />
     <Compile Include="Reporting\Models\TransactionInfo.cs" />
     <Compile Include="Reporting\ViewModels\BlockOutstandingsReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\FlatTransactionsHistoryReportViewModel.cs" />
-    <Compile Include="Reporting\ViewModels\MonthwisePaymentsReportViewModel.cs" />
+    <Compile Include="Reporting\ViewModels\PaymentsReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\ReportViewModelBase.cs" />
-    <Compile Include="Reporting\Views\MonthwisePaymentsReportView.xaml.cs">
-      <DependentUpon>MonthwisePaymentsReportView.xaml</DependentUpon>
+    <Compile Include="Reporting\Views\PaymentsReportOptions.xaml.cs">
+      <DependentUpon>PaymentsReportOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\Views\PaymentsReportView.xaml.cs">
+      <DependentUpon>PaymentsReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Reporting\Views\BlockOutstandingsReportView.xaml.cs">
       <DependentUpon>BlockOutstandingsReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Reporting\Views\BlockInfoView.xaml.cs">
       <DependentUpon>BlockInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\Views\PaymentsHistoryView.xaml.cs">
+      <DependentUpon>PaymentsHistoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Repositories\FlatRepository.cs" />
     <Compile Include="Services\BlockInitialDataProvider.cs" />
@@ -193,7 +202,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Reporting\Views\MonthwisePaymentsReportView.xaml">
+    <Page Include="Reporting\Views\PaymentsReportOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Reporting\Views\PaymentsReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -204,6 +217,10 @@
     <Page Include="Reporting\Views\BlockInfoView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Reporting\Views\PaymentsHistoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\DataTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>

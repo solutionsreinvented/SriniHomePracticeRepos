@@ -28,8 +28,8 @@ namespace SlvParkview.FinanceManager.Factories
                 case ReportType.BlockOutstandings:
                     reportViewModel = new BlockOutstandingsReportViewModel(summaryViewModel);
                     break;
-                case ReportType.PaymentsReceivedInAMonth:
-                    reportViewModel = new MonthwisePaymentsReportViewModel(summaryViewModel);
+                case ReportType.PaymentsHistory:
+                    reportViewModel = new PaymentsReportViewModel(summaryViewModel);
                     break;
                 default:
                     reportViewModel = new BlockOutstandingsReportViewModel(summaryViewModel);

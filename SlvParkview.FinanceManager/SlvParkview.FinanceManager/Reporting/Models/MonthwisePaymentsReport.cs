@@ -7,11 +7,9 @@ using SlvParkview.FinanceManager.Enums;
 using SlvParkview.FinanceManager.Extensions;
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Reporting.Interfaces;
-using SlvParkview.FinanceManager.Services;
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace SlvParkview.FinanceManager.Reporting.Models
@@ -19,13 +17,11 @@ namespace SlvParkview.FinanceManager.Reporting.Models
     /// <summary>
     /// Creates a report which comprises of the payments received from each flat (of a given block) in a specified month.
     /// </summary>
-    public class MonthwisePaymentsReport : Report, IReport
+    public class MonthwisePaymentsReport : PaymentsReport, IReport
     {
         #region Private Fields
 
-        private const string _fileName = "Monthwise Payments";
-
-        private readonly Block _block;
+        private const string _fileName = "Payments History";
 
         private readonly Month _forMonth;
 
@@ -47,8 +43,8 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         #region Parameterized Constructor
 
         public MonthwisePaymentsReport(Block block, Month forMonth, PaymentModeFilter paymentModeFilter, int year)
+            : base(block)
         {
-            _block = block;
             _forMonth = forMonth;
             _paymentModeFilter = paymentModeFilter;
             _year = year;
@@ -67,22 +63,13 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         [JsonProperty]
         public string Filter { get => Get<string>(); private set => Set(value); }
 
-        [JsonProperty]
-        public List<PaymentInfo> Payments { get => Get<List<PaymentInfo>>(); private set => Set(value); }
-
-        [JsonProperty]
-        public string TotalPayment { get => Get<string>(); private set => Set(value); }
-
-
         #endregion
 
         #region Public Methods
 
         public override void GenerateContents()
         {
-            ReportedMonth = _forMonth.ToString();
-            ReportedYear = _year.ToString();
-            Filter = _paymentModeFilter.ToString();
+            SetPrivateProperties();
 
             List<PaymentInfo> allPayments = new List<PaymentInfo>();
 
@@ -113,47 +100,6 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         #endregion
 
-        #region Private Helper Methods
-
-        private protected override void CreateRequiredDirectories()
-        {
-            base.CreateRequiredDirectories();
-
-            /// Create a new directory to store Monthwise Payments reports if it does not exists.
-
-            _reportTargetDirectory = Path.Combine(ServiceProvider.MonthwisePaymentsDirectory);
-
-            if (!Directory.Exists(_reportTargetDirectory))
-            {
-                _ = Directory.CreateDirectory(_reportTargetDirectory);
-            }
-        }
-
-        private protected override void CreateHtmlFile()
-        {
-            string fileName = $"{GetFileName()}.html";
-
-            string[] htmlContents = File.ReadAllLines(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"));
-
-            List<string> finalHtmlFileContent = ConcatenateScriptTagIn(htmlContents, fileName);
-
-            File.WriteAllLines(Path.Combine(_reportTargetDirectory, fileName), finalHtmlFileContent);
-        }
-
-        private protected override void CreateJavaScriptFile()
-        {
-            string fileName = $"{GetFileName()}.js";
-
-            string jsFilePath = Path.Combine(ServiceProvider.ReportScriptsDirectory, $"{_fileName}.js");
-            string[] jsContents = File.ReadAllLines(jsFilePath);
-
-            string finalJavaScriptFileContent = ConcatenateJsonContentIn(jsContents);
-
-            File.WriteAllText(Path.Combine(_reportTargetDirectory, fileName), finalJavaScriptFileContent);
-        }
-
-        #endregion
-
         #region Private Helper Functions
 
         private protected override string GetSerializedData()
@@ -167,6 +113,19 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         {
             return $"{_fileName} ({_forMonth} {_year} - {_paymentModeFilter})";
         }
+
+        #endregion
+
+        #region Abstract Members Implementation
+
+        private protected override void SetPrivateProperties()
+        {
+            ReportedMonth = _forMonth.ToString();
+            ReportedYear = _year.ToString();
+            Filter = _paymentModeFilter.ToString();
+        }
+
+        private protected override string GetTemplateFileName() => _fileName;
 
         #endregion
 

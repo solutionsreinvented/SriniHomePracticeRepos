@@ -38,6 +38,9 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         [JsonProperty]
         public string ApartmentName => "SLV Parkview Apartment";
 
+        [JsonProperty]
+        public string DocumentTitle => GetFileName();
+
         #endregion
 
         #region Public Methods

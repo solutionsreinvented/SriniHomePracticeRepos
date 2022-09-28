@@ -1,0 +1,93 @@
+﻿<UserControl
+    x:Class="SlvParkview.FinanceManager.Reporting.Views.PaymentsReportOptions"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:enums="clr-namespace:SlvParkview.FinanceManager.Enums"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    d:DesignHeight="150"
+    d:DesignWidth="350"
+    mc:Ignorable="d">
+    <Grid>
+
+        <!--#region Grid Definitions-->
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+
+
+        <!--#endregion-->
+
+        <!--#region Data Entry Fields-->
+
+
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="0"
+            IsEnabled="{Binding PaymentsReportType, Converter={shared:EnumToBooleanConverter}, ConverterParameter={x:Static enums:PaymentsReportType.Monthwise}}">
+            <TextBlock Text="Select the year: " />
+
+            <ComboBox
+                Padding="5,2"
+                VerticalContentAlignment="Center"
+                ItemsSource="{Binding Years}"
+                SelectedItem="{Binding SelectedYear}" />
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="10,0,0,0"
+            IsEnabled="{Binding PaymentsReportType, Converter={shared:EnumToBooleanConverter}, ConverterParameter={x:Static enums:PaymentsReportType.Monthwise}}">
+            <TextBlock Text="Select the month: " />
+
+            <ComboBox
+                Padding="5,2"
+                VerticalContentAlignment="Center"
+                ItemsSource="{shared:EnumBindingResource enums:Month}"
+                SelectedItem="{Binding SelectedMonth}" />
+        </StackPanel>
+
+
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="0,10,0,0"
+            IsEnabled="{Binding PaymentsReportType, Converter={shared:EnumToBooleanConverter}, ConverterParameter={x:Static enums:PaymentsReportType.Monthwise}}">
+
+            <TextBlock Text="Filter by payment mode: " />
+
+            <ComboBox
+                Padding="5,2"
+                VerticalContentAlignment="Center"
+                ItemsSource="{shared:EnumBindingResource enums:PaymentModeFilter}"
+                SelectedItem="{Binding PaymentModeFilter}" />
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="10,10,0,0"
+            IsEnabled="{Binding PaymentsReportType, Converter={shared:EnumToBooleanConverter}, ConverterParameter={x:Static enums:PaymentsReportType.ToASelectedDate}}">
+            <TextBlock Text="Generate payments upto: " />
+
+            <DatePicker
+                Padding="5,2"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                SelectedDate="{Binding SelectedDate}" />
+        </StackPanel>
+
+        <!--#endregion-->
+
+    </Grid>
+</UserControl>

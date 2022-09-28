@@ -6,6 +6,8 @@
 
         string ApartmentName { get; }
 
+        string DocumentTitle { get; }
+
         void GenerateContents();
 
         void SaveReport();

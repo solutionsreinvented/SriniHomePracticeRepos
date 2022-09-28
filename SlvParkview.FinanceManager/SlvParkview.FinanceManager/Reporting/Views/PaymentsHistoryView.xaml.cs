@@ -3,11 +3,11 @@
 namespace SlvParkview.FinanceManager.Reporting.Views
 {
     /// <summary>
-    /// Interaction logic for MonthwisePaymentsReportView.xaml
+    /// Interaction logic for PaymentsHistoryView.xaml
     /// </summary>
-    public partial class MonthwisePaymentsReportView : UserControl
+    public partial class PaymentsHistoryView : UserControl
     {
-        public MonthwisePaymentsReportView()
+        public PaymentsHistoryView()
         {
             InitializeComponent();
         }

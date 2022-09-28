@@ -45,8 +45,8 @@
         <viewreps:FlatTransactionsHistoryReportView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vmreps:MonthwisePaymentsReportViewModel}">
-        <viewreps:MonthwisePaymentsReportView />
+    <DataTemplate DataType="{x:Type vmreps:PaymentsReportViewModel}">
+        <viewreps:PaymentsReportView />
     </DataTemplate>
 
     <!--#endregion-->

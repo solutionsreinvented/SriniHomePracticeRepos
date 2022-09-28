@@ -105,7 +105,8 @@ var jsonContents = {
   ],
   "TotalPayment": "38,000.0",
   "GeneratedOn": "20 Sep 2022",
-  "ApartmentName": "SLV Parkview Apartment"
+  "ApartmentName": "SLV Parkview Apartment",
+  "DocumentTitle": "Payments History"
 };
 // #endregion
 
@@ -127,12 +128,11 @@ function populatePayments() {
   var endOfData = "";
   tableBody.innerHTML = "";
 
-  document.title = "Payments Received (" + jsonContents.ReportedMonth + " " +
-    jsonContents.ReportedYear + " - " + jsonContents.Filter + ")";
+  document.title = jsonContents.DocumentTitle
 
   // tableTitle.innerHTML = "Payments Received for " + jsonContents.ReportedMonth + " " + jsonContents.ReportedYear;
 
-  tableTitle.innerHTML = document.title
+  tableTitle.innerHTML = jsonContents.DocumentTitle
 
   if (payments.length > 0) {
 
