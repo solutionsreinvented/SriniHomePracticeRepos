@@ -56,7 +56,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
             /// Create a new directory to store Monthwise Payments reports if it does not exists.
 
-            _reportTargetDirectory = Path.Combine(ServiceProvider.MonthwisePaymentsDirectory);
+            _reportTargetDirectory = Path.Combine(ServiceProvider.PaymentsReportsDirectory);
 
             if (!Directory.Exists(_reportTargetDirectory))
             {
