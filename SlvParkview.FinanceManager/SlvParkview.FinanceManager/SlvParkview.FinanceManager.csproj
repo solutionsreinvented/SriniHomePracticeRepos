@@ -109,6 +109,7 @@
     <Compile Include="Reporting\Models\FlatTransactionsHistoryReport.cs" />
     <Compile Include="Reporting\Models\FlatInfo.cs" />
     <Compile Include="Reporting\Interfaces\IReport.cs" />
+    <Compile Include="Reporting\Models\PaymentsInADateRangeReport.cs" />
     <Compile Include="Reporting\Models\PaymentsToASelectedDateReport.cs" />
     <Compile Include="Reporting\Models\MonthwisePaymentsReport.cs" />
     <Compile Include="Reporting\Models\PaymentsReport.cs" />
@@ -120,6 +121,12 @@
     <Compile Include="Reporting\ViewModels\FlatTransactionsHistoryReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\PaymentsReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\ReportViewModelBase.cs" />
+    <Compile Include="Reporting\Views\ToASelectedDatePaymentsReportOptions.xaml.cs">
+      <DependentUpon>ToASelectedDatePaymentsReportOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\Views\DateRangePaymentsReportOptions.xaml.cs">
+      <DependentUpon>DateRangePaymentsReportOptions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Reporting\Views\PaymentsReportOptions.xaml.cs">
       <DependentUpon>PaymentsReportOptions.xaml</DependentUpon>
     </Compile>
@@ -202,6 +209,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Reporting\Views\ToASelectedDatePaymentsReportOptions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Reporting\Views\DateRangePaymentsReportOptions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Reporting\Views\PaymentsReportOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

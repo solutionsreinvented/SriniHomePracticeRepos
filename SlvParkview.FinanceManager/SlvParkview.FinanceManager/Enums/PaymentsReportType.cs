@@ -10,6 +10,8 @@ namespace SlvParkview.FinanceManager.Enums
         [Description("Monthwise")]
         Monthwise,
         [Description("Upto a Selected Date")]
-        ToASelectedDate
+        ToASelectedDate,
+        [Description("Between A Date Range")]
+        InADateRange
     }
 }

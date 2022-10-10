@@ -28,7 +28,7 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="1.2*" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
@@ -42,7 +42,7 @@
             BorderThickness="0.2"
             Header="Report Type">
 
-            <UniformGrid Columns="2">
+            <UniformGrid Columns="3">
                 <RadioButton
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
@@ -55,6 +55,12 @@
                     Content="Upto a Selected Date"
                     GroupName="ReportTypeGroup"
                     IsChecked="{Binding Path=PaymentsReportType, Converter={shared:EnumToBooleanConverter}, ConverterParameter={x:Static enums:PaymentsReportType.ToASelectedDate}}" />
+                <RadioButton
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Content="Between Dates"
+                    GroupName="ReportTypeGroup"
+                    IsChecked="{Binding Path=PaymentsReportType, Converter={shared:EnumToBooleanConverter}, ConverterParameter={x:Static enums:PaymentsReportType.InADateRange}}" />
             </UniformGrid>
 
 

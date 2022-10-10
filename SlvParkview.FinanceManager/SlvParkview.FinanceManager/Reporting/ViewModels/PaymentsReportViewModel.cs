@@ -34,6 +34,10 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
 
         public DateTime SelectedDate { get => Get<DateTime>(); set { Set(value); UpdateReport(); } }
 
+        public DateTime StartDate { get => Get<DateTime>(); set { Set(value); UpdateReport(); } }
+
+        public DateTime EndDate { get => Get<DateTime>(); set { Set(value); UpdateReport(); } }
+
         public PaymentModeFilter PaymentModeFilter { get => Get<PaymentModeFilter>(); set { Set(value); UpdateReport(); } }
 
         public PaymentsReportType PaymentsReportType { get => Get<PaymentsReportType>(); set { Set(value); UpdateReport(); } }
@@ -56,9 +60,23 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
 
         private void UpdateReport()
         {
-            Report = PaymentsReportType == PaymentsReportType.Monthwise ?
-                     new MonthwisePaymentsReport(Block, SelectedMonth, PaymentModeFilter, SelectedYear) :
-                     (Interfaces.IReport)new PaymentsToASelectedDateReport(Block, SelectedDate);
+
+            if (PaymentsReportType == PaymentsReportType.Monthwise)
+            {
+                Report = new MonthwisePaymentsReport(Block, SelectedMonth, PaymentModeFilter, SelectedYear);
+            }
+            else if (PaymentsReportType == PaymentsReportType.ToASelectedDate)
+            {
+                Report = new PaymentsToASelectedDateReport(Block, SelectedDate);
+            }
+            else if (PaymentsReportType == PaymentsReportType.InADateRange)
+            {
+                Report = new PaymentsInADateRangeReport(Block, StartDate, EndDate);
+            }
+
+            //Report = PaymentsReportType == PaymentsReportType.Monthwise ?
+            //         new MonthwisePaymentsReport(Block, SelectedMonth, PaymentModeFilter, SelectedYear) :
+            //         (Interfaces.IReport)new PaymentsToASelectedDateReport(Block, SelectedDate);
 
             Report.GenerateContents();
         }
