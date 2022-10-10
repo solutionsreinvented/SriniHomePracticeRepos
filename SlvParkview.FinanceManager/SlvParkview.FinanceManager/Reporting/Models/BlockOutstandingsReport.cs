@@ -74,10 +74,23 @@ namespace SlvParkview.FinanceManager.Reporting.Models
                 }
             }
 
-            TotalOutstanding = FlatInfoCollection?.Sum(f => decimal.Parse(f.OutstandingOnSpecifiedDate)).FormatNumber("N1");
+            TotalOutstanding = FlatInfoCollection?.Sum(f => decimal.Parse(StripNumberFormat(f.OutstandingOnSpecifiedDate))).FormatNumber("N1");
         }
 
         #endregion
+
+        private string StripNumberFormat(string value)
+        {
+            string unformattedString = value;
+
+            if (value.Contains("(") && value.Contains(")"))
+            {
+                unformattedString = string.Concat("-", value.Replace("(", "").Replace(")", ""));
+            }
+
+            return unformattedString;
+        }
+
 
         #region Private Helper Methods
 
