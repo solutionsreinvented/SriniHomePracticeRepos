@@ -11,7 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 
-namespace SlvParkview.FinanceManager.Reporting.Models
+namespace SlvParkview.FinanceManager.Reporting.Models.Base
 {
     public abstract class Report : PropertyStore, IReport
     {

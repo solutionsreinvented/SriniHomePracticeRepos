@@ -79,7 +79,10 @@
             BorderThickness="0.2"
             Header="Report Options">
 
-            <viewreps:PaymentsReportOptions VerticalAlignment="Top" VerticalContentAlignment="Top" />
+            <viewreps:PaymentsReportOptions
+                VerticalAlignment="Top"
+                VerticalContentAlignment="Top"
+                DataContext="{Binding}" />
 
         </GroupBox>
 

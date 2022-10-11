@@ -5,6 +5,7 @@ using ReInvented.DataAccess.Interfaces;
 
 using SlvParkview.FinanceManager.Extensions;
 using SlvParkview.FinanceManager.Models;
+using SlvParkview.FinanceManager.Reporting.Models.Base;
 using SlvParkview.FinanceManager.Services;
 
 using System;

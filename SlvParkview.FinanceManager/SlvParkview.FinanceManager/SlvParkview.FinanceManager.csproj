@@ -106,21 +106,31 @@
     <Compile Include="Extensions\FlatExtensions.cs" />
     <Compile Include="Extensions\PaymentExtensions.cs" />
     <Compile Include="Factories\ReportViewModelFactory.cs" />
+    <Compile Include="Reporting\Factories\PaymentsReportFactory.cs" />
+    <Compile Include="Reporting\Factories\ReportOptionsFactory.cs" />
+    <Compile Include="Reporting\Interfaces\IReportOptions.cs" />
     <Compile Include="Reporting\Models\FlatTransactionsHistoryReport.cs" />
     <Compile Include="Reporting\Models\FlatInfo.cs" />
     <Compile Include="Reporting\Interfaces\IReport.cs" />
     <Compile Include="Reporting\Models\PaymentsInADateRangeReport.cs" />
+    <Compile Include="Reporting\Models\DateRangePaymentsReportOptions.cs" />
+    <Compile Include="Reporting\Models\InAMonthPaymentsReportOptions.cs" />
     <Compile Include="Reporting\Models\PaymentsToASelectedDateReport.cs" />
-    <Compile Include="Reporting\Models\MonthwisePaymentsReport.cs" />
+    <Compile Include="Reporting\Models\PaymentsInAMonthReport.cs" />
     <Compile Include="Reporting\Models\PaymentsReport.cs" />
     <Compile Include="Reporting\Models\BlockOutstandingsReport.cs" />
     <Compile Include="Reporting\Models\PaymentInfo.cs" />
-    <Compile Include="Reporting\Models\Report.cs" />
+    <Compile Include="Reporting\Base\Report.cs" />
+    <Compile Include="Reporting\Base\ReportOptions.cs" />
+    <Compile Include="Reporting\Models\ToASelectedDatePaymentsReportOptions.cs" />
     <Compile Include="Reporting\Models\TransactionInfo.cs" />
     <Compile Include="Reporting\ViewModels\BlockOutstandingsReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\FlatTransactionsHistoryReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\PaymentsReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\ReportViewModelBase.cs" />
+    <Compile Include="Reporting\Views\InAMonthPaymentsReportOptions.xaml.cs">
+      <DependentUpon>InAMonthPaymentsReportOptions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Reporting\Views\ToASelectedDatePaymentsReportOptions.xaml.cs">
       <DependentUpon>ToASelectedDatePaymentsReportOptions.xaml</DependentUpon>
     </Compile>
@@ -209,6 +219,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Reporting\Views\InAMonthPaymentsReportOptions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Reporting\Views\ToASelectedDatePaymentsReportOptions.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

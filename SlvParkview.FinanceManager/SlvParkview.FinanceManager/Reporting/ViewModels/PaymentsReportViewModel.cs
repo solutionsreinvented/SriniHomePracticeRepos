@@ -1,11 +1,8 @@
 ﻿using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Enums;
-using SlvParkview.FinanceManager.Reporting.Models;
 using SlvParkview.FinanceManager.ViewModels;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using SlvParkview.FinanceManager.Reporting.Interfaces;
+using SlvParkview.FinanceManager.Reporting.Factories;
 
 namespace SlvParkview.FinanceManager.Reporting.ViewModels
 {
@@ -26,19 +23,7 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
 
         #region Public Properties
 
-        public IEnumerable<int> Years => Enumerable.Range(2019, 22);
-
-        public int SelectedYear { get => Get<int>(); set { Set(value); UpdateReport(); } }
-
-        public Month SelectedMonth { get => Get<Month>(); set { Set(value); UpdateReport(); } }
-
-        public DateTime SelectedDate { get => Get<DateTime>(); set { Set(value); UpdateReport(); } }
-
-        public DateTime StartDate { get => Get<DateTime>(); set { Set(value); UpdateReport(); } }
-
-        public DateTime EndDate { get => Get<DateTime>(); set { Set(value); UpdateReport(); } }
-
-        public PaymentModeFilter PaymentModeFilter { get => Get<PaymentModeFilter>(); set { Set(value); UpdateReport(); } }
+        public IReportOptions ReportOptions { get => Get<IReportOptions>(); set => Set(value); }
 
         public PaymentsReportType PaymentsReportType { get => Get<PaymentsReportType>(); set { Set(value); UpdateReport(); } }
 
@@ -50,34 +35,22 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
         {
             base.Initialize();
 
-            SelectedYear = DateTime.Today.Year;
-            SelectedMonth = (Month)DateTime.Today.Month;
-            SelectedDate = DateTime.Today;
-
-            PaymentModeFilter = PaymentModeFilter.All;
             PaymentsReportType = PaymentsReportType.Monthwise;
         }
 
         private void UpdateReport()
         {
+            ReportOptions = ReportOptionsFactory.Create(PaymentsReportType);
 
-            if (PaymentsReportType == PaymentsReportType.Monthwise)
-            {
-                Report = new MonthwisePaymentsReport(Block, SelectedMonth, PaymentModeFilter, SelectedYear);
-            }
-            else if (PaymentsReportType == PaymentsReportType.ToASelectedDate)
-            {
-                Report = new PaymentsToASelectedDateReport(Block, SelectedDate);
-            }
-            else if (PaymentsReportType == PaymentsReportType.InADateRange)
-            {
-                Report = new PaymentsInADateRangeReport(Block, StartDate, EndDate);
-            }
+            ReportOptions.ReportOptionChanged -= OnReportOptionChanged;
+            ReportOptions.ReportOptionChanged += OnReportOptionChanged;
 
-            //Report = PaymentsReportType == PaymentsReportType.Monthwise ?
-            //         new MonthwisePaymentsReport(Block, SelectedMonth, PaymentModeFilter, SelectedYear) :
-            //         (Interfaces.IReport)new PaymentsToASelectedDateReport(Block, SelectedDate);
+            OnReportOptionChanged();
+        }
 
+        private void OnReportOptionChanged()
+        {
+            Report = PaymentsReportFactory.Create(PaymentsReportType, Block, ReportOptions);
             Report.GenerateContents();
         }
 

@@ -17,7 +17,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
     /// <summary>
     /// Creates a report which comprises of the payments received from each flat (of a given block) in a specified month.
     /// </summary>
-    public class MonthwisePaymentsReport : PaymentsReport, IReport
+    public class PaymentsInAMonthReport : PaymentsReport, IReport
     {
         #region Private Fields
 
@@ -25,15 +25,13 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private readonly Month _forMonth;
 
-        private readonly PaymentModeFilter _paymentModeFilter;
-
         private readonly int _year;
 
         #endregion
 
         #region Default Constructor
 
-        public MonthwisePaymentsReport()
+        public PaymentsInAMonthReport()
         {
 
         }
@@ -42,12 +40,13 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         #region Parameterized Constructor
 
-        public MonthwisePaymentsReport(Block block, Month forMonth, PaymentModeFilter paymentModeFilter, int year)
-            : base(block)
+        public PaymentsInAMonthReport(Block block, IReportOptions reportOptions)
+            : base(block, reportOptions)
         {
-            _forMonth = forMonth;
-            _paymentModeFilter = paymentModeFilter;
-            _year = year;
+            InAMonthPaymentsReportOptions inAMonthReportOptions = _reportOptions as InAMonthPaymentsReportOptions;
+
+            _forMonth = inAMonthReportOptions.SelectedMonth;
+            _year = inAMonthReportOptions.SelectedYear;
         }
 
         #endregion
@@ -60,8 +59,8 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         [JsonProperty]
         public string ReportedYear { get => Get<string>(); private set => Set(value); }
 
-        [JsonProperty]
-        public string Filter { get => Get<string>(); private set => Set(value); }
+        //[JsonProperty]
+        //public string Filter { get => Get<string>(); private set => Set(value); }
 
         #endregion
 
@@ -80,21 +79,11 @@ namespace SlvParkview.FinanceManager.Reporting.Models
                     IEnumerable<Payment> flatPayments = flat.Payments?
                                                             .Where(p => p.ReceivedOn.Month == (int)_forMonth && p.ReceivedOn.Year == _year);
 
-                    if (_paymentModeFilter == PaymentModeFilter.All)
-                    {
-                        flatPayments?.ToList()
-                                     .ForEach(p => allPayments.Add(p.ParseToPaymentInfo(flat)));
-                    }
-                    else
-                    {
-                        flatPayments?.Where(p => p.Mode.ToString() == _paymentModeFilter.ToString())
-                                     .ToList()
-                                     .ForEach(p => allPayments.Add(p.ParseToPaymentInfo(flat)));
-                    }
+                    flatPayments?.ToList().ForEach(p => allPayments.Add(p.ParseToPaymentInfo(flat)));
                 }
             }
 
-            Payments = allPayments?.OrderBy(p => DateTime.Parse(p.ReceivedOn)).ToList();
+            Payments = ApplyFilterOn(allPayments).OrderBy(p => DateTime.Parse(p.ReceivedOn)).ToList();
             TotalPayment = Payments.Sum(p => decimal.Parse(p.Amount)).FormatNumber("N1");
         }
 
@@ -104,14 +93,14 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private protected override string GetSerializedData()
         {
-            IDataSerializer<MonthwisePaymentsReport> serializer = new JsonDataSerializer<MonthwisePaymentsReport>();
+            IDataSerializer<PaymentsInAMonthReport> serializer = new JsonDataSerializer<PaymentsInAMonthReport>();
 
             return serializer.Serialize(this);
         }
 
         private protected override string GetFileName()
         {
-            return $"{_fileName} ({_forMonth} {_year} - {_paymentModeFilter})";
+            return $"{_fileName} ({_forMonth} {_year} - {_reportOptions.PaymentModeFilter})";
         }
 
         #endregion
@@ -122,7 +111,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         {
             ReportedMonth = _forMonth.ToString();
             ReportedYear = _year.ToString();
-            Filter = _paymentModeFilter.ToString();
+            ///Filter = _reportOptions.PaymentModeFilter.ToString();
         }
 
         private protected override string GetTemplateFileName() => _fileName;

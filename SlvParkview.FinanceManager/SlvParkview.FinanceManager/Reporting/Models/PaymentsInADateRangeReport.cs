@@ -39,10 +39,14 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         #region Parameterized Constructor
 
-        public PaymentsInADateRangeReport(Block block, DateTime startDate, DateTime endDate) : base(block)
+        public PaymentsInADateRangeReport(Block block, IReportOptions reportOptions)
+            : base(block, reportOptions)
         {
-            _startDate = startDate;
-            _endDate = endDate;
+            DateRangePaymentsReportOptions dateRangeReportOptions = _reportOptions as DateRangePaymentsReportOptions;
+
+            _startDate = dateRangeReportOptions.StartDate;
+            _endDate = dateRangeReportOptions.EndDate;
+
         }
 
         #endregion
@@ -76,7 +80,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
                 }
             }
 
-            Payments = allPayments?.OrderBy(p => DateTime.Parse(p.ReceivedOn)).ToList();
+            Payments = ApplyFilterOn(allPayments).OrderBy(p => DateTime.Parse(p.ReceivedOn)).ToList();
             TotalPayment = Payments.Sum(p => decimal.Parse(p.Amount)).FormatNumber("N1");
         }
 
@@ -93,7 +97,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private protected override string GetFileName()
         {
-            return $"{_fileName} {StartDate} - {EndDate}";
+            return $"{_fileName} ({StartDate} to {EndDate}) (Mode(s) - {_reportOptions.PaymentModeFilter})";
         }
 
         #endregion
@@ -103,6 +107,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         private protected override void SetPrivateProperties()
         {
             StartDate = _startDate.ToString("dd-MMM-yyyy");
+            EndDate = _endDate.ToString("dd-MMM-yyyy");
         }
 
         private protected override string GetTemplateFileName()

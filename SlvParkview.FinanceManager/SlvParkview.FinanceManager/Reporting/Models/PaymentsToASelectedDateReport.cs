@@ -37,9 +37,12 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         #region Parameterized Constructor
 
-        public PaymentsToASelectedDateReport(Block block, DateTime selectedDate) : base(block)
+        public PaymentsToASelectedDateReport(Block block, IReportOptions reportOptions)
+            : base(block, reportOptions)
         {
-            _selectedDate = selectedDate;
+            ToASelectedDatePaymentsReportOptions toASelectedDateReportOptions = _reportOptions as ToASelectedDatePaymentsReportOptions;
+
+            _selectedDate = toASelectedDateReportOptions.SelectedDate;
         }
 
         #endregion
@@ -70,7 +73,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
                 }
             }
 
-            Payments = allPayments?.OrderBy(p => DateTime.Parse(p.ReceivedOn)).ToList();
+            Payments = ApplyFilterOn(allPayments).OrderBy(p => DateTime.Parse(p.ReceivedOn)).ToList();
             TotalPayment = Payments.Sum(p => decimal.Parse(p.Amount)).FormatNumber("N1");
         }
 
@@ -87,7 +90,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private protected override string GetFileName()
         {
-            return $"{_fileName} Upto {SelectedDate}";
+            return $"{_fileName} (As on {SelectedDate}) (Mode(s) - {_reportOptions.PaymentModeFilter})";
         }
 
         #endregion

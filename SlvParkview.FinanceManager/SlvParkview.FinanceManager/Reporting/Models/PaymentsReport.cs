@@ -1,11 +1,14 @@
 ﻿using Newtonsoft.Json;
 
+using SlvParkview.FinanceManager.Enums;
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Reporting.Interfaces;
+using SlvParkview.FinanceManager.Reporting.Models.Base;
 using SlvParkview.FinanceManager.Services;
 
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace SlvParkview.FinanceManager.Reporting.Models
 {
@@ -17,6 +20,8 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         #region Private Fields
 
         private protected readonly Block _block;
+
+        private protected readonly IReportOptions _reportOptions;
 
         #endregion
 
@@ -31,9 +36,10 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         #region Parameterized Constructor
 
-        public PaymentsReport(Block block)
+        public PaymentsReport(Block block, IReportOptions reportOptions)
         {
             _block = block;
+            _reportOptions = reportOptions;
         }
 
         #endregion
@@ -94,6 +100,13 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         private protected abstract void SetPrivateProperties();
 
         private protected abstract string GetTemplateFileName();
+
+        private protected virtual List<PaymentInfo> ApplyFilterOn(List<PaymentInfo> payments)
+        {
+            return _reportOptions.PaymentModeFilter == PaymentModeFilter.All
+                ? payments
+                : payments.Where(p => p.Mode == _reportOptions.PaymentModeFilter.ToString()).ToList();
+        }
 
         #endregion
 
