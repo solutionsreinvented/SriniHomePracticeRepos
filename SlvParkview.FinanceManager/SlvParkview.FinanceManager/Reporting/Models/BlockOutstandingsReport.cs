@@ -80,19 +80,6 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         #endregion
 
-        private string StripNumberFormat(string value)
-        {
-            string unformattedString = value;
-
-            if (value.Contains("(") && value.Contains(")"))
-            {
-                unformattedString = string.Concat("-", value.Replace("(", "").Replace(")", ""));
-            }
-
-            return unformattedString;
-        }
-
-
         #region Private Helper Methods
 
         private protected override void CreateRequiredDirectories()
@@ -131,6 +118,18 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             File.WriteAllText(Path.Combine(_reportTargetDirectory, fileName), finalJavaScriptFileContent);
         }
 
+        private string StripNumberFormat(string value)
+        {
+            string unformattedString = value;
+
+            if (value.Contains("(") && value.Contains(")"))
+            {
+                unformattedString = string.Concat("-", value.Replace("(", "").Replace(")", ""));
+            }
+
+            return unformattedString;
+        }
+
         #endregion
 
         #region Private Helper Functions
@@ -144,7 +143,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private protected override string GetFileName()
         {
-            return $"{_fileName} ({_reportTill:dd MMM yyyy})";
+            return $"{_fileName} (As on {_reportTill:dd MMM yyyy})";
         }
 
         #endregion
