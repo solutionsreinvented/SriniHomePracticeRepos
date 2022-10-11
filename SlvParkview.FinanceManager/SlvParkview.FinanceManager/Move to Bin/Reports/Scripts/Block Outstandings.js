@@ -154,14 +154,8 @@ function getCurrentDirectory() {
 }
 
 function stripNumberFormatting(formattedValue) {
-  if (formattedValue.includes("(")) {
-    formattedValue = formattedValue.replace("(", "")
-  }
-  if (formattedValue.includes(")")) {
-    formattedValue = formattedValue.replace(")", "")
-  }
-  if (formattedValue.includes(",")) {
-    formattedValue = formattedValue.replace(",", "")
+  if (formattedValue.includes("(") && formattedValue.includes(")")) {
+    formattedValue = "-" + formattedValue.replace("(", "").replace(")","").replace(",","")
   }
   return formattedValue
 }
