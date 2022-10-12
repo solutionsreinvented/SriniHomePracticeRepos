@@ -19,7 +19,7 @@
         HorizontalScrollBarVisibility="Disabled"
         ItemsSource="{Binding Payments}"
         SelectionUnit="FullRow"
-        VerticalScrollBarVisibility="Auto">
+        VerticalScrollBarVisibility="Visible">
 
         <DataGrid.Columns>
 
