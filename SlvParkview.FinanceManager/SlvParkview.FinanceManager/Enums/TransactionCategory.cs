@@ -10,7 +10,7 @@ namespace SlvParkview.FinanceManager.Enums
         [Description("One Time Charges")]
         OneTimeCharges,
 
-        [Description("Monthly Maintenance Charges")]
+        [Description("Maintenance Charges")]
         Maintenance
     }
 }

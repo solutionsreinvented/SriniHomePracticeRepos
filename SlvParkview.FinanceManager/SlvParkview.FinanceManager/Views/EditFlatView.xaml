@@ -253,7 +253,7 @@
                             <DataGridTemplateColumn Width="*" Header="Date">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding ReceivedOn, StringFormat={}{0:dd-MM-yyyy}}" />
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding OccuredOn, StringFormat={}{0:dd-MM-yyyy}}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
