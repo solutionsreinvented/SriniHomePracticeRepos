@@ -83,13 +83,13 @@ namespace SlvParkview.FinanceManager.Models
         /// </summary>
         [JsonIgnore]
         [XmlIgnore]
-        public bool CanEditFlatDetails { get => Get(false); set { Set(value); RaisePropertyChanged(nameof(CanChangeTenantName)); } }
+        public bool ChangesAllowed { get => Get(false); set { Set(value); RaisePropertyChanged(nameof(CanChangeTenantName)); } }
         /// <summary>
         /// Allows to change/enter the tenant name only when the <see cref="ResidentType"/> is a <see cref="ResidentType.Tenant"/>.
         /// </summary>
         [JsonIgnore]
         [XmlIgnore]
-        public bool CanChangeTenantName => CanEditFlatDetails && ResidentType == ResidentType.Tenant;
+        public bool CanChangeTenantName => ChangesAllowed && ResidentType == ResidentType.Tenant;
         /// <summary>
         /// Indicates whether flat is occupied by the owner(s) or a tenant.
         /// </summary>

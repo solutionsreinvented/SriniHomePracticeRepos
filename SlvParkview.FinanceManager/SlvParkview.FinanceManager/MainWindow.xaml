@@ -67,7 +67,7 @@
                     <MenuItem
                         Command="{Binding SaveDataCommand}"
                         Header="_Save Data"
-                        IsEnabled="{Binding AllowSave}" />
+                        IsEnabled="{Binding DataManagementService.AllowSave, UpdateSourceTrigger=PropertyChanged}" />
                 </MenuItem>
             </Menu>
 

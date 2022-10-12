@@ -160,6 +160,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
+                <ColumnDefinition Width="1.2*" />
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -190,12 +191,20 @@
             <Button
                 Grid.Column="3"
                 Margin="5,0"
-                Command="{Binding SaveExpenseCommand}"
-                Content="Save E_xpense"
-                IsEnabled="{Binding Expense.IsDataValid}" />
+                Command="{Binding SaveFlatCommand}"
+                Content="Save _Flat Details"
+                IsEnabled="{Binding TargetFlat.ChangesAllowed}" />
 
             <Button
                 Grid.Column="4"
+                Margin="5,0"
+                Command="{Binding SaveExpenseCommand}"
+                Content="Save E_xpense"
+                IsDefault="True"
+                IsEnabled="{Binding Expense.IsDataValid}" />
+
+            <Button
+                Grid.Column="5"
                 Margin="5,0,0,0"
                 Command="{Binding GoToSummaryCommand}"
                 Content="S_witch to Summary" />

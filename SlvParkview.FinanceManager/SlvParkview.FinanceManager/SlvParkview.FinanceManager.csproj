@@ -154,6 +154,7 @@
     </Compile>
     <Compile Include="Repositories\FlatRepository.cs" />
     <Compile Include="Services\BlockInitialDataProvider.cs" />
+    <Compile Include="Services\DataManagementService.cs" />
     <Compile Include="Services\ReportsGenerator.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ServiceProvider.cs" />

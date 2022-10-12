@@ -3,7 +3,6 @@
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Services;
 
-using System;
 using System.Windows.Input;
 
 namespace SlvParkview.FinanceManager.ViewModels
@@ -13,7 +12,6 @@ namespace SlvParkview.FinanceManager.ViewModels
         #region Private Fields
 
         private readonly SummaryViewModel _summaryViewModel;
-
         private readonly NavigationService _navigationService;
 
         #endregion
@@ -38,16 +36,25 @@ namespace SlvParkview.FinanceManager.ViewModels
         }
         #endregion
 
+        #region Public Properties
+
         public Flat TargetFlat { get => Get<Flat>(); set => Set(value); }
 
         public Payment SelectedPayment { get => Get<Payment>(); set { Set(value); RaisePropertyChanged(nameof(CanModifyPayment)); } }
 
         public Expense SelectedExpense { get => Get<Expense>(); set { Set(value); RaisePropertyChanged(nameof(CanModifyExpense)); } }
 
+        #endregion
+
+        #region Read-only Properties
+
+        public DataManagementService DataManagementService { get => Get<DataManagementService>(); private set => Set(value); }
+
         public bool CanModifyPayment => SelectedPayment != null;
 
         public bool CanModifyExpense => SelectedExpense != null;
 
+        #endregion
 
         #region Public Commands
 
@@ -67,13 +74,17 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public ICommand DeleteExpenseCommand { get => Get<ICommand>(); set => Set(value); }
 
+        public ICommand SavePaymentCommand { get => Get<ICommand>(); set => Set(value); }
+
+        public ICommand SaveExpenseCommand { get => Get<ICommand>(); set => Set(value); }
+
         #endregion
 
         #region Command Handlers
 
         private void OnSaveFlat()
         {
-
+            DataManagementService.SaveData(_summaryViewModel.Block);
         }
 
         private void OnAddExpense()
@@ -121,12 +132,24 @@ namespace SlvParkview.FinanceManager.ViewModels
             }
         }
 
+        private void OnSavePayment()
+        {
+            DataManagementService.SaveData(_summaryViewModel.Block);
+        }
+
+        private void OnSaveExpense()
+        {
+            DataManagementService.SaveData(_summaryViewModel.Block);
+        }
+
         #endregion
 
         #region Private Helpers
 
         private void Initialize()
         {
+            DataManagementService = DataManagementService.Instance;
+
             SaveFlatCommand = new RelayCommand(OnSaveFlat, true);
             AddExpenseCommand = new RelayCommand(OnAddExpense, true);
             AddPaymentCommand = new RelayCommand(OnAddPayment, true);
@@ -137,6 +160,9 @@ namespace SlvParkview.FinanceManager.ViewModels
 
             DeletePaymentCommand = new RelayCommand(OnDeletePayment, true);
             DeleteExpenseCommand = new RelayCommand(OnDeleteExpense, true);
+
+            SavePaymentCommand = new RelayCommand(OnSavePayment, true);
+            SaveExpenseCommand = new RelayCommand(OnSaveExpense, true);
         }
 
         #endregion

@@ -185,7 +185,10 @@
 
                     <!--#region Payment Manipulation Buttons-->
 
-                    <UniformGrid Grid.Row="2" Columns="2">
+                    <UniformGrid
+                        Grid.Row="2"
+                        Margin="5,0"
+                        Columns="2">
 
                         <Button
                             Margin="0,0,20,0"
@@ -194,6 +197,7 @@
                             IsEnabled="{Binding CanModifyPayment}" />
                         <Button
                             Margin="20,0,0,0"
+                            Command="{Binding SavePaymentCommand}"
                             Content="S_ave Payment"
                             IsEnabled="{Binding CanModifyPayment}" />
 
@@ -304,7 +308,10 @@
                             Command="{Binding DeleteExpenseCommand}"
                             Content="Dele_te Expense"
                             IsEnabled="{Binding CanModifyExpense}" />
-                        <Button Content="Sa_ve Expense" IsEnabled="{Binding CanModifyExpense}" />
+                        <Button
+                            Command="{Binding SaveExpenseCommand}"
+                            Content="Sa_ve Expense"
+                            IsEnabled="{Binding CanModifyExpense}" />
 
                     </UniformGrid>
 
@@ -372,7 +379,8 @@
                 Margin="5,0"
                 Command="{Binding SaveFlatCommand}"
                 Content="Save F_lat Details"
-                IsDefault="True" />
+                IsDefault="True"
+                IsEnabled="{Binding TargetFlat.ChangesAllowed}" />
 
             <Button
                 Grid.Column="5"

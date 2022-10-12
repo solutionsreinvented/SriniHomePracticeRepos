@@ -177,6 +177,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
+                <ColumnDefinition Width="1.2*" />
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -207,13 +208,20 @@
             <Button
                 Grid.Column="3"
                 Margin="5,0"
+                Command="{Binding SaveFlatCommand}"
+                Content="Save _Flat Details"
+                IsEnabled="{Binding TargetFlat.ChangesAllowed}" />
+
+            <Button
+                Grid.Column="4"
+                Margin="5,0"
                 Command="{Binding SavePaymentCommand}"
                 Content="Save _Payment"
                 IsDefault="True"
                 IsEnabled="{Binding Payment.IsDataValid}" />
 
             <Button
-                Grid.Column="4"
+                Grid.Column="5"
                 Margin="5,0,0,0"
                 Command="{Binding GoToSummaryCommand}"
                 Content="S_witch to Summary" />

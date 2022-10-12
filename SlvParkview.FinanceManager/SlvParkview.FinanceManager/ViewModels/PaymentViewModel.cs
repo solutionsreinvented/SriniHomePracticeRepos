@@ -51,6 +51,8 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public ICommand SavePaymentCommand { get; set; }
 
+        public ICommand SaveFlatCommand { get; set; }
+
         public ICommand AddExpenseCommand { get; set; }
 
         public ICommand AddCommonExpenseCommand { get; set; }
@@ -70,6 +72,7 @@ namespace SlvParkview.FinanceManager.ViewModels
             if (!targetFlat.ContainsSimilar(Payment))
             {
                 AddPaymentTo(targetFlat);
+
             }
             else
             {
@@ -105,6 +108,11 @@ namespace SlvParkview.FinanceManager.ViewModels
             _navigationService.CurrentViewModel = _summaryViewModel;
         }
 
+        private void OnSaveFlat()
+        {
+            DataManagementService.Instance.SaveData(_summaryViewModel.Block);
+        }
+
         #endregion
 
         #region Helper Methods
@@ -112,7 +120,9 @@ namespace SlvParkview.FinanceManager.ViewModels
         private void Initialize()
         {
             Payment = new Payment();
+
             SavePaymentCommand = new RelayCommand(OnSavePayment, true);
+            SaveFlatCommand = new RelayCommand(OnSaveFlat, true);
             AddExpenseCommand = new RelayCommand(OnAddExpense, true);
             AddCommonExpenseCommand = new RelayCommand(OnAddCommonExpense, true);
 
@@ -123,6 +133,7 @@ namespace SlvParkview.FinanceManager.ViewModels
         private void AddPaymentTo(Flat flat)
         {
             flat.AddPayment(Payment);
+            DataManagementService.Instance.SaveData(_summaryViewModel.Block);
 
             _ = MessageBox.Show("Payment added successfully!", "Entry successful", MessageBoxButton.OK);
 

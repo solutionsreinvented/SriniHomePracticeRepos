@@ -87,7 +87,7 @@
             <TextBox
                 Grid.Row="2"
                 Grid.Column="1"
-                IsEnabled="{Binding CanEditFlatDetails}"
+                IsEnabled="{Binding ChangesAllowed}"
                 Text="{Binding OwnedBy}" />
 
             <TextBlock
@@ -98,7 +98,7 @@
             <TextBox
                 Grid.Row="3"
                 Grid.Column="1"
-                IsEnabled="{Binding CanEditFlatDetails}"
+                IsEnabled="{Binding ChangesAllowed}"
                 Text="{Binding CoOwnedBy}" />
 
             <TextBlock
@@ -121,7 +121,7 @@
                 Grid.Row="5"
                 Grid.Column="1"
                 Height="26"
-                IsEnabled="{Binding CanEditFlatDetails}"
+                IsEnabled="{Binding ChangesAllowed}"
                 ItemsSource="{shared:EnumBindingResource enums:ResidentType}"
                 SelectedItem="{Binding ResidentType}">
                 <ComboBox.Resources>
@@ -202,7 +202,7 @@
                 Margin="0,10,0,0"
                 VerticalContentAlignment="Center"
                 Content="Modify flat details"
-                IsChecked="{Binding CanEditFlatDetails}" />
+                IsChecked="{Binding ChangesAllowed}" />
 
             <!--#endregion-->
 

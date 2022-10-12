@@ -62,6 +62,7 @@ namespace SlvParkview.FinanceManager.ViewModels
             if (AllowDuplicateEntry)
             {
                 _sender.Block.Flats.ForEach(f => f.AddExpense(Expense));
+                DataManagementService.Instance.SaveData(ApartmentBlockToBeProcessed);
             }
             else
             {

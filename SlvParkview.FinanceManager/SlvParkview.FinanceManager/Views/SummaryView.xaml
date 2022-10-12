@@ -72,7 +72,7 @@
                 RowHeaderWidth="0"
                 SelectedItem="{Binding SelectedFlat}"
                 SelectionUnit="FullRow"
-                VerticalScrollBarVisibility="Auto">
+                VerticalScrollBarVisibility="Visible">
 
                 <DataGrid.Columns>
 

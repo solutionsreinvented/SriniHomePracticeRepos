@@ -51,6 +51,8 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public ICommand SaveExpenseCommand { get => Get<ICommand>(); set => Set(value); }
 
+        public ICommand SaveFlatCommand { get => Get<ICommand>(); set => Set(value); }
+
         public ICommand AddPaymentCommand { get => Get<ICommand>(); set => Set(value); }
 
         public ICommand AddCommonExpenseCommand { get => Get<ICommand>(); set => Set(value); }
@@ -80,6 +82,11 @@ namespace SlvParkview.FinanceManager.ViewModels
                     AddExpenseTo(targetFlat);
                 }
             }
+        }
+
+        private void OnSaveFlat()
+        {
+            DataManagementService.Instance.SaveData(_summaryViewModel.Block);
         }
 
         private void OnAddPayment()
@@ -113,6 +120,8 @@ namespace SlvParkview.FinanceManager.ViewModels
         {
             Expense = new Expense();
             SaveExpenseCommand = new RelayCommand(OnSaveExpense, true);
+            SaveFlatCommand = new RelayCommand(OnSaveFlat, true);
+
             AddPaymentCommand = new RelayCommand(OnAddPayment, true);
             AddCommonExpenseCommand = new RelayCommand(OnAddCommonExpense, true);
 
@@ -123,6 +132,7 @@ namespace SlvParkview.FinanceManager.ViewModels
         private void AddExpenseTo(Flat flat)
         {
             flat.AddExpense(Expense);
+            DataManagementService.Instance.SaveData(_summaryViewModel.Block);
 
             _ = MessageBox.Show("Expense added successfully!", "Entry successful", MessageBoxButton.OK);
 
