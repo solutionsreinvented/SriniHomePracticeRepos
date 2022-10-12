@@ -69,7 +69,8 @@ namespace SlvParkview.FinanceManager.Models
 
         public override int GetHashCode()
         {
-            return $"{ReceivedOn}{Category}{Amount}".GetHashCode();
+            return base.GetHashCode();
+            ///return $"{ReceivedOn}{Category}{Amount}".GetHashCode();
         }
 
         public bool Equals(Payment payment)

@@ -61,7 +61,8 @@ namespace SlvParkview.FinanceManager.Models
 
         public override int GetHashCode()
         {
-            return $"{OccuredOn}{Category}{Amount}".GetHashCode();
+            return base.GetHashCode();
+            ///return $"{OccuredOn}{Category}{Amount}".GetHashCode();
         }
 
         public bool Equals(Expense expense)

@@ -103,7 +103,6 @@
                     <!--#endregion-->
 
                     <!--#region Payments Data-->
-
                     <DataGrid
                         Grid.Row="0"
                         Margin="5"
@@ -114,6 +113,7 @@
                         HorizontalScrollBarVisibility="Disabled"
                         ItemsSource="{Binding TargetFlat.Payments}"
                         SelectedItem="{Binding SelectedPayment}"
+                        SelectionMode="Single"
                         SelectionUnit="FullRow"
                         VerticalScrollBarVisibility="Auto">
 
@@ -181,18 +181,18 @@
 
                     <!--#region Edit Selected Payment-->
 
-                    <ContentControl
+                    <!--<ContentControl
                         Grid.Row="1"
                         Margin="5,5,5,10"
-                        Content="{Binding SelectedPayment}"
+                        Content="{Binding DataContext.SelectedPayment, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=GroupBox}}"
                         DataContext="{Binding}"
-                        Visibility="{Binding CanModifyPayment, Converter={shared:BoolToVisibilityConverter}}" />
+                        Visibility="{Binding CanModifyPayment, Converter={shared:BoolToVisibilityConverter}}" />-->
 
-                    <!--<views:EditPaymentView
+                    <views:EditPaymentView
                         Grid.Row="1"
                         Margin="5,5,5,10"
                         DataContext="{Binding SelectedPayment}"
-                        Visibility="{Binding DataContext.CanModifyPayment, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={shared:BoolToVisibilityConverter}}" />-->
+                        Visibility="{Binding DataContext.CanModifyPayment, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={shared:BoolToVisibilityConverter}}" />
 
                     <!--#endregion-->
 
