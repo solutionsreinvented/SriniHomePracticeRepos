@@ -3,6 +3,7 @@
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Services;
 
+using System;
 using System.Windows.Input;
 
 namespace SlvParkview.FinanceManager.ViewModels
@@ -62,6 +63,10 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public ICommand GoToSummaryCommand { get => Get<ICommand>(); set => Set(value); }
 
+        public ICommand DeletePaymentCommand { get => Get<ICommand>(); set => Set(value); }
+
+        public ICommand DeleteExpenseCommand { get => Get<ICommand>(); set => Set(value); }
+
         #endregion
 
         #region Command Handlers
@@ -100,6 +105,22 @@ namespace SlvParkview.FinanceManager.ViewModels
             _navigationService.CurrentViewModel = _summaryViewModel;
         }
 
+        private void OnDeletePayment()
+        {
+            if (SelectedPayment != null)
+            {
+                _ = TargetFlat.Payments.Remove(SelectedPayment);
+            }
+        }
+
+        private void OnDeleteExpense()
+        {
+            if (SelectedExpense != null)
+            {
+                _ = TargetFlat.Expenses.Remove(SelectedExpense);
+            }
+        }
+
         #endregion
 
         #region Private Helpers
@@ -113,6 +134,9 @@ namespace SlvParkview.FinanceManager.ViewModels
 
             GenerateReportsCommand = new RelayCommand(OnGenerateReports, true);
             GoToSummaryCommand = new RelayCommand(OnGoToSummary, true);
+
+            DeletePaymentCommand = new RelayCommand(OnDeletePayment, true);
+            DeleteExpenseCommand = new RelayCommand(OnDeleteExpense, true);
         }
 
         #endregion
