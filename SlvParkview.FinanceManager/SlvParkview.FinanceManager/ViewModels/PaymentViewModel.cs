@@ -133,10 +133,9 @@ namespace SlvParkview.FinanceManager.ViewModels
         private void AddPaymentTo(Flat flat)
         {
             flat.AddPayment(Payment);
-            DataManagementService.Instance.SaveData(_summaryViewModel.Block);
-
             _ = MessageBox.Show("Payment added successfully!", "Entry successful", MessageBoxButton.OK);
 
+            DataManagementService.Instance.SaveData(_summaryViewModel.Block);
             Payment = new Payment();
         }
 
