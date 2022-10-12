@@ -52,7 +52,7 @@
 
             <!--#region Last Updated Info-->
 
-            <TextBlock Grid.Row="0" Margin="5,10">
+            <TextBlock HorizontalAlignment="Right" Grid.Row="0" Margin="5,10">
                 <Run Text="Data last updated on: " />
                 <Run Text="{Binding Block.LastUpdated, StringFormat={}{0:F}}" />
             </TextBlock>
