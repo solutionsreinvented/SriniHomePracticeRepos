@@ -106,7 +106,7 @@
 
                         <!--#region Flat Number Column-->
 
-                        <DataGridTemplateColumn Width="Auto" Header="Flat Number">
+                        <DataGridTemplateColumn Width="0.8*" Header="Flat Number">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock HorizontalAlignment="Center" Text="{Binding Description}" />
@@ -118,7 +118,7 @@
 
                         <!--#region Owner Column-->
 
-                        <DataGridTemplateColumn Width="*" Header="Owner Name">
+                        <DataGridTemplateColumn Width="2*" Header="Owner Name">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Margin="5,0" Text="{Binding OwnedBy}" />
@@ -130,7 +130,7 @@
 
                         <!--#region Coowner Column-->
 
-                        <DataGridTemplateColumn Width="*" Header="Coowner Name">
+                        <DataGridTemplateColumn Width="2*" Header="Coowner Name">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Margin="5,0" Text="{Binding CoOwnedBy}" />
@@ -142,7 +142,7 @@
 
                         <!--#region Tenant Column-->
 
-                        <DataGridTemplateColumn Width="*" Header="Tenant Name">
+                        <DataGridTemplateColumn Width="2*" Header="Tenant Name">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Margin="5,0" Text="{Binding TenantName}" />
@@ -154,7 +154,7 @@
 
                         <!--#region Resident Type Column-->
 
-                        <DataGridTemplateColumn Width="Auto" Header="Resident Type">
+                        <DataGridTemplateColumn Width="1.2*" Header="Resident Type">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock HorizontalAlignment="Center" Text="{Binding ResidentType}" />
@@ -166,11 +166,11 @@
 
                         <!--#region Outstanding On Specified Date Column-->
 
-                        <DataGridTemplateColumn Width="Auto" Header="Outstanding">
+                        <DataGridTemplateColumn Width="1.2*" Header="Outstanding">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock
-                                        Padding="25,0,0,0"
+                                        Padding="40,0,0,0"
                                         HorizontalAlignment="Left"
                                         Text="{Binding OutstandingOnSpecifiedDate}" />
                                 </DataTemplate>
