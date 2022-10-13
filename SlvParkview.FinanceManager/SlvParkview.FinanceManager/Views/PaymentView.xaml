@@ -2,7 +2,7 @@
     x:Class="SlvParkview.FinanceManager.Views.PaymentView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:comps="clr-namespace:SlvParkview.FinanceManager.Components"
+    xmlns:components="clr-namespace:SlvParkview.FinanceManager.Components"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:enums="clr-namespace:SlvParkview.FinanceManager.Enums"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -61,7 +61,7 @@
 
         <!--#region Flat Information-->
 
-        <comps:FlatDetailControl Grid.Row="1" DataContext="{Binding TargetFlat}" />
+        <components:FlatDetailControl Grid.Row="1" DataContext="{Binding TargetFlat}" />
 
         <!--#endregion-->
 

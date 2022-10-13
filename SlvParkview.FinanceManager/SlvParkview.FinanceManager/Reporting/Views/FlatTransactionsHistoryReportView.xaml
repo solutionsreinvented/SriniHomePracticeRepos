@@ -120,7 +120,7 @@
 
                     <!--#region Transaction Date Column-->
 
-                    <DataGridTemplateColumn Width="Auto" Header="Date">
+                    <DataGridTemplateColumn Width="0.8*" Header="Date">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="10,0" Text="{Binding TransactionDate}" />
@@ -132,7 +132,7 @@
 
                     <!--#region Payment Amount Column-->
 
-                    <DataGridTemplateColumn Width="Auto" Header="Amount Paid">
+                    <DataGridTemplateColumn Width="*" Header="Amount Paid">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock HorizontalAlignment="Center" Text="{Binding PaymentAmount}" />
@@ -144,7 +144,7 @@
 
                     <!--#region Payment Mode Column-->
 
-                    <DataGridTemplateColumn Width="Auto" Header="Payment Mode">
+                    <DataGridTemplateColumn Width="*" Header="Payment Mode">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock HorizontalAlignment="Center" Text="{Binding PaymentMode}" />
@@ -156,7 +156,7 @@
 
                     <!--#region Payment Category Column-->
 
-                    <DataGridTemplateColumn Width="Auto" Header="Payment Category">
+                    <DataGridTemplateColumn Width="*" Header="Payment Category">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock HorizontalAlignment="Center" Text="{Binding PaymentCategory}" />
@@ -168,7 +168,7 @@
 
                     <!--#region Expense Amount Column-->
 
-                    <DataGridTemplateColumn Width="Auto" Header="Expense">
+                    <DataGridTemplateColumn Width="0.8*" Header="Expense">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock HorizontalAlignment="Center" Text="{Binding ExpenseAmount}" />
@@ -180,7 +180,7 @@
 
                     <!--#region Expense Category Column-->
 
-                    <DataGridTemplateColumn Width="Auto" Header="Expense Category">
+                    <DataGridTemplateColumn Width="*" Header="Expense Category">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock HorizontalAlignment="Center" Text="{Binding ExpenseCategory}" />

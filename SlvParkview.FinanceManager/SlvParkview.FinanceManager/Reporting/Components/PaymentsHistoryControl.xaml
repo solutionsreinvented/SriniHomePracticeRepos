@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="SlvParkview.FinanceManager.Reporting.Views.PaymentsHistoryView"
+    x:Class="SlvParkview.FinanceManager.Reporting.Components.PaymentsHistoryControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,6 +7,7 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+
     <!--#region Payments History-->
 
     <DataGrid
@@ -49,7 +50,6 @@
             </DataGridTemplateColumn>
 
             <!--#endregion-->
-
 
             <!--#region Received On Column-->
 
@@ -104,4 +104,5 @@
     </DataGrid>
 
     <!--#endregion-->
+
 </UserControl>

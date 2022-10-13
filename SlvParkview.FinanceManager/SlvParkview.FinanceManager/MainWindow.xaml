@@ -7,9 +7,8 @@
     xmlns:shared="http://schemas.reinvented.com/shared"
     xmlns:theme="http://schemas.reinvented.com/ui/themes"
     xmlns:vm="clr-namespace:SlvParkview.FinanceManager.ViewModels"
-    Title="MainWindow"
-    Width="1920"
-    Height="1080"
+    Width="{StaticResource MainWindowWidth}"
+    Height="{StaticResource MainWindowHeight}"
     Background="#4a4e69"
     DataContext="{DynamicResource MainViewModel}"
     MouseDown="OnMouseDown"
@@ -18,6 +17,7 @@
     WindowState="Maximized"
     WindowStyle="None"
     mc:Ignorable="d">
+
     <Window.Resources>
         <vm:MainViewModel x:Key="MainViewModel" />
     </Window.Resources>
@@ -47,11 +47,14 @@
                 BorderBrush="{theme:ThemeResource ResourceKey=StaticBorderBrush}"
                 BorderThickness="0.1">
 
-                <MenuItem
-                    Width="120"
-                    VerticalAlignment="Center"
-                    Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
-                    Header="_Start Here">
+                <MenuItem Width="120" Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}">
+
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center" Text="Start Here" />
+                        </StackPanel>
+                    </MenuItem.Header>
+
 
                     <MenuItem.Resources>
                         <Style TargetType="{x:Type MenuItem}">

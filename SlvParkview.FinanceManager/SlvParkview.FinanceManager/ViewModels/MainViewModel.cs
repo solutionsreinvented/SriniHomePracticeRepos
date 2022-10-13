@@ -99,7 +99,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
             ThemeViewModel = new ThemeViewModel();
 
-            _summaryViewModel = new SummaryViewModel(_navigationService);
+            ///_summaryViewModel = new SummaryViewModel(_navigationService);
 
             SaveDataCommand = new RelayCommand(OnSaveData, true);
             GenerateDataCommand = new RelayCommand(OnGenerateData, true);

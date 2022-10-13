@@ -3,42 +3,49 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
+    <!--#region Main Window-->
+
+    <sys:Double x:Key="MainWindowHeight">1080</sys:Double>
+    <sys:Double x:Key="MainWindowWidth">1920</sys:Double>
+
+    <!--#endregion-->
+
     <!--#region Host Dimensions-->
 
-    <sys:Double x:Key="HostMinimumHeight">500</sys:Double>
-    <sys:Double x:Key="HostMinimumWidth">950</sys:Double>
+    <sys:Double x:Key="HostMinimumHeight">800</sys:Double>
+    <sys:Double x:Key="HostMinimumWidth">1350</sys:Double>
 
-    <sys:Double x:Key="HostMaximumHeight">800</sys:Double>
-    <sys:Double x:Key="HostMaximumWidth">1250</sys:Double>
+    <sys:Double x:Key="HostMaximumHeight">900</sys:Double>
+    <sys:Double x:Key="HostMaximumWidth">1450</sys:Double>
 
-    <sys:Double x:Key="HostHeight">750</sys:Double>
-    <sys:Double x:Key="HostWidth">1150</sys:Double>
+    <sys:Double x:Key="HostHeight">850</sys:Double>
+    <sys:Double x:Key="HostWidth">1350</sys:Double>
 
     <!--#endregion-->
 
     <!--#region View Dimensions-->
 
-    <sys:Double x:Key="ViewMinimumHeight">450</sys:Double>
-    <sys:Double x:Key="ViewMinimumWidth">900</sys:Double>
+    <sys:Double x:Key="ViewMinimumHeight">750</sys:Double>
+    <sys:Double x:Key="ViewMinimumWidth">1300</sys:Double>
 
-    <sys:Double x:Key="ViewMaximumHeight">750</sys:Double>
-    <sys:Double x:Key="ViewMaximumWidth">1200</sys:Double>
+    <sys:Double x:Key="ViewMaximumHeight">850</sys:Double>
+    <sys:Double x:Key="ViewMaximumWidth">1400</sys:Double>
 
-    <sys:Double x:Key="ViewHeight">700</sys:Double>
-    <sys:Double x:Key="ViewWidth">1100</sys:Double>
+    <sys:Double x:Key="ViewHeight">800</sys:Double>
+    <sys:Double x:Key="ViewWidth">1300</sys:Double>
 
     <!--#endregion-->
 
     <!--#region Report Control Dimensions-->
 
-    <sys:Double x:Key="ReportControlMinimumHeight">450</sys:Double>
-    <sys:Double x:Key="ReportControlMinimumWidth">840</sys:Double>
+    <sys:Double x:Key="ReportControlMinimumHeight">550</sys:Double>
+    <sys:Double x:Key="ReportControlMinimumWidth">1140</sys:Double>
 
     <sys:Double x:Key="ReportControlMaximumHeight">650</sys:Double>
-    <sys:Double x:Key="ReportControlMaximumWidth">1140</sys:Double>
+    <sys:Double x:Key="ReportControlMaximumWidth">1340</sys:Double>
 
-    <sys:Double x:Key="ReportControlHeight">600</sys:Double>
-    <sys:Double x:Key="ReportControlWidth">1040</sys:Double>
+    <sys:Double x:Key="ReportControlHeight">650</sys:Double>
+    <sys:Double x:Key="ReportControlWidth">1240</sys:Double>
 
     <!--#endregion-->
 

@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:reportComponents="clr-namespace:SlvParkview.FinanceManager.Reporting.Components"
     d:DesignHeight="{StaticResource ReportControlHeight}"
-    d:DesignWidth="{StaticResource ViewWidth}"
+    d:DesignWidth="{StaticResource ReportControlWidth}"
     Style="{StaticResource ReportViewStyle}"
     mc:Ignorable="d">
 
