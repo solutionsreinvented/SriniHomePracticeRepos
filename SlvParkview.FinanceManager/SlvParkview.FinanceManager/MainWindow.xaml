@@ -8,8 +8,8 @@
     xmlns:theme="http://schemas.reinvented.com/ui/themes"
     xmlns:vm="clr-namespace:SlvParkview.FinanceManager.ViewModels"
     Title="MainWindow"
-    Width="1200"
-    Height="650"
+    Width="1920"
+    Height="1080"
     Background="#4a4e69"
     DataContext="{DynamicResource MainViewModel}"
     MouseDown="OnMouseDown"
@@ -127,7 +127,12 @@
 
         <Grid
             Grid.Row="1"
-            MaxWidth="900"
+            Width="{StaticResource HostWidth}"
+            Height="{StaticResource HostHeight}"
+            MinWidth="{StaticResource HostMinimumWidth}"
+            MinHeight="{StaticResource HostMinimumHeight}"
+            MaxWidth="{StaticResource HostMaximumWidth}"
+            MaxHeight="{StaticResource HostMaximumHeight}"
             Margin="25">
             <ContentControl Content="{Binding CurrentViewModel}" />
 

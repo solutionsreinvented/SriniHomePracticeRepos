@@ -5,8 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:enums="clr-namespace:SlvParkview.FinanceManager.Enums"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:reportComponents="clr-namespace:SlvParkview.FinanceManager.Reporting.Components"
+    xmlns:reportViews="clr-namespace:SlvParkview.FinanceManager.Reporting.Views"
     xmlns:shared="http://schemas.reinvented.com/shared"
-    xmlns:viewreps="clr-namespace:SlvParkview.FinanceManager.Reporting.Views"
     Height="650"
     MinHeight="600"
     MaxHeight="650"
@@ -79,7 +80,7 @@
             BorderThickness="0.2"
             Header="Report Options">
 
-            <viewreps:PaymentsReportOptions
+            <reportComponents:PaymentsReportOptionsControl
                 VerticalAlignment="Top"
                 VerticalContentAlignment="Top"
                 DataContext="{Binding}" />
@@ -91,7 +92,7 @@
 
         <!--#region Block Info-->
 
-        <viewreps:BlockInfoView
+        <reportComponents:BlockInfoControl
             Grid.Row="1"
             Grid.Column="0"
             DataContext="{Binding Block}" />
@@ -117,7 +118,7 @@
 
                 <!--#endregion-->
 
-                <viewreps:PaymentsHistoryView Grid.Row="0" DataContext="{Binding Report}" />
+                <reportViews:PaymentsHistoryView Grid.Row="0" DataContext="{Binding Report}" />
 
                 <!--#region Total Payment Received-->
 

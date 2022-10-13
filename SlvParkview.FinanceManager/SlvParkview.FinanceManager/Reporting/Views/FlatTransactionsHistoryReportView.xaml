@@ -4,12 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewreps="clr-namespace:SlvParkview.FinanceManager.Reporting.Views"
-    Height="650"
-    MinHeight="600"
-    MaxHeight="650"
-    d:DesignHeight="650"
-    d:DesignWidth="800"
+    xmlns:reportComponents="clr-namespace:SlvParkview.FinanceManager.Reporting.Components"
+    d:DesignHeight="{StaticResource ReportControlHeight}"
+    d:DesignWidth="{StaticResource ReportControlWidth}"
+    Style="{StaticResource ReportViewStyle}"
     mc:Ignorable="d">
 
     <Grid>
@@ -96,7 +94,7 @@
 
         <!--#region Flat Info-->
 
-        <viewreps:FlatInfoView Grid.Row="1" DataContext="{Binding Report.FlatInfo}" />
+        <reportComponents:FlatInfoControl Grid.Row="1" DataContext="{Binding Report.FlatInfo}" />
 
         <!--#endregion-->
 

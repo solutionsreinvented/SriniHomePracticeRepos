@@ -1,0 +1,72 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!--#region Host Dimensions-->
+
+    <sys:Double x:Key="HostMinimumHeight">500</sys:Double>
+    <sys:Double x:Key="HostMinimumWidth">950</sys:Double>
+
+    <sys:Double x:Key="HostMaximumHeight">800</sys:Double>
+    <sys:Double x:Key="HostMaximumWidth">1250</sys:Double>
+
+    <sys:Double x:Key="HostHeight">750</sys:Double>
+    <sys:Double x:Key="HostWidth">1150</sys:Double>
+
+    <!--#endregion-->
+
+    <!--#region View Dimensions-->
+
+    <sys:Double x:Key="ViewMinimumHeight">450</sys:Double>
+    <sys:Double x:Key="ViewMinimumWidth">900</sys:Double>
+
+    <sys:Double x:Key="ViewMaximumHeight">750</sys:Double>
+    <sys:Double x:Key="ViewMaximumWidth">1200</sys:Double>
+
+    <sys:Double x:Key="ViewHeight">700</sys:Double>
+    <sys:Double x:Key="ViewWidth">1100</sys:Double>
+
+    <!--#endregion-->
+
+    <!--#region Report Control Dimensions-->
+
+    <sys:Double x:Key="ReportControlMinimumHeight">450</sys:Double>
+    <sys:Double x:Key="ReportControlMinimumWidth">840</sys:Double>
+
+    <sys:Double x:Key="ReportControlMaximumHeight">650</sys:Double>
+    <sys:Double x:Key="ReportControlMaximumWidth">1140</sys:Double>
+
+    <sys:Double x:Key="ReportControlHeight">600</sys:Double>
+    <sys:Double x:Key="ReportControlWidth">1040</sys:Double>
+
+    <!--#endregion-->
+
+    <!--#region Default Style for Main Views-->
+
+    <Style x:Key="ViewStyle" TargetType="{x:Type UserControl}">
+        <Setter Property="MinWidth" Value="{StaticResource ViewMinimumWidth}" />
+        <Setter Property="MinHeight" Value="{StaticResource ViewMinimumHeight}" />
+        <Setter Property="MaxWidth" Value="{StaticResource ViewMaximumWidth}" />
+        <Setter Property="MaxHeight" Value="{StaticResource ViewMaximumHeight}" />
+        <Setter Property="Width" Value="{StaticResource ViewWidth}" />
+        <Setter Property="Height" Value="{StaticResource ViewHeight}" />
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region Default Style for Report Control-->
+
+    <Style x:Key="ReportViewStyle" TargetType="{x:Type UserControl}">
+        <Setter Property="MinWidth" Value="{StaticResource ReportControlMinimumWidth}" />
+        <Setter Property="MinHeight" Value="{StaticResource ReportControlMinimumHeight}" />
+        <Setter Property="MaxWidth" Value="{StaticResource ReportControlMaximumWidth}" />
+        <Setter Property="MaxHeight" Value="{StaticResource ReportControlMaximumHeight}" />
+        <Setter Property="Width" Value="{StaticResource ReportControlWidth}" />
+        <Setter Property="Height" Value="{StaticResource ReportControlHeight}" />
+    </Style>
+
+    <!--#endregion-->
+
+
+</ResourceDictionary>

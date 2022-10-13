@@ -1,71 +1,73 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:components="clr-namespace:SlvParkview.FinanceManager.Components"
     xmlns:models="clr-namespace:SlvParkview.FinanceManager.Models"
-    xmlns:modelsreps="clr-namespace:SlvParkview.FinanceManager.Reporting.Models"
-    xmlns:viewreps="clr-namespace:SlvParkview.FinanceManager.Reporting.Views"
-    xmlns:views="clr-namespace:SlvParkview.FinanceManager.Views"
-    xmlns:vm="clr-namespace:SlvParkview.FinanceManager.ViewModels"
-    xmlns:vmreps="clr-namespace:SlvParkview.FinanceManager.Reporting.ViewModels">
+    xmlns:reportComponents="clr-namespace:SlvParkview.FinanceManager.Reporting.Components"
+    xmlns:reportModels="clr-namespace:SlvParkview.FinanceManager.Reporting.Models"
+    xmlns:reportViewModels="clr-namespace:SlvParkview.FinanceManager.Reporting.ViewModels"
+    xmlns:reportViews="clr-namespace:SlvParkview.FinanceManager.Reporting.Views"
+    xmlns:viewModels="clr-namespace:SlvParkview.FinanceManager.ViewModels"
+    xmlns:views="clr-namespace:SlvParkview.FinanceManager.Views">
 
-    <DataTemplate DataType="{x:Type vm:SummaryViewModel}">
+    <DataTemplate DataType="{x:Type viewModels:SummaryViewModel}">
         <views:SummaryView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:PaymentViewModel}">
+    <DataTemplate DataType="{x:Type viewModels:PaymentViewModel}">
         <views:PaymentView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:ExpenseViewModel}">
+    <DataTemplate DataType="{x:Type viewModels:ExpenseViewModel}">
         <views:ExpenseView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:CommonExpenseViewModel}">
+    <DataTemplate DataType="{x:Type viewModels:CommonExpenseViewModel}">
         <views:CommonExpenseView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:ReportingViewModel}">
+    <DataTemplate DataType="{x:Type viewModels:ReportingViewModel}">
         <views:ReportingView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:ReportViewerViewModel}">
+    <DataTemplate DataType="{x:Type viewModels:ReportViewerViewModel}">
         <views:ReportViewerView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:EditFlatViewModel}">
+    <DataTemplate DataType="{x:Type viewModels:EditFlatViewModel}">
         <views:EditFlatView />
     </DataTemplate>
 
     <!--#region Reporting-->
 
-    <DataTemplate DataType="{x:Type vmreps:BlockOutstandingsReportViewModel}">
-        <viewreps:BlockOutstandingsReportView />
+    <DataTemplate DataType="{x:Type reportViewModels:BlockOutstandingsReportViewModel}">
+        <reportViews:BlockOutstandingsReportView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vmreps:FlatTransactionsHistoryReportViewModel}">
-        <viewreps:FlatTransactionsHistoryReportView />
+    <DataTemplate DataType="{x:Type reportViewModels:FlatTransactionsHistoryReportViewModel}">
+        <reportViews:FlatTransactionsHistoryReportView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vmreps:PaymentsReportViewModel}">
-        <viewreps:PaymentsReportView />
+    <DataTemplate DataType="{x:Type reportViewModels:PaymentsReportViewModel}">
+        <reportViews:PaymentsReportView />
     </DataTemplate>
 
     <!--#endregion-->
 
     <DataTemplate DataType="{x:Type models:Payment}">
-        <views:EditPaymentView />
+        <components:EditPaymentControl />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type modelsreps:InAMonthPaymentsReportOptions}">
-        <viewreps:InAMonthPaymentsReportOptions />
+    <DataTemplate DataType="{x:Type reportModels:InAMonthPaymentsReportOptions}">
+        <reportComponents:InAMonthPaymentsReportOptionsControl />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type modelsreps:ToASelectedDatePaymentsReportOptions}">
-        <viewreps:ToASelectedDatePaymentsReportOptions />
+    <DataTemplate DataType="{x:Type reportModels:ToASelectedDatePaymentsReportOptions}">
+        <reportComponents:ToASelectedDatePaymentsReportOptionsControl />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type modelsreps:DateRangePaymentsReportOptions}">
-        <viewreps:DateRangePaymentsReportOptions />
+    <DataTemplate DataType="{x:Type reportModels:DateRangePaymentsReportOptions}">
+        <reportComponents:DateRangePaymentsReportOptionsControl />
     </DataTemplate>
 
 </ResourceDictionary>

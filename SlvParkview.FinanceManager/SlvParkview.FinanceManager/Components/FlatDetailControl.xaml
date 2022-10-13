@@ -1,27 +1,24 @@
 ﻿<UserControl
-    x:Class="SlvParkview.FinanceManager.Reporting.Views.FlatInfoView"
+    x:Class="SlvParkview.FinanceManager.Components.FlatDetailControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:enums="clr-namespace:SlvParkview.FinanceManager.Enums"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="clr-namespace:SlvParkview.FinanceManager.Reporting.Models"
+    xmlns:shared="http://schemas.reinvented.com/shared"
     MinWidth="650"
-    MinHeight="170"
+    MinHeight="240"
     MaxHeight="250"
-    d:DesignHeight="170"
+    d:DesignHeight="220"
     d:DesignWidth="650"
     mc:Ignorable="d">
-
-    <!--<UserControl.DataContext>
-        <models:FlatInfo />
-    </UserControl.DataContext>-->
 
     <!--#region Flat Details Host-->
 
     <GroupBox
+        Margin="20,0,20,10"
         BorderThickness="0.2"
-        Header="Details of the flat"
-        IsEnabled="False">
+        Header="Details of the flat">
 
         <Grid Margin="10">
 
@@ -39,6 +36,10 @@
                     <Setter Property="IsEnabled" Value="False" />
                 </Style>
 
+                <Style BasedOn="{StaticResource ComboBoxStyle}" TargetType="{x:Type ComboBox}">
+                    <Setter Property="Margin" Value="0,2,5,2" />
+                    <Setter Property="Height" Value="26" />
+                </Style>
 
             </Grid.Resources>
 
@@ -54,6 +55,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -85,6 +87,7 @@
             <TextBox
                 Grid.Row="2"
                 Grid.Column="1"
+                IsEnabled="{Binding ChangesAllowed}"
                 Text="{Binding OwnedBy}" />
 
             <TextBlock
@@ -95,6 +98,7 @@
             <TextBox
                 Grid.Row="3"
                 Grid.Column="1"
+                IsEnabled="{Binding ChangesAllowed}"
                 Text="{Binding CoOwnedBy}" />
 
             <TextBlock
@@ -105,7 +109,27 @@
             <TextBox
                 Grid.Row="4"
                 Grid.Column="1"
+                IsEnabled="{Binding CanChangeTenantName}"
                 Text="{Binding TenantName}" />
+
+            <TextBlock
+                Grid.Row="5"
+                Grid.Column="0"
+                Text="Flat is occupied by: " />
+
+            <ComboBox
+                Grid.Row="5"
+                Grid.Column="1"
+                Height="26"
+                IsEnabled="{Binding ChangesAllowed}"
+                ItemsSource="{shared:EnumBindingResource enums:ResidentType}"
+                SelectedItem="{Binding ResidentType}">
+                <ComboBox.Resources>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Margin" Value="0" />
+                    </Style>
+                </ComboBox.Resources>
+            </ComboBox>
 
             <!--#endregion-->
 
@@ -115,13 +139,14 @@
                 Grid.Row="1"
                 Grid.Column="2"
                 Margin="10,5"
-                Text="Flat is occupied by: " />
+                Text="Retrieve results till: " />
 
-            <TextBox
+            <DatePicker
                 Grid.Row="1"
                 Grid.Column="3"
-                Height="26"
-                Text="{Binding ResidentType}" />
+                Margin="0,2,5,2"
+                VerticalContentAlignment="Center"
+                SelectedDate="{Binding DateSpecified}" />
 
             <TextBlock
                 Grid.Row="2"
@@ -149,12 +174,35 @@
                 Grid.Row="4"
                 Grid.Column="2"
                 Margin="10,5"
-                Text="Current outstanding: " />
+                Text="Oustanding on specified date: " />
 
             <TextBox
                 Grid.Row="4"
                 Grid.Column="3"
+                Text="{Binding OutstandingOnSpecifiedDate, Mode=OneWay, StringFormat={}{0:N2}}" />
+
+            <TextBlock
+                Grid.Row="5"
+                Grid.Column="2"
+                Margin="10,5"
+                Text="Current outstanding: " />
+
+            <TextBox
+                Grid.Row="5"
+                Grid.Column="3"
                 Text="{Binding CurrentOutstanding, Mode=OneWay, StringFormat={}{0:N2}}" />
+
+            <!--#endregion-->
+
+            <!--#region Allow Flat Modifications-->
+
+            <CheckBox
+                Grid.Row="6"
+                Grid.ColumnSpan="4"
+                Margin="0,10,0,0"
+                VerticalContentAlignment="Center"
+                Content="Modify flat details"
+                IsChecked="{Binding ChangesAllowed}" />
 
             <!--#endregion-->
 

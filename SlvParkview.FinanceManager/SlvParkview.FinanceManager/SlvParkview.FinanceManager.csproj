@@ -98,6 +98,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\EditExpenseControl.xaml.cs">
+      <DependentUpon>EditExpenseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\EditPaymentControl.xaml.cs">
+      <DependentUpon>EditPaymentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\FlatDetailControl.xaml.cs">
+      <DependentUpon>FlatDetailControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Enums\Month.cs" />
     <Compile Include="Enums\PaymentModeFilter.cs" />
     <Compile Include="Enums\PaymentsReportType.cs" />
@@ -106,6 +115,27 @@
     <Compile Include="Extensions\FlatExtensions.cs" />
     <Compile Include="Extensions\PaymentExtensions.cs" />
     <Compile Include="Factories\ReportViewModelFactory.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\Components\BlockInfoContol.xaml.cs">
+      <DependentUpon>BlockInfoContol.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\Components\DateRangePaymentsReportOptionsControl.xaml.cs">
+      <DependentUpon>DateRangePaymentsReportOptionsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\Components\FlatInfoControl.xaml.cs">
+      <DependentUpon>FlatInfoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\Components\InAMonthPaymentsReportOptionsControl.xaml.cs">
+      <DependentUpon>InAMonthPaymentsReportOptionsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\Components\PaymentsReportOptionsControl.xaml.cs">
+      <DependentUpon>PaymentsReportOptionsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\Components\ToASelectedDatePaymentsReportOptionsControl.xaml.cs">
+      <DependentUpon>ToASelectedDatePaymentsReportOptionsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Reporting\Factories\PaymentsReportFactory.cs" />
     <Compile Include="Reporting\Factories\ReportOptionsFactory.cs" />
     <Compile Include="Reporting\Interfaces\IReportOptions.cs" />
@@ -128,29 +158,17 @@
     <Compile Include="Reporting\ViewModels\FlatTransactionsHistoryReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\PaymentsReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\ReportViewModelBase.cs" />
-    <Compile Include="Reporting\Views\InAMonthPaymentsReportOptions.xaml.cs">
-      <DependentUpon>InAMonthPaymentsReportOptions.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Reporting\Views\ToASelectedDatePaymentsReportOptions.xaml.cs">
-      <DependentUpon>ToASelectedDatePaymentsReportOptions.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Reporting\Views\DateRangePaymentsReportOptions.xaml.cs">
-      <DependentUpon>DateRangePaymentsReportOptions.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Reporting\Views\PaymentsReportOptions.xaml.cs">
-      <DependentUpon>PaymentsReportOptions.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Reporting\Views\PaymentsReportView.xaml.cs">
-      <DependentUpon>PaymentsReportView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Reporting\Views\BlockOutstandingsReportView.xaml.cs">
       <DependentUpon>BlockOutstandingsReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Reporting\Views\BlockInfoView.xaml.cs">
-      <DependentUpon>BlockInfoView.xaml</DependentUpon>
+    <Compile Include="Reporting\Views\FlatTransactionsHistoryReportView.xaml.cs">
+      <DependentUpon>FlatTransactionsHistoryReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Reporting\Views\PaymentsHistoryView.xaml.cs">
       <DependentUpon>PaymentsHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\Views\PaymentsReportView.xaml.cs">
+      <DependentUpon>PaymentsReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Repositories\FlatRepository.cs" />
     <Compile Include="Services\BlockInitialDataProvider.cs" />
@@ -171,29 +189,14 @@
     <Compile Include="Views\CommonExpenseView.xaml.cs">
       <DependentUpon>CommonExpenseView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EditExpenseView.xaml.cs">
-      <DependentUpon>EditExpenseView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EditPaymentView.xaml.cs">
-      <DependentUpon>EditPaymentView.xaml</DependentUpon>
+    <Compile Include="Views\EditFlatView.xaml.cs">
+      <DependentUpon>EditFlatView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ExpenseView.xaml.cs">
       <DependentUpon>ExpenseView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FlatDetailView.xaml.cs">
-      <DependentUpon>FlatDetailView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EditFlatView.xaml.cs">
-      <DependentUpon>EditFlatView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\PaymentView.xaml.cs">
       <DependentUpon>PaymentView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Reporting\Views\FlatInfoView.xaml.cs">
-      <DependentUpon>FlatInfoView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Reporting\Views\FlatTransactionsHistoryReportView.xaml.cs">
-      <DependentUpon>FlatTransactionsHistoryReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ReportingView.xaml.cs">
       <DependentUpon>ReportingView.xaml</DependentUpon>
@@ -204,7 +207,15 @@
     <Compile Include="Views\SummaryView.xaml.cs">
       <DependentUpon>SummaryView.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Components\EditExpenseControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\EditPaymentControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\FlatDetailControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -216,27 +227,31 @@
     <Compile Include="Enums\PaymentMode.cs" />
     <Compile Include="Enums\ResidentType.cs" />
     <Compile Include="Enums\TransactionCategory.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="Reporting\Views\InAMonthPaymentsReportOptions.xaml">
+    <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Reporting\Views\ToASelectedDatePaymentsReportOptions.xaml">
+    <Page Include="Reporting\Components\BlockInfoContol.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Reporting\Views\DateRangePaymentsReportOptions.xaml">
+    <Page Include="Reporting\Components\DateRangePaymentsReportOptionsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Reporting\Views\PaymentsReportOptions.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Reporting\Components\FlatInfoControl.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Reporting\Views\PaymentsReportView.xaml">
+    <Page Include="Reporting\Components\InAMonthPaymentsReportOptionsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Reporting\Components\PaymentsReportOptionsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Reporting\Components\ToASelectedDatePaymentsReportOptionsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -244,15 +259,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Reporting\Views\BlockInfoView.xaml">
+    <Page Include="Reporting\Views\FlatTransactionsHistoryReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Reporting\Views\PaymentsHistoryView.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Reporting\Views\PaymentsReportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\DataTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Settings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -264,23 +287,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\EditExpenseView.xaml">
+    <Page Include="Views\EditFlatView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\EditPaymentView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ExpenseView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\FlatDetailView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\EditFlatView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -288,21 +299,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Reporting\Views\FlatInfoView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Reporting\Views\FlatTransactionsHistoryReportView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\ReportingView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ReportViewerView.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SummaryView.xaml">
       <Generator>MSBuild:Compile</Generator>
