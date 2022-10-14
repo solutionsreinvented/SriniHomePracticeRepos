@@ -106,8 +106,15 @@
             <Button
                 HorizontalAlignment="Left"
                 Command="{Binding GenerateCommand}"
-                Content="Generate Report"
-                IsDefault="True" />
+                IsDefault="True">
+                <StackPanel Orientation="Horizontal">
+                    <Image
+                        Height="18"
+                        Margin="0,0,5,0"
+                        Source="/Images/report-light.png" />
+                    <TextBlock VerticalAlignment="Center" Text="Generate Report" />
+                </StackPanel>
+            </Button>
 
         </Grid>
 

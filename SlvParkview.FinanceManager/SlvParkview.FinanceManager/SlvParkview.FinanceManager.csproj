@@ -63,7 +63,7 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>ledger-dark.ico</ApplicationIcon>
+    <ApplicationIcon>Images\Icons\ledger-light.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -361,9 +361,30 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="ledger-dark.ico" />
+    <Resource Include="Images\close-light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\menu-light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\minimize-light.png" />
+    <Resource Include="Images\restore-light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\theme-light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\maximize-light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\report-light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ledger-light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\ledger-light.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

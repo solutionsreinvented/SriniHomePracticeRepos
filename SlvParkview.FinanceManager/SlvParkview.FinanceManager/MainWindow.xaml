@@ -47,11 +47,11 @@
                 BorderBrush="{theme:ThemeResource ResourceKey=StaticBorderBrush}"
                 BorderThickness="0.1">
 
-                <MenuItem Width="120" Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}">
+                <MenuItem Width="Auto" Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}">
 
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock VerticalAlignment="Center" Text="Start Here" />
+                            <Image Source="Images/menu-light.png" />
                         </StackPanel>
                     </MenuItem.Header>
 
@@ -77,13 +77,20 @@
             <!--#endregion-->
 
             <!--#region Title-->
-
-            <TextBlock
+            <StackPanel
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                FontWeight="DemiBold"
-                Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
-                Text="SLV Parkview Finance Manager" />
+                Orientation="Horizontal">
+                <Image
+                    Width="22"
+                    Margin="5,0"
+                    Source="Images/ledger-light.png" />
+                <TextBlock
+                    VerticalAlignment="Center"
+                    FontWeight="DemiBold"
+                    Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
+                    Text="SLV Parkview Finance Manager" />
+            </StackPanel>
             <!--#endregion-->
 
             <!--#region Window Controls-->
@@ -93,24 +100,54 @@
                 VerticalAlignment="Center"
                 Orientation="Horizontal">
 
-                <ComboBox
-                    Width="80"
-                    ItemsSource="{shared:EnumBindingResource theme:ThemeType}"
-                    SelectedItem="{Binding ThemeViewModel.SelectedTheme}" />
+                <StackPanel.Resources>
+
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Width" Value="16" />
+                    </Style>
+
+                </StackPanel.Resources>
+
+                <StackPanel Orientation="Horizontal">
+                    <Image
+                        Width="22"
+                        Margin="0,0,5,0"
+                        VerticalAlignment="Center"
+                        Source="Images/theme-light.png" />
+                    <ComboBox
+                        Width="80"
+                        BorderThickness="0"
+                        ItemsSource="{shared:EnumBindingResource theme:ThemeType}"
+                        SelectedItem="{Binding ThemeViewModel.SelectedTheme}" />
+
+                </StackPanel>
 
                 <Button
                     Margin="5,0"
-                    Click="OnMinimizeButtonClick"
-                    Content="Minimize" />
+                    Padding="5,0"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Click="OnMinimizeButtonClick">
+                    <Image Source="Images/minimize-light.png" />
+                </Button>
                 <Button
                     x:Name="btnMaximizeOrRestore"
                     Margin="5,0"
-                    Click="OnMaximizeOrRestoreButtonClick"
-                    Content="Maximize" />
+                    Padding="5,0"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Click="OnMaximizeOrRestoreButtonClick">
+                    <Image Source="Images/maximize-light.png" />
+                </Button>
+
                 <Button
                     Margin="5,0"
-                    Click="OnCloseButtonClick"
-                    Content="Close" />
+                    Padding="5,0"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Click="OnCloseButtonClick">
+                    <Image Source="Images/close-light.png" />
+                </Button>
 
             </StackPanel>
 

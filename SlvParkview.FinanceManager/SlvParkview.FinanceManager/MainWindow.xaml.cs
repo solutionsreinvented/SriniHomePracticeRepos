@@ -10,7 +10,7 @@ namespace SlvParkview.FinanceManager
         public MainWindow()
         {
             InitializeComponent();
-            btnMaximizeOrRestore.Content = WindowState == WindowState.Maximized ? "Restore" : "Maximize";
+            ///btnMaximizeOrRestore.Content = WindowState == WindowState.Maximized ? "Restore" : "Maximize";
         }
 
         private void OnMinimizeButtonClick(object sender, RoutedEventArgs e)
@@ -27,7 +27,7 @@ namespace SlvParkview.FinanceManager
 
             WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
 
-            btnMaximizeOrRestore.Content = WindowState == WindowState.Maximized ? "Restore" : "Maximize";
+            ///btnMaximizeOrRestore.Content = WindowState == WindowState.Maximized ? "Restore" : "Maximize";
         }
 
         private void OnCloseButtonClick(object sender, RoutedEventArgs e)
