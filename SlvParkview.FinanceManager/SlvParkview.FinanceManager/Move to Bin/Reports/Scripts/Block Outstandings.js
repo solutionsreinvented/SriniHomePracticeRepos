@@ -63,7 +63,7 @@ function populateOutstandings() {
             `;
     }
 
-    endOfData = "**** End of Data ****";
+    endOfData = "**** End of Report ****";
 
   } else {
 

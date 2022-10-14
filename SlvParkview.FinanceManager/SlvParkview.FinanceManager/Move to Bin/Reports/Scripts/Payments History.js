@@ -151,7 +151,7 @@ function populatePayments() {
 
     }
 
-    endOfData = "**** End of Data ****";
+    endOfData = "**** End of Report ****";
 
   } else {
 

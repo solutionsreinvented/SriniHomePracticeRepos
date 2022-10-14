@@ -97,7 +97,7 @@ function populateTransactionDetails() {
 
     }
 
-    endOfData = "**** End of Data ****";
+    endOfData = "**** End of Report ****";
 
   } else {
 
