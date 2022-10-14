@@ -5,8 +5,8 @@
 
     <!--#region Main Window-->
 
-    <sys:Double x:Key="MainWindowHeight">1080</sys:Double>
-    <sys:Double x:Key="MainWindowWidth">1920</sys:Double>
+    <sys:Double x:Key="MainWindowHeight">950</sys:Double>
+    <sys:Double x:Key="MainWindowWidth">1720</sys:Double>
 
     <!--#endregion-->
 

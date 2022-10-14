@@ -12,9 +12,8 @@
     Background="#4a4e69"
     DataContext="{DynamicResource MainViewModel}"
     MouseDown="OnMouseDown"
-    ResizeMode="CanResize"
+    ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
-    WindowState="Maximized"
     WindowStyle="None"
     mc:Ignorable="d">
 
