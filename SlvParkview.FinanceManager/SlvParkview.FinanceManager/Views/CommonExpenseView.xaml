@@ -226,10 +226,15 @@
                     Content="Save E_xpense"
                     IsDefault="True"
                     IsEnabled="{Binding Expense.IsDataValid}" />
-                <Button
-                    Margin="5,0,0,0"
-                    Command="{Binding GoToSummaryCommand}"
-                    Content="S_witch to Summary" />
+                <Button Margin="5,0,0,0" Command="{Binding GoToSummaryCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Height="18"
+                            Margin="5,0"
+                            Source="/Assets/Images/summary-light.png" />
+                        <TextBlock VerticalAlignment="Center" Text="Switch to Summary" />
+                    </StackPanel>
+                </Button>
 
             </StackPanel>
 

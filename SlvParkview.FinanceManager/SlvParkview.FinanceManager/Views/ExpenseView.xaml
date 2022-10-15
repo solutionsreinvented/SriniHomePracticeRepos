@@ -170,14 +170,28 @@
             <Button
                 Grid.Column="0"
                 Margin="0,0,5,0"
-                Command="{Binding GenerateReportsCommand}"
-                Content="_Generate Reports" />
+                Command="{Binding GenerateReportsCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <Image
+                        Height="18"
+                        Margin="5,0"
+                        Source="/Assets/Images/reports-light.png" />
+                    <TextBlock VerticalAlignment="Center" Text="Go to Reports" />
+                </StackPanel>
+            </Button>
 
             <Button
                 Grid.Column="1"
                 Margin="5,0"
-                Command="{Binding AddPaymentCommand}"
-                Content="Add _Payment" />
+                Command="{Binding AddPaymentCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <Image
+                        Height="18"
+                        Margin="5,0"
+                        Source="/Assets/Images/payment-light.png" />
+                    <TextBlock VerticalAlignment="Center" Text="Add Payment" />
+                </StackPanel>
+            </Button>
 
             <Button
                 Grid.Column="2"
@@ -203,8 +217,15 @@
             <Button
                 Grid.Column="5"
                 Margin="5,0,0,0"
-                Command="{Binding GoToSummaryCommand}"
-                Content="S_witch to Summary" />
+                Command="{Binding GoToSummaryCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <Image
+                        Height="18"
+                        Margin="5,0"
+                        Source="/Assets/Images/summary-light.png" />
+                    <TextBlock VerticalAlignment="Center" Text="Switch to Summary" />
+                </StackPanel>
+            </Button>
 
             <!--#endregion-->
 

@@ -389,5 +389,23 @@
   <ItemGroup>
     <Folder Include="Assets\Libraries\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\reports-light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\summary2-light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\overview-light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\expense-light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\summary-light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\payment-light.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
