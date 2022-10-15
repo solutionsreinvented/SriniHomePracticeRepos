@@ -50,7 +50,7 @@
 
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="Images/menu-light.png" />
+                            <Image Source="Assets/Images/menu-light.png" />
                         </StackPanel>
                     </MenuItem.Header>
 
@@ -83,7 +83,7 @@
                 <Image
                     Width="22"
                     Margin="5,0"
-                    Source="Images/ledger-light.png" />
+                    Source="Assets/Images/ledger-light.png" />
                 <TextBlock
                     VerticalAlignment="Center"
                     FontWeight="DemiBold"
@@ -112,7 +112,7 @@
                         Width="22"
                         Margin="0,0,5,0"
                         VerticalAlignment="Center"
-                        Source="Images/theme-light.png" />
+                        Source="Assets/Images/theme-light.png" />
                     <ComboBox
                         Width="80"
                         BorderThickness="0"
@@ -127,7 +127,7 @@
                     Background="Transparent"
                     BorderThickness="0"
                     Click="OnMinimizeButtonClick">
-                    <Image Source="Images/minimize-light.png" />
+                    <Image Source="Assets/Images/minimize-light.png" />
                 </Button>
                 <Button
                     x:Name="btnMaximizeOrRestore"
@@ -136,7 +136,7 @@
                     Background="Transparent"
                     BorderThickness="0"
                     Click="OnMaximizeOrRestoreButtonClick">
-                    <Image Source="Images/maximize-light.png" />
+                    <Image Source="Assets/Images/maximize-light.png" />
                 </Button>
 
                 <Button
@@ -145,7 +145,7 @@
                     Background="Transparent"
                     BorderThickness="0"
                     Click="OnCloseButtonClick">
-                    <Image Source="Images/close-light.png" />
+                    <Image Source="Assets/Images/close-light.png" />
                 </Button>
 
             </StackPanel>

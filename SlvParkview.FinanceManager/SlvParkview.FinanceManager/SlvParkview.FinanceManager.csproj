@@ -63,7 +63,7 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Images\Icons\ledger-light.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\Images\Icons\ledger-light.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -362,29 +362,32 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\close-light.png" />
+    <Resource Include="Assets\Images\close-light.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\menu-light.png" />
+    <Resource Include="Assets\Images\menu-light.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\minimize-light.png" />
-    <Resource Include="Images\restore-light.png" />
+    <Resource Include="Assets\Images\minimize-light.png" />
+    <Resource Include="Assets\Images\restore-light.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\theme-light.png" />
+    <Resource Include="Assets\Images\theme-light.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\maximize-light.png" />
+    <Resource Include="Assets\Images\maximize-light.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\report-light.png" />
+    <Resource Include="Assets\Images\report-light.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\ledger-light.png" />
+    <Resource Include="Assets\Images\ledger-light.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Icons\ledger-light.ico" />
+    <Resource Include="Assets\Images\Icons\ledger-light.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Libraries\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
