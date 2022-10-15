@@ -166,3 +166,4 @@ C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManage
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.csproj.CopyComplete
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager.exe
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager.pdb
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.csproj.AssemblyReference.cache

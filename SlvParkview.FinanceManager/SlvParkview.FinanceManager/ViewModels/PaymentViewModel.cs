@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using SlvParkview.FinanceManager.Services;
 using SlvParkview.FinanceManager.Models;
+using System;
 
 namespace SlvParkview.FinanceManager.ViewModels
 {
@@ -119,7 +120,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void Initialize()
         {
-            Payment = new Payment();
+            Payment = new Payment() { RecordedOn = DateTime.Today};
 
             SavePaymentCommand = new RelayCommand(OnSavePayment, true);
             SaveFlatCommand = new RelayCommand(OnSaveFlat, true);

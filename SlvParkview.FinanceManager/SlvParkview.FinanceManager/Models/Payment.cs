@@ -45,6 +45,10 @@ namespace SlvParkview.FinanceManager.Models
         /// </summary>
         public DateTime ReceivedOn { get => Get(DateTime.Today); set { Set(value); RaisePropertyChanged(nameof(IsDataValid)); } }
         /// <summary>
+        /// Date on which the payment is entered in to the database.
+        /// </summary>
+        public DateTime RecordedOn { get => Get(ReceivedOn); set { Set(value); } }
+        /// <summary>
         /// Category <see cref="TransactionCategory"/> of the payment.
         /// </summary>
         public TransactionCategory Category { get => Get(TransactionCategory.Maintenance); set => Set(value); }
