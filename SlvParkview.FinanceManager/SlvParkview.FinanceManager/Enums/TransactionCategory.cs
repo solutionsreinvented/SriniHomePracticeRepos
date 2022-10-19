@@ -9,8 +9,13 @@ namespace SlvParkview.FinanceManager.Enums
     {
         [Description("One Time Charges")]
         OneTimeCharges,
-
         [Description("Maintenance Charges")]
-        Maintenance
+        Maintenance,
+        [Description("Penalty for Delay in Maintenance Payment")]
+        MaintenancePaymentDelay,
+        [Description("Wrong Parking In Common Area")]
+        WrongParkingInCommonArea,
+        [Description("Wrong Parking In Flat Parking Access Way")]
+        WrongParkingInFlatParkingAccessWay
     }
 }

@@ -136,6 +136,21 @@
                     ItemsSource="{shared:EnumBindingResource enums:TransactionCategory}"
                     SelectedItem="{Binding Category}" />
 
+                <!--<TextBlock
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Margin="0,5"
+                    Text="Flat to which the collected charges be credited: " />
+
+                <ComboBox
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Height="26"
+                    Margin="0,2"
+                    VerticalContentAlignment="Center"
+                    ItemsSource="{Binding}"
+                    SelectedItem="{Binding Category}" />-->
+
                 <!--#endregion-->
 
             </Grid>
