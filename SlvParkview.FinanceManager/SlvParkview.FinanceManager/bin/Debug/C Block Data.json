@@ -1,5 +1,5 @@
 {
-  "LastUpdated": "2022-10-18T13:46:08.6219229+05:30",
+  "LastUpdated": "2022-10-19T09:27:47.8110672+05:30",
   "Name": "C",
   "Flats": [
     {
@@ -370,10 +370,17 @@
           "RecordedOn": "2022-09-20T00:00:00",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "Mode": 0,
+          "ReceivedOn": "2022-10-19T00:00:00+05:30",
+          "RecordedOn": "2022-10-19T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 3000.00
         }
       ],
       "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00
+      "CurrentOutstanding": -200.00
     },
     {
       "Number": "122",
