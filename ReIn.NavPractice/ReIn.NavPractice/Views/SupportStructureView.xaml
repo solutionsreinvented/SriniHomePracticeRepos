@@ -10,6 +10,13 @@
     Background="IndianRed"
     Foreground="WhiteSmoke"
     mc:Ignorable="d">
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource AnimateWidth}" />
+        </EventTrigger>
+    </UserControl.Triggers>
+
     <Grid>
 
         <DataGrid
