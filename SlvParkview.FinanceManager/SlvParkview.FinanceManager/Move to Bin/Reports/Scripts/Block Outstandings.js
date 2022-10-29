@@ -1,25 +1,25 @@
 // #region Content
 var jsonContents = {
-  "FlatInfoCollection": [
+  FlatInfoCollection: [
     {
-      "Number": "217",
-      "Description": "C217",
-      "OwnedBy": "Srinivasa Rao Masanam",
-      "CoOwnedBy": "-",
-      "TenantName": "-",
-      "ResidentType": "Owner",
-      "AccountOpenedOn": "01 Sep 2022",
-      "DateSpecified": "20 Sep 2022",
-      "OpeningBalance": "2,800.00",
-      "OutstandingOnSpecifiedDate": "2,800.00",
-      "CurrentOutstanding": "2,800.00"
-    }
+      Number: "217",
+      Description: "C217",
+      OwnedBy: "Srinivasa Rao Masanam",
+      CoOwnedBy: "-",
+      TenantName: "-",
+      ResidentType: "Owner",
+      AccountOpenedOn: "01 Sep 2022",
+      DateSpecified: "20 Sep 2022",
+      OpeningBalance: "2,800.00",
+      OutstandingOnSpecifiedDate: "2,800.00",
+      CurrentOutstanding: "2,800.00",
+    },
   ],
-  "TotalOutstanding": "2,28,717.0",
-  "GeneratedOn": "20 Sep 2022",
-  "ApartmentName": "SLV Parkview Apartment",
-  "DocumentTitle": "Block Outstandings"
-}
+  TotalOutstanding: "2,28,717.0",
+  GeneratedOn: "20 Sep 2022",
+  ApartmentName: "SLV Parkview Apartment",
+  DocumentTitle: "Block Outstandings",
+};
 // #endregion
 
 // #region Retrieve Table Elements
@@ -28,8 +28,8 @@ var tableBody = document.querySelector(".table-body");
 // #endregion
 
 // #region Data Required for Calculations
-var outstandings = jsonContents.FlatInfoCollection.map(outstandingOnly)
-var maxOutstanding = Math.max(...outstandings)
+var outstandings = jsonContents.FlatInfoCollection.map(outstandingOnly);
+var maxOutstanding = Math.max(...outstandings);
 // #endregion
 
 populateOutstandings();
@@ -37,20 +37,18 @@ populateOutstandings();
 // #region Populate Outstandings
 
 function populateOutstandings() {
-
   var endOfData = "";
   var flatInfoCollection = jsonContents.FlatInfoCollection;
 
   tableBody.innerHTML = "";
 
   if (flatInfoCollection.length > 0) {
-
     var reportTill = jsonContents.FlatInfoCollection[0].DateSpecified;
     document.title = jsonContents.DocumentTitle;
-    document.querySelector(".table-title").innerHTML = jsonContents.DocumentTitle;
+    document.querySelector(".table-title").innerHTML =
+      jsonContents.DocumentTitle;
 
     for (i = 0; i < flatInfoCollection.length; i++) {
-
       tableBody.innerHTML += `
             <tr>
                 <td>${flatInfoCollection[i].Description}</td>
@@ -64,11 +62,8 @@ function populateOutstandings() {
     }
 
     endOfData = "**** End of Report ****";
-
   } else {
-
     endOfData = "**** No Records Found ****";
-
   }
 
   tableBody.innerHTML += `<tr class="total-outstanding">
@@ -84,47 +79,47 @@ function populateOutstandings() {
 // #endregion
 
 // #region Limits for Cell Backgrounds
-var noFocus = 0.0
-var lowFocus = 20.0
-var normalFocus = 40.0
-var aboveNormalFocus = 60.0
-var mediumFocus = 80.0
+var noFocus = 0.0;
+var lowFocus = 20.0;
+var normalFocus = 40.0;
+var aboveNormalFocus = 60.0;
+var mediumFocus = 80.0;
 // #endregion
 
-changeElementBackground()
+changeElementBackground();
 
 // #region Change Element Background
 
 function changeElementBackground(elementIndex) {
-
   var flatCount = jsonContents.FlatInfoCollection.length;
 
   for (index = 0; index < flatCount; index++) {
+    var tableRow = tableBody.children[index];
 
-    var tableRow = tableBody.children[index]
+    var nameCell = tableRow.children[1];
+    var outstandingCell = tableRow.children[tableRow.children.length - 1];
 
-    var nameCell = tableRow.children[1]
-    var outstandingCell = tableRow.children[tableRow.children.length - 1]
-
-    var currentItemPercentage = getPercentage(outstandings[index], maxOutstanding)
-    var focusClass
+    var currentItemPercentage = getPercentage(
+      outstandings[index],
+      maxOutstanding
+    );
+    var focusClass;
 
     if (currentItemPercentage <= noFocus) {
-      focusClass = "no-focus"
+      focusClass = "no-focus";
     } else if (currentItemPercentage <= lowFocus) {
-      focusClass = "low-focus"
+      focusClass = "low-focus";
     } else if (currentItemPercentage <= normalFocus) {
-      focusClass = "normal-focus"
+      focusClass = "normal-focus";
     } else if (currentItemPercentage <= aboveNormalFocus) {
-      focusClass = "above-normal-focus"
+      focusClass = "above-normal-focus";
     } else if (currentItemPercentage <= mediumFocus) {
-      focusClass = "medium-focus"
+      focusClass = "medium-focus";
     } else {
-      focusClass = "high-focus"
+      focusClass = "high-focus";
     }
-    nameCell.classList.add(focusClass)
-    outstandingCell.classList.add(focusClass)
-
+    nameCell.classList.add(focusClass);
+    outstandingCell.classList.add(focusClass);
   }
 }
 
@@ -133,11 +128,11 @@ function changeElementBackground(elementIndex) {
 // #region Helper Functions for Cell Coloring
 
 function outstandingOnly(flatInfo) {
-  return parseFloat(stripNumberFormatting(flatInfo.OutstandingOnSpecifiedDate))
+  return parseFloat(stripNumberFormatting(flatInfo.OutstandingOnSpecifiedDate));
 }
 
 function getPercentage(current, max) {
-  return current / max * 100;
+  return (current / max) * 100;
 }
 
 // #endregion
@@ -155,9 +150,12 @@ function getCurrentDirectory() {
 
 function stripNumberFormatting(formattedValue) {
   if (formattedValue.includes("(") && formattedValue.includes(")")) {
-    formattedValue = "-" + formattedValue.replace("(", "").replace(")","").replace(",","")
+    formattedValue = "-" + formattedValue.replace("(", "").replace(")", "");
   }
-  return formattedValue
+  if (formattedValue.includes(",")) {
+    formattedValue = formattedValue.replace(",", "");
+  }
+  return formattedValue;
 }
 
 // #endregion
