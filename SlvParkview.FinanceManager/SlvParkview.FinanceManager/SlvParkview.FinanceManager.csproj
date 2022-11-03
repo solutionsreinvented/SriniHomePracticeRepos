@@ -122,6 +122,7 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Penalty.cs" />
     <Compile Include="Reporting\Components\BlockInfoContol.xaml.cs">
       <DependentUpon>BlockInfoContol.xaml</DependentUpon>
     </Compile>
@@ -177,6 +178,7 @@
     <Compile Include="Repositories\FlatRepository.cs" />
     <Compile Include="Services\BlockInitialDataProvider.cs" />
     <Compile Include="Services\DataManagementService.cs" />
+    <Compile Include="Services\DayOccurencesFinder.cs" />
     <Compile Include="Services\ReportsGenerator.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ServiceProvider.cs" />

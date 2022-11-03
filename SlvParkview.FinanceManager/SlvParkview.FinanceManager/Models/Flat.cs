@@ -120,6 +120,13 @@ namespace SlvParkview.FinanceManager.Models
         /// </summary>
         public ObservableCollection<Expense> Expenses { get => Get<ObservableCollection<Expense>>(); set => Set(value); }
         /// <summary>
+        /// Keeps track of the all the penalties imposed for this flat.
+        /// TODO: Remove the JsonIgnore and XmlIgnore incase the penalties data has to be persisted.
+        /// </summary>
+        [JsonIgnore]
+        [XmlIgnore]
+        public ObservableCollection<Expense> Penalties { get => Get<ObservableCollection<Expense>>(); set => Set(value); }
+        /// <summary>
         /// Keeps track of the all the payments made by the flat owner.
         /// </summary>
         public ObservableCollection<Payment> Payments { get => Get<ObservableCollection<Payment>>(); set => Set(value); }
