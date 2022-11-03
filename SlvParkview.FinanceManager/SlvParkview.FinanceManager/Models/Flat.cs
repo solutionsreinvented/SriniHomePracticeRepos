@@ -7,6 +7,8 @@ using System.Linq;
 using SlvParkview.FinanceManager.Enums;
 using Newtonsoft.Json;
 using System.Xml.Serialization;
+using SlvParkview.FinanceManager.Services;
+using System.Collections.Generic;
 
 namespace SlvParkview.FinanceManager.Models
 {
@@ -125,10 +127,10 @@ namespace SlvParkview.FinanceManager.Models
         /// </summary>
         [JsonIgnore]
         [XmlIgnore]
-        public ObservableCollection<Expense> Penalties { get => Get<ObservableCollection<Expense>>(); set => Set(value); }
-        /// <summary>
-        /// Keeps track of the all the payments made by the flat owner.
-        /// </summary>
+        public ObservableCollection<Expense> Penalties => GeneratePenalties(); ///{ get => Get<ObservableCollection<Expense>>(); set => Set(value); }
+                                                                               /// <summary>
+                                                                               /// Keeps track of the all the payments made by the flat owner.
+                                                                               /// </summary>
         public ObservableCollection<Payment> Payments { get => Get<ObservableCollection<Payment>>(); set => Set(value); }
 
         #endregion
@@ -265,6 +267,25 @@ namespace SlvParkview.FinanceManager.Models
                                                     - paymentsTillSpecifiedDate;
 
             return outstandingOnSpecifiedDate;
+        }
+
+        private ObservableCollection<Expense> GeneratePenalties()
+        {
+            List<DateTime> dates = DayOccurencesFinder.FindFor(_block.PenaltyCommencesFrom, DateSpecified, _block.PaymentCutoffDay);
+
+            ObservableCollection<Expense> penalties = new ObservableCollection<Expense>();
+
+            foreach (DateTime date in dates)
+            {
+                decimal outstanding = GetOutstandingBalanceOnSpecifiedDate(date);
+
+                if (outstanding >= _block.MinimumOutstandingForPenalty)
+                {
+                    Expense penalty = new Expense(TransactionCategory.MaintenancePaymentDelay,
+                                                  outstanding * _block.PenaltyPercentage / 100, date);
+                    penalties.Add(penalty);
+                }
+            }
         }
 
         #endregion
