@@ -271,21 +271,40 @@ namespace SlvParkview.FinanceManager.Models
 
         private ObservableCollection<Expense> GeneratePenalties()
         {
-            List<DateTime> dates = DayOccurencesFinder.FindFor(_block.PenaltyCommencesFrom, DateSpecified, _block.PaymentCutoffDay);
+            List<DateTime> dates = DayOccurencesFinder
+                                        .FindFor(_block.PenaltyCommencesFrom, DateSpecified, _block.PaymentCutoffDay);
 
             ObservableCollection<Expense> penalties = new ObservableCollection<Expense>();
 
-            foreach (DateTime date in dates)
+            for (int i = 0; i < dates.Count; i++)
             {
-                decimal outstanding = GetOutstandingBalanceOnSpecifiedDate(date);
+                decimal outstanding = GetOutstandingBalanceOnSpecifiedDate(dates[i]);
+
+                decimal previousPenalty = i > 0 ? penalties[i - 1].Amount : 0.0m;
+
+                outstanding += previousPenalty;
 
                 if (outstanding >= _block.MinimumOutstandingForPenalty)
                 {
                     Expense penalty = new Expense(TransactionCategory.MaintenancePaymentDelay,
-                                                  outstanding * _block.PenaltyPercentage / 100, date);
+                                                  outstanding * _block.PenaltyPercentage / 100, dates[i]);
                     penalties.Add(penalty);
                 }
             }
+
+            return penalties;
+
+            //foreach (DateTime date in dates)
+            //{
+            //    decimal outstanding = GetOutstandingBalanceOnSpecifiedDate(date);
+
+            //    if (outstanding >= _block.MinimumOutstandingForPenalty)
+            //    {
+            //        Expense penalty = new Expense(TransactionCategory.MaintenancePaymentDelay,
+            //                                      outstanding * _block.PenaltyPercentage / 100, date);
+            //        penalties.Add(penalty);
+            //    }
+            //}
         }
 
         #endregion
