@@ -302,9 +302,16 @@ namespace SlvParkview.FinanceManager.Models
             {
                 decimal outstanding = GetOutstandingBalanceOnSpecifiedDate(dates[i]);
 
-                decimal previousPenalty = i > 0 ? Penalties[i - 1].Amount : 0.0m;
+                ///decimal previousPenalty = i > 0 ? Penalties[i - 1].Amount : 0.0m;
 
-                outstanding += previousPenalty;
+                Expense previousPenalty = Penalties?.FirstOrDefault(p => p.OccuredOn == dates[i - 1]);
+
+                ///decimal previousPenalty = i > 0 ? Penalties?.FirstOrDefault(p => p.OccuredOn == dates[i - 1]).Amount : 0.0m;
+
+                if (previousPenalty != null)
+                {
+                    outstanding += previousPenalty.Amount;
+                }
 
                 if (outstanding >= block.MinimumOutstandingForPenalty)
                 {
@@ -313,19 +320,6 @@ namespace SlvParkview.FinanceManager.Models
                     Penalties.Add(penalty);
                 }
             }
-
-
-            //foreach (DateTime date in dates)
-            //{
-            //    decimal outstanding = GetOutstandingBalanceOnSpecifiedDate(date);
-
-            //    if (outstanding >= _block.MinimumOutstandingForPenalty)
-            //    {
-            //        Expense penalty = new Expense(TransactionCategory.MaintenancePaymentDelay,
-            //                                      outstanding * _block.PenaltyPercentage / 100, date);
-            //        penalties.Add(penalty);
-            //    }
-            //}
         }
 
         #endregion

@@ -1,6 +1,7 @@
 ﻿using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Reporting;
 using SlvParkview.FinanceManager.Reporting.Models;
+using SlvParkview.FinanceManager.Services;
 
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace SlvParkview.FinanceManager.Extensions
         /// <returns>A <see cref="List{PrintableTransaction}"/> to facilitate the preparation of an html table.</returns>
         public static List<TransactionInfo> GetTransactionsHistoryBasic(this Flat flat, DateTime summarizeTill)
         {
-            return GetTransactionsHistory(GetTransactionsHistoryDetailed(flat, summarizeTill));
+            return GetTransactionsHistory(GetTransactionsHistoryDetailedModified(flat, summarizeTill));
         }
 
         /// <summary>
@@ -134,6 +135,41 @@ namespace SlvParkview.FinanceManager.Extensions
 
             return transactionRecords;
         }
+
+        public static List<TransactionRecord> GetTransactionsHistoryDetailedModified(this Flat flat, DateTime summarizeTill)
+        {
+            List<Expense> expensesInRange = flat.Expenses?
+                                                .Where(e => e.OccuredOn >= flat.AccountOpenedOn && e.OccuredOn <= summarizeTill).ToList();
+            List<Payment> paymentsInRange = flat.Payments?
+                                                .Where(p => p.ReceivedOn >= flat.AccountOpenedOn && p.ReceivedOn <= summarizeTill).ToList();
+            List<Expense> penaltiesInRange = flat.Penalties?
+                                                 .Where(p => p.OccuredOn >= flat.AccountOpenedOn && p.OccuredOn <= summarizeTill).ToList();
+
+            if (expensesInRange?.Count <= 0 && paymentsInRange?.Count <= 0 && penaltiesInRange?.Count <= 0)
+            {
+                return null;
+            }
+
+            List<TransactionRecord> transactionRecords = new List<TransactionRecord>();
+
+            if (TransactionRecordsService.Generate(expensesInRange) != null)
+            {
+                transactionRecords.AddRange(TransactionRecordsService.Generate(expensesInRange));
+            }
+            if (TransactionRecordsService.Generate(penaltiesInRange) != null)
+            {
+                transactionRecords.AddRange(TransactionRecordsService.Generate(penaltiesInRange));
+            }
+            if (TransactionRecordsService.Generate(paymentsInRange) != null)
+            {
+                transactionRecords.AddRange(TransactionRecordsService.Generate(paymentsInRange));
+            }
+
+            transactionRecords = TransactionRecordsService.Summarize(transactionRecords, flat.AccountOpenedOn, summarizeTill, flat.OpeningBalance).ToList();
+
+            return transactionRecords;
+        }
+
 
         #endregion
 

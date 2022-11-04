@@ -182,6 +182,7 @@
     <Compile Include="Services\ReportsGenerator.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ServiceProvider.cs" />
+    <Compile Include="Services\TransactionRecordsService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CommonExpenseViewModel.cs" />
     <Compile Include="ViewModels\ExpenseViewModel.cs" />
