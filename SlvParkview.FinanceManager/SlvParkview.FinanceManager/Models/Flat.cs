@@ -127,10 +127,10 @@ namespace SlvParkview.FinanceManager.Models
         /// </summary>
         [JsonIgnore]
         [XmlIgnore]
-        public ObservableCollection<Expense> Penalties => GeneratePenalties(); ///{ get => Get<ObservableCollection<Expense>>(); set => Set(value); }
-                                                                               /// <summary>
-                                                                               /// Keeps track of the all the payments made by the flat owner.
-                                                                               /// </summary>
+        public ObservableCollection<Expense> Penalties { get => Get<ObservableCollection<Expense>>(); private set => Set(value); }
+        /// <summary>
+        /// Keeps track of the all the payments made by the flat owner.
+        /// </summary>
         public ObservableCollection<Payment> Payments { get => Get<ObservableCollection<Payment>>(); set => Set(value); }
 
         #endregion
@@ -250,6 +250,25 @@ namespace SlvParkview.FinanceManager.Models
             //    TenantName = "";
             //}
         }
+        //private decimal GetOutstandingBalanceOnSpecifiedDate(DateTime? calculatedTill = null)
+        //{
+        //    if (calculatedTill == null)
+        //    {
+        //        calculatedTill = DateTime.Today;
+        //    }
+
+        //    decimal expensesTillSpecifiedDate = Expenses == null ? 0.0m : Expenses.Where(e => e.OccuredOn <= calculatedTill).Sum(e => e.Amount);
+
+        //    decimal paymentsTillSpecifiedDate = Payments == null ? 0.0m : Payments.Where(p => p.ReceivedOn <= calculatedTill).Sum(p => p.Amount);
+
+
+        //    decimal outstandingOnSpecifiedDate = OpeningBalance
+        //                                            + expensesTillSpecifiedDate
+        //                                            - paymentsTillSpecifiedDate;
+
+        //    return outstandingOnSpecifiedDate;
+        //}
+
         private decimal GetOutstandingBalanceOnSpecifiedDate(DateTime? calculatedTill = null)
         {
             if (calculatedTill == null)
@@ -261,38 +280,40 @@ namespace SlvParkview.FinanceManager.Models
 
             decimal paymentsTillSpecifiedDate = Payments == null ? 0.0m : Payments.Where(p => p.ReceivedOn <= calculatedTill).Sum(p => p.Amount);
 
+            decimal penaltiesTillSpecifiedDate = Penalties == null || Penalties.Count() == 0 ? 0.0m : 
+                                                              Penalties.Where(p => p.OccuredOn <= calculatedTill).Sum(p => p.Amount);
 
             decimal outstandingOnSpecifiedDate = OpeningBalance
                                                     + expensesTillSpecifiedDate
+                                                    + penaltiesTillSpecifiedDate
                                                     - paymentsTillSpecifiedDate;
 
             return outstandingOnSpecifiedDate;
         }
 
-        private ObservableCollection<Expense> GeneratePenalties()
+        public void GeneratePenalties(Block block)
         {
             List<DateTime> dates = DayOccurencesFinder
-                                        .FindFor(_block.PenaltyCommencesFrom, DateSpecified, _block.PaymentCutoffDay);
+                                        .FindFor(block.PenaltyCommencesFrom, DateSpecified, block.PaymentCutoffDay);
 
-            ObservableCollection<Expense> penalties = new ObservableCollection<Expense>();
+            Penalties = new ObservableCollection<Expense>();
 
             for (int i = 0; i < dates.Count; i++)
             {
                 decimal outstanding = GetOutstandingBalanceOnSpecifiedDate(dates[i]);
 
-                decimal previousPenalty = i > 0 ? penalties[i - 1].Amount : 0.0m;
+                decimal previousPenalty = i > 0 ? Penalties[i - 1].Amount : 0.0m;
 
                 outstanding += previousPenalty;
 
-                if (outstanding >= _block.MinimumOutstandingForPenalty)
+                if (outstanding >= block.MinimumOutstandingForPenalty)
                 {
                     Expense penalty = new Expense(TransactionCategory.MaintenancePaymentDelay,
-                                                  outstanding * _block.PenaltyPercentage / 100, dates[i]);
-                    penalties.Add(penalty);
+                                                  outstanding * block.PenaltyPercentage / 100, dates[i]);
+                    Penalties.Add(penalty);
                 }
             }
 
-            return penalties;
 
             //foreach (DateTime date in dates)
             //{

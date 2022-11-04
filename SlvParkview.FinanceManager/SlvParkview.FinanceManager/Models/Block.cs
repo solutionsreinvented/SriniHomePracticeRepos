@@ -11,7 +11,7 @@ namespace SlvParkview.FinanceManager.Models
 
         public Block()
         {
-
+            Initialize();
         }
 
         #endregion
@@ -26,18 +26,36 @@ namespace SlvParkview.FinanceManager.Models
         /// <summary>
         /// Date from which the penalties for delay in maintenance payments will be applicable.
         /// </summary>
-        public DateTime PenaltyCommencesFrom { get => Get<DateTime>(new DateTime(2022, 10, 01)); set => Set(value); }
+        public DateTime PenaltyCommencesFrom { get => Get<DateTime>(); set => Set(value); }
 
-        public decimal PenaltyPercentage { get => Get(20.0m); set => Set(value); }
+        public decimal PenaltyPercentage { get => Get<decimal>(); set => Set(value); }
 
-        public decimal MinimumOutstandingForPenalty { get => Get(5600.0m); set => Set(value); }
+        public decimal MinimumOutstandingForPenalty { get => Get<decimal>(); set => Set(value); }
 
         /// <summary>
         /// Cutoff date by which the maintenance outstanding shall be cleared.
         /// </summary>
-        public int PaymentCutoffDay { get => Get<int>(15); set => Set(value); }
+        public int PaymentCutoffDay { get => Get<int>(); set => Set(value); }
 
 
         #endregion
+
+        #region Private Helpers
+
+        private void Initialize()
+        {
+            InitializePenaltyStuff();
+        }
+
+        private void InitializePenaltyStuff()
+        {
+            PenaltyCommencesFrom = new DateTime(2022, 10, 01);
+            PenaltyPercentage = 20.0m;
+            PaymentCutoffDay = 10;
+            MinimumOutstandingForPenalty = 5600.0m;
+        }
+
+        #endregion
+
     }
 }
