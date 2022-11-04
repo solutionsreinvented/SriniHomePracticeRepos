@@ -316,7 +316,7 @@ namespace SlvParkview.FinanceManager.Models
                 if (outstanding >= block.MinimumOutstandingForPenalty)
                 {
                     Expense penalty = new Expense(TransactionCategory.MaintenancePaymentDelay,
-                                                  outstanding * block.PenaltyPercentage / 100, dates[i]);
+                                                  outstanding * block.PenaltyPercentage, dates[i]);
                     Penalties.Add(penalty);
                 }
             }
