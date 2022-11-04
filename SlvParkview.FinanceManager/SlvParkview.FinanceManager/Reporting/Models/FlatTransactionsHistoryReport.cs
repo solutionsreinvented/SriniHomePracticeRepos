@@ -24,6 +24,8 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private const string _fileName = "Transactions History";
 
+        private readonly Block _block;
+
         private readonly Flat _flat;
 
         private readonly DateTime _reportTill;
@@ -41,11 +43,18 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         #region Parameterized Constructor
 
-        public FlatTransactionsHistoryReport(Flat flat, DateTime reportTill)
+        public FlatTransactionsHistoryReport(Block block, Flat flat, DateTime reportTill)
         {
+            _block = block;
             _flat = flat;
             _reportTill = reportTill;
         }
+
+        ///public FlatTransactionsHistoryReport(Flat flat, DateTime reportTill)
+        ///{
+        ///    _flat = flat;
+        ///    _reportTill = reportTill;
+        ///}
 
         #endregion
 
@@ -65,6 +74,8 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         {
             if (_flat != null)
             {
+                _flat.GeneratePenalties(_block);
+
                 FlatInfo = _flat.ParseToFlatInfo();
                 Transactions = _flat.GetTransactionsHistoryBasic(_reportTill);
             }

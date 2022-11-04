@@ -43,7 +43,7 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
 
         private void UpdateReport()
         {
-            Report = new FlatTransactionsHistoryReport(SelectedFlat, ReportTill);
+            Report = new FlatTransactionsHistoryReport(Block, SelectedFlat, ReportTill);
             Report.GenerateContents();
         }
 
