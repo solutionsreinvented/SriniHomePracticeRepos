@@ -250,24 +250,6 @@ namespace SlvParkview.FinanceManager.Models
             //    TenantName = "";
             //}
         }
-        //private decimal GetOutstandingBalanceOnSpecifiedDate(DateTime? calculatedTill = null)
-        //{
-        //    if (calculatedTill == null)
-        //    {
-        //        calculatedTill = DateTime.Today;
-        //    }
-
-        //    decimal expensesTillSpecifiedDate = Expenses == null ? 0.0m : Expenses.Where(e => e.OccuredOn <= calculatedTill).Sum(e => e.Amount);
-
-        //    decimal paymentsTillSpecifiedDate = Payments == null ? 0.0m : Payments.Where(p => p.ReceivedOn <= calculatedTill).Sum(p => p.Amount);
-
-
-        //    decimal outstandingOnSpecifiedDate = OpeningBalance
-        //                                            + expensesTillSpecifiedDate
-        //                                            - paymentsTillSpecifiedDate;
-
-        //    return outstandingOnSpecifiedDate;
-        //}
 
         private decimal GetOutstandingBalanceOnSpecifiedDate(DateTime? calculatedTill = null)
         {
@@ -302,11 +284,7 @@ namespace SlvParkview.FinanceManager.Models
             {
                 decimal outstanding = GetOutstandingBalanceOnSpecifiedDate(dates[i]);
 
-                ///decimal previousPenalty = i > 0 ? Penalties[i - 1].Amount : 0.0m;
-
                 Expense previousPenalty = Penalties?.FirstOrDefault(p => p.OccuredOn == dates[i - 1]);
-
-                ///decimal previousPenalty = i > 0 ? Penalties?.FirstOrDefault(p => p.OccuredOn == dates[i - 1]).Amount : 0.0m;
 
                 if (previousPenalty != null)
                 {
@@ -315,7 +293,7 @@ namespace SlvParkview.FinanceManager.Models
 
                 if (outstanding >= block.MinimumOutstandingForPenalty)
                 {
-                    Expense penalty = new Expense(TransactionCategory.MaintenancePaymentDelay,
+                    Expense penalty = new Expense(TransactionCategory.PenaltyMaintenance,
                                                   outstanding * block.PenaltyPercentage, dates[i]);
                     Penalties.Add(penalty);
                 }

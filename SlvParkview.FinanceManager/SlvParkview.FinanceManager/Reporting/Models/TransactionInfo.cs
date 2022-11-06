@@ -27,7 +27,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
             return new TransactionInfo()
             {
-                TransactionDate = record.TransactionDate.ToString("dd MMMM yyyy"),
+                TransactionDate = record.TransactionDate.ToString("dd MMM yyyy"),
                 PaymentAmount = record.Payment != null ? record.Payment.Amount.FormatNumber(numberFormat) : blank,
                 PaymentCategory = record.Payment != null ? record.Payment.Category.ToString() : blank,
                 PaymentMode = record.Payment != null ? record.Payment.Mode.ToString() : blank,

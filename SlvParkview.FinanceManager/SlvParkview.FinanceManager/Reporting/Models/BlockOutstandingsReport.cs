@@ -70,15 +70,19 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             {
                 foreach (Flat flat in _block.Flats)
                 {
-                    flat.GeneratePenalties(_block);
+                    if (_block.ConsiderPenalties)
+                    {
+                        flat.GeneratePenalties(_block);
+                    }
+                    else
+                    {
+                        flat.Penalties.Clear();
+                    }
+
                     flat.DateSpecified = _reportTill;
                     FlatInfoCollection.Add(flat.ParseToFlatInfo());
                 }
             }
-
-            var principalOutstanding = FlatInfoCollection?.Sum(f => decimal.Parse(StripNumberFormat(f.OutstandingOnSpecifiedDate))).FormatNumber("N1");
-
-
 
             TotalOutstanding = FlatInfoCollection?.Sum(f => decimal.Parse(StripNumberFormat(f.OutstandingOnSpecifiedDate))).FormatNumber("N1");
         }

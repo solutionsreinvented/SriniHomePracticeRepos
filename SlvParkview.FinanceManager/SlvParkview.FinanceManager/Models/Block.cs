@@ -27,21 +27,22 @@ namespace SlvParkview.FinanceManager.Models
         /// Date from which the penalties for delay in maintenance payments will be applicable.
         /// </summary>
         public DateTime PenaltyCommencesFrom { get => Get<DateTime>(); set { Set(value); UpdateFlatPenalties(); } }
-
-        private void UpdateFlatPenalties()
-        {
-            Flats?.ForEach(f => f.GeneratePenalties(this));
-        }
-
+        /// <summary>
+        /// Percentage of outstanding due which is added as penalty.
+        /// </summary>
         public decimal PenaltyPercentage { get => Get<decimal>(); set { Set(value); UpdateFlatPenalties(); } }
-
+        /// <summary>
+        /// Amount beyond which the penalty is applicable.
+        /// </summary>
         public decimal MinimumOutstandingForPenalty { get => Get<decimal>(); set { Set(value); UpdateFlatPenalties(); } }
-
         /// <summary>
         /// Cutoff date by which the maintenance outstanding shall be cleared.
         /// </summary>
-        public int PaymentCutoffDay { get => Get<int>(); set => Set(value); }
-
+        public int PaymentCutoffDay { get => Get<int>(); set { Set(value); UpdateFlatPenalties(); } }
+        /// <summary>
+        /// Indicates whether penalties to be considered in the calculations
+        /// </summary>
+        public bool ConsiderPenalties { get => Get<bool>(); set { Set(value); UpdateFlatPenalties(); } }
 
         #endregion
 
@@ -58,6 +59,19 @@ namespace SlvParkview.FinanceManager.Models
             PenaltyPercentage = 20.0m;
             PaymentCutoffDay = 01;
             MinimumOutstandingForPenalty = 5600.0m;
+            ConsiderPenalties = true;
+        }
+
+        private void UpdateFlatPenalties()
+        {
+            if (ConsiderPenalties)
+            {
+                Flats?.ForEach(f => f.GeneratePenalties(this));
+            }
+            else
+            {
+                Flats?.ForEach(f => f.Penalties.Clear());
+            }
         }
 
         #endregion

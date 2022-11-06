@@ -74,7 +74,14 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         {
             if (_flat != null)
             {
-                _flat.GeneratePenalties(_block);
+                if (_block.ConsiderPenalties)
+                {
+                    _flat.GeneratePenalties(_block);
+                }
+                else
+                {
+                    _flat.Penalties.Clear();
+                }
 
                 FlatInfo = _flat.ParseToFlatInfo();
                 Transactions = _flat.GetTransactionsHistoryBasic(_reportTill);

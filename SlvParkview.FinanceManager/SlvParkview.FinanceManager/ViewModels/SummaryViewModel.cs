@@ -3,7 +3,6 @@
 using System.Windows.Input;
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Services;
-using System;
 
 namespace SlvParkview.FinanceManager.ViewModels
 {
