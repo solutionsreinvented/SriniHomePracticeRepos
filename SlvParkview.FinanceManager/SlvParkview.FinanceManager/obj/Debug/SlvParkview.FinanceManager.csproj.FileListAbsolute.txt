@@ -169,3 +169,5 @@ C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManage
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.csproj.AssemblyReference.cache
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\PenaltyInfoControl.baml
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\PenaltyInfoControl.g.cs
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\PenaltyInfoControl.baml
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\PenaltyInfoControl.g.cs
