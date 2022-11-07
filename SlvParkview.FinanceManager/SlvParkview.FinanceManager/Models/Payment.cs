@@ -47,7 +47,7 @@ namespace SlvParkview.FinanceManager.Models
         /// <summary>
         /// Date on which the payment is entered in to the database.
         /// </summary>
-        public DateTime RecordedOn { get => Get(ReceivedOn); set { Set(value); } }
+        public DateTime RecordedOn { get => Get(ReceivedOn); set => Set(value); }
         /// <summary>
         /// Category <see cref="TransactionCategory"/> of the payment.
         /// </summary>

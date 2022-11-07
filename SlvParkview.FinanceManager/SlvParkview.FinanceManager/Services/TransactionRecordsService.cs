@@ -56,7 +56,7 @@ namespace SlvParkview.FinanceManager.Services
                     summaryRecords.Add(p);
                 }
 
-                foreach (var e in expensesOnThisDate)
+                foreach (TransactionRecord e in expensesOnThisDate)
                 {
                     currentOutstanding += e.Expense.Amount;
                     e.Outstanding = currentOutstanding;
