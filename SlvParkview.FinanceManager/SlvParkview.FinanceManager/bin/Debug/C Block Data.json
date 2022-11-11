@@ -1,5 +1,5 @@
 {
-  "LastUpdated": "2022-11-07T11:32:54.3330517+05:30",
+  "LastUpdated": "2022-11-11T21:48:31.2073461+05:30",
   "Name": "C",
   "Flats": [
     {
@@ -121,8 +121,8 @@
         }
       ],
       "Payments": null,
-      "OutstandingOnSpecifiedDate": 35248.000,
-      "CurrentOutstanding": 35248.000
+      "OutstandingOnSpecifiedDate": 29840.00,
+      "CurrentOutstanding": 29840.00
     },
     {
       "Number": "020",
@@ -284,8 +284,8 @@
         }
       ],
       "Payments": null,
-      "OutstandingOnSpecifiedDate": 24979.600,
-      "CurrentOutstanding": 24979.600
+      "OutstandingOnSpecifiedDate": 21283.00,
+      "CurrentOutstanding": 21283.00
     },
     {
       "Number": "024",
@@ -351,8 +351,8 @@
         }
       ],
       "Payments": null,
-      "OutstandingOnSpecifiedDate": 26320.000,
-      "CurrentOutstanding": 26320.000
+      "OutstandingOnSpecifiedDate": 22400.00,
+      "CurrentOutstanding": 22400.00
     },
     {
       "Number": "118",
@@ -390,10 +390,17 @@
           "RecordedOn": "2022-10-20T00:00:00+05:30",
           "Category": 1,
           "Amount": 5600.00
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2022-11-11T00:00:00+05:30",
+          "RecordedOn": "2022-11-11T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
-      "OutstandingOnSpecifiedDate": 3920.000,
-      "CurrentOutstanding": 3920.000
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 0.00
     },
     {
       "Number": "119",
@@ -418,8 +425,8 @@
         }
       ],
       "Payments": null,
-      "OutstandingOnSpecifiedDate": 22960.000,
-      "CurrentOutstanding": 22960.000
+      "OutstandingOnSpecifiedDate": 19600.00,
+      "CurrentOutstanding": 19600.00
     },
     {
       "Number": "120",
@@ -589,8 +596,8 @@
           "Amount": 2800.00
         }
       ],
-      "OutstandingOnSpecifiedDate": 4607.800,
-      "CurrentOutstanding": 1807.800
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 0.00
     },
     {
       "Number": "124",
@@ -712,8 +719,8 @@
           "Amount": 5600.00
         }
       ],
-      "OutstandingOnSpecifiedDate": 3920.000,
-      "CurrentOutstanding": 3920.000
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "219",
@@ -738,8 +745,8 @@
         }
       ],
       "Payments": null,
-      "OutstandingOnSpecifiedDate": 12880.000,
-      "CurrentOutstanding": 12880.000
+      "OutstandingOnSpecifiedDate": 11200.00,
+      "CurrentOutstanding": 11200.00
     },
     {
       "Number": "220",
@@ -764,8 +771,8 @@
         }
       ],
       "Payments": null,
-      "OutstandingOnSpecifiedDate": 30280.000,
-      "CurrentOutstanding": 30280.000
+      "OutstandingOnSpecifiedDate": 25700.00,
+      "CurrentOutstanding": 25700.00
     },
     {
       "Number": "221",
@@ -839,8 +846,8 @@
           "Amount": 8000.00
         }
       ],
-      "OutstandingOnSpecifiedDate": 4880.000,
-      "CurrentOutstanding": 4880.000
+      "OutstandingOnSpecifiedDate": 3200.00,
+      "CurrentOutstanding": 3200.00
     },
     {
       "Number": "223",
@@ -995,8 +1002,8 @@
         }
       ],
       "Payments": null,
-      "OutstandingOnSpecifiedDate": 26320.000,
-      "CurrentOutstanding": 26320.000
+      "OutstandingOnSpecifiedDate": 22400.00,
+      "CurrentOutstanding": 22400.00
     },
     {
       "Number": "319",
@@ -1029,8 +1036,8 @@
           "Amount": 2800.00
         }
       ],
-      "OutstandingOnSpecifiedDate": 25248.000,
-      "CurrentOutstanding": 25248.000
+      "OutstandingOnSpecifiedDate": 21040.00,
+      "CurrentOutstanding": 21040.00
     },
     {
       "Number": "320",
@@ -1103,8 +1110,8 @@
         }
       ],
       "Payments": null,
-      "OutstandingOnSpecifiedDate": 54622.000,
-      "CurrentOutstanding": 54622.000
+      "OutstandingOnSpecifiedDate": 45985.00,
+      "CurrentOutstanding": 45985.00
     },
     {
       "Number": "322",
@@ -1129,8 +1136,8 @@
         }
       ],
       "Payments": null,
-      "OutstandingOnSpecifiedDate": 9520.000,
-      "CurrentOutstanding": 9520.000
+      "OutstandingOnSpecifiedDate": 8400.00,
+      "CurrentOutstanding": 8400.00
     },
     {
       "Number": "323",
@@ -1170,8 +1177,8 @@
           "Amount": 5600.00
         }
       ],
-      "OutstandingOnSpecifiedDate": 22988.000,
-      "CurrentOutstanding": 22988.000
+      "OutstandingOnSpecifiedDate": 18690.00,
+      "CurrentOutstanding": 18690.00
     },
     {
       "Number": "324",
@@ -1219,5 +1226,5 @@
   "PenaltyPercentage": 0.2,
   "MinimumOutstandingForPenalty": 5600.0,
   "PaymentCutoffDay": 10,
-  "ConsiderPenalties": true
+  "ConsiderPenalties": false
 }
