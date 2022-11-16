@@ -1,5 +1,5 @@
 {
-  "LastUpdated": "2022-11-16T17:02:13.6258176+05:30",
+  "LastUpdated": "2022-11-16T23:32:30.3960492+05:30",
   "Name": "C",
   "Flats": [
     {
@@ -512,10 +512,17 @@
           "RecordedOn": "2022-10-19T00:00:00+05:30",
           "Category": 1,
           "Amount": 3000.00
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2022-11-16T00:00:00+05:30",
+          "RecordedOn": "2022-11-16T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
-      "OutstandingOnSpecifiedDate": 2600.00,
-      "CurrentOutstanding": 2600.00
+      "OutstandingOnSpecifiedDate": -200.00,
+      "CurrentOutstanding": -200.00
     },
     {
       "Number": "122",
@@ -717,10 +724,17 @@
           "RecordedOn": "2022-10-18T00:00:00+05:30",
           "Category": 1,
           "Amount": 5600.00
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2022-11-16T00:00:00+05:30",
+          "RecordedOn": "2022-11-16T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
-      "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00
+      "OutstandingOnSpecifiedDate": 0.00,
+      "CurrentOutstanding": 0.00
     },
     {
       "Number": "219",
