@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 
 using ReInvented.Shared.Stores;
@@ -214,6 +213,5 @@ namespace ReIn.TabPathGeometry.Models
         }
 
         #endregion
-
     }
 }

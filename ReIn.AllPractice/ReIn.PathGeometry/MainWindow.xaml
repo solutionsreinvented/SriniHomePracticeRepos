@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:ReIn.TabPathGeometry.Models"
-    Title="MainWindow"
+    Title="Tab Geometry Practice"
     Width="800"
     Height="650"
     mc:Ignorable="d">
