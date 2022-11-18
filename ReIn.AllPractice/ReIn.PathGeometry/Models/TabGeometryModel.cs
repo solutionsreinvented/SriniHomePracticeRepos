@@ -13,7 +13,7 @@ namespace ReIn.TabPathGeometry.Models
         public TabGeometryModel()
         {
 
-        } 
+        }
 
         #endregion
 
@@ -65,20 +65,19 @@ namespace ReIn.TabPathGeometry.Models
             {
                 StartPoint = new Point()
                 {
-                    X = B,
-                    Y = 0
+                    X = B - (StrokeThickness / 2),
+                    Y = 0 + (StrokeThickness / 2)
                 },
                 Segments = new PathSegmentCollection()
                 {
-                    CreateNewLineSegment(Db, 0),
-                    CreateNewLineSegment(0, Dh),
-                    CreateNewLineSegment(0, H),
-                    CreateNewLineSegment(B, H)
+                    CreateNewLineSegment(Db + (StrokeThickness / 2), 0 + (StrokeThickness / 2)),
+                    CreateNewLineSegment(0 + (StrokeThickness / 2), Dh + (StrokeThickness / 2)),
+                    CreateNewLineSegment(0 + (StrokeThickness / 2), H - (StrokeThickness / 2)),
+                    CreateNewLineSegment(B - (StrokeThickness / 2), H - (StrokeThickness / 2))
                 }
             };
 
             pathGeometry.Figures.Add(pathFigure);
-
             return pathGeometry;
         }
 
@@ -89,15 +88,15 @@ namespace ReIn.TabPathGeometry.Models
             {
                 StartPoint = new Point()
                 {
-                    X = 0,
-                    Y = H
+                    X = 0 + (StrokeThickness / 2),
+                    Y = H - (StrokeThickness / 2)
                 },
                 Segments = new PathSegmentCollection()
                 {
-                    CreateNewLineSegment(0, 0),
-                    CreateNewLineSegment(B - Db, 0),
-                    CreateNewLineSegment(B, Dh),
-                    CreateNewLineSegment(B, H)
+                    CreateNewLineSegment(0 + (StrokeThickness / 2), 0 + (StrokeThickness / 2)),
+                    CreateNewLineSegment(B - Db - (StrokeThickness / 2), 0 + (StrokeThickness / 2)),
+                    CreateNewLineSegment(B - (StrokeThickness / 2), Dh + (StrokeThickness / 2)),
+                    CreateNewLineSegment(B - (StrokeThickness / 2), H - StrokeThickness / 2)
                 }
             };
 

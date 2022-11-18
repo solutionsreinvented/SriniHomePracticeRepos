@@ -13,11 +13,11 @@
 
     <Window.Resources>
 
-        <core:Double x:Key="B">300</core:Double>
-        <core:Double x:Key="H">40</core:Double>
+        <core:Double x:Key="B">200</core:Double>
+        <core:Double x:Key="H">30</core:Double>
         <core:Double x:Key="DB">10</core:Double>
         <core:Double x:Key="DH">10</core:Double>
-        <core:Double x:Key="StrokeThickness">1</core:Double>
+        <core:Double x:Key="StrokeThickness">0.2</core:Double>
 
 
         <!--#region Placement Closed-->
@@ -101,9 +101,17 @@
                 <Setter Property="Height" Value="{StaticResource H}" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="VerticalAlignment" Value="Center" />
-                <Setter Property="Stroke" Value="Red" />
+                <Setter Property="Stroke" Value="#c6c906" />
                 <Setter Property="StrokeThickness" Value="{StaticResource StrokeThickness}" />
-                <Setter Property="Fill" Value="AliceBlue" />
+                <Setter Property="Fill">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0 0.5" EndPoint="0 0">
+                            <GradientStop Offset="0" Color="#e9ed72" />
+                            <GradientStop Offset="0.5" Color="#f4f792" />
+                            <GradientStop Offset="1" Color="#f0f2a2" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
             </Style>
 
         </StackPanel.Resources>
@@ -171,10 +179,7 @@
                 </Grid>
 
                 <Grid Margin="5">
-                    <Path
-                        Panel.ZIndex="1"
-                        Data="{Binding BottomPlacementOpen}"
-                        Fill="AntiqueWhite" />
+                    <Path Panel.ZIndex="1" Data="{Binding BottomPlacementOpen}" />
                 </Grid>
 
             </StackPanel>
