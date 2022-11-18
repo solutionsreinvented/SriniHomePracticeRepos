@@ -48,7 +48,6 @@
             </PathFigure>
         </PathGeometry>
 
-
         <PathGeometry x:Key="RightPlacementClosed">
             <PathFigure StartPoint="0 0">
                 <PathFigure.Segments>
@@ -105,7 +104,8 @@
                 Height="50"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Data="{StaticResource LeftPlacementClosed}"
+                Data="{Binding BottomPlacementOpen}"
+                DataContext="{StaticResource TabGeometryModel}"
                 Fill="AliceBlue"
                 Stroke="Red"
                 StrokeThickness="1" />

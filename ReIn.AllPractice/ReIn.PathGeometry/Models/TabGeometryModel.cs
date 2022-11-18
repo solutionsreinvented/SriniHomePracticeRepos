@@ -233,10 +233,29 @@ namespace ReIn.TabPathGeometry.Models
         }
 
 
+        #region Private Helpers
+
         private void RaiseNotifications()
         {
-            RaiseMultiplePropertiesChanged(nameof(TopPlacementOpen));
+            RaiseMultiplePropertiesChanged(nameof(LeftPlacementOpen), nameof(TopPlacementOpen), nameof(RightPlacementOpen), nameof(BottomPlacementOpen));
         }
+
+        private LineSegment CreateNewLineSegment(double x, double y)
+        {
+            return new LineSegment()
+            {
+                Point = new Point()
+                {
+                    X = x,
+                    Y = y
+                }
+            };
+        }
+
+
+        #endregion
+
+
 
     }
 }
