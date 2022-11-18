@@ -8,15 +8,17 @@
     xmlns:models="clr-namespace:ReIn.TabPathGeometry.Models"
     Title="MainWindow"
     Width="800"
-    Height="450"
+    Height="650"
     mc:Ignorable="d">
 
     <Window.Resources>
 
-        <core:Double x:Key="B">200</core:Double>
-        <core:Double x:Key="H">30</core:Double>
+        <core:Double x:Key="B">300</core:Double>
+        <core:Double x:Key="H">40</core:Double>
         <core:Double x:Key="DB">10</core:Double>
         <core:Double x:Key="DH">10</core:Double>
+        <core:Double x:Key="StrokeThickness">1</core:Double>
+
 
         <!--#region Placement Closed-->
 
@@ -82,83 +84,104 @@
 
     <StackPanel VerticalAlignment="Center">
 
-        <StackPanel>
-            <StackPanel.Resources>
-                <models:TabGeometryModel
-                    x:Key="TabGeometryModel"
-                    B="{StaticResource B}"
-                    Db="{StaticResource DB}"
-                    Dh="{StaticResource DH}"
-                    H="{StaticResource H}" />
-            </StackPanel.Resources>
+        <!--#region Resources-->
+
+        <StackPanel.Resources>
+
+            <models:TabGeometryModel
+                x:Key="TabGeometryModel"
+                B="{StaticResource B}"
+                Db="{StaticResource DB}"
+                Dh="{StaticResource DH}"
+                H="{StaticResource H}"
+                StrokeThickness="{StaticResource StrokeThickness}" />
+
+            <Style TargetType="{x:Type Path}">
+                <Setter Property="Width" Value="{StaticResource B}" />
+                <Setter Property="Height" Value="{StaticResource H}" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Stroke" Value="Red" />
+                <Setter Property="StrokeThickness" Value="{StaticResource StrokeThickness}" />
+                <Setter Property="Fill" Value="AliceBlue" />
+            </Style>
+
+        </StackPanel.Resources>
+
+        <!--#endregion-->
+
+        <!--#region Input for Testing-->
+
+        <Grid Margin="0,0,0,20" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBox
+                x:Name="WidthBox"
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="200" />
+            <TextBox
+                x:Name="HeightBox"
+                Grid.Row="0"
+                Grid.Column="1"
+                Text="30" />
+            <TextBox
+                x:Name="DWidthBox"
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="10" />
+            <TextBox
+                x:Name="DHeightBox"
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="10" />
+
+        </Grid>
+
+        <!--#endregion-->
+
+        <!--#region Code Based Open-->
+
+        <StackPanel Margin="0,20">
+
             <TextBlock HorizontalAlignment="Center" Text="Using the Model Class" />
 
-            <TabPanel
+            <StackPanel
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 DataContext="{StaticResource TabGeometryModel}">
 
+                <Grid Margin="5">
+                    <Path Data="{Binding LeftPlacementOpen}" />
+                </Grid>
 
                 <Grid Margin="5">
-                    <!--<Grid.Resources>
-                <models:TabGeometry x:Key="TabGeometry" B="{Binding Width, ElementName=TabItemName}" />
-            </Grid.Resources>
+                    <Path Data="{Binding TopPlacementOpen}" />
+                </Grid>
 
-            <TextBlock DataContext="{StaticResource TabGeometry}" Text="{Binding B}" />-->
-
-                    <Path
-                        x:Name="TabItemName"
-                        Width="220"
-                        Height="50"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Data="{Binding LeftPlacementOpen}"
-                        Fill="AliceBlue"
-                        Stroke="Red"
-                        StrokeThickness="1" />
+                <Grid Margin="5">
+                    <Path Data="{Binding RightPlacementOpen}" />
                 </Grid>
 
                 <Grid Margin="5">
                     <Path
-                        Width="220"
-                        Height="50"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Data="{Binding TopPlacementOpen}"
-                        Fill="AliceBlue"
-                        Stroke="Red"
-                        StrokeThickness="1" />
-                </Grid>
-
-
-                <Grid Margin="5">
-                    <Path
-                        Width="220"
-                        Height="50"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Data="{Binding RightPlacementOpen}"
-                        Fill="AliceBlue"
-                        Stroke="Red"
-                        StrokeThickness="1" />
-                </Grid>
-
-                <Grid Margin="5">
-                    <Path
-                        Width="220"
-                        Height="50"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
                         Panel.ZIndex="1"
                         Data="{Binding BottomPlacementOpen}"
-                        Fill="AntiqueWhite"
-                        Stroke="Red"
-                        StrokeThickness="1" />
+                        Fill="AntiqueWhite" />
                 </Grid>
 
+            </StackPanel>
 
-            </TabPanel>
         </StackPanel>
+
+        <!--#endregion-->
 
         <!--#region Xaml Open-->
 
@@ -166,61 +189,26 @@
 
             <TextBlock HorizontalAlignment="Center" Text="Using the Xaml Static Resources" />
 
-            <TabPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
                 <Grid Margin="5">
-
-                    <Path
-                        Width="220"
-                        Height="50"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Data="{StaticResource LeftPlacementOpen}"
-                        Fill="AliceBlue"
-                        Stroke="Red"
-                        StrokeThickness="1" />
+                    <Path Data="{StaticResource LeftPlacementOpen}" />
                 </Grid>
 
                 <Grid Margin="5">
-                    <Path
-                        Width="220"
-                        Height="50"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Data="{StaticResource TopPlacementOpen}"
-                        Fill="AliceBlue"
-                        Stroke="Red"
-                        StrokeThickness="1" />
-                </Grid>
-
-
-                <Grid Margin="5">
-                    <Path
-                        Width="220"
-                        Height="50"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Data="{StaticResource RightPlacementOpen}"
-                        Fill="AliceBlue"
-                        Stroke="Red"
-                        StrokeThickness="1" />
+                    <Path Data="{StaticResource TopPlacementOpen}" />
                 </Grid>
 
                 <Grid Margin="5">
-                    <Path
-                        Width="220"
-                        Height="50"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Panel.ZIndex="1"
-                        Data="{StaticResource BottomPlacementOpen}"
-                        Fill="AntiqueWhite"
-                        Stroke="Red"
-                        StrokeThickness="1" />
+                    <Path Data="{StaticResource RightPlacementOpen}" />
+                </Grid>
+
+                <Grid Margin="5">
+                    <Path Panel.ZIndex="1" Data="{StaticResource BottomPlacementOpen}" />
                 </Grid>
 
 
-            </TabPanel>
+            </StackPanel>
 
         </StackPanel>
 

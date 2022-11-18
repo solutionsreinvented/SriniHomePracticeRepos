@@ -4,16 +4,19 @@ using System.Windows.Media;
 
 using ReInvented.Shared.Stores;
 
-namespace ReIn.TabPathGeometry.Models
+namespace ReIn.TabControlStyling.Models
 {
-    public class TabGeometryModel : PropertyStore
+    /// <summary>
+    /// Provides geometry for TabItem in a TabControl according to the placement of the TabStrip.
+    /// </summary>
+    public class TabGeometry : PropertyStore
     {
         #region Default Constructor
 
-        public TabGeometryModel()
+        public TabGeometry()
         {
 
-        } 
+        }
 
         #endregion
 
@@ -152,6 +155,5 @@ namespace ReIn.TabPathGeometry.Models
         }
 
         #endregion
-
     }
 }

@@ -90,7 +90,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\GeometryProvider.cs" />
+    <Compile Include="Models\TabGeometry.cs" />
     <Compile Include="Models\GeometryResourceExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
