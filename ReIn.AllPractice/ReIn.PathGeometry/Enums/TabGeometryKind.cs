@@ -2,13 +2,13 @@
 {
     public enum TabGeometryKind
     {
-        LeftLess,
-        TopLess,
-        RightLess,
-        BottomLess,
-        Left,
-        Top,
-        Right,
-        Bottom
+        LeftPlacementOpen,
+        TopPlacementOpen,
+        RightPlacementOpen,
+        BottomPlacementOpen,
+        LeftPlacementClosed,
+        TopPlacementClosed,
+        RightPlacementClosed,
+        BottomPlacementClosed
     }
 }

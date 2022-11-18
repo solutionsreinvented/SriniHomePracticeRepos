@@ -31,213 +31,93 @@ namespace ReIn.TabPathGeometry.Models
 
         public PathGeometry RightPlacementOpen => GetRightPlacementOpenGeometry();
 
-
         public PathGeometry BottomPlacementOpen => GetBottomPlacementOpenGeometry();
 
-        /// Completed
         private PathGeometry GetLeftPlacementOpenGeometry()
         {
-            PathGeometry pathGeometry = new PathGeometry();
-            PathFigure pathFigure = new PathFigure()
-            {
-                StartPoint = new Point()
-                {
-                    X = B,
-                    Y = 0
-                },
-                Segments = new PathSegmentCollection()
-                {
-                    new LineSegment()
-                    {
-                        Point = new Point()
-                        {
-                            X = Db, Y = 0
-                        }
-                    },
-                    new LineSegment()
-                    {
-                        Point = new Point()
-                        {
-                            X = 0, Y = Dh
-                        }
-                    },
-                    new LineSegment()
-                    {
-                        Point = new Point()
-                        {
-                            X = 0, Y = H
-                        }
-                    },
-                    new LineSegment()
-                    {
-                        Point = new Point()
-                        {
-                            X = B, Y = H
-                        }
-                    }
-                }
-            };
-
-            pathGeometry.Figures.Add(pathFigure);
-
-            return pathGeometry;
+            return GetPlacementOpenGeometry(B, 0, TabGeometryKind.LeftPlacementOpen);
         }
 
-        /// Completed
         private PathGeometry GetTopPlacementOpenGeometry()
         {
-            PathGeometry pathGeometry = new PathGeometry();
-            PathFigure pathFigure = new PathFigure()
-            {
-                StartPoint = new Point()
-                {
-                    X = 0,
-                    Y = H
-                },
-                Segments = new PathSegmentCollection()
-                {
-                    new LineSegment()
-                    {
-                        Point = new Point()
-                        {
-                            X = 0, Y = 0
-                        }
-                    },
-                    new LineSegment()
-                    {
-                        Point = new Point()
-                        {
-                            X = B-Db, Y = 0
-                        }
-                    },
-                    new LineSegment()
-                    {
-                        Point = new Point()
-                        {
-                            X = B, Y = Dh
-                        }
-                    },
-                    new LineSegment()
-                    {
-                        Point = new Point()
-                        {
-                            X = B, Y = H
-                        }
-                    }
-                }
-            };
-
-            pathGeometry.Figures.Add(pathFigure);
-
-            return pathGeometry;
+            return GetPlacementOpenGeometry(0, H, TabGeometryKind.TopPlacementOpen);
         }
 
-        /// Completed
         private PathGeometry GetRightPlacementOpenGeometry()
         {
-            PathGeometry pathGeometry = new PathGeometry();
-            PathFigure pathFigure = new PathFigure()
-            {
-                StartPoint = new Point()
-                {
-                    X = 0,
-                    Y = 0
-                },
-                Segments = new PathSegmentCollection()
-                {
-                    new LineSegment()
-                    {
-                        Point = new Point()
-                        {
-                            X = B-Db, Y = 0
-                        }
-                    },
-                    new LineSegment()
-                    {
-                        Point = new Point()
-                        {
-                            X = B, Y = Dh
-                        }
-                    },
-                    new LineSegment()
-                    {
-                        Point = new Point()
-                        {
-                            X = B, Y = H
-                        }
-                    },
-                    new LineSegment()
-                    {
-                        Point = new Point()
-                        {
-                            X = 0, Y = H
-                        }
-                    }
-                }
-            };
-
-            pathGeometry.Figures.Add(pathFigure);
-
-            return pathGeometry;
+            return GetPlacementOpenGeometry(0, 0, TabGeometryKind.RightPlacementOpen);
         }
 
-        /// Completed
         private PathGeometry GetBottomPlacementOpenGeometry()
         {
+            return GetPlacementOpenGeometry(0, 0, TabGeometryKind.BottomPlacementOpen);
+        }
+
+
+        #region Private Functions
+
+        private PathGeometry GetPlacementOpenGeometry(double startPointX, double startPointY, TabGeometryKind tabGeometryKind)
+        {
             PathGeometry pathGeometry = new PathGeometry();
             PathFigure pathFigure = new PathFigure()
             {
                 StartPoint = new Point()
                 {
-                    X = 0,
-                    Y = 0
+                    X = startPointX,
+                    Y = startPointY
                 },
-                Segments = new PathSegmentCollection()
-                {
-                    new LineSegment()
-                    {
-                        Point = new Point()
-                        {
-                            X = 0, Y = H
-                        }
-                    },
-                    new LineSegment()
-                    {
-                        Point = new Point()
-                        {
-                            X = B-Db, Y = H
-                        }
-                    },
-                    new LineSegment()
-                    {
-                        Point = new Point()
-                        {
-                            X = B, Y = H-Dh
-                        }
-                    },
-                    new LineSegment()
-                    {
-                        Point = new Point()
-                        {
-                            X = B, Y = 0
-                        }
-                    }
-                }
+                Segments = GetPathSegmentsFor(tabGeometryKind)
             };
 
             pathGeometry.Figures.Add(pathFigure);
 
-            ///pathGeometry.Transform = new RotateTransform() { Angle = 45, CenterX = B / 2, CenterY = H / 2 };
-
             return pathGeometry;
         }
 
-
-        #region Private Helpers
-
-        private void RaiseNotifications()
+        private PathSegmentCollection GetPathSegmentsFor(TabGeometryKind tabGeometryKind)
         {
-            RaiseMultiplePropertiesChanged(nameof(LeftPlacementOpen), nameof(TopPlacementOpen), nameof(RightPlacementOpen), nameof(BottomPlacementOpen));
+            PathSegmentCollection segmentCollection = new PathSegmentCollection();
+
+            switch (tabGeometryKind)
+            {
+                case TabGeometryKind.LeftPlacementOpen:
+                    segmentCollection.Add(CreateNewLineSegment(Db, 0));
+                    segmentCollection.Add(CreateNewLineSegment(0, Dh));
+                    segmentCollection.Add(CreateNewLineSegment(0, H));
+                    segmentCollection.Add(CreateNewLineSegment(B, H));
+                    break;
+                case TabGeometryKind.TopPlacementOpen:
+                    segmentCollection.Add(CreateNewLineSegment(0, 0));
+                    segmentCollection.Add(CreateNewLineSegment(B - Db, 0));
+                    segmentCollection.Add(CreateNewLineSegment(B, Dh));
+                    segmentCollection.Add(CreateNewLineSegment(B, H));
+                    break;
+                case TabGeometryKind.RightPlacementOpen:
+                    segmentCollection.Add(CreateNewLineSegment(B - Db, 0));
+                    segmentCollection.Add(CreateNewLineSegment(B, Dh));
+                    segmentCollection.Add(CreateNewLineSegment(B, H));
+                    segmentCollection.Add(CreateNewLineSegment(0, H));
+                    break;
+                case TabGeometryKind.BottomPlacementOpen:
+                    segmentCollection.Add(CreateNewLineSegment(0, H));
+                    segmentCollection.Add(CreateNewLineSegment(B - Db, H));
+                    segmentCollection.Add(CreateNewLineSegment(B, H - Dh));
+                    segmentCollection.Add(CreateNewLineSegment(B, 0));
+                    break;
+                case TabGeometryKind.LeftPlacementClosed:
+                    break;
+                case TabGeometryKind.TopPlacementClosed:
+                    break;
+                case TabGeometryKind.RightPlacementClosed:
+                    break;
+                case TabGeometryKind.BottomPlacementClosed:
+                    break;
+                default:
+                    break;
+            }
+
+            return segmentCollection;
+
         }
 
         private LineSegment CreateNewLineSegment(double x, double y)
@@ -252,10 +132,16 @@ namespace ReIn.TabPathGeometry.Models
             };
         }
 
-
         #endregion
 
+        #region Private Helpers
 
+        private void RaiseNotifications()
+        {
+            RaiseMultiplePropertiesChanged(nameof(LeftPlacementOpen), nameof(TopPlacementOpen), nameof(RightPlacementOpen), nameof(BottomPlacementOpen));
+        }
+
+        #endregion
 
     }
 }

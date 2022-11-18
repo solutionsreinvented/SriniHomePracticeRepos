@@ -104,7 +104,7 @@
                 Height="50"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Data="{Binding BottomPlacementOpen}"
+                Data="{Binding RightPlacementOpen}"
                 DataContext="{StaticResource TabGeometryModel}"
                 Fill="AliceBlue"
                 Stroke="Red"
