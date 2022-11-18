@@ -45,17 +45,17 @@ namespace ReIn.TabPathGeometry.Models
 
         #region Read-only Properties - Closed Geometry
 
-        public PathGeometry LeftPlacementClosed => GetClosedGeometry(GetLeftPlacementOpenGeometry());
+        public PathGeometry LeftPlacementClosed => GetLeftPlacementClosedGeometry();
 
-        public PathGeometry TopPlacementClosed => GetClosedGeometry(GetTopPlacementOpenGeometry());
+        public PathGeometry TopPlacementClosed => GetTopPlacementClosedGeometry();
 
-        public PathGeometry RightPlacementClosed => GetClosedGeometry(GetRightPlacementOpenGeometry());
+        public PathGeometry RightPlacementClosed => GetRightPlacementClosedGeometry();
 
-        public PathGeometry BottomPlacementClosed => GetClosedGeometry(GetBottomPlacementOpenGeometry());
+        public PathGeometry BottomPlacementClosed => GetBottomPlacementClosedGeometry();
 
         #endregion
 
-        #region Private Functions
+        #region Private Functions - Open Geometry
 
         private PathGeometry GetLeftPlacementOpenGeometry()
         {
@@ -78,6 +78,7 @@ namespace ReIn.TabPathGeometry.Models
             };
 
             pathGeometry.Figures.Add(pathFigure);
+
             return pathGeometry;
         }
 
@@ -123,14 +124,76 @@ namespace ReIn.TabPathGeometry.Models
 
         #endregion
 
-        #region Private Helpers
+        #region Private Functions - Closed Geometry
 
-        private PathGeometry GetClosedGeometry(PathGeometry pathGeometry)
+        private PathGeometry GetLeftPlacementClosedGeometry()
         {
-            pathGeometry.Figures.FirstOrDefault().IsClosed = true;
+            PathGeometry pathGeometry = new PathGeometry();
+            PathFigure pathFigure = new PathFigure()
+            {
+                IsClosed = true,
+                StartPoint = new Point()
+                {
+                    X = B - StrokeThickness,
+                    Y = 0 + (StrokeThickness / 2)
+                },
+                Segments = new PathSegmentCollection()
+                {
+                    CreateNewLineSegment(Db + (StrokeThickness / 2), 0 + (StrokeThickness / 2)),
+                    CreateNewLineSegment(0 + (StrokeThickness / 2), Dh + (StrokeThickness / 2)),
+                    CreateNewLineSegment(0 + (StrokeThickness / 2), H - (StrokeThickness / 2)),
+                    CreateNewLineSegment(B - StrokeThickness, H - (StrokeThickness / 2))
+                }
+            };
+
+            pathGeometry.Figures.Add(pathFigure);
+            return pathGeometry;
+        }
+
+        private PathGeometry GetTopPlacementClosedGeometry()
+        {
+            PathGeometry pathGeometry = new PathGeometry();
+            PathFigure pathFigure = new PathFigure()
+            {
+                IsClosed = true,
+                StartPoint = new Point()
+                {
+                    X = 0 + (StrokeThickness / 2),
+                    Y = H - StrokeThickness
+                },
+                Segments = new PathSegmentCollection()
+                {
+                    CreateNewLineSegment(0 + (StrokeThickness / 2), 0 + (StrokeThickness / 2)),
+                    CreateNewLineSegment(B - Db - (StrokeThickness / 2), 0 + (StrokeThickness / 2)),
+                    CreateNewLineSegment(B - (StrokeThickness / 2), Dh + (StrokeThickness / 2)),
+                    CreateNewLineSegment(B - (StrokeThickness / 2), H - StrokeThickness)
+                }
+            };
+
+            pathGeometry.Figures.Add(pathFigure);
 
             return pathGeometry;
         }
+
+        private PathGeometry GetRightPlacementClosedGeometry()
+        {
+            PathGeometry leftPlacementClosed = GetLeftPlacementClosedGeometry();
+            leftPlacementClosed.Transform = new ScaleTransform() { CenterX = B / 2, CenterY = H / 2, ScaleX = -1 };
+
+            return leftPlacementClosed;
+        }
+
+        private PathGeometry GetBottomPlacementClosedGeometry()
+        {
+            PathGeometry topPlacementClosed = GetTopPlacementClosedGeometry();
+            topPlacementClosed.Transform = new ScaleTransform() { CenterX = B / 2, CenterY = H / 2, ScaleY = -1 };
+
+            return topPlacementClosed;
+        }
+
+        #endregion
+
+        #region Private Helpers
 
         private LineSegment CreateNewLineSegment(double x, double y)
         {

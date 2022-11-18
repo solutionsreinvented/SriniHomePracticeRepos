@@ -13,12 +13,18 @@
 
     <Window.Resources>
 
-        <core:Double x:Key="B">200</core:Double>
-        <core:Double x:Key="H">30</core:Double>
-        <core:Double x:Key="DB">10</core:Double>
-        <core:Double x:Key="DH">10</core:Double>
+        <core:Double x:Key="B">150</core:Double>
+        <core:Double x:Key="H">25</core:Double>
+        <core:Double x:Key="DB">12</core:Double>
+        <core:Double x:Key="DH">9</core:Double>
         <core:Double x:Key="StrokeThickness">0.2</core:Double>
 
+        <Thickness
+            x:Key="TabLeft"
+            Bottom="0"
+            Left="-12"
+            Right="0"
+            Top="0" />
 
         <!--#region Placement Closed-->
 
@@ -101,17 +107,27 @@
                 <Setter Property="Height" Value="{StaticResource H}" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="VerticalAlignment" Value="Center" />
-                <Setter Property="Stroke" Value="#c6c906" />
+                <Setter Property="Stroke" Value="#006cbd" />
                 <Setter Property="StrokeThickness" Value="{StaticResource StrokeThickness}" />
                 <Setter Property="Fill">
                     <Setter.Value>
-                        <LinearGradientBrush StartPoint="0 0.5" EndPoint="0 0">
-                            <GradientStop Offset="0" Color="#e9ed72" />
-                            <GradientStop Offset="0.5" Color="#f4f792" />
-                            <GradientStop Offset="1" Color="#f0f2a2" />
+                        <LinearGradientBrush StartPoint="0 1" EndPoint="0 0">
+                            <GradientStop Offset="0" Color="#93cefa" />
+                            <GradientStop Offset="0.5" Color="#73c3ff" />
+                            <GradientStop Offset="1" Color="#38aaff" />
                         </LinearGradientBrush>
                     </Setter.Value>
                 </Setter>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect
+                            BlurRadius="1"
+                            Direction="0"
+                            ShadowDepth="0"
+                            Color="Gray" />
+                    </Setter.Value>
+                </Setter>
+
             </Style>
 
         </StackPanel.Resources>
@@ -166,13 +182,32 @@
                 VerticalAlignment="Center"
                 DataContext="{StaticResource TabGeometryModel}">
 
-                <Grid Margin="5">
+                <StackPanel Margin="5">
                     <Path Data="{Binding LeftPlacementOpen}" />
-                </Grid>
+                    <Path Data="{Binding LeftPlacementClosed}" />
+                </StackPanel>
 
-                <Grid Margin="5">
-                    <Path Data="{Binding TopPlacementOpen}" />
-                </Grid>
+                <StackPanel>
+                    <StackPanel
+                        Margin="5"
+                        HorizontalAlignment="Left"
+                        Orientation="Horizontal">
+                        <Path Data="{Binding TopPlacementOpen}" />
+                        <Path Data="{Binding TopPlacementClosed}" />
+                    </StackPanel>
+                    <Rectangle
+                        Width="400"
+                        Height="5"
+                        Margin="5,-5,0,0"
+                        Fill="#006cbd"
+                        Stroke="#006cbd" />
+                    <Rectangle
+                        Width="400"
+                        Height="100"
+                        Margin="5,0,0,0"
+                        Fill="AliceBlue"
+                        Stroke="#006cbd" />
+                </StackPanel>
 
                 <Grid Margin="5">
                     <Path Data="{Binding RightPlacementOpen}" />
