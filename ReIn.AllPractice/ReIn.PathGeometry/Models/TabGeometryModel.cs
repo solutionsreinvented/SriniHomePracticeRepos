@@ -35,7 +35,11 @@ namespace ReIn.TabPathGeometry.Models
 
         private PathGeometry GetLeftPlacementOpenGeometry()
         {
-            return GetPlacementOpenGeometry(B, 0, TabGeometryKind.LeftPlacementOpen);
+            ///return GetPlacementOpenGeometry(B, 0, TabGeometryKind.LeftPlacementOpen);
+            ///
+
+
+            return GetTopPlacementOpenGeometry().Transform = new RotateTransform() { Angle = }
         }
 
         private PathGeometry GetTopPlacementOpenGeometry()
