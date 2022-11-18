@@ -132,21 +132,47 @@ namespace ReIn.TabPathGeometry.Models
             return pathGeometry;
         }
 
+        /// Completed
         private PathGeometry GetRightPlacementOpenGeometry()
         {
             PathGeometry pathGeometry = new PathGeometry();
             PathFigure pathFigure = new PathFigure()
             {
-                StartPoint = new Point() { X = 0, Y = 0 },
+                StartPoint = new Point()
+                {
+                    X = 0,
+                    Y = 0
+                },
                 Segments = new PathSegmentCollection()
                 {
                     new LineSegment()
                     {
-                        Point = new Point(){X = 0, Y = H }
+                        Point = new Point()
+                        {
+                            X = B-Db, Y = 0
+                        }
                     },
-                    new LineSegment(){Point = new Point(){X = B-Db, Y = H } },
-                    new LineSegment(){Point = new Point(){X = B, Y = H-Dh } },
-                    new LineSegment(){Point = new Point(){X = B, Y = 0 } }
+                    new LineSegment()
+                    {
+                        Point = new Point()
+                        {
+                            X = B, Y = Dh
+                        }
+                    },
+                    new LineSegment()
+                    {
+                        Point = new Point()
+                        {
+                            X = B, Y = H
+                        }
+                    },
+                    new LineSegment()
+                    {
+                        Point = new Point()
+                        {
+                            X = 0, Y = H
+                        }
+                    }
                 }
             };
 
@@ -161,13 +187,41 @@ namespace ReIn.TabPathGeometry.Models
             PathGeometry pathGeometry = new PathGeometry();
             PathFigure pathFigure = new PathFigure()
             {
-                StartPoint = new Point() { X = 0, Y = 0 },
+                StartPoint = new Point()
+                {
+                    X = 0,
+                    Y = 0
+                },
                 Segments = new PathSegmentCollection()
                 {
-                    new LineSegment(){Point = new Point(){X = 0, Y = H } },
-                    new LineSegment(){Point = new Point(){X = B-Db, Y = H } },
-                    new LineSegment(){Point = new Point(){X = B, Y = H-Dh } },
-                    new LineSegment(){Point = new Point(){X = B, Y = 0 } }
+                    new LineSegment()
+                    {
+                        Point = new Point()
+                        {
+                            X = 0, Y = H
+                        }
+                    },
+                    new LineSegment()
+                    {
+                        Point = new Point()
+                        {
+                            X = B-Db, Y = H
+                        }
+                    },
+                    new LineSegment()
+                    {
+                        Point = new Point()
+                        {
+                            X = B, Y = H-Dh
+                        }
+                    },
+                    new LineSegment()
+                    {
+                        Point = new Point()
+                        {
+                            X = B, Y = 0
+                        }
+                    }
                 }
             };
 
