@@ -1,0 +1,95 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <PathGeometry x:Key="LeftLessTabGeometry">
+        <PathGeometry.Figures>
+            <PathFigureCollection>
+                <PathFigure>
+                    <PathFigure.Segments>
+                        <PathSegmentCollection>
+                            <LineSegment Point="0 0" />
+                            <LineSegment Point="90 0" />
+                            <LineSegment Point="95 5" />
+                            <LineSegment Point="95 20" />
+                            <LineSegment Point="0 20" />
+                        </PathSegmentCollection>
+                    </PathFigure.Segments>
+                </PathFigure>
+            </PathFigureCollection>
+        </PathGeometry.Figures>
+    </PathGeometry>
+
+    <PathGeometry x:Key="TopLessTabGeometry">
+        <PathGeometry.Figures>
+            <PathFigureCollection>
+                <PathFigure>
+                    <PathFigure.Segments>
+                        <PathSegmentCollection>
+                            <LineSegment Point="0 0" />
+                            <LineSegment Point="0 20" />
+                            <LineSegment Point="90 20" />
+                            <LineSegment Point="95 15" />
+                            <LineSegment Point="95 0" />
+                        </PathSegmentCollection>
+                    </PathFigure.Segments>
+                </PathFigure>
+            </PathFigureCollection>
+        </PathGeometry.Figures>
+    </PathGeometry>
+
+    <PathGeometry x:Key="RightLessTabGeometry">
+        <PathGeometry.Figures>
+            <PathFigureCollection>
+                <PathFigure>
+                    <PathFigure.Segments>
+                        <PathSegmentCollection>
+                            <LineSegment Point="95 0" />
+                            <LineSegment Point="5 0" />
+                            <LineSegment Point="0 5" />
+                            <LineSegment Point="0 20" />
+                            <LineSegment Point="95 20" />
+                        </PathSegmentCollection>
+                    </PathFigure.Segments>
+                </PathFigure>
+            </PathFigureCollection>
+        </PathGeometry.Figures>
+    </PathGeometry>
+
+    <PathGeometry x:Key="BottomLessTabGeometry">
+        <PathGeometry.Figures>
+            <PathFigureCollection>
+                <PathFigure>
+                    <PathFigure.Segments>
+                        <PathSegmentCollection>
+                            <LineSegment Point="0 20" />
+                            <LineSegment Point="0 0" />
+                            <LineSegment Point="90 0" />
+                            <LineSegment Point="95 5" />
+                            <LineSegment Point="95 20" />
+                            <LineSegment Point="0 20" />
+                        </PathSegmentCollection>
+                    </PathFigure.Segments>
+                </PathFigure>
+            </PathFigureCollection>
+        </PathGeometry.Figures>
+    </PathGeometry>
+
+    <PathGeometry x:Key="TopTabGeometry">
+        <PathGeometry.Figures>
+            <PathFigureCollection>
+                <PathFigure>
+                    <PathFigure.Segments>
+                        <PathSegmentCollection>
+                            <LineSegment Point="0 20" />
+                            <LineSegment Point="0 0" />
+                            <LineSegment Point="90 0" />
+                            <LineSegment Point="95 5" />
+                            <LineSegment Point="95 20" />
+                            <LineSegment Point="0 20" />
+                        </PathSegmentCollection>
+                    </PathFigure.Segments>
+                </PathFigure>
+            </PathFigureCollection>
+        </PathGeometry.Figures>
+    </PathGeometry>
+
+</ResourceDictionary>

@@ -1,0 +1,59 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--#region Placement One-side Open-->
+
+    <PathGeometry x:Key="LeftPlacementOpen">
+        <PathFigure StartPoint="200 0">
+            <PathFigure.Segments>
+                <PathSegmentCollection>
+                    <LineSegment Point="10 0" />
+                    <LineSegment Point="0 10" />
+                    <LineSegment Point="0 30" />
+                    <LineSegment Point="200 30" />
+                </PathSegmentCollection>
+            </PathFigure.Segments>
+        </PathFigure>
+    </PathGeometry>
+
+    <PathGeometry x:Key="TopPlacementOpen">
+        <PathFigure StartPoint="0 30">
+            <PathFigure.Segments>
+                <PathSegmentCollection>
+                    <LineSegment Point="0 0" />
+                    <LineSegment Point="190 0" />
+                    <LineSegment Point="200 10" />
+                    <LineSegment Point="200 30" />
+                </PathSegmentCollection>
+            </PathFigure.Segments>
+        </PathFigure>
+    </PathGeometry>
+
+    <PathGeometry x:Key="RightPlacementOpen">
+        <PathFigure StartPoint="0 0">
+            <PathFigure.Segments>
+                <PathSegmentCollection>
+                    <LineSegment Point="190 0" />
+                    <LineSegment Point="200 10" />
+                    <LineSegment Point="200 30" />
+                    <LineSegment Point="0 30" />
+                </PathSegmentCollection>
+            </PathFigure.Segments>
+        </PathFigure>
+    </PathGeometry>
+
+    <PathGeometry x:Key="BottomPlacementOpen">
+        <PathFigure StartPoint="0 0">
+            <PathFigure.Segments>
+                <PathSegmentCollection>
+                    <LineSegment Point="0 30" />
+                    <LineSegment Point="190 30" />
+                    <LineSegment Point="200 20" />
+                    <LineSegment Point="200 0" />
+                </PathSegmentCollection>
+            </PathFigure.Segments>
+        </PathFigure>
+    </PathGeometry>
+
+    <!--#endregion-->
+
+</ResourceDictionary>

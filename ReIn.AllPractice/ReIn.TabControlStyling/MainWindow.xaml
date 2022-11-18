@@ -1,0 +1,64 @@
+﻿<Window
+    x:Class="ReIn.TabControlStyling.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ReIn.TabControlStyling"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:ReIn.TabControlStyling.Models"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <Grid>
+        <TabControl
+            Width="500"
+            Height="200"
+            Style="{DynamicResource TabControlStyle}"
+            TabStripPlacement="Top">
+            <TabItem
+                x:Name="TabItemControl"
+                Width="100"
+                Style="{DynamicResource TabItemStyle}">
+                <TabItem.Header>
+                    <Grid>
+                        <TextBlock HorizontalAlignment="Left" Text="Floor" />
+                    </Grid>
+                </TabItem.Header>
+
+                <TextBlock Text="Content for Checking" />
+
+            </TabItem>
+            <TabItem
+                Width="100"
+                Header="Wall"
+                Style="{DynamicResource TabItemStyle}">
+                <TextBlock Text="Content for Checking" />
+            </TabItem>
+
+            <TabItem
+                Width="100"
+                Header="Don't Know"
+                Style="{DynamicResource TabItemStyle}" />
+
+            <!--<TabItem
+                Width="100"
+                Header="Don't Know"
+                Style="{DynamicResource TabItemStyle}" />
+
+            <TabItem
+                Width="100"
+                Header="Don't Know"
+                Style="{DynamicResource TabItemStyle}" />
+
+            <TabItem
+                Width="100"
+                Header="Don't Know"
+                Style="{DynamicResource TabItemStyle}" />-->
+
+        </TabControl>
+    </Grid>
+</Window>
