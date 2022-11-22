@@ -2,6 +2,7 @@
     x:Class="ReIn.TabPathGeometry.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ap="clr-namespace:ReIn.TabPathGeometry.AttachedProperties"
     xmlns:core="clr-namespace:System;assembly=mscorlib"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -216,37 +217,6 @@
                 <Grid Margin="5">
                     <Path Panel.ZIndex="1" Data="{Binding BottomPlacementOpen}" />
                 </Grid>
-
-            </StackPanel>
-
-        </StackPanel>
-
-        <!--#endregion-->
-
-        <!--#region Xaml Open-->
-
-        <StackPanel>
-
-            <TextBlock HorizontalAlignment="Center" Text="Using the Xaml Static Resources" />
-
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-
-                <Grid Margin="5">
-                    <Path Data="{StaticResource LeftPlacementOpen}" />
-                </Grid>
-
-                <Grid Margin="5">
-                    <Path Data="{StaticResource TopPlacementOpen}" />
-                </Grid>
-
-                <Grid Margin="5">
-                    <Path Data="{StaticResource RightPlacementOpen}" />
-                </Grid>
-
-                <Grid Margin="5">
-                    <Path Panel.ZIndex="1" Data="{StaticResource BottomPlacementOpen}" />
-                </Grid>
-
 
             </StackPanel>
 

@@ -1,0 +1,44 @@
+﻿<Window
+    x:Class="ReIn.TreeViewStyling.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ReIn.TreeViewStyling"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:theme="http://schemas.reinvented.com/ui/themes"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Window.Resources />
+
+    <Grid Background="{theme:ThemeResource ResourceKey=StaticBackgroundBrush}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+
+        <TreeView
+            Grid.Column="0"
+            Margin="25"
+            BorderThickness="0,0,1,0"
+            Style="{DynamicResource TreeViewStyle}">
+            <TreeViewItem
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Stretch"
+                Header="Tank"
+                Style="{DynamicResource TreeViewMainItemStyle}">
+                <TreeViewItem Header="Launder" Style="{DynamicResource TreeViewSubItemStyle}" />
+                <TreeViewItem Header="Shell" Style="{DynamicResource TreeViewSubItemStyle}" />
+                <TreeViewItem Header="Underflow Cone" Style="{DynamicResource TreeViewSubItemStyle}" />
+                <TreeViewItem Header="Centre Column" Style="{DynamicResource TreeViewSubItemStyle}" />
+            </TreeViewItem>
+            <TreeViewItem Header="Support Structure" Style="{DynamicResource TreeViewMainItemStyle}" />
+
+        </TreeView>
+    </Grid>
+</Window>

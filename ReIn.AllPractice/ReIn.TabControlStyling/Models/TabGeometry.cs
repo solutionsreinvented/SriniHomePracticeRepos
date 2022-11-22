@@ -1,112 +1,77 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 
-using ReInvented.Shared.Stores;
-
 namespace ReIn.TabControlStyling.Models
 {
-    /// <summary>
-    /// Provides geometry for TabItem in a TabControl according to the placement of the TabStrip.
-    /// </summary>
-    public class TabGeometry : PropertyStore
+    public class TabGeometry : FrameworkElement
     {
-        #region Default Constructor
-
         public TabGeometry()
         {
 
         }
 
-        #endregion
 
-        #region Public Properties
+        /// Using a DependencyProperty as the backing store for H.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HProperty =
+            DependencyProperty.Register("H", typeof(double), typeof(TabGeometry), new PropertyMetadata(0.0, OnPropertyChanged));
 
-        public double H { get => Get<double>(); set { Set(value); RaiseNotifications(); } }
+        /// Using a DependencyProperty as the backing store for B.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BProperty =
+            DependencyProperty.Register("B", typeof(double), typeof(TabGeometry), new PropertyMetadata(0.0, OnPropertyChanged));
 
-        public double B { get => Get<double>(); set { Set(value); RaiseNotifications(); } }
+        /// Using a DependencyProperty as the backing store for Db.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DbProperty =
+            DependencyProperty.Register("Db", typeof(double), typeof(TabGeometry), new PropertyMetadata(0.0, OnPropertyChanged));
 
-        public double Dh { get => Get<double>(); set { Set(value); RaiseNotifications(); } }
+        /// Using a DependencyProperty as the backing store for Dh.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DhProperty =
+            DependencyProperty.Register("Dh", typeof(double), typeof(TabGeometry), new PropertyMetadata(0.0, OnPropertyChanged));
 
-        public double Db { get => Get<double>(); set { Set(value); RaiseNotifications(); } }
 
-        public double StrokeThickness { get => Get<double>(); set { Set(value); RaiseNotifications(); } }
+        /// Using a DependencyProperty as the backing store for LeftPlacementOpen.  This enables animation, styling, binding, etc...
+        public static readonly DependencyPropertyKey LeftPlacementOpenPropertyKey =
+            DependencyProperty.RegisterReadOnly("LeftPlacementOpen", typeof(PathGeometry), typeof(TabGeometry), new PropertyMetadata(null));
 
-        #endregion
+        public static readonly DependencyProperty LeftPlacementOpenProperty = LeftPlacementOpenPropertyKey.DependencyProperty;
 
-        #region Read-only Properties - Open Geometry
 
-        public PathGeometry LeftPlacementOpen => GetLeftPlacementOpenGeometry();
+        /// Using a DependencyProperty as the backing store for TopPlacementOpen.  This enables animation, styling, binding, etc...
+        public static readonly DependencyPropertyKey TopPlacementOpenPropertyKey =
+            DependencyProperty.RegisterReadOnly("TopPlacementOpen", typeof(PathGeometry), typeof(TabGeometry), new PropertyMetadata(null));
 
-        public PathGeometry TopPlacementOpen => GetTopPlacementOpenGeometry();
+        public static readonly DependencyProperty TopPlacementOpenProperty = TopPlacementOpenPropertyKey.DependencyProperty;
 
-        public PathGeometry RightPlacementOpen => GetRightPlacementOpenGeometry();
 
-        public PathGeometry BottomPlacementOpen => GetBottomPlacementOpenGeometry();
+        /// Using a DependencyProperty as the backing store for RightPlacementOpen.  This enables animation, styling, binding, etc...
+        public static readonly DependencyPropertyKey RightPlacementOpenPropertyKey =
+            DependencyProperty.RegisterReadOnly("RightPlacementOpen", typeof(PathGeometry), typeof(TabGeometry), new PropertyMetadata(null));
 
-        #endregion
+        public static readonly DependencyProperty RightPlacementOpenProperty = RightPlacementOpenPropertyKey.DependencyProperty;
 
-        #region Read-only Properties - Closed Geometry
 
-        public PathGeometry LeftPlacementClosed => GetLeftPlacementClosedGeometry();
+        /// Using a DependencyProperty as the backing store for BottomPlacementOpen.  This enables animation, styling, binding, etc...
+        public static readonly DependencyPropertyKey BottomPlacementOpenPropertyKey =
+            DependencyProperty.RegisterReadOnly("BottomPlacementOpen", typeof(PathGeometry), typeof(TabGeometry), new PropertyMetadata(null));
 
-        public PathGeometry TopPlacementClosed => GetTopPlacementClosedGeometry();
+        public static readonly DependencyProperty BottomPlacementOpenProperty = BottomPlacementOpenPropertyKey.DependencyProperty;
 
-        public PathGeometry RightPlacementClosed => GetRightPlacementClosedGeometry();
 
-        public PathGeometry BottomPlacementClosed => GetBottomPlacementClosedGeometry();
+        #region PropertyChanged Callback
+
+        private static void OnPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            TabGeometry tabGeometry = d as TabGeometry;
+
+            tabGeometry.SetValue(TopPlacementOpenPropertyKey, tabGeometry.GetTopPlacementOpenGeometry());
+            tabGeometry.SetValue(LeftPlacementOpenPropertyKey, tabGeometry.GetLeftPlacementOpenGeometry());
+            tabGeometry.SetValue(RightPlacementOpenPropertyKey, tabGeometry.GetRightPlacementOpenGeometry());
+            tabGeometry.SetValue(BottomPlacementOpenPropertyKey, tabGeometry.GetBottomPlacementOpenGeometry());
+
+        }
 
         #endregion
 
         #region Private Functions - Open Geometry
-
-        private PathGeometry GetLeftPlacementOpenGeometry()
-        {
-            PathGeometry pathGeometry = new PathGeometry();
-
-            PathFigure pathFigure = new PathFigure()
-            {
-                StartPoint = new Point()
-                {
-                    X = B - (StrokeThickness / 2),
-                    Y = 0 + (StrokeThickness / 2)
-                },
-                Segments = new PathSegmentCollection()
-                {
-                    CreateNewLineSegment(Db + (StrokeThickness / 2), 0 + (StrokeThickness / 2)),
-                    CreateNewLineSegment(0 + (StrokeThickness / 2), Dh + (StrokeThickness / 2)),
-                    CreateNewLineSegment(0 + (StrokeThickness / 2), H - (StrokeThickness / 2)),
-                    CreateNewLineSegment(B - (StrokeThickness / 2), H - (StrokeThickness / 2))
-                }
-            };
-
-            pathGeometry.Figures.Add(pathFigure);
-
-            return pathGeometry;
-        }
-
-        private PathGeometry GetTopPlacementOpenGeometry()
-        {
-            PathGeometry pathGeometry = new PathGeometry();
-            PathFigure pathFigure = new PathFigure()
-            {
-                StartPoint = new Point()
-                {
-                    X = 0 + (StrokeThickness / 2),
-                    Y = H - (StrokeThickness / 2)
-                },
-                Segments = new PathSegmentCollection()
-                {
-                    CreateNewLineSegment(0 + (StrokeThickness / 2), 0 + (StrokeThickness / 2)),
-                    CreateNewLineSegment(B - Db - (StrokeThickness / 2), 0 + (StrokeThickness / 2)),
-                    CreateNewLineSegment(B - (StrokeThickness / 2), Dh + (StrokeThickness / 2)),
-                    CreateNewLineSegment(B - (StrokeThickness / 2), H - StrokeThickness / 2)
-                }
-            };
-
-            pathGeometry.Figures.Add(pathFigure);
-
-            return pathGeometry;
-        }
 
         private PathGeometry GetRightPlacementOpenGeometry()
         {
@@ -124,51 +89,22 @@ namespace ReIn.TabControlStyling.Models
             return topPlacementOpen;
         }
 
-        #endregion
-
-        #region Private Functions - Closed Geometry
-
-        private PathGeometry GetLeftPlacementClosedGeometry()
+        private PathGeometry GetTopPlacementOpenGeometry()
         {
             PathGeometry pathGeometry = new PathGeometry();
             PathFigure pathFigure = new PathFigure()
             {
-                IsClosed = true,
                 StartPoint = new Point()
                 {
-                    X = B - StrokeThickness,
-                    Y = 0 + (StrokeThickness / 2)
+                    X = 0,
+                    Y = H
                 },
                 Segments = new PathSegmentCollection()
                 {
-                    CreateNewLineSegment(Db + (StrokeThickness / 2), 0 + (StrokeThickness / 2)),
-                    CreateNewLineSegment(0 + (StrokeThickness / 2), Dh + (StrokeThickness / 2)),
-                    CreateNewLineSegment(0 + (StrokeThickness / 2), H - (StrokeThickness / 2)),
-                    CreateNewLineSegment(B - StrokeThickness, H - (StrokeThickness / 2))
-                }
-            };
-
-            pathGeometry.Figures.Add(pathFigure);
-            return pathGeometry;
-        }
-
-        private PathGeometry GetTopPlacementClosedGeometry()
-        {
-            PathGeometry pathGeometry = new PathGeometry();
-            PathFigure pathFigure = new PathFigure()
-            {
-                IsClosed = true,
-                StartPoint = new Point()
-                {
-                    X = 0 + (StrokeThickness / 2),
-                    Y = H - StrokeThickness
-                },
-                Segments = new PathSegmentCollection()
-                {
-                    CreateNewLineSegment(0 + (StrokeThickness / 2), 0 + (StrokeThickness / 2)),
-                    CreateNewLineSegment(B - Db - (StrokeThickness / 2), 0 + (StrokeThickness / 2)),
-                    CreateNewLineSegment(B - (StrokeThickness / 2), Dh + (StrokeThickness / 2)),
-                    CreateNewLineSegment(B - (StrokeThickness / 2), H - StrokeThickness)
+                    CreateNewLineSegment(0, 0),
+                    CreateNewLineSegment(B - Db, 0),
+                    CreateNewLineSegment(B, Dh),
+                    CreateNewLineSegment(B, H)
                 }
             };
 
@@ -177,20 +113,29 @@ namespace ReIn.TabControlStyling.Models
             return pathGeometry;
         }
 
-        private PathGeometry GetRightPlacementClosedGeometry()
+        private PathGeometry GetLeftPlacementOpenGeometry()
         {
-            PathGeometry leftPlacementClosed = GetLeftPlacementClosedGeometry();
-            leftPlacementClosed.Transform = new ScaleTransform() { CenterX = B / 2, CenterY = H / 2, ScaleX = -1 };
+            PathGeometry pathGeometry = new PathGeometry();
 
-            return leftPlacementClosed;
-        }
+            PathFigure pathFigure = new PathFigure()
+            {
+                StartPoint = new Point()
+                {
+                    X = B,
+                    Y = 0
+                },
+                Segments = new PathSegmentCollection()
+                {
+                    CreateNewLineSegment(Db, 0),
+                    CreateNewLineSegment(0, Dh),
+                    CreateNewLineSegment(0, H),
+                    CreateNewLineSegment(B, H)
+                }
+            };
 
-        private PathGeometry GetBottomPlacementClosedGeometry()
-        {
-            PathGeometry topPlacementClosed = GetTopPlacementClosedGeometry();
-            topPlacementClosed.Transform = new ScaleTransform() { CenterX = B / 2, CenterY = H / 2, ScaleY = -1 };
+            pathGeometry.Figures.Add(pathFigure);
 
-            return topPlacementClosed;
+            return pathGeometry;
         }
 
         #endregion
@@ -209,12 +154,47 @@ namespace ReIn.TabControlStyling.Models
             };
         }
 
-        private void RaiseNotifications()
+        #endregion
+
+        #region CLR Properties - Read-only
+
+        public PathGeometry LeftPlacementOpen => (PathGeometry)GetValue(LeftPlacementOpenProperty);
+
+        public PathGeometry TopPlacementOpen => (PathGeometry)GetValue(TopPlacementOpenProperty);
+
+        public PathGeometry RightPlacementOpen => (PathGeometry)GetValue(RightPlacementOpenProperty);
+
+        public PathGeometry BottomPlacementOpen => (PathGeometry)GetValue(BottomPlacementOpenProperty);
+
+        #endregion
+
+        #region CLR Properties
+
+        public double H
         {
-            RaiseMultiplePropertiesChanged(nameof(LeftPlacementOpen), nameof(TopPlacementOpen), nameof(RightPlacementOpen), nameof(BottomPlacementOpen));
-            RaiseMultiplePropertiesChanged(nameof(LeftPlacementClosed), nameof(TopPlacementClosed), nameof(RightPlacementClosed), nameof(BottomPlacementClosed));
+            get => (double)GetValue(HProperty);
+            set => SetValue(HProperty, value);
+        }
+
+        public double B
+        {
+            get => (double)GetValue(BProperty);
+            set => SetValue(BProperty, value);
+        }
+
+        public double Db
+        {
+            get => (double)GetValue(DbProperty);
+            set => SetValue(DbProperty, value);
+        }
+
+        public double Dh
+        {
+            get => (double)GetValue(DhProperty);
+            set => SetValue(DhProperty, value);
         }
 
         #endregion
+
     }
 }

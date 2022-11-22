@@ -1,4 +1,7 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:models="clr-namespace:ReIn.TabControlStyling.Models">
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -52,14 +55,21 @@
 
                     <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
 
+
                         <Border x:Name="mainBorder">
                             <Grid>
+                                <models:TabGeometry
+                                    x:Name="TabGeometry"
+                                    B="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border, Mode=FindAncestor}}"
+                                    H="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border, Mode=FindAncestor}}" />
+
+                                <TextBlock Text="{Binding B, ElementName=TabGeometry}" />
+
                                 <Path
                                     x:Name="mainBorderPath"
-                                    Width="100"
-                                    Height="18"
                                     Margin="1"
-                                    Data="{DynamicResource BottomLessTabGeometry}"
+                                    Data="{Binding BottomPlacementOpen}"
+                                    DataContext="{Binding ElementName=TabGeometry}"
                                     Fill="#AED6F1"
                                     Stroke="Red"
                                     StrokeThickness="1" />
