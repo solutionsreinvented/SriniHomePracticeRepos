@@ -60,8 +60,8 @@
                             <Grid>
                                 <models:TabGeometry
                                     x:Name="TabGeometry"
-                                    B="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border, Mode=FindAncestor}}"
-                                    H="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border, Mode=FindAncestor}}" />
+                                    B="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid, Mode=FindAncestor}}"
+                                    H="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid, Mode=FindAncestor}}" />
 
                                 <TextBlock Text="{Binding B, ElementName=TabGeometry}" />
 

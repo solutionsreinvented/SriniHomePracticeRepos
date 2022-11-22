@@ -7,8 +7,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="TreeViewStyles.xaml" />
                 <ResourceDictionary Source="/ReInvented.UI.Themes;component/Themes/ReInvented.UI.Themes.xaml" />
+                <ResourceDictionary Source="TreeViewStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

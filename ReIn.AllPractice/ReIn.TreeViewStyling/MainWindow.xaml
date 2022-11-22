@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:theme="http://schemas.reinvented.com/ui/themes"
     Title="MainWindow"
-    Width="800"
+    Width="900"
     Height="450"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
@@ -17,10 +17,9 @@
     <Grid Background="{theme:ThemeResource ResourceKey=StaticBackgroundBrush}">
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="350" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-
 
         <TreeView
             Grid.Column="0"
@@ -40,5 +39,6 @@
             <TreeViewItem Header="Support Structure" Style="{DynamicResource TreeViewMainItemStyle}" />
 
         </TreeView>
+
     </Grid>
 </Window>
