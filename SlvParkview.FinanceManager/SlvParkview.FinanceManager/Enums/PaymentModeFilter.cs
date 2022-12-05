@@ -5,6 +5,7 @@
         All,
         Cash,
         Online,
-        Cheque
+        Cheque,
+        AppPayment
     }
 }
