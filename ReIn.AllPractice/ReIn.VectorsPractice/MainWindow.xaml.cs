@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Media.Media3D;
 
@@ -25,7 +26,7 @@ namespace ReIn.VectorsPractice
             {
                 Height = 3.0,
                 TankRadius = 25.0,
-                Theta = -60,
+                Theta = 60,
                 Width = 2.5,
                 DeckElevation = 10.0,
                 Origin = new Point3D(0.0, 0.0, 0.0),
@@ -58,6 +59,22 @@ namespace ReIn.VectorsPractice
             {
                 refGrids.Add(ReferenceGridExtensions.GenerateReferenceGrid(sRefGrid, i * spacing));
             }
+
+            ///var totalNodes = refGrids.Count * 4;
+
+            string syntax = $"JOINT COORDINATES{Environment.NewLine}";
+
+            var nodeId = 1;
+
+            for (int i = 0; i < refGrids.Count; i++)
+            {
+                syntax += $"{nodeId++} {refGrids[i].A.X} {refGrids[i].A.Y} {refGrids[i].A.Z};{Environment.NewLine}";
+                syntax += $"{nodeId++} {refGrids[i].B.X} {refGrids[i].B.Y} {refGrids[i].B.Z};{Environment.NewLine}";
+                syntax += $"{nodeId++} {refGrids[i].C.X} {refGrids[i].C.Y} {refGrids[i].C.Z};{Environment.NewLine}";
+                syntax += $"{nodeId++} {refGrids[i].D.X} {refGrids[i].D.Y} {refGrids[i].D.Z};{Environment.NewLine}";
+            }
+
+            File.WriteAllText(@"C:\Users\masanams\Desktop\Test Files\jointcoords.txt", syntax);
 
             var pointHalf = sRefGrid.A + Vector3D.Multiply(0.5, sRefGrid.VectorAB);
 
