@@ -38,6 +38,9 @@
     <Reference Include="ReInvented.Shared">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\ApplicationData\Libraries\ReInvented.Shared.dll</HintPath>
     </Reference>
+    <Reference Include="ReInvented.Thickener.Domain">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\ApplicationData\Libraries\ReInvented.Thickener.Domain.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -58,6 +61,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ICrossFrameVectors.cs" />
+    <Compile Include="IReferenceGrid.cs" />
+    <Compile Include="ILongitudinalFrameVectors.cs" />
+    <Compile Include="ReferenceGrid.cs" />
     <Compile Include="Services\FileService.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
