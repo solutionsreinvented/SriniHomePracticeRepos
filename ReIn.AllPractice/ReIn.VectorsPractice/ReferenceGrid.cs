@@ -1,5 +1,7 @@
 ﻿using System.Windows.Media.Media3D;
 
+using ReIn.VectorsPractice.Interfaces;
+
 using ReInvented.Shared.Stores;
 using ReInvented.Thickener.Domain.Entities;
 

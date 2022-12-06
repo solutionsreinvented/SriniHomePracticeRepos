@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media.Media3D;
 
-namespace ReIn.VectorsPractice
+namespace ReIn.VectorsPractice.Interfaces
 {
     public interface ICrossFrameVectors
     {

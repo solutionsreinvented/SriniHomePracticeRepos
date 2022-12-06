@@ -61,11 +61,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ICrossFrameVectors.cs" />
-    <Compile Include="IReferenceGrid.cs" />
-    <Compile Include="ILongitudinalFrameVectors.cs" />
+    <Compile Include="Fakes\FakeBridgeFactory.cs" />
+    <Compile Include="Models\Bridge.cs" />
+    <Compile Include="Extensions\BridgeExtensions.cs" />
+    <Compile Include="Interfaces\ICrossFrameVectors.cs" />
+    <Compile Include="Interfaces\IReferenceGrid.cs" />
+    <Compile Include="Interfaces\ILongitudinalFrameVectors.cs" />
     <Compile Include="ReferenceGrid.cs" />
+    <Compile Include="Extensions\ReferenceGridExtensions.cs" />
     <Compile Include="Services\FileService.cs" />
+    <Compile Include="Services\SyntaxGenerationService.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

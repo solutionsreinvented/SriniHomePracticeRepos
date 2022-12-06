@@ -1,6 +1,6 @@
 ﻿using ReInvented.Thickener.Domain.Entities;
 
-namespace ReIn.VectorsPractice
+namespace ReIn.VectorsPractice.Interfaces
 {
     public interface IReferenceGrid
     {
