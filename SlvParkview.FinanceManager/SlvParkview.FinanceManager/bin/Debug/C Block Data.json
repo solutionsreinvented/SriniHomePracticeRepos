@@ -1,5 +1,5 @@
 {
-  "LastUpdated": "2022-12-06T11:56:29.5296067+05:30",
+  "LastUpdated": "2022-12-07T14:10:03.6991749+05:30",
   "Name": "C",
   "Flats": [
     {
@@ -634,10 +634,17 @@
           "RecordedOn": "2022-11-16T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2022-12-07T00:00:00+05:30",
+          "RecordedOn": "2022-12-07T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2600.00
         }
       ],
       "OutstandingOnSpecifiedDate": 2600.00,
-      "CurrentOutstanding": 2600.00
+      "CurrentOutstanding": 0.00
     },
     {
       "Number": "122",
@@ -1411,9 +1418,17 @@
           "Amount": 2800.00
         }
       ],
-      "Payments": null,
+      "Payments": [
+        {
+          "Mode": 3,
+          "ReceivedOn": "2022-12-07T00:00:00+05:30",
+          "RecordedOn": "2022-12-07T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 48785.00
+        }
+      ],
       "OutstandingOnSpecifiedDate": 48785.00,
-      "CurrentOutstanding": 48785.00
+      "CurrentOutstanding": 0.00
     },
     {
       "Number": "322",

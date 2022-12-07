@@ -59,19 +59,14 @@ namespace ReIn.VectorsPractice
 
         private void GenerateFrameGridNodes(Bridge bridge, FrameGrid frameGrid)
         {
-            ICrossFrameVectors referenceGrid = frameGrid.ReferenceGrid as ICrossFrameVectors;
-            ReferenceGrid baseGrid = new ReferenceGrid();
+            ICrossFrameVectors crossFrameVectors = frameGrid.ReferenceGrid as ICrossFrameVectors;
+
             double shift = (frameGrid.Width - bridge.Width) / 2;
 
-            frameGrid.A = Vector3DToNode(frameGrid.ReferenceGrid.A, Vector3D.Multiply((-1) * shift / bridge.Width, referenceGrid.VectorAB));
-            frameGrid.B = Vector3DToNode(frameGrid.ReferenceGrid.A, Vector3D.Multiply((bridge.Width + shift) / bridge.Width, referenceGrid.VectorAB));
-            frameGrid.C = Vector3DToNode(frameGrid.ReferenceGrid.C, Vector3D.Multiply((-1) * shift / bridge.Width, referenceGrid.VectorCD));
-            frameGrid.D = Vector3DToNode(frameGrid.ReferenceGrid.C, Vector3D.Multiply((bridge.Width + shift) / bridge.Width, referenceGrid.VectorCD));
-        }
-
-        private Node Vector3DToNode(Node referenceNode, Vector3D vector)
-        {
-            return new Node() { X = referenceNode.X + vector.X, Y = referenceNode.Y + vector.Y, Z = referenceNode.Z + vector.Z };
+            frameGrid.A = frameGrid.ReferenceGrid.A.GetNewNodeBasedOn(crossFrameVectors.VectorAB, (-1) * shift / bridge.Width);
+            frameGrid.B = frameGrid.ReferenceGrid.A.GetNewNodeBasedOn(crossFrameVectors.VectorAB, (bridge.Width + shift) / bridge.Width);
+            frameGrid.C = frameGrid.ReferenceGrid.C.GetNewNodeBasedOn(crossFrameVectors.VectorCD, (-1) * shift / bridge.Width );
+            frameGrid.D = frameGrid.ReferenceGrid.C.GetNewNodeBasedOn(crossFrameVectors.VectorCD, (bridge.Width + shift) / bridge.Width);
         }
 
     }
