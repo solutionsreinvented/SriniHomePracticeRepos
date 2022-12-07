@@ -21,10 +21,44 @@ namespace ReIn.VectorsPractice
     /// </summary>
     public partial class MainWindow : Window
     {
+        private void GetCount()
+        {
+            DateTime startDate = new DateTime(2019, 01, 11);
+            DateTime endDate = new DateTime(2022, 02, 11);
+
+            int nYears = endDate.Year - startDate.Year;
+            int dayOfMonth = 11;
+
+            List<DateTime> dates = new List<DateTime>();
+
+            if (nYears == 0)
+            {
+                dates = PartialYearCounter.GetCount(startDate, endDate, dayOfMonth);
+            }
+            else
+            {
+                dates.AddRange(PartialYearCounter.GetCount(startDate, new DateTime(startDate.Year, 12, 31), dayOfMonth));
+
+                for (int yearCount = 1; yearCount < nYears; yearCount++)
+                {
+                    dates.AddRange(CompleteYearCounter.GetCount(startDate.Year + yearCount, dayOfMonth));
+                }
+
+                dates.AddRange(PartialYearCounter.GetCount(new DateTime(endDate.Year, 01, 01), endDate, dayOfMonth));
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
-            ProcessBridge();
+
+            GetCount();
+
+
+
+
+
+            ///ProcessBridge();
         }
 
         public void ProcessBridge()
@@ -44,7 +78,8 @@ namespace ReIn.VectorsPractice
             for (int i = 0; i < bridge.FrameGrids.Count; i++)
             {
                 bridge.FrameGrids[i].ReferenceGrid = sRefGrid.GenerateRelativeReferenceGridAt(-bridge.FrameGrids[i].Distance);
-                GenerateFrameGridNodes(bridge, bridge.FrameGrids[i] as FrameGrid);
+                bridge.FrameGrids[i].GenerateFrameGridNodes(bridge.Width);
+                ///GenerateFrameGridNodes(bridge.FrameGrids[i] as FrameGrid, bridge);
             }
 
             List<IReferenceGrid> refGrids = bridge.FrameGrids.Cast<IReferenceGrid>().ToList();
@@ -52,22 +87,26 @@ namespace ReIn.VectorsPractice
             string syntax = SyntaxGenerationService.NodeIncidencesFrom(refGrids) +
                             SyntaxGenerationService.MemberIncidencesFrom(refGrids);
 
-
             File.WriteAllText(@"C:\Users\masanams\Desktop\Test Files\bridge-geometry.txt", syntax);
 
         }
 
-        private void GenerateFrameGridNodes(Bridge bridge, FrameGrid frameGrid)
+        private void GenerateFrameGridNodes(FrameGrid frameGrid, Bridge bridge)
         {
-            ICrossFrameVectors crossFrameVectors = frameGrid.ReferenceGrid as ICrossFrameVectors;
+            IReferenceGrid referenceGrid = frameGrid.ReferenceGrid;
+            ICrossFrameVectors crossFrameVectors = referenceGrid as ICrossFrameVectors;
 
             double shift = (frameGrid.Width - bridge.Width) / 2;
+            double forwardLengthFactor = (bridge.Width + shift) / bridge.Width;
+            double backwardLengthFactor = (-1) * shift / bridge.Width;
 
-            frameGrid.A = frameGrid.ReferenceGrid.A.GetNewNodeBasedOn(crossFrameVectors.VectorAB, (-1) * shift / bridge.Width);
-            frameGrid.B = frameGrid.ReferenceGrid.A.GetNewNodeBasedOn(crossFrameVectors.VectorAB, (bridge.Width + shift) / bridge.Width);
-            frameGrid.C = frameGrid.ReferenceGrid.C.GetNewNodeBasedOn(crossFrameVectors.VectorCD, (-1) * shift / bridge.Width );
-            frameGrid.D = frameGrid.ReferenceGrid.C.GetNewNodeBasedOn(crossFrameVectors.VectorCD, (bridge.Width + shift) / bridge.Width);
+            frameGrid.A = referenceGrid.A.CreateNodeBasedOn(crossFrameVectors.VectorAB, backwardLengthFactor);
+            frameGrid.B = referenceGrid.A.CreateNodeBasedOn(crossFrameVectors.VectorAB, forwardLengthFactor);
+            frameGrid.C = referenceGrid.C.CreateNodeBasedOn(crossFrameVectors.VectorCD, backwardLengthFactor);
+            frameGrid.D = referenceGrid.C.CreateNodeBasedOn(crossFrameVectors.VectorCD, forwardLengthFactor);
         }
+
+
 
     }
 

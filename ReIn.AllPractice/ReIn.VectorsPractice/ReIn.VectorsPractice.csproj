@@ -62,6 +62,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Base\FrameGrid.cs" />
+    <Compile Include="Extensions\FrameGridExtensions.cs" />
     <Compile Include="Extensions\NodeExtensions.cs" />
     <Compile Include="Fakes\FakeBridgeFactory.cs" />
     <Compile Include="Interfaces\IFrameGrid.cs" />
@@ -73,6 +74,8 @@
     <Compile Include="Models\BridgeFrameGrid.cs" />
     <Compile Include="Models\ReferenceGrid.cs" />
     <Compile Include="Extensions\ReferenceGridExtensions.cs" />
+    <Compile Include="Penalties\CompleteYearCounter.cs" />
+    <Compile Include="Penalties\PartialYearCounter.cs" />
     <Compile Include="Services\FileService.cs" />
     <Compile Include="Services\SyntaxGenerationService.cs" />
     <Page Include="MainWindow.xaml">
@@ -114,5 +117,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

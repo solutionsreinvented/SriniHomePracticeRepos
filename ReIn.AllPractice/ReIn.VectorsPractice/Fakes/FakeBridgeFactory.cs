@@ -16,7 +16,7 @@ namespace ReIn.VectorsPractice.Fakes
             {
                 Height = 2.8,
                 Radius = 25.0,
-                Theta = 35,
+                Theta = 139.5,
                 Width = 2.0,
                 DeckElevation = 10.0,
                 Origin = new Node(0.0, 0.0, 0.0),

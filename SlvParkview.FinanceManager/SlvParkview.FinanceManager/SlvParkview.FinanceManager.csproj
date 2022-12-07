@@ -186,6 +186,8 @@
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ServiceProvider.cs" />
     <Compile Include="Services\TransactionRecordsService.cs" />
+    <Compile Include="Utilities\CompleteYear.cs" />
+    <Compile Include="Utilities\PartialYear.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CommonExpenseViewModel.cs" />
     <Compile Include="ViewModels\ExpenseViewModel.cs" />

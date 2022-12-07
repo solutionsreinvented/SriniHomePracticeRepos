@@ -8,10 +8,10 @@ namespace ReIn.VectorsPractice.Extensions
         {
             ReferenceGrid referenceGridAtSpecifiedDistance = new ReferenceGrid()
             {
-                A = baseReferenceGrid.A.GetNewNodeBasedOn(baseReferenceGrid.VectorA, distance),
-                B = baseReferenceGrid.B.GetNewNodeBasedOn(baseReferenceGrid.VectorB, distance),
-                C = baseReferenceGrid.C.GetNewNodeBasedOn(baseReferenceGrid.VectorC, distance),
-                D = baseReferenceGrid.D.GetNewNodeBasedOn(baseReferenceGrid.VectorD, distance)
+                A = baseReferenceGrid.A.CreateNodeBasedOn(baseReferenceGrid.VectorA, distance),
+                B = baseReferenceGrid.B.CreateNodeBasedOn(baseReferenceGrid.VectorB, distance),
+                C = baseReferenceGrid.C.CreateNodeBasedOn(baseReferenceGrid.VectorC, distance),
+                D = baseReferenceGrid.D.CreateNodeBasedOn(baseReferenceGrid.VectorD, distance)
 
             };
 
