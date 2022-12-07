@@ -5,7 +5,7 @@ using ReIn.VectorsPractice.Interfaces;
 using ReInvented.Shared.Stores;
 using ReInvented.Thickener.Domain.Entities;
 
-namespace ReIn.VectorsPractice
+namespace ReIn.VectorsPractice.Models
 {
     /// <summary>
     /// Grid with four nodes which forms the basis for generating the cross frames, longitudinal frames and other members
@@ -33,10 +33,6 @@ namespace ReIn.VectorsPractice
 
         #region Public Properties
 
-        public double Spacing { get => Get<double>(); set => Set(value); }
-
-        public double Distance { get => Get<double>(); set => Set(value); }
-
         public Node A { get => Get<Node>(); set => Set(value); }
 
         public Node B { get => Get<Node>(); set => Set(value); }
@@ -49,7 +45,7 @@ namespace ReIn.VectorsPractice
 
         #region Read-only Properties - Cross Frame Vectors
 
-        public int Id { get => Get<int>(); private set => Set(value); }
+        public int Id { get => Get<int>(); protected private set => Set(value); }
 
         public Vector3D VectorAB => new Vector3D(B.X - A.X, B.Y - A.Y, B.Z - A.Z);
 

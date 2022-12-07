@@ -13,10 +13,10 @@ namespace ReIn.VectorsPractice.Models
     {
         public Bridge()
         {
-            ReferenceGrids = new List<IReferenceGrid>();
+            FrameGrids = new List<IFrameGrid>();
         }
 
-        public List<IReferenceGrid> ReferenceGrids { get; set; }
+        public List<IFrameGrid> FrameGrids { get; set; }
 
         public Node Origin { get; set; }
 

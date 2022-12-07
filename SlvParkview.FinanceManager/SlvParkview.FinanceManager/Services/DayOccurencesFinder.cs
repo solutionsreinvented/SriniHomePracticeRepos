@@ -21,6 +21,7 @@ namespace SlvParkview.FinanceManager.Services
 
             for (int year = startDate.Year; year <= endDate.Year; year++)
             {
+                /// Occurences if the start and end dates are within the same year.
                 if (startDate.Year == endDate.Year)
                 {
                     if (startDate.Day <= dayOfMonth)
@@ -39,6 +40,8 @@ namespace SlvParkview.FinanceManager.Services
                     }
 
                 }
+                /// Occurences from the start date till the last month of the start year, when the range spans accross
+                /// multiple years.
                 else if (year == startDate.Year)
                 {
                     if (startDate.Day <= dayOfMonth)
@@ -51,6 +54,8 @@ namespace SlvParkview.FinanceManager.Services
                         AddDate(dates, year, month, dayOfMonth);
                     }
                 }
+                /// Occurences starting from the from month till the month of the end date in the end year, when the range
+                /// spans across multiple years.
                 else if (year == endDate.Year)
                 {
                     for (int month = 1; month < endDate.Month; month++)
@@ -63,6 +68,7 @@ namespace SlvParkview.FinanceManager.Services
                         AddDate(dates, year, endDate.Month, dayOfMonth);
                     }
                 }
+                /// Occurences for the entire year i.e., for twelve months if the date range encompasses a full year in between.
                 else
                 {
                     for (int month = 1; month <= 12; month++)
