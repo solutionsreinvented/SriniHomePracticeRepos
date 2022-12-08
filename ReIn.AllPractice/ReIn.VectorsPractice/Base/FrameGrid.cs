@@ -7,8 +7,8 @@ namespace ReIn.VectorsPractice.Base
     /// Stores the data related to bridge frames at each grid i.e., cross frame location to generate the bridge geometry.
     /// This is the base class for all kinds of frames e.g., BridgeFrame, ExtensionFrame and PortalFrame etc.
     /// </summary>
-    public abstract class FrameGrid : ReferenceGrid, IFrameGrid,
-                                      IReferenceGrid, ICrossFrameVectors, ILongitudinalFrameVectors
+    public abstract class FrameGrid : ReferenceGrid, IFrameGrid, IReferenceGrid,
+                                                     ICrossFrameVectors, ILongitudinalFrameVectors
     {
         public FrameGrid()
         {

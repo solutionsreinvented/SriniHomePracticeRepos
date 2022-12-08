@@ -21,42 +21,9 @@ namespace ReIn.VectorsPractice
     /// </summary>
     public partial class MainWindow : Window
     {
-        private void GetCount()
-        {
-            DateTime startDate = new DateTime(2019, 01, 11);
-            DateTime endDate = new DateTime(2022, 02, 11);
-
-            int nYears = endDate.Year - startDate.Year;
-            int dayOfMonth = 11;
-
-            List<DateTime> dates = new List<DateTime>();
-
-            if (nYears == 0)
-            {
-                dates = PartialYearCounter.GetCount(startDate, endDate, dayOfMonth);
-            }
-            else
-            {
-                dates.AddRange(PartialYearCounter.GetCount(startDate, new DateTime(startDate.Year, 12, 31), dayOfMonth));
-
-                for (int yearCount = 1; yearCount < nYears; yearCount++)
-                {
-                    dates.AddRange(CompleteYearCounter.GetCount(startDate.Year + yearCount, dayOfMonth));
-                }
-
-                dates.AddRange(PartialYearCounter.GetCount(new DateTime(endDate.Year, 01, 01), endDate, dayOfMonth));
-            }
-        }
-
         public MainWindow()
         {
             InitializeComponent();
-
-            GetCount();
-
-
-
-
 
             ///ProcessBridge();
         }

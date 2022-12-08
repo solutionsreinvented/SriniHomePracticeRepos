@@ -1,9 +1,8 @@
 ﻿namespace ReIn.VectorsPractice.Interfaces
 {
-    public interface IFrameGrid
+    public interface IFrameGrid : IReferenceGrid, ICrossFrameVectors, ILongitudinalFrameVectors
     {
 
-        int Id { get; }
         /// <summary>
         /// Width of the bridge at the respective grid.
         /// </summary>
