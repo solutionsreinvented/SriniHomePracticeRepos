@@ -115,6 +115,7 @@
       <DependentUpon>PenaltyInfoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Enums\Month.cs" />
+    <Compile Include="Enums\OutstandingsFilter.cs" />
     <Compile Include="Enums\PaymentModeFilter.cs" />
     <Compile Include="Enums\PaymentsReportType.cs" />
     <Compile Include="Enums\ReportType.cs" />

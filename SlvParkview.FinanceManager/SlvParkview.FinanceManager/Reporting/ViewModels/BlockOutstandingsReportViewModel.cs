@@ -1,4 +1,5 @@
-﻿using SlvParkview.FinanceManager.Reporting.Models;
+﻿using SlvParkview.FinanceManager.Enums;
+using SlvParkview.FinanceManager.Reporting.Models;
 using SlvParkview.FinanceManager.ViewModels;
 
 using System;
@@ -24,6 +25,8 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
 
         public DateTime ReportTill { get => Get<DateTime>(); set { Set(value); UpdateReport(); } }
 
+        public OutstandingsFilter Filter { get => Get<OutstandingsFilter>(); set { Set(value); UpdateReport(); } }
+
         public string OutstandingHeader { get => Get<string>(); private set => Set(value); }
 
         #endregion
@@ -33,14 +36,14 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
         private protected override void Initialize()
         {
             base.Initialize();
-
+            Filter = OutstandingsFilter.All;
             ReportTill = DateTime.Today;
         }
 
         private void UpdateReport()
         {
             OutstandingHeader = $"Outstanding as on {ReportTill:dd-MMM-yyyy}";
-            Report = new BlockOutstandingsReport(Block, ReportTill);
+            Report = new BlockOutstandingsReport(Block, ReportTill, Filter);
             Report.GenerateContents();
         }
 

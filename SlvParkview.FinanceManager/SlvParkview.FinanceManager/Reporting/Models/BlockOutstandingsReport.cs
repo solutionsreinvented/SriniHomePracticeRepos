@@ -3,6 +3,7 @@
 using ReInvented.DataAccess;
 using ReInvented.DataAccess.Interfaces;
 
+using SlvParkview.FinanceManager.Enums;
 using SlvParkview.FinanceManager.Extensions;
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Reporting.Interfaces;
@@ -42,10 +43,11 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         #region Parameterized Constructor
 
-        public BlockOutstandingsReport(Block block, DateTime reportTill)
+        public BlockOutstandingsReport(Block block, DateTime reportTill, OutstandingsFilter filter = OutstandingsFilter.All)
         {
             _block = block;
             _reportTill = reportTill;
+            Filter = filter;
         }
 
         #endregion
@@ -57,6 +59,8 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         [JsonProperty]
         public string TotalOutstanding { get => Get<string>(); private set => Set(value); }
+
+        public OutstandingsFilter Filter { get => Get<OutstandingsFilter>(); private set => Set(value); }
 
         #endregion
 
@@ -80,7 +84,17 @@ namespace SlvParkview.FinanceManager.Reporting.Models
                     }
 
                     flat.DateSpecified = _reportTill;
-                    FlatInfoCollection.Add(flat.ParseToFlatInfo());
+                    if (Filter == OutstandingsFilter.Defaulters)
+                    {
+                        if (flat.CurrentOutstanding >= _block.MinimumOutstandingForPenalty)
+                        {
+                            FlatInfoCollection.Add(flat.ParseToFlatInfo());
+                        }
+                    }
+                    else
+                    {
+                        FlatInfoCollection.Add(flat.ParseToFlatInfo());
+                    }
                 }
             }
 
