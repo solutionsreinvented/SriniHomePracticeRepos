@@ -47,6 +47,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         {
             _block = block;
             _reportTill = reportTill;
+
             Filter = filter;
         }
 
@@ -84,6 +85,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
                     }
 
                     flat.DateSpecified = _reportTill;
+
                     if (Filter == OutstandingsFilter.Defaulters)
                     {
                         if (flat.CurrentOutstanding >= _block.MinimumOutstandingForPenalty)

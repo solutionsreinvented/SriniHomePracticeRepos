@@ -25,7 +25,7 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
 
         public DateTime ReportTill { get => Get<DateTime>(); set { Set(value); UpdateReport(); } }
 
-        public OutstandingsFilter Filter { get => Get<OutstandingsFilter>(); set { Set(value); UpdateReport(); } }
+        public OutstandingsFilter Filter { get => Get(OutstandingsFilter.All); set { Set(value); UpdateReport(); } }
 
         public string OutstandingHeader { get => Get<string>(); private set => Set(value); }
 
@@ -36,8 +36,8 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
         private protected override void Initialize()
         {
             base.Initialize();
-            Filter = OutstandingsFilter.All;
             ReportTill = DateTime.Today;
+            ///Filter = OutstandingsFilter.All;
         }
 
         private void UpdateReport()
