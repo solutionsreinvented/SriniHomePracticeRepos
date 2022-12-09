@@ -24,7 +24,7 @@
                 Height="24"
                 Padding="5,0,0,0"
                 VerticalContentAlignment="Center"
-                SelectedDate="{Binding ReceivedOn}" />
+                SelectedDate="{Binding OccuredOn}" />
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="5,0,0,0">
             <TextBlock Margin="0,2" Text="Amount:" />

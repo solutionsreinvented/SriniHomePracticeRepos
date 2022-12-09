@@ -179,6 +179,15 @@
 
         <!--#endregion-->
 
+        <TextBlock
+            Grid.RowSpan="2"
+            Margin="15,0,10,10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom">
+            <Run Text="Crafted by" />
+            <Run Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}" Text="© ReInvented" />
+        </TextBlock>
+
     </Grid>
 
 </Window>
