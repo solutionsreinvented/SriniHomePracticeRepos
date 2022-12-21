@@ -1,0 +1,57 @@
+[
+  {
+    "Id": 5941241,
+    "FullName": "Srinivasa Rao Masanam",
+    "Password": "Advitha@2634",
+    "UserRole": "Admin"
+  },
+  {
+    "Id": 5941246,
+    "FullName": "Harish Ramachandran",
+    "Password": "Test",
+    "UserRole": "Standard"
+  },
+  {
+    "Id": 5941311,
+    "FullName": "Ragavendiran M",
+    "Password": "Ragavendiran5941311",
+    "UserRole": "Standard"
+  },
+  {
+    "Id": 5941337,
+    "FullName": "Dinesh Kumar S",
+    "Password": "Dinesh5941337",
+    "UserRole": "Standard"
+  },
+  {
+    "Id": 7165,
+    "FullName": "Madhuri Mulgund",
+    "Password": "Madhuri7165",
+    "UserRole": "Standard"
+  },
+  {
+    "Id": 7113,
+    "FullName": "Vinayaka Shinde",
+    "Password": "Vinayaka7113",
+    "UserRole": "Standard"
+  },
+  {
+    "Id": 7156,
+    "FullName": "Godwin Viju",
+    "Password": "Godwin7156",
+    "UserRole": "Standard"
+  },
+  {
+    "Id": 2406,
+    "FullName": "Rajasekaran R",
+    "Password": "Rajasekaran2406",
+    "UserRole": "Standard"
+  },
+  {
+    //Id to be updated
+    "Id": 24174,
+    "FullName": "Digambar Khetri",
+    "Password": "Digmabar24174",
+    "UserRole": "Standard"
+  }
+]

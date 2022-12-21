@@ -1,4 +1,8 @@
-﻿using ReIn.VectorsPractice.Interfaces;
+﻿using System;
+
+using ReIn.VectorsPractice.Enums;
+using ReIn.VectorsPractice.Factories;
+using ReIn.VectorsPractice.Interfaces;
 using ReIn.VectorsPractice.Models;
 
 namespace ReIn.VectorsPractice.Base
@@ -10,9 +14,12 @@ namespace ReIn.VectorsPractice.Base
     public abstract class FrameGrid : ReferenceGrid, IFrameGrid, IReferenceGrid,
                                                      ICrossFrameVectors, ILongitudinalFrameVectors
     {
+
         public FrameGrid()
         {
-
+            Width = 2.0;
+            Height = 2.0;
+            Spacing = 2.0;
         }
 
         public FrameGrid(int id)
@@ -22,6 +29,10 @@ namespace ReIn.VectorsPractice.Base
 
         ///public int Id { get => Get<int>(); private set => Set(value); }
 
+        public FrameGridType GridType { get => Get<FrameGridType>(); set { Set(value); UpdateType(); } }
+
+        protected abstract void UpdateType();
+
         public double Width { get => Get<double>(); set => Set(value); }
 
         public double Height { get => Get<double>(); set => Set(value); }
@@ -29,8 +40,6 @@ namespace ReIn.VectorsPractice.Base
         public double Spacing { get => Get<double>(); set => Set(value); }
 
         public double Distance { get => Get<double>(); set => Set(value); }
-
-        public IReferenceGrid ReferenceGrid { get => Get<IReferenceGrid>(); set => Set(value); }
 
     }
 }

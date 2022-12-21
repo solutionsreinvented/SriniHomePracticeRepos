@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using ReIn.VectorsPractice.Interfaces;
 using ReIn.VectorsPractice.Models;
@@ -20,7 +21,7 @@ namespace ReIn.VectorsPractice.Fakes
                 Width = 2.0,
                 DeckElevation = 10.0,
                 Origin = new Node(0.0, 0.0, 0.0),
-                FrameGrids = new List<IFrameGrid>()
+                FrameGrids = new ObservableCollection<IFrameGrid>()
                 {
                     //new BridgeFrameGrid() { Spacing = 0.0, Width = 2.0, Height = 2.8 },
                     //new BridgeFrameGrid() { Spacing = 2.3, Width = 2.2, Height = 2.8 },

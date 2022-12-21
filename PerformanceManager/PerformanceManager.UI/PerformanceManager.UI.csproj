@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PerformanceManager.Domain\PerformanceManager.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ReInvented.Shared">
+      <HintPath>..\ReInvented.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="SRi.CustomControlsLibrary">
+      <HintPath>..\SRi.CustomControlsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="SRi.XamlUIThickenerApp.DataAccess">
+      <HintPath>..\SRi.XamlUIThickenerApp.DataAccess.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

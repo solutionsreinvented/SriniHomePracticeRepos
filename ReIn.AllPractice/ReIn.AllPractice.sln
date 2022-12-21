@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReIn.ViewModelPercolation",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReIn.VectorsPractice", "ReIn.VectorsPractice\ReIn.VectorsPractice.csproj", "{AD5E8851-0F99-4B61-8385-7A3A29009CFE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Techtural.Loading", "Techtural.Loading\Techtural.Loading.csproj", "{C57B7608-444E-4B81-AE0B-621B80E80874}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{AD5E8851-0F99-4B61-8385-7A3A29009CFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD5E8851-0F99-4B61-8385-7A3A29009CFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD5E8851-0F99-4B61-8385-7A3A29009CFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C57B7608-444E-4B81-AE0B-621B80E80874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C57B7608-444E-4B81-AE0B-621B80E80874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C57B7608-444E-4B81-AE0B-621B80E80874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C57B7608-444E-4B81-AE0B-621B80E80874}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

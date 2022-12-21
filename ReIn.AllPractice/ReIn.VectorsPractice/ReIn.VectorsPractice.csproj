@@ -64,7 +64,9 @@
     <Compile Include="Base\FrameGrid.cs" />
     <Compile Include="Extensions\FrameGridExtensions.cs" />
     <Compile Include="Extensions\NodeExtensions.cs" />
+    <Compile Include="Factories\FrameGridFactory.cs" />
     <Compile Include="Fakes\FakeBridgeFactory.cs" />
+    <Compile Include="Enums\FrameGridType.cs" />
     <Compile Include="Interfaces\IFrameGrid.cs" />
     <Compile Include="Models\Bridge.cs" />
     <Compile Include="Extensions\BridgeExtensions.cs" />
@@ -72,10 +74,13 @@
     <Compile Include="Interfaces\IReferenceGrid.cs" />
     <Compile Include="Interfaces\ILongitudinalFrameVectors.cs" />
     <Compile Include="Models\BridgeFrameGrid.cs" />
+    <Compile Include="Models\ExtensionFrameGrid.cs" />
+    <Compile Include="Models\PortalFrameGrid.cs" />
     <Compile Include="Models\ReferenceGrid.cs" />
     <Compile Include="Extensions\ReferenceGridExtensions.cs" />
     <Compile Include="Services\FileService.cs" />
     <Compile Include="Services\SyntaxGenerationService.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

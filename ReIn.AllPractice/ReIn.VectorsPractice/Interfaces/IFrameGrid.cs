@@ -1,8 +1,13 @@
-﻿namespace ReIn.VectorsPractice.Interfaces
+﻿using System;
+
+using ReIn.VectorsPractice.Enums;
+
+namespace ReIn.VectorsPractice.Interfaces
 {
     public interface IFrameGrid : IReferenceGrid, ICrossFrameVectors, ILongitudinalFrameVectors
     {
 
+        FrameGridType GridType { get; set; }
         /// <summary>
         /// Width of the bridge at the respective grid.
         /// </summary>
@@ -19,15 +24,6 @@
         /// Absolute distance of this frame grid from the reference grid i.e., start grid of the bridge.
         /// </summary>
         double Distance { get; set; }
-
-        IReferenceGrid ReferenceGrid { get; set; }
-
-        ///// <summary>
-        ///// Properties of the walkway if applicable.
-        ///// </summary>
-        //Walkway Walkway { get; set; }
-
-        //ObservableCollection<FeedPipe> FeedPipes { get; set; }
 
     }
 }

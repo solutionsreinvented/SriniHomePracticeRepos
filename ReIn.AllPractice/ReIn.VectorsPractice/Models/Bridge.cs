@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using ReIn.VectorsPractice.Interfaces;
 
@@ -13,10 +14,10 @@ namespace ReIn.VectorsPractice.Models
     {
         public Bridge()
         {
-            FrameGrids = new List<IFrameGrid>();
+            FrameGrids = new ObservableCollection<IFrameGrid>();
         }
 
-        public List<IFrameGrid> FrameGrids { get; set; }
+        public ObservableCollection<IFrameGrid> FrameGrids { get; set; }
 
         public Node Origin { get; set; }
 

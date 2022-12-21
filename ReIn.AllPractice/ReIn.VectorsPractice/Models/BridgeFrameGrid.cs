@@ -1,4 +1,5 @@
 ﻿using ReIn.VectorsPractice.Base;
+using ReIn.VectorsPractice.Enums;
 using ReIn.VectorsPractice.Interfaces;
 
 namespace ReIn.VectorsPractice.Models
@@ -8,7 +9,7 @@ namespace ReIn.VectorsPractice.Models
 
         public BridgeFrameGrid()
         {
-
+            GridType = FrameGridType.BridgeFrameGrid;
         }
 
         public BridgeFrameGrid(int id) : base(id)

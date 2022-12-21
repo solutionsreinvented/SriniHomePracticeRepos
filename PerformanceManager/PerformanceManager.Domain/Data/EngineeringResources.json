@@ -1,0 +1,65 @@
+[
+  {
+    "Activities": [],
+    "ResourceRole": 0,
+    "Id": 5941241,
+    "FirstName": "Srinivasa Rao",
+    "LastName": "Masanam"
+  },
+  {
+    "Activities": [],
+    "ResourceRole": 1,
+    "Id": 5941338,
+    "FirstName": "Harish",
+    "LastName": "Ramachandran"
+  },
+  {
+    "Activities": [],
+    "ResourceRole": 1,
+    "Id": 5941311,
+    "FirstName": "Ragavendiran",
+    "LastName": "Murugan"
+  },
+  {
+    "Activities": [],
+    "ResourceRole": 1,
+    "Id": 5941337,
+    "FirstName": "Dinesh Kumar",
+    "LastName": "Sukumaran"
+  },
+  {
+    "Activities": [],
+    "ResourceRole": 1,
+    "Id": 7165,
+    "FirstName": "Madhuri",
+    "LastName": "Mulgund"
+  },
+  {
+    "Activities": [],
+    "ResourceRole": 2,
+    "Id": 7113,
+    "FirstName": "Vinayaka",
+    "LastName": "Shinde"
+  },
+  {
+    "Activities": [],
+    "ResourceRole": 2,
+    "Id": 7156,
+    "FirstName": "Godwin Viju",
+    "LastName": "Antony"
+  },
+  {
+    "Activities": [],
+    "ResourceRole": 2,
+    "Id": 2406,
+    "FirstName": "Rajasekaran",
+    "LastName": "Velmurugan"
+  },
+  {
+    "Activities": [],
+    "ResourceRole": 2,
+    "Id": 6717,
+    "FirstName": "Malinga",
+    "LastName": "Golla"
+  }
+]
