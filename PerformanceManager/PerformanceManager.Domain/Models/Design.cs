@@ -4,13 +4,12 @@ using PerformanceManager.Domain.Interfaces;
 
 namespace PerformanceManager.Domain.Models
 {
-    public sealed class Drafter : Resource, IResource
+    public sealed class Design : Activity, IActivity
     {
-        public Drafter(int employeeId) : base(employeeId)
+        public Design(int id) : base(id)
         {
-            ResourceRole = ResourceRole.Drafter;
+            ActivityType = ActivityType.Design;
         }
-
 
     }
 }

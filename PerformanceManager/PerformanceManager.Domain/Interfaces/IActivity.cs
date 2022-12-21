@@ -6,28 +6,28 @@ using PerformanceManager.Domain.Models;
 
 namespace PerformanceManager.Domain.Interfaces
 {
-    public interface IEngineeringActivity
+    public interface IActivity
     {
 
         int Id { get; set; }
 
-        ProjectType ProjectType { get; set; }
-
         string Description { get; set; }
+
+        ProjectType ProjectType { get; set; }
 
         Project Project { get; set; }
 
-        EngineeringActivityType ActivityType { get; set; }
+        ActivityType ActivityType { get; set; }
 
         CompletionStatus CurrentStatus { get; set; }
 
-        HashSet<IEngineeringResource> AllocatedResources { get; set; }
+        HashSet<IResource> AllocatedResources { get; set; }
 
         HashSet<Change> Changes { get; set; }
 
         DateTime InitiatedOn { get; set; }
 
-        DateTime ScheduledCompletion { get; set; }
+        DateTime ScheduledCompletion { get; }
 
         public void SetCompletionInHours(int totalHoursRequired);
 

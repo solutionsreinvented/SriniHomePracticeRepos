@@ -15,9 +15,9 @@ namespace PerformanceManager.Domain.Models
 
         public ScheduleChangeReason RescheduleReason { get => Get(ScheduleChangeReason.PriorityChange); set => Set(value); }
 
-        public IEngineeringActivity AffectedActivity { get => Get<IEngineeringActivity>(); set => Set(value); }
+        public IActivity AffectedActivity { get => Get<IActivity>(); set => Set(value); }
 
-        public IEngineeringActivity SupercedingActivity { get => Get<IEngineeringActivity>(); set => Set(value); }
+        public IActivity SupercedingActivity { get => Get<IActivity>(); set => Set(value); }
 
     }
 }

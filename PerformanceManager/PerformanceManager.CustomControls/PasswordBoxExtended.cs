@@ -1,8 +1,7 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace PerformanceManager.UI.CustomControls
+namespace PerformanceManager.CustomControls
 {
     public class PasswordBoxExtended : Control
     {
@@ -35,7 +34,8 @@ namespace PerformanceManager.UI.CustomControls
 
         // Using a DependencyProperty as the backing store for Password.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PasswordProperty =
-            DependencyProperty.Register("Password", typeof(string), typeof(PasswordBoxExtended), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnPasswordChanged));
+            DependencyProperty.Register("Password", typeof(string), typeof(PasswordBoxExtended),
+                                        new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnPasswordChanged));
 
 
         private static void OnPasswordChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

@@ -2,6 +2,7 @@
 {
     public enum ResourceRole
     {
+        Manager,
         LeadEngineer,
         Engineer,
         Drafter

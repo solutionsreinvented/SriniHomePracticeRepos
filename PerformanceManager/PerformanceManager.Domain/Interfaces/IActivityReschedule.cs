@@ -6,8 +6,8 @@
 
         string ReasonForReschedule { get; set; }
 
-        void RescheduleByHours(int hours, IEngineeringActivity activity);
+        void RescheduleByHours(int hours, IActivity activity);
 
-        void RescheduleByDays(int days, IEngineeringActivity engineeringActivity);
+        void RescheduleByDays(int days, IActivity engineeringActivity);
     }
 }

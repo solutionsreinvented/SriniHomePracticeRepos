@@ -9,7 +9,7 @@ namespace PerformanceManager.Domain.Base
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        protected void RaiseMultiplePropertiesChanged([CallerMemberName] string propertyName = "")
         {
             RaisePropertyChanged(propertyName);
         }

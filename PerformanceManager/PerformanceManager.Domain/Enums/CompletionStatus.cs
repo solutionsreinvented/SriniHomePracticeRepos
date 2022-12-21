@@ -1,7 +1,10 @@
-﻿using System.ComponentModel;
+﻿using ReInvented.Shared.TypeConverters;
+
+using System.ComponentModel;
 
 namespace PerformanceManager.Domain.Enums
 {
+    [TypeConverter(typeof(EnumToDescriptionTypeConverter))]
     public enum CompletionStatus
     {
         [Description("Completed")]

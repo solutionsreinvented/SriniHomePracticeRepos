@@ -22,16 +22,16 @@ namespace PerformanceManager.UI.ViewModels
         {
             Title = "Create Activity";
 
-            EngineeringResourcesRepository engineeringResourcesRepository = new();
+            ResourceRepository resourceRepository = new();
 
-            Resources = engineeringResourcesRepository.GetAll();
+            Resources = resourceRepository.GetAll();
         }
 
         public string Title { get => Get<string>(); set => Set(value); }
 
-        public IEnumerable<IEngineeringResource> Resources { get => Get<IEnumerable<IEngineeringResource>>(); set => Set(value); }
+        public IEnumerable<IResource> Resources { get => Get<IEnumerable<IResource>>(); set => Set(value); }
 
-        public IEnumerable<IEngineeringActivity> Activities => SelectedResource?.Activities;
+        public IEnumerable<IActivity> Activities => SelectedResource?.Activities;
 
         public ProjectType SelectedProjectType
         {
@@ -39,26 +39,26 @@ namespace PerformanceManager.UI.ViewModels
             set => Set(value);
         }
 
-        public EngineeringActivityType SelectedActivityType
+        public ActivityType SelectedActivityType
         {
-            get => Get<EngineeringActivityType>();
+            get => Get<ActivityType>();
             set => Set(value);
         }
 
 
-        public IEngineeringResource SelectedResource
+        public IResource SelectedResource
         {
             get => Get(Resources?.First());
             set
             {
                 Set(value);
-                OnPropertyChanged(nameof(Activities));
+                RaiseMultiplePropertiesChanged(nameof(Activities));
             }
         }
 
         public List<Project> Projects { get; set; }
 
-        public IEngineeringActivity SelectedActivity { get => Get<IEngineeringActivity>(); set => Set(value); }
+        public IActivity SelectedActivity { get => Get<IActivity>(); set => Set(value); }
 
         public DateTime StartDate { get => Get(DateTime.Now); set => Set(value); }
 

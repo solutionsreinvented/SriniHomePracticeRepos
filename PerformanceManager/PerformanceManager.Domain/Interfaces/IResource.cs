@@ -4,9 +4,9 @@ using PerformanceManager.Domain.Enums;
 
 namespace PerformanceManager.Domain.Interfaces
 {
-    public interface IEngineeringResource
+    public interface IResource
     {
-        List<IEngineeringActivity> Activities { get; set; }
+        HashSet<IActivity> Activities { get; set; }
 
         string FirstName { get; set; }
 

@@ -35,7 +35,7 @@ namespace PerformanceManager.Domain.Stores
                     _propertiesDictionary.Add(propertyName, value);
                 }
 
-                OnPropertyChanged(propertyName);
+                RaiseMultiplePropertiesChanged(propertyName);
             }
         }
     }

@@ -13,34 +13,34 @@ using SRi.XamlUIThickenerApp.DataAccess;
 
 namespace PerformanceManager.Domain.Repositories
 {
-    public class EngineeringResourcesRepository
+    public class ResourceRepository
     {
-        private const string _fileName = @"EngineeringResources.json";
+        private const string _fileName = @"Resources.json";
 
-        private readonly JsonDataSerializer<List<EngineeringResource>> _jsonDataSerializer = new();
+        private readonly JsonDataSerializer<List<Resource>> _jsonDataSerializer = new();
 
-        public EngineeringResourcesRepository()
+        public ResourceRepository()
         {
 
         }
 
-        public List<IEngineeringResource> GetAll()
+        public List<IResource> GetAll()
         {
             string fileFullPath = Path.Combine(FileServiceProvider.GetDataDirectory(), _fileName);
 
-            List<EngineeringResource> resources = _jsonDataSerializer.Deserialiaze(fileFullPath);
+            List<Resource> resources = _jsonDataSerializer.Deserialiaze(fileFullPath);
 
-            resources.First().Activities = new List<IEngineeringActivity>()
+            resources.First().Activities = new HashSet<IActivity>()
             {
-                new EngineeringActivity()
+                new Activity()
                 {
-                    ActivityType = EngineeringActivityType.Drafting,
+                    ActivityType = ActivityType.Detailing,
                     Description = "New Activity",
                     InitiatedOn = DateTime.Now
                 }
             };
 
-            return ClassToInterfaceMapper<EngineeringResource, IEngineeringResource>.Map(resources);
+            return ClassToInterfaceMapper<Resource, IResource>.Map(resources);
 
         }
 

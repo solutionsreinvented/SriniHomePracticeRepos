@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PerformanceManager.CustomControls\PerformanceManager.CustomControls.csproj" />
     <ProjectReference Include="..\PerformanceManager.Domain\PerformanceManager.Domain.csproj" />
   </ItemGroup>
 

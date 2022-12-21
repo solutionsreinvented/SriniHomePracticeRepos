@@ -23,7 +23,7 @@ namespace PerformanceManager.UI.ViewModels
 
         private void OnCurrentViewModelChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged(nameof(CurrentViewModel));
+            RaiseMultiplePropertiesChanged(nameof(CurrentViewModel));
         }
 
         public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;

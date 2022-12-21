@@ -6,27 +6,27 @@ using PerformanceManager.Domain.Stores;
 
 namespace PerformanceManager.Domain.Base
 {
-    public class EngineeringResource : PropertyStore, IEngineeringResource
+    public class Resource : PropertyStore, IResource
     {
         #region Default Constructor
 
-        public EngineeringResource()
+        public Resource()
         {
 
         }
 
         #endregion
 
-        protected EngineeringResource(int employeeId)
+        protected Resource(int employeeId)
         {
             InitializeData(employeeId);
         }
 
-        public List<IEngineeringActivity> Activities { get => Get<List<IEngineeringActivity>>(); set => Set(value); }
+        public int Id { get => Get<int>(); set => Set(value); }
+
+        public HashSet<IActivity> Activities { get => Get<HashSet<IActivity>>(); set => Set(value); }
 
         public ResourceRole ResourceRole { get => Get<ResourceRole>(); set => Set(value); }
-
-        public int Id { get => Get<int>(); set => Set(value); }
 
         public string FirstName
         {
@@ -34,7 +34,7 @@ namespace PerformanceManager.Domain.Base
             set
             {
                 Set(value);
-                OnPropertyChanged(nameof(FullName));
+                RaiseMultiplePropertiesChanged(nameof(FullName));
             }
         }
 
@@ -44,7 +44,7 @@ namespace PerformanceManager.Domain.Base
             set
             {
                 Set(value);
-                OnPropertyChanged(nameof(FullName));
+                RaiseMultiplePropertiesChanged(nameof(FullName));
             }
         }
 
@@ -56,7 +56,7 @@ namespace PerformanceManager.Domain.Base
         private void InitializeData(int employeeId)
         {
             Id = employeeId;
-            Activities = new List<IEngineeringActivity>();
+            Activities = new HashSet<IActivity>();
         }
 
         #endregion

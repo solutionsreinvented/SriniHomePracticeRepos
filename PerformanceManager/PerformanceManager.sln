@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PerformanceManager.Domain",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PerformanceManager.UI", "PerformanceManager.UI\PerformanceManager.UI.csproj", "{85F5BA39-B601-486F-985B-FA7F9E6955F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceManager.CustomControls", "PerformanceManager.CustomControls\PerformanceManager.CustomControls.csproj", "{905182F9-086C-42AB-B45D-27D93C354E23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{85F5BA39-B601-486F-985B-FA7F9E6955F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85F5BA39-B601-486F-985B-FA7F9E6955F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85F5BA39-B601-486F-985B-FA7F9E6955F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{905182F9-086C-42AB-B45D-27D93C354E23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{905182F9-086C-42AB-B45D-27D93C354E23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{905182F9-086C-42AB-B45D-27D93C354E23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{905182F9-086C-42AB-B45D-27D93C354E23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

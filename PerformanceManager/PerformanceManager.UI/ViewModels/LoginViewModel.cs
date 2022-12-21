@@ -36,21 +36,27 @@ namespace PerformanceManager.UI.ViewModels
             _navigationStore.CurrentViewModel = new ChangePasswordViewModel(_navigationStore)
             {
                 UserId = UserId,
-                CurrentPassword = Password
             };
         }
 
         public IUser User { get => Get<IUser>(); private set => Set(value); }
 
-        public int UserId
+        public string UserId
         {
-            get => Get<int>();
+            get => Get<string>();
             set
             {
                 Set(value);
-                User = _usersRepository.GetById(value);
-                OnPropertyChanged(nameof(ValidUser));
+                User = GetUser(value);
+                RaiseMultiplePropertiesChanged(nameof(ValidUser), nameof(UserExists));
             }
+        }
+
+        private IUser GetUser(string userId)
+        {
+            _ = int.TryParse(userId, out int result);
+
+            return _usersRepository.GetById(result);
         }
 
         public string Password
@@ -59,22 +65,17 @@ namespace PerformanceManager.UI.ViewModels
             set
             {
                 Set(value);
-                OnPropertyChanged(nameof(ValidUser));
+                RaiseMultiplePropertiesChanged(nameof(ValidUser), nameof(UserExists));
             }
         }
 
-        public bool ValidUser => UserExists() && ValidPassword();
+        public bool ValidUser => UserExists && ValidPassword();
 
-        private bool UserExists() => User != null;
+        public bool UserExists => User != null;
 
         private bool ValidPassword()
         {
-            if (User == null)
-            {
-                return false;
-            }
-
-            return User.Password == Password;
+            return User != null && User.Password == Password;
 
             ///return !string.IsNullOrEmpty(Password) && (Password.Length is >= 8 and <= 15) && Password.Any(c => char.IsDigit(c));
         }

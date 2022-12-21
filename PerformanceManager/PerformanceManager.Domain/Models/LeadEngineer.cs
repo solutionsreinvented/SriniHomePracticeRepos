@@ -4,7 +4,7 @@ using PerformanceManager.Domain.Interfaces;
 
 namespace PerformanceManager.Domain.Models
 {
-    public sealed class LeadEngineer : EngineeringResource, IEngineeringResource
+    public sealed class LeadEngineer : Resource, IResource
     {
         public LeadEngineer(int employeeId) : base(employeeId)
         {
