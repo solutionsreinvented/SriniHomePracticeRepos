@@ -10,7 +10,5 @@ namespace PerformanceManager.Domain.Models
         {
             ResourceRole = ResourceRole.Drafter;
         }
-
-
     }
 }

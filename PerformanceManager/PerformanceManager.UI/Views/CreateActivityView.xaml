@@ -2,13 +2,11 @@
     x:Class="PerformanceManager.UI.Views.CreateActivityView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:be="clr-namespace:PerformanceManager.UI.Extensions"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:enums="clr-namespace:PerformanceManager.Domain.Enums;assembly=PerformanceManager.Domain"
-    xmlns:local="clr-namespace:PerformanceManager.UI.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="clr-namespace:PerformanceManager.Domain.Base;assembly=PerformanceManager.Domain"
-    xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:models="clr-namespace:PerformanceManager.Domain.Models;assembly=PerformanceManager.Domain"
+    xmlns:uc="clr-namespace:PerformanceManager.UI.UserControls"
+    x:Name="Root"
     Width="1100"
     Height="600"
     MinWidth="1000"
@@ -29,188 +27,74 @@
 
         </Border.Effect>
 
-        <Grid Margin="15">
 
-            <!--#region Grid Resources-->
 
-            <Grid.Resources>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                    <Setter Property="Margin" Value="10,0" />
-                    <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
-                </Style>
 
-                <Style TargetType="{x:Type TextBox}">
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                    <Setter Property="VerticalContentAlignment" Value="Center" />
-                    <Setter Property="Padding" Value="5,3" />
-                    <Setter Property="Margin" Value="10,0" />
-                    <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
-
-                    <!--<Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}" />-->
-                </Style>
-
-            </Grid.Resources>
-
-            <!--#endregion-->
-
-            <!--#region Grid Definitions-->
+        <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
 
-            <TextBlock
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <!--<Grid.DataContext>
+                    <models:ProjectMaster />
+                </Grid.DataContext>-->
+
+            <DataGrid
                 Grid.Row="0"
-                Margin="0,0,0,25"
-                HorizontalAlignment="Center"
-                FontSize="12"
-                FontWeight="DemiBold"
-                Text="{Binding Title}" />
+                Grid.Column="0"
+                Margin="10"
+                AutoGenerateColumns="False"
+                ItemsSource="{Binding PreOrders}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Type}"
+                        Header="Project Type" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Code}"
+                        Header="Project Code" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Name}"
+                        Header="Project Name" />
+                </DataGrid.Columns>
 
-            <Grid Grid.Row="1" Margin="0,10,0,5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+            </DataGrid>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
+            <DataGrid
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="10"
+                AutoGenerateColumns="False"
+                ItemsSource="{Binding Orders}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Type}"
+                        Header="Project Type" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Code}"
+                        Header="Project Code" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Name}"
+                        Header="Project Name" />
+                </DataGrid.Columns>
+            </DataGrid>
 
-                <TextBlock
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="3"
-                    Margin="0,0,0,10"
-                    FontWeight="DemiBold"
-                    Text="New activity details:" />
-
-                <StackPanel Grid.Row="1" Grid.Column="0">
-
-                    <TextBlock Margin="10,0,0,10" Text="Start date:" />
-                    <DatePicker
-                        Height="28"
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        SelectedDate="{Binding StartDate}"
-                        SelectedDateFormat="Long" />
-                </StackPanel>
-
-                <StackPanel Grid.Row="1" Grid.Column="1">
-
-                    <TextBlock Margin="10,0,0,10" Text="End date:" />
-                    <DatePicker
-                        Height="28"
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        SelectedDate="{Binding EndDate}"
-                        SelectedDateFormat="Long" />
-                </StackPanel>
-
-                <StackPanel Grid.Row="1" Grid.Column="2">
-
-                    <TextBlock Margin="10,0,0,0" Text="Choose resource:" />
-                    <ComboBox
-                        Width="250"
-                        Height="24"
-                        Margin="0,10"
-                        VerticalContentAlignment="Center"
-                        ItemsSource="{Binding Resources}"
-                        SelectedItem="{Binding SelectedResource}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding FullName}" />
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                </StackPanel>
-
-            </Grid>
-
-            <Grid Grid.Row="2" Margin="0,10,0,5">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-
-                <StackPanel Grid.Column="0">
-
-                    <TextBlock Margin="10,0,0,0" Text="Project type:" />
-                    <ComboBox
-                        Width="250"
-                        Height="24"
-                        Margin="0,10"
-                        VerticalContentAlignment="Center"
-                        ItemsSource="{be:EnumBindingSource enums:ProjectType}"
-                        SelectedItem="{Binding SelectedProjectType}" />
-                </StackPanel>
-
-                <StackPanel Grid.Column="1">
-
-                    <TextBlock Margin="10,0,0,0" Text="Activity type:" />
-                    <ComboBox
-                        Width="250"
-                        Height="24"
-                        Margin="0,10"
-                        VerticalContentAlignment="Center"
-                        ItemsSource="{shared:EnumBindingResource enums:Domain}"
-                        SelectedItem="{Binding SelectedActivityType}" />
-                </StackPanel>
-
-                <!--<StackPanel Grid.Row="1" Grid.Column="2">
-
-                    <TextBlock Margin="10,0,0,0" Text="Choose resource:" />
-                    <ComboBox
-                        Width="250"
-                        Height="24"
-                        Margin="0,10"
-                        VerticalContentAlignment="Center"
-                        ItemsSource="{Binding Resources}"
-                        SelectedItem="{Binding SelectedResource}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding FullName}" />
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                </StackPanel>-->
-
-            </Grid>
-
-
-
-            <UniformGrid Grid.Row="5" Columns="3">
-                <Button
-                    Grid.Column="0"
-                    Height="28"
-                    Margin="10"
-                    Command="{Binding CreateActivityCommand}"
-                    Content="Create Activity" />
-                <Button
-                    Grid.Column="1"
-                    Height="28"
-                    Margin="10"
-                    Content="Check Conflicts" />
-                <Button
-                    Grid.Column="2"
-                    Height="28"
-                    Margin="10"
-                    Content="Cancel" />
-            </UniformGrid>
+            <!--<uc:CreateActivityControlPrevious Visibility="Hidden" />-->
 
         </Grid>
 
     </Border>
+
 </UserControl>

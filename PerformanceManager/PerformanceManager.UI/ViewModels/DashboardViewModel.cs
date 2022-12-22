@@ -26,9 +26,9 @@ namespace PerformanceManager.UI.ViewModels
 
         public ActivityMaster ActivityMaster { get => Get<ActivityMaster>(); set => Set(value); }
 
-        public PreOrder SelectedPreOrder { get => Get<PreOrder>(); set => Set(value); }
+        //public PreOrder SelectedPreOrder { get => Get<PreOrder>(); set => Set(value); }
 
-        public Order SelectedOrder { get => Get<Order>(); set => Set(value); }
+        //public Order SelectedOrder { get => Get<Order>(); set => Set(value); }
 
     }
 }
