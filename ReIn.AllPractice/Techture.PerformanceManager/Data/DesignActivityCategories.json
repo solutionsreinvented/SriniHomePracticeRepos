@@ -1,0 +1,11 @@
+[
+  {
+    "Category": "Non Structural",
+    "SubCategories": [ "Preamble", "Foundation Load Data", "Base Plates Design" ]
+  },
+  {
+    "Category": "Structural",
+    "SubCategories": [ "Staad Modeling", "Loads Application", "Analysis and Design", "Member Design Calculation Report", 
+                       "Connections Design Calculation Report" ]
+  }
+]
