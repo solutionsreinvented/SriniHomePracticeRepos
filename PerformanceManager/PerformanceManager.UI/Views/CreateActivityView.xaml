@@ -8,6 +8,7 @@
     xmlns:local="clr-namespace:PerformanceManager.UI.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:PerformanceManager.Domain.Base;assembly=PerformanceManager.Domain"
+    xmlns:shared="http://schemas.reinvented.com/shared"
     Width="1100"
     Height="600"
     MinWidth="1000"
@@ -164,7 +165,7 @@
                         Height="24"
                         Margin="0,10"
                         VerticalContentAlignment="Center"
-                        ItemsSource="{be:EnumBindingSource enums:EngineeringActivityType}"
+                        ItemsSource="{shared:EnumBindingResource enums:ActivityType}"
                         SelectedItem="{Binding SelectedActivityType}" />
                 </StackPanel>
 

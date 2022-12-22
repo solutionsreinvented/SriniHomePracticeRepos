@@ -34,7 +34,7 @@ namespace PerformanceManager.Domain.Repositories
             {
                 new Activity()
                 {
-                    ActivityType = ActivityType.Detailing,
+                    ///ActivityType = ActivityType.Detailing,
                     Description = "New Activity",
                     InitiatedOn = DateTime.Now
                 }

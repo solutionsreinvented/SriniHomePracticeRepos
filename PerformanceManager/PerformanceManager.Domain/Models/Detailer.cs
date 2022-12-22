@@ -4,9 +4,9 @@ using PerformanceManager.Domain.Interfaces;
 
 namespace PerformanceManager.Domain.Models
 {
-    public sealed class Drafter : Resource, IResource
+    public sealed class Detailer : Resource, IResource
     {
-        public Drafter(int employeeId) : base(employeeId)
+        public Detailer(int employeeId) : base(employeeId)
         {
             ResourceRole = ResourceRole.Drafter;
         }

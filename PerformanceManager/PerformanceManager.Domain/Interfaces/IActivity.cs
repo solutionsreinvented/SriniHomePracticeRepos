@@ -9,7 +9,7 @@ namespace PerformanceManager.Domain.Interfaces
     public interface IActivity
     {
 
-        int Id { get; set; }
+        int Id { get; }
 
         string Description { get; set; }
 
@@ -17,7 +17,7 @@ namespace PerformanceManager.Domain.Interfaces
 
         Project Project { get; set; }
 
-        ActivityType ActivityType { get; set; }
+        ActivityType ActivityType { get; }
 
         CompletionStatus CurrentStatus { get; set; }
 

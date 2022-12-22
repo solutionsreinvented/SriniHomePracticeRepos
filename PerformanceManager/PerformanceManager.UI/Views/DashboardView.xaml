@@ -3,8 +3,11 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:enums="clr-namespace:PerformanceManager.Domain.Enums;assembly=PerformanceManager.Domain"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
     xmlns:uc="clr-namespace:PerformanceManager.UI.UserControls"
+    x:Name="Root"
     Width="1100"
     Height="600"
     MinWidth="1000"
@@ -15,7 +18,10 @@
     d:DesignWidth="1100"
     mc:Ignorable="d">
 
-    <Border Background="{StaticResource BackgroundBrush}" CornerRadius="5">
+    <Border
+        Background="{StaticResource BackgroundBrush}"
+        CornerRadius="5"
+        DataContext="{Binding}">
 
         <Border.Effect>
             <DropShadowEffect
@@ -66,7 +72,42 @@
 
             <!--#endregion-->
 
-            <uc:ResourceSummaryControl Grid.Row="0" Grid.ColumnSpan="2" />
+            <DataGrid
+                Grid.Row="0"
+                Grid.RowSpan="3"
+                Grid.Column="0"
+                AutoGenerateColumns="False"
+                DataContext="{Binding ActivityMaster}"
+                ItemsSource="{Binding PreOrders}"
+                SelectedItem="{Binding DataContext.SelectedPreOrder, ElementName=Root}">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Code}" Header="Code" />
+                </DataGrid.Columns>
+
+
+
+            </DataGrid>
+
+            <DataGrid
+                Grid.Row="0"
+                Grid.RowSpan="3"
+                Grid.Column="1"
+                Margin="5,0"
+                AutoGenerateColumns="False"
+                DataContext="{Binding SelectedPreOrder}"
+                ItemsSource="{Binding DesignActivities}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
+                    <DataGridComboBoxColumn
+                        Header="Project Type"
+                        ItemsSource="{shared:EnumBindingResource enums:ProjectType}"
+                        SelectedItemBinding="{Binding ProjectType}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+
+            <!--<uc:ResourceSummaryControl Grid.Row="0" Grid.ColumnSpan="2" />
 
             <TextBlock
                 Grid.ColumnSpan="2"
@@ -80,7 +121,7 @@
                 Grid.Column="1"
                 Width="200"
                 Height="28"
-                Text="{Binding TestTextBoxValue, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding TestTextBoxValue, UpdateSourceTrigger=PropertyChanged}" />-->
 
         </Grid>
 

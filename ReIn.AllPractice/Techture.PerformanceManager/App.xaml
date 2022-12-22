@@ -1,8 +1,8 @@
 ﻿<Application
-    x:Class="Techtural.Loading.App"
+    x:Class="Techture.PerformanceManager.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Techtural.Loading"
+    xmlns:local="clr-namespace:Techture.PerformanceManager"
     StartupUri="MainWindow.xaml">
     <Application.Resources />
 </Application>

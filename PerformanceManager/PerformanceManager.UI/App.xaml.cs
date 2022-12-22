@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 
+using PerformanceManager.Domain.Enums;
 using PerformanceManager.Domain.Interfaces;
 using PerformanceManager.Domain.Models;
 using PerformanceManager.Domain.Services;
@@ -43,17 +44,17 @@ namespace PerformanceManager.UI
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            UtilizationServiceTester();
+            ///UtilizationServiceTester();
 
             base.OnStartup(e);
 
             NavigationStore navigationStore = new();
 
-            navigationStore.CurrentViewModel = new LoginViewModel(navigationStore);
+            ///navigationStore.CurrentViewModel = new LoginViewModel(navigationStore);
 
             ///navigationStore.CurrentViewModel = new CreateActivityViewModel(navigationStore);
 
-            ///navigationStore.CurrentViewModel = new DashboardViewModel(navigationStore);
+            navigationStore.CurrentViewModel = new DashboardViewModel(navigationStore);
 
             MainWindow = new MainWindow()
             {
@@ -63,6 +64,7 @@ namespace PerformanceManager.UI
                     MinimizeCommand = new RelayCommand(OnMinimize, true),
                     MaximizeRestoreCommand = new RelayCommand(OnMaximizeRestore, true)
                 }
+
             };
 
             MainWindow.Show();

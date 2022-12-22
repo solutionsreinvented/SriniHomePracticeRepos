@@ -24,7 +24,7 @@ namespace PerformanceManager.Domain.Base
             Initialize(id);
         }
 
-        public int Id { get => Get<int>(); set => Set(value); }
+        public int Id { get => Get<int>(); protected set => Set(value); }
 
         public string Description { get => Get<string>(); set => Set(value); }
 
@@ -32,7 +32,7 @@ namespace PerformanceManager.Domain.Base
 
         public Project Project { get => Get<Project>(); set => Set(value); }
 
-        public ActivityType ActivityType { get => Get<ActivityType>(); set => Set(value); }
+        public ActivityType ActivityType { get => Get<ActivityType>(); protected set => Set(value); }
 
         public HashSet<IResource> AllocatedResources { get => Get<HashSet<IResource>>(); set => Set(value); }
 

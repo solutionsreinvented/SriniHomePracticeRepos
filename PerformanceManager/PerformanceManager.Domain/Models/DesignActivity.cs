@@ -4,11 +4,11 @@ using PerformanceManager.Domain.Interfaces;
 
 namespace PerformanceManager.Domain.Models
 {
-    public sealed class Drafting : Activity, IActivity
+    public sealed class DesignActivity : Activity, IActivity
     {
-        public Drafting(int activityId) : base(activityId)
+        public DesignActivity(int id) : base(id)
         {
-            ActivityType = ActivityType.Detailing;
+            ActivityType = ActivityType.Design;
         }
     }
 }
