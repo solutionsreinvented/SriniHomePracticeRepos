@@ -165,7 +165,7 @@
                         Height="24"
                         Margin="0,10"
                         VerticalContentAlignment="Center"
-                        ItemsSource="{shared:EnumBindingResource enums:ActivityType}"
+                        ItemsSource="{shared:EnumBindingResource enums:Domain}"
                         SelectedItem="{Binding SelectedActivityType}" />
                 </StackPanel>
 

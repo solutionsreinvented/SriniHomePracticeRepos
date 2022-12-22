@@ -32,7 +32,7 @@ namespace PerformanceManager.Domain.Base
 
         public Project Project { get => Get<Project>(); set => Set(value); }
 
-        public ActivityType ActivityType { get => Get<ActivityType>(); protected set => Set(value); }
+        public Enums.Domain ActivityType { get => Get<Enums.Domain>(); protected set => Set(value); }
 
         public HashSet<IResource> AllocatedResources { get => Get<HashSet<IResource>>(); set => Set(value); }
 

@@ -8,7 +8,7 @@ namespace PerformanceManager.Domain.Models
     {
         public DesignActivity(int id) : base(id)
         {
-            ActivityType = ActivityType.Design;
+            ActivityType = Enums.Domain.Design;
         }
     }
 }

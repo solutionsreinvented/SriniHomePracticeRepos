@@ -29,6 +29,22 @@ namespace PerformanceManager.UI
             Debug.Print($"Number of weekends: {service.AssessmentYear.CategorizedDays.WeekEnds.Count()}");
         }
 
+        private void PerformanceCalculationServiceTest()
+        {
+            PerformanceCalculationService service = new PerformanceCalculationService(100, 400);
+
+            PerformanceCalculationService significant = new PerformanceCalculationService(100, 400);
+            PerformanceCalculationService below = new PerformanceCalculationService(100, 200);
+            PerformanceCalculationService meets = new PerformanceCalculationService(100, 100);
+            PerformanceCalculationService exceeds = new PerformanceCalculationService(100, 80);
+            PerformanceCalculationService oustanding = new PerformanceCalculationService(100, 60);
+
+
+
+
+            var rating = service.RatingFactor;
+        }
+
         private void UtilizationServiceTester()
         {
             IYear calendarYear = new CalendarYear(2023);
@@ -44,7 +60,10 @@ namespace PerformanceManager.UI
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            PerformanceCalculationServiceTest();
             ///UtilizationServiceTester();
+
+
 
             base.OnStartup(e);
 

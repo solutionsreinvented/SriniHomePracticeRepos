@@ -5,7 +5,7 @@ using System.ComponentModel;
 namespace PerformanceManager.Domain.Enums
 {
     [TypeConverter(typeof(EnumDescriptionTypeConverter))]
-    public enum ActivityType
+    public enum Domain
     {
         Design,
         Detailing
@@ -26,14 +26,5 @@ namespace PerformanceManager.Domain.Enums
         SupportStructure,
         Bridge,
         RakeMechanism,
-    }
-    [TypeConverter(typeof(EnumDescriptionTypeConverter))]
-    public enum PerformanceRating
-    {
-        NeedsSignificantImprovement = 1,
-        NeedsImprovement = 2,
-        Satisfactory = 3,
-        VerySatisfactory = 4,
-        Outstanding = 5,
     }
 }

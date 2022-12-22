@@ -17,7 +17,7 @@ namespace PerformanceManager.Domain.Interfaces
 
         Project Project { get; set; }
 
-        ActivityType ActivityType { get; }
+        Enums.Domain ActivityType { get; }
 
         CompletionStatus CurrentStatus { get; set; }
 

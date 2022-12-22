@@ -39,9 +39,9 @@ namespace PerformanceManager.UI.ViewModels
             set => Set(value);
         }
 
-        public ActivityType SelectedActivityType
+        public Domain.Enums.Domain SelectedActivityType
         {
-            get => Get<ActivityType>();
+            get => Get<Domain.Enums.Domain>();
             set => Set(value);
         }
 

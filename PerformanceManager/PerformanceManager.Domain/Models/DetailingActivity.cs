@@ -8,7 +8,7 @@ namespace PerformanceManager.Domain.Models
     {
         public DetailingActivity(int activityId) : base(activityId)
         {
-            ActivityType = ActivityType.Detailing;
+            ActivityType = Enums.Domain.Detailing;
             ProjectType = ProjectType.Order;
         }
     }
