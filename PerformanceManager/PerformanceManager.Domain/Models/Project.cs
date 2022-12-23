@@ -10,7 +10,7 @@ namespace PerformanceManager.Domain.Models
     {
         public Project()
         {
-
+            Activities = new ObservableCollection<IActivity>();
         }
 
         #region Parameterized Constructors
