@@ -29,7 +29,7 @@ namespace PerformanceManager.Domain.Repositories
 
         public List<IUser> GetAllUsers()
         {
-            string fileFullPath = Path.Combine(FileServiceProvider.GetDataDirectory(), _fileName);
+            string fileFullPath = Path.Combine(FileServiceProvider.DataDirectory, _fileName);
 
             return ClassToInterfaceMapper<User, IUser>.Map(_jsonDataSerializer.Deserialiaze(fileFullPath));
         }

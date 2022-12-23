@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PerformanceManager.UI.Views
+namespace PerformanceManager.UI.UserControls
 {
     /// <summary>
-    /// Interaction logic for CreateActivityView.xaml
+    /// Interaction logic for ProjectsListControl.xaml
     /// </summary>
-    public partial class CreateActivityView : UserControl
+    public partial class ProjectsListControl : UserControl
     {
-        public CreateActivityView()
+        public ProjectsListControl()
         {
             InitializeComponent();
         }

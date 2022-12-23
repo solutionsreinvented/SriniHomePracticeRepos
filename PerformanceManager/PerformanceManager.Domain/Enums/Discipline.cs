@@ -5,10 +5,11 @@ using System.ComponentModel;
 namespace PerformanceManager.Domain.Enums
 {
     [TypeConverter(typeof(EnumDescriptionTypeConverter))]
-    public enum Domain
+    public enum Discipline
     {
         Design,
-        Detailing
+        Detailing,
+        Development
     }
     [TypeConverter(typeof(EnumDescriptionTypeConverter))]
     public enum DesignSubActivityType

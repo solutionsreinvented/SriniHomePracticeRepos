@@ -21,7 +21,7 @@ namespace PerformanceManager.Domain.Repositories
 
         public HashSet<DateTime> GetAll()
         {
-            string fileFullPath = Path.Combine(FileServiceProvider.GetDataDirectory(), _fileName);
+            string fileFullPath = Path.Combine(FileServiceProvider.DataDirectory, _fileName);
 
             HashSet<DateTime> holidays = _jsonDataSerializer.Deserialiaze(fileFullPath);
 

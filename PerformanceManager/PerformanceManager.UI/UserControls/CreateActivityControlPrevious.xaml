@@ -147,7 +147,7 @@
                     Height="24"
                     Margin="0,10"
                     VerticalContentAlignment="Center"
-                    ItemsSource="{shared:EnumBindingResource enums:Domain}"
+                    ItemsSource="{shared:EnumBindingResource enums:Discipline}"
                     SelectedItem="{Binding SelectedActivityType}" />
             </StackPanel>
 

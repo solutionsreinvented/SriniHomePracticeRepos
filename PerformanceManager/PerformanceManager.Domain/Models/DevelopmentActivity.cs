@@ -4,14 +4,13 @@ using PerformanceManager.Domain.Interfaces;
 
 namespace PerformanceManager.Domain.Models
 {
-    public sealed class DetailingActivity : Activity, IActivity
+    public class DevelopmentActivity : Activity, IActivity
     {
         #region Default Constructor
 
-        public DetailingActivity()
+        public DevelopmentActivity()
         {
-            Discipline = Discipline.Detailing;
-            ProjectType = ProjectType.Order;
+            Discipline = Discipline.Development;
         }
 
         #endregion

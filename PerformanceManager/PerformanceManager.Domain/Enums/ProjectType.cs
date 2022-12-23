@@ -9,6 +9,8 @@ namespace PerformanceManager.Domain.Enums
         [Description("Pre Order")]
         PreOrder,
         [Description("Order")]
-        Order
+        Order,
+        [Description("Development")]
+        Development
     }
 }

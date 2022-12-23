@@ -28,7 +28,7 @@ namespace PerformanceManager.UI
 
             ///navigationStore.CurrentViewModel = new LoginViewModel(navigationStore);
 
-            navigationStore.CurrentViewModel = new CreateActivityViewModel(navigationStore);
+            navigationStore.CurrentViewModel = new AdminDashboardViewModel(navigationStore);
 
             ///navigationStore.CurrentViewModel = new DashboardViewModel(navigationStore);
 

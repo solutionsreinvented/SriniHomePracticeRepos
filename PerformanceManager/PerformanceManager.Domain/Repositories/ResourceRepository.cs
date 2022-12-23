@@ -26,7 +26,7 @@ namespace PerformanceManager.Domain.Repositories
 
         public List<IResource> GetAll()
         {
-            string fileFullPath = Path.Combine(FileServiceProvider.GetDataDirectory(), _fileName);
+            string fileFullPath = Path.Combine(FileServiceProvider.DataDirectory, _fileName);
 
             List<Resource> resources = _jsonDataSerializer.Deserialiaze(fileFullPath);
 
@@ -34,8 +34,6 @@ namespace PerformanceManager.Domain.Repositories
             {
                 new Activity()
                 {
-                    ///ActivityType = ActivityType.Detailing,
-                    Description = "New Activity",
                     InitiatedOn = DateTime.Now
                 }
             };

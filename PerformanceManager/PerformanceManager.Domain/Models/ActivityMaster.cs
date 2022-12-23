@@ -5,43 +5,34 @@ using System.Collections.Generic;
 
 namespace PerformanceManager.Domain.Models
 {
+    public class Category : PropertyStore
+    {
+        public string Name { get => Get<string>(); set => Set(value); }
+
+        public HashSet<string> SubCategories { get => Get<HashSet<string>>(); set => Set(value); }
+    }
+
+    public class ActivityDomain : PropertyStore
+    {
+        public ActivityDomain()
+        {
+
+        }
+
+        public Discipline Descipline { get => Get<Discipline>(); set => Set(value); }
+
+        public HashSet<Category> Categories { get; set; }
+    }
+
     public class ActivityMaster : PropertyStore
     {
         public ActivityMaster()
         {
-            //PreOrders = new HashSet<PreOrder>();
-            //Orders = new HashSet<Order>();
+
         }
 
-        //public HashSet<PreOrder> PreOrders { get => Get<HashSet<PreOrder>>(); set => Set(value); }
-
-        //public HashSet<Order> Orders { get => Get<HashSet<Order>>(); set => Set(value); }
+        public HashSet<ActivityDomain> Domains { get => Get<HashSet<ActivityDomain>>(); set => Set(value); }
 
     }
-    //public class PreOrder : PropertyStore
-    //{
-    //    public PreOrder()
-    //    {
-    //        DesignActivities = new HashSet<DesignActivity>();
-    //    }
 
-    //    public string Code { get => Get<string>(); set => Set(value); }
-
-    //    public HashSet<DesignActivity> DesignActivities { get => Get<HashSet<DesignActivity>>(); set => Set(value); }
-
-    //}
-    //public class Order : PropertyStore
-    //{
-    //    public Order()
-    //    {
-    //        DesignActivities = new HashSet<DesignActivity>();
-    //        DetailingActivities = new HashSet<DetailingActivity>();
-    //    }
-
-    //    public string Code { get => Get<string>(); set => Set(value); }
-
-    //    public HashSet<DesignActivity> DesignActivities { get => Get<HashSet<DesignActivity>>(); set => Set(value); }
-
-    //    public HashSet<DetailingActivity> DetailingActivities { get => Get<HashSet<DetailingActivity>>(); set => Set(value); }
-    //}
 }

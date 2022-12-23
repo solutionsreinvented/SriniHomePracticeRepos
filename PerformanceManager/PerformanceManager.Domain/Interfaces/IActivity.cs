@@ -9,15 +9,25 @@ namespace PerformanceManager.Domain.Interfaces
     public interface IActivity
     {
 
-        int Id { get; }
+        string Id { get; }
 
-        string Description { get; set; }
+        ActivityMaster ActivityMaster { get; }
 
         ProjectType ProjectType { get; set; }
 
         Project Project { get; set; }
 
-        Enums.Domain ActivityType { get; }
+        Discipline Discipline { get; }
+
+        Category Category { get; set; }
+
+        string SubCategory { get; set; }
+
+        double AllocatedHours { get; set; }
+
+        HashSet<string> SubCategories { get; }
+
+        HashSet<Category> Categories { get; }
 
         CompletionStatus CurrentStatus { get; set; }
 

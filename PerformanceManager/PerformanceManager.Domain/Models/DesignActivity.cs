@@ -6,9 +6,13 @@ namespace PerformanceManager.Domain.Models
 {
     public sealed class DesignActivity : Activity, IActivity
     {
-        public DesignActivity(int id) : base(id)
+        #region Default Constructor
+
+        public DesignActivity()
         {
-            ActivityType = Enums.Domain.Design;
+            Discipline = Discipline.Design;
         }
+
+        #endregion
     }
 }

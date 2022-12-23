@@ -13,7 +13,7 @@ namespace PerformanceManager.UI.ViewModels
         public DashboardViewModel(NavigationStore navigationStore) : base(navigationStore)
         {
             Title = "I am the dashboard!";
-            ActivityMaster = ActivityMasterService.Create();
+            ActivityMaster = ActivityMasterService.ReadFromFile();
         }
 
         public string Title { get => Get<string>(); set => Set(value); }

@@ -1,0 +1,51 @@
+{
+  "Domains": [
+    {
+      "Descipline": "Design",
+      "Categories": [
+        {
+          "Name": "Non Structural",
+          "SubCategories": [ "Preamble"]
+        },
+        {
+          "Name": "Structural",
+          "SubCategories": [
+            "Staad Modeling",
+            "Loads Application",
+            "Analysis and Design",
+            "Foundation Load Data",
+            "Base Plates Design",
+            "Member Design Calculation Report",
+            "Connections Design Calculation Report"
+          ]
+        }
+      ]
+    },
+    {
+      "Descipline": "Development",
+      "Categories": [
+        {
+          "Name": "Non Structural",
+          "SubCategories": [
+            "Bridge Geometry Modeling",
+            "Bridge Loads Implementation",
+            "Bridge Design Parameters Implementation",
+            "Tank Seismic Loads Implementation",
+            "Tank Content Loads Implementation",
+            "Support Structure Design Parameters"
+          ]
+        }
+      ]
+    },
+    {
+      "Descipline": "Detailing",
+      "Categories": [
+        {
+          "Name": "Structural",
+          "SubCategories": [ "Tekla Modeling", "Design Drawings", "Fabrication Drawings", "Erection Drawings", 
+                             "Corrections and Revisions" ]
+        }
+      ]
+    }
+  ]
+}
