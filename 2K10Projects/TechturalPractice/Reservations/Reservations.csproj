@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AirplaneService.cs" />
+    <Compile Include="DummyVacationPart.cs" />
     <Compile Include="HotelInfo.cs" />
     <Compile Include="HotelSelector.cs" />
     <Compile Include="HotelService.cs" />

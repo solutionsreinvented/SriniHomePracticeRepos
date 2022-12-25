@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Reservations
 {
-    class VacationSpecification
+    public class VacationSpecification
     {
         private IList<IVacationPart> parts;
 

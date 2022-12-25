@@ -8,7 +8,11 @@ namespace ReInvented.DialogManagement.Commands
 {
     public class RelayCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
 
         private readonly Action _execute;
         private readonly bool _canExecute;

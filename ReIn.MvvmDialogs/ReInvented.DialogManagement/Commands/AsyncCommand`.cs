@@ -49,10 +49,10 @@ namespace ReInvented.DialogManagement.Commands
             }
             finally
             {
-                _runningTasks.Remove(runningTask);
+                _ = _runningTasks.Remove(runningTask);
             }
 
-            await ExecuteAsync();
+            await ExecuteAsync((T)parameter);
         }
 
         #endregion
