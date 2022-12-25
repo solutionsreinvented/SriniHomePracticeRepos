@@ -2,6 +2,7 @@
 using ReInvented.DialogManagement.EventsData;
 using ReInvented.DialogManagement.Interfaces;
 using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ReInvented.DialogManagement.ViewModels
