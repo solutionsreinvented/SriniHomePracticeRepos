@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 
@@ -48,6 +47,8 @@ namespace PerformanceManager.UI.ViewModels
         public ActivityMaster ActivityMaster { get => Get<ActivityMaster>(); private set => Set(value); }
 
         #endregion
+
+        public CreateProjectViewModel CreateProjectViewModel { get => Get<CreateProjectViewModel>(); set => Set(value); }
 
         #region New Entries
 
@@ -123,7 +124,20 @@ namespace PerformanceManager.UI.ViewModels
 
         public bool ProjectIsSelected => SelectedProject != null;
 
+        public bool CanAddActivity => CheckIfActivityCanBeAdded();
+
         #region Command Handlers
+
+        private bool CheckIfActivityCanBeAdded()
+        {
+            if (ActivityDefinition.Discipline == Discipline.Detailing && 
+                (SelectedProject.Type == ProjectType.PreOrder || SelectedProject.Type == ProjectType.Development))
+            {
+                return false;
+            }
+
+            return true;
+        }
 
         private void OnAddActivity()
         {
