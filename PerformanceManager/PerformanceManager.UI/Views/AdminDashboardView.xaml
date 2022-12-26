@@ -44,6 +44,7 @@
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -91,23 +92,33 @@
 
             </GroupBox>
 
-            <!--#endregion-->
+            <StackPanel
+                Grid.Row="3"
+                Grid.Column="0"
+                Orientation="Horizontal">
+                <Button
+                    Width="120"
+                    Margin="5,0,0,0"
+                    Command="{Binding CreateProjectCommand}"
+                    Content="Add New Project" />
+                <Button
+                    Width="120"
+                    Margin="5,0"
+                    Command="{Binding CreateActivityCommand}"
+                    Content="Add New Activity"
+                    IsEnabled="{Binding ProjectIsSelected}"
+                    ToolTip="Select a project to add an activity"
+                    ToolTipService.ShowOnDisabled="True" />
+            </StackPanel>
 
-            <!--#region Add New Project Section-->
-
-            <uc:AddNewProjectControl
-                Grid.Row="0"
-                Grid.RowSpan="1"
-                Grid.Column="1"
-                DataContext="{Binding}" />
 
             <!--#endregion-->
 
             <!--#region Delete Selected Project Section-->
 
             <uc:DeleteProjectControl
-                Grid.Row="1"
-                Grid.Column="1"
+                Grid.Row="0"
+                Grid.Column="2"
                 DataContext="{Binding}" />
 
             <!--#endregion-->
@@ -115,7 +126,7 @@
             <!--#region Add New Activity Section-->
 
             <uc:AddNewActivityControl
-                Grid.Row="0"
+                Grid.Row="1"
                 Grid.RowSpan="2"
                 Grid.Column="2"
                 DataContext="{Binding}" />

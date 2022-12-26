@@ -1,12 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
-using PerformanceManager.Domain.Base;
 using PerformanceManager.Domain.Interfaces;
 using PerformanceManager.Domain.Repositories;
 using PerformanceManager.UI.Commands;
 using PerformanceManager.UI.Stores;
+
+using ReInvented.Shared.Interfaces;
 
 namespace PerformanceManager.UI.ViewModels
 {
@@ -14,7 +13,8 @@ namespace PerformanceManager.UI.ViewModels
     {
         private readonly UserRepository _usersRepository = new();
 
-        public LoginViewModel(NavigationStore navigationStore) : base(navigationStore)
+        public LoginViewModel(NavigationStore navigationStore, IDialogService dialogService)
+            : base(navigationStore, dialogService)
         {
             ChangePasswordCommand = new RelayCommand(OnChangePassword, true);
             LogInCommand = new RelayCommand(OnLogIn, true);
@@ -24,7 +24,7 @@ namespace PerformanceManager.UI.ViewModels
         {
             if (ValidUser)
             {
-                _navigationStore.CurrentViewModel = new DashboardViewModel(_navigationStore)
+                _navigationStore.CurrentViewModel = new DashboardViewModel(_navigationStore, _dialogService)
                 {
 
                 };
@@ -33,7 +33,7 @@ namespace PerformanceManager.UI.ViewModels
 
         private void OnChangePassword()
         {
-            _navigationStore.CurrentViewModel = new ChangePasswordViewModel(_navigationStore)
+            _navigationStore.CurrentViewModel = new ChangePasswordViewModel(_navigationStore, _dialogService)
             {
                 UserId = UserId,
             };

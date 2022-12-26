@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <Reference Include="ReInvented.Shared">
-      <HintPath>..\ReInvented.Shared.dll</HintPath>
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\ApplicationData\Libraries\ReInvented.Shared.dll</HintPath>
     </Reference>
     <Reference Include="SRi.XamlUIThickenerApp.DataAccess">
       <HintPath>..\SRi.XamlUIThickenerApp.DataAccess.dll</HintPath>

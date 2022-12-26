@@ -1,15 +1,12 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 
-using PerformanceManager.Domain.Enums;
-using PerformanceManager.Domain.Interfaces;
-using PerformanceManager.Domain.Models;
-using PerformanceManager.Domain.Services;
 using PerformanceManager.UI.Commands;
+using PerformanceManager.UI.Dialogs;
 using PerformanceManager.UI.Stores;
 using PerformanceManager.UI.ViewModels;
+
+using ReInvented.Shared.Interfaces;
+using ReInvented.Shared.Services;
 
 namespace PerformanceManager.UI
 {
@@ -21,20 +18,25 @@ namespace PerformanceManager.UI
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            IDialogService dialogService = new DialogService(MainWindow);
 
-            base.OnStartup(e);
+            dialogService.Register<CreateProjectViewModel, CreateProjectView>();
+            dialogService.Register<CreateActivityViewModel, CreateActivityView>();
 
-            NavigationStore navigationStore = new();
+
+            ///base.OnStartup(e);
+
+            NavigationStore navigationStore = new(dialogService);
 
             ///navigationStore.CurrentViewModel = new LoginViewModel(navigationStore);
 
-            navigationStore.CurrentViewModel = new AdminDashboardViewModel(navigationStore);
+            navigationStore.CurrentViewModel = new AdminDashboardViewModel(navigationStore, dialogService);
 
             ///navigationStore.CurrentViewModel = new DashboardViewModel(navigationStore);
 
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(navigationStore)
+                DataContext = new MainViewModel(navigationStore, dialogService)
                 {
                     CloseCommand = new RelayCommand(OnClose, true),
                     MinimizeCommand = new RelayCommand(OnMinimize, true),

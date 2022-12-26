@@ -1,21 +1,20 @@
 ﻿using System.Windows;
-using System.Windows.Input;
 
 using ReInvented.Shared.Interfaces;
 
 namespace PerformanceManager.UI.Dialogs
 {
     /// <summary>
-    /// Interaction logic for CreateProjectView.xaml
+    /// Interaction logic for CreateActivityView.xaml
     /// </summary>
-    public partial class CreateProjectView : Window, IDialog
+    public partial class CreateActivityView : Window, IDialog
     {
-        public CreateProjectView()
+        public CreateActivityView()
         {
             InitializeComponent();
         }
 
-        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        private void OnMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             DragMove();
         }

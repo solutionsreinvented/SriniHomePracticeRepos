@@ -5,11 +5,13 @@ using System.Windows.Input;
 using PerformanceManager.UI.Commands;
 using PerformanceManager.UI.Stores;
 
+using ReInvented.Shared.Interfaces;
+
 namespace PerformanceManager.UI.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public MainViewModel(NavigationStore navigationStore) : base(navigationStore)
+        public MainViewModel(NavigationStore navigationStore, IDialogService dialogService) : base(navigationStore, dialogService)
         {
             CloseCommand = new RelayCommand(OnClose, true);
 
@@ -18,7 +20,7 @@ namespace PerformanceManager.UI.ViewModels
 
         private void OnClose()
         {
-            
+
         }
 
         private void OnCurrentViewModelChanged(object sender, PropertyChangedEventArgs e)

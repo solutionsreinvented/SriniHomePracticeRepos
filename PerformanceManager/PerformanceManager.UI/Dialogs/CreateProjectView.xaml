@@ -4,61 +4,100 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:enums="clr-namespace:PerformanceManager.Domain.Enums;assembly=PerformanceManager.Domain"
-    xmlns:local="clr-namespace:PerformanceManager.UI.Dialogs"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="http://schemas.reinvented.com/shared"
     xmlns:uc="clr-namespace:PerformanceManager.UI.UserControls"
-    Title="CreateProjectView"
-    Width="800"
-    Height="450"
+    x:Name="Root"
+    Title="Create New Project"
+    Width="600"
+    Height="350"
+    AllowsTransparency="True"
+    Background="Transparent"
+    MouseDown="OnMouseDown"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
     mc:Ignorable="d">
-    <GroupBox Header="Add New Project">
 
-        <Grid DataContext="{Binding ProjectDefinition}">
+    <Border
+        Margin="25"
+        Background="{StaticResource BackgroundBrush}"
+        CornerRadius="5">
 
-            <!--#region Grid Definitions-->
+        <!--#region Border Effects-->
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <Border.Effect>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+            <DropShadowEffect
+                BlurRadius="15"
+                Direction="315"
+                ShadowDepth="10"
+                Color="Black" />
 
-            <!--#endregion-->
+        </Border.Effect>
 
-            <TextBlock
-                Grid.Row="0"
-                Grid.Column="0"
-                Margin="0,0,0,5"
-                Text="Select project type:" />
-            <ComboBox
-                Grid.Row="0"
-                Grid.Column="1"
-                Margin="0,0,0,5"
-                ItemsSource="{shared:EnumBindingResource enums:ProjectType}"
-                SelectedItem="{Binding ProjectType}" />
+        <!--#endregion-->
 
-            <uc:ProjectDetailsControl
-                Grid.Row="1"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                DataContext="{Binding Project}" />
+        <GroupBox Margin="10" Header="Add New Project">
 
-            <Button
-                Grid.Row="3"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Command="{Binding DataContext.AddProjectCommand, RelativeSource={RelativeSource AncestorLevel=2, AncestorType=UserControl, Mode=FindAncestor}}"
-                Content="Add to Projects"
-                IsEnabled="{Binding Project.IsDataValid}" />
+            <Grid DataContext="{Binding ProjectDefinition}">
 
-        </Grid>
+                <!--#region Grid Definitions-->
 
-    </GroupBox>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <!--#endregion-->
+
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0,0,0,5"
+                    Text="Select project type:" />
+                <ComboBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,0,0,5"
+                    ItemsSource="{shared:EnumBindingResource enums:ProjectType}"
+                    SelectedItem="{Binding ProjectType}" />
+
+                <uc:ProjectDetailsControl
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    DataContext="{Binding Project}" />
+
+                <StackPanel
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Button
+                        Width="100"
+                        Margin="5,0"
+                        Command="{Binding DataContext.SaveCommand, ElementName=Root}"
+                        Content="Save"
+                        IsEnabled="{Binding Project.IsDataValid}" />
+                    <Button
+                        Width="100"
+                        Command="{Binding DataContext.DiscardCommand, ElementName=Root}"
+                        Content="Discard" />
+                </StackPanel>
+
+            </Grid>
+
+        </GroupBox>
+
+    </Border>
+
 </Window>
