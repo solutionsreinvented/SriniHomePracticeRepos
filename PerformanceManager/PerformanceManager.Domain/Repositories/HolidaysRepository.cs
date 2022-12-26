@@ -4,7 +4,7 @@ using System.IO;
 
 using PerformanceManager.Domain.Services;
 
-using SRi.XamlUIThickenerApp.DataAccess;
+using ReInvented.DataAccess;
 
 namespace PerformanceManager.Domain.Repositories
 {
@@ -23,7 +23,7 @@ namespace PerformanceManager.Domain.Repositories
         {
             string fileFullPath = Path.Combine(FileServiceProvider.DataDirectory, _fileName);
 
-            HashSet<DateTime> holidays = _jsonDataSerializer.Deserialiaze(fileFullPath);
+            HashSet<DateTime> holidays = _jsonDataSerializer.Deserialize(fileFullPath);
 
             return holidays;
 

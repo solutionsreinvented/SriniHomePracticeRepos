@@ -7,9 +7,9 @@ namespace PerformanceManager.Domain.Enums
     [TypeConverter(typeof(EnumDescriptionTypeConverter))]
     public enum Discipline
     {
-        Design,
-        Detailing,
-        Development
+        Design = 11,
+        Detailing = 15,
+        Development = 17
     }
     [TypeConverter(typeof(EnumDescriptionTypeConverter))]
     public enum DesignSubActivityType

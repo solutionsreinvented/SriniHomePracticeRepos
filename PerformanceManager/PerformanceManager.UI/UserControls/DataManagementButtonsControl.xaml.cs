@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace PerformanceManager.UI.UserControls
 {
     /// <summary>
-    /// Interaction logic for CreateActivityControlPrevious.xaml
+    /// Interaction logic for DataManagementButtonsControl.xaml
     /// </summary>
-    public partial class CreateActivityControlPrevious : UserControl
+    public partial class DataManagementButtonsControl : UserControl
     {
-        public CreateActivityControlPrevious()
+        public DataManagementButtonsControl()
         {
             InitializeComponent();
         }

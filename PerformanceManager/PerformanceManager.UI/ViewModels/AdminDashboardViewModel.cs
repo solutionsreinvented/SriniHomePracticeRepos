@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 using PerformanceManager.Domain.Enums;
@@ -11,32 +12,13 @@ using PerformanceManager.Domain.Services;
 using PerformanceManager.UI.Commands;
 using PerformanceManager.UI.Stores;
 
-using ReInvented.Shared.Interfaces;
-
 namespace PerformanceManager.UI.ViewModels
 {
     public class AdminDashboardViewModel : ViewModelBase
     {
-        public AdminDashboardViewModel(NavigationStore navigationStore, IDialogService dialogService)
-            : base(navigationStore, dialogService)
+        public AdminDashboardViewModel(NavigationStore navigationStore) : base(navigationStore)
         {
             InitializeProperties();
-        }
-
-        private void InitializeProperties()
-        {
-
-            Title = "Admin Dashboard";
-
-            ResourceRepository resourceRepository = new();
-            Resources = resourceRepository.GetAll();
-
-            ProjectMaster = ProjectMasterService.Retrieve();
-            ActivityMaster = ActivityMasterService.ReadFromFile();
-
-            CreateProjectCommand = new RelayCommand(OnCreateProject, true);
-            CreateActivityCommand = new RelayCommand(OnCreateActivity, true);
-            DeleteSelectedProjectCommand = new RelayCommand(OnDeleteSelectedProject, true);
         }
 
         #region Data Masters
@@ -47,40 +29,33 @@ namespace PerformanceManager.UI.ViewModels
 
         #endregion
 
-
-        public IProject SelectedProject { get => Get<IProject>(); set { Set(value); RaisePropertyChanged(nameof(ProjectIsSelected)); } }
+        public IProject SelectedProject
+        {
+            get => Get<IProject>();
+            set
+            {
+                Set(value);
+                RaiseMultiplePropertiesChanged(nameof(ProjectIsSelected), nameof(Activities));
+            }
+        }
 
         #region DataGrid Source Providers
 
-        public IEnumerable<IProject> PreOrders => ProjectMaster.Projects.Where(p => p.Type == ProjectType.PreOrder);
+        public IEnumerable<IProject> PreOrders => ProjectMaster?.Projects?.Where(p => p.Type == ProjectType.PreOrder);
 
-        public IEnumerable<IProject> Orders => ProjectMaster.Projects.Where(p => p.Type == ProjectType.Order);
+        public IEnumerable<IProject> Orders => ProjectMaster?.Projects?.Where(p => p.Type == ProjectType.Order);
 
-        public IEnumerable<IProject> Developments => ProjectMaster.Projects.Where(p => p.Type == ProjectType.Development);
+        public IEnumerable<IProject> Developments => ProjectMaster?.Projects?.Where(p => p.Type == ProjectType.Development);
+
+        public IEnumerable<IActivity> Activities => SelectedProject?.Activities;
 
         #endregion
 
-
-
         public string Title { get => Get<string>(); set => Set(value); }
-
 
         public IEnumerable<IResource> Resources { get => Get<IEnumerable<IResource>>(); set => Set(value); }
 
-        public IEnumerable<IActivity> Activities => SelectedResource?.Activities;
-
-        //public ProjectType SelectedProjectType
-        //{
-        //    get => Get<ProjectType>();
-        //    set => Set(value);
-        //}
-
-        //public Discipline SelectedActivityType
-        //{
-        //    get => Get<Discipline>();
-        //    set => Set(value);
-        //}
-
+        ///public IEnumerable<IActivity> Activities => SelectedResource?.Activities;
 
         public IResource SelectedResource
         {
@@ -92,13 +67,7 @@ namespace PerformanceManager.UI.ViewModels
             }
         }
 
-        public List<Project> Projects { get; set; }
-
         public IActivity SelectedActivity { get => Get<IActivity>(); set => Set(value); }
-
-        //public DateTime StartDate { get => Get(DateTime.Now); set => Set(value); }
-
-        //public DateTime EndDate { get => Get(DateTime.Now); set => Set(value); }
 
         #region Commands
 
@@ -108,26 +77,16 @@ namespace PerformanceManager.UI.ViewModels
 
         public ICommand DeleteSelectedProjectCommand { get => Get<ICommand>(); private set => Set(value); }
 
-        public ICommand CancelCreateActivityCommand { get => Get<ICommand>(); private set => Set(value); }
+        public ICommand LoadProjectsMasterCommand { get => Get<ICommand>(); private set => Set(value); }
+
+        public ICommand SaveProjectsMasterCommand { get => Get<ICommand>(); private set => Set(value); }
+
 
         #endregion
 
         public bool ProjectIsSelected => SelectedProject != null;
 
-        //public bool CanAddActivity => CheckIfActivityCanBeAdded();
-
         #region Command Handlers
-
-        //private bool CheckIfActivityCanBeAdded()
-        //{
-        //    if (ActivityDefinition.Discipline == Discipline.Detailing &&
-        //        (SelectedProject.Type == ProjectType.PreOrder || SelectedProject.Type == ProjectType.Development))
-        //    {
-        //        return false;
-        //    }
-
-        //    return true;
-        //}
 
         private void OnCreateProject()
         {
@@ -144,19 +103,16 @@ namespace PerformanceManager.UI.ViewModels
 
         private void OnCreateActivity()
         {
-            CreateActivityViewModel viewModel = new();
+            CreateActivityViewModel viewModel = new(SelectedProject);
 
             bool? result = _dialogService.ShowDialog(viewModel);
 
-            if (viewModel.ActivityDefinition.Discipline == Discipline.Detailing &&
-                (SelectedProject.Type == ProjectType.PreOrder || SelectedProject.Type == ProjectType.Development))
+            if (result.HasValue && result.Value)
             {
-                throw new InvalidOperationException($"{viewModel.ActivityDefinition.Discipline} activity cannot be added to {SelectedProject.Type}");
-            }
-
-            if (!SelectedProject.Activities.Contains(viewModel.ActivityDefinition.Activity))
-            {
-                SelectedProject.Activities.Add(viewModel.ActivityDefinition.Activity);
+                if (!SelectedProject.Activities.Contains(viewModel.ActivityDefinition.Activity))
+                {
+                    SelectedProject.Activities.Add(viewModel.ActivityDefinition.Activity);
+                }
             }
         }
 
@@ -165,6 +121,40 @@ namespace PerformanceManager.UI.ViewModels
             _ = ProjectMaster.Projects.Remove(SelectedProject);
             RaiseMultiplePropertiesChanged(nameof(PreOrders), nameof(Orders), nameof(Developments));
             SelectedProject = ProjectMaster?.Projects?.FirstOrDefault();
+        }
+
+        #endregion
+
+        #region Private Helpers
+
+        private void InitializeProperties()
+        {
+
+            Title = "Admin Dashboard";
+
+            //ResourceRepository resourceRepository = new();
+            //Resources = resourceRepository.GetAll();
+
+            ActivityMaster = ActivityMasterService.ReadFromFile();
+
+            CreateProjectCommand = new RelayCommand(OnCreateProject, true);
+            CreateActivityCommand = new RelayCommand(OnCreateActivity, true);
+            DeleteSelectedProjectCommand = new RelayCommand(OnDeleteSelectedProject, true);
+
+            LoadProjectsMasterCommand = new RelayCommand(OnLoadProjectsMaster, true);
+            SaveProjectsMasterCommand = new RelayCommand(OnSaveProjectsMaster, true);
+        }
+
+        private void OnSaveProjectsMaster()
+        {
+            ProjectMasterService.SaveToFile(ProjectMaster);
+            _ = MessageBox.Show("Project master is saved successfully!", "Save project master", MessageBoxButton.OK);
+        }
+
+        private void OnLoadProjectsMaster()
+        {
+            ProjectMaster = ProjectMasterService.ReadFromFile();///.Retrieve();
+            RaiseMultiplePropertiesChanged(nameof(PreOrders), nameof(Orders), nameof(Developments));
         }
 
         #endregion

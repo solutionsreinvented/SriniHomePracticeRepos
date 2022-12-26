@@ -48,7 +48,7 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
@@ -62,7 +62,7 @@
                 Grid.Column="0"
                 Header="Pre Orders">
 
-                <uc:ProjectsListControl DataContext="{Binding PreOrders}" />
+                <uc:ProjectsControl DataContext="{Binding PreOrders}" />
 
             </GroupBox>
 
@@ -75,7 +75,7 @@
                 Grid.Column="0"
                 Header="Orders">
 
-                <uc:ProjectsListControl DataContext="{Binding Orders}" />
+                <uc:ProjectsControl DataContext="{Binding Orders}" />
 
             </GroupBox>
 
@@ -88,47 +88,48 @@
                 Grid.Column="0"
                 Header="Developments">
 
-                <uc:ProjectsListControl DataContext="{Binding Developments}" />
+                <uc:ProjectsControl DataContext="{Binding Developments}" />
 
             </GroupBox>
 
-            <StackPanel
-                Grid.Row="3"
-                Grid.Column="0"
-                Orientation="Horizontal">
-                <Button
-                    Width="120"
-                    Margin="5,0,0,0"
-                    Command="{Binding CreateProjectCommand}"
-                    Content="Add New Project" />
-                <Button
-                    Width="120"
-                    Margin="5,0"
-                    Command="{Binding CreateActivityCommand}"
-                    Content="Add New Activity"
-                    IsEnabled="{Binding ProjectIsSelected}"
-                    ToolTip="Select a project to add an activity"
-                    ToolTipService.ShowOnDisabled="True" />
-            </StackPanel>
-
-
             <!--#endregion-->
 
-            <!--#region Delete Selected Project Section-->
+            <!--#region Activities List-->
 
-            <uc:DeleteProjectControl
+            <GroupBox
                 Grid.Row="0"
-                Grid.Column="2"
-                DataContext="{Binding}" />
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Header="Activities"
+                Visibility="{Binding ProjectIsSelected, Converter={shared:BoolToVisibilityConverter}}">
+
+                <uc:ActivitiesControl />
+
+            </GroupBox>
 
             <!--#endregion-->
 
-            <!--#region Add New Activity Section-->
+            <!--#region Selected Project Section-->
 
-            <uc:AddNewActivityControl
+            <uc:SelectedProjectControl
                 Grid.Row="1"
                 Grid.RowSpan="2"
-                Grid.Column="2"
+                Grid.Column="1"
+                DataContext="{Binding}"
+                Visibility="{Binding ProjectIsSelected, Converter={shared:BoolToVisibilityConverter}}" />
+
+            <!--#endregion-->
+
+            <!--#region Projects Management Button-->
+
+            <uc:ProjectsManagementButtonsControl
+                Grid.Row="3"
+                Grid.Column="0"
+                DataContext="{Binding}" />
+
+            <uc:DataManagementButtonsControl
+                Grid.Row="3"
+                Grid.Column="3"
                 DataContext="{Binding}" />
 
             <!--#endregion-->

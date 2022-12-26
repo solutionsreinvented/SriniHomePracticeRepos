@@ -1,4 +1,4 @@
-﻿using ReInvented.DialogManagement.Interfaces;
+﻿    using ReInvented.DialogManagement.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

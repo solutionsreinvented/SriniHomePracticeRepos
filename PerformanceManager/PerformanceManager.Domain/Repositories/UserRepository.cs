@@ -7,7 +7,7 @@ using PerformanceManager.Domain.Interfaces;
 using PerformanceManager.Domain.Mappers;
 using PerformanceManager.Domain.Services;
 
-using SRi.XamlUIThickenerApp.DataAccess;
+using ReInvented.DataAccess;
 
 namespace PerformanceManager.Domain.Repositories
 {
@@ -31,7 +31,7 @@ namespace PerformanceManager.Domain.Repositories
         {
             string fileFullPath = Path.Combine(FileServiceProvider.DataDirectory, _fileName);
 
-            return ClassToInterfaceMapper<User, IUser>.Map(_jsonDataSerializer.Deserialiaze(fileFullPath));
+            return ClassToInterfaceMapper<User, IUser>.Map(_jsonDataSerializer.Deserialize(fileFullPath));
         }
     }
 }

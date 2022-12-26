@@ -64,16 +64,15 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Text="Activity descipline:" />
-
                 <ComboBox
                     Grid.Row="0"
                     Grid.Column="1"
-                    Margin="5,0,0,0"
+                    Margin="5,0,5,0"
                     ItemsSource="{shared:EnumBindingResource enums:Discipline}"
                     SelectedItem="{Binding Discipline}" />
 
                 <Grid
-                    Grid.Row="1"
+                    Grid.Row="2"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Margin="0,10,0,0"
@@ -82,6 +81,7 @@
                     <!--#region Grid Definitions-->
 
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -105,21 +105,35 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         Margin="0,0,5,5"
+                        Text="Activity Id:" />
+                    <TextBox
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="5,0,5,5"
+                        IsEnabled="False"
+                        Text="{Binding Id, Mode=OneWay}" />
+
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="0,0,5,5"
                         Text="Descipline:" />
                     <TextBox
-                        Grid.Row="1"
+                        Grid.Row="2"
                         Grid.Column="0"
                         Margin="0,0,5,5"
                         IsEnabled="False"
                         Text="{Binding Discipline}" />
 
+                    <!--#region Category and Sub Category Selection-->
+
                     <TextBlock
-                        Grid.Row="0"
+                        Grid.Row="1"
                         Grid.Column="1"
                         Margin="5,0,5,5"
                         Text="Category:" />
                     <ComboBox
-                        Grid.Row="1"
+                        Grid.Row="2"
                         Grid.Column="1"
                         Margin="5,0,5,5"
                         DisplayMemberPath="Name"
@@ -127,26 +141,28 @@
                         SelectedItem="{Binding Category}" />
 
                     <TextBlock
-                        Grid.Row="2"
+                        Grid.Row="3"
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
                         Margin="0,0,5,5"
                         Text="Sub Category:" />
                     <ComboBox
-                        Grid.Row="3"
+                        Grid.Row="4"
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
                         Margin="0,0,5,5"
                         ItemsSource="{Binding SubCategories}"
                         SelectedItem="{Binding SubCategory}" />
 
+                    <!--#endregion-->
+
                     <TextBlock
-                        Grid.Row="4"
+                        Grid.Row="5"
                         Grid.Column="0"
                         Margin="0,0,5,5"
                         Text="Activity start date:" />
                     <DatePicker
-                        Grid.Row="5"
+                        Grid.Row="6"
                         Grid.Column="0"
                         Margin="0,0,5,5"
                         VerticalAlignment="Center"
@@ -155,25 +171,25 @@
                         SelectedDate="{Binding InitiatedOn}" />
 
                     <TextBlock
-                        Grid.Row="4"
+                        Grid.Row="5"
                         Grid.Column="1"
                         Margin="5,0,5,5"
                         Text="Allocated man-hours:" />
                     <TextBox
-                        Grid.Row="5"
+                        Grid.Row="6"
                         Grid.Column="1"
                         Margin="5,0,5,5"
                         VerticalAlignment="Center"
                         VerticalContentAlignment="Center"
-                        Text="{Binding AllocatedHours}" />
+                        Text="{Binding AllocatedHours, UpdateSourceTrigger=PropertyChanged}" />
 
                     <TextBlock
-                        Grid.Row="6"
+                        Grid.Row="7"
                         Grid.Column="0"
                         Margin="0,0,5,5"
                         Text="Scheduled completion date:" />
                     <TextBox
-                        Grid.Row="7"
+                        Grid.Row="8"
                         Grid.Column="0"
                         Margin="0,0,5,5"
                         VerticalAlignment="Center"
@@ -181,10 +197,13 @@
                         IsEnabled="False"
                         Text="{Binding ScheduledCompletion, Mode=OneWay, StringFormat={}{0:dd-MM-yyyy}}" />
 
+                    <!--#region Dialog Buttons-->
+
                     <StackPanel
-                        Grid.Row="9"
+                        Grid.Row="10"
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
+                        Margin="0,0,5,0"
                         HorizontalAlignment="Right"
                         Orientation="Horizontal">
                         <Button
@@ -192,12 +211,18 @@
                             Margin="5,0"
                             Command="{Binding DataContext.SaveCommand, ElementName=Root}"
                             Content="Save Activity"
-                            IsEnabled="{Binding Activity.IsDataValid}" />
+                            IsDefault="True"
+                            IsEnabled="{Binding ValidActivity}"
+                            TabIndex="0" />
                         <Button
                             Width="120"
                             Command="{Binding DataContext.DiscardCommand, ElementName=Root}"
-                            Content="Discard" />
+                            Content="Discard"
+                            IsCancel="True"
+                            TabIndex="1" />
                     </StackPanel>
+
+                    <!--#endregion-->
 
                 </Grid>
 

@@ -5,23 +5,20 @@ using PerformanceManager.Domain.Repositories;
 using PerformanceManager.UI.Commands;
 using PerformanceManager.UI.Stores;
 
-using ReInvented.Shared.Interfaces;
-
 namespace PerformanceManager.UI.ViewModels
 {
     public class ChangePasswordViewModel : ViewModelBase
     {
         private readonly UserRepository _usersRepository = new();
 
-        public ChangePasswordViewModel(NavigationStore navigationStore, IDialogService dialogService)
-            : base(navigationStore, dialogService)
+        public ChangePasswordViewModel(NavigationStore navigationStore) : base(navigationStore)
         {
             SubmitCommand = new RelayCommand(OnPasswordChange, true);
         }
 
         private void OnPasswordChange()
         {
-            _navigationStore.CurrentViewModel = new LoginViewModel(_navigationStore, _dialogService);
+            _navigationStore.CurrentViewModel = new LoginViewModel(_navigationStore);
         }
 
         public bool CanChangePassword => UserExists && CurrentPasswordMatches && NewPasswordsMatch();

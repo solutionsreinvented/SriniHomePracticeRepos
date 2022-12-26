@@ -11,10 +11,10 @@ namespace PerformanceManager.UI.ViewModels
         private protected readonly NavigationStore _navigationStore;
         private protected readonly IDialogService _dialogService;
 
-        public ViewModelBase(NavigationStore navigationStore, IDialogService dialogService)
+        public ViewModelBase(NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
-            _dialogService = dialogService;
+            _dialogService = _navigationStore.DialogService;
         }
     }
 }

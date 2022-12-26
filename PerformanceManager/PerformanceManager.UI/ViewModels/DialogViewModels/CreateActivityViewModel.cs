@@ -15,9 +15,9 @@ namespace PerformanceManager.UI.ViewModels
     {
         public event EventHandler<DialogCloseRequestedEventArgs> CloseRequested;
 
-        public CreateActivityViewModel()
+        public CreateActivityViewModel(IProject selectedProject)
         {
-            ActivityDefinition = new ActivityDefinition();
+            ActivityDefinition = new ActivityDefinition(selectedProject);
 
             SaveCommand = new RelayCommand(() => CloseRequested?.Invoke(this, new DialogCloseRequestedEventArgs(true)), true);
             DiscardCommand = new RelayCommand(() => CloseRequested?.Invoke(this, new DialogCloseRequestedEventArgs(false)), true);

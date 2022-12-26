@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="http://schemas.reinvented.com/shared"
     x:Name="Root"
-    d:DesignHeight="450"
+    d:DesignHeight="250"
     d:DesignWidth="800"
     mc:Ignorable="d">
 
@@ -57,7 +57,7 @@
             Height="24"
             Margin="5,0,0,5"
             VerticalContentAlignment="Center"
-            Text="{Binding Code}" />
+            Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBlock
             Grid.Row="2"
@@ -71,7 +71,7 @@
             Grid.ColumnSpan="2"
             Height="24"
             VerticalContentAlignment="Center"
-            Text="{Binding Name}" />
+            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
 
     </Grid>
 

@@ -3,17 +3,11 @@ using PerformanceManager.Domain.Models;
 using PerformanceManager.Domain.Services;
 using PerformanceManager.UI.Stores;
 
-using ReInvented.Shared.Interfaces;
-
-using System.Collections.Generic;
-using System.Linq;
-
 namespace PerformanceManager.UI.ViewModels
 {
     public class DashboardViewModel : ViewModelBase
     {
-        public DashboardViewModel(NavigationStore navigationStore, IDialogService dialogService) 
-            : base(navigationStore, dialogService)
+        public DashboardViewModel(NavigationStore navigationStore) : base(navigationStore)
         {
             Title = "I am the dashboard!";
             ActivityMaster = ActivityMasterService.ReadFromFile();

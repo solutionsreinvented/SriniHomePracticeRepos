@@ -1,4 +1,6 @@
-﻿using PerformanceManager.Domain.Enums;
+﻿using Newtonsoft.Json;
+
+using PerformanceManager.Domain.Enums;
 using PerformanceManager.Domain.Interfaces;
 using PerformanceManager.Domain.Stores;
 
@@ -48,6 +50,7 @@ namespace PerformanceManager.Domain.Models
             _ = Activities.Remove(activity);
         }
 
+        [JsonIgnore]
         public bool IsDataValid => !string.IsNullOrWhiteSpace(Code) && !string.IsNullOrWhiteSpace(Name);
     }
 

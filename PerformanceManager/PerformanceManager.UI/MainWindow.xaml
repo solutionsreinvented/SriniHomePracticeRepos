@@ -13,7 +13,6 @@
     MouseDown="OnMouseDown"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
-    WindowState="Maximized"
     WindowStyle="None"
     mc:Ignorable="d">
 

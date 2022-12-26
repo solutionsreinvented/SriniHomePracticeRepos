@@ -1,17 +1,14 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows.Input;
 
 using PerformanceManager.UI.Commands;
 using PerformanceManager.UI.Stores;
 
-using ReInvented.Shared.Interfaces;
-
 namespace PerformanceManager.UI.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public MainViewModel(NavigationStore navigationStore, IDialogService dialogService) : base(navigationStore, dialogService)
+        public MainViewModel(NavigationStore navigationStore) : base(navigationStore)
         {
             CloseCommand = new RelayCommand(OnClose, true);
 

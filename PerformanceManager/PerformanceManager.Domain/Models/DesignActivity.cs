@@ -8,7 +8,7 @@ namespace PerformanceManager.Domain.Models
     {
         #region Default Constructor
 
-        public DesignActivity()
+        public DesignActivity(IProject selectedProject) : base(selectedProject)
         {
             Discipline = Discipline.Design;
         }

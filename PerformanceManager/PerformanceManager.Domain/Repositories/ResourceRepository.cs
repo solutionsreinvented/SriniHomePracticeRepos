@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 using PerformanceManager.Domain.Base;
-using PerformanceManager.Domain.Enums;
 using PerformanceManager.Domain.Interfaces;
 using PerformanceManager.Domain.Mappers;
 using PerformanceManager.Domain.Services;
 
-using SRi.XamlUIThickenerApp.DataAccess;
+using ReInvented.DataAccess;
 
 namespace PerformanceManager.Domain.Repositories
 {
@@ -28,15 +25,15 @@ namespace PerformanceManager.Domain.Repositories
         {
             string fileFullPath = Path.Combine(FileServiceProvider.DataDirectory, _fileName);
 
-            List<Resource> resources = _jsonDataSerializer.Deserialiaze(fileFullPath);
+            List<Resource> resources = _jsonDataSerializer.Deserialize(fileFullPath);
 
-            resources.First().Activities = new HashSet<IActivity>()
-            {
-                new Activity()
-                {
-                    InitiatedOn = DateTime.Now
-                }
-            };
+            //resources.First().Activities = new HashSet<IActivity>()
+            //{
+            //    new Activity()
+            //    {
+            //        InitiatedOn = DateTime.Now
+            //    }
+            //};
 
             return ClassToInterfaceMapper<Resource, IResource>.Map(resources);
 

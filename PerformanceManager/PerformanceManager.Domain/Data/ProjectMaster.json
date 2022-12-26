@@ -1,0 +1,158 @@
+{
+  "$id": "1",
+  "$type": "PerformanceManager.Domain.Models.ProjectMaster, PerformanceManager.Domain",
+  "Projects": [
+    {
+      "$id": "2",
+      "$type": "PerformanceManager.Domain.Models.PreOrder, PerformanceManager.Domain",
+      "Type": 0,
+      "Code": "GS2212129",
+      "Name": "Liberia",
+      "Activities": []
+    },
+    {
+      "$id": "3",
+      "$type": "PerformanceManager.Domain.Models.PreOrder, PerformanceManager.Domain",
+      "Type": 0,
+      "Code": "GS2212130",
+      "Name": "Rilebia",
+      "Activities": []
+    },
+    {
+      "$id": "4",
+      "$type": "PerformanceManager.Domain.Models.PreOrder, PerformanceManager.Domain",
+      "Type": 0,
+      "Code": "GS2212131",
+      "Name": "Bileria",
+      "Activities": []
+    },
+    {
+      "$id": "5",
+      "$type": "PerformanceManager.Domain.Models.Order, PerformanceManager.Domain",
+      "Type": 1,
+      "Code": "22-3849",
+      "Name": "25m Thickener",
+      "Activities": []
+    },
+    {
+      "$id": "6",
+      "$type": "PerformanceManager.Domain.Models.Order, PerformanceManager.Domain",
+      "Type": 1,
+      "Code": "22-3877",
+      "Name": "48m Thickener",
+      "Activities": []
+    },
+    {
+      "$id": "7",
+      "$type": "PerformanceManager.Domain.Models.Order, PerformanceManager.Domain",
+      "Type": 1,
+      "Code": "22-3965",
+      "Name": "77m Thickener",
+      "Activities": []
+    },
+    {
+      "$id": "8",
+      "$type": "PerformanceManager.Domain.Models.Development, PerformanceManager.Domain",
+      "Type": 2,
+      "Code": "DTIPR 20.13",
+      "Name": "Thickener Design Automation",
+      "Activities": [
+        {
+          "$id": "9",
+          "$type": "PerformanceManager.Domain.Models.DevelopmentActivity, PerformanceManager.Domain",
+          "Discipline": 17,
+          "Category": {
+            "$id": "10",
+            "$type": "PerformanceManager.Domain.Models.Category, PerformanceManager.Domain",
+            "Name": "Non Structural",
+            "SubCategories": [
+              "Bridge Geometry Modeling",
+              "Bridge Loads Implementation",
+              "Bridge Design Parameters Implementation",
+              "Tank Seismic Loads Implementation",
+              "Tank Content Loads Implementation",
+              "Support Structure Design Parameters"
+            ]
+          },
+          "SubCategory": "Bridge Geometry Modeling",
+          "InitiatedOn": "2022-12-26T00:00:00+05:30",
+          "AllocatedHours": 90.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "2-DTIPR 20.13-17-740-1160",
+          "Project": {
+            "$ref": "8"
+          },
+          "ScheduledCompletion": "2023-01-10T00:00:00+05:30"
+        },
+        {
+          "$id": "11",
+          "$type": "PerformanceManager.Domain.Models.DevelopmentActivity, PerformanceManager.Domain",
+          "Discipline": 17,
+          "Category": {
+            "$id": "12",
+            "$type": "PerformanceManager.Domain.Models.Category, PerformanceManager.Domain",
+            "Name": "Non Structural",
+            "SubCategories": [
+              "Bridge Geometry Modeling",
+              "Bridge Loads Implementation",
+              "Bridge Design Parameters Implementation",
+              "Tank Seismic Loads Implementation",
+              "Tank Content Loads Implementation",
+              "Support Structure Design Parameters"
+            ]
+          },
+          "SubCategory": "Bridge Loads Implementation",
+          "InitiatedOn": "2022-12-26T00:00:00+05:30",
+          "AllocatedHours": 100.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "2-DTIPR 20.13-17-740-1334",
+          "Project": {
+            "$ref": "8"
+          },
+          "ScheduledCompletion": "2023-01-11T00:00:00+05:30"
+        },
+        {
+          "$id": "13",
+          "$type": "PerformanceManager.Domain.Models.DevelopmentActivity, PerformanceManager.Domain",
+          "Discipline": 17,
+          "Category": {
+            "$id": "14",
+            "$type": "PerformanceManager.Domain.Models.Category, PerformanceManager.Domain",
+            "Name": "Non Structural",
+            "SubCategories": [
+              "Bridge Geometry Modeling",
+              "Bridge Loads Implementation",
+              "Bridge Design Parameters Implementation",
+              "Tank Seismic Loads Implementation",
+              "Tank Content Loads Implementation",
+              "Support Structure Design Parameters"
+            ]
+          },
+          "SubCategory": "Bridge Geometry Modeling",
+          "InitiatedOn": "2022-12-26T00:00:00+05:30",
+          "AllocatedHours": 50.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "2-DTIPR 20.13-17-740-1160",
+          "Project": {
+            "$ref": "8"
+          },
+          "ScheduledCompletion": "2023-01-02T00:00:00+05:30"
+        }
+      ]
+    },
+    {
+      "$id": "15",
+      "$type": "PerformanceManager.Domain.Models.Development, PerformanceManager.Domain",
+      "Type": 2,
+      "Code": "DTIPR 20.15",
+      "Name": "Connection Templates Library - Russian Codes",
+      "Activities": []
+    }
+  ]
+}

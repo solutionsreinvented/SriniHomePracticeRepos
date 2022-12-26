@@ -9,6 +9,7 @@ namespace PerformanceManager.Domain.Interfaces
         ProjectType Type { get; }
 
         string Code { get; }
+
         string Name { get; }
 
         ObservableCollection<IActivity> Activities { get; set; }

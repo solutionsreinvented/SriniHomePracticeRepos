@@ -15,29 +15,31 @@ using ReInvented.Shared;
 
 namespace PerformanceManager.Domain.Base
 {
-    public class Activity : PropertyStore, IActivity
+    public abstract class Activity : PropertyStore, IActivity
     {
+        #region Private Constants
+
         private const int _workingHoursPerDay = 9;
 
-        public Activity()
+        #endregion
+
+        #region Parameterized Constructor
+
+        public Activity(IProject project)
         {
+            Project = project;
             InitializeMandatoryData();
         }
 
-        [JsonIgnore]
-        public ActivityMaster ActivityMaster { get; private set; }
+        #endregion
 
-        public string Id { get => Get<string>(); internal set => Set(value); }
+        #region Public Properties
 
         public Discipline Discipline { get => Get<Discipline>(); set { Set(value); UpdateCategories(); } }
 
         public Category Category { get => Get<Category>(); set { Set(value); UpdateSubCategories(); } }
 
-        public string SubCategory { get => Get<string>(); set => Set(value); }
-
-        public ProjectType ProjectType { get => Get<ProjectType>(); set => Set(value); }
-
-        public Project Project { get => Get<Project>(); set => Set(value); }
+        public string SubCategory { get => Get<string>(); set { Set(value); GenerateActivityId(); } }
 
         public DateTime InitiatedOn { get => Get<DateTime>(); set { Set(value); UpdateScheduledCompletion(); } }
 
@@ -45,20 +47,35 @@ namespace PerformanceManager.Domain.Base
 
         public HashSet<IResource> AllocatedResources { get => Get<HashSet<IResource>>(); set => Set(value); }
 
-
-        public DateTime ScheduledCompletion { get => Get<DateTime>(); private set => Set(value); }
-
         public CompletionStatus CurrentStatus { get => Get<CompletionStatus>(); set => Set(value); }
 
         public HashSet<Change> Changes { get => Get<HashSet<Change>>(); set => Set(value); }
 
-        [JsonIgnore]
-        public HashSet<string> SubCategories { get => Get<HashSet<string>>(); protected set => Set(value); }
+        #endregion
+
+        #region Read-only Properties
 
         [JsonIgnore]
-        public HashSet<Category> Categories { get => Get<HashSet<Category>>(); protected set => Set(value); }
+        public ActivityMaster ActivityMaster { get; private set; }
 
+        [JsonProperty]
+        public string Id { get => Get<string>(); private set => Set(value); }
 
+        [JsonProperty]
+        public IProject Project { get => Get<IProject>(); private set => Set(value); }
+
+        public DateTime ScheduledCompletion { get => Get<DateTime>(); private set => Set(value); }
+
+        [JsonIgnore]
+        public HashSet<string> SubCategories { get => Get<HashSet<string>>(); private set => Set(value); }
+
+        [JsonIgnore]
+        public HashSet<Category> Categories { get => Get<HashSet<Category>>(); private set => Set(value); }
+
+        [JsonIgnore]
+        public bool ValidActivity => CheckActivityValidity();
+
+        #endregion
 
         #region Public Methods
 
@@ -76,15 +93,41 @@ namespace PerformanceManager.Domain.Base
 
         #region Private Methods
 
+        private bool CheckActivityValidity()
+        {
+            /// TODO: Proper user feedback in terms of validation shall be provided.
+
+            if (Project.Type == ProjectType.Development && Discipline != Discipline.Development) return false;
+            if (Discipline == Discipline.Detailing && Project.Type != ProjectType.Order) return false;
+            if (AllocatedHours <= 0) return false;
+
+            return true;
+        }
+
+        private void GenerateActivityId()
+        {
+            if (SubCategory != null && Project != null)
+            {
+                string projecBasedCode = $"{(int)Project.Type}-{Project.Code}";
+                string activityCode = $"{(int)Discipline}-{ControlDigitService.Calculate(Category.Name)}-{ControlDigitService.Calculate(SubCategory)}";
+
+                Id = $"{projecBasedCode}-{activityCode}";
+            }
+        }
         private void UpdateScheduledCompletion()
         {
             ScheduledCompletion = InitiatedOn.NextBusinessDay((int)AllocatedHours, HolidaysService.GetAllHolidays());
+            RaisePropertyChanged(nameof(ValidActivity));
         }
 
         private void UpdateSubCategories()
         {
             SubCategories = Categories.FirstOrDefault(c => c.Name == Category.Name).SubCategories;
             SubCategory = SubCategories.FirstOrDefault();
+
+            RaisePropertyChanged(nameof(ValidActivity));
+
+            GenerateActivityId();
         }
 
         private void UpdateCategories()

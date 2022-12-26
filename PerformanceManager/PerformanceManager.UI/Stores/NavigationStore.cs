@@ -9,15 +9,16 @@ namespace PerformanceManager.UI.Stores
     public class NavigationStore
     {
         private ViewModelBase _currentViewModel;
-        private readonly IDialogService _dialogService;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public NavigationStore(IDialogService dialogService)
         {
             ///CurrentViewModel = new ChangePasswordViewModel(this);
-            _dialogService = dialogService;
+            DialogService = dialogService;
         }
+
+        public IDialogService DialogService { get; }
 
         public ViewModelBase CurrentViewModel
         {

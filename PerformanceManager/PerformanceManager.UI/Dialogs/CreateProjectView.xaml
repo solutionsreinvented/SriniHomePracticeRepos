@@ -87,11 +87,15 @@
                         Margin="5,0"
                         Command="{Binding DataContext.SaveCommand, ElementName=Root}"
                         Content="Save"
-                        IsEnabled="{Binding Project.IsDataValid}" />
+                        IsDefault="True"
+                        IsEnabled="{Binding Project.IsDataValid}"
+                        TabIndex="0" />
                     <Button
                         Width="100"
                         Command="{Binding DataContext.DiscardCommand, ElementName=Root}"
-                        Content="Discard" />
+                        Content="Discard"
+                        IsCancel="True"
+                        TabIndex="1" />
                 </StackPanel>
 
             </Grid>

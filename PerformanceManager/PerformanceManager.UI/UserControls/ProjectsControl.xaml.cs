@@ -3,11 +3,11 @@
 namespace PerformanceManager.UI.UserControls
 {
     /// <summary>
-    /// Interaction logic for AddNewProjectControl.xaml
+    /// Interaction logic for ProjectsControl.xaml
     /// </summary>
-    public partial class AddNewProjectControl : UserControl
+    public partial class ProjectsControl : UserControl
     {
-        public AddNewProjectControl()
+        public ProjectsControl()
         {
             InitializeComponent();
         }

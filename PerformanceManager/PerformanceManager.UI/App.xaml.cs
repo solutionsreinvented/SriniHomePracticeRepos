@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 
+using PerformanceManager.Domain.Services;
 using PerformanceManager.UI.Commands;
 using PerformanceManager.UI.Dialogs;
 using PerformanceManager.UI.Stores;
@@ -30,13 +31,13 @@ namespace PerformanceManager.UI
 
             ///navigationStore.CurrentViewModel = new LoginViewModel(navigationStore);
 
-            navigationStore.CurrentViewModel = new AdminDashboardViewModel(navigationStore, dialogService);
+            navigationStore.CurrentViewModel = new AdminDashboardViewModel(navigationStore);
 
             ///navigationStore.CurrentViewModel = new DashboardViewModel(navigationStore);
 
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(navigationStore, dialogService)
+                DataContext = new MainViewModel(navigationStore)
                 {
                     CloseCommand = new RelayCommand(OnClose, true),
                     MinimizeCommand = new RelayCommand(OnMinimize, true),

@@ -13,9 +13,9 @@ namespace PerformanceManager.Domain.Interfaces
 
         ActivityMaster ActivityMaster { get; }
 
-        ProjectType ProjectType { get; set; }
+        ///ProjectType ProjectType { get; set; }
 
-        Project Project { get; set; }
+        IProject Project { get; }
 
         Discipline Discipline { get; }
 
@@ -38,6 +38,8 @@ namespace PerformanceManager.Domain.Interfaces
         DateTime InitiatedOn { get; set; }
 
         DateTime ScheduledCompletion { get; }
+
+        bool ValidActivity { get; }
 
         public void SetCompletionInHours(int totalHoursRequired);
 

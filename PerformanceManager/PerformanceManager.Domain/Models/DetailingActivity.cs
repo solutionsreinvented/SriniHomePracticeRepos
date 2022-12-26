@@ -8,10 +8,9 @@ namespace PerformanceManager.Domain.Models
     {
         #region Default Constructor
 
-        public DetailingActivity()
+        public DetailingActivity(IProject selectedProject) : base(selectedProject)
         {
             Discipline = Discipline.Detailing;
-            ProjectType = ProjectType.Order;
         }
 
         #endregion

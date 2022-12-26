@@ -10,11 +10,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="ReInvented.DataAccess">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\ApplicationData\Libraries\ReInvented.DataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="ReInvented.Shared">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\ApplicationData\Libraries\ReInvented.Shared.dll</HintPath>
-    </Reference>
-    <Reference Include="SRi.XamlUIThickenerApp.DataAccess">
-      <HintPath>..\SRi.XamlUIThickenerApp.DataAccess.dll</HintPath>
     </Reference>
   </ItemGroup>
 

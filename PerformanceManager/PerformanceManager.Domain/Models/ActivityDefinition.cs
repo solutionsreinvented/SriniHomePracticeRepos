@@ -7,8 +7,12 @@ namespace PerformanceManager.Domain.Models
 {
     public class ActivityDefinition : PropertyStore
     {
-        public ActivityDefinition()
+        private readonly IProject _selectedProject;
+
+        public ActivityDefinition(IProject selectedProject)
         {
+            _selectedProject = selectedProject;
+
             Discipline = Discipline.Design;
         }
 
@@ -16,7 +20,7 @@ namespace PerformanceManager.Domain.Models
 
         private void UpdateActivity()
         {
-            Activity = ActivityFactory.Create(Discipline);
+            Activity = ActivityFactory.Create(Discipline, _selectedProject);
         }
 
         public IActivity Activity { get => Get<IActivity>(); set => Set(value); }

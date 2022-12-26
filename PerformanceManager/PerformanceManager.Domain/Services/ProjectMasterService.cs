@@ -1,14 +1,21 @@
-﻿using PerformanceManager.Domain.Interfaces;
+﻿using System.IO;
+
+using PerformanceManager.Domain.Interfaces;
 using PerformanceManager.Domain.Models;
+
+using ReInvented.DataAccess;
+using ReInvented.DataAccess.Interfaces;
 
 namespace PerformanceManager.Domain.Services
 {
-    public class ProjectMasterService
+    public static class ProjectMasterService
     {
+        private static readonly IDataSerializer<ProjectMaster> _serializer = new JsonDataSerializer<ProjectMaster>();
+
         public static ProjectMaster Retrieve()
         {
-            /// TODO: In real-world scenario this needs to generated from a json file.
-            
+            /// TODO: In a real-world scenario this needs to generated from a json file.
+
             ProjectMaster projectMaster = new();
 
             IProject preOrder1 = new PreOrder("GS2212129", "Liberia");
@@ -27,6 +34,22 @@ namespace PerformanceManager.Domain.Services
             projectMaster.Projects.Add(order3);
 
             return projectMaster;
+        }
+
+        public static ProjectMaster ReadFromFile(string fileFullPath = null)
+        {
+            string filePath = fileFullPath ?? FileServiceProvider.ProjectMasterFilePath;
+
+            return _serializer.Deserialize(filePath);
+        }
+
+        public static void SaveToFile(ProjectMaster projectMaster, string fileFullPath = null)
+        {
+            string filePath = fileFullPath ?? FileServiceProvider.ProjectMasterFilePath;
+
+            string serializedContents =  _serializer.Serialize(projectMaster);
+
+            File.WriteAllText(filePath, serializedContents);
         }
     }
 }
