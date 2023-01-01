@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace ReIn.VectorsPractice.Models
 {
-    class FrameGrids
+    public class FrameGrids
     {
+        public int Id { get; set; }
+
+        public string CalculatedId => Id.ToString();
+
+        public int Calculate => CalculatedId.ToString();
     }
 }
