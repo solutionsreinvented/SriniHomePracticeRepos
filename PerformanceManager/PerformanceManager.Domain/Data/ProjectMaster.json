@@ -152,7 +152,66 @@
       "Type": 2,
       "Code": "DTIPR 20.15",
       "Name": "Connection Templates Library - Russian Codes",
-      "Activities": []
+      "Activities": [
+        {
+          "$id": "16",
+          "$type": "PerformanceManager.Domain.Models.DevelopmentActivity, PerformanceManager.Domain",
+          "Discipline": 17,
+          "Category": {
+            "$id": "17",
+            "$type": "PerformanceManager.Domain.Models.Category, PerformanceManager.Domain",
+            "Name": "Non Structural",
+            "SubCategories": [
+              "Bridge Geometry Modeling",
+              "Bridge Loads Implementation",
+              "Bridge Design Parameters Implementation",
+              "Tank Seismic Loads Implementation",
+              "Tank Content Loads Implementation",
+              "Support Structure Design Parameters"
+            ]
+          },
+          "SubCategory": "Bridge Geometry Modeling",
+          "InitiatedOn": "2023-01-02T00:00:00+05:30",
+          "AllocatedHours": 25.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "2-DTIPR 20.15-17-740-1160",
+          "Project": {
+            "$ref": "15"
+          },
+          "ScheduledCompletion": "2023-01-04T00:00:00+05:30"
+        },
+        {
+          "$id": "18",
+          "$type": "PerformanceManager.Domain.Models.DevelopmentActivity, PerformanceManager.Domain",
+          "Discipline": 17,
+          "Category": {
+            "$id": "19",
+            "$type": "PerformanceManager.Domain.Models.Category, PerformanceManager.Domain",
+            "Name": "Non Structural",
+            "SubCategories": [
+              "Bridge Geometry Modeling",
+              "Bridge Loads Implementation",
+              "Bridge Design Parameters Implementation",
+              "Tank Seismic Loads Implementation",
+              "Tank Content Loads Implementation",
+              "Support Structure Design Parameters"
+            ]
+          },
+          "SubCategory": "Bridge Loads Implementation",
+          "InitiatedOn": "2023-01-02T00:00:00+05:30",
+          "AllocatedHours": 35.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "2-DTIPR 20.15-17-740-1334",
+          "Project": {
+            "$ref": "15"
+          },
+          "ScheduledCompletion": "2023-01-06T00:00:00+05:30"
+        }
+      ]
     }
   ]
 }

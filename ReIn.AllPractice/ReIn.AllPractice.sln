@@ -25,6 +25,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Techtural.Loading", "Techtu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Techture.PerformanceManager", "Techture.PerformanceManager\Techture.PerformanceManager.csproj", "{2B7CA1E9-B68C-4526-B92C-2AE503DE63DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StructSkills.Mapping", "StructSkills.Mapping\StructSkills.Mapping.csproj", "{1FCBC7D7-F471-4E2A-B771-946B6667FC05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StructSkills.CollectionsPractice", "StructSkills.CollectionsPractice\StructSkills.CollectionsPractice.csproj", "{68AB9C24-D401-4F09-9CA7-D6760006B9CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +79,14 @@ Global
 		{2B7CA1E9-B68C-4526-B92C-2AE503DE63DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B7CA1E9-B68C-4526-B92C-2AE503DE63DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B7CA1E9-B68C-4526-B92C-2AE503DE63DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FCBC7D7-F471-4E2A-B771-946B6667FC05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FCBC7D7-F471-4E2A-B771-946B6667FC05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FCBC7D7-F471-4E2A-B771-946B6667FC05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FCBC7D7-F471-4E2A-B771-946B6667FC05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68AB9C24-D401-4F09-9CA7-D6760006B9CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68AB9C24-D401-4F09-9CA7-D6760006B9CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68AB9C24-D401-4F09-9CA7-D6760006B9CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68AB9C24-D401-4F09-9CA7-D6760006B9CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

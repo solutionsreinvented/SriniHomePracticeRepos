@@ -1,1 +1,42 @@
-{"Domains":[{"Group":0,"Categories":[{"Type":"Non Structural","SubCategories":["Preamble","Foundation Load Data","Base Plates Design"]},{"Type":"Structural","SubCategories":["Staad Modeling","Loads Application","Analysis and Design","Member Design Calculation Report","Connections Design Calculation Report"]}]},{"Group":1,"Categories":[{"Type":"Structural","SubCategories":["Tekla Modeling","Design Drawings","Fabrication Drawings","Erection Drawings","Corrections and Revisions"]}]}]}
+{
+  "Domains": [
+    {
+      "Group": 0,
+      "Categories": [
+        {
+          "Type": "Non Structural",
+          "SubCategories": [
+            "Preamble",
+            "Foundation Load Data",
+            "Base Plates Design"
+          ]
+        },
+        {
+          "Type": "Structural",
+          "SubCategories": [
+            "Staad Modeling",
+            "Loads Application",
+            "Analysis and Design",
+            "Member Design Calculation Report",
+            "Connections Design Calculation Report"
+          ]
+        }
+      ]
+    },
+    {
+      "Group": 1,
+      "Categories": [
+        {
+          "Type": "Structural",
+          "SubCategories": [
+            "Tekla Modeling",
+            "Design Drawings",
+            "Fabrication Drawings",
+            "Erection Drawings",
+            "Corrections and Revisions"
+          ]
+        }
+      ]
+    }
+  ]
+}
