@@ -1,5 +1,5 @@
 {
-  "LastUpdated": "2023-01-29T11:39:40.626401+05:30",
+  "LastUpdated": "2023-01-29T11:53:04.3834493+05:30",
   "Name": "C",
   "Flats": [
     {
@@ -430,10 +430,17 @@
           "RecordedOn": "2023-01-04T00:00:00+05:30",
           "Category": 1,
           "Amount": 10000.00
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2023-01-16T00:00:00",
+          "RecordedOn": "2023-01-29T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 4000.00
         }
       ],
-      "OutstandingOnSpecifiedDate": 16883.00,
-      "CurrentOutstanding": 16883.00
+      "OutstandingOnSpecifiedDate": 12883.00,
+      "CurrentOutstanding": 12883.00
     },
     {
       "Number": "024",
@@ -1816,7 +1823,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-01-29T00:00:00",
+      "DateSpecified": "2023-01-29T00:00:00+05:30",
       "OpeningBalance": 21490.0,
       "Expenses": [
         {
@@ -1953,9 +1960,9 @@
       "CurrentOutstanding": 0.00
     }
   ],
-  "PenaltyCommencesFrom": "2022-10-01T00:00:00",
+  "PenaltyCommencesFrom": "2022-11-20T00:00:00",
   "PenaltyPercentage": 0.2,
   "MinimumOutstandingForPenalty": 5600.0,
-  "PaymentCutoffDay": 10,
+  "PaymentCutoffDay": 11,
   "ConsiderPenalties": false
 }
