@@ -168,7 +168,8 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private protected override string GetFileName()
         {
-            return $"{_fileName} (As on {_reportTill:dd MMM yyyy})";
+            var penaltyString = _block.ConsiderPenalties ? "With Penalties" : "Without Penalties";
+            return $"{_fileName} - As on {_reportTill:dd MMM yyyy} - {penaltyString} - {Filter}";
         }
 
         #endregion
