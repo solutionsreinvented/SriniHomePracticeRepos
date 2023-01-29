@@ -88,7 +88,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
                     if (Filter == OutstandingsFilter.Defaulters)
                     {
-                        if (flat.CurrentOutstanding >= _block.MinimumOutstandingForPenalty)
+                        if (flat.OutstandingOnSpecifiedDate >= _block.MinimumOutstandingForPenalty)
                         {
                             FlatInfoCollection.Add(flat.ParseToFlatInfo());
                         }
