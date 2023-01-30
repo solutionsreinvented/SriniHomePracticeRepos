@@ -5,27 +5,27 @@
 
     <!--#region Main Window-->
 
-    <sys:Double x:Key="MainWindowHeight">950</sys:Double>
+    <sys:Double x:Key="MainWindowHeight">1000</sys:Double>
     <sys:Double x:Key="MainWindowWidth">1720</sys:Double>
 
     <!--#endregion-->
 
     <!--#region Host Dimensions-->
 
-    <sys:Double x:Key="HostMinimumHeight">800</sys:Double>
+    <sys:Double x:Key="HostMinimumHeight">900</sys:Double>
     <sys:Double x:Key="HostMinimumWidth">1350</sys:Double>
 
-    <sys:Double x:Key="HostMaximumHeight">900</sys:Double>
+    <sys:Double x:Key="HostMaximumHeight">1000</sys:Double>
     <sys:Double x:Key="HostMaximumWidth">1450</sys:Double>
 
-    <sys:Double x:Key="HostHeight">850</sys:Double>
+    <sys:Double x:Key="HostHeight">950</sys:Double>
     <sys:Double x:Key="HostWidth">1350</sys:Double>
 
     <!--#endregion-->
 
     <!--#region View Dimensions-->
 
-    <sys:Double x:Key="ViewMinimumHeight">750</sys:Double>
+    <sys:Double x:Key="ViewMinimumHeight">850</sys:Double>
     <sys:Double x:Key="ViewMinimumWidth">1300</sys:Double>
 
     <sys:Double x:Key="ViewMaximumHeight">850</sys:Double>
@@ -74,6 +74,18 @@
     </Style>
 
     <!--#endregion-->
+
+    <!--#region Default Style for Penalty Control-->
+
+    <Style x:Key="PenaltyControlStyle" TargetType="{x:Type UserControl}">
+        <Setter Property="MinWidth" Value="{StaticResource ViewMinimumWidth}" />
+        <Setter Property="MaxWidth" Value="{StaticResource ViewMaximumWidth}" />
+        <Setter Property="Width" Value="{StaticResource ViewWidth}" />
+    </Style>
+
+    <!--#endregion-->
+
+
 
 
 </ResourceDictionary>

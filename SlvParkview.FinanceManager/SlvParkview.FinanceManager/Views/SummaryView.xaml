@@ -58,7 +58,7 @@
             </TextBlock>
 
 
-            <components:PenaltyInfoControl Grid.Row="1" DataContext="{Binding Block}" />
+            <!--<components:PenaltyInfoControl Grid.Row="1" DataContext="{Binding Block}" />-->
 
             <!--#region Owners Listing-->
 

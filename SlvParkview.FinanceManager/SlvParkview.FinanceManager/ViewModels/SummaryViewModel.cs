@@ -35,7 +35,6 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         #region Public Properties
 
-        public Block Block { get => Get<Block>(); set { Set(value); ShowContent = value != null; } }
 
         public Flat SelectedFlat
         {
@@ -48,7 +47,6 @@ namespace SlvParkview.FinanceManager.ViewModels
         }
 
         public bool CanProcessFlat { get => Get<bool>(); set => Set(value); }
-        public bool ShowContent { get => Get<bool>(); set => Set(value); }
 
         #endregion
 
