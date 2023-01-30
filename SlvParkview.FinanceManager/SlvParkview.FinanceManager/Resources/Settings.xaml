@@ -75,5 +75,14 @@
 
     <!--#endregion-->
 
+    <!--#region Default Style for Penalty Control-->
+
+    <Style x:Key="PenaltyControlStyle" TargetType="{x:Type UserControl}">
+        <Setter Property="MinWidth" Value="{StaticResource ViewMinimumWidth}" />
+        <Setter Property="MaxWidth" Value="{StaticResource ViewMaximumWidth}" />
+        <Setter Property="Width" Value="{StaticResource ViewWidth}" />
+    </Style>
+
+    <!--#endregion-->
 
 </ResourceDictionary>

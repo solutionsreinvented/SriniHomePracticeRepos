@@ -33,6 +33,8 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public DataManagementService DataManagementService { get => Get<DataManagementService>(); private set => Set(value); }
 
+        public Block Block { get => Get<Block>(); set => Set(value); }
+
         #endregion
 
         #region Event Handlers
@@ -61,9 +63,9 @@ namespace SlvParkview.FinanceManager.ViewModels
         /// </summary>
         private void OnRetrieveData()
         {
-            Block deserializedData = DataManagementService.RetrieveData();
+            Block = DataManagementService.RetrieveData();
 
-            _summaryViewModel = new SummaryViewModel(_navigationService) { Block = deserializedData };
+            _summaryViewModel = new SummaryViewModel(_navigationService) { Block = Block };
 
             _navigationService.CurrentViewModel = _summaryViewModel;
         }
