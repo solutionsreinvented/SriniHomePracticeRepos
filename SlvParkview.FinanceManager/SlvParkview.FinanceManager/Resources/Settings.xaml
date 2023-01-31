@@ -5,21 +5,32 @@
 
     <!--#region Main Window-->
 
-    <sys:Double x:Key="MainWindowHeight">950</sys:Double>
+    <sys:Double x:Key="MainWindowHeight">1050</sys:Double>
     <sys:Double x:Key="MainWindowWidth">1720</sys:Double>
 
     <!--#endregion-->
 
+    <!--#region Container-->
+
+    <sys:Double x:Key="ContainerMinimumHeight">950</sys:Double>
+    <!--<sys:Double x:Key="ContainerMinimumWidth">1350</sys:Double>-->
+
+    <sys:Double x:Key="ContainerHeight">950</sys:Double>
+    <!--<sys:Double x:Key="ContainerWidth">1350</sys:Double>-->
+
+    <!--#endregion-->
+
+
     <!--#region Host Dimensions-->
 
-    <sys:Double x:Key="HostMinimumHeight">800</sys:Double>
-    <sys:Double x:Key="HostMinimumWidth">1350</sys:Double>
+    <sys:Double x:Key="ViewHostMinimumHeight">800</sys:Double>
+    <sys:Double x:Key="ViewHostMinimumWidth">1350</sys:Double>
 
-    <sys:Double x:Key="HostMaximumHeight">900</sys:Double>
-    <sys:Double x:Key="HostMaximumWidth">1450</sys:Double>
+    <sys:Double x:Key="ViewHostMaximumHeight">900</sys:Double>
+    <sys:Double x:Key="ViewHostMaximumWidth">1450</sys:Double>
 
-    <sys:Double x:Key="HostHeight">850</sys:Double>
-    <sys:Double x:Key="HostWidth">1350</sys:Double>
+    <sys:Double x:Key="ViewHostHeight">850</sys:Double>
+    <sys:Double x:Key="ViewHostWidth">1350</sys:Double>
 
     <!--#endregion-->
 
@@ -45,44 +56,10 @@
     <sys:Double x:Key="ReportControlMaximumWidth">1340</sys:Double>
 
     <sys:Double x:Key="ReportControlHeight">650</sys:Double>
-    <sys:Double x:Key="ReportControlWidth">1240</sys:Double>
+    <sys:Double x:Key="ReportControlWidth">1260</sys:Double>
 
     <!--#endregion-->
 
-    <!--#region Default Style for Main Views-->
 
-    <Style x:Key="ViewStyle" TargetType="{x:Type UserControl}">
-        <Setter Property="MinWidth" Value="{StaticResource ViewMinimumWidth}" />
-        <Setter Property="MinHeight" Value="{StaticResource ViewMinimumHeight}" />
-        <Setter Property="MaxWidth" Value="{StaticResource ViewMaximumWidth}" />
-        <Setter Property="MaxHeight" Value="{StaticResource ViewMaximumHeight}" />
-        <Setter Property="Width" Value="{StaticResource ViewWidth}" />
-        <Setter Property="Height" Value="{StaticResource ViewHeight}" />
-    </Style>
-
-    <!--#endregion-->
-
-    <!--#region Default Style for Report Control-->
-
-    <Style x:Key="ReportViewStyle" TargetType="{x:Type UserControl}">
-        <Setter Property="MinWidth" Value="{StaticResource ReportControlMinimumWidth}" />
-        <Setter Property="MinHeight" Value="{StaticResource ReportControlMinimumHeight}" />
-        <Setter Property="MaxWidth" Value="{StaticResource ReportControlMaximumWidth}" />
-        <Setter Property="MaxHeight" Value="{StaticResource ReportControlMaximumHeight}" />
-        <Setter Property="Width" Value="{StaticResource ReportControlWidth}" />
-        <Setter Property="Height" Value="{StaticResource ReportControlHeight}" />
-    </Style>
-
-    <!--#endregion-->
-
-    <!--#region Default Style for Penalty Control-->
-
-    <Style x:Key="PenaltyControlStyle" TargetType="{x:Type UserControl}">
-        <Setter Property="MinWidth" Value="{StaticResource ViewMinimumWidth}" />
-        <Setter Property="MaxWidth" Value="{StaticResource ViewMaximumWidth}" />
-        <Setter Property="Width" Value="{StaticResource ViewWidth}" />
-    </Style>
-
-    <!--#endregion-->
 
 </ResourceDictionary>

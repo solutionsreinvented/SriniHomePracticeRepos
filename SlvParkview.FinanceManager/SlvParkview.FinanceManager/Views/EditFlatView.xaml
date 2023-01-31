@@ -15,7 +15,7 @@
 
     <!--#region Content Host-->
 
-    <Grid Margin="10">
+    <Grid>
 
         <!--#region Grid Definitions-->
 

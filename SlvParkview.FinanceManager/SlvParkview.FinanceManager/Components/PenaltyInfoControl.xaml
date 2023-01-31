@@ -7,73 +7,78 @@
     xmlns:theme="http://schemas.reinvented.com/ui/themes"
     d:DesignHeight="100"
     d:DesignWidth="800"
-    Background="{theme:ThemeResource ResourceKey=StaticBackgroundBrush}"
     Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
     mc:Ignorable="d">
+
     <!--#region Last Updated Info-->
 
-    <GroupBox
-        Margin="5,5"
-        Padding="5"
-        BorderThickness="0.1"
-        DataContext="{Binding}">
-        <GroupBox.Header>
-            <CheckBox
-                VerticalAlignment="Center"
-                VerticalContentAlignment="Center"
-                Content="Consider Penalties"
-                IsChecked="{Binding ConsiderPenalties}" />
-        </GroupBox.Header>
+    <Grid>
 
-        <Grid>
+        <Border Style="{StaticResource BorderWithEffectsStyle}" />
 
-            <!--#region Grid Definitions-->
+        <GroupBox
+            Margin="15,10"
+            Padding="5"
+            BorderThickness="0.1"
+            DataContext="{Binding}">
+            <GroupBox.Header>
+                <CheckBox
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Content="Consider Penalties"
+                    IsChecked="{Binding ConsiderPenalties}" />
+            </GroupBox.Header>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2.5*" />
-                <ColumnDefinition Width="1.5*" />
-                <ColumnDefinition Width="2.5*" />
-                <ColumnDefinition Width="1.0*" />
-                <ColumnDefinition Width="2.5*" />
-                <ColumnDefinition Width="1.0*" />
-                <ColumnDefinition Width="2.5*" />
-                <ColumnDefinition Width="1.0*" />
-            </Grid.ColumnDefinitions>
+            <Grid>
 
-            <!--#endregion-->
+                <!--#region Grid Definitions-->
 
-            <TextBlock
-                Grid.Column="0"
-                VerticalAlignment="Center"
-                Text="Commencement date: " />
-            <DatePicker
-                Grid.Column="1"
-                VerticalAlignment="Center"
-                VerticalContentAlignment="Center"
-                SelectedDate="{Binding PenaltyCommencesFrom, Mode=TwoWay}" />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2.5*" />
+                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="2.5*" />
+                    <ColumnDefinition Width="1.0*" />
+                    <ColumnDefinition Width="2.5*" />
+                    <ColumnDefinition Width="1.0*" />
+                    <ColumnDefinition Width="2.5*" />
+                    <ColumnDefinition Width="1.0*" />
+                </Grid.ColumnDefinitions>
 
-            <TextBlock
-                Grid.Column="2"
-                Margin="10,0,0,0"
-                VerticalAlignment="Center"
-                Text="Cutoff day of the month: " />
-            <TextBox Grid.Column="3" Text="{Binding PaymentCutoffDay, StringFormat={}{0:D2}}" />
+                <!--#endregion-->
 
-            <TextBlock
-                Grid.Column="4"
-                Margin="10,0,0,0"
-                VerticalAlignment="Center"
-                Text="Percentage of penalty: " />
-            <TextBox Grid.Column="5" Text="{Binding PenaltyPercentage, StringFormat={}{0:P0}}" />
+                <TextBlock
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Commencement date: " />
+                <DatePicker
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    SelectedDate="{Binding PenaltyCommencesFrom, Mode=TwoWay}" />
 
-            <TextBlock
-                Grid.Column="6"
-                Margin="10,0,0,0"
-                VerticalAlignment="Center"
-                Text="Minimum outstanding for penalty: " />
-            <TextBox Grid.Column="7" Text="{Binding MinimumOutstandingForPenalty, StringFormat={}{0:N1}}" />
-        </Grid>
-    </GroupBox>
+                <TextBlock
+                    Grid.Column="2"
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    Text="Cutoff day of the month: " />
+                <TextBox Grid.Column="3" Text="{Binding PaymentCutoffDay, StringFormat={}{0:D2}}" />
+
+                <TextBlock
+                    Grid.Column="4"
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    Text="Percentage of penalty: " />
+                <TextBox Grid.Column="5" Text="{Binding PenaltyPercentage, StringFormat={}{0:P0}}" />
+
+                <TextBlock
+                    Grid.Column="6"
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    Text="Minimum outstanding for penalty: " />
+                <TextBox Grid.Column="7" Text="{Binding MinimumOutstandingForPenalty, StringFormat={}{0:N1}}" />
+            </Grid>
+        </GroupBox>
+    </Grid>
 
 
     <!--#endregion-->
