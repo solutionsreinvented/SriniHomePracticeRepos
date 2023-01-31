@@ -168,7 +168,7 @@
                 Grid.Row="1"
                 Width="{StaticResource ViewWidth}"
                 Margin="25,5,25,0"
-                DataContext="{Binding Block}" />
+                DataContext="{Binding CurrentViewModel.Block}" />
 
             <Grid
                 Grid.Row="2"

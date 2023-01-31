@@ -1,8 +1,8 @@
 ﻿using ReInvented.Shared.Commands;
 using ReInvented.Shared.Stores;
 using System.Windows.Input;
-using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Services;
+using SlvParkview.FinanceManager.Models;
 
 namespace SlvParkview.FinanceManager.ViewModels
 {
@@ -11,15 +11,17 @@ namespace SlvParkview.FinanceManager.ViewModels
         #region Private Fields
 
         private SummaryViewModel _summaryViewModel;
-        private NavigationService _navigationService;
+        private readonly NavigationService _navigationService;
 
         #endregion
 
         #region Default Constructor
 
-        public MainViewModel()
+        public MainViewModel(NavigationService navigationService)
         {
-            InitializeNavigationService();
+            _navigationService = navigationService;
+
+            AttachNavigationServiceEvents();
             Initialize();
         }
 
@@ -87,10 +89,8 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         #region Private Helpers
 
-        private void InitializeNavigationService()
+        private void AttachNavigationServiceEvents()
         {
-            _navigationService = new NavigationService();
-
             _navigationService.CurrentViewModelChanged -= OnNavigationServiceCurrentViewModelChanged;
             _navigationService.CurrentViewModelChanged += OnNavigationServiceCurrentViewModelChanged;
         }

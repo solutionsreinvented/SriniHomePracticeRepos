@@ -50,12 +50,6 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             _reportTill = reportTill;
         }
 
-        ///public FlatTransactionsHistoryReport(Flat flat, DateTime reportTill)
-        ///{
-        ///    _flat = flat;
-        ///    _reportTill = reportTill;
-        ///}
-
         #endregion
 
         #region Read-only Properties
@@ -76,11 +70,11 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             {
                 if (_block.ConsiderPenalties)
                 {
-                    _flat.GeneratePenalties(_block);
+                    _flat.GeneratePenalties(_block.PenaltyCriteria);
                 }
                 else
                 {
-                    _flat.Penalties.Clear();
+                    _flat.Penalties?.Clear();
                 }
 
                 FlatInfo = _flat.ParseToFlatInfo();

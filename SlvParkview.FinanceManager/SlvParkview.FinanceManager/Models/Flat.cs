@@ -262,7 +262,7 @@ namespace SlvParkview.FinanceManager.Models
 
             decimal paymentsTillSpecifiedDate = Payments == null ? 0.0m : Payments.Where(p => p.ReceivedOn <= calculatedTill).Sum(p => p.Amount);
 
-            decimal penaltiesTillSpecifiedDate = Penalties == null || Penalties.Count() == 0 ? 0.0m : 
+            decimal penaltiesTillSpecifiedDate = Penalties == null || Penalties.Count() == 0 ? 0.0m :
                                                               Penalties.Where(p => p.OccuredOn <= calculatedTill).Sum(p => p.Amount);
 
             decimal outstandingOnSpecifiedDate = OpeningBalance
@@ -273,10 +273,10 @@ namespace SlvParkview.FinanceManager.Models
             return outstandingOnSpecifiedDate;
         }
 
-        public void GeneratePenalties(Block block)
+        public void GeneratePenalties(PenaltyCriteria criteria)
         {
             List<DateTime> dates = DayOccurencesFinder
-                                        .FindFor(block.PenaltyCommencesFrom, DateSpecified, block.PaymentCutoffDay);
+                                        .FindFor(criteria.CommencesFrom, DateSpecified, criteria.PaymentCutoffDay);
 
             Penalties = new ObservableCollection<Expense>();
 
@@ -291,10 +291,10 @@ namespace SlvParkview.FinanceManager.Models
                     outstanding += previousPenalty.Amount;
                 }
 
-                if (outstanding >= block.MinimumOutstandingForPenalty)
+                if (outstanding >= criteria.MinimumOutstanding)
                 {
                     Expense penalty = new Expense(TransactionCategory.PenaltyMaintenance,
-                                                  outstanding * block.PenaltyPercentage, dates[i]);
+                                                  outstanding * criteria.Percentage, dates[i]);
                     Penalties.Add(penalty);
                 }
             }

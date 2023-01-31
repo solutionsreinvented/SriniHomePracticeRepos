@@ -38,7 +38,7 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
             PaymentsReportType = PaymentsReportType.Monthwise;
         }
 
-        private void UpdateReport()
+        protected override void UpdateReport()
         {
             ReportOptions = ReportOptionsFactory.Create(PaymentsReportType);
 

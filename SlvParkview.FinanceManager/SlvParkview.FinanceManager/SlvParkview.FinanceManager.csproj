@@ -127,6 +127,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Penalty.cs" />
+    <Compile Include="Models\PenaltyCriteria.cs" />
     <Compile Include="Reporting\Components\BlockInfoContol.xaml.cs">
       <DependentUpon>BlockInfoContol.xaml</DependentUpon>
     </Compile>

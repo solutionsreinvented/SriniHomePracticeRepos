@@ -4,9 +4,11 @@ using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Reporting.Interfaces;
 using SlvParkview.FinanceManager.ViewModels;
 
+using System;
+
 namespace SlvParkview.FinanceManager.Reporting.ViewModels
 {
-    public class ReportViewModelBase : PropertyStore
+    public abstract class ReportViewModelBase : PropertyStore
     {
         #region Private Fields
 
@@ -27,16 +29,22 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
 
         #region Public Properties
 
-        public Block Block { get => Get<Block>(); set => Set(value); }
+        public Block Block { get => Get<Block>(); set { Set(value); UpdateReport(); } }
+
+        public DateTime ReportTill { get => Get<DateTime>(); set { Set(value); UpdateReport(); } }
 
         public IReport Report { get => Get<IReport>(); set => Set(value); }
 
         #endregion
 
+        protected abstract void UpdateReport();
+
+
         #region Private Helpers
 
         private protected virtual void Initialize()
         {
+            ReportTill = DateTime.Today;
             Block = _summaryViewModel.Block;
         }
 

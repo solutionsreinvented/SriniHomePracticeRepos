@@ -25,8 +25,6 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
 
         #region Public Properties
 
-        public DateTime ReportTill { get => Get<DateTime>(); set { Set(value); UpdateReport(); } }
-
         public Flat SelectedFlat { get => Get<Flat>(); set { Set(value); UpdateReport(); } }
 
         #endregion
@@ -37,11 +35,10 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
         {
             base.Initialize();
 
-            ReportTill = DateTime.Today;
             SelectedFlat = _summaryViewModel.SelectedFlat ?? (Block.Flats?.First());
         }
 
-        private void UpdateReport()
+        protected override void UpdateReport()
         {
             Report = new FlatTransactionsHistoryReport(Block, SelectedFlat, ReportTill);
             Report.GenerateContents();

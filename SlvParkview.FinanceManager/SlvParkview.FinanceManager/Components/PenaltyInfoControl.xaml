@@ -29,7 +29,7 @@
                     IsChecked="{Binding ConsiderPenalties}" />
             </GroupBox.Header>
 
-            <Grid>
+            <Grid DataContext="{Binding PenaltyCriteria}">
 
                 <!--#region Grid Definitions-->
 
@@ -54,7 +54,7 @@
                     Grid.Column="1"
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
-                    SelectedDate="{Binding PenaltyCommencesFrom, Mode=TwoWay}" />
+                    SelectedDate="{Binding CommencesFrom, Mode=TwoWay}" />
 
                 <TextBlock
                     Grid.Column="2"
@@ -68,14 +68,14 @@
                     Margin="10,0,0,0"
                     VerticalAlignment="Center"
                     Text="Percentage of penalty: " />
-                <TextBox Grid.Column="5" Text="{Binding PenaltyPercentage, StringFormat={}{0:P0}}" />
+                <TextBox Grid.Column="5" Text="{Binding Percentage, StringFormat={}{0:P0}}" />
 
                 <TextBlock
                     Grid.Column="6"
                     Margin="10,0,0,0"
                     VerticalAlignment="Center"
                     Text="Minimum outstanding for penalty: " />
-                <TextBox Grid.Column="7" Text="{Binding MinimumOutstandingForPenalty, StringFormat={}{0:N1}}" />
+                <TextBox Grid.Column="7" Text="{Binding MinimumOutstanding, StringFormat={}{0:N1}}" />
             </Grid>
         </GroupBox>
     </Grid>

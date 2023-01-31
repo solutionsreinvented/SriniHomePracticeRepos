@@ -23,22 +23,9 @@ namespace SlvParkview.FinanceManager.Models
         public string Name { get => Get<string>(); set => Set(value); }
 
         public List<Flat> Flats { get => Get<List<Flat>>(); set => Set(value); }
-        /// <summary>
-        /// Date from which the penalties for delay in maintenance payments will be applicable.
-        /// </summary>
-        public DateTime PenaltyCommencesFrom { get => Get<DateTime>(); set { Set(value); UpdateFlatPenalties(); } }
-        /// <summary>
-        /// Percentage of outstanding due which is added as penalty.
-        /// </summary>
-        public decimal PenaltyPercentage { get => Get<decimal>(); set { Set(value); UpdateFlatPenalties(); } }
-        /// <summary>
-        /// Amount beyond which the penalty is applicable.
-        /// </summary>
-        public decimal MinimumOutstandingForPenalty { get => Get<decimal>(); set { Set(value); UpdateFlatPenalties(); } }
-        /// <summary>
-        /// Cutoff date by which the maintenance outstanding shall be cleared.
-        /// </summary>
-        public int PaymentCutoffDay { get => Get<int>(); set { Set(value); UpdateFlatPenalties(); } }
+
+        public PenaltyCriteria PenaltyCriteria { get => Get<PenaltyCriteria>(); private set => Set(value); }
+
         /// <summary>
         /// Indicates whether penalties to be considered in the calculations
         /// </summary>
@@ -55,22 +42,35 @@ namespace SlvParkview.FinanceManager.Models
 
         private void InitializePenaltyStuff()
         {
-            PenaltyCommencesFrom = new DateTime(2022, 10, 01);
-            PenaltyPercentage = 20.0m;
-            PaymentCutoffDay = 01;
-            MinimumOutstandingForPenalty = 5600.0m;
+
+            PenaltyCriteria = new PenaltyCriteria()
+            {
+                CommencesFrom = new DateTime(2022, 10, 01),
+                Percentage = 20.0m,
+                PaymentCutoffDay = 01,
+                MinimumOutstanding = 5600.0m
+            };
+
+            PenaltyCriteria.PenaltyCriteriaChanged -= OnPenaltyCriteriaChanged;
+            PenaltyCriteria.PenaltyCriteriaChanged += OnPenaltyCriteriaChanged;
+
             ConsiderPenalties = true;
+        }
+
+        private void OnPenaltyCriteriaChanged(PenaltyCriteria sender, EventArgs e)
+        {
+            UpdateFlatPenalties();
         }
 
         private void UpdateFlatPenalties()
         {
             if (ConsiderPenalties)
             {
-                Flats?.ForEach(f => f.GeneratePenalties(this));
+                Flats?.ForEach(f => f.GeneratePenalties(PenaltyCriteria));
             }
             else
             {
-                Flats?.ForEach(f => f.Penalties.Clear());
+                Flats?.ForEach(f => f.Penalties?.Clear());
             }
         }
 

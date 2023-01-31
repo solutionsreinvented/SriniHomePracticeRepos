@@ -35,8 +35,6 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         #region Public Properties
 
-        public Block Block { get => Get<Block>(); set { Set(value); ShowContent = value != null; } }
-
         public Flat SelectedFlat
         {
             get => Get<Flat>();
@@ -48,7 +46,6 @@ namespace SlvParkview.FinanceManager.ViewModels
         }
 
         public bool CanProcessFlat { get => Get<bool>(); set => Set(value); }
-        public bool ShowContent { get => Get<bool>(); set => Set(value); }
 
         #endregion
 
@@ -71,30 +68,40 @@ namespace SlvParkview.FinanceManager.ViewModels
         private void OnEditFlat()
         {
             EditFlatViewModel editFlatViewModel = new EditFlatViewModel(this, _navigationService, SelectedFlat);
+
+            editFlatViewModel.Block = Block;
             _navigationService.CurrentViewModel = editFlatViewModel;
         }
 
         private void OnAddExpense()
         {
             ExpenseViewModel expenseViewModel = new ExpenseViewModel(this, _navigationService, SelectedFlat);
+
+            expenseViewModel.Block = Block;
             _navigationService.CurrentViewModel = expenseViewModel;
         }
 
         private void OnAddPayment()
         {
             PaymentViewModel paymentViewModel = new PaymentViewModel(this, _navigationService, SelectedFlat);
+
+            paymentViewModel.Block = Block;
             _navigationService.CurrentViewModel = paymentViewModel;
         }
 
         private void OnAddCommonExpense()
         {
             CommonExpenseViewModel commonExpenseViewModel = new CommonExpenseViewModel(this, _navigationService);
+
+            commonExpenseViewModel.Block = Block;
             _navigationService.CurrentViewModel = commonExpenseViewModel;
         }
 
         private void OnGenerateReports()
         {
             ReportingViewModel reportViewModel = new ReportingViewModel(this, _navigationService);
+
+            reportViewModel.Block = Block;
             _navigationService.CurrentViewModel = reportViewModel;
         }
 
