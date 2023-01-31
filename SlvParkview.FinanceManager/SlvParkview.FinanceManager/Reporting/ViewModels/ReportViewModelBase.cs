@@ -5,6 +5,7 @@ using SlvParkview.FinanceManager.Reporting.Interfaces;
 using SlvParkview.FinanceManager.ViewModels;
 
 using System;
+using System.ComponentModel;
 
 namespace SlvParkview.FinanceManager.Reporting.ViewModels
 {
@@ -12,7 +13,7 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
     {
         #region Private Fields
 
-        private protected readonly SummaryViewModel _summaryViewModel; 
+        private protected readonly SummaryViewModel _summaryViewModel;
 
         #endregion
 
@@ -46,6 +47,25 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
         {
             ReportTill = DateTime.Today;
             Block = _summaryViewModel.Block;
+
+            Block.PenaltyCriteria.PenaltyCriteriaChanged -= OnPenaltyCriteriaChanged;
+            Block.PenaltyCriteria.PenaltyCriteriaChanged += OnPenaltyCriteriaChanged;
+
+            Block.PropertyChanged -= OnBlockPropertyChanged;
+            Block.PropertyChanged += OnBlockPropertyChanged;
+        }
+
+        private void OnBlockPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Block.ConsiderPenalties))
+            {
+                UpdateReport();
+            }
+        }
+
+        private void OnPenaltyCriteriaChanged(PenaltyCriteria criteria, EventArgs e)
+        {
+            UpdateReport();
         }
 
         #endregion

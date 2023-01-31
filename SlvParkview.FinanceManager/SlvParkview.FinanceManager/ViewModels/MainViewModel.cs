@@ -31,11 +31,11 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public ThemeViewModel ThemeViewModel { get; set; }
 
-        public BaseViewModel CurrentViewModel { get => Get<BaseViewModel>(); set => Set(value); }
+        public BaseViewModel CurrentViewModel { get => Get<BaseViewModel>(); set { Set(value); ShowMainContent = value != null; } }
 
         public DataManagementService DataManagementService { get => Get<DataManagementService>(); private set => Set(value); }
 
-        public Block Block { get => Get<Block>(); set => Set(value); }
+        public bool ShowMainContent { get => Get<bool>(); private set => Set(value); }
 
         #endregion
 
@@ -65,9 +65,7 @@ namespace SlvParkview.FinanceManager.ViewModels
         /// </summary>
         private void OnRetrieveData()
         {
-            Block = DataManagementService.RetrieveData();
-
-            _summaryViewModel = new SummaryViewModel(_navigationService) { Block = Block };
+            _summaryViewModel = new SummaryViewModel(_navigationService) { Block = DataManagementService.RetrieveData() };
 
             _navigationService.CurrentViewModel = _summaryViewModel;
         }

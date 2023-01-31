@@ -15,8 +15,5 @@ namespace ReIn.ViewModelPercolation.ViewModels
         }
 
         public BaseViewModel CurrentViewModel { get => Get<BaseViewModel>(); set => Set(value); }
-
-
-
     }
 }

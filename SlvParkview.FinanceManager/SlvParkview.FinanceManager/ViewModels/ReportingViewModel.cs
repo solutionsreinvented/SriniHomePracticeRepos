@@ -16,8 +16,6 @@ namespace SlvParkview.FinanceManager.ViewModels
     {
         #region Private Fields
 
-        ///private readonly string _reportTargetDirectory;
-
         private readonly SummaryViewModel _summaryViewModel;
 
         private readonly NavigationService _navigationService;
@@ -35,8 +33,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         #region Parameterized Constructor
 
-        public ReportingViewModel(SummaryViewModel summaryViewModel, NavigationService navigationService)
-            : this()
+        public ReportingViewModel(SummaryViewModel summaryViewModel, NavigationService navigationService) : this()
         {
             _summaryViewModel = summaryViewModel;
             _navigationService = navigationService;

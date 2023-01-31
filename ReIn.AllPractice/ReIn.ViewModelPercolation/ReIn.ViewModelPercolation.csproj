@@ -62,6 +62,7 @@
     <Compile Include="Models\Family.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Village.cs" />
+    <Compile Include="ObjectPassing\BaseViewModel.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\FamilyViewModel.cs" />

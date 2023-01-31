@@ -1,4 +1,6 @@
-﻿using ReInvented.Shared.Stores;
+﻿using Newtonsoft.Json;
+
+using ReInvented.Shared.Stores;
 
 using System;
 using System.Collections.Generic;
@@ -24,6 +26,7 @@ namespace SlvParkview.FinanceManager.Models
 
         public List<Flat> Flats { get => Get<List<Flat>>(); set => Set(value); }
 
+        [JsonProperty]
         public PenaltyCriteria PenaltyCriteria { get => Get<PenaltyCriteria>(); private set => Set(value); }
 
         /// <summary>
