@@ -95,6 +95,8 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void Initialize()
         {
+            ShowMainContent = false;
+
             DataManagementService = DataManagementService.Instance;
 
             ThemeViewModel = new ThemeViewModel();

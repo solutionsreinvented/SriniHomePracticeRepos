@@ -34,6 +34,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
             TargetFlat = selectedFlat;
         }
+
         #endregion
 
         #region Public Properties
@@ -150,6 +151,11 @@ namespace SlvParkview.FinanceManager.ViewModels
         {
             DataManagementService = DataManagementService.Instance;
 
+            InitializeCommands();
+        }
+
+        private void InitializeCommands()
+        {
             SaveFlatCommand = new RelayCommand(OnSaveFlat, true);
             AddExpenseCommand = new RelayCommand(OnAddExpense, true);
             AddPaymentCommand = new RelayCommand(OnAddPayment, true);

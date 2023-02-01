@@ -54,7 +54,7 @@
                     Grid.Column="1"
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
-                    SelectedDate="{Binding PenaltyCommencesFrom, Mode=TwoWay}" />
+                    SelectedDate="{Binding CommencesFrom, Mode=TwoWay}" />
 
                 <TextBlock
                     Grid.Column="2"

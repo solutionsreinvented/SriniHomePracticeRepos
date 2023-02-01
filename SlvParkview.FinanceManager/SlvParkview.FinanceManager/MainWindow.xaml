@@ -162,21 +162,21 @@
         <StackPanel
             Grid.Row="1"
             Margin="0,10,0,0"
-            DataContext="{Binding CurrentViewModel}"
-            Style="{StaticResource ContainerStyle}">
+            Style="{StaticResource ContainerStyle}"
+            Visibility="{Binding ShowMainContent, Converter={shared:BoolToVisibilityConverter}}">
 
             <components:PenaltyInfoControl
                 Grid.Row="1"
                 Width="{StaticResource ViewWidth}"
                 Margin="25,5,25,0"
-                DataContext="{Binding Block}" />
+                DataContext="{Binding CurrentViewModel.Block}" />
 
             <Grid
                 Grid.Row="2"
                 Margin="25,-15,25,0"
                 Style="{StaticResource ViewHostStyle}">
 
-                <ContentControl Content="{Binding}" />
+                <ContentControl Content="{Binding CurrentViewModel}" />
 
             </Grid>
 
