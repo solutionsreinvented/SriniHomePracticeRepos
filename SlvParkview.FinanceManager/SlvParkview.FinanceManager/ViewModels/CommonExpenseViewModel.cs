@@ -6,7 +6,7 @@ using SlvParkview.FinanceManager.Services;
 
 namespace SlvParkview.FinanceManager.ViewModels
 {
-    public class CommonExpenseViewModel : BaseViewModel
+    public class CommonBillViewModel : BaseViewModel
     {
 
         #region Private Fields
@@ -18,7 +18,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         #region Default Constructor
 
-        private CommonExpenseViewModel()
+        private CommonBillViewModel()
         {
             Initialize();
         }
@@ -27,7 +27,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         #region Parameterized Constructor
 
-        public CommonExpenseViewModel(SummaryViewModel sender, NavigationService navigationService) : this()
+        public CommonBillViewModel(SummaryViewModel sender, NavigationService navigationService) : this()
         {
             _sender = sender;
             _navigationService = navigationService;
@@ -41,7 +41,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public bool AllowDuplicateEntry { get => Get<bool>(); set => Set(value); }
 
-        public Expense Expense { get => Get<Expense>(); set => Set(value); }
+        public Bill Bill { get => Get<Bill>(); set => Set(value); }
 
         public Block ApartmentBlockToBeProcessed { get => Get<Block>(); set => Set(value); }
 
@@ -49,7 +49,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         #region Public Commands
 
-        public ICommand SaveExpenseCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand SaveBillCommand { get => Get<ICommand>(); set => Set(value); }
 
         public ICommand GoToSummaryCommand { get => Get<ICommand>(); set => Set(value); }
 
@@ -57,20 +57,20 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         #region Command Handlers
 
-        private void OnSaveExpense()
+        private void OnSaveBill()
         {
             if (AllowDuplicateEntry)
             {
-                _sender.Block.Flats.ForEach(f => f.AddExpense(Expense));
+                _sender.Block.Flats.ForEach(f => f.AddBill(Bill));
                 DataManagementService.Instance.SaveData(ApartmentBlockToBeProcessed);
             }
             else
             {
                 foreach (Flat flat in _sender.Block.Flats)
                 {
-                    if (!flat.ContainsSimilar(Expense))
+                    if (!flat.ContainsSimilar(Bill))
                     {
-                        flat.AddExpense(Expense);
+                        flat.AddBill(Bill);
                     }
                     else
                     {
@@ -78,13 +78,13 @@ namespace SlvParkview.FinanceManager.ViewModels
 
                         if (result == MessageBoxResult.Yes)
                         {
-                            flat.AddExpense(Expense);
+                            flat.AddBill(Bill);
                         }
                     }
                 }
             }
 
-            Expense = new Expense();
+            Bill = new Bill();
         }
 
         private void OnGoToSummary()
@@ -98,9 +98,9 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void Initialize()
         {
-            Expense = new Expense();
+            Bill = new Bill();
 
-            SaveExpenseCommand = new RelayCommand(OnSaveExpense, true);
+            SaveBillCommand = new RelayCommand(OnSaveBill, true);
             GoToSummaryCommand = new RelayCommand(OnGoToSummary, true);
         }
 

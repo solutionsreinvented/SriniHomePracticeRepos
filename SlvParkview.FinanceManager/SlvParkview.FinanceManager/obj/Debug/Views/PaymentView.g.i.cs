@@ -59,7 +59,7 @@ namespace SlvParkview.FinanceManager.Views {
     /// <summary>
     /// PaymentView
     /// </summary>
-    public partial class PaymentView : System.Windows.Controls.UserControl, System.Windows.Markup.IComponentConnector {
+    public partial class ReceiptView : System.Windows.Controls.UserControl, System.Windows.Markup.IComponentConnector {
         
         private bool _contentLoaded;
         

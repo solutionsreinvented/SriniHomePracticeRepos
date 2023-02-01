@@ -41,9 +41,9 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public Flat TargetFlat { get => Get<Flat>(); set => Set(value); }
 
-        public Payment SelectedPayment { get => Get<Payment>(); set { Set(value); RaisePropertyChanged(nameof(CanModifyPayment)); } }
+        public Receipt SelectedReceipt { get => Get<Receipt>(); set { Set(value); RaisePropertyChanged(nameof(CanModifyReceipt)); } }
 
-        public Expense SelectedExpense { get => Get<Expense>(); set { Set(value); RaisePropertyChanged(nameof(CanModifyExpense)); } }
+        public Bill SelectedBill { get => Get<Bill>(); set { Set(value); RaisePropertyChanged(nameof(CanModifyBill)); } }
 
         #endregion
 
@@ -51,9 +51,9 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public DataManagementService DataManagementService { get => Get<DataManagementService>(); private set => Set(value); }
 
-        public bool CanModifyPayment => SelectedPayment != null;
+        public bool CanModifyReceipt => SelectedReceipt != null;
 
-        public bool CanModifyExpense => SelectedExpense != null;
+        public bool CanModifyBill => SelectedBill != null;
 
         #endregion
 
@@ -61,23 +61,23 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public ICommand SaveFlatCommand { get => Get<ICommand>(); set => Set(value); }
 
-        public ICommand AddExpenseCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand AddBillCommand { get => Get<ICommand>(); set => Set(value); }
 
-        public ICommand AddPaymentCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand AddReceiptCommand { get => Get<ICommand>(); set => Set(value); }
 
-        public ICommand AddCommonExpenseCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand AddCommonBillCommand { get => Get<ICommand>(); set => Set(value); }
 
         public ICommand GenerateReportsCommand { get => Get<ICommand>(); set => Set(value); }
 
         public ICommand GoToSummaryCommand { get => Get<ICommand>(); set => Set(value); }
 
-        public ICommand DeletePaymentCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand DeleteReceiptCommand { get => Get<ICommand>(); set => Set(value); }
 
-        public ICommand DeleteExpenseCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand DeleteBillCommand { get => Get<ICommand>(); set => Set(value); }
 
-        public ICommand SavePaymentCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand SaveReceiptCommand { get => Get<ICommand>(); set => Set(value); }
 
-        public ICommand SaveExpenseCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand SaveBillCommand { get => Get<ICommand>(); set => Set(value); }
 
         #endregion
 
@@ -88,22 +88,22 @@ namespace SlvParkview.FinanceManager.ViewModels
             DataManagementService.SaveData(_summaryViewModel.Block);
         }
 
-        private void OnAddExpense()
+        private void OnAddBill()
         {
-            ExpenseViewModel expenseViewModel = new ExpenseViewModel(_summaryViewModel, _navigationService, TargetFlat);
+            BillViewModel expenseViewModel = new BillViewModel(_summaryViewModel, _navigationService, TargetFlat);
             _navigationService.CurrentViewModel = expenseViewModel;
         }
 
-        private void OnAddPayment()
+        private void OnAddReceipt()
         {
-            PaymentViewModel paymentViewModel = new PaymentViewModel(_summaryViewModel, _navigationService, TargetFlat);
+            ReceiptViewModel paymentViewModel = new ReceiptViewModel(_summaryViewModel, _navigationService, TargetFlat);
             _navigationService.CurrentViewModel = paymentViewModel;
         }
 
-        private void OnAddCommonExpense()
+        private void OnAddCommonBill()
         {
-            CommonExpenseViewModel commonExpenseViewModel = new CommonExpenseViewModel(_summaryViewModel, _navigationService);
-            _navigationService.CurrentViewModel = commonExpenseViewModel;
+            CommonBillViewModel commonBillViewModel = new CommonBillViewModel(_summaryViewModel, _navigationService);
+            _navigationService.CurrentViewModel = commonBillViewModel;
         }
 
         private void OnGenerateReports()
@@ -117,28 +117,28 @@ namespace SlvParkview.FinanceManager.ViewModels
             _navigationService.CurrentViewModel = _summaryViewModel;
         }
 
-        private void OnDeletePayment()
+        private void OnDeleteReceipt()
         {
-            if (SelectedPayment != null)
+            if (SelectedReceipt != null)
             {
-                _ = TargetFlat.Payments.Remove(SelectedPayment);
+                _ = TargetFlat.Receipts.Remove(SelectedReceipt);
             }
         }
 
-        private void OnDeleteExpense()
+        private void OnDeleteBill()
         {
-            if (SelectedExpense != null)
+            if (SelectedBill != null)
             {
-                _ = TargetFlat.Expenses.Remove(SelectedExpense);
+                _ = TargetFlat.Bills.Remove(SelectedBill);
             }
         }
 
-        private void OnSavePayment()
+        private void OnSaveReceipt()
         {
             DataManagementService.SaveData(_summaryViewModel.Block);
         }
 
-        private void OnSaveExpense()
+        private void OnSaveBill()
         {
             DataManagementService.SaveData(_summaryViewModel.Block);
         }
@@ -157,18 +157,18 @@ namespace SlvParkview.FinanceManager.ViewModels
         private void InitializeCommands()
         {
             SaveFlatCommand = new RelayCommand(OnSaveFlat, true);
-            AddExpenseCommand = new RelayCommand(OnAddExpense, true);
-            AddPaymentCommand = new RelayCommand(OnAddPayment, true);
-            AddCommonExpenseCommand = new RelayCommand(OnAddCommonExpense, true);
+            AddBillCommand = new RelayCommand(OnAddBill, true);
+            AddReceiptCommand = new RelayCommand(OnAddReceipt, true);
+            AddCommonBillCommand = new RelayCommand(OnAddCommonBill, true);
 
             GenerateReportsCommand = new RelayCommand(OnGenerateReports, true);
             GoToSummaryCommand = new RelayCommand(OnGoToSummary, true);
 
-            DeletePaymentCommand = new RelayCommand(OnDeletePayment, true);
-            DeleteExpenseCommand = new RelayCommand(OnDeleteExpense, true);
+            DeleteReceiptCommand = new RelayCommand(OnDeleteReceipt, true);
+            DeleteBillCommand = new RelayCommand(OnDeleteBill, true);
 
-            SavePaymentCommand = new RelayCommand(OnSavePayment, true);
-            SaveExpenseCommand = new RelayCommand(OnSaveExpense, true);
+            SaveReceiptCommand = new RelayCommand(OnSaveReceipt, true);
+            SaveBillCommand = new RelayCommand(OnSaveBill, true);
         }
 
         #endregion

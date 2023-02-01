@@ -6,23 +6,23 @@ namespace SlvParkview.FinanceManager.Reporting.Factories
 {
     public static class ReportOptionsFactory
     {
-        public static IReportOptions Create(PaymentsReportType paymentsReportType)
+        public static IReportOptions Create(ReceiptsReportType paymentsReportType)
         {
             IReportOptions reportOptions;
 
             switch (paymentsReportType)
             {
-                case PaymentsReportType.Monthwise:
-                    reportOptions = new InAMonthPaymentsReportOptions();
+                case ReceiptsReportType.Monthwise:
+                    reportOptions = new InAMonthReceiptsReportOptions();
                     break;
-                case PaymentsReportType.ToASelectedDate:
-                    reportOptions = new ToASelectedDatePaymentsReportOptions();
+                case ReceiptsReportType.ToASelectedDate:
+                    reportOptions = new ToASelectedDateReceiptsReportOptions();
                     break;
-                case PaymentsReportType.InADateRange:
-                    reportOptions = new DateRangePaymentsReportOptions();
+                case ReceiptsReportType.InADateRange:
+                    reportOptions = new DateRangeReceiptsReportOptions();
                     break;
                 default:
-                    reportOptions = new InAMonthPaymentsReportOptions();
+                    reportOptions = new InAMonthReceiptsReportOptions();
                     break;
             }
 

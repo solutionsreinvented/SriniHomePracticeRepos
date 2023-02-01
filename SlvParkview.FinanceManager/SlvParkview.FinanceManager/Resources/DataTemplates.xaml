@@ -14,16 +14,16 @@
         <views:SummaryView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type viewModels:PaymentViewModel}">
-        <views:PaymentView />
+    <DataTemplate DataType="{x:Type viewModels:ReceiptViewModel}">
+        <views:ReceiptView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type viewModels:ExpenseViewModel}">
-        <views:ExpenseView />
+    <DataTemplate DataType="{x:Type viewModels:BillViewModel}">
+        <views:BillView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type viewModels:CommonExpenseViewModel}">
-        <views:CommonExpenseView />
+    <DataTemplate DataType="{x:Type viewModels:CommonBillViewModel}">
+        <views:CommonBillView />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewModels:ReportingViewModel}">
@@ -48,26 +48,26 @@
         <reportViews:FlatTransactionsHistoryReportView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type reportViewModels:PaymentsReportViewModel}">
-        <reportViews:PaymentsReportView />
+    <DataTemplate DataType="{x:Type reportViewModels:ReceiptsReportViewModel}">
+        <reportViews:ReceiptsReportView />
     </DataTemplate>
 
     <!--#endregion-->
 
-    <DataTemplate DataType="{x:Type models:Payment}">
-        <components:EditPaymentControl />
+    <DataTemplate DataType="{x:Type models:Receipt}">
+        <components:EditReceiptControl />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type reportModels:InAMonthPaymentsReportOptions}">
-        <reportComponents:InAMonthPaymentsReportOptionsControl />
+    <DataTemplate DataType="{x:Type reportModels:InAMonthReceiptsReportOptions}">
+        <reportComponents:InAMonthReceiptsReportOptionsControl />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type reportModels:ToASelectedDatePaymentsReportOptions}">
-        <reportComponents:ToASelectedDatePaymentsReportOptionsControl />
+    <DataTemplate DataType="{x:Type reportModels:ToASelectedDateReceiptsReportOptions}">
+        <reportComponents:ToASelectedDateReceiptsReportOptionsControl />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type reportModels:DateRangePaymentsReportOptions}">
-        <reportComponents:DateRangePaymentsReportOptionsControl />
+    <DataTemplate DataType="{x:Type reportModels:DateRangeReceiptsReportOptions}">
+        <reportComponents:DateRangeReceiptsReportOptionsControl />
     </DataTemplate>
 
 </ResourceDictionary>

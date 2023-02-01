@@ -1,0 +1,234 @@
+﻿<UserControl
+    x:Class="SlvParkview.FinanceManager.Views.ReceiptView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:components="clr-namespace:SlvParkview.FinanceManager.Components"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:enums="clr-namespace:SlvParkview.FinanceManager.Enums"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:theme="http://schemas.reinvented.com/ui/themes"
+    d:DesignHeight="{StaticResource ViewHeight}"
+    d:DesignWidth="{StaticResource ViewWidth}"
+    Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
+    Style="{StaticResource ViewStyle}"
+    mc:Ignorable="d">
+
+    <Grid>
+
+        <!--#region Grid Definitions-->
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--#endregion-->
+
+        <Border Grid.RowSpan="4" Style="{StaticResource BorderWithEffectsStyle}" />
+
+        <!--#region Title-->
+
+        <TextBlock
+            Grid.Row="0"
+            Style="{StaticResource ReportHeadingStyle}"
+            Text="Receipt" />
+
+        <!--#endregion-->
+
+        <!--#region Flat Information-->
+
+        <components:FlatDetailControl Grid.Row="1" DataContext="{Binding TargetFlat}" />
+
+        <!--#endregion-->
+
+        <!--#region Add Receipt Detail-->
+
+        <GroupBox
+            Grid.Row="2"
+            Margin="20,0,20,10"
+            BorderThickness="0.2"
+            Header="Add New Receipt">
+            <Grid Margin="10" DataContext="{Binding Receipt}">
+
+                <!--#region Grid Definitions-->
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2.5*" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <!--#endregion-->
+
+                <!--#region New Receipt Content Area-->
+
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0,5"
+                    Text="Receipt received on: " />
+
+                <DatePicker
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Height="30"
+                    Margin="0,2"
+                    VerticalContentAlignment="Center"
+                    SelectedDate="{Binding ReceivedOn}" />
+
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="0,5"
+                    Text="Total amount of payment received (INR): " />
+
+                <TextBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Height="26"
+                    Margin="0,2"
+                    Padding="5,0"
+                    VerticalContentAlignment="Center"
+                    Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N2}}" />
+
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="0,5"
+                    Text="Receipt made towards: " />
+
+                <ComboBox
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Height="26"
+                    Margin="0,2"
+                    VerticalContentAlignment="Center"
+                    ItemsSource="{shared:EnumBindingResource enums:TransactionCategory}"
+                    SelectedItem="{Binding Category}" />
+
+
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Margin="0,5"
+                    Text="Mode through which the payment is made: " />
+
+                <ComboBox
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Height="26"
+                    Margin="0,2"
+                    VerticalContentAlignment="Center"
+                    ItemsSource="{shared:EnumBindingResource enums:ReceiptMode}"
+                    SelectedItem="{Binding Mode}" />
+
+            </Grid>
+
+            <!--#endregion-->
+
+        </GroupBox>
+
+
+        <!--#endregion-->
+
+        <!--#region Buttons Group-->
+
+        <Grid
+            Grid.Row="3"
+            Height="26"
+            Margin="20,0,20,10">
+
+            <!--#region Grid Definitions-->
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition Width="1.2*" />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <!--#endregion-->
+
+            <!--#region Buttons-->
+
+            <Button
+                Grid.Column="0"
+                Margin="0,0,5,0"
+                Command="{Binding GenerateReportsCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <Image
+                        Height="18"
+                        Margin="5,0"
+                        Source="/Assets/Images/reports-light.png" />
+                    <TextBlock VerticalAlignment="Center" Text="Go to Reports" />
+                </StackPanel>
+            </Button>
+
+            <Button
+                Grid.Column="1"
+                Margin="5,0"
+                Command="{Binding AddBillCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <Image
+                        Height="18"
+                        Margin="5,0"
+                        Source="/Assets/Images/expense-light.png" />
+                    <TextBlock VerticalAlignment="Center" Text="Add Bill" />
+                </StackPanel>
+            </Button>
+
+            <Button
+                Grid.Column="2"
+                Margin="5,0"
+                Command="{Binding AddCommonBillCommand}"
+                Content="Add _Common Bill" />
+
+            <Button
+                Grid.Column="3"
+                Margin="5,0"
+                Command="{Binding SaveFlatCommand}"
+                Content="Save _Flat Details"
+                IsEnabled="{Binding TargetFlat.ChangesAllowed}" />
+
+            <Button
+                Grid.Column="4"
+                Margin="5,0"
+                Command="{Binding SaveReceiptCommand}"
+                Content="Save _Receipt"
+                IsDefault="True"
+                IsEnabled="{Binding Receipt.IsDataValid}" />
+
+            <Button
+                Grid.Column="5"
+                Margin="5,0,0,0"
+                Command="{Binding GoToSummaryCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <Image
+                        Height="18"
+                        Margin="5,0"
+                        Source="/Assets/Images/summary-light.png" />
+                    <TextBlock VerticalAlignment="Center" Text="Switch to Summary" />
+                </StackPanel>
+            </Button>
+
+            <!--#endregion-->
+
+        </Grid>
+
+        <!--#endregion-->
+
+    </Grid>
+
+</UserControl>

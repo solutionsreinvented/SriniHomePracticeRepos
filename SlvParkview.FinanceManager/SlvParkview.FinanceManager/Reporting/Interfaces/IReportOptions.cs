@@ -8,6 +8,6 @@ namespace SlvParkview.FinanceManager.Reporting.Interfaces
     {
         event Action ReportOptionChanged;
 
-        PaymentModeFilter PaymentModeFilter { get; set; }
+        ReceiptModeFilter ReceiptModeFilter { get; set; }
     }
 }

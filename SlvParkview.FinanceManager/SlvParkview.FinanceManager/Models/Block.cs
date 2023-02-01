@@ -50,7 +50,7 @@ namespace SlvParkview.FinanceManager.Models
             {
                 CommencesFrom = new DateTime(2022, 10, 01),
                 Percentage = 20.0m,
-                PaymentCutoffDay = 01,
+                ReceiptCutoffDay = 01,
                 MinimumOutstanding = 5600.0m
             };
 

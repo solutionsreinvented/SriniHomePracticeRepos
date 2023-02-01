@@ -79,12 +79,12 @@
 
             <!--#endregion-->
 
-            <!--#region Payments History Group-->
+            <!--#region Receipts History Group-->
 
             <GroupBox
                 Grid.Column="0"
                 BorderThickness="0.2"
-                Header="Payments History">
+                Header="Receipts History">
 
                 <Grid>
 
@@ -98,7 +98,7 @@
 
                     <!--#endregion-->
 
-                    <!--#region Payments Data-->
+                    <!--#region Receipts Data-->
 
                     <DataGrid
                         Grid.Row="0"
@@ -108,8 +108,8 @@
                         CanUserDeleteRows="True"
                         CanUserResizeRows="False"
                         HorizontalScrollBarVisibility="Disabled"
-                        ItemsSource="{Binding TargetFlat.Payments}"
-                        SelectedItem="{Binding SelectedPayment}"
+                        ItemsSource="{Binding TargetFlat.Receipts}"
+                        SelectedItem="{Binding SelectedReceipt}"
                         SelectionMode="Single"
                         SelectionUnit="FullRow"
                         VerticalScrollBarVisibility="Auto">
@@ -152,7 +152,7 @@
 
                             <!--#endregion-->
 
-                            <!--#region Payment Mode Column-->
+                            <!--#region Receipt Mode Column-->
 
                             <DataGridTemplateColumn Width="0.7*" Header="Mode">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -170,17 +170,17 @@
 
                     <!--#endregion-->
 
-                    <!--#region Edit Selected Payment-->
+                    <!--#region Edit Selected Receipt-->
 
-                    <comps:EditPaymentControl
+                    <comps:EditReceiptControl
                         Grid.Row="1"
                         Margin="5,5,5,10"
-                        DataContext="{Binding SelectedPayment}"
-                        Visibility="{Binding DataContext.CanModifyPayment, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={shared:BoolToVisibilityConverter}}" />
+                        DataContext="{Binding SelectedReceipt}"
+                        Visibility="{Binding DataContext.CanModifyReceipt, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={shared:BoolToVisibilityConverter}}" />
 
                     <!--#endregion-->
 
-                    <!--#region Payment Manipulation Buttons-->
+                    <!--#region Receipt Manipulation Buttons-->
 
                     <UniformGrid
                         Grid.Row="2"
@@ -189,14 +189,14 @@
 
                         <Button
                             Margin="0,0,20,0"
-                            Command="{Binding DeletePaymentCommand}"
-                            Content="D_elete Payment"
-                            IsEnabled="{Binding CanModifyPayment}" />
+                            Command="{Binding DeleteReceiptCommand}"
+                            Content="D_elete Receipt"
+                            IsEnabled="{Binding CanModifyReceipt}" />
                         <Button
                             Margin="20,0,0,0"
-                            Command="{Binding SavePaymentCommand}"
-                            Content="S_ave Payment"
-                            IsEnabled="{Binding CanModifyPayment}" />
+                            Command="{Binding SaveReceiptCommand}"
+                            Content="S_ave Receipt"
+                            IsEnabled="{Binding CanModifyReceipt}" />
 
                     </UniformGrid>
 
@@ -208,13 +208,13 @@
 
             <!--#endregion-->
 
-            <!--#region Expenses History Group-->
+            <!--#region Bills History Group-->
 
             <GroupBox
                 Grid.Column="1"
                 Margin="5,0,0,0"
                 BorderThickness="0.2"
-                Header="Expenses History">
+                Header="Bills History">
 
                 <Grid>
 
@@ -228,7 +228,7 @@
 
                     <!--#endregion-->
 
-                    <!--#region Expenses Data-->
+                    <!--#region Bills Data-->
 
                     <DataGrid
                         Grid.Row="0"
@@ -238,8 +238,8 @@
                         CanUserDeleteRows="True"
                         CanUserResizeRows="False"
                         HorizontalScrollBarVisibility="Disabled"
-                        ItemsSource="{Binding TargetFlat.Expenses}"
-                        SelectedItem="{Binding SelectedExpense}"
+                        ItemsSource="{Binding TargetFlat.Bills}"
+                        SelectedItem="{Binding SelectedBill}"
                         SelectionUnit="FullRow"
                         VerticalScrollBarVisibility="Auto">
 
@@ -287,28 +287,28 @@
 
                     <!--#endregion-->
 
-                    <!--#region Edit Selected Expense-->
+                    <!--#region Edit Selected Bill-->
 
-                    <comps:EditExpenseControl
+                    <comps:EditBillControl
                         Grid.Row="1"
                         Margin="5,5,5,10"
-                        DataContext="{Binding SelectedExpense}"
-                        Visibility="{Binding DataContext.CanModifyExpense, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={shared:BoolToVisibilityConverter}}" />
+                        DataContext="{Binding SelectedBill}"
+                        Visibility="{Binding DataContext.CanModifyBill, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={shared:BoolToVisibilityConverter}}" />
 
                     <!--#endregion-->
 
-                    <!--#region Expenses Manipulation Buttons-->
+                    <!--#region Bills Manipulation Buttons-->
 
                     <UniformGrid Grid.Row="2" Columns="2">
 
                         <Button
-                            Command="{Binding DeleteExpenseCommand}"
-                            Content="Dele_te Expense"
-                            IsEnabled="{Binding CanModifyExpense}" />
+                            Command="{Binding DeleteBillCommand}"
+                            Content="Dele_te Bill"
+                            IsEnabled="{Binding CanModifyBill}" />
                         <Button
-                            Command="{Binding SaveExpenseCommand}"
-                            Content="Sa_ve Expense"
-                            IsEnabled="{Binding CanModifyExpense}" />
+                            Command="{Binding SaveBillCommand}"
+                            Content="Sa_ve Bill"
+                            IsEnabled="{Binding CanModifyBill}" />
 
                     </UniformGrid>
 
@@ -363,34 +363,34 @@
             <Button
                 Grid.Column="1"
                 Margin="5,0"
-                Command="{Binding AddPaymentCommand}">
+                Command="{Binding AddReceiptCommand}">
                 <StackPanel Orientation="Horizontal">
                     <Image
                         Height="18"
                         Margin="5,0"
                         Source="/Assets/Images/payment-light.png" />
-                    <TextBlock VerticalAlignment="Center" Text="Add Payment" />
+                    <TextBlock VerticalAlignment="Center" Text="Add Receipt" />
                 </StackPanel>
             </Button>
 
             <Button
                 Grid.Column="2"
                 Margin="5,0"
-                Command="{Binding AddExpenseCommand}">
+                Command="{Binding AddBillCommand}">
                 <StackPanel Orientation="Horizontal">
                     <Image
                         Height="18"
                         Margin="5,0"
                         Source="/Assets/Images/expense-light.png" />
-                    <TextBlock VerticalAlignment="Center" Text="Add Expense" />
+                    <TextBlock VerticalAlignment="Center" Text="Add Bill" />
                 </StackPanel>
             </Button>
 
             <Button
                 Grid.Column="3"
                 Margin="5,0"
-                Command="{Binding AddCommonExpenseCommand}"
-                Content="Add _Common Expense" />
+                Command="{Binding AddCommonBillCommand}"
+                Content="Add _Common Bill" />
 
             <Button
                 Grid.Column="4"

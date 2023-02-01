@@ -23,7 +23,7 @@ namespace SlvParkview.FinanceManager.Models
         /// <summary>
         /// Cutoff date by which the maintenance outstanding shall be cleared.
         /// </summary>
-        public int PaymentCutoffDay { get => Get<int>(); set { Set(value); RaisePenaltyCriteriaChanged(); } }
+        public int ReceiptCutoffDay { get => Get<int>(); set { Set(value); RaisePenaltyCriteriaChanged(); } }
 
         private void RaisePenaltyCriteriaChanged()
         {

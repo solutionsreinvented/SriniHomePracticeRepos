@@ -26,7 +26,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models.Base
 
         #region Public Properties
 
-        public PaymentModeFilter PaymentModeFilter { get => Get<PaymentModeFilter>(); set { Set(value); RaiseReportOptionChanged(); } }
+        public ReceiptModeFilter ReceiptModeFilter { get => Get<ReceiptModeFilter>(); set { Set(value); RaiseReportOptionChanged(); } }
 
         #endregion
 
@@ -34,7 +34,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models.Base
 
         private protected virtual void Initialize()
         {
-            PaymentModeFilter = PaymentModeFilter.All;
+            ReceiptModeFilter = ReceiptModeFilter.All;
         }
 
         private protected void RaiseReportOptionChanged()

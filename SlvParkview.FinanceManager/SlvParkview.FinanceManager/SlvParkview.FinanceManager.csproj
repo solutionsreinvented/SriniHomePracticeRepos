@@ -102,11 +102,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Components\EditExpenseControl.xaml.cs">
-      <DependentUpon>EditExpenseControl.xaml</DependentUpon>
+    <Compile Include="Components\EditBillControl.xaml.cs">
+      <DependentUpon>EditBillControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Components\EditPaymentControl.xaml.cs">
-      <DependentUpon>EditPaymentControl.xaml</DependentUpon>
+    <Compile Include="Components\EditReceiptControl.xaml.cs">
+      <DependentUpon>EditReceiptControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\FlatDetailControl.xaml.cs">
       <DependentUpon>FlatDetailControl.xaml</DependentUpon>
@@ -116,12 +116,12 @@
     </Compile>
     <Compile Include="Enums\Month.cs" />
     <Compile Include="Enums\OutstandingsFilter.cs" />
-    <Compile Include="Enums\PaymentModeFilter.cs" />
-    <Compile Include="Enums\PaymentsReportType.cs" />
+    <Compile Include="Enums\ReceiptModeFilter.cs" />
+    <Compile Include="Enums\ReceiptsReportType.cs" />
     <Compile Include="Enums\ReportType.cs" />
     <Compile Include="Extensions\DecimalExtensions.cs" />
     <Compile Include="Extensions\FlatExtensions.cs" />
-    <Compile Include="Extensions\PaymentExtensions.cs" />
+    <Compile Include="Extensions\ReceiptExtensions.cs" />
     <Compile Include="Factories\ReportViewModelFactory.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -131,42 +131,42 @@
     <Compile Include="Reporting\Components\BlockInfoContol.xaml.cs">
       <DependentUpon>BlockInfoContol.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Reporting\Components\DateRangePaymentsReportOptionsControl.xaml.cs">
-      <DependentUpon>DateRangePaymentsReportOptionsControl.xaml</DependentUpon>
+    <Compile Include="Reporting\Components\DateRangeReceiptsReportOptionsControl.xaml.cs">
+      <DependentUpon>DateRangeReceiptsReportOptionsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Reporting\Components\FlatInfoControl.xaml.cs">
       <DependentUpon>FlatInfoControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Reporting\Components\InAMonthPaymentsReportOptionsControl.xaml.cs">
-      <DependentUpon>InAMonthPaymentsReportOptionsControl.xaml</DependentUpon>
+    <Compile Include="Reporting\Components\InAMonthReceiptsReportOptionsControl.xaml.cs">
+      <DependentUpon>InAMonthReceiptsReportOptionsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Reporting\Components\PaymentsReportOptionsControl.xaml.cs">
-      <DependentUpon>PaymentsReportOptionsControl.xaml</DependentUpon>
+    <Compile Include="Reporting\Components\ReceiptsReportOptionsControl.xaml.cs">
+      <DependentUpon>ReceiptsReportOptionsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Reporting\Components\ToASelectedDatePaymentsReportOptionsControl.xaml.cs">
-      <DependentUpon>ToASelectedDatePaymentsReportOptionsControl.xaml</DependentUpon>
+    <Compile Include="Reporting\Components\ToASelectedDateReceiptsReportOptionsControl.xaml.cs">
+      <DependentUpon>ToASelectedDateReceiptsReportOptionsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Reporting\Factories\PaymentsReportFactory.cs" />
+    <Compile Include="Reporting\Factories\ReceiptsReportFactory.cs" />
     <Compile Include="Reporting\Factories\ReportOptionsFactory.cs" />
     <Compile Include="Reporting\Interfaces\IReportOptions.cs" />
     <Compile Include="Reporting\Models\FlatTransactionsHistoryReport.cs" />
     <Compile Include="Reporting\Models\FlatInfo.cs" />
     <Compile Include="Reporting\Interfaces\IReport.cs" />
-    <Compile Include="Reporting\Models\PaymentsInADateRangeReport.cs" />
-    <Compile Include="Reporting\Models\DateRangePaymentsReportOptions.cs" />
-    <Compile Include="Reporting\Models\InAMonthPaymentsReportOptions.cs" />
-    <Compile Include="Reporting\Models\PaymentsToASelectedDateReport.cs" />
-    <Compile Include="Reporting\Models\PaymentsInAMonthReport.cs" />
-    <Compile Include="Reporting\Models\PaymentsReport.cs" />
+    <Compile Include="Reporting\Models\ReceiptsInADateRangeReport.cs" />
+    <Compile Include="Reporting\Models\DateRangeReceiptsReportOptions.cs" />
+    <Compile Include="Reporting\Models\InAMonthReceiptsReportOptions.cs" />
+    <Compile Include="Reporting\Models\ReceiptsToASelectedDateReport.cs" />
+    <Compile Include="Reporting\Models\ReceiptsInAMonthReport.cs" />
+    <Compile Include="Reporting\Models\ReceiptsReport.cs" />
     <Compile Include="Reporting\Models\BlockOutstandingsReport.cs" />
-    <Compile Include="Reporting\Models\PaymentInfo.cs" />
+    <Compile Include="Reporting\Models\ReceiptInfo.cs" />
     <Compile Include="Reporting\Base\Report.cs" />
     <Compile Include="Reporting\Base\ReportOptions.cs" />
-    <Compile Include="Reporting\Models\ToASelectedDatePaymentsReportOptions.cs" />
+    <Compile Include="Reporting\Models\ToASelectedDateReceiptsReportOptions.cs" />
     <Compile Include="Reporting\Models\TransactionInfo.cs" />
     <Compile Include="Reporting\ViewModels\BlockOutstandingsReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\FlatTransactionsHistoryReportViewModel.cs" />
-    <Compile Include="Reporting\ViewModels\PaymentsReportViewModel.cs" />
+    <Compile Include="Reporting\ViewModels\ReceiptsReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\ReportViewModelBase.cs" />
     <Compile Include="Reporting\Views\BlockOutstandingsReportView.xaml.cs">
       <DependentUpon>BlockOutstandingsReportView.xaml</DependentUpon>
@@ -174,11 +174,11 @@
     <Compile Include="Reporting\Views\FlatTransactionsHistoryReportView.xaml.cs">
       <DependentUpon>FlatTransactionsHistoryReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Reporting\Components\PaymentsHistoryControl.xaml.cs">
-      <DependentUpon>PaymentsHistoryControl.xaml</DependentUpon>
+    <Compile Include="Reporting\Components\ReceiptsHistoryControl.xaml.cs">
+      <DependentUpon>ReceiptsHistoryControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Reporting\Views\PaymentsReportView.xaml.cs">
-      <DependentUpon>PaymentsReportView.xaml</DependentUpon>
+    <Compile Include="Reporting\Views\ReceiptsReportView.xaml.cs">
+      <DependentUpon>ReceiptsReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Repositories\FlatRepository.cs" />
     <Compile Include="Services\BlockInitialDataProvider.cs" />
@@ -192,10 +192,10 @@
     <Compile Include="Utilities\PartialYear.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CommonExpenseViewModel.cs" />
-    <Compile Include="ViewModels\ExpenseViewModel.cs" />
+    <Compile Include="ViewModels\BillViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\EditFlatViewModel.cs" />
-    <Compile Include="ViewModels\PaymentViewModel.cs" />
+    <Compile Include="ViewModels\ReceiptViewModel.cs" />
     <Compile Include="ViewModels\ReportViewerViewModel.cs" />
     <Compile Include="ViewModels\ReportingViewModel.cs" />
     <Compile Include="ViewModels\SummaryViewModel.cs" />
@@ -206,11 +206,11 @@
     <Compile Include="Views\EditFlatView.xaml.cs">
       <DependentUpon>EditFlatView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ExpenseView.xaml.cs">
-      <DependentUpon>ExpenseView.xaml</DependentUpon>
+    <Compile Include="Views\BillView.xaml.cs">
+      <DependentUpon>BillView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PaymentView.xaml.cs">
-      <DependentUpon>PaymentView.xaml</DependentUpon>
+    <Compile Include="Views\ReceiptView.xaml.cs">
+      <DependentUpon>ReceiptView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ReportingView.xaml.cs">
       <DependentUpon>ReportingView.xaml</DependentUpon>
@@ -221,11 +221,11 @@
     <Compile Include="Views\SummaryView.xaml.cs">
       <DependentUpon>SummaryView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Components\EditExpenseControl.xaml">
+    <Page Include="Components\EditBillControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Components\EditPaymentControl.xaml">
+    <Page Include="Components\EditReceiptControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -238,7 +238,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\DateToDateOnlyConverter.cs" />
-    <Compile Include="Enums\PaymentMode.cs" />
+    <Compile Include="Enums\ReceiptMode.cs" />
     <Compile Include="Enums\ResidentType.cs" />
     <Compile Include="Enums\TransactionCategory.cs" />
     <Page Include="Components\PenaltyInfoControl.xaml">
@@ -253,7 +253,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Reporting\Components\DateRangePaymentsReportOptionsControl.xaml">
+    <Page Include="Reporting\Components\DateRangeReceiptsReportOptionsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -261,15 +261,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Reporting\Components\InAMonthPaymentsReportOptionsControl.xaml">
+    <Page Include="Reporting\Components\InAMonthReceiptsReportOptionsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Reporting\Components\PaymentsReportOptionsControl.xaml">
+    <Page Include="Reporting\Components\ReceiptsReportOptionsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Reporting\Components\ToASelectedDatePaymentsReportOptionsControl.xaml">
+    <Page Include="Reporting\Components\ToASelectedDateReceiptsReportOptionsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -281,11 +281,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Reporting\Components\PaymentsHistoryControl.xaml">
+    <Page Include="Reporting\Components\ReceiptsHistoryControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Reporting\Views\PaymentsReportView.xaml">
+    <Page Include="Reporting\Views\ReceiptsReportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -309,11 +309,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ExpenseView.xaml">
+    <Page Include="Views\BillView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PaymentView.xaml">
+    <Page Include="Views\ReceiptView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -333,10 +333,10 @@
   <ItemGroup>
     <Compile Include="Models\Apartment.cs" />
     <Compile Include="Models\Block.cs" />
-    <Compile Include="Models\Expense.cs" />
+    <Compile Include="Models\Bill.cs" />
     <Compile Include="Models\Flat.cs" />
     <Compile Include="Reporting\Models\TransactionRecord.cs" />
-    <Compile Include="Models\Payment.cs" />
+    <Compile Include="Models\Receipt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

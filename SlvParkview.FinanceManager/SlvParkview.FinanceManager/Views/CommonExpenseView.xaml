@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="SlvParkview.FinanceManager.Views.CommonExpenseView"
+    x:Class="SlvParkview.FinanceManager.Views.CommonBillView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -54,7 +54,7 @@
             VerticalAlignment="Center"
             FontSize="14"
             FontWeight="DemiBold"
-            Text="Common Expense" />
+            Text="Common Bill" />
 
         <!--#endregion-->
 
@@ -124,15 +124,15 @@
 
         <!--#endregion-->
 
-        <!--#region Add Common Expense Detail-->
+        <!--#region Add Common Bill Detail-->
 
         <GroupBox
             Grid.Row="2"
             Margin="20,0,20,10"
             BorderThickness="0.2"
-            Header="Add New Expense">
+            Header="Add New Bill">
 
-            <Grid Margin="10" DataContext="{Binding Expense}">
+            <Grid Margin="10" DataContext="{Binding Bill}">
 
                 <!--#region Grid Definitions-->
 
@@ -156,7 +156,7 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Margin="0,5"
-                    Text="Expense occured on: " />
+                    Text="Bill occured on: " />
 
                 <DatePicker
                     Grid.Row="0"
@@ -222,10 +222,10 @@
 
                 <Button
                     Margin="5,0"
-                    Command="{Binding SaveExpenseCommand}"
+                    Command="{Binding SaveBillCommand}"
                     Content="Save E_xpense"
                     IsDefault="True"
-                    IsEnabled="{Binding Expense.IsDataValid}" />
+                    IsEnabled="{Binding Bill.IsDataValid}" />
                 <Button Margin="5,0,0,0" Command="{Binding GoToSummaryCommand}">
                     <StackPanel Orientation="Horizontal">
                         <Image

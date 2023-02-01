@@ -112,33 +112,20 @@ C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvPa
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.csproj.AssemblyReference.cache
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\PenaltyInfoControl.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\BlockInfoContol.baml
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\DateRangePaymentsReportOptionsControl.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\FlatInfoControl.baml
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\ToASelectedDatePaymentsReportOptionsControl.baml
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\PaymentsHistoryControl.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Resources\Settings.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Resources\Styles.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReportViewerView.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\App.baml
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\EditExpenseControl.g.cs
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\EditPaymentControl.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\FlatDetailControl.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\PenaltyInfoControl.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\MainWindow.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\BlockInfoContol.g.cs
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\DateRangePaymentsReportOptionsControl.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\FlatInfoControl.g.cs
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\InAMonthPaymentsReportOptionsControl.g.cs
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\PaymentsReportOptionsControl.g.cs
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\ToASelectedDatePaymentsReportOptionsControl.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\BlockOutstandingsReportView.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\FlatTransactionsHistoryReportView.g.cs
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\PaymentsHistoryControl.g.cs
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\PaymentsReportView.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\CommonExpenseView.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\EditFlatView.g.cs
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ExpenseView.g.cs
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\PaymentView.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReportingView.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReportViewerView.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\SummaryView.g.cs
@@ -146,20 +133,13 @@ C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvPa
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager_MarkupCompile.cache
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager_MarkupCompile.lref
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\EditExpenseControl.baml
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\EditPaymentControl.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\FlatDetailControl.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\MainWindow.baml
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\InAMonthPaymentsReportOptionsControl.baml
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\PaymentsReportOptionsControl.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\BlockOutstandingsReportView.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\FlatTransactionsHistoryReportView.baml
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\PaymentsReportView.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Resources\DataTemplates.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\CommonExpenseView.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\EditFlatView.baml
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ExpenseView.baml
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\PaymentView.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReportingView.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\SummaryView.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager.g.resources
@@ -171,3 +151,23 @@ C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvPa
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.csproj.CopyComplete
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager.exe
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager.pdb
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\DateRangeReceiptsReportOptionsControl.baml
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\EditBillControl.g.cs
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\EditReceiptControl.g.cs
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\DateRangeReceiptsReportOptionsControl.g.cs
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\InAMonthReceiptsReportOptionsControl.g.cs
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\ReceiptsReportView.g.cs
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\BillView.g.cs
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReceiptView.g.cs
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\EditBillControl.baml
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\EditReceiptControl.baml
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\InAMonthReceiptsReportOptionsControl.baml
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Views\ReceiptsReportView.baml
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\BillView.baml
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReceiptView.baml
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\ToASelectedDateReceiptsReportOptionsControl.baml
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\ReceiptsHistoryControl.baml
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\ReceiptsReportOptionsControl.g.cs
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\ToASelectedDateReceiptsReportOptionsControl.g.cs
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\ReceiptsHistoryControl.g.cs
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\ReceiptsReportOptionsControl.baml

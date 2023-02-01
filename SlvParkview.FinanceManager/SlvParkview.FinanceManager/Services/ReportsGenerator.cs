@@ -21,11 +21,11 @@ namespace SlvParkview.FinanceManager.Services
 
         #region Reports
 
-        //public static MonthlyPaymentsReport GetMonthlyPaymentsReport(Block block, int forMonth)
+        //public static MonthlyReceiptsReport GetMonthlyReceiptsReport(Block block, int forMonth)
         //{
-        //    MonthlyPaymentsReport monthlyPaymentsReport = new MonthlyPaymentsReport() { ReportedMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(forMonth) };
+        //    MonthlyReceiptsReport monthlyReceiptsReport = new MonthlyReceiptsReport() { ReportedMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(forMonth) };
 
-        //    block.Flats.ForEach(f => monthlyPaymentsReport.Payments.AddRange(f.Payments.Where(p => p.ReceivedOn.Month == forMonth)) )
+        //    block.Flats.ForEach(f => monthlyReceiptsReport.Receipts.AddRange(f.Receipts.Where(p => p.ReceivedOn.Month == forMonth)) )
         //}
 
         //public static BlockOustandingsReport GetOverviewReport(Block block)

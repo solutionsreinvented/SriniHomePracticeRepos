@@ -130,60 +130,60 @@
 
                     <!--#endregion-->
 
-                    <!--#region Payment Amount Column-->
+                    <!--#region Receipt Amount Column-->
 
                     <DataGridTemplateColumn Width="*" Header="Amount Paid">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding PaymentAmount}" />
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding ReceiptAmount}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
                     <!--#endregion-->
 
-                    <!--#region Payment Mode Column-->
+                    <!--#region Receipt Mode Column-->
 
-                    <DataGridTemplateColumn Width="*" Header="Payment Mode">
+                    <DataGridTemplateColumn Width="*" Header="Receipt Mode">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding PaymentMode}" />
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding ReceiptMode}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
                     <!--#endregion-->
 
-                    <!--#region Payment Category Column-->
+                    <!--#region Receipt Category Column-->
 
-                    <DataGridTemplateColumn Width="*" Header="Payment Category">
+                    <DataGridTemplateColumn Width="*" Header="Receipt Category">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding PaymentCategory}" />
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding ReceiptCategory}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
                     <!--#endregion-->
 
-                    <!--#region Expense Amount Column-->
+                    <!--#region Bill Amount Column-->
 
-                    <DataGridTemplateColumn Width="0.8*" Header="Expense">
+                    <DataGridTemplateColumn Width="0.8*" Header="Bill">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding ExpenseAmount}" />
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding BillAmount}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
                     <!--#endregion-->
 
-                    <!--#region Expense Category Column-->
+                    <!--#region Bill Category Column-->
 
-                    <DataGridTemplateColumn Width="*" Header="Expense Category">
+                    <DataGridTemplateColumn Width="*" Header="Bill Category">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding ExpenseCategory}" />
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding BillCategory}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

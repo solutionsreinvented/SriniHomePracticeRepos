@@ -3,11 +3,11 @@
 namespace SlvParkview.FinanceManager.Views
 {
     /// <summary>
-    /// Interaction logic for CommonExpenseView.xaml
+    /// Interaction logic for CommonBillView.xaml
     /// </summary>
-    public partial class CommonExpenseView : UserControl
+    public partial class CommonBillView : UserControl
     {
-        public CommonExpenseView()
+        public CommonBillView()
         {
             InitializeComponent();
         }

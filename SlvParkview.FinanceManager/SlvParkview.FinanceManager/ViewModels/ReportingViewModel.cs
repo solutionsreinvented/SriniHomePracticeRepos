@@ -63,11 +63,11 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         #region Public Commands
 
-        public ICommand AddExpenseCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand AddBillCommand { get => Get<ICommand>(); set => Set(value); }
 
-        public ICommand AddPaymentCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand AddReceiptCommand { get => Get<ICommand>(); set => Set(value); }
 
-        public ICommand AddCommonExpenseCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand AddCommonBillCommand { get => Get<ICommand>(); set => Set(value); }
 
         public ICommand GenerateCommand { get => Get<ICommand>(); set => Set(value); }
 
