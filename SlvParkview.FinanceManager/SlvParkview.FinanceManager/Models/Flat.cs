@@ -16,7 +16,7 @@ namespace SlvParkview.FinanceManager.Models
     {
         #region Private Fields
 
-        private readonly Block _block;
+        private readonly string _blockName;
 
         #endregion
 
@@ -24,33 +24,33 @@ namespace SlvParkview.FinanceManager.Models
 
         private Flat()
         {
-            Description = $"{_block?.Name}{Number}";
+            Description = $"{_blockName}{Number}";
         }
 
-        public Flat(Block block, string ownedBy)
-            : this(block, ownedBy, DateTime.Today)
+        public Flat(string blockName, string ownedBy)
+            : this(blockName, ownedBy, DateTime.Today)
         {
 
         }
 
-        public Flat(Block block, string ownedBy, DateTime accountOpenedOn)
+        public Flat(string blockName, string ownedBy, DateTime accountOpenedOn)
             : this()
         {
-            _block = block;
+            _blockName = blockName;
             OwnedBy = ownedBy;
             AccountOpenedOn = accountOpenedOn;
         }
 
-        public Flat(Block block, string ownedBy, string coOwnedBy)
-            : this(block, ownedBy, coOwnedBy, DateTime.Today)
+        public Flat(string blockName, string ownedBy, string coOwnedBy)
+            : this(blockName, ownedBy, coOwnedBy, DateTime.Today)
         {
 
         }
 
-        public Flat(Block block, string ownedBy, string coOwnedBy, DateTime accountOpenedOn)
-            : this()
+        public Flat(string blockName, string ownedBy, string coOwnedBy, DateTime accountOpenedOn) : this()
         {
-            _block = block;
+            _blockName = blockName;
+
             OwnedBy = ownedBy;
             CoOwnedBy = coOwnedBy;
             AccountOpenedOn = accountOpenedOn;
@@ -101,7 +101,6 @@ namespace SlvParkview.FinanceManager.Models
             set
             {
                 Set(value);
-                UpdateTenantName();
                 RaisePropertyChanged(nameof(CanChangeTenantName));
             }
         }
@@ -112,7 +111,7 @@ namespace SlvParkview.FinanceManager.Models
         /// <summary>
         /// Date for which the results to be calculated.
         /// </summary>
-        public DateTime DateSpecified { get => Get(DateTime.Today); set { Set(value); RaisePropertyChanged(nameof(OutstandingOnSpecifiedDate)); } }
+        public DateTime DateSpecified { get => Get(DateTime.Today); set { Set(value); OutstandingOnSpecifiedDate = GetOutstandingBalanceOnSpecifiedDate(DateSpecified); } }
         /// <summary>
         /// Outstanding balance pending as of the date of opening this account.
         /// </summary>
@@ -140,11 +139,11 @@ namespace SlvParkview.FinanceManager.Models
         /// <summary>
         /// Outstanding balance pending as on the selected date.
         /// </summary>
-        public decimal OutstandingOnSpecifiedDate => GetOutstandingBalanceOnSpecifiedDate(DateSpecified);
+        public decimal OutstandingOnSpecifiedDate { get => Get<decimal>(); private set => Set(value); }
         /// <summary>
         /// Outstanding balance pending calculated till date.
         /// </summary>
-        public decimal CurrentOutstanding => GetOutstandingBalanceOnSpecifiedDate();
+        public decimal CurrentOutstanding { get => Get<decimal>(); private set => Set(value); }
 
         #endregion
 
@@ -185,8 +184,15 @@ namespace SlvParkview.FinanceManager.Models
             }
 
             Expenses.Add(expense);
-            RaiseMultiplePropertiesChanged(nameof(CurrentOutstanding), nameof(OutstandingOnSpecifiedDate));
+            UpdateOutstandings();
         }
+
+        private void UpdateOutstandings()
+        {
+            CurrentOutstanding = GetOutstandingBalanceOnSpecifiedDate();
+            OutstandingOnSpecifiedDate = GetOutstandingBalanceOnSpecifiedDate(DateSpecified);
+        }
+
         /// <summary>
         /// Adds the specified <see cref="Payment"/> entry to the flat's <see cref="Payments"/> list and raises notifications.
         /// </summary>
@@ -199,7 +205,7 @@ namespace SlvParkview.FinanceManager.Models
             }
 
             Payments.Add(payment);
-            RaiseMultiplePropertiesChanged(nameof(CurrentOutstanding), nameof(OutstandingOnSpecifiedDate));
+            UpdateOutstandings();
         }
 
         #endregion
@@ -238,14 +244,6 @@ namespace SlvParkview.FinanceManager.Models
         #endregion
 
         #region Helper Methods
-
-        private void UpdateTenantName()
-        {
-            //if (ResidentType == ResidentType.Owner)
-            //{
-            //    TenantName = "";
-            //}
-        }
 
         private decimal GetOutstandingBalanceOnSpecifiedDate(DateTime? calculatedTill = null)
         {

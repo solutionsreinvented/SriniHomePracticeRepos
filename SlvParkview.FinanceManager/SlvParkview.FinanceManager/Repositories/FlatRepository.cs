@@ -8,7 +8,7 @@ namespace SlvParkview.FinanceManager.Repositories
     {
         public static Flat Create(Block block, string ownedBy)
         {
-            return new Flat(block, ownedBy);
+            return new Flat(block.Name, ownedBy);
         }
 
         public static void Delete(Block block, string description)

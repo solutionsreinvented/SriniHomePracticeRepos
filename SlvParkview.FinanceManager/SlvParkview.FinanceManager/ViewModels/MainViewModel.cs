@@ -2,7 +2,6 @@
 using ReInvented.Shared.Stores;
 using System.Windows.Input;
 using SlvParkview.FinanceManager.Services;
-using SlvParkview.FinanceManager.Models;
 
 namespace SlvParkview.FinanceManager.ViewModels
 {

@@ -67,41 +67,46 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void OnEditFlat()
         {
-            EditFlatViewModel editFlatViewModel = new EditFlatViewModel(this, _navigationService, SelectedFlat);
-
-            editFlatViewModel.Block = Block;
+            EditFlatViewModel editFlatViewModel = new EditFlatViewModel(this, _navigationService, SelectedFlat)
+            {
+                Block = Block
+            };
             _navigationService.CurrentViewModel = editFlatViewModel;
         }
 
         private void OnAddExpense()
         {
-            ExpenseViewModel expenseViewModel = new ExpenseViewModel(this, _navigationService, SelectedFlat);
-
-            expenseViewModel.Block = Block;
+            ExpenseViewModel expenseViewModel = new ExpenseViewModel(this, _navigationService, SelectedFlat)
+            {
+                Block = Block
+            };
             _navigationService.CurrentViewModel = expenseViewModel;
         }
 
         private void OnAddPayment()
         {
-            PaymentViewModel paymentViewModel = new PaymentViewModel(this, _navigationService, SelectedFlat);
-
-            paymentViewModel.Block = Block;
+            PaymentViewModel paymentViewModel = new PaymentViewModel(this, _navigationService, SelectedFlat)
+            {
+                Block = Block
+            };
             _navigationService.CurrentViewModel = paymentViewModel;
         }
 
         private void OnAddCommonExpense()
         {
-            CommonExpenseViewModel commonExpenseViewModel = new CommonExpenseViewModel(this, _navigationService);
-
-            commonExpenseViewModel.Block = Block;
+            CommonExpenseViewModel commonExpenseViewModel = new CommonExpenseViewModel(this, _navigationService)
+            {
+                Block = Block
+            };
             _navigationService.CurrentViewModel = commonExpenseViewModel;
         }
 
         private void OnGenerateReports()
         {
-            ReportingViewModel reportViewModel = new ReportingViewModel(this, _navigationService);
-
-            reportViewModel.Block = Block;
+            ReportingViewModel reportViewModel = new ReportingViewModel(this, _navigationService)
+            {
+                Block = Block
+            };
             _navigationService.CurrentViewModel = reportViewModel;
         }
 
