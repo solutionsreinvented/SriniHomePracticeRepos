@@ -1,5 +1,5 @@
 {
-  "LastUpdated": "2023-01-30T17:32:44.5978602+05:30",
+  "LastUpdated": "2023-02-01T18:34:08.3436114+05:30",
   "Name": "C",
   "Flats": [
     {
@@ -30,6 +30,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -72,7 +77,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "018",
@@ -102,6 +107,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -144,7 +154,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "019",
@@ -176,6 +186,11 @@
           "OccuredOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -188,7 +203,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "020",
@@ -218,6 +233,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -260,7 +280,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "021",
@@ -290,6 +310,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -332,7 +357,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "022",
@@ -362,6 +387,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -394,9 +424,16 @@
           "RecordedOn": "2022-12-08T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2023-01-03T00:00:00",
+          "RecordedOn": "2023-02-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
-      "OutstandingOnSpecifiedDate": 2800.00,
+      "OutstandingOnSpecifiedDate": 0.00,
       "CurrentOutstanding": 2800.00
     },
     {
@@ -429,6 +466,11 @@
           "OccuredOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -448,7 +490,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 12883.00,
-      "CurrentOutstanding": 12883.00
+      "CurrentOutstanding": 15683.00
     },
     {
       "Number": "024",
@@ -478,6 +520,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -513,7 +560,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": -205.00,
-      "CurrentOutstanding": -205.00
+      "CurrentOutstanding": 2595.00
     },
     {
       "Number": "117",
@@ -545,11 +592,16 @@
           "OccuredOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": null,
       "OutstandingOnSpecifiedDate": 28000.00,
-      "CurrentOutstanding": 28000.00
+      "CurrentOutstanding": 30800.00
     },
     {
       "Number": "118",
@@ -579,6 +631,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -614,7 +671,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00
+      "CurrentOutstanding": 5600.00
     },
     {
       "Number": "119",
@@ -646,6 +703,11 @@
           "OccuredOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -672,7 +734,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "120",
@@ -702,6 +764,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -751,7 +818,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "121",
@@ -781,6 +848,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -813,9 +885,16 @@
           "RecordedOn": "2022-12-07T00:00:00+05:30",
           "Category": 1,
           "Amount": 2600.00
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2023-01-27T00:00:00",
+          "RecordedOn": "2023-02-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
-      "OutstandingOnSpecifiedDate": 2800.00,
+      "OutstandingOnSpecifiedDate": 0.00,
       "CurrentOutstanding": 2800.00
     },
     {
@@ -846,6 +925,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -888,7 +972,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "123",
@@ -920,6 +1004,11 @@
           "OccuredOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -946,7 +1035,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00
+      "CurrentOutstanding": 5600.00
     },
     {
       "Number": "124",
@@ -976,6 +1065,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1018,7 +1112,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "217",
@@ -1048,6 +1142,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1090,7 +1189,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "218",
@@ -1120,6 +1219,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1155,7 +1259,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "219",
@@ -1187,6 +1291,11 @@
           "OccuredOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -1206,7 +1315,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00
+      "CurrentOutstanding": 5600.00
     },
     {
       "Number": "220",
@@ -1238,6 +1347,11 @@
           "OccuredOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -1257,7 +1371,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 11300.00,
-      "CurrentOutstanding": 11300.00
+      "CurrentOutstanding": 14100.00
     },
     {
       "Number": "221",
@@ -1287,6 +1401,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1329,7 +1448,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "222",
@@ -1361,6 +1480,11 @@
           "OccuredOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -1380,7 +1504,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00
+      "CurrentOutstanding": 5600.00
     },
     {
       "Number": "223",
@@ -1410,6 +1534,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1452,7 +1581,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "224",
@@ -1482,6 +1611,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1524,7 +1658,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "317",
@@ -1554,6 +1688,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1589,7 +1728,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "318",
@@ -1621,11 +1760,16 @@
           "OccuredOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": null,
       "OutstandingOnSpecifiedDate": 28000.00,
-      "CurrentOutstanding": 28000.00
+      "CurrentOutstanding": 30800.00
     },
     {
       "Number": "319",
@@ -1657,6 +1801,11 @@
           "OccuredOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -1683,7 +1832,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 13640.00,
-      "CurrentOutstanding": 13640.00
+      "CurrentOutstanding": 16440.00
     },
     {
       "Number": "320",
@@ -1713,6 +1862,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1755,7 +1909,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "321",
@@ -1787,6 +1941,11 @@
           "OccuredOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -1799,7 +1958,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00
+      "CurrentOutstanding": 5600.00
     },
     {
       "Number": "322",
@@ -1831,11 +1990,16 @@
           "OccuredOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": null,
       "OutstandingOnSpecifiedDate": 14000.00,
-      "CurrentOutstanding": 14000.00
+      "CurrentOutstanding": 16800.00
     },
     {
       "Number": "323",
@@ -1865,6 +2029,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1907,7 +2076,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00
+      "CurrentOutstanding": 5600.00
     },
     {
       "Number": "324",
@@ -1937,6 +2106,11 @@
         },
         {
           "OccuredOn": "2023-01-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1979,7 +2153,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 2800.00
     }
   ],
   "PenaltyCommencesFrom": "2022-11-20T00:00:00",
