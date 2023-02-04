@@ -1,5 +1,5 @@
 {
-  "LastUpdated": "2023-02-04T11:03:58.6321327+05:30",
+  "LastUpdated": "2023-02-04T11:29:57.7737563+05:30",
   "Name": "C",
   "Flats": [
     {
@@ -689,10 +689,17 @@
           "RecordedOn": "2022-12-09T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "Mode": 3,
+          "ReceivedOn": "2023-01-30T00:00:00",
+          "RecordedOn": "2023-02-04T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
-      "OutstandingOnSpecifiedDate": 5600.00,
-      "CurrentOutstanding": 5600.00
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00
     },
     {
       "Number": "119",
@@ -1060,10 +1067,17 @@
           "RecordedOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2023-02-01T00:00:00",
+          "RecordedOn": "2023-02-04T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
-      "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00
+      "OutstandingOnSpecifiedDate": 0.00,
+      "CurrentOutstanding": 0.00
     },
     {
       "Number": "124",
@@ -2026,7 +2040,7 @@
     {
       "Number": "322",
       "Description": "C322",
-      "OwnedBy": "Sai Shravanth",
+      "OwnedBy": "Sai Shravanth Mudgal",
       "CoOwnedBy": null,
       "TenantName": null,
       "ResidentType": 0,
