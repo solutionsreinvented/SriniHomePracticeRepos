@@ -1,5 +1,5 @@
 {
-  "LastUpdated": "2023-02-04T11:29:57.7737563+05:30",
+  "LastUpdated": "2023-02-04T21:23:04.0160401+05:30",
   "Name": "C",
   "Flats": [
     {
@@ -578,10 +578,17 @@
           "RecordedOn": "2023-01-04T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2023-02-04T00:00:00+05:30",
+          "RecordedOn": "2023-02-04T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
-      "OutstandingOnSpecifiedDate": 2595.00,
-      "CurrentOutstanding": 2595.00
+      "OutstandingOnSpecifiedDate": -205.00,
+      "CurrentOutstanding": -205.00
     },
     {
       "Number": "117",
