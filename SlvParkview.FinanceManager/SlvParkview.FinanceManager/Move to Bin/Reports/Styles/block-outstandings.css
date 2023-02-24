@@ -1,114 +1,113 @@
 * {
-    font-size: 0.92em;
+  font-size: 0.92em;
 }
 
 #generated-on,
 #apartment-name,
 #container {
-    min-width: 600px;
-    width: 80%;
-    height: 100%;
-    margin: 0 auto;
-    padding-top: 20px;
+  min-width: 600px;
+  width: 95%;
+  height: 100%;
+  margin: 0 auto;
+  padding-top: 20px;
 }
 
 .main-heading-row {
-    text-align: center;
-    font-weight: bold;
+  text-align: center;
+  font-weight: bold;
 }
 
 .table-header {
-    border-collapse: collapse;
-    border-top: 2px solid;
-    border-bottom: 2px solid;
-    padding: 20px 30px;
-    min-width: 600px;
-    max-height: 80%;
-    width: 90%;
-    margin: 0 auto;
+  border-collapse: collapse;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  padding: 20px 30px;
+  min-width: 600px;
+  max-height: 80%;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .table-header thead td {
-    font-size: 13px;
-    font-weight: bold;
-    background-color: #e9edc9;
+  font-size: 13px;
+  font-weight: bold;
+  background-color: #aabbc9;
 }
 
 .flat-number-header {
-    vertical-align: middle;
-    width: 3%;
+  vertical-align: middle;
+  width: 3%;
 }
 
 .owner-header {
-    vertical-align: middle;
-    width: 27%;
+  vertical-align: middle;
+  width: 27%;
 }
 
 .coowner-header {
-    vertical-align: middle;
-    width: 25%;
+  vertical-align: middle;
+  width: 25%;
 }
 
 .tenant-header {
-    vertical-align: middle;
-    width: 25%;
+  vertical-align: middle;
+  width: 25%;
 }
 
 .resident-type-header {
-    vertical-align: middle;
-    width: 10%;
+  vertical-align: middle;
+  width: 10%;
 }
 
 .outstanding-header {
-    vertical-align: middle;
-    width: 10%;
+  vertical-align: middle;
+  width: 10%;
 }
 
 .table-header td {
-    text-align: left;
-    padding: 5px 10px;
-    border: 1px solid;
+  text-align: left;
+  padding: 5px 10px;
+  border: 1px solid;
 }
 
 .table-body td {
-    font-size: 11px;
-    text-align: left;
+  font-size: 11px;
+  text-align: left;
 }
 
 .table-header .table-title {
-    text-align: center;
+  text-align: center;
 }
 
 .table-body .total-outstanding .total-outstanding-desc {
-    text-align: right;
-    font-weight: bold;
+  text-align: right;
+  font-weight: bold;
 }
 
 .table-body .total-outstanding .total-outstanding-amount {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .table-body .end-of-data td {
-    text-align: center;
+  text-align: center;
 }
 
 .table-body .no-focus {
-    background: linear-gradient(90deg,#FA7070, #C6EBC5 0%);
+  background: linear-gradient(90deg, #fa7070, #c6ebc5 0%);
 }
 
 .table-body .low-focus {
-    background: linear-gradient(90deg,#FA7070, #C6EBC5 20%);
+  background: linear-gradient(90deg, #fa7070, #c6ebc5 20%);
 }
 .table-body .normal-focus {
-    background: linear-gradient(90deg,#FA7070, #C6EBC5 40%);
+  background: linear-gradient(90deg, #fa7070, #c6ebc5 40%);
 }
 .table-body .above-normal-focus {
-    background: linear-gradient(90deg,#FA7070, #C6EBC5 60%);
+  background: linear-gradient(90deg, #fa7070, #c6ebc5 60%);
 }
 .table-body .medium-focus {
-    background: linear-gradient(90deg,#FA7070, #C6EBC5 80%);
+  background: linear-gradient(90deg, #fa7070, #c6ebc5 80%);
 }
 .table-body .high-focus {
-    background: linear-gradient(45deg,#FA7070, #C6EBC5 100%);
+  background: linear-gradient(45deg, #fa7070, #c6ebc5 100%);
 }
-
