@@ -35,7 +35,7 @@
 
 .paid-on-header {
   vertical-align: middle;
-  width: 18%;
+  width: 16%;
 }
 
 .flat-number-header {
@@ -50,17 +50,17 @@
 
 .amount-header {
   vertical-align: middle;
-  width: 12%;
+  width: 11%;
 }
 
 .payment-mode-header {
   vertical-align: middle;
-  width: 16.5%;
+  width: 16%;
 }
 
 .payment-category-header {
   vertical-align: middle;
-  width: 17.5%;
+  width: 21%;
 }
 
 .payments-table td {
