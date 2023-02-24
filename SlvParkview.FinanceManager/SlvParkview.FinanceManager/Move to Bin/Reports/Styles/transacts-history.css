@@ -24,7 +24,7 @@
   padding: 20px 30px;
   min-width: 600px;
   max-height: 80%;
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
 }
 
@@ -36,21 +36,21 @@
 
 .date-col {
   vertical-align: middle;
-  width: 24%;
+  width: 19%;
 }
 
 .pay-col {
-  width: 37%;
+  width: 41%;
   text-align: center;
 }
 
 .exp-col {
-  width: 25%;
+  width: 29%;
   text-align: center;
 }
 
 .outstand-col {
-  width: 16%;
+  width: 11%;
 }
 
 .flat-info td,
