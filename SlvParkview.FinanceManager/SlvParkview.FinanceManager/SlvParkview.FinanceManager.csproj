@@ -148,6 +148,7 @@
     <Compile Include="Reporting\Factories\PaymentsReportFactory.cs" />
     <Compile Include="Reporting\Factories\ReportOptionsFactory.cs" />
     <Compile Include="Reporting\Interfaces\IReportOptions.cs" />
+    <Compile Include="Reporting\Models\PenaltiesReport.cs" />
     <Compile Include="Reporting\Models\FlatTransactionsHistoryReport.cs" />
     <Compile Include="Reporting\Models\FlatInfo.cs" />
     <Compile Include="Reporting\Interfaces\IReport.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Reporting\Base\ReportOptions.cs" />
     <Compile Include="Reporting\Models\ToASelectedDatePaymentsReportOptions.cs" />
     <Compile Include="Reporting\Models\TransactionInfo.cs" />
+    <Compile Include="Reporting\ViewModels\PenaltiesSummaryReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\BlockOutstandingsReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\FlatTransactionsHistoryReportViewModel.cs" />
     <Compile Include="Reporting\ViewModels\PaymentsReportViewModel.cs" />
