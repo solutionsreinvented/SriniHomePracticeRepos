@@ -1,5 +1,4 @@
-﻿
-using System.IO;
+﻿using System.IO;
 using System.Reflection;
 
 namespace SlvParkview.FinanceManager.Services

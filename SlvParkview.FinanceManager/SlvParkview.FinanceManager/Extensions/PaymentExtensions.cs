@@ -1,5 +1,6 @@
 ﻿using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Reporting.Models;
+using SlvParkview.FinanceManager.Services;
 
 namespace SlvParkview.FinanceManager.Extensions
 {
@@ -12,9 +13,9 @@ namespace SlvParkview.FinanceManager.Extensions
                 Amount = payment.Amount.FormatNumber("N1"),
                 FlatNumber = flat.Description,
                 OwnerName = flat.OwnedBy,
-                Mode = payment.Mode.ToString(),
+                Mode = ConvertersService.PaymentModeConverter.ConvertTo(payment.Mode, typeof(string)).ToString(),
                 ReceivedOn = payment.ReceivedOn.ToString("dd-MM-yyyy"),
-                Category = payment.Category.ToString()
+                Category = ConvertersService.TransactionCategoryConverter.ConvertTo(payment.Category, typeof(string)).ToString()
             };
         }
     }
