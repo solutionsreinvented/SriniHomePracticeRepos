@@ -1,0 +1,33 @@
+* {
+  font-size: 0.96em;
+}
+
+thead td {
+  font-size: 13px;
+  font-weight: bold;
+  background-color: #aabbc9;
+}
+
+#container {
+  min-width: 600px;
+  width: 95%;
+  height: 100%;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+.table-header {
+  border-collapse: collapse;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  padding: 20px 30px;
+  min-width: 600px;
+  max-height: 80%;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.main-heading-row {
+  text-align: center;
+  font-weight: bold;
+}
