@@ -29,15 +29,20 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             {
                 TransactionDate = record.TransactionDate.ToString("dd MMM yyyy"),
                 PaymentAmount = record.Payment != null ? record.Payment.Amount.FormatNumber(numberFormat) : blank,
+
                 PaymentCategory = 
                 record.Payment != null ?
-                ConvertersService.TransactionCategoryConverter.ConvertTo(record.Payment.Category, typeof(string)).ToString() : blank,
-                PaymentMode = record.Payment != null ? record.Payment.Mode.ToString() : blank,
+                ConvertersService.TransactionCategoryConverter.ConvertToString(record.Payment.Category) : blank,
+
+                PaymentMode = 
+                record.Payment != null ?
+                ConvertersService.PaymentModeConverter.ConvertToString(record.Payment.Mode) : blank,
+
                 ExpenseAmount = record.Expense != null ? record.Expense.Amount.FormatNumber(numberFormat) : blank,
 
                 ExpenseCategory = 
                 record.Expense != null ?
-                ConvertersService.TransactionCategoryConverter.ConvertTo(record.Expense.Category, typeof(string)).ToString() : blank,
+                ConvertersService.TransactionCategoryConverter.ConvertToString(record.Expense.Category) : blank,
 
                 Outstanding = record.Outstanding.FormatNumber(numberFormat)
             };

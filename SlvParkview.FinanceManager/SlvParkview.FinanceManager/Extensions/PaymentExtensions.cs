@@ -13,9 +13,9 @@ namespace SlvParkview.FinanceManager.Extensions
                 Amount = payment.Amount.FormatNumber("N1"),
                 FlatNumber = flat.Description,
                 OwnerName = flat.OwnedBy,
-                Mode = ConvertersService.PaymentModeConverter.ConvertTo(payment.Mode, typeof(string)).ToString(),
+                Mode = ConvertersService.PaymentModeConverter.ConvertToString(payment.Mode),
                 ReceivedOn = payment.ReceivedOn.ToString("dd-MM-yyyy"),
-                Category = ConvertersService.TransactionCategoryConverter.ConvertTo(payment.Category, typeof(string)).ToString()
+                Category = ConvertersService.TransactionCategoryConverter.ConvertToString(payment.Category)
             };
         }
     }
