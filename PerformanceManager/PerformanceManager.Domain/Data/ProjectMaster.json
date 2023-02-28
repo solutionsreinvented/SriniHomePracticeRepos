@@ -212,6 +212,159 @@
           "ScheduledCompletion": "2023-01-06T00:00:00+05:30"
         }
       ]
+    },
+    {
+      "$id": "20",
+      "$type": "PerformanceManager.Domain.Models.Order, PerformanceManager.Domain",
+      "Type": 1,
+      "Code": "22-3807",
+      "Name": "11.3m Torex MML Clarifier",
+      "Activities": [
+        {
+          "$id": "21",
+          "$type": "PerformanceManager.Domain.Models.DesignActivity, PerformanceManager.Domain",
+          "Id": "1-22-3807-11-740-424",
+          "Discipline": 11,
+          "Category": {
+            "$id": "22",
+            "$type": "PerformanceManager.Domain.Models.Category, PerformanceManager.Domain",
+            "Name": "Non Structural",
+            "SubCategories": [
+              "Preamble"
+            ]
+          },
+          "SubCategory": "Preamble",
+          "InitiatedOn": "2023-02-10T00:00:00",
+          "AllocatedHours": 9.0,
+          "ScheduledCompletion": "2023-02-13T00:00:00",
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Project": {
+            "$ref": "20"
+          }
+        },
+        {
+          "$id": "23",
+          "$type": "PerformanceManager.Domain.Models.DesignActivity, PerformanceManager.Domain",
+          "Id": "1-22-3807-11-601-668",
+          "Discipline": 11,
+          "Category": {
+            "$id": "24",
+            "$type": "PerformanceManager.Domain.Models.Category, PerformanceManager.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Staad Modeling",
+          "InitiatedOn": "2023-02-13T00:00:00",
+          "AllocatedHours": 18.0,
+          "ScheduledCompletion": "2023-02-15T00:00:00",
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Project": {
+            "$ref": "20"
+          }
+        },
+        {
+          "$id": "25",
+          "$type": "PerformanceManager.Domain.Models.DesignActivity, PerformanceManager.Domain",
+          "Id": "1-22-3807-11-601-855",
+          "Discipline": 11,
+          "Category": {
+            "$id": "26",
+            "$type": "PerformanceManager.Domain.Models.Category, PerformanceManager.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Loads Application",
+          "InitiatedOn": "2023-02-16T00:00:00",
+          "AllocatedHours": 9.0,
+          "ScheduledCompletion": "2023-02-17T00:00:00",
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Project": {
+            "$ref": "20"
+          }
+        },
+        {
+          "$id": "27",
+          "$type": "PerformanceManager.Domain.Models.DesignActivity, PerformanceManager.Domain",
+          "Id": "1-22-3807-11-601-897",
+          "Discipline": 11,
+          "Category": {
+            "$id": "28",
+            "$type": "PerformanceManager.Domain.Models.Category, PerformanceManager.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Analysis and Design",
+          "InitiatedOn": "2023-02-20T00:00:00",
+          "AllocatedHours": 9.0,
+          "ScheduledCompletion": "2023-02-21T00:00:00",
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Project": {
+            "$ref": "20"
+          }
+        },
+        {
+          "$id": "29",
+          "$type": "PerformanceManager.Domain.Models.DesignActivity, PerformanceManager.Domain",
+          "Id": "1-22-3807-11-601-913",
+          "Discipline": 11,
+          "Category": {
+            "$id": "30",
+            "$type": "PerformanceManager.Domain.Models.Category, PerformanceManager.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Foundation Load Data",
+          "InitiatedOn": "2023-02-21T00:00:00",
+          "AllocatedHours": 9.0,
+          "ScheduledCompletion": "2023-02-22T00:00:00",
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Project": {
+            "$ref": "20"
+          }
+        }
+      ]
     }
   ]
 }
