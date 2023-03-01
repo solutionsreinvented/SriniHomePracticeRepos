@@ -106,9 +106,25 @@
 
             <Grid>
 
-                <reportComponents:OutstandingsControl DataContext="{Binding}" Visibility="{Binding DataContext.ShowOnlyPenalties, ElementName=Root, Converter={shared:BoolToVisibilityConverter IsInverse=True}}" />
-                <!--<reportComponents:PenaltiesControl DataContext="{Binding}" Visibility="{Binding DataContext.ShowOnlyPenalties, ElementName=Root, Converter={shared:BoolToVisibilityConverter}}" />-->
-                <TextBlock Text="{Binding DataContext.ShowOnlyPenalties, ElementName=Root, Converter={shared:BoolToVisibilityConverter IsInverse=True}}" />
+                <reportComponents:PenaltiesControl
+                    x:Name="PenaltiesControl"
+                    DataContext="{Binding}"
+                    Visibility="{Binding DataContext.ShowOnlyPenalties, ElementName=Root, Converter={shared:BoolToVisibilityConverter}}" />
+                <reportComponents:OutstandingsControl DataContext="{Binding}">
+                    <reportComponents:OutstandingsControl.Style>
+                        <Style TargetType="reportComponents:OutstandingsControl">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=PenaltiesControl, Path=Visibility}" Value="Visible">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=PenaltiesControl, Path=Visibility}" Value="Collapsed">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </reportComponents:OutstandingsControl.Style>
+                </reportComponents:OutstandingsControl>
             </Grid>
 
         </GroupBox>
