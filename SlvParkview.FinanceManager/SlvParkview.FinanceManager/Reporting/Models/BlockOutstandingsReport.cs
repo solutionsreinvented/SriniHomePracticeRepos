@@ -43,11 +43,14 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         #region Parameterized Constructor
 
-        public BlockOutstandingsReport(Block block, DateTime reportTill, OutstandingsFilter filter = OutstandingsFilter.All)
+        public BlockOutstandingsReport(Block block, DateTime reportTill,
+                                       OutstandingsFilter filter = OutstandingsFilter.All,
+                                       bool showPenaltiesOnly = false)
         {
             _block = block;
             _reportTill = reportTill;
 
+            ShowPenaltiesOnly = showPenaltiesOnly;
             Filter = filter;
         }
 
@@ -61,7 +64,12 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         [JsonProperty]
         public string TotalOutstanding { get => Get<string>(); private set => Set(value); }
 
+        [JsonProperty]
+        public string TotalPenalty { get => Get<string>(); private set => Set(value); }
+
         public OutstandingsFilter Filter { get => Get<OutstandingsFilter>(); private set => Set(value); }
+
+        public bool ShowPenaltiesOnly { get => Get<bool>(); private set => Set(value); }
 
         #endregion
 
@@ -101,6 +109,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             }
 
             TotalOutstanding = FlatInfoCollection?.Sum(f => decimal.Parse(StripNumberFormat(f.OutstandingOnSpecifiedDate))).FormatNumber("N1");
+            TotalPenalty = FlatInfoCollection?.Sum(f => decimal.Parse(StripNumberFormat(f.PenaltyTillSpecifiedDate))).FormatNumber("N1");
         }
 
         #endregion

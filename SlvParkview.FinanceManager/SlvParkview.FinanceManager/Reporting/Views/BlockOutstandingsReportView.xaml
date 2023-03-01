@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:reportComponents="clr-namespace:SlvParkview.FinanceManager.Reporting.Components"
     xmlns:shared="http://schemas.reinvented.com/shared"
+    x:Name="Root"
     d:DesignHeight="{StaticResource ReportControlHeight}"
     d:DesignWidth="{StaticResource ReportControlWidth}"
     Style="{StaticResource ReportViewStyle}"
@@ -41,6 +42,7 @@
                     <ColumnDefinition />
                     <ColumnDefinition Width="2.5*" />
                     <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
                 <!--#endregion-->
@@ -73,6 +75,14 @@
                     ItemsSource="{shared:EnumBindingResource enums:OutstandingsFilter}"
                     SelectedItem="{Binding Filter}" />
 
+                <CheckBox
+                    Grid.Column="4"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Content="Show only penalties?"
+                    IsChecked="{Binding ShowOnlyPenalties}" />
+
                 <!--#endregion-->
 
             </Grid>
@@ -96,133 +106,9 @@
 
             <Grid>
 
-                <!--#region Grid Definitions-->
-
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-                <!--#endregion-->
-
-                <!--#region Outstanding History-->
-
-                <DataGrid
-                    Grid.Row="0"
-                    Margin="5"
-                    AutoGenerateColumns="False"
-                    CanUserAddRows="False"
-                    CanUserDeleteRows="True"
-                    CanUserResizeRows="False"
-                    HorizontalScrollBarVisibility="Disabled"
-                    ItemsSource="{Binding Report.FlatInfoCollection}"
-                    SelectionUnit="FullRow"
-                    VerticalScrollBarVisibility="Auto">
-
-                    <DataGrid.Columns>
-
-                        <!--#region Flat Number Column-->
-
-                        <DataGridTemplateColumn Width="0.8*" Header="Flat Number">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Description}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <!--#endregion-->
-
-                        <!--#region Owner Column-->
-
-                        <DataGridTemplateColumn Width="2*" Header="Owner Name">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Margin="5,0" Text="{Binding OwnedBy}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <!--#endregion-->
-
-                        <!--#region Coowner Column-->
-
-                        <DataGridTemplateColumn Width="2*" Header="Coowner Name">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Margin="5,0" Text="{Binding CoOwnedBy}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <!--#endregion-->
-
-                        <!--#region Tenant Column-->
-
-                        <DataGridTemplateColumn Width="2*" Header="Tenant Name">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Margin="5,0" Text="{Binding TenantName}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <!--#endregion-->
-
-                        <!--#region Resident Type Column-->
-
-                        <DataGridTemplateColumn Width="1.2*" Header="Resident Type">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Center" Text="{Binding ResidentType}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <!--#endregion-->
-
-                        <!--#region Outstanding On Specified Date Column-->
-
-                        <DataGridTemplateColumn Width="1.2*" Header="Outstanding">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock
-                                        Padding="40,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        Text="{Binding OutstandingOnSpecifiedDate}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <!--#endregion-->
-
-                    </DataGrid.Columns>
-
-                </DataGrid>
-
-                <!--#endregion-->
-
-                <!--#region Total Outstanding-->
-
-                <StackPanel
-                    Grid.Row="1"
-                    Margin="5"
-                    HorizontalAlignment="Right"
-                    Orientation="Horizontal">
-                    <TextBlock
-                        Margin="0,0,25,0"
-                        VerticalAlignment="Center"
-                        Text="Total outstanding amount:" />
-                    <TextBox
-                        Width="Auto"
-                        MinWidth="100"
-                        Padding="10,0"
-                        IsEnabled="False"
-                        Text="{Binding Report.TotalOutstanding, Mode=OneWay}" />
-                </StackPanel>
-
-                <!--#endregion-->
-
+                <reportComponents:OutstandingsControl DataContext="{Binding}" Visibility="{Binding DataContext.ShowOnlyPenalties, ElementName=Root, Converter={shared:BoolToVisibilityConverter IsInverse=True}}" />
+                <!--<reportComponents:PenaltiesControl DataContext="{Binding}" Visibility="{Binding DataContext.ShowOnlyPenalties, ElementName=Root, Converter={shared:BoolToVisibilityConverter}}" />-->
+                <TextBlock Text="{Binding DataContext.ShowOnlyPenalties, ElementName=Root, Converter={shared:BoolToVisibilityConverter IsInverse=True}}" />
             </Grid>
 
         </GroupBox>

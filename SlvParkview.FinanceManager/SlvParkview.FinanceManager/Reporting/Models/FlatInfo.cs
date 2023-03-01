@@ -55,6 +55,14 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         /// Outstanding balance pending calculated till date.
         /// </summary>
         public string CurrentOutstanding { get => Get<string>(); set => Set(value); }
+        /// <summary>
+        /// Total penalty till the specified date.
+        /// </summary>
+        public string PenaltyTillSpecifiedDate { get => Get<string>(); set => Set(value); }
+        /// <summary>
+        /// Total penalty calculated till date.
+        /// </summary>
+        public string CurrentTotalPenalty { get => Get<string>(); set => Set(value); }
 
         #endregion
 
