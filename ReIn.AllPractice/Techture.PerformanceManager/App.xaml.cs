@@ -41,7 +41,7 @@ namespace Techture.PerformanceManager
     {
         private ActivityMaster CreateActivityMaster()
         {
-            var activityMaster = new ActivityMaster() { Domains = new List<DomainClass>() };
+            ActivityMaster activityMaster = new ActivityMaster() { Domains = new List<DomainClass>() };
             activityMaster.Domains.Add(new DomainClass()
             {
                 Group = DomainGroup.Design,
@@ -94,18 +94,18 @@ namespace Techture.PerformanceManager
 
         private ActivityMaster ReadCategories()
         {
-            var fileContents = File.ReadAllText(@"C:\Users\masanams\source\SriniHomePracticeRepos\ReIn.AllPractice\Techture.PerformanceManager\Data\ActivityCategories.json");
+            string fileContents = File.ReadAllText(@"C:\Users\masanams\source\SriniHomePracticeRepos\ReIn.AllPractice\Techture.PerformanceManager\Data\ActivityCategories.json");
 
             return JsonConvert.DeserializeObject<ActivityMaster>(fileContents);
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            var actMaster = CreateActivityMaster();
+            ActivityMaster actMaster = CreateActivityMaster();
 
             WriteJsonToFile(JsonConvert.SerializeObject(CreateActivityMaster()));
 
-            var categories = ReadCategories();
+            ActivityMaster categories = ReadCategories();
 
 
             string projectCode = "22-3849";
@@ -122,14 +122,7 @@ namespace Techture.PerformanceManager
 
         private Activity GenerateActivity(ActivityType activityType)
         {
-            if (activityType == ActivityType.Design)
-            {
-                return new DesignActivity(1);
-            }
-            else
-            {
-                return new DetailingActivity(1);
-            }
+            return activityType == ActivityType.Design ? new DesignActivity(1) : (Activity)new DetailingActivity(1);
         }
 
         private ProjectMaster GenerateProjectMaster()

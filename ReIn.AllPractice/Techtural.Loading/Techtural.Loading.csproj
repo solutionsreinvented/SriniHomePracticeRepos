@@ -71,7 +71,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\BeamForces.cs" />
     <Compile Include="Models\LoadCase.cs" />
+    <Compile Include="Models\NodeDisplacements.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

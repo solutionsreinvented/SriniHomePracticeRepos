@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 using Techtural.Loading.Enums;
+using Techtural.Loading.Models;
 
 namespace Techtural.Loading.Interfaces
 {
