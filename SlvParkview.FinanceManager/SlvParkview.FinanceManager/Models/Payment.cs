@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+
 using ReInvented.Shared.Stores;
 
 using SlvParkview.FinanceManager.Enums;
@@ -39,7 +40,15 @@ namespace SlvParkview.FinanceManager.Models
 
         #region Public Properties
 
-        public PaymentMode Mode { get => Get(PaymentMode.Cash); set => Set(value); }
+        public PaymentMode Mode
+        {
+            get => Get(PaymentMode.Cash);
+            set
+            {
+                Set(value);
+                EnableReferenceId = value == PaymentMode.Online || value == PaymentMode.Cheque;
+            }
+        }
         /// <summary>
         /// Date on which the payment is made.
         /// </summary>
@@ -56,8 +65,10 @@ namespace SlvParkview.FinanceManager.Models
         /// Amount spent.
         /// </summary>
         public decimal Amount { get => Get<decimal>(); set { Set(value); RaisePropertyChanged(nameof(IsDataValid)); } }
-
-        //public string ReferenceId { get => Get<string>(); set => Set(value); }
+        /// <summary>
+        /// Reference ID of the transaction. Applicable for online transfer only.
+        /// </summary>
+        public string ReferenceId { get => Get<string>(); set => Set(value); }
 
         #endregion
 
@@ -67,6 +78,9 @@ namespace SlvParkview.FinanceManager.Models
         [XmlIgnore]
         public bool IsDataValid => Amount > 0.0m && ReceivedOn <= DateTime.Today;
 
+        [JsonIgnore]
+        [XmlIgnore]
+        public bool EnableReferenceId { get => Get<bool>(); private set => Set(value); }
         #endregion
 
         #region Equality
