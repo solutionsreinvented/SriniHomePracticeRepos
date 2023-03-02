@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="http://schemas.reinvented.com/shared"
     MinWidth="650"
-    MinHeight="240"
+    MinHeight="220"
     MaxHeight="250"
     d:DesignHeight="220"
     d:DesignWidth="650"
@@ -16,11 +16,11 @@
     <!--#region Flat Details Host-->
 
     <GroupBox
-        Margin="20,0,20,10"
+        Margin="20,0,20,5"
         BorderThickness="0.2"
         Header="Details of the flat">
 
-        <Grid Margin="10">
+        <Grid Margin="10,0">
 
             <!--#region Grid Resources-->
 

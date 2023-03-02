@@ -3,6 +3,8 @@
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Services;
 
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 
 namespace SlvParkview.FinanceManager.ViewModels
@@ -37,6 +39,7 @@ namespace SlvParkview.FinanceManager.ViewModels
         #endregion
 
         #region Public Properties
+        public IEnumerable<Flat> Flats => _summaryViewModel.Block.Flats;
 
         public Flat TargetFlat { get => Get<Flat>(); set => Set(value); }
 
