@@ -30,7 +30,12 @@ var tableBody = document.querySelector(".table-body");
 // #region Data Required for Calculations
 var outstandings = jsonContents.FlatInfoCollection.map(outstandingOnly);
 var maxOutstanding = Math.max(...outstandings);
+
+var penalties = jsonContents.FlatInfoCollection.map(penaltyOnly);
+var maxPenalty = Math.max(...penalties);
 // #endregion
+
+document.querySelector(".outstanding-header").innerHTML = jsonContents.ShowPenaltiesOnly ? "Total Penalty" : "Outstanding";
 
 populateOutstandings();
 
@@ -43,7 +48,7 @@ function populateOutstandings() {
   tableBody.innerHTML = "";
 
   if (flatInfoCollection.length > 0) {
-    var reportTill = jsonContents.FlatInfoCollection[0].DateSpecified;
+    ///var reportTill = jsonContents.FlatInfoCollection[0].DateSpecified;
     document.title = jsonContents.DocumentTitle;
     document.querySelector(".table-title").innerHTML =
       jsonContents.DocumentTitle;
@@ -56,9 +61,9 @@ function populateOutstandings() {
                 <td>${flatInfoCollection[i].CoOwnedBy}</td>
                 <td>${flatInfoCollection[i].TenantName}</td>
                 <td>${flatInfoCollection[i].ResidentType}</td>
-                <td>${flatInfoCollection[i].OutstandingOnSpecifiedDate}</td>
-            </tr>
-            `;
+                <td>${jsonContents.ShowPenaltiesOnly ? flatInfoCollection[i].PenaltyTillSpecifiedDate :
+          flatInfoCollection[i].OutstandingOnSpecifiedDate}</td>
+            </tr>`;
     }
 
     endOfData = "**** End of Report ****";
@@ -66,10 +71,10 @@ function populateOutstandings() {
     endOfData = "**** No Records Found ****";
   }
 
-  tableBody.innerHTML += `<tr class="total-outstanding">
-            <td colspan="5" class="total-outstanding-desc">Total outstanding amount:</td>
-            <td colspan="1" class="total-outstanding-amount">${jsonContents.TotalOutstanding}</td>
-        </tr>`;
+  tableBody.innerHTML += `<tr class="total-outstanding" >
+            <td colspan="5" class="total-outstanding-desc">Total ${jsonContents.ShowPenaltiesOnly ? "penalty:" : "outstanding amount:"} </td>
+            <td colspan="1" class="total-outstanding-amount">${jsonContents.ShowPenaltiesOnly ? jsonContents.TotalPenalty : jsonContents.TotalOutstanding}</td>
+        </tr> `;
 
   tableBody.innerHTML += `<tr class="end-of-data">
             <td colspan="6">${endOfData}</td>
@@ -86,11 +91,13 @@ var aboveNormalFocus = 60.0;
 var mediumFocus = 80.0;
 // #endregion
 
-changeElementBackground();
+if (jsonContents.Filter == 0) {
+  changeElementBackground();
+}
 
 // #region Change Element Background
 
-function changeElementBackground(elementIndex) {
+function changeElementBackground() {
   var flatCount = jsonContents.FlatInfoCollection.length;
 
   for (index = 0; index < flatCount; index++) {
@@ -100,8 +107,8 @@ function changeElementBackground(elementIndex) {
     var outstandingCell = tableRow.children[tableRow.children.length - 1];
 
     var currentItemPercentage = getPercentage(
-      outstandings[index],
-      maxOutstanding
+      jsonContents.ShowPenaltiesOnly ? penalties[index] : outstandings[index],
+      jsonContents.ShowPenaltiesOnly ? maxPenalty : maxOutstanding
     );
     var focusClass;
 
@@ -129,6 +136,10 @@ function changeElementBackground(elementIndex) {
 
 function outstandingOnly(flatInfo) {
   return parseFloat(stripNumberFormatting(flatInfo.OutstandingOnSpecifiedDate));
+}
+
+function penaltyOnly(flatInfo) {
+  return parseFloat(stripNumberFormatting(flatInfo.PenaltyTillSpecifiedDate));
 }
 
 function getPercentage(current, max) {

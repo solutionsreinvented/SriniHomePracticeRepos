@@ -184,11 +184,13 @@ namespace SlvParkview.FinanceManager.Extensions
                 AccountOpenedOn = flat.AccountOpenedOn.ToString(dateFormat),
                 CoOwnedBy = flat.CoOwnedBy ?? "-",
                 CurrentOutstanding = flat.CurrentOutstanding.FormatNumber("N1"),
+                CurrentTotalPenalty = flat.CurrentTotalPenalty.FormatNumber("N1"),
                 DateSpecified = flat.DateSpecified.ToString(dateFormat),
                 Description = flat.Description,
                 Number = flat.Number.ToString(),
                 OpeningBalance = flat.OpeningBalance.FormatNumber("N1"),
                 OutstandingOnSpecifiedDate = flat.OutstandingOnSpecifiedDate.FormatNumber("N1"),
+                PenaltyTillSpecifiedDate = flat.PenaltyTillSpecifiedDate.FormatNumber("N1"),
                 OwnedBy = flat.OwnedBy,
                 ResidentType = flat.ResidentType.ToString(),
                 TenantName = flat.TenantName ?? "-"

@@ -111,6 +111,12 @@
     <Compile Include="Components\FlatDetailControl.xaml.cs">
       <DependentUpon>FlatDetailControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Reporting\Components\OutstandingsControl.xaml.cs">
+      <DependentUpon>OutstandingsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\Components\PenaltiesControl.xaml.cs">
+      <DependentUpon>PenaltiesControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\PenaltyInfoControl.xaml.cs">
       <DependentUpon>PenaltyInfoControl.xaml</DependentUpon>
     </Compile>
@@ -241,6 +247,14 @@
     <Compile Include="Enums\PaymentMode.cs" />
     <Compile Include="Enums\ResidentType.cs" />
     <Compile Include="Enums\TransactionCategory.cs" />
+    <Page Include="Reporting\Components\OutstandingsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Reporting\Components\PenaltiesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\PenaltyInfoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

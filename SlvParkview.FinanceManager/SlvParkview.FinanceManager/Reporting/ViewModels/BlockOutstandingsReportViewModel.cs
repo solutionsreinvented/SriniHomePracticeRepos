@@ -27,6 +27,8 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
 
         public OutstandingsFilter Filter { get => Get(OutstandingsFilter.All); set { Set(value); UpdateReport(); } }
 
+        public bool ShowOnlyPenalties { get => Get<bool>(); set { Set(value); Filter = OutstandingsFilter.All; UpdateReport(); } }
+
         public string OutstandingHeader { get => Get<string>(); private set => Set(value); }
 
         #endregion
@@ -43,7 +45,7 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
         private void UpdateReport()
         {
             OutstandingHeader = $"Outstanding as on {ReportTill:dd-MMM-yyyy}";
-            Report = new BlockOutstandingsReport(Block, ReportTill, Filter);
+            Report = new BlockOutstandingsReport(Block, ReportTill, Filter, ShowOnlyPenalties);
             Report.GenerateContents();
         }
 

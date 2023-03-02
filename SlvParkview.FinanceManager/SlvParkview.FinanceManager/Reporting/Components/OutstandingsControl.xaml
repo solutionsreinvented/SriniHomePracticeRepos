@@ -1,0 +1,144 @@
+﻿<UserControl
+    x:Class="SlvParkview.FinanceManager.Reporting.Components.OutstandingsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="Root"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <Grid>
+
+        <!--#region Grid Definitions-->
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--#endregion-->
+
+        <!--#region Outstanding History-->
+
+        <DataGrid
+            Grid.Row="0"
+            Margin="5"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserDeleteRows="True"
+            CanUserResizeRows="False"
+            HorizontalScrollBarVisibility="Disabled"
+            ItemsSource="{Binding Report.FlatInfoCollection}"
+            SelectionUnit="FullRow"
+            VerticalScrollBarVisibility="Auto">
+
+            <DataGrid.Columns>
+
+                <!--#region Flat Number Column-->
+
+                <DataGridTemplateColumn Width="0.8*" Header="Flat Number">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding Description}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--#endregion-->
+
+                <!--#region Owner Column-->
+
+                <DataGridTemplateColumn Width="2*" Header="Owner Name">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Margin="5,0" Text="{Binding OwnedBy}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--#endregion-->
+
+                <!--#region Coowner Column-->
+
+                <DataGridTemplateColumn Width="2*" Header="Coowner Name">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Margin="5,0" Text="{Binding CoOwnedBy}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--#endregion-->
+
+                <!--#region Tenant Column-->
+
+                <DataGridTemplateColumn Width="2*" Header="Tenant Name">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Margin="5,0" Text="{Binding TenantName}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--#endregion-->
+
+                <!--#region Resident Type Column-->
+
+                <DataGridTemplateColumn Width="1.2*" Header="Resident Type">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding ResidentType}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--#endregion-->
+
+                <!--#region Outstanding/Penalty On Specified Date Column-->
+
+                <DataGridTemplateColumn Width="1.2*" Header="Outstanding">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                Padding="40,0,0,0"
+                                HorizontalAlignment="Left"
+                                Text="{Binding OutstandingOnSpecifiedDate}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--#endregion-->
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+        <!--#endregion-->
+
+        <!--#region Total Outstanding-->
+
+
+        <StackPanel
+            Grid.Row="1"
+            Margin="5"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <TextBlock
+                Margin="0,0,25,0"
+                VerticalAlignment="Center"
+                Text="Total outstanding amount:" />
+            <TextBox
+                Width="Auto"
+                MinWidth="100"
+                Padding="10,0"
+                IsEnabled="False"
+                Text="{Binding Report.TotalOutstanding, Mode=OneWay}" />
+        </StackPanel>
+
+        <!--#endregion-->
+
+    </Grid>
+
+</UserControl>

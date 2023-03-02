@@ -1,5 +1,5 @@
 {
-  "LastUpdated": "2023-03-01T09:02:09.378786+05:30",
+  "LastUpdated": "2023-03-02T11:38:11.9090682+05:30",
   "Name": "C",
   "Flats": [
     {
@@ -10,7 +10,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 4600.0,
       "Expenses": [
         {
@@ -37,6 +37,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -45,46 +50,54 @@
           "ReceivedOn": "2022-09-14T00:00:00",
           "RecordedOn": "2022-09-14T00:00:00",
           "Category": 1,
-          "Amount": 3000.00
+          "Amount": 3000.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-10-02T00:00:00",
           "RecordedOn": "2022-10-02T00:00:00",
           "Category": 1,
-          "Amount": 3000.00
+          "Amount": 3000.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-01T00:00:00+05:30",
           "RecordedOn": "2022-11-01T00:00:00+05:30",
           "Category": 1,
-          "Amount": 3000.00
+          "Amount": 3000.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-12-01T00:00:00",
           "RecordedOn": "2022-12-05T00:00:00+05:30",
           "Category": 1,
-          "Amount": 3000.00
+          "Amount": 3000.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-01-01T00:00:00+05:30",
           "RecordedOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
-          "Amount": 3800.00
+          "Amount": 3800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-01T00:00:00+05:30",
           "RecordedOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "018",
@@ -94,7 +107,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -121,6 +134,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -129,46 +147,54 @@
           "ReceivedOn": "2022-09-11T00:00:00",
           "RecordedOn": "2022-09-11T00:00:00",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-10-02T00:00:00",
           "RecordedOn": "2022-10-02T00:00:00",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-06T00:00:00+05:30",
           "RecordedOn": "2022-11-06T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2022-12-01T00:00:00",
           "RecordedOn": "2022-12-05T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-01-13T00:00:00",
           "RecordedOn": "2023-01-23T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-13T00:00:00",
           "RecordedOn": "2023-02-20T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "019",
@@ -178,7 +204,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 24240.0,
       "Expenses": [
         {
@@ -205,6 +231,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -213,11 +244,14 @@
           "ReceivedOn": "2023-01-29T00:00:00+05:30",
           "RecordedOn": "2023-01-29T00:00:00+05:30",
           "Category": 1,
-          "Amount": 35440.00
+          "Amount": 35440.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00
+      "OutstandingOnSpecifiedDate": 5600.00,
+      "CurrentOutstanding": 5600.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "020",
@@ -227,7 +261,7 @@
       "TenantName": "Manjunath K S",
       "ResidentType": 1,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -254,6 +288,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -262,46 +301,54 @@
           "ReceivedOn": "2022-09-12T00:00:00",
           "RecordedOn": "2022-09-12T00:00:00",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-10-14T00:00:00+05:30",
           "RecordedOn": "2022-10-14T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-13T00:00:00",
           "RecordedOn": "2023-01-02T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-12-10T00:00:00",
           "RecordedOn": "2022-12-10T00:00:00",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-01-10T00:00:00+05:30",
           "RecordedOn": "2023-01-10T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-18T00:00:00",
           "RecordedOn": "2023-02-20T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "021",
@@ -311,7 +358,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -338,6 +385,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -346,46 +398,54 @@
           "ReceivedOn": "2022-09-12T00:00:00",
           "RecordedOn": "2022-09-12T00:00:00",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-10-19T00:00:00+05:30",
           "RecordedOn": "2022-10-19T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-06T00:00:00",
           "RecordedOn": "2022-11-07T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-12-02T00:00:00",
           "RecordedOn": "2022-12-05T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-01-02T00:00:00+05:30",
           "RecordedOn": "2023-01-02T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-01T00:00:00",
           "RecordedOn": "2023-02-04T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "022",
@@ -395,7 +455,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -422,6 +482,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -430,46 +495,54 @@
           "ReceivedOn": "2022-09-12T00:00:00",
           "RecordedOn": "2022-09-12T00:00:00",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-10-11T00:00:00",
           "RecordedOn": "2022-11-04T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-04T00:00:00+05:30",
           "RecordedOn": "2022-11-04T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-12-06T00:00:00",
           "RecordedOn": "2022-12-08T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2023-01-03T00:00:00",
           "RecordedOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-07T00:00:00",
           "RecordedOn": "2023-02-08T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "023",
@@ -479,7 +552,7 @@
       "TenantName": "Raghunath",
       "ResidentType": 1,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 15683.0,
       "Expenses": [
         {
@@ -506,6 +579,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -514,25 +592,30 @@
           "ReceivedOn": "2022-12-02T00:00:00",
           "RecordedOn": "2023-01-04T00:00:00+05:30",
           "Category": 1,
-          "Amount": 10000.00
+          "Amount": 10000.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2023-01-16T00:00:00",
           "RecordedOn": "2023-01-29T00:00:00+05:30",
           "Category": 1,
-          "Amount": 4000.00
+          "Amount": 4000.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2023-02-02T00:00:00",
           "RecordedOn": "2023-02-04T00:00:00+05:30",
           "Category": 1,
-          "Amount": 5600.00
+          "Amount": 5600.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 12099.600,
-      "CurrentOutstanding": 12099.600
+      "OutstandingOnSpecifiedDate": 14899.600,
+      "CurrentOutstanding": 14899.600,
+      "PenaltyTillSpecifiedDate": 2016.600,
+      "CurrentTotalPenalty": 2016.600
     },
     {
       "Number": "024",
@@ -542,7 +625,7 @@
       "TenantName": null,
       "ResidentType": 1,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 2495.0,
       "Expenses": [
         {
@@ -569,6 +652,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -577,39 +665,46 @@
           "ReceivedOn": "2022-10-08T00:00:00",
           "RecordedOn": "2022-10-08T00:00:00",
           "Category": 1,
-          "Amount": 5500.00
+          "Amount": 5500.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-03T00:00:00+05:30",
           "RecordedOn": "2022-11-03T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-12-03T00:00:00",
           "RecordedOn": "2022-12-05T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2023-01-04T00:00:00+05:30",
           "RecordedOn": "2023-01-04T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2023-02-04T00:00:00+05:30",
           "RecordedOn": "2023-02-04T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": -205.00,
-      "CurrentOutstanding": -205.00
+      "OutstandingOnSpecifiedDate": 2595.00,
+      "CurrentOutstanding": 2595.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "117",
@@ -619,7 +714,7 @@
       "TenantName": null,
       "ResidentType": 1,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 16800.0,
       "Expenses": [
         {
@@ -646,11 +741,18 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": null,
-      "OutstandingOnSpecifiedDate": 36960.000,
-      "CurrentOutstanding": 36960.000
+      "OutstandingOnSpecifiedDate": 39760.000,
+      "CurrentOutstanding": 39760.000,
+      "PenaltyTillSpecifiedDate": 6160.000,
+      "CurrentTotalPenalty": 6160.000
     },
     {
       "Number": "118",
@@ -660,7 +762,7 @@
       "TenantName": "Santhosh",
       "ResidentType": 1,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 5600.0,
       "Expenses": [
         {
@@ -687,6 +789,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -695,46 +802,54 @@
           "ReceivedOn": "2022-09-05T00:00:00",
           "RecordedOn": "2022-09-05T00:00:00",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-10-20T00:00:00+05:30",
           "RecordedOn": "2022-10-20T00:00:00+05:30",
           "Category": 1,
-          "Amount": 5600.00
+          "Amount": 5600.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-11T00:00:00+05:30",
           "RecordedOn": "2022-11-11T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2022-12-08T00:00:00",
           "RecordedOn": "2022-12-09T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-01-30T00:00:00",
           "RecordedOn": "2023-02-04T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-28T00:00:00+05:30",
           "RecordedOn": "2023-02-28T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "119",
@@ -744,7 +859,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 14000.0,
       "Expenses": [
         {
@@ -771,6 +886,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -779,32 +899,38 @@
           "ReceivedOn": "2022-11-19T00:00:00",
           "RecordedOn": "2022-11-20T00:00:00+05:30",
           "Category": 1,
-          "Amount": 19600.00
+          "Amount": 19600.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2022-12-08T00:00:00",
           "RecordedOn": "2022-12-09T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-01-30T00:00:00+05:30",
           "RecordedOn": "2023-01-30T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-13T00:00:00",
           "RecordedOn": "2023-02-20T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "120",
@@ -814,7 +940,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 5600.0,
       "Expenses": [
         {
@@ -841,6 +967,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -849,53 +980,62 @@
           "ReceivedOn": "2022-09-05T00:00:00",
           "RecordedOn": "2022-09-05T00:00:00",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-09-18T00:00:00",
           "RecordedOn": "2022-09-18T00:00:00",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-10-20T00:00:00+05:30",
           "RecordedOn": "2022-10-20T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-05T00:00:00",
           "RecordedOn": "2022-11-20T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2022-12-05T00:00:00+05:30",
           "RecordedOn": "2022-12-05T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-01-25T00:00:00+05:30",
           "RecordedOn": "2023-01-25T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-28T00:00:00",
           "RecordedOn": "2023-03-01T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "121",
@@ -905,7 +1045,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -932,6 +1072,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -940,46 +1085,54 @@
           "ReceivedOn": "2022-09-20T00:00:00",
           "RecordedOn": "2022-09-20T00:00:00",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 0,
           "ReceivedOn": "2022-10-19T00:00:00+05:30",
           "RecordedOn": "2022-10-19T00:00:00+05:30",
           "Category": 1,
-          "Amount": 3000.00
+          "Amount": 3000.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-16T00:00:00+05:30",
           "RecordedOn": "2022-11-16T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-12-07T00:00:00+05:30",
           "RecordedOn": "2022-12-07T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2600.00
+          "Amount": 2600.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2023-01-27T00:00:00",
           "RecordedOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-13T00:00:00",
           "RecordedOn": "2023-02-20T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "122",
@@ -989,7 +1142,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 2845.0,
       "Expenses": [
         {
@@ -1016,6 +1169,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -1024,46 +1182,54 @@
           "ReceivedOn": "2022-09-22T00:00:00",
           "RecordedOn": "2022-09-22T00:00:00",
           "Category": 1,
-          "Amount": 2845.00
+          "Amount": 2845.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-10-29T00:00:00+05:30",
           "RecordedOn": "2022-10-29T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-23T00:00:00",
           "RecordedOn": "2022-11-24T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2022-12-27T00:00:00",
           "RecordedOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2023-01-30T00:00:00+05:30",
           "RecordedOn": "2023-01-30T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2023-02-24T00:00:00",
           "RecordedOn": "2023-02-27T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "123",
@@ -1073,7 +1239,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 6239.0,
       "Expenses": [
         {
@@ -1100,6 +1266,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -1108,39 +1279,46 @@
           "ReceivedOn": "2022-10-15T00:00:00+05:30",
           "RecordedOn": "2022-10-15T00:00:00+05:30",
           "Category": 1,
-          "Amount": 9039.00
+          "Amount": 9039.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-04T00:00:00+05:30",
           "RecordedOn": "2022-11-04T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-12-04T00:00:00",
           "RecordedOn": "2022-12-05T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2023-01-04T00:00:00",
           "RecordedOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2023-02-01T00:00:00",
           "RecordedOn": "2023-02-04T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "124",
@@ -1150,7 +1328,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -1175,6 +1353,11 @@
         },
         {
           "OccuredOn": "2023-02-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1185,46 +1368,54 @@
           "ReceivedOn": "2022-09-16T00:00:00+05:30",
           "RecordedOn": "2022-09-16T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-10-10T00:00:00",
           "RecordedOn": "2022-10-10T00:00:00",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-07T00:00:00+05:30",
           "RecordedOn": "2022-11-07T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2022-12-07T00:00:00",
           "RecordedOn": "2022-12-08T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-01-12T00:00:00",
           "RecordedOn": "2023-01-23T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-14T00:00:00",
           "RecordedOn": "2023-02-20T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "217",
@@ -1234,7 +1425,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -1259,6 +1450,11 @@
         },
         {
           "OccuredOn": "2023-02-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1269,46 +1465,54 @@
           "ReceivedOn": "2022-09-23T00:00:00",
           "RecordedOn": "2022-09-23T00:00:00",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-10-12T00:00:00+05:30",
           "RecordedOn": "2022-10-12T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-16T00:00:00",
           "RecordedOn": "2022-11-20T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2022-12-08T00:00:00+05:30",
           "RecordedOn": "2022-12-08T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-01-18T00:00:00+05:30",
           "RecordedOn": "2023-01-18T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-27T00:00:00+05:30",
           "RecordedOn": "2023-02-27T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "218",
@@ -1318,7 +1522,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -1345,6 +1549,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -1353,39 +1562,46 @@
           "ReceivedOn": "2022-10-18T00:00:00+05:30",
           "RecordedOn": "2022-10-18T00:00:00+05:30",
           "Category": 1,
-          "Amount": 5600.00
+          "Amount": 5600.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-16T00:00:00+05:30",
           "RecordedOn": "2022-11-16T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2022-12-13T00:00:00",
           "RecordedOn": "2022-12-14T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-01-04T00:00:00+05:30",
           "RecordedOn": "2023-01-04T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-06T00:00:00",
           "RecordedOn": "2023-02-08T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "219",
@@ -1395,7 +1611,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 5600.0,
       "Expenses": [
         {
@@ -1422,6 +1638,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -1430,32 +1651,38 @@
           "ReceivedOn": "2022-11-23T00:00:00",
           "RecordedOn": "2022-11-24T00:00:00+05:30",
           "Category": 1,
-          "Amount": 11200.00
+          "Amount": 11200.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2022-12-17T00:00:00",
           "RecordedOn": "2022-12-18T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-25T00:00:00",
           "RecordedOn": "2023-02-27T00:00:00+05:30",
           "Category": 1,
-          "Amount": 5600.00
+          "Amount": 5600.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-25T00:00:00",
           "RecordedOn": "2023-02-25T00:00:00",
           "Category": 2,
-          "Amount": 1120.00
+          "Amount": 1120.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 0.000,
-      "CurrentOutstanding": 0.000
+      "OutstandingOnSpecifiedDate": 2800.000,
+      "CurrentOutstanding": 2800.000,
+      "PenaltyTillSpecifiedDate": 1120.000,
+      "CurrentTotalPenalty": 1120.000
     },
     {
       "Number": "220",
@@ -1465,7 +1692,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 20100.0,
       "Expenses": [
         {
@@ -1492,6 +1719,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -1500,18 +1732,22 @@
           "ReceivedOn": "2022-11-25T00:00:00+05:30",
           "RecordedOn": "2022-11-25T00:00:00+05:30",
           "Category": 1,
-          "Amount": 15000.00
+          "Amount": 15000.00,
+          "ReferenceId": null
         },
         {
           "Mode": 0,
           "ReceivedOn": "2022-12-11T00:00:00+05:30",
           "RecordedOn": "2022-12-11T00:00:00+05:30",
           "Category": 1,
-          "Amount": 5000.00
+          "Amount": 5000.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 16920.000,
-      "CurrentOutstanding": 16920.000
+      "OutstandingOnSpecifiedDate": 19720.000,
+      "CurrentOutstanding": 19720.000,
+      "PenaltyTillSpecifiedDate": 2820.000,
+      "CurrentTotalPenalty": 2820.000
     },
     {
       "Number": "221",
@@ -1521,7 +1757,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -1548,6 +1784,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -1556,46 +1797,62 @@
           "ReceivedOn": "2022-09-14T00:00:00",
           "RecordedOn": "2022-09-14T00:00:00",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-10-16T00:00:00+05:30",
           "RecordedOn": "2022-10-16T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-14T00:00:00+05:30",
           "RecordedOn": "2022-11-14T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2022-12-02T00:00:00",
           "RecordedOn": "2022-12-05T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-01-01T00:00:00+05:30",
           "RecordedOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-01T00:00:00",
           "RecordedOn": "2023-02-04T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
+        },
+        {
+          "Mode": 3,
+          "ReceivedOn": "2023-03-01T00:00:00",
+          "RecordedOn": "2023-03-02T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "8a96d282869b5b3401869bd6d3ee082e"
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 0.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "222",
@@ -1605,7 +1862,7 @@
       "TenantName": "Harish",
       "ResidentType": 1,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 5600.0,
       "Expenses": [
         {
@@ -1632,6 +1889,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -1640,18 +1902,22 @@
           "ReceivedOn": "2022-10-23T00:00:00",
           "RecordedOn": "2022-10-25T00:00:00+05:30",
           "Category": 1,
-          "Amount": 8000.00
+          "Amount": 8000.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2022-12-31T00:00:00",
           "RecordedOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
-          "Amount": 6000.00
+          "Amount": 6000.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 6720.000,
-      "CurrentOutstanding": 6720.000
+      "OutstandingOnSpecifiedDate": 9520.000,
+      "CurrentOutstanding": 9520.000,
+      "PenaltyTillSpecifiedDate": 1120.000,
+      "CurrentTotalPenalty": 1120.000
     },
     {
       "Number": "223",
@@ -1661,7 +1927,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 1400.0,
       "Expenses": [
         {
@@ -1688,6 +1954,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -1696,46 +1967,62 @@
           "ReceivedOn": "2022-09-14T00:00:00",
           "RecordedOn": "2022-09-14T00:00:00",
           "Category": 1,
-          "Amount": 1400.00
+          "Amount": 1400.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-10-25T00:00:00+05:30",
           "RecordedOn": "2022-10-25T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-21T00:00:00",
           "RecordedOn": "2022-11-22T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-12-01T00:00:00",
           "RecordedOn": "2022-12-05T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-01-01T00:00:00+05:30",
           "RecordedOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-02T00:00:00",
           "RecordedOn": "2023-02-04T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
+        },
+        {
+          "Mode": 3,
+          "ReceivedOn": "2023-03-01T00:00:00",
+          "RecordedOn": "2023-03-02T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "8a96cd82869bfd6c01869c23dd363713"
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 0.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "224",
@@ -1745,7 +2032,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -1772,6 +2059,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -1780,46 +2072,62 @@
           "ReceivedOn": "2022-09-15T00:00:00",
           "RecordedOn": "2022-09-15T00:00:00",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-09-30T00:00:00",
           "RecordedOn": "2022-09-30T00:00:00",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-01T00:00:00+05:30",
           "RecordedOn": "2022-11-01T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-12-01T00:00:00",
           "RecordedOn": "2022-12-05T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-01-01T00:00:00+05:30",
           "RecordedOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-01T00:00:00+05:30",
           "RecordedOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
+        },
+        {
+          "Mode": 3,
+          "ReceivedOn": "2023-03-01T00:00:00",
+          "RecordedOn": "2023-03-02T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "8a968b82869bfb0301869c32746d5032"
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 0.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "317",
@@ -1829,7 +2137,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 0.0,
       "Expenses": [
         {
@@ -1856,6 +2164,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -1864,39 +2177,54 @@
           "ReceivedOn": "2022-10-14T00:00:00+05:30",
           "RecordedOn": "2022-10-14T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-07T00:00:00+05:30",
           "RecordedOn": "2022-11-07T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-12-06T00:00:00+05:30",
           "RecordedOn": "2022-12-06T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-01-01T00:00:00+05:30",
           "RecordedOn": "2023-01-01T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-01T00:00:00+05:30",
           "RecordedOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
+        },
+        {
+          "Mode": 3,
+          "ReceivedOn": "2023-03-01T00:00:00",
+          "RecordedOn": "2023-03-02T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "8a968f82869b560b01869bd6934915ff"
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "CurrentOutstanding": 0.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "318",
@@ -1906,7 +2234,7 @@
       "TenantName": null,
       "ResidentType": 1,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 16800.0,
       "Expenses": [
         {
@@ -1933,11 +2261,18 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": null,
-      "OutstandingOnSpecifiedDate": 36960.000,
-      "CurrentOutstanding": 36960.000
+      "OutstandingOnSpecifiedDate": 39760.000,
+      "CurrentOutstanding": 39760.000,
+      "PenaltyTillSpecifiedDate": 6160.000,
+      "CurrentTotalPenalty": 6160.000
     },
     {
       "Number": "319",
@@ -1947,7 +2282,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 18240.0,
       "Expenses": [
         {
@@ -1974,6 +2309,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -1982,32 +2322,38 @@
           "ReceivedOn": "2022-10-16T00:00:00+05:30",
           "RecordedOn": "2022-10-16T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-16T00:00:00+05:30",
           "RecordedOn": "2022-11-16T00:00:00+05:30",
           "Category": 1,
-          "Amount": 5000.00
+          "Amount": 5000.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-12-18T00:00:00+05:30",
           "RecordedOn": "2022-12-18T00:00:00+05:30",
           "Category": 1,
-          "Amount": 8000.00
+          "Amount": 8000.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2023-02-11T00:00:00",
           "RecordedOn": "2023-02-12T00:00:00+05:30",
           "Category": 1,
-          "Amount": 16440.00
+          "Amount": 16440.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 3288.000,
-      "CurrentOutstanding": 3288.000
+      "OutstandingOnSpecifiedDate": 6088.000,
+      "CurrentOutstanding": 6088.000,
+      "PenaltyTillSpecifiedDate": 3288.000,
+      "CurrentTotalPenalty": 3288.000
     },
     {
       "Number": "320",
@@ -2017,7 +2363,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -2044,6 +2390,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -2052,46 +2403,54 @@
           "ReceivedOn": "2022-09-13T00:00:00",
           "RecordedOn": "2022-09-13T00:00:00",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-10-09T00:00:00+05:30",
           "RecordedOn": "2022-10-09T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-02T00:00:00+05:30",
           "RecordedOn": "2022-11-02T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2022-12-03T00:00:00",
           "RecordedOn": "2022-12-05T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2023-01-03T00:00:00",
           "RecordedOn": "2023-01-04T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-03T00:00:00",
           "RecordedOn": "2023-02-04T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     },
     {
       "Number": "321",
@@ -2101,7 +2460,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 40385.0,
       "Expenses": [
         {
@@ -2128,6 +2487,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -2136,18 +2500,22 @@
           "ReceivedOn": "2022-12-07T00:00:00+05:30",
           "RecordedOn": "2022-12-07T00:00:00+05:30",
           "Category": 1,
-          "Amount": 48785.00
+          "Amount": 48785.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-11T00:00:00",
           "RecordedOn": "2023-02-12T00:00:00+05:30",
           "Category": 1,
-          "Amount": 5600.00
+          "Amount": 5600.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 1120.000,
-      "CurrentOutstanding": 1120.000
+      "OutstandingOnSpecifiedDate": 3920.000,
+      "CurrentOutstanding": 3920.000,
+      "PenaltyTillSpecifiedDate": 1120.000,
+      "CurrentTotalPenalty": 1120.000
     },
     {
       "Number": "322",
@@ -2157,7 +2525,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -2184,11 +2552,18 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": null,
-      "OutstandingOnSpecifiedDate": 20160.000,
-      "CurrentOutstanding": 20160.000
+      "OutstandingOnSpecifiedDate": 22960.000,
+      "CurrentOutstanding": 22960.000,
+      "PenaltyTillSpecifiedDate": 3360.000,
+      "CurrentTotalPenalty": 3360.000
     },
     {
       "Number": "323",
@@ -2198,7 +2573,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 21490.0,
       "Expenses": [
         {
@@ -2225,6 +2600,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -2233,46 +2613,62 @@
           "ReceivedOn": "2022-09-05T00:00:00",
           "RecordedOn": "2022-09-05T00:00:00",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-01T00:00:00",
           "RecordedOn": "2022-11-02T00:00:00+05:30",
           "Category": 1,
-          "Amount": 5600.00
+          "Amount": 5600.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-12-09T00:00:00+05:30",
           "RecordedOn": "2022-12-09T00:00:00+05:30",
           "Category": 1,
-          "Amount": 10890.00
+          "Amount": 10890.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-12-10T00:00:00+05:30",
           "RecordedOn": "2022-12-10T00:00:00+05:30",
           "Category": 1,
-          "Amount": 7800.00
+          "Amount": 7800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2023-01-28T00:00:00",
           "RecordedOn": "2023-01-29T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2023-02-11T00:00:00",
           "RecordedOn": "2023-02-12T00:00:00+05:30",
           "Category": 1,
-          "Amount": 5600.00
+          "Amount": 5600.00,
+          "ReferenceId": null
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2023-03-01T00:00:00",
+          "RecordedOn": "2023-03-02T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "T2303012208312627086091"
         }
       ],
       "OutstandingOnSpecifiedDate": 1120.000,
-      "CurrentOutstanding": 1120.000
+      "CurrentOutstanding": 1120.000,
+      "PenaltyTillSpecifiedDate": 1120.000,
+      "CurrentTotalPenalty": 1120.000
     },
     {
       "Number": "324",
@@ -2282,7 +2678,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-03-01T00:00:00+05:30",
+      "DateSpecified": "2023-03-02T00:00:00+05:30",
       "OpeningBalance": 2600.0,
       "Expenses": [
         {
@@ -2309,6 +2705,11 @@
           "OccuredOn": "2023-02-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-03-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -2317,46 +2718,54 @@
           "ReceivedOn": "2022-09-14T00:00:00",
           "RecordedOn": "2022-09-14T00:00:00",
           "Category": 1,
-          "Amount": 2600.00
+          "Amount": 2600.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-10-14T00:00:00+05:30",
           "RecordedOn": "2022-10-14T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-11-17T00:00:00",
           "RecordedOn": "2022-11-22T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 1,
           "ReceivedOn": "2022-12-02T00:00:00",
           "RecordedOn": "2022-12-05T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-01-02T00:00:00+05:30",
           "RecordedOn": "2023-01-02T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         },
         {
           "Mode": 3,
           "ReceivedOn": "2023-02-03T00:00:00",
           "RecordedOn": "2023-02-04T00:00:00+05:30",
           "Category": 1,
-          "Amount": 2800.00
+          "Amount": 2800.00,
+          "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00
+      "OutstandingOnSpecifiedDate": 2800.00,
+      "CurrentOutstanding": 2800.00,
+      "PenaltyTillSpecifiedDate": 0.0,
+      "CurrentTotalPenalty": 0.0
     }
   ],
   "PenaltyCommencesFrom": "2023-02-01T00:00:00",

@@ -23,7 +23,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
     public class BlockOutstandingsReport : Report, IReport
     {
         #region Private Fields
-
+        /// Exercise cuation while changing this string. This string is used to access the linked js files.
         private const string _fileName = "Block Outstandings";
 
         private readonly Block _block;
@@ -43,11 +43,14 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         #region Parameterized Constructor
 
-        public BlockOutstandingsReport(Block block, DateTime reportTill, OutstandingsFilter filter = OutstandingsFilter.All)
+        public BlockOutstandingsReport(Block block, DateTime reportTill,
+                                       OutstandingsFilter filter = OutstandingsFilter.All,
+                                       bool showPenaltiesOnly = false)
         {
             _block = block;
             _reportTill = reportTill;
 
+            ShowPenaltiesOnly = showPenaltiesOnly;
             Filter = filter;
         }
 
@@ -61,7 +64,12 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         [JsonProperty]
         public string TotalOutstanding { get => Get<string>(); private set => Set(value); }
 
+        [JsonProperty]
+        public string TotalPenalty { get => Get<string>(); private set => Set(value); }
+
         public OutstandingsFilter Filter { get => Get<OutstandingsFilter>(); private set => Set(value); }
+
+        public bool ShowPenaltiesOnly { get => Get<bool>(); private set => Set(value); }
 
         #endregion
 
@@ -101,6 +109,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             }
 
             TotalOutstanding = FlatInfoCollection?.Sum(f => decimal.Parse(StripNumberFormat(f.OutstandingOnSpecifiedDate))).FormatNumber("N1");
+            TotalPenalty = FlatInfoCollection?.Sum(f => decimal.Parse(StripNumberFormat(f.PenaltyTillSpecifiedDate))).FormatNumber("N1");
         }
 
         #endregion
@@ -168,8 +177,14 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private protected override string GetFileName()
         {
-            var penaltyString = _block.ConsiderPenalties ? "With Penalties" : "Without Penalties";
-            return $"{_fileName} - As on {_reportTill:dd MMM yyyy} - {penaltyString} - {Filter}";
+            if (ShowPenaltiesOnly)
+            {
+                return $"Summary of Penalties - As on {_reportTill:dd MMM yyyy}";
+            }
+
+            string penaltyString = _block.ConsiderPenalties ? "With Penalties" : "Without Penalties";
+            ///return $"{_fileName} - As on {_reportTill:dd MMM yyyy} - {penaltyString} - {Filter}";
+            return $"Oustanding Dues {penaltyString} As on {_reportTill:dd MMM yyyy} - {Filter}";
         }
 
         #endregion

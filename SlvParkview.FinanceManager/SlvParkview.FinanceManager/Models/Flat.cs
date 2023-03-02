@@ -101,7 +101,6 @@ namespace SlvParkview.FinanceManager.Models
             set
             {
                 Set(value);
-                UpdateTenantName();
                 RaisePropertyChanged(nameof(CanChangeTenantName));
             }
         }
@@ -145,6 +144,15 @@ namespace SlvParkview.FinanceManager.Models
         /// Outstanding balance pending calculated till date.
         /// </summary>
         public decimal CurrentOutstanding => GetOutstandingBalanceOnSpecifiedDate();
+        /// <summary>
+        /// Total penalty till the specified date.
+        /// </summary>
+        public decimal PenaltyTillSpecifiedDate => GetTotalPenaltyOnSpecifiedDate(DateSpecified);
+        /// <summary>
+        /// Total penalty calculated till date.
+        /// </summary>
+        public decimal CurrentTotalPenalty => GetTotalPenaltyOnSpecifiedDate();
+
         ///// <summary>
         ///// Summary of transactions since the inception of the account till the required date.
         ///// </summary>
@@ -243,14 +251,6 @@ namespace SlvParkview.FinanceManager.Models
 
         #region Helper Methods
 
-        private void UpdateTenantName()
-        {
-            //if (ResidentType == ResidentType.Owner)
-            //{
-            //    TenantName = "";
-            //}
-        }
-
         private decimal GetOutstandingBalanceOnSpecifiedDate(DateTime? calculatedTill = null)
         {
             if (calculatedTill == null)
@@ -271,6 +271,17 @@ namespace SlvParkview.FinanceManager.Models
                                                     - paymentsTillSpecifiedDate;
 
             return outstandingOnSpecifiedDate;
+        }
+
+        private decimal GetTotalPenaltyOnSpecifiedDate(DateTime? calculatedTill = null)
+        {
+            if (calculatedTill == null)
+            {
+                calculatedTill = DateTime.Today;
+            }
+
+            return Penalties == null || Penalties.Count() == 0 ? 0.0m :
+                                                              Penalties.Where(p => p.OccuredOn <= calculatedTill).Sum(p => p.Amount);
         }
 
         public void GeneratePenalties(Block block)
