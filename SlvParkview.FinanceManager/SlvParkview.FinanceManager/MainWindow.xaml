@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="http://schemas.reinvented.com/shared"
     xmlns:theme="http://schemas.reinvented.com/ui/themes"
+    xmlns:uc="clr-namespace:SlvParkview.FinanceManager.Components"
     xmlns:vm="clr-namespace:SlvParkview.FinanceManager.ViewModels"
     Width="{StaticResource MainWindowWidth}"
     Height="{StaticResource MainWindowHeight}"
@@ -36,44 +37,7 @@
 
         <Grid Height="38" Background="{theme:ThemeResource ResourceKey=StaticBackgroundBrush}">
 
-            <!--#region Main Menu-->
-
-            <Menu
-                Height="30"
-                Margin="5,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                BorderBrush="{theme:ThemeResource ResourceKey=StaticBorderBrush}"
-                BorderThickness="0.1">
-
-                <MenuItem Width="Auto" Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}">
-
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="Assets/Images/menu-light.png" />
-                        </StackPanel>
-                    </MenuItem.Header>
-
-
-                    <MenuItem.Resources>
-                        <Style TargetType="{x:Type MenuItem}">
-                            <Setter Property="Height" Value="26" />
-                        </Style>
-                    </MenuItem.Resources>
-
-                    <MenuItem Command="{Binding RetrieveDataCommand}" Header="_Read Existing Data" />
-                    <MenuItem
-                        Command="{Binding GenerateDataCommand}"
-                        Header="_Generate Data"
-                        IsEnabled="False" />
-                    <MenuItem
-                        Command="{Binding SaveDataCommand}"
-                        Header="_Save Data"
-                        IsEnabled="{Binding DataManagementService.AllowSave, UpdateSourceTrigger=PropertyChanged}" />
-                </MenuItem>
-            </Menu>
-
-            <!--#endregion-->
+            <uc:MenuControl />
 
             <!--#region Title-->
 
@@ -94,65 +58,7 @@
 
             <!--#endregion-->
 
-            <!--#region Window Controls-->
-
-            <StackPanel
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Orientation="Horizontal">
-
-                <StackPanel.Resources>
-
-                    <Style TargetType="{x:Type Image}">
-                        <Setter Property="Width" Value="16" />
-                    </Style>
-
-                </StackPanel.Resources>
-
-                <StackPanel Orientation="Horizontal">
-                    <Image
-                        Width="22"
-                        Margin="0,0,5,0"
-                        VerticalAlignment="Center"
-                        Source="Assets/Images/theme-light.png" />
-                    <ComboBox
-                        Width="80"
-                        BorderThickness="0"
-                        ItemsSource="{shared:EnumBindingResource theme:ThemeType}"
-                        SelectedItem="{Binding ThemeViewModel.SelectedTheme}" />
-
-                </StackPanel>
-
-                <Button
-                    Margin="5,0"
-                    Padding="5,0"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    Click="OnMinimizeButtonClick">
-                    <Image Source="Assets/Images/minimize-light.png" />
-                </Button>
-                <Button
-                    x:Name="btnMaximizeOrRestore"
-                    Margin="5,0"
-                    Padding="5,0"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    Click="OnMaximizeOrRestoreButtonClick">
-                    <Image Source="Assets/Images/maximize-light.png" />
-                </Button>
-
-                <Button
-                    Margin="5,0"
-                    Padding="5,0"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    Click="OnCloseButtonClick">
-                    <Image Source="Assets/Images/close-light.png" />
-                </Button>
-
-            </StackPanel>
-
-            <!--#endregion-->
+            <uc:WindowButtonsControl />
 
         </Grid>
 
@@ -161,15 +67,8 @@
         <!--#region Main Content-->
 
 
-        <Grid
-            Grid.Row="1"
-            Width="{StaticResource HostWidth}"
-            Height="{StaticResource HostHeight}"
-            MinWidth="{StaticResource HostMinimumWidth}"
-            MinHeight="{StaticResource HostMinimumHeight}"
-            MaxWidth="{StaticResource HostMaximumWidth}"
-            MaxHeight="{StaticResource HostMaximumHeight}"
-            Margin="25">
+        <Grid Grid.Row="1" Style="{StaticResource HostStyle}">
+
             <ContentControl Content="{Binding CurrentViewModel}" />
 
         </Grid>

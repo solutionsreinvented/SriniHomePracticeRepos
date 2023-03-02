@@ -24,15 +24,8 @@
 
         <DataGrid
             Grid.Row="0"
-            Margin="5"
-            AutoGenerateColumns="False"
-            CanUserAddRows="False"
-            CanUserDeleteRows="True"
-            CanUserResizeRows="False"
-            HorizontalScrollBarVisibility="Disabled"
             ItemsSource="{Binding Report.FlatInfoCollection}"
-            SelectionUnit="FullRow"
-            VerticalScrollBarVisibility="Auto">
+            Style="{StaticResource ContentDataGridStyle}">
 
             <DataGrid.Columns>
 

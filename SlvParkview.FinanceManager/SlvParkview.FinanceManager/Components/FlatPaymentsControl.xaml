@@ -33,17 +33,9 @@
 
             <DataGrid
                 Grid.Row="0"
-                Margin="5"
-                AutoGenerateColumns="False"
-                CanUserAddRows="False"
-                CanUserDeleteRows="True"
-                CanUserResizeRows="False"
-                HorizontalScrollBarVisibility="Disabled"
                 ItemsSource="{Binding TargetFlat.Payments}"
                 SelectedItem="{Binding SelectedPayment}"
-                SelectionMode="Single"
-                SelectionUnit="FullRow"
-                VerticalScrollBarVisibility="Auto">
+                Style="{StaticResource ContentDataGridStyle}">
 
                 <DataGrid.Columns>
 
@@ -129,6 +121,7 @@
 
                 <TextBox
                     Grid.Column="1"
+                    Height="24"
                     VerticalAlignment="Center"
                     HorizontalContentAlignment="Left"
                     IsEnabled="{Binding EnableReferenceId}"

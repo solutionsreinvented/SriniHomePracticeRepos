@@ -105,16 +105,7 @@
             BorderThickness="0.2"
             Header="Transactions">
 
-            <DataGrid
-                Margin="5"
-                AutoGenerateColumns="False"
-                CanUserAddRows="False"
-                CanUserDeleteRows="True"
-                CanUserResizeRows="False"
-                HorizontalScrollBarVisibility="Disabled"
-                ItemsSource="{Binding Report.Transactions}"
-                SelectionUnit="FullRow"
-                VerticalScrollBarVisibility="Auto">
+            <DataGrid ItemsSource="{Binding Report.Transactions}" Style="{StaticResource ContentDataGridStyle}">
 
                 <DataGrid.Columns>
 

@@ -123,6 +123,12 @@
     <Compile Include="Components\FlatPaymentsControl.xaml.cs">
       <DependentUpon>FlatPaymentsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\MenuControl.xaml.cs">
+      <DependentUpon>MenuControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\WindowButtonsControl.xaml.cs">
+      <DependentUpon>WindowButtonsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Reporting\Components\OutstandingsControl.xaml.cs">
       <DependentUpon>OutstandingsControl.xaml</DependentUpon>
     </Compile>
@@ -275,6 +281,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Components\MenuControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\WindowButtonsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Reporting\Components\OutstandingsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -334,6 +348,10 @@
     <Page Include="Resources\DataTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\OverridingStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Settings.xaml">
       <Generator>MSBuild:Compile</Generator>

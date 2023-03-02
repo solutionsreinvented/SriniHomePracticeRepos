@@ -33,16 +33,9 @@
 
             <DataGrid
                 Grid.Row="0"
-                Margin="5"
-                AutoGenerateColumns="False"
-                CanUserAddRows="False"
-                CanUserDeleteRows="True"
-                CanUserResizeRows="False"
-                HorizontalScrollBarVisibility="Disabled"
                 ItemsSource="{Binding TargetFlat.Expenses}"
                 SelectedItem="{Binding SelectedExpense}"
-                SelectionUnit="FullRow"
-                VerticalScrollBarVisibility="Auto">
+                Style="{StaticResource ContentDataGridStyle}">
 
                 <DataGrid.Columns>
 
