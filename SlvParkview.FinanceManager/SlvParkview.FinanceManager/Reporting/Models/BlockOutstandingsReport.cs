@@ -23,7 +23,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
     public class BlockOutstandingsReport : Report, IReport
     {
         #region Private Fields
-
+        /// Exercise cuation while changing this string. This string is used to access the linked js files.
         private const string _fileName = "Block Outstandings";
 
         private readonly Block _block;
@@ -177,8 +177,14 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private protected override string GetFileName()
         {
-            var penaltyString = _block.ConsiderPenalties ? "With Penalties" : "Without Penalties";
-            return $"{_fileName} - As on {_reportTill:dd MMM yyyy} - {penaltyString} - {Filter}";
+            if (ShowPenaltiesOnly)
+            {
+                return $"Summary of Penalties - As on {_reportTill:dd MMM yyyy}";
+            }
+
+            string penaltyString = _block.ConsiderPenalties ? "With Penalties" : "Without Penalties";
+            ///return $"{_fileName} - As on {_reportTill:dd MMM yyyy} - {penaltyString} - {Filter}";
+            return $"Oustanding Dues {penaltyString} As on {_reportTill:dd MMM yyyy} - {Filter}";
         }
 
         #endregion

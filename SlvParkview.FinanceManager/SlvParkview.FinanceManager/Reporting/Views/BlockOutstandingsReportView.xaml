@@ -72,10 +72,12 @@
                     Grid.Column="3"
                     Margin="5,2"
                     VerticalAlignment="Center"
+                    IsEnabled="{Binding IsChecked, ElementName=ShowPenalties, Converter={shared:InvertBooleanConverter}}"
                     ItemsSource="{shared:EnumBindingResource enums:OutstandingsFilter}"
                     SelectedItem="{Binding Filter}" />
 
                 <CheckBox
+                    x:Name="ShowPenalties"
                     Grid.Column="4"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"

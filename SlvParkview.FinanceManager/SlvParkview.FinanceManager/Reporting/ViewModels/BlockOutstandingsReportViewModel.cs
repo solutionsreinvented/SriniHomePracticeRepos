@@ -27,7 +27,7 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
 
         public OutstandingsFilter Filter { get => Get(OutstandingsFilter.All); set { Set(value); UpdateReport(); } }
 
-        public bool ShowOnlyPenalties { get => Get<bool>(); set { Set(value); UpdateReport(); } }
+        public bool ShowOnlyPenalties { get => Get<bool>(); set { Set(value); Filter = OutstandingsFilter.All; UpdateReport(); } }
 
         public string OutstandingHeader { get => Get<string>(); private set => Set(value); }
 
