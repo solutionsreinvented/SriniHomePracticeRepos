@@ -15,7 +15,7 @@ namespace SlvParkview.FinanceManager.Models
 
         public Payment()
         {
-
+            Mode = PaymentMode.AppPayment;
         }
 
         #endregion
@@ -42,11 +42,11 @@ namespace SlvParkview.FinanceManager.Models
 
         public PaymentMode Mode
         {
-            get => Get(PaymentMode.Cash);
+            get => Get<PaymentMode>();
             set
             {
                 Set(value);
-                EnableReferenceId = value == PaymentMode.Online || value == PaymentMode.Cheque;
+                EnableReferenceId = value != PaymentMode.Cash;
             }
         }
         /// <summary>
