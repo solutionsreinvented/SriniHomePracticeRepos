@@ -7,7 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="http://schemas.reinvented.com/shared"
     xmlns:theme="http://schemas.reinvented.com/ui/themes"
-    VerticalAlignment="Center"
     d:DesignHeight="{StaticResource ViewHeight}"
     d:DesignWidth="{StaticResource ViewWidth}"
     Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"

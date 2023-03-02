@@ -76,6 +76,7 @@
             <!--#endregion-->
 
             <!--#region Title-->
+
             <StackPanel
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -90,6 +91,7 @@
                     Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
                     Text="SLV Parkview Finance Manager" />
             </StackPanel>
+
             <!--#endregion-->
 
             <!--#region Window Controls-->
@@ -158,11 +160,6 @@
 
         <!--#region Main Content-->
 
-        <!--<Grid
-            Grid.Row="1"
-            MaxWidth="900"
-            MaxHeight="650"
-            Margin="25">-->
 
         <Grid
             Grid.Row="1"
@@ -179,6 +176,8 @@
 
         <!--#endregion-->
 
+        <!--#region Footer-->
+
         <TextBlock
             Grid.RowSpan="2"
             Margin="15,0,10,10"
@@ -187,6 +186,8 @@
             <Run Text="Crafted by" />
             <Run Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}" Text="© ReInvented" />
         </TextBlock>
+
+        <!--#endregion-->
 
     </Grid>
 

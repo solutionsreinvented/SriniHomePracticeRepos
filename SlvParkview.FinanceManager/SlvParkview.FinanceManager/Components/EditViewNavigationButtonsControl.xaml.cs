@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace SlvParkview.FinanceManager.Components
 {
     /// <summary>
-    /// Interaction logic for PaymentsHistoryControl.xaml
+    /// Interaction logic for EditViewNavigationButtonsControl.xaml
     /// </summary>
-    public partial class PaymentsHistoryControl : UserControl
+    public partial class EditViewNavigationButtonsControl : UserControl
     {
-        public PaymentsHistoryControl()
+        public EditViewNavigationButtonsControl()
         {
             InitializeComponent();
         }
