@@ -6,6 +6,7 @@ using System.Windows.Input;
 using SlvParkview.FinanceManager.Services;
 using SlvParkview.FinanceManager.Models;
 using System;
+using System.Collections.Generic;
 
 namespace SlvParkview.FinanceManager.ViewModels
 {
@@ -45,6 +46,12 @@ namespace SlvParkview.FinanceManager.ViewModels
         public Payment Payment { get => Get<Payment>(); set => Set(value); }
 
         public Flat TargetFlat { get => Get<Flat>(); set => Set(value); }
+
+        #endregion
+
+        #region Readonly Properties
+
+        public IEnumerable<Flat> Flats => _summaryViewModel.Block.Flats;
 
         #endregion
 

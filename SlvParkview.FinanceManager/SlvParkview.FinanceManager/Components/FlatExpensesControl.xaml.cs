@@ -3,11 +3,11 @@
 namespace SlvParkview.FinanceManager.Components
 {
     /// <summary>
-    /// Interaction logic for PenaltyInfoControl.xaml
+    /// Interaction logic for FlatExpensesControl.xaml
     /// </summary>
-    public partial class PenaltyInfoControl : UserControl
+    public partial class FlatExpensesControl : UserControl
     {
-        public PenaltyInfoControl()
+        public FlatExpensesControl()
         {
             InitializeComponent();
         }

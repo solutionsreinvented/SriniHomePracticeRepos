@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Services;
+using System.Collections.Generic;
 
 namespace SlvParkview.FinanceManager.ViewModels
 {
@@ -44,6 +45,12 @@ namespace SlvParkview.FinanceManager.ViewModels
         public Expense Expense { get => Get<Expense>(); set => Set(value); }
 
         public Flat TargetFlat { get => Get<Flat>(); set => Set(value); }
+
+        #endregion
+
+        #region Readonly Properties
+
+        public IEnumerable<Flat> Flats => _summaryViewModel.Block.Flats;
 
         #endregion
 

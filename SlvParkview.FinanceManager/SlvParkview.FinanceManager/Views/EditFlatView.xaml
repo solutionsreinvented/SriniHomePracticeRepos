@@ -5,7 +5,6 @@
     xmlns:comps="clr-namespace:SlvParkview.FinanceManager.Components"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:shared="http://schemas.reinvented.com/shared"
     xmlns:theme="http://schemas.reinvented.com/ui/themes"
     d:DesignHeight="{StaticResource ViewHeight}"
     d:DesignWidth="{StaticResource ViewWidth}"
@@ -22,6 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -30,20 +30,7 @@
 
         <!--#region Effects-->
 
-        <Border
-            Grid.RowSpan="4"
-            Background="{theme:ThemeResource ResourceKey=StaticBackgroundBrush}"
-            BorderThickness="2"
-            CornerRadius="5">
-            <Border.Effect>
-                <DropShadowEffect
-                    BlurRadius="5"
-                    Direction="45"
-                    Opacity="0.6"
-                    ShadowDepth="2"
-                    Color="Gray" />
-            </Border.Effect>
-        </Border>
+        <Border Grid.RowSpan="5" Style="{StaticResource BorderEffectStyle}" />
 
         <!--#endregion-->
 
@@ -62,13 +49,18 @@
 
         <!--#region Flat Information-->
 
-        <comps:FlatDetailControl Grid.Row="1" DataContext="{Binding TargetFlat}" />
+        <comps:FlatNavigationControl
+            Grid.Row="1"
+            Margin="20,0,20,0"
+            DataContext="{Binding}" />
+
+        <comps:FlatDetailControl Grid.Row="2" DataContext="{Binding TargetFlat}" />
 
         <!--#endregion-->
 
         <!--#region Transactions History-->
 
-        <Grid Grid.Row="2" Margin="20,0,20,10">
+        <Grid Grid.Row="3" Margin="20,0,20,10">
 
             <!--#region Grid Definitions-->
 
@@ -79,364 +71,18 @@
 
             <!--#endregion-->
 
-            <!--#region Payments History Group-->
+            <comps:FlatPaymentsControl Grid.Column="0" />
 
-            <GroupBox
-                Grid.Column="0"
-                BorderThickness="0.2"
-                Header="Payments History">
-
-                <Grid>
-
-                    <!--#region Grid Definitions-->
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
-                    <!--#endregion-->
-
-                    <!--#region Payments Data-->
-
-                    <DataGrid
-                        Grid.Row="0"
-                        Margin="5"
-                        AutoGenerateColumns="False"
-                        CanUserAddRows="False"
-                        CanUserDeleteRows="True"
-                        CanUserResizeRows="False"
-                        HorizontalScrollBarVisibility="Disabled"
-                        ItemsSource="{Binding TargetFlat.Payments}"
-                        SelectedItem="{Binding SelectedPayment}"
-                        SelectionMode="Single"
-                        SelectionUnit="FullRow"
-                        VerticalScrollBarVisibility="Auto">
-
-                        <DataGrid.Columns>
-
-                            <!--#region Date Column-->
-
-                            <DataGridTemplateColumn Width="*" Header="Date">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding ReceivedOn, StringFormat={}{0:dd-MM-yyyy}}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-
-                            <!--#endregion-->
-
-                            <!--#region Amount Column-->
-
-                            <DataGridTemplateColumn Width="0.7*" Header="Amount">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Amount, StringFormat={}{0:N2}}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-
-                            <!--#endregion-->
-
-                            <!--#region Category Column-->
-
-                            <DataGridTemplateColumn Width="1.6*" Header="Category">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Category}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-
-                            <!--#endregion-->
-
-                            <!--#region Payment Mode Column-->
-
-                            <DataGridTemplateColumn Width="0.7*" Header="Mode">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Mode}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-
-                            <!--#endregion-->
-
-                        </DataGrid.Columns>
-
-                    </DataGrid>
-
-                    <!--#endregion-->
-
-                    <!--#region Edit Selected Payment-->
-
-                    <comps:EditPaymentControl
-                        Grid.Row="1"
-                        Margin="5,5,5,10"
-                        DataContext="{Binding SelectedPayment}"
-                        Visibility="{Binding DataContext.CanModifyPayment, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={shared:BoolToVisibilityConverter}}" />
-
-                    <!--#endregion-->
-
-                    <!--#region Payment Manipulation Buttons-->
-
-                    <Grid Grid.Row="2" Margin="5,0">
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock
-                            Grid.Column="0"
-                            VerticalAlignment="Center"
-                            Text="Reference Id:" />
-
-                        <TextBox
-                            Grid.Column="1"
-                            VerticalAlignment="Center"
-                            HorizontalContentAlignment="Left"
-                            IsEnabled="{Binding EnableReferenceId}"
-                            Text="{Binding SelectedPayment.ReferenceId}" />
-
-
-                        <Button
-                            Grid.Column="2"
-                            Margin="20,0,0,0"
-                            Command="{Binding DeletePaymentCommand}"
-                            Content="D_elete Payment"
-                            IsEnabled="{Binding CanModifyPayment}" />
-                        <Button
-                            Grid.Column="3"
-                            Margin="10,0,0,0"
-                            Command="{Binding SavePaymentCommand}"
-                            Content="S_ave Payment"
-                            IsEnabled="{Binding CanModifyPayment}" />
-
-                    </Grid>
-
-                    <!--#endregion-->
-
-                </Grid>
-
-            </GroupBox>
-
-            <!--#endregion-->
-
-            <!--#region Expenses History Group-->
-
-            <GroupBox
-                Grid.Column="1"
-                Margin="5,0,0,0"
-                BorderThickness="0.2"
-                Header="Expenses History">
-
-                <Grid>
-
-                    <!--#region Grid Definitions-->
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
-                    <!--#endregion-->
-
-                    <!--#region Expenses Data-->
-
-                    <DataGrid
-                        Grid.Row="0"
-                        Margin="5"
-                        AutoGenerateColumns="False"
-                        CanUserAddRows="False"
-                        CanUserDeleteRows="True"
-                        CanUserResizeRows="False"
-                        HorizontalScrollBarVisibility="Disabled"
-                        ItemsSource="{Binding TargetFlat.Expenses}"
-                        SelectedItem="{Binding SelectedExpense}"
-                        SelectionUnit="FullRow"
-                        VerticalScrollBarVisibility="Auto">
-
-                        <DataGrid.Columns>
-
-                            <!--#region Date Column-->
-
-                            <DataGridTemplateColumn Width="*" Header="Date">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding OccuredOn, StringFormat={}{0:dd-MM-yyyy}}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-
-                            <!--#endregion-->
-
-                            <!--#region Amount Column-->
-
-                            <DataGridTemplateColumn Width="0.8*" Header="Amount">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Amount, StringFormat={}{0:N2}}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-
-                            <!--#endregion-->
-
-                            <!--#region Category Column-->
-
-                            <DataGridTemplateColumn Width="1.6*" Header="Category">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Category}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-
-                            <!--#endregion-->
-
-                        </DataGrid.Columns>
-
-                    </DataGrid>
-
-                    <!--#endregion-->
-
-                    <!--#region Edit Selected Expense-->
-
-                    <comps:EditExpenseControl
-                        Grid.Row="1"
-                        Margin="5,5,5,10"
-                        DataContext="{Binding SelectedExpense}"
-                        Visibility="{Binding DataContext.CanModifyExpense, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={shared:BoolToVisibilityConverter}}" />
-
-                    <!--#endregion-->
-
-                    <!--#region Expenses Manipulation Buttons-->
-
-                    <UniformGrid Grid.Row="2" Columns="2">
-
-                        <Button
-                            Command="{Binding DeleteExpenseCommand}"
-                            Content="Dele_te Expense"
-                            IsEnabled="{Binding CanModifyExpense}" />
-                        <Button
-                            Command="{Binding SaveExpenseCommand}"
-                            Content="Sa_ve Expense"
-                            IsEnabled="{Binding CanModifyExpense}" />
-
-                    </UniformGrid>
-
-                    <!--#endregion-->
-
-                </Grid>
-
-            </GroupBox>
-
-            <!--#endregion-->
+            <comps:FlatExpensesControl Grid.Column="1" Margin="5,0,0,0" />
 
         </Grid>
 
-        <!--#endregion-->
-
-        <!--#region Buttons Group-->
-
-        <Grid
-            Grid.Row="3"
+        <comps:EditViewNavigationButtonsControl
+            Grid.Row="4"
             Height="26"
             Margin="20,0,20,10"
-            VerticalAlignment="Center">
+            VerticalAlignment="Center" />
 
-            <!--#region Grid Definitions-->
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition Width="1.2*" />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-            <!--#endregion-->
-
-            <!--#region Buttons-->
-
-            <Button
-                Grid.Column="0"
-                Margin="0,0,5,0"
-                Command="{Binding GenerateReportsCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <Image
-                        Height="18"
-                        Margin="5,0"
-                        Source="/Assets/Images/reports-light.png" />
-                    <TextBlock VerticalAlignment="Center" Text="Go to Reports" />
-                </StackPanel>
-            </Button>
-
-            <Button
-                Grid.Column="1"
-                Margin="5,0"
-                Command="{Binding AddPaymentCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <Image
-                        Height="18"
-                        Margin="5,0"
-                        Source="/Assets/Images/payment-light.png" />
-                    <TextBlock VerticalAlignment="Center" Text="Add Payment" />
-                </StackPanel>
-            </Button>
-
-            <Button
-                Grid.Column="2"
-                Margin="5,0"
-                Command="{Binding AddExpenseCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <Image
-                        Height="18"
-                        Margin="5,0"
-                        Source="/Assets/Images/expense-light.png" />
-                    <TextBlock VerticalAlignment="Center" Text="Add Expense" />
-                </StackPanel>
-            </Button>
-
-            <Button
-                Grid.Column="3"
-                Margin="5,0"
-                Command="{Binding AddCommonExpenseCommand}"
-                Content="Add _Common Expense" />
-
-            <Button
-                Grid.Column="4"
-                Margin="5,0"
-                Command="{Binding SaveFlatCommand}"
-                Content="Save F_lat Details"
-                IsDefault="True"
-                IsEnabled="{Binding TargetFlat.ChangesAllowed}" />
-
-            <Button
-                Grid.Column="5"
-                Margin="5,0,0,0"
-                Command="{Binding GoToSummaryCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <Image
-                        Height="18"
-                        Margin="5,0"
-                        Source="/Assets/Images/summary-light.png" />
-                    <TextBlock VerticalAlignment="Center" Text="Switch to Summary" />
-                </StackPanel>
-            </Button>
-
-            <!--#endregion-->
-
-        </Grid>
-
-        <!--#endregion-->
 
     </Grid>
 

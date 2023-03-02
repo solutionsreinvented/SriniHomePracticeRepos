@@ -49,31 +49,7 @@
 
     <!--#endregion-->
 
-    <!--#region Default Style for Main Views-->
 
-    <Style x:Key="ViewStyle" TargetType="{x:Type UserControl}">
-        <Setter Property="MinWidth" Value="{StaticResource ViewMinimumWidth}" />
-        <Setter Property="MinHeight" Value="{StaticResource ViewMinimumHeight}" />
-        <Setter Property="MaxWidth" Value="{StaticResource ViewMaximumWidth}" />
-        <Setter Property="MaxHeight" Value="{StaticResource ViewMaximumHeight}" />
-        <Setter Property="Width" Value="{StaticResource ViewWidth}" />
-        <Setter Property="Height" Value="{StaticResource ViewHeight}" />
-    </Style>
-
-    <!--#endregion-->
-
-    <!--#region Default Style for Report Control-->
-
-    <Style x:Key="ReportViewStyle" TargetType="{x:Type UserControl}">
-        <Setter Property="MinWidth" Value="{StaticResource ReportControlMinimumWidth}" />
-        <Setter Property="MinHeight" Value="{StaticResource ReportControlMinimumHeight}" />
-        <Setter Property="MaxWidth" Value="{StaticResource ReportControlMaximumWidth}" />
-        <Setter Property="MaxHeight" Value="{StaticResource ReportControlMaximumHeight}" />
-        <Setter Property="Width" Value="{StaticResource ReportControlWidth}" />
-        <Setter Property="Height" Value="{StaticResource ReportControlHeight}" />
-    </Style>
-
-    <!--#endregion-->
 
 
 </ResourceDictionary>

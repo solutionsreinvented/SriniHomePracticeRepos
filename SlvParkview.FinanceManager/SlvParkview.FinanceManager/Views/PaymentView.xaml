@@ -21,6 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -29,20 +30,7 @@
 
         <!--#region Effects-->
 
-        <Border
-            Grid.RowSpan="4"
-            Background="{theme:ThemeResource ResourceKey=StaticBackgroundBrush}"
-            BorderThickness="2"
-            CornerRadius="5">
-            <Border.Effect>
-                <DropShadowEffect
-                    BlurRadius="5"
-                    Direction="45"
-                    Opacity="0.6"
-                    ShadowDepth="2"
-                    Color="Gray" />
-            </Border.Effect>
-        </Border>
+        <Border Grid.RowSpan="5" Style="{StaticResource BorderEffectStyle}" />
 
         <!--#endregion-->
 
@@ -61,14 +49,19 @@
 
         <!--#region Flat Information-->
 
-        <components:FlatDetailControl Grid.Row="1" DataContext="{Binding TargetFlat}" />
+        <components:FlatNavigationControl
+            Grid.Row="1"
+            Margin="20,0,20,0"
+            DataContext="{Binding}" />
+
+        <components:FlatDetailControl Grid.Row="2" DataContext="{Binding TargetFlat}" />
 
         <!--#endregion-->
 
         <!--#region Add Payment Detail-->
 
         <GroupBox
-            Grid.Row="2"
+            Grid.Row="3"
             Margin="20,0,20,10"
             BorderThickness="0.2"
             Header="Add New Payment">
@@ -182,7 +175,7 @@
         <!--#region Buttons Group-->
 
         <Grid
-            Grid.Row="3"
+            Grid.Row="4"
             Height="26"
             Margin="20,0,20,10">
 
