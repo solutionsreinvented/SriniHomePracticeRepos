@@ -182,23 +182,42 @@
 
                     <!--#region Payment Manipulation Buttons-->
 
-                    <UniformGrid
-                        Grid.Row="2"
-                        Margin="5,0"
-                        Columns="2">
+                    <Grid Grid.Row="2" Margin="5,0">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Text="Reference Id:" />
+
+                        <TextBox
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Left"
+                            IsEnabled="{Binding EnableReferenceId}"
+                            Text="{Binding SelectedPayment.ReferenceId}" />
+
 
                         <Button
-                            Margin="0,0,20,0"
+                            Grid.Column="2"
+                            Margin="20,0,0,0"
                             Command="{Binding DeletePaymentCommand}"
                             Content="D_elete Payment"
                             IsEnabled="{Binding CanModifyPayment}" />
                         <Button
-                            Margin="20,0,0,0"
+                            Grid.Column="3"
+                            Margin="10,0,0,0"
                             Command="{Binding SavePaymentCommand}"
                             Content="S_ave Payment"
                             IsEnabled="{Binding CanModifyPayment}" />
 
-                    </UniformGrid>
+                    </Grid>
 
                     <!--#endregion-->
 
