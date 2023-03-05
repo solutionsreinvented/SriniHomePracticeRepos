@@ -28,7 +28,9 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <!--#endregion-->
@@ -64,10 +66,26 @@
 
         <!--#endregion-->
 
+        <Grid Grid.Row="1" Margin="20,10" Width="{StaticResource HostWidth}">
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <TextBlock
+                    Width="200"
+                    VerticalAlignment="Center"
+                    Text="Choose block:" />
+                <ComboBox Width="50">
+                    <ComboBoxItem>A</ComboBoxItem>
+                    <ComboBoxItem>B</ComboBoxItem>
+                    <ComboBoxItem>C</ComboBoxItem>
+                    <ComboBoxItem>D</ComboBoxItem>
+                    <ComboBox.SelectedIndex>2</ComboBox.SelectedIndex>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+
         <!--#region Main Content-->
 
 
-        <Grid Grid.Row="1" Style="{StaticResource HostStyle}">
+        <Grid Grid.Row="2" Style="{StaticResource HostStyle}">
 
             <ContentControl Content="{Binding CurrentViewModel}" />
 
@@ -78,7 +96,7 @@
         <!--#region Footer-->
 
         <TextBlock
-            Grid.RowSpan="2"
+            Grid.RowSpan="3"
             Margin="15,0,10,10"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom">

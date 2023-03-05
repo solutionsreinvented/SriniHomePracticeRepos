@@ -106,7 +106,7 @@ namespace SlvParkview.FinanceManager.Services
 
         private void Initialize()
         {
-            _filePath = Path.Combine(ServiceProvider.AppDirectory, "C Block Data.json");
+            _filePath = Path.Combine(ServiceProvider.AppDirectory, "C Block.json");
             _dataSerializer = new JsonDataSerializer<Block>();
 
             AllowSave = false;
