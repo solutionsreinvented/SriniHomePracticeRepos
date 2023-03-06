@@ -20,9 +20,9 @@
       "Payments": null
     },
     {
-      "Number": "018",
-      "Description": "C018",
-      "OwnedBy": "Rajesh Singh",
+      "Number": "002",
+      "Description": "A002",
+      "OwnedBy": "Madhura G",
       "CoOwnedBy": null,
       "TenantName": null,
       "ResidentType": 0,
@@ -37,9 +37,9 @@
       "Payments": null
     },
     {
-      "Number": "019",
-      "Description": "C019",
-      "OwnedBy": "Manjunath M N",
+      "Number": "003",
+      "Description": "A003",
+      "OwnedBy": "B V Prasad",
       "CoOwnedBy": null,
       "TenantName": null,
       "ResidentType": 0,
@@ -54,9 +54,9 @@
       "Payments": null
     },
     {
-      "Number": "020",
-      "Description": "C020",
-      "OwnedBy": "B V Nagaraja",
+      "Number": "004",
+      "Description": "A004",
+      "OwnedBy": "B V Prasad",
       "CoOwnedBy": null,
       "TenantName": "Manjunath K S",
       "ResidentType": 1,

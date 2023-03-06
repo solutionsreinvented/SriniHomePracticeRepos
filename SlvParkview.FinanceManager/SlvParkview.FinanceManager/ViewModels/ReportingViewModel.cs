@@ -102,7 +102,8 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void OnGenerate()
         {
-            ExcelExportImportService.ExportOutstandingDuesToExcel(CurrentReportViewModel.Report as BlockOutstandingsReport);
+            ExcelExportImportService.ExportFlatDataFromExcelToJson("");
+            ///ExcelExportImportService.ExportOutstandingDuesToExcel(CurrentReportViewModel.Report as BlockOutstandingsReport);
             ///CurrentReportViewModel.Report.SaveReport();
         }
 
