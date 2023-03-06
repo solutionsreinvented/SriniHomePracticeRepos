@@ -35,7 +35,10 @@
                 </Style>
             </MenuItem.Resources>
 
-            <MenuItem Command="{Binding RetrieveDataCommand}" Header="_Read Existing Data" />
+            <MenuItem
+                Command="{Binding RetrieveDataCommand}"
+                Header="_Read Existing Data"
+                IsEnabled="False" />
             <MenuItem
                 Command="{Binding GenerateDataCommand}"
                 Header="_Generate Data"

@@ -3,6 +3,7 @@ using ReInvented.Shared.Stores;
 using System.Windows.Input;
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Services;
+using SlvParkview.FinanceManager.Enums;
 
 namespace SlvParkview.FinanceManager.ViewModels
 {
@@ -32,6 +33,8 @@ namespace SlvParkview.FinanceManager.ViewModels
         public BaseViewModel CurrentViewModel { get => Get<BaseViewModel>(); set => Set(value); }
 
         public DataManagementService DataManagementService { get => Get<DataManagementService>(); private set => Set(value); }
+
+        public Tower SelectedTower { get => Get<Tower>(); set { Set(value); OnSelectedTowerChanged(); } }
 
         #endregion
 
@@ -78,7 +81,25 @@ namespace SlvParkview.FinanceManager.ViewModels
         /// </summary>
         private void OnSaveData()
         {
-            DataManagementService?.SaveData(_summaryViewModel.Block);
+            string towerDataFilename = $"{SelectedTower} Block.json";
+
+            ///DataManagementService?.SaveData(_summaryViewModel.Block);
+            DataManagementService?.SaveData(_summaryViewModel.Block, towerDataFilename);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void OnSelectedTowerChanged()
+        {
+            string towerDataFilename = $"{SelectedTower} Block.json";
+
+            Block deserializedData = DataManagementService.RetrieveData(towerDataFilename);
+
+            _summaryViewModel = new SummaryViewModel(_navigationService) { Block = deserializedData };
+
+            _navigationService.CurrentViewModel = _summaryViewModel;
         }
 
         #endregion
@@ -106,6 +127,8 @@ namespace SlvParkview.FinanceManager.ViewModels
             RetrieveDataCommand = new RelayCommand(OnRetrieveData, true);
 
             _navigationService.CurrentViewModel = _summaryViewModel;
+
+            SelectedTower = Tower.C;
         }
 
         #endregion

@@ -66,6 +66,9 @@
     <ApplicationIcon>Assets\Images\Icons\ledger-light.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -129,6 +132,7 @@
     <Compile Include="Components\WindowButtonsControl.xaml.cs">
       <DependentUpon>WindowButtonsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Enums\Tower.cs" />
     <Compile Include="Reporting\Components\OutstandingsControl.xaml.cs">
       <DependentUpon>OutstandingsControl.xaml</DependentUpon>
     </Compile>
@@ -204,6 +208,7 @@
       <DependentUpon>PaymentsReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Repositories\FlatRepository.cs" />
+    <Compile Include="Services\ExcelExportImportService.cs" />
     <Compile Include="Services\BlockInitialDataProvider.cs" />
     <Compile Include="Services\ConvertersService.cs" />
     <Compile Include="Services\DataManagementService.cs" />

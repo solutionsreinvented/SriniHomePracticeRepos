@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:enums="clr-namespace:SlvParkview.FinanceManager.Enums"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="http://schemas.reinvented.com/shared"
     xmlns:theme="http://schemas.reinvented.com/ui/themes"
@@ -37,7 +38,10 @@
 
         <!--#region Window Header-->
 
-        <Grid Height="38" Background="{theme:ThemeResource ResourceKey=StaticBackgroundBrush}">
+        <Grid
+            Grid.Row="0"
+            Height="38"
+            Background="{theme:ThemeResource ResourceKey=StaticBackgroundBrush}">
 
             <uc:MenuControl />
 
@@ -66,19 +70,19 @@
 
         <!--#endregion-->
 
-        <Grid Grid.Row="1" Margin="20,10" Width="{StaticResource HostWidth}">
+        <Grid
+            Grid.Row="1"
+            Width="{StaticResource ViewWidth}"
+            Margin="20,10">
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                 <TextBlock
                     Width="200"
                     VerticalAlignment="Center"
                     Text="Choose block:" />
-                <ComboBox Width="50">
-                    <ComboBoxItem>A</ComboBoxItem>
-                    <ComboBoxItem>B</ComboBoxItem>
-                    <ComboBoxItem>C</ComboBoxItem>
-                    <ComboBoxItem>D</ComboBoxItem>
-                    <ComboBox.SelectedIndex>2</ComboBox.SelectedIndex>
-                </ComboBox>
+                <ComboBox
+                    Width="50"
+                    ItemsSource="{shared:EnumBindingResource enums:Tower}"
+                    SelectedItem="{Binding SelectedTower}" />
             </StackPanel>
         </Grid>
 
