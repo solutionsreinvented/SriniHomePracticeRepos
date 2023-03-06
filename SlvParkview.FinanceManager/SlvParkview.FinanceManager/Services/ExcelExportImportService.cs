@@ -46,15 +46,11 @@ namespace SlvParkview.FinanceManager.Services
 
         public static void ExportFlatDataFromExcelToJson(string path)
         {
-            
+
         }
 
         public static void ExportOutstandingDuesToExcel(BlockOutstandingsReport report)
         {
-            int sRow = 3; int sCol = 3; int eRow = sRow + report.FlatInfoCollection.Count; int eCol = sCol + 5;
-
-            System.Data.DataTable reportTable = GenerateDataTable(report);
-
             Application xlApplication = new Application
             {
                 Visible = false,
@@ -62,43 +58,9 @@ namespace SlvParkview.FinanceManager.Services
             };
 
             Workbook xlWorkbook = xlApplication.Workbooks.Add(Type.Missing);
-            Worksheet xlWorksheet = xlWorkbook.ActiveSheet as Worksheet;
-
-            xlWorksheet.Name = "Outstanding Dues";
-
-            xlWorksheet.Range[xlWorksheet.Cells[sRow, sCol], xlWorksheet.Cells[sRow, eCol]].Merge();
-            xlWorksheet.Cells[sRow, sCol] = report.DocumentTitle;
-
-            for (int i = 0; i < reportTable.Columns.Count; i++)
-            {
-                xlWorksheet.Cells[sRow + 1, sCol + i] = reportTable.Columns[i].ColumnName;
-            }
-
-            int currentRow = sRow + 1;
-
-            foreach (DataRow dataRow in reportTable.Rows)
-            {
-                currentRow += 1;
-
-                for (int i = 0; i < reportTable.Columns.Count; i++)
-                {
-                    xlWorksheet.Cells[currentRow, sCol + i] = dataRow[i];
-                }
-            }
-
-            xlWorksheet.Range[xlWorksheet.Cells[sRow, sCol], xlWorksheet.Cells[sRow, eCol]].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-
-            Range headerArea = xlWorksheet.Range[xlWorksheet.Cells[sRow, sCol], xlWorksheet.Cells[sRow + 1, eCol]];
-            headerArea.Font.Bold = true;
-
-            Range printableArea = xlWorksheet.Range[xlWorksheet.Cells[sRow, sCol], xlWorksheet.Cells[eRow + 1, eCol]];
-            printableArea.EntireColumn.AutoFit();
-
-            printableArea.Borders.LineStyle = XlLineStyle.xlContinuous;
-            printableArea.Borders.Weight = 2d;
+            xlWorkbook = CopyDataToWorkbook(xlWorkbook, report);
 
             xlApplication.ActiveWindow.DisplayGridlines = false;
-
 
             string directory = @"C:\Users\masanams\Desktop\";
 
