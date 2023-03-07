@@ -2,6 +2,7 @@
 using System.Data;
 using System.IO;
 
+
 using Microsoft.Office.Interop.Excel;
 
 using SlvParkview.FinanceManager.Reporting.Models;
@@ -10,6 +11,8 @@ namespace SlvParkview.FinanceManager.Services
 {
     public static class ExcelExportImportService
     {
+        private static readonly string _filesDirectory = @"C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Move to Bin";
+
         public static void ExportFromExcelToJson()
         {
             Application xlApplication = new Application();
@@ -44,27 +47,42 @@ namespace SlvParkview.FinanceManager.Services
             ///}
         }
 
-        public static void ExportFlatDataFromExcelToJson(string path)
+        public static void ExportFlatDataFromExcelToJson()
         {
+            ExportFlatDataFromExcelToJson("Data Format.xlsx");
+        }
+
+        public static void ExportFlatDataFromExcelToJson(string fileName)
+        {
+            string inputFilePath = Path.Combine(_filesDirectory, fileName);
+
+            Application xlApplication = ExcelApplicationService.GetApplication();
+
+            Workbook xlWorkbook = xlApplication.Workbooks.Open(inputFilePath);
+            Worksheet xlWorksheet = xlWorkbook.Worksheets["Block Details"];
+
+            System.Windows.MessageBox.Show(xlWorksheet.Cells[1, 5].Value2);
+
+            xlWorkbook.Close();
+            xlApplication.Quit();
+
+            ExcelApplicationService.ReleaseObject(xlWorksheet);
+            ExcelApplicationService.ReleaseObject(xlWorkbook);
+            ExcelApplicationService.ReleaseObject(xlApplication);
 
         }
 
         public static void ExportOutstandingDuesToExcel(BlockOutstandingsReport report)
         {
-            Application xlApplication = new Application
-            {
-                Visible = false,
-                DisplayAlerts = false
-            };
+            Application xlApplication = ExcelApplicationService.GetApplication();
 
             Workbook xlWorkbook = xlApplication.Workbooks.Add(Type.Missing);
             xlWorkbook = CopyDataToWorkbook(xlWorkbook, report);
 
             xlApplication.ActiveWindow.DisplayGridlines = false;
 
-            string directory = @"C:\Users\masanams\Desktop\";
 
-            xlWorkbook.SaveAs($"{Path.Combine(directory, report.DocumentTitle)}.xlsx");
+            xlWorkbook.SaveAs($"{Path.Combine(_filesDirectory, report.DocumentTitle)}.xlsx");
             xlWorkbook.Close();
             xlApplication.Quit();
         }

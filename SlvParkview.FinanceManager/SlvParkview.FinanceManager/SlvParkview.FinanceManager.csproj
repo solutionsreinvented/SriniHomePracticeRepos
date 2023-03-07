@@ -208,6 +208,7 @@
       <DependentUpon>PaymentsReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Repositories\FlatRepository.cs" />
+    <Compile Include="Services\ExcelApplicationService.cs" />
     <Compile Include="Services\ExcelExportImportService.cs" />
     <Compile Include="Services\BlockInitialDataProvider.cs" />
     <Compile Include="Services\ConvertersService.cs" />
