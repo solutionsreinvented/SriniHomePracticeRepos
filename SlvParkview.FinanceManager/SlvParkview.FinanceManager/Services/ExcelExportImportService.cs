@@ -4,14 +4,16 @@ using System.IO;
 
 
 using Microsoft.Office.Interop.Excel;
-
+using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Reporting.Models;
 
 namespace SlvParkview.FinanceManager.Services
 {
     public static class ExcelExportImportService
     {
-        private static readonly string _filesDirectory = @"C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Move to Bin";
+        ///private static readonly string _filesDirectory = @"C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Move to Bin";
+        private static readonly string _filesDirectory = @"C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Move to Bin";
+
 
         public static void ExportFromExcelToJson()
         {
@@ -54,12 +56,29 @@ namespace SlvParkview.FinanceManager.Services
 
         public static void ExportFlatDataFromExcelToJson(string fileName)
         {
+            const int sRow = 1;
+            const int sCol = 1;
+            const int eCol = 5;
+
+            int eRow;
+
             string inputFilePath = Path.Combine(_filesDirectory, fileName);
 
             Application xlApplication = ExcelApplicationService.GetApplication();
 
             Workbook xlWorkbook = xlApplication.Workbooks.Open(inputFilePath);
             Worksheet xlWorksheet = xlWorkbook.Worksheets["Block Details"];
+
+            int currentRow = sRow;
+
+            while (xlWorksheet.Cells[currentRow, sCol].Value2 != "")
+            {
+                currentRow++;
+            }
+
+            eRow = currentRow - 1;
+
+            Block block = new Block();
 
             System.Windows.MessageBox.Show(xlWorksheet.Cells[1, 5].Value2);
 
