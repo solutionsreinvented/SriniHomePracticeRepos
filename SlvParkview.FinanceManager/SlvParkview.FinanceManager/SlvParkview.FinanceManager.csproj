@@ -105,6 +105,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\BlockSelectionControl.xaml.cs">
+      <DependentUpon>BlockSelectionControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\EditExpenseControl.xaml.cs">
       <DependentUpon>EditExpenseControl.xaml</DependentUpon>
     </Compile>
@@ -251,6 +254,10 @@
     <Compile Include="Views\SummaryView.xaml.cs">
       <DependentUpon>SummaryView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Components\BlockSelectionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\EditExpenseControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

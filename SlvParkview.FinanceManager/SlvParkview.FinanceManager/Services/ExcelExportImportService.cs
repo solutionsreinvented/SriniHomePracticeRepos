@@ -20,7 +20,7 @@ namespace SlvParkview.FinanceManager.Services
     public static class ExcelExportImportService
     {
         private static readonly string _filesDirectory = @"C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Move to Bin";
-        //private static readonly string _filesDirectory = @"C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Move to Bin";
+        ///private static readonly string _filesDirectory = @"C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Move to Bin";
 
 
         public static void ExportFlatDataFromExcelToJson()

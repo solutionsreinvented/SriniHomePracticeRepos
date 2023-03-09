@@ -70,7 +70,7 @@ namespace SlvParkview.FinanceManager.Services
         /// </summary>
         public void SaveData(Block block)
         {
-            SaveData(block, _filePath);
+            SaveData(block, $"{block.Name} Block.json");
         }
 
         /// <summary>

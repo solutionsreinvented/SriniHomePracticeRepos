@@ -51,8 +51,6 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public IEnumerable<Flat> Flats => _summaryViewModel.Block.Flats;
 
-        public DataManagementService DataManagementService { get => Get<DataManagementService>(); private set => Set(value); }
-
         public bool CanModifyPayment => SelectedPayment != null;
 
         public bool CanModifyExpense => SelectedExpense != null;
@@ -87,7 +85,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void OnSaveFlat()
         {
-            DataManagementService.SaveData(_summaryViewModel.Block);
+            DataManagementService.Instance.SaveData(_summaryViewModel.Block);
         }
 
         private void OnAddExpense()
@@ -137,12 +135,12 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void OnSavePayment()
         {
-            DataManagementService.SaveData(_summaryViewModel.Block);
+            DataManagementService.Instance.SaveData(_summaryViewModel.Block);
         }
 
         private void OnSaveExpense()
         {
-            DataManagementService.SaveData(_summaryViewModel.Block);
+            DataManagementService.Instance.SaveData(_summaryViewModel.Block);
         }
 
         #endregion
@@ -151,8 +149,6 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void Initialize()
         {
-            DataManagementService = DataManagementService.Instance;
-
             SaveFlatCommand = new RelayCommand(OnSaveFlat, true);
             AddExpenseCommand = new RelayCommand(OnAddExpense, true);
             AddPaymentCommand = new RelayCommand(OnAddPayment, true);

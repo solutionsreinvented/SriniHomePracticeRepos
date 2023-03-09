@@ -3,9 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:enums="clr-namespace:SlvParkview.FinanceManager.Enums"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:shared="http://schemas.reinvented.com/shared"
     xmlns:theme="http://schemas.reinvented.com/ui/themes"
     xmlns:uc="clr-namespace:SlvParkview.FinanceManager.Components"
     xmlns:vm="clr-namespace:SlvParkview.FinanceManager.ViewModels"
@@ -28,7 +26,6 @@
         <!--#region Grid Definitions-->
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
@@ -70,28 +67,19 @@
 
         <!--#endregion-->
 
-        <Grid
-            Grid.Row="1"
-            Width="{StaticResource ViewWidth}"
-            Margin="20,10">
-            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                <TextBlock
-                    Width="200"
-                    VerticalAlignment="Center"
-                    Text="Choose block:" />
-                <ComboBox
-                    Width="50"
-                    ItemsSource="{shared:EnumBindingResource enums:Tower}"
-                    SelectedItem="{Binding SelectedTower}" />
-            </StackPanel>
-        </Grid>
-
         <!--#region Main Content-->
 
 
-        <Grid Grid.Row="2" Style="{StaticResource HostStyle}">
+        <Grid Grid.Row="1" Style="{StaticResource HostStyle}">
 
-            <ContentControl Content="{Binding CurrentViewModel}" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <uc:BlockSelectionControl Grid.Row="0" Margin="30,10" />
+
+            <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
 
         </Grid>
 
@@ -100,7 +88,7 @@
         <!--#region Footer-->
 
         <TextBlock
-            Grid.RowSpan="3"
+            Grid.Row="2"
             Margin="15,0,10,10"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom">

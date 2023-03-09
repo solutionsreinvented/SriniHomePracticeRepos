@@ -81,10 +81,7 @@ namespace SlvParkview.FinanceManager.ViewModels
         /// </summary>
         private void OnSaveData()
         {
-            string towerDataFilename = $"{SelectedTower} Block.json";
-
-            ///DataManagementService?.SaveData(_summaryViewModel.Block);
-            DataManagementService?.SaveData(_summaryViewModel.Block, towerDataFilename);
+            DataManagementService?.SaveData(_summaryViewModel.Block);
         }
 
         #endregion
