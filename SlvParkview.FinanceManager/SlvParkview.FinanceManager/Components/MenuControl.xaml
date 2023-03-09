@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:theme="http://schemas.reinvented.com/ui/themes"
     x:Name="Root"
-    d:DesignHeight="100"
+    d:DesignHeight="300"
     d:DesignWidth="800"
     mc:Ignorable="d">
 
@@ -47,7 +47,11 @@
                 Command="{Binding SaveDataCommand}"
                 Header="_Save Data"
                 IsEnabled="{Binding DataManagementService.AllowSave, UpdateSourceTrigger=PropertyChanged}" />
+
+            <MenuItem Header="Generate Block Data from Excel" IsEnabled="False" />
+
         </MenuItem>
+
     </Menu>
 
     <!--#endregion-->

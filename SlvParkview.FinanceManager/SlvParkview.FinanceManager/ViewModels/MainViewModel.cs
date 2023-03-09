@@ -32,9 +32,16 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public BaseViewModel CurrentViewModel { get => Get<BaseViewModel>(); set => Set(value); }
 
+        public ExportImportViewModel ExportImportViewModel { get => Get<ExportImportViewModel>(); set => Set(value); }
+
         public DataManagementService DataManagementService { get => Get<DataManagementService>(); private set => Set(value); }
 
         public Tower SelectedTower { get => Get<Tower>(); set { Set(value); OnSelectedTowerChanged(); } }
+
+        public bool ShowExportImport { get => Get<bool>(); set { Set(value); ShowMainContent = !value; } }
+
+        public bool ShowMainContent { get => Get<bool>(); private set => Set(value); }
+
 
         #endregion
 
@@ -113,9 +120,11 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void Initialize()
         {
+            ShowExportImport = false;
             DataManagementService = DataManagementService.Instance;
 
             ThemeViewModel = new ThemeViewModel();
+            ExportImportViewModel = new ExportImportViewModel();
 
             ///_summaryViewModel = new SummaryViewModel(_navigationService);
 

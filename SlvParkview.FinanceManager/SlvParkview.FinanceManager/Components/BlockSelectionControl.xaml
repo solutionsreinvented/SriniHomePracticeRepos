@@ -4,20 +4,38 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:enums="clr-namespace:SlvParkview.FinanceManager.Enums"
-    xmlns:local="clr-namespace:SlvParkview.FinanceManager.Components"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:theme="http://schemas.reinvented.com/ui/themes"
     d:DesignHeight="100"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+
         <StackPanel
+            Grid.Row="1"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
             Orientation="Horizontal">
+
+            <CheckBox
+                Margin="20,0"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Content="Show Export Import Options"
+                IsChecked="{Binding ShowExportImport}"
+                IsEnabled="False" />
+
             <TextBlock
                 Width="200"
                 VerticalAlignment="Center"
+                Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
                 Text="Choose block:" />
             <ComboBox
                 Width="50"

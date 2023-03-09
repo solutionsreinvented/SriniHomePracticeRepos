@@ -4,9 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
     xmlns:theme="http://schemas.reinvented.com/ui/themes"
     xmlns:uc="clr-namespace:SlvParkview.FinanceManager.Components"
+    xmlns:views="clr-namespace:SlvParkview.FinanceManager.Views"
     xmlns:vm="clr-namespace:SlvParkview.FinanceManager.ViewModels"
+    x:Name="Root"
     Width="{StaticResource MainWindowWidth}"
     Height="{StaticResource MainWindowHeight}"
     Background="#4a4e69"
@@ -79,7 +82,17 @@
 
             <uc:BlockSelectionControl Grid.Row="0" Margin="30,10" />
 
-            <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
+            <ContentControl
+                Grid.Row="1"
+                Content="{Binding CurrentViewModel}"
+                Visibility="{Binding ShowMainContent, Converter={shared:BoolToVisibilityConverter}}" />
+
+            <!--<views:ExportImportView
+                Grid.Row="1"
+                Width="{StaticResource ViewWidth}"
+                Height="400"
+                DataContext="{Binding ExportImportViewModel}"
+                Visibility="{Binding DataContext.ShowExportImport, ElementName=Root, Converter={shared:BoolToVisibilityConverter}}" />-->
 
         </Grid>
 

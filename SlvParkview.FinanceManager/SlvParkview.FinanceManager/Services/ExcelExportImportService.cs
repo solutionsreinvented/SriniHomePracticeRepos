@@ -23,23 +23,17 @@ namespace SlvParkview.FinanceManager.Services
         ///private static readonly string _filesDirectory = @"C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Move to Bin";
 
 
-        public static void ExportFlatDataFromExcelToJson()
-        {
-            ExportFlatDataFromExcelToJson("A Block.xlsx");
-        }
-
-        public static void ExportFlatDataFromExcelToJson(string fileName)
+        public static void ExportFlatDataFromExcelToJson(string sourceFilePath, string destinationFilePath, string towerName)
         {
             const int sRow = 1;
             const int sCol = 1;
 
             int eRow;
 
-            string inputFilePath = Path.Combine(_filesDirectory, fileName);
 
             Application xlApplication = ExcelApplicationService.GetApplication();
 
-            Workbook xlWorkbook = xlApplication.Workbooks.Open(inputFilePath);
+            Workbook xlWorkbook = xlApplication.Workbooks.Open(sourceFilePath);
             Worksheet xlWorksheet = xlWorkbook.Worksheets["Block Details"];
 
             int currentRow = sRow;
@@ -51,7 +45,7 @@ namespace SlvParkview.FinanceManager.Services
 
             eRow = currentRow - 1;
 
-            Block block = new Block() { Name = "A" };
+            Block block = new Block() { Name = towerName };
             block.Flats = new List<Flat>();
             block.LastUpdated = DateTime.Today;
             block.PenaltyCommencesFrom = new DateTime(2023, 02, 01);
@@ -82,8 +76,8 @@ namespace SlvParkview.FinanceManager.Services
 
             string seriailzedData = seriailzer.Serialize(block);
 
-            ///File.WriteAllText(Path.Combine(_filesDirectory, $"{block.Name} Block.json"), seriailzedData);
-            File.WriteAllText(Path.Combine(_filesDirectory, $"{Path.GetFileNameWithoutExtension(fileName)}.json"), seriailzedData);
+
+            File.WriteAllText(destinationFilePath, seriailzedData);
 
 
             xlWorkbook.Close();

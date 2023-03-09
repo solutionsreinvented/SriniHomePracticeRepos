@@ -87,6 +87,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -226,6 +227,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CommonExpenseViewModel.cs" />
     <Compile Include="ViewModels\ExpenseViewModel.cs" />
+    <Compile Include="ViewModels\ExportImportViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\EditFlatViewModel.cs" />
     <Compile Include="ViewModels\PaymentViewModel.cs" />
@@ -250,6 +252,9 @@
     </Compile>
     <Compile Include="Views\ReportViewerView.xaml.cs">
       <DependentUpon>ReportViewerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExportImportView.xaml.cs">
+      <DependentUpon>ExportImportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SummaryView.xaml.cs">
       <DependentUpon>SummaryView.xaml</DependentUpon>
@@ -395,6 +400,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ReportViewerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ExportImportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
