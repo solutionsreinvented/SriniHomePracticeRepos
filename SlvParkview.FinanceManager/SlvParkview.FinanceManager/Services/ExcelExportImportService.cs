@@ -1,9 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
 
 
 using Microsoft.Office.Interop.Excel;
+
+using ReInvented.DataAccess.Enums;
+using ReInvented.DataAccess.Factories;
+using ReInvented.DataAccess.Interfaces;
+
+using SlvParkview.FinanceManager.Enums;
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Reporting.Models;
 
@@ -11,54 +19,19 @@ namespace SlvParkview.FinanceManager.Services
 {
     public static class ExcelExportImportService
     {
-        ///private static readonly string _filesDirectory = @"C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Move to Bin";
-        private static readonly string _filesDirectory = @"C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Move to Bin";
+        private static readonly string _filesDirectory = @"C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Move to Bin";
+        //private static readonly string _filesDirectory = @"C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\Move to Bin";
 
-
-        public static void ExportFromExcelToJson()
-        {
-            Application xlApplication = new Application();
-
-            ///excel.Visible = false;
-            ///excel.DisplayAlerts = false;
-
-            Workbook workbook = xlApplication.Workbooks.Add(Type.Missing);
-
-            string path = @"C:\Users\masanams\Desktop\Export.xlsx";
-
-            workbook.SaveAs(path);
-
-            _ = xlApplication.Workbooks.Open(path);
-
-            xlApplication.Quit();
-
-            ///Worksheet aTowerSheet = workbook.ActiveSheet as Worksheet;
-
-            ///workbook.Worksheets.Add(aTowerSheet);
-
-            ///Worksheet aTowerSheet = workbook.ActiveSheet as Worksheet;
-            ///Worksheet aTowerSheet = workbook.ActiveSheet as Worksheet;
-            ///worksheet.Name = "A Block";
-            ///Range range;
-
-
-            ///Sheets sheets = workbook.Sheets;
-
-            ///foreach (var sheet in sheets)
-            ///{
-            ///}
-        }
 
         public static void ExportFlatDataFromExcelToJson()
         {
-            ExportFlatDataFromExcelToJson("Data Format.xlsx");
+            ExportFlatDataFromExcelToJson("A Block.xlsx");
         }
 
         public static void ExportFlatDataFromExcelToJson(string fileName)
         {
             const int sRow = 1;
             const int sCol = 1;
-            const int eCol = 5;
 
             int eRow;
 
@@ -71,16 +44,47 @@ namespace SlvParkview.FinanceManager.Services
 
             int currentRow = sRow;
 
-            while (xlWorksheet.Cells[currentRow, sCol].Value2 != "")
+            while (xlWorksheet.Cells[currentRow, sCol].Value2 != string.Empty && xlWorksheet.Cells[currentRow, sCol].Value2 != null)
             {
                 currentRow++;
             }
 
             eRow = currentRow - 1;
 
-            Block block = new Block();
+            Block block = new Block() { Name = "A" };
+            block.Flats = new List<Flat>();
+            block.LastUpdated = DateTime.Today;
+            block.PenaltyCommencesFrom = new DateTime(2023, 02, 01);
 
-            System.Windows.MessageBox.Show(xlWorksheet.Cells[1, 5].Value2);
+            DateTime accountOpenedOn = new DateTime(2023, 02, 10);
+
+            for (int rowIndex = sRow + 1; rowIndex <= eRow; rowIndex++)
+            {
+                string flatDescription = xlWorksheet.Cells[rowIndex, sCol].Value2;
+
+                Flat flat = new Flat(block, xlWorksheet.Cells[rowIndex, sCol + 1].Value2)
+                {
+                    AccountOpenedOn = accountOpenedOn,
+                    Description = flatDescription,
+                    Number = flatDescription.Substring(1, flatDescription.Length - 1),
+                    CoOwnedBy = xlWorksheet.Cells[rowIndex, sCol + 2].Value2,
+                    TenantName = xlWorksheet.Cells[rowIndex, sCol + 3].Value2,
+                    ResidentType = Enum.Parse(typeof(ResidentType), xlWorksheet.Cells[rowIndex, sCol + 4].Value2),
+                    OpeningBalance = (decimal)xlWorksheet.Cells[rowIndex, sCol + 5].Value2,
+                    Expenses = new ObservableCollection<Expense>(),
+                    Payments = new ObservableCollection<Payment>()
+                };
+
+                block.Flats.Add(flat);
+            }
+
+            IDataSerializer<Block> seriailzer = SerializerFactory.GetSerializer<Block>(DataFileFormat.Json);
+
+            string seriailzedData = seriailzer.Serialize(block);
+
+            ///File.WriteAllText(Path.Combine(_filesDirectory, $"{block.Name} Block.json"), seriailzedData);
+            File.WriteAllText(Path.Combine(_filesDirectory, $"{Path.GetFileNameWithoutExtension(fileName)}.json"), seriailzedData);
+
 
             xlWorkbook.Close();
             xlApplication.Quit();

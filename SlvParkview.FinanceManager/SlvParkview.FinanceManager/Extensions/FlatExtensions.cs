@@ -1,5 +1,4 @@
 ﻿using SlvParkview.FinanceManager.Models;
-using SlvParkview.FinanceManager.Reporting;
 using SlvParkview.FinanceManager.Reporting.Models;
 using SlvParkview.FinanceManager.Services;
 
@@ -41,6 +40,11 @@ namespace SlvParkview.FinanceManager.Extensions
         /// <returns>A <see cref="List{PrintableTransaction}"/> to facilitate the preparation of an html table.</returns>
         public static List<TransactionInfo> GetTransactionsHistory(List<TransactionRecord> transactionRecords)
         {
+            if (transactionRecords == null)
+            {
+                return null;
+            }
+
             List<TransactionInfo> printableTransactions = new List<TransactionInfo>();
 
             transactionRecords.ForEach(t => printableTransactions.Add(t.TransactionInfo));
