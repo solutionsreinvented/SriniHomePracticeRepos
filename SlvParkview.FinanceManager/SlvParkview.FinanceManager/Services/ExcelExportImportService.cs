@@ -25,10 +25,6 @@ namespace SlvParkview.FinanceManager.Services
 
         public static void ExportFlatDataFromExcelToJson(string sourceFilePath, string destinationFilePath, string towerName)
         {
-            const int sRow = 1;
-            const int sCol = 1;
-
-            int eRow;
 
 
             Application xlApplication = ExcelApplicationService.GetApplication();
@@ -36,21 +32,38 @@ namespace SlvParkview.FinanceManager.Services
             Workbook xlWorkbook = xlApplication.Workbooks.Open(sourceFilePath);
             Worksheet xlWorksheet = xlWorkbook.Worksheets["Block Details"];
 
-            int currentRow = sRow;
-
-            while (xlWorksheet.Cells[currentRow, sCol].Value2 != string.Empty && xlWorksheet.Cells[currentRow, sCol].Value2 != null)
-            {
-                currentRow++;
-            }
-
-            eRow = currentRow - 1;
 
             Block block = new Block() { Name = towerName };
             block.Flats = new List<Flat>();
             block.LastUpdated = DateTime.Today;
+            DateTime accountOpenedOn = new DateTime(2023, 02, 01);
             block.PenaltyCommencesFrom = new DateTime(2023, 02, 01);
 
-            DateTime accountOpenedOn = new DateTime(2023, 02, 10);
+            RetrieveBlockFlatsDataFromExcelSpreadsheet(xlWorksheet, block, accountOpenedOn);
+
+            IDataSerializer<Block> seriailzer = SerializerFactory.GetSerializer<Block>(DataFileFormat.Json);
+
+            string seriailzedData = seriailzer.Serialize(block);
+
+
+            File.WriteAllText(destinationFilePath, seriailzedData);
+
+
+            xlWorkbook.Close();
+            xlApplication.Quit();
+
+            ExcelApplicationService.ReleaseObject(xlWorksheet);
+            ExcelApplicationService.ReleaseObject(xlWorkbook);
+            ExcelApplicationService.ReleaseObject(xlApplication);
+
+        }
+
+        private static void RetrieveBlockFlatsDataFromExcelSpreadsheet(Worksheet xlWorksheet, Block block, DateTime accountOpenedOn)
+        {
+            const int sRow = 1;
+            const int sCol = 1;
+
+            int eRow = GetLastNonEmptyRow(xlWorksheet, sRow, sCol);
 
             for (int rowIndex = sRow + 1; rowIndex <= eRow; rowIndex++)
             {
@@ -71,23 +84,9 @@ namespace SlvParkview.FinanceManager.Services
 
                 block.Flats.Add(flat);
             }
-
-            IDataSerializer<Block> seriailzer = SerializerFactory.GetSerializer<Block>(DataFileFormat.Json);
-
-            string seriailzedData = seriailzer.Serialize(block);
-
-
-            File.WriteAllText(destinationFilePath, seriailzedData);
-
-
-            xlWorkbook.Close();
-            xlApplication.Quit();
-
-            ExcelApplicationService.ReleaseObject(xlWorksheet);
-            ExcelApplicationService.ReleaseObject(xlWorkbook);
-            ExcelApplicationService.ReleaseObject(xlApplication);
-
         }
+
+
 
         public static void ExportOutstandingDuesToExcel(BlockOutstandingsReport report)
         {
@@ -166,6 +165,24 @@ namespace SlvParkview.FinanceManager.Services
 
             return activeWorkbook;
         }
+
+
+        #region Private Helpers
+
+        private static int GetLastNonEmptyRow(Worksheet xlWorksheet, int sRow, int sCol)
+        {
+            int currentRow = sRow;
+
+            while (xlWorksheet.Cells[currentRow, sCol].Value2 != string.Empty && xlWorksheet.Cells[currentRow, sCol].Value2 != null)
+            {
+                currentRow++;
+            }
+
+            return currentRow--;
+        }
+
+        #endregion
+
 
     }
 }
