@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 
+using ReInvented.Shared.TypeConverters;
+
 using SlvParkview.FinanceManager.Enums;
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Reporting.Interfaces;
@@ -105,7 +107,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         {
             return _reportOptions.PaymentModeFilter == PaymentModeFilter.All
                 ? payments
-                : payments.Where(p => p.Mode == _reportOptions.PaymentModeFilter.ToString()).ToList();
+                : payments.Where(p => p.Mode == ConvertersService.PaymentModeConverter.ConvertToString(_reportOptions.PaymentModeFilter)).ToList();
         }
 
         #endregion
