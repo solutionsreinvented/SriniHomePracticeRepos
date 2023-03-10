@@ -90,7 +90,7 @@
 
                 <!--#region Penalty On Specified Date Column-->
 
-                <DataGridTemplateColumn Width="1.2*" Header="Total Penalty">
+                <DataGridTemplateColumn Width="1.2*" Header="Applicable Penalty">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock

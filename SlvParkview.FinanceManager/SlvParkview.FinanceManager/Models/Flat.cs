@@ -280,8 +280,19 @@ namespace SlvParkview.FinanceManager.Models
                 calculatedTill = DateTime.Today;
             }
 
-            return Penalties == null || Penalties.Count() == 0 ? 0.0m :
-                                                              Penalties.Where(p => p.OccuredOn <= calculatedTill).Sum(p => p.Amount);
+            /// TODO: The below formula was used to provide the total penalty imposed till date.
+            /// However, to simply reporting of penalties applicable on a given date formula is changed.
+            /// Hence, if the previous functionality to be restored:
+            ///     a. Uncomment the code below
+            ///     b. Change the header of last column of the view to 'Total Penalty'.
+
+            ///return Penalties == null || Penalties.Count() == 0 ? 0.0m :
+            ///                                                  Penalties.Where(p => p.OccuredOn <= calculatedTill).Sum(p => p.Amount);
+
+            var penaltyOnSpecifiedDate = Penalties?.FirstOrDefault(p => p.OccuredOn == DateSpecified);
+
+            return penaltyOnSpecifiedDate == null ? 0.0m : penaltyOnSpecifiedDate.Amount;
+
         }
 
         public void GeneratePenalties(Block block)
