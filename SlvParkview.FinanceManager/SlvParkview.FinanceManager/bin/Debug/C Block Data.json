@@ -1,5 +1,5 @@
 {
-  "LastUpdated": "2023-03-10T11:15:02.2393323+05:30",
+  "LastUpdated": "2023-03-10T11:50:39.9139138+05:30",
   "Name": "C",
   "Flats": [
     {
@@ -264,10 +264,10 @@
           "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 5600.00,
-      "CurrentOutstanding": 5600.00,
-      "PenaltyTillSpecifiedDate": 0.0,
-      "CurrentTotalPenalty": 0.0
+      "OutstandingOnSpecifiedDate": 6720.000,
+      "CurrentOutstanding": 6720.000,
+      "PenaltyTillSpecifiedDate": 1120.000,
+      "CurrentTotalPenalty": 1120.000
     },
     {
       "Number": "020",
@@ -644,10 +644,10 @@
           "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 14899.600,
-      "CurrentOutstanding": 14899.600,
-      "PenaltyTillSpecifiedDate": 2016.600,
-      "CurrentTotalPenalty": 2016.600
+      "OutstandingOnSpecifiedDate": 18282.8400,
+      "CurrentOutstanding": 18282.8400,
+      "PenaltyTillSpecifiedDate": 5399.8400,
+      "CurrentTotalPenalty": 5399.8400
     },
     {
       "Number": "024",
@@ -789,10 +789,10 @@
         }
       ],
       "Payments": null,
-      "OutstandingOnSpecifiedDate": 39760.000,
-      "CurrentOutstanding": 39760.000,
-      "PenaltyTillSpecifiedDate": 6160.000,
-      "CurrentTotalPenalty": 6160.000
+      "OutstandingOnSpecifiedDate": 48944.0000,
+      "CurrentOutstanding": 48944.0000,
+      "PenaltyTillSpecifiedDate": 15344.0000,
+      "CurrentTotalPenalty": 15344.0000
     },
     {
       "Number": "118",
@@ -1288,10 +1288,18 @@
           "Category": 1,
           "Amount": 2800.00,
           "ReferenceId": null
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2023-03-10T00:00:00+05:30",
+          "RecordedOn": "2023-03-10T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "306994031907"
         }
       ],
-      "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00,
+      "OutstandingOnSpecifiedDate": 0.00,
+      "CurrentOutstanding": 0.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -1832,10 +1840,10 @@
           "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 19720.000,
-      "CurrentOutstanding": 19720.000,
-      "PenaltyTillSpecifiedDate": 2820.000,
-      "CurrentTotalPenalty": 2820.000
+      "OutstandingOnSpecifiedDate": 24228.0000,
+      "CurrentOutstanding": 24228.0000,
+      "PenaltyTillSpecifiedDate": 7328.0000,
+      "CurrentTotalPenalty": 7328.0000
     },
     {
       "Number": "221",
@@ -2002,10 +2010,10 @@
           "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 9520.000,
-      "CurrentOutstanding": 9520.000,
-      "PenaltyTillSpecifiedDate": 1120.000,
-      "CurrentTotalPenalty": 1120.000
+      "OutstandingOnSpecifiedDate": 11648.0000,
+      "CurrentOutstanding": 11648.0000,
+      "PenaltyTillSpecifiedDate": 3248.0000,
+      "CurrentTotalPenalty": 3248.0000
     },
     {
       "Number": "223",
@@ -2357,10 +2365,10 @@
         }
       ],
       "Payments": null,
-      "OutstandingOnSpecifiedDate": 39760.000,
-      "CurrentOutstanding": 39760.000,
-      "PenaltyTillSpecifiedDate": 6160.000,
-      "CurrentTotalPenalty": 6160.000
+      "OutstandingOnSpecifiedDate": 48944.0000,
+      "CurrentOutstanding": 48944.0000,
+      "PenaltyTillSpecifiedDate": 15344.0000,
+      "CurrentTotalPenalty": 15344.0000
     },
     {
       "Number": "319",
@@ -2438,10 +2446,10 @@
           "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 6088.000,
-      "CurrentOutstanding": 6088.000,
-      "PenaltyTillSpecifiedDate": 3288.000,
-      "CurrentTotalPenalty": 3288.000
+      "OutstandingOnSpecifiedDate": 7963.2000,
+      "CurrentOutstanding": 7963.2000,
+      "PenaltyTillSpecifiedDate": 5163.2000,
+      "CurrentTotalPenalty": 5163.2000
     },
     {
       "Number": "320",
@@ -2665,10 +2673,10 @@
           "ReferenceId": null
         }
       ],
-      "OutstandingOnSpecifiedDate": 17960.000,
-      "CurrentOutstanding": 17960.000,
-      "PenaltyTillSpecifiedDate": 3360.000,
-      "CurrentTotalPenalty": 3360.000
+      "OutstandingOnSpecifiedDate": 22224.0000,
+      "CurrentOutstanding": 22224.0000,
+      "PenaltyTillSpecifiedDate": 7624.0000,
+      "CurrentTotalPenalty": 7624.0000
     },
     {
       "Number": "323",
