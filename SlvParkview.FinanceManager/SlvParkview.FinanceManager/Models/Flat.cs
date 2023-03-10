@@ -262,7 +262,7 @@ namespace SlvParkview.FinanceManager.Models
 
             decimal paymentsTillSpecifiedDate = Payments == null ? 0.0m : Payments.Where(p => p.ReceivedOn <= calculatedTill).Sum(p => p.Amount);
 
-            decimal penaltiesTillSpecifiedDate = Penalties == null || Penalties.Count() == 0 ? 0.0m : 
+            decimal penaltiesTillSpecifiedDate = Penalties == null || Penalties.Count() == 0 ? 0.0m :
                                                               Penalties.Where(p => p.OccuredOn <= calculatedTill).Sum(p => p.Amount);
 
             decimal outstandingOnSpecifiedDate = OpeningBalance

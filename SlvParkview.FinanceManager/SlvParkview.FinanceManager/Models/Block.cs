@@ -57,7 +57,7 @@ namespace SlvParkview.FinanceManager.Models
         {
             PenaltyCommencesFrom = new DateTime(2022, 10, 01);
             PenaltyPercentage = 20.0m;
-            PaymentCutoffDay = 01;
+            PaymentCutoffDay = 10;
             MinimumOutstandingForPenalty = 5600.0m;
             ConsiderPenalties = true;
         }
