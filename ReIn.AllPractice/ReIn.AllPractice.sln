@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StructSkills.CollectionsPra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwistGate.ObjectConstruction", "TwistGate.ObjectConstruction\TwistGate.ObjectConstruction.csproj", "{01413E41-D442-4762-AFB5-191A99FE575D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Practice.DesignParameters", "Practice.DesignParameters\Practice.DesignParameters.csproj", "{38C0614A-9E0E-4107-8114-6205EF3F08F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{01413E41-D442-4762-AFB5-191A99FE575D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01413E41-D442-4762-AFB5-191A99FE575D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01413E41-D442-4762-AFB5-191A99FE575D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38C0614A-9E0E-4107-8114-6205EF3F08F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38C0614A-9E0E-4107-8114-6205EF3F08F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38C0614A-9E0E-4107-8114-6205EF3F08F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38C0614A-9E0E-4107-8114-6205EF3F08F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
