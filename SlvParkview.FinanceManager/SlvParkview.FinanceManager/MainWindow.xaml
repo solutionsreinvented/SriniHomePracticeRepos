@@ -86,6 +86,15 @@
             <Run Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}" Text="© ReInvented" />
         </TextBlock>
 
+        <TextBlock
+            Grid.RowSpan="2"
+            Margin="15,0,10,10"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom">
+            <Run Text="Developed by" />
+            <Run Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}" Text="Srinivasa Rao M" />
+        </TextBlock>
+
         <!--#endregion-->
 
     </Grid>
