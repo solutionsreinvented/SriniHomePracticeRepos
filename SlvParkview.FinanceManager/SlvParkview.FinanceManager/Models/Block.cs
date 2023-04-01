@@ -24,7 +24,7 @@ namespace SlvParkview.FinanceManager.Models
 
         public List<Flat> Flats { get => Get<List<Flat>>(); set => Set(value); }
         /// <summary>
-        /// Date from which the penalties for delay in maintenance payments will be applicable.
+        /// Date from which the penalties for delay in maintenance receipts will be applicable.
         /// </summary>
         public DateTime PenaltyCommencesFrom { get => Get<DateTime>(); set { Set(value); UpdateFlatPenalties(); } }
         /// <summary>
@@ -38,7 +38,7 @@ namespace SlvParkview.FinanceManager.Models
         /// <summary>
         /// Cutoff date by which the maintenance outstanding shall be cleared.
         /// </summary>
-        public int PaymentCutoffDay { get => Get<int>(); set { Set(value); UpdateFlatPenalties(); } }
+        public int ReceiptCutoffDay { get => Get<int>(); set { Set(value); UpdateFlatPenalties(); } }
         /// <summary>
         /// Indicates whether penalties to be considered in the calculations
         /// </summary>
@@ -57,7 +57,7 @@ namespace SlvParkview.FinanceManager.Models
         {
             PenaltyCommencesFrom = new DateTime(2022, 10, 01);
             PenaltyPercentage = 20.0m;
-            PaymentCutoffDay = 10;
+            ReceiptCutoffDay = 10;
             MinimumOutstandingForPenalty = 5600.0m;
             ConsiderPenalties = true;
         }

@@ -1,93 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flat Transactions History</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Flat Transactions History</title>
+    <link rel="stylesheet" href="../../Styles/common-styles.css" />
+    <link rel="stylesheet" href="../../Styles/transacts-history.css" />
+  </head>
 
-  <link rel="stylesheet" href="../../Styles/common-styles.css" />
-  <link rel="stylesheet" href="../../Styles/transacts-history.css" />
-</head>
+  <body>
+    <div id="container">
+      <!-- #region Flat Information Table -->
 
-<body>
-  <div id="container">
+      <table class="table-header flat-info">
+        <thead>
+          <tr>
+            <td class="main-heading-row" colspan="4">Flat Information</td>
+          </tr>
+        </thead>
 
-    <!-- #region Flat Information Table -->
+        <tbody class="flat-info-body">
+          <tr>
+            <td class="flat-desc-cap">Flat No.:</td>
+            <td class="flat-desc"></td>
+            <td class="resident-type-cap">Resident type (Owner/Tenant):</td>
+            <td class="resident-type"></td>
+          </tr>
+          <tr>
+            <td class="owner-name-cap">Name of the owner:</td>
+            <td class="owner-name"></td>
+            <td class="opening-date-cap">Account start date:</td>
+            <td class="opening-date"></td>
+          </tr>
+          <tr>
+            <td class="coowner-name-cap">Name of the co-owner:</td>
+            <td class="coowner-name"></td>
+            <td class="opening-balance-cap">Opening balance:</td>
+            <td class="opening-balance"></td>
+          </tr>
+          <tr>
+            <td class="tenant-name-cap">Name of the tenant:</td>
+            <td class="tenant-name"></td>
+            <td class="current-outstanding-cap">Current outstanding:</td>
+            <td class="current-outstanding"></td>
+          </tr>
+        </tbody>
+      </table>
 
-    <table class="table-header flat-info">
-      <thead>
-        <tr>
-          <td class="main-heading-row" colspan="4">Flat Information</td>
-        </tr>
-      </thead>
+      <!-- #endregion -->
+    </div>
 
-      <tbody class="flat-info-body">
-        <tr>
-          <td class="flat-desc-cap">Flat No.:</td>
-          <td class="flat-desc"></td>
-          <td class="resident-type-cap">Resident type (Owner/Tenant):</td>
-          <td class="resident-type"></td>
-        </tr>
-        <tr>
-          <td class="owner-name-cap">Name of the owner:</td>
-          <td class="owner-name"></td>
-          <td class="opening-date-cap">Account start date:</td>
-          <td class="opening-date"></td>
-        </tr>
-        <tr>
-          <td class="coowner-name-cap">Name of the co-owner:</td>
-          <td class="coowner-name"></td>
-          <td class="opening-balance-cap">Opening balance:</td>
-          <td class="opening-balance"></td>
-        </tr>
-        <tr>
-          <td class="tenant-name-cap">Name of the tenant:</td>
-          <td class="tenant-name"></td>
-          <td class="current-outstanding-cap">Current outstanding:</td>
-          <td class="current-outstanding"></td>
-        </tr>
-      </tbody>
-    </table>
+    <div id="container">
+      <!-- #region Transactions Table -->
 
-    <!-- #endregion -->
+      <table class="table-header transactions-table">
+        <thead>
+          <tr class="transaction-row">
+            <td colspan="7">Transactions Summary</td>
+          </tr>
+          <tr>
+            <td rowspan="2" class="date-col">Date of Transaction</td>
+            <td colspan="3" class="pay-col">Receipts</td>
+            <td colspan="2" class="exp-col">Bills</td>
+            <td rowspan="2" class="outstand-col">Outstanding</td>
+          </tr>
+          <tr>
+            <td>Amount</td>
+            <td>Mode</td>
+            <td>Category</td>
+            <td>Amount</td>
+            <td>Category</td>
+          </tr>
+        </thead>
 
-  </div>
+        <tbody class="summary-body"></tbody>
+      </table>
 
-  <div id="container">
+      <!-- #endregion -->
+    </div>
 
-    <!-- #region Transactions Table -->
-
-    <table class="table-header transactions-table">
-      <thead>
-        <tr class="transaction-row">
-          <td colspan="7">Transactions Summary</td>
-        </tr>
-        <tr>
-          <td rowspan="2" class="date-col">Date of Transaction</td>
-          <td colspan="3" class="pay-col">Payments</td>
-          <td colspan="2" class="exp-col">Expenses</td>
-          <td rowspan="2" class="outstand-col">Outstanding</td>
-        </tr>
-        <tr>
-          <td>Amount</td>
-          <td>Mode</td>
-          <td>Category</td>
-          <td>Amount</td>
-          <td>Category</td>
-        </tr>
-      </thead>
-
-      <tbody class="summary-body"></tbody>
-    </table>
-
-    <!-- #endregion -->
-  
-  </div>
-
-  <script src="../../Scripts/transacts-history.js"></script>
-
-</body>
-
+    <script src="../../Scripts/transacts-history.js"></script>
+  </body>
 </html>

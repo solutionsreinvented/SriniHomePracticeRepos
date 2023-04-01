@@ -1,48 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Block Outstandings</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Block Outstandings</title>
+    <link rel="stylesheet" href="../Styles/common-styles.css" />
+    <link rel="stylesheet" href="../Styles/block-outstandings.css" />
+  </head>
 
-  <link rel="stylesheet" href="../Styles/common-styles.css" />
-  <link rel="stylesheet" href="../Styles/block-outstandings.css" />
-</head>
+  <body>
+    <div id="container">
+      <!-- #region Outstandings Table -->
 
-<body>
+      <table class="table-header">
+        <thead>
+          <tr class="main-heading-row">
+            <td class="table-title" colspan="6">Summary of Outstandings</td>
+          </tr>
+          <tr>
+            <td class="flat-number-header">Flat</td>
+            <td class="owner-header">Owner</td>
+            <td class="coowner-header">Co-owner</td>
+            <td class="tenant-header">Tenant</td>
+            <td class="resident-type-header">Residing</td>
+            <td class="outstanding-header">Outstanding</td>
+          </tr>
+        </thead>
 
-  <div id="container">
+        <tbody class="table-body"></tbody>
+      </table>
 
-    <!-- #region Outstandings Table -->
+      <!-- #endregion -->
+    </div>
 
-    <table class="table-header">
-
-      <thead>
-        <tr class="main-heading-row">
-          <td class="table-title" colspan="6">Summary of Outstandings</td>
-        </tr>
-        <tr>
-          <td class="flat-number-header">Flat</td>
-          <td class="owner-header">Owner</td>
-          <td class="coowner-header">Co-owner</td>
-          <td class="tenant-header">Tenant</td>
-          <td class="resident-type-header">Residing</td>
-          <td class="outstanding-header">Outstanding</td>
-        </tr>
-      </thead>
-
-      <tbody class="table-body"></tbody>
-
-    </table>
-
-    <!-- #endregion -->
-
-  </div>
-
-  <script src="block-outstandings.js"></script>
-
-</body>
-
+    <script src="block-outstandings.js"></script>
+  </body>
 </html>

@@ -71,9 +71,9 @@
 
             <!--#endregion-->
 
-            <comps:FlatPaymentsControl Grid.Column="0" />
+            <comps:FlatReceiptsControl Grid.Column="0" />
 
-            <comps:FlatExpensesControl Grid.Column="1" Margin="5,0,0,0" />
+            <comps:FlatBillsControl Grid.Column="1" Margin="5,0,0,0" />
 
         </Grid>
 

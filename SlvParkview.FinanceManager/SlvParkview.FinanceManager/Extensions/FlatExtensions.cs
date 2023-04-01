@@ -53,29 +53,29 @@ namespace SlvParkview.FinanceManager.Extensions
         #region Get Transactions
 
         /// <summary>
-        /// Generates date wise transactions with full <see cref="Expense"/> and <see cref="Payment"/> information up to this date.
+        /// Generates date wise transactions with full <see cref="Bill"/> and <see cref="Receipt"/> information up to this date.
         /// </summary>
         /// <param name="flat">Flat for which the transactions summary to be prepared.</param>
-        /// <returns>A <see cref="List{TransactionRecord}"/> with full <see cref="Expense"/> and <see cref="Payment"/> details summarized date wise.</returns>
+        /// <returns>A <see cref="List{TransactionRecord}"/> with full <see cref="Bill"/> and <see cref="Receipt"/> details summarized date wise.</returns>
         public static List<TransactionRecord> GetTransactionsHistoryDetailed(this Flat flat)
         {
             return GetTransactionsHistoryDetailed(flat, DateTime.Today);
         }
 
         /// <summary>
-        /// Generates date wise transactions with full <see cref="Expense"/> and <see cref="Payment"/> information.
+        /// Generates date wise transactions with full <see cref="Bill"/> and <see cref="Receipt"/> information.
         /// </summary>
         /// <param name="flat">Flat for which the transactions summary to be prepared.</param>
         /// <param name="summarizeTill">Date up to which the transactions to be considered.</param>
-        /// <returns>A <see cref="List{TransactionRecord}"/> with full <see cref="Expense"/> and <see cref="Payment"/> details summarized date wise.</returns>
+        /// <returns>A <see cref="List{TransactionRecord}"/> with full <see cref="Bill"/> and <see cref="Receipt"/> details summarized date wise.</returns>
         public static List<TransactionRecord> GetTransactionsHistoryDetailed(this Flat flat, DateTime summarizeTill)
         {
-            List<Expense> allExpenses = flat.Expenses?
+            List<Bill> allBills = flat.Bills?
                                             .Where(e => e.OccuredOn >= flat.AccountOpenedOn && e.OccuredOn <= summarizeTill).ToList();
-            List<Payment> allPayments = flat.Payments?
+            List<Receipt> allReceipts = flat.Receipts?
                                             .Where(p => p.ReceivedOn >= flat.AccountOpenedOn && p.ReceivedOn <= summarizeTill).ToList();
 
-            if (allExpenses?.Count <= 0 && allPayments?.Count <= 0)
+            if (allBills?.Count <= 0 && allReceipts?.Count <= 0)
             {
                 return null;
             }
@@ -88,11 +88,11 @@ namespace SlvParkview.FinanceManager.Extensions
 
             while (date <= summarizeTill)
             {
-                List<Expense> expensesOnThisDate = allExpenses?.Where(e => e.OccuredOn == date).ToList();
-                List<Payment> paymentsOnThisDate = allPayments?.Where(p => p.ReceivedOn == date).ToList();
+                List<Bill> billsOnThisDate = allBills?.Where(e => e.OccuredOn == date).ToList();
+                List<Receipt> receiptsOnThisDate = allReceipts?.Where(p => p.ReceivedOn == date).ToList();
 
-                int maxCount = Math.Max(expensesOnThisDate == null ? 0 : expensesOnThisDate.Count,
-                                        paymentsOnThisDate == null ? 0 : paymentsOnThisDate.Count);
+                int maxCount = Math.Max(billsOnThisDate == null ? 0 : billsOnThisDate.Count,
+                                        receiptsOnThisDate == null ? 0 : receiptsOnThisDate.Count);
 
                 if (maxCount > 0)
                 {
@@ -106,18 +106,18 @@ namespace SlvParkview.FinanceManager.Extensions
                             TransactionDate = date,
                         };
 
-                        if (counter < expensesOnThisDate?.Count)
+                        if (counter < billsOnThisDate?.Count)
                         {
-                            outstanding += expensesOnThisDate[counter].Amount;
+                            outstanding += billsOnThisDate[counter].Amount;
 
-                            transactionRecord.Expense = expensesOnThisDate[counter];
+                            transactionRecord.Bill = billsOnThisDate[counter];
                         }
 
-                        if (counter < paymentsOnThisDate?.Count)
+                        if (counter < receiptsOnThisDate?.Count)
                         {
-                            outstanding -= paymentsOnThisDate[counter].Amount;
+                            outstanding -= receiptsOnThisDate[counter].Amount;
 
-                            transactionRecord.Payment = paymentsOnThisDate[counter];
+                            transactionRecord.Receipt = receiptsOnThisDate[counter];
                         }
 
                         transactionRecord.Outstanding = outstanding;
@@ -138,31 +138,31 @@ namespace SlvParkview.FinanceManager.Extensions
 
         public static List<TransactionRecord> GetTransactionsHistoryDetailedModified(this Flat flat, DateTime summarizeTill)
         {
-            List<Expense> expensesInRange = flat.Expenses?
+            List<Bill> billsInRange = flat.Bills?
                                                 .Where(e => e.OccuredOn >= flat.AccountOpenedOn && e.OccuredOn <= summarizeTill).ToList();
-            List<Payment> paymentsInRange = flat.Payments?
+            List<Receipt> receiptsInRange = flat.Receipts?
                                                 .Where(p => p.ReceivedOn >= flat.AccountOpenedOn && p.ReceivedOn <= summarizeTill).ToList();
-            List<Expense> penaltiesInRange = flat.Penalties?
+            List<Bill> penaltiesInRange = flat.Penalties?
                                                  .Where(p => p.OccuredOn >= flat.AccountOpenedOn && p.OccuredOn <= summarizeTill).ToList();
 
-            if (expensesInRange?.Count <= 0 && paymentsInRange?.Count <= 0 && penaltiesInRange?.Count <= 0)
+            if (billsInRange?.Count <= 0 && receiptsInRange?.Count <= 0 && penaltiesInRange?.Count <= 0)
             {
                 return null;
             }
 
             List<TransactionRecord> transactionRecords = new List<TransactionRecord>();
 
-            if (TransactionRecordsService.Generate(expensesInRange) != null)
+            if (TransactionRecordsService.Generate(billsInRange) != null)
             {
-                transactionRecords.AddRange(TransactionRecordsService.Generate(expensesInRange));
+                transactionRecords.AddRange(TransactionRecordsService.Generate(billsInRange));
             }
             if (TransactionRecordsService.Generate(penaltiesInRange) != null)
             {
                 transactionRecords.AddRange(TransactionRecordsService.Generate(penaltiesInRange));
             }
-            if (TransactionRecordsService.Generate(paymentsInRange) != null)
+            if (TransactionRecordsService.Generate(receiptsInRange) != null)
             {
-                transactionRecords.AddRange(TransactionRecordsService.Generate(paymentsInRange));
+                transactionRecords.AddRange(TransactionRecordsService.Generate(receiptsInRange));
             }
 
             transactionRecords = TransactionRecordsService.Summarize(transactionRecords, flat.AccountOpenedOn, summarizeTill, flat.OpeningBalance).ToList();

@@ -54,7 +54,7 @@
                 Margin="10,0,0,0"
                 VerticalAlignment="Center"
                 Text="Cutoff day of the month: " />
-            <TextBox Grid.Column="3" Text="{Binding PaymentCutoffDay, StringFormat={}{0:D2}}" />
+            <TextBox Grid.Column="3" Text="{Binding ReceiptCutoffDay, StringFormat={}{0:D2}}" />
 
             <TextBlock
                 Grid.Column="4"

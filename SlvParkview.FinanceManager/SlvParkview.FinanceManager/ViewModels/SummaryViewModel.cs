@@ -56,11 +56,11 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public ICommand EditFlatCommand { get => Get<ICommand>(); set => Set(value); }
 
-        public ICommand AddPaymentCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand AddReceiptCommand { get => Get<ICommand>(); set => Set(value); }
 
-        public ICommand AddExpenseCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand AddBillCommand { get => Get<ICommand>(); set => Set(value); }
 
-        public ICommand AddCommonExpenseCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand AddCommonBillCommand { get => Get<ICommand>(); set => Set(value); }
 
         public ICommand GenerateReportsCommand { get => Get<ICommand>(); set => Set(value); }
 
@@ -74,22 +74,22 @@ namespace SlvParkview.FinanceManager.ViewModels
             _navigationService.CurrentViewModel = editFlatViewModel;
         }
 
-        private void OnAddExpense()
+        private void OnAddBill()
         {
-            ExpenseViewModel expenseViewModel = new ExpenseViewModel(this, _navigationService, SelectedFlat);
-            _navigationService.CurrentViewModel = expenseViewModel;
+            BillViewModel billViewModel = new BillViewModel(this, _navigationService, SelectedFlat);
+            _navigationService.CurrentViewModel = billViewModel;
         }
 
-        private void OnAddPayment()
+        private void OnAddReceipt()
         {
-            PaymentViewModel paymentViewModel = new PaymentViewModel(this, _navigationService, SelectedFlat);
-            _navigationService.CurrentViewModel = paymentViewModel;
+            ReceiptViewModel receiptViewModel = new ReceiptViewModel(this, _navigationService, SelectedFlat);
+            _navigationService.CurrentViewModel = receiptViewModel;
         }
 
-        private void OnAddCommonExpense()
+        private void OnAddCommonBill()
         {
-            CommonExpenseViewModel commonExpenseViewModel = new CommonExpenseViewModel(this, _navigationService);
-            _navigationService.CurrentViewModel = commonExpenseViewModel;
+            CommonBillViewModel commonBillViewModel = new CommonBillViewModel(this, _navigationService);
+            _navigationService.CurrentViewModel = commonBillViewModel;
         }
 
         private void OnGenerateReports()
@@ -107,9 +107,9 @@ namespace SlvParkview.FinanceManager.ViewModels
             CanProcessFlat = false;
 
             EditFlatCommand = new RelayCommand(OnEditFlat, true);
-            AddExpenseCommand = new RelayCommand(OnAddExpense, true);
-            AddPaymentCommand = new RelayCommand(OnAddPayment, true);
-            AddCommonExpenseCommand = new RelayCommand(OnAddCommonExpense, true);
+            AddBillCommand = new RelayCommand(OnAddBill, true);
+            AddReceiptCommand = new RelayCommand(OnAddReceipt, true);
+            AddCommonBillCommand = new RelayCommand(OnAddCommonBill, true);
             GenerateReportsCommand = new RelayCommand(OnGenerateReports, true);
         }
 

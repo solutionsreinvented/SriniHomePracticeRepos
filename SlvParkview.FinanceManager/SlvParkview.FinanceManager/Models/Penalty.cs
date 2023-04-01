@@ -2,7 +2,7 @@
 
 namespace SlvParkview.FinanceManager.Models
 {
-    public class Penalty : Expense
+    public class Penalty : Bill
     {
         public Penalty()
         {

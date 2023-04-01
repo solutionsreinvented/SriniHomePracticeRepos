@@ -117,20 +117,20 @@ namespace SlvParkview.FinanceManager.Models
         /// </summary>
         public decimal OpeningBalance { get => Get<decimal>(); set => Set(value); }
         /// <summary>
-        /// Keeps track of the all the expenses occured for this flat.
+        /// Keeps track of the all the bills raised for this flat.
         /// </summary>
-        public ObservableCollection<Expense> Expenses { get => Get<ObservableCollection<Expense>>(); set => Set(value); }
+        public ObservableCollection<Bill> Bills { get => Get<ObservableCollection<Bill>>(); set => Set(value); }
         /// <summary>
         /// Keeps track of the all the penalties imposed for this flat.
         /// TODO: Remove the JsonIgnore and XmlIgnore incase the penalties data has to be persisted.
         /// </summary>
         [JsonIgnore]
         [XmlIgnore]
-        public ObservableCollection<Expense> Penalties { get => Get<ObservableCollection<Expense>>(); private set => Set(value); }
+        public ObservableCollection<Bill> Penalties { get => Get<ObservableCollection<Bill>>(); private set => Set(value); }
         /// <summary>
-        /// Keeps track of the all the payments made by the flat owner.
+        /// Keeps track of the all the receipts made by the flat owner.
         /// </summary>
-        public ObservableCollection<Payment> Payments { get => Get<ObservableCollection<Payment>>(); set => Set(value); }
+        public ObservableCollection<Receipt> Receipts { get => Get<ObservableCollection<Receipt>>(); set => Set(value); }
 
         #endregion
 
@@ -163,22 +163,22 @@ namespace SlvParkview.FinanceManager.Models
         #region Public Functions
 
         /// <summary>
-        /// Identifies if a duplicate <see cref="Expense"/> entry exists in the <see cref="Expenses"/> list of the flat.
+        /// Identifies if a duplicate <see cref="Bill"/> entry exists in the <see cref="Bills"/> list of the flat.
         /// </summary>
-        /// <param name="expense"><see cref="Expense"/> entry that is newly created.</param>
+        /// <param name="bill"><see cref="Bill"/> entry that is newly created.</param>
         /// <returns>True or False indicating if the entry exists.</returns>
-        public bool ContainsSimilar(Expense expense)
+        public bool ContainsSimilar(Bill bill)
         {
-            return Expenses?.FirstOrDefault(e => e.Equals(expense)) != null;
+            return Bills?.FirstOrDefault(b => b.Equals(bill)) != null;
         }
         /// <summary>
-        /// Identifies if a duplicate <see cref="Payment"/> entry exists in the <see cref="Payments"/> list of the flat.
+        /// Identifies if a duplicate <see cref="Receipt"/> entry exists in the <see cref="Receipts"/> list of the flat.
         /// </summary>s
-        /// <param name="payment"><see cref="Payment"/> entry that is newly created.</param>
+        /// <param name="receipt"><see cref="Receipt"/> entry that is newly created.</param>
         /// <returns>True or False indicating if the entry exists.</returns>
-        public bool ContainsSimilar(Payment payment)
+        public bool ContainsSimilar(Receipt receipt)
         {
-            return Payments?.FirstOrDefault(e => e.Equals(payment)) != null;
+            return Receipts?.FirstOrDefault(r => r.Equals(receipt)) != null;
         }
 
         #endregion
@@ -186,31 +186,31 @@ namespace SlvParkview.FinanceManager.Models
         #region Public Methods
 
         /// <summary>
-        /// Adds the specified <see cref="Expense"/> entry to the flat's <see cref="Expenses"/> list and raises notifications.
+        /// Adds the specified <see cref="Bill"/> entry to the flat's <see cref="Bills"/> list and raises notifications.
         /// </summary>
-        /// <param name="expense">A newly created <see cref="Expense"/> item.</param>
-        public void AddExpense(Expense expense)
+        /// <param name="bill">A newly created <see cref="Bill"/> item.</param>
+        public void AddBill(Bill bill)
         {
-            if (Expenses == null)
+            if (Bills == null)
             {
-                Expenses = new ObservableCollection<Expense>();
+                Bills = new ObservableCollection<Bill>();
             }
 
-            Expenses.Add(expense);
+            Bills.Add(bill);
             RaiseMultiplePropertiesChanged(nameof(CurrentOutstanding), nameof(OutstandingOnSpecifiedDate));
         }
         /// <summary>
-        /// Adds the specified <see cref="Payment"/> entry to the flat's <see cref="Payments"/> list and raises notifications.
+        /// Adds the specified <see cref="Receipt"/> entry to the flat's <see cref="Receipts"/> list and raises notifications.
         /// </summary>
-        /// <param name="payment">A newly created <see cref="Payment"/> item.</param>
-        public void AddPayment(Payment payment)
+        /// <param name="receipt">A newly created <see cref="Receipt"/> item.</param>
+        public void AddReceipt(Receipt receipt)
         {
-            if (Payments == null)
+            if (Receipts == null)
             {
-                Payments = new ObservableCollection<Payment>();
+                Receipts = new ObservableCollection<Receipt>();
             }
 
-            Payments.Add(payment);
+            Receipts.Add(receipt);
             RaiseMultiplePropertiesChanged(nameof(CurrentOutstanding), nameof(OutstandingOnSpecifiedDate));
         }
 
@@ -258,17 +258,17 @@ namespace SlvParkview.FinanceManager.Models
                 calculatedTill = DateTime.Today;
             }
 
-            decimal expensesTillSpecifiedDate = Expenses == null ? 0.0m : Expenses.Where(e => e.OccuredOn <= calculatedTill).Sum(e => e.Amount);
+            decimal billedAmountTillSpecifiedDate = Bills == null ? 0.0m : Bills.Where(e => e.OccuredOn <= calculatedTill).Sum(e => e.Amount);
 
-            decimal paymentsTillSpecifiedDate = Payments == null ? 0.0m : Payments.Where(p => p.ReceivedOn <= calculatedTill).Sum(p => p.Amount);
+            decimal receivedAmountTillSpecifiedDate = Receipts == null ? 0.0m : Receipts.Where(p => p.ReceivedOn <= calculatedTill).Sum(p => p.Amount);
 
             decimal penaltiesTillSpecifiedDate = Penalties == null || Penalties.Count() == 0 ? 0.0m :
                                                               Penalties.Where(p => p.OccuredOn <= calculatedTill).Sum(p => p.Amount);
 
             decimal outstandingOnSpecifiedDate = OpeningBalance
-                                                    + expensesTillSpecifiedDate
+                                                    + billedAmountTillSpecifiedDate
                                                     + penaltiesTillSpecifiedDate
-                                                    - paymentsTillSpecifiedDate;
+                                                    - receivedAmountTillSpecifiedDate;
 
             return outstandingOnSpecifiedDate;
         }
@@ -298,15 +298,15 @@ namespace SlvParkview.FinanceManager.Models
         public void GeneratePenalties(Block block)
         {
             List<DateTime> dates = DayOccurencesFinder
-                                        .FindFor(block.PenaltyCommencesFrom, DateSpecified, block.PaymentCutoffDay);
+                                        .FindFor(block.PenaltyCommencesFrom, DateSpecified, block.ReceiptCutoffDay);
 
-            Penalties = new ObservableCollection<Expense>();
+            Penalties = new ObservableCollection<Bill>();
 
             for (int i = 0; i < dates.Count; i++)
             {
                 decimal outstanding = GetOutstandingBalanceOnSpecifiedDate(dates[i]);
 
-                Expense previousPenalty = Penalties?.FirstOrDefault(p => p.OccuredOn == dates[i - 1]);
+                Bill previousPenalty = Penalties?.FirstOrDefault(p => p.OccuredOn == dates[i - 1]);
 
                 if (previousPenalty != null)
                 {
@@ -315,7 +315,7 @@ namespace SlvParkview.FinanceManager.Models
 
                 if (outstanding >= block.MinimumOutstandingForPenalty)
                 {
-                    Expense penalty = new Expense(TransactionCategory.PenaltyMaintenance,
+                    Bill penalty = new Bill(TransactionCategory.PenaltyMaintenance,
                                                   outstanding * block.PenaltyPercentage, dates[i]);
                     Penalties.Add(penalty);
                 }

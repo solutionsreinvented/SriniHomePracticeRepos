@@ -15,7 +15,7 @@ using System.IO;
 namespace SlvParkview.FinanceManager.Reporting.Models
 {
     /// <summary>
-    /// Creates a report which contains the transactions (both payments and expenses) history for a specified flat
+    /// Creates a report which contains the transactions (both receipts and bills) history for a specified flat
     /// calculated till the specified date.
     /// </summary>
     public class FlatTransactionsHistoryReport : Report

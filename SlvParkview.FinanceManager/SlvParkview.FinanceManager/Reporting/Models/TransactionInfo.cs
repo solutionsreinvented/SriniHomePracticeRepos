@@ -8,15 +8,15 @@ namespace SlvParkview.FinanceManager.Reporting.Models
     {
         public string TransactionDate { get => Get<string>(); set => Set(value); }
 
-        public string PaymentAmount { get => Get<string>(); set => Set(value); }
+        public string ReceiptAmount { get => Get<string>(); set => Set(value); }
 
-        public string PaymentMode { get => Get<string>(); set => Set(value); }
+        public string ReceiptMode { get => Get<string>(); set => Set(value); }
 
-        public string PaymentCategory { get => Get<string>(); set => Set(value); }
+        public string ReceiptCategory { get => Get<string>(); set => Set(value); }
 
-        public string ExpenseAmount { get => Get<string>(); set => Set(value); }
+        public string BillAmount { get => Get<string>(); set => Set(value); }
 
-        public string ExpenseCategory { get => Get<string>(); set => Set(value); }
+        public string BillCategory { get => Get<string>(); set => Set(value); }
 
         public string Outstanding { get => Get<string>(); set => Set(value); }
 
@@ -28,21 +28,21 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             return new TransactionInfo()
             {
                 TransactionDate = record.TransactionDate.ToString("dd MMM yyyy"),
-                PaymentAmount = record.Payment != null ? record.Payment.Amount.FormatNumber(numberFormat) : blank,
+                ReceiptAmount = record.Receipt != null ? record.Receipt.Amount.FormatNumber(numberFormat) : blank,
 
-                PaymentCategory = 
-                record.Payment != null ?
-                ConvertersService.TransactionCategoryConverter.ConvertToString(record.Payment.Category) : blank,
+                ReceiptCategory =
+                record.Receipt != null ?
+                ConvertersService.TransactionCategoryConverter.ConvertToString(record.Receipt.Category) : blank,
 
-                PaymentMode = 
-                record.Payment != null ?
-                ConvertersService.PaymentModeConverter.ConvertToString(record.Payment.Mode) : blank,
+                ReceiptMode =
+                record.Receipt != null ?
+                ConvertersService.ReceiptModeConverter.ConvertToString(record.Receipt.Mode) : blank,
 
-                ExpenseAmount = record.Expense != null ? record.Expense.Amount.FormatNumber(numberFormat) : blank,
+                BillAmount = record.Bill != null ? record.Bill.Amount.FormatNumber(numberFormat) : blank,
 
-                ExpenseCategory = 
-                record.Expense != null ?
-                ConvertersService.TransactionCategoryConverter.ConvertToString(record.Expense.Category) : blank,
+                BillCategory =
+                record.Bill != null ?
+                ConvertersService.TransactionCategoryConverter.ConvertToString(record.Bill.Category) : blank,
 
                 Outstanding = record.Outstanding.FormatNumber(numberFormat)
             };

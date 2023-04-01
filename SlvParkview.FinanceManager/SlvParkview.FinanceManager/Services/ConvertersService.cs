@@ -8,7 +8,7 @@ namespace SlvParkview.FinanceManager.Services
     {
         public static readonly EnumToDescriptionTypeConverter TransactionCategoryConverter = new EnumToDescriptionTypeConverter(typeof(TransactionCategory));
 
-        public static readonly EnumToDescriptionTypeConverter PaymentModeConverter = new EnumToDescriptionTypeConverter(typeof(PaymentMode));
+        public static readonly EnumToDescriptionTypeConverter ReceiptModeConverter = new EnumToDescriptionTypeConverter(typeof(ReceiptMode));
 
         public static readonly EnumToDescriptionTypeConverter ReportTypeConverter = new EnumToDescriptionTypeConverter(typeof(ReportType));
     }

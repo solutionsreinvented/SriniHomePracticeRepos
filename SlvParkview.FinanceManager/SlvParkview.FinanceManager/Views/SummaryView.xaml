@@ -161,34 +161,34 @@
 
                 <Button
                     Margin="5,0"
-                    Command="{Binding AddExpenseCommand}"
+                    Command="{Binding AddBillCommand}"
                     IsEnabled="{Binding CanProcessFlat}">
                     <StackPanel Orientation="Horizontal">
                         <Image
                             Height="18"
                             Margin="5,0"
-                            Source="/Assets/Images/expense-light.png" />
-                        <TextBlock VerticalAlignment="Center" Text="Add Expense" />
+                            Source="/Assets/Images/receipt-light.png" />
+                        <TextBlock VerticalAlignment="Center" Text="Add Bill" />
                     </StackPanel>
                 </Button>
 
                 <Button
                     Margin="5,0"
-                    Command="{Binding AddPaymentCommand}"
+                    Command="{Binding AddReceiptCommand}"
                     IsEnabled="{Binding CanProcessFlat}">
                     <StackPanel Orientation="Horizontal">
                         <Image
                             Height="18"
                             Margin="5,0"
-                            Source="/Assets/Images/payment-light.png" />
-                        <TextBlock VerticalAlignment="Center" Text="Add Payment" />
+                            Source="/Assets/Images/receipt-light.png" />
+                        <TextBlock VerticalAlignment="Center" Text="Add Receipt" />
                     </StackPanel>
                 </Button>
 
                 <Button
                     Margin="5,0"
-                    Command="{Binding AddCommonExpenseCommand}"
-                    Content="Add _Common Expense" />
+                    Command="{Binding AddCommonBillCommand}"
+                    Content="Add _Common Bill" />
 
                 <Button
                     Margin="5,0,0,0"

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Details of Receipts</title>
+
+    <link rel="stylesheet" href="../Styles/common-styles.css" />
+    <link rel="stylesheet" href="../Styles/payments-history.css" />
+  </head>
+
+  <body>
+    <div id="container">
+      <!-- #region Receipts Table -->
+
+      <table class="payments-table table-header">
+        <thead>
+          <tr class="main-heading-row">
+            <td class="table-title" colspan="6">Payments Received During</td>
+          </tr>
+          <tr class="main-heading-row">
+            <td class="paid-on-header" rowspan="2">Date of Receipt</td>
+            <td colspan="2">Flat Information</td>
+            <td colspan="3">Receipt Information</td>
+          </tr>
+          <tr>
+            <td class="flat-number-header">Number</td>
+            <td class="owner-name-header">Owner Name</td>
+            <td class="amount-header">Amount</td>
+            <td class="payment-mode-header">Mode</td>
+            <td class="payment-category-header">Category</td>
+          </tr>
+        </thead>
+
+        <tbody class="table-body">
+          <tr>
+            <td class="paid-on">21-09-2022</td>
+            <td class="flat-number">C217</td>
+            <td class="owner-name">Srinivasa Rao M</td>
+            <td class="amount">0.00</td>
+            <td class="payment-mode">Online</td>
+            <td class="payment-category">Maintenance</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- #endregion -->
+    </div>
+
+    <script src="../Scripts/monthwise-payments.js"></script>
+  </body>
+</html>

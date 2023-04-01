@@ -44,34 +44,34 @@
         <Button
             Grid.Column="1"
             Margin="5,0"
-            Command="{Binding AddPaymentCommand}">
+            Command="{Binding AddReceiptCommand}">
             <StackPanel Orientation="Horizontal">
                 <Image
                     Height="18"
                     Margin="5,0"
-                    Source="/Assets/Images/payment-light.png" />
-                <TextBlock VerticalAlignment="Center" Text="Add Payment" />
+                    Source="/Assets/Images/receipt-light.png" />
+                <TextBlock VerticalAlignment="Center" Text="Add Receipt" />
             </StackPanel>
         </Button>
 
         <Button
             Grid.Column="2"
             Margin="5,0"
-            Command="{Binding AddExpenseCommand}">
+            Command="{Binding AddBillCommand}">
             <StackPanel Orientation="Horizontal">
                 <Image
                     Height="18"
                     Margin="5,0"
                     Source="/Assets/Images/expense-light.png" />
-                <TextBlock VerticalAlignment="Center" Text="Add Expense" />
+                <TextBlock VerticalAlignment="Center" Text="Add Bill" />
             </StackPanel>
         </Button>
 
         <Button
             Grid.Column="3"
             Margin="5,0"
-            Command="{Binding AddCommonExpenseCommand}"
-            Content="Add _Common Expense" />
+            Command="{Binding AddCommonBillCommand}"
+            Content="Add _Common Bill" />
 
         <Button
             Grid.Column="4"
