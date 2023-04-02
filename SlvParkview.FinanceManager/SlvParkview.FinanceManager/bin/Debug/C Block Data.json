@@ -1,5 +1,5 @@
 {
-  "LastUpdated": "2023-04-01T10:41:38.4382119+05:30",
+  "LastUpdated": "2023-04-02T16:25:58.4796495+05:30",
   "Name": "C",
   "Flats": [
     {
@@ -105,10 +105,18 @@
           "Category": 1,
           "Amount": 2800.00,
           "ReferenceId": "8a96dc8286aff4490186b06366880916"
+        },
+        {
+          "Mode": 3,
+          "ReceivedOn": "2023-04-02T00:00:00+05:30",
+          "RecordedOn": "2023-04-02T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "8a96a682874021990187406f828a3f99"
         }
       ],
       "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00,
+      "CurrentOutstanding": 0.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -215,10 +223,18 @@
           "Category": 1,
           "Amount": 2800.00,
           "ReferenceId": "8a96e78286c0297a0186c073369c4c69"
+        },
+        {
+          "Mode": 3,
+          "ReceivedOn": "2023-04-02T00:00:00+05:30",
+          "RecordedOn": "2023-04-02T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "8a96cc8287402436018740d8fef51894"
         }
       ],
       "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00,
+      "CurrentOutstanding": 0.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -693,10 +709,26 @@
           "Category": 1,
           "Amount": 10082.00,
           "ReferenceId": null
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2023-03-05T00:00:00",
+          "RecordedOn": "2023-04-02T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "0618418505"
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2023-04-01T00:00:00",
+          "RecordedOn": "2023-04-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "309119037973"
         }
       ],
-      "OutstandingOnSpecifiedDate": 5601.00,
-      "CurrentOutstanding": 5601.00,
+      "OutstandingOnSpecifiedDate": 1.00,
+      "CurrentOutstanding": 1.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -2113,10 +2145,18 @@
           "Category": 1,
           "Amount": 2800.00,
           "ReferenceId": "8a96d282869b5b3401869bd6d3ee082e"
+        },
+        {
+          "Mode": 3,
+          "ReceivedOn": "2023-04-02T00:00:00+05:30",
+          "RecordedOn": "2023-04-02T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "8a96b1828740240a0187405134ba6f3a"
         }
       ],
       "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00,
+      "CurrentOutstanding": 0.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -2301,10 +2341,18 @@
           "Category": 1,
           "Amount": 2800.00,
           "ReferenceId": "8a96cd82869bfd6c01869c23dd363713"
+        },
+        {
+          "Mode": 3,
+          "ReceivedOn": "2023-04-02T00:00:00+05:30",
+          "RecordedOn": "2023-04-02T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "8a96cc8287402436018740d69b0813de"
         }
       ],
       "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00,
+      "CurrentOutstanding": 0.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -2411,10 +2459,18 @@
           "Category": 1,
           "Amount": 2800.00,
           "ReferenceId": "8a968b82869bfb0301869c32746d5032"
+        },
+        {
+          "Mode": 3,
+          "ReceivedOn": "2023-04-02T00:00:00+05:30",
+          "RecordedOn": "2023-04-02T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "8a969a82874021970187416a17877ff2"
         }
       ],
       "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00,
+      "CurrentOutstanding": 0.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -2513,10 +2569,18 @@
           "Category": 1,
           "Amount": 2800.00,
           "ReferenceId": "8a968f82869b560b01869bd6934915ff"
+        },
+        {
+          "Mode": 3,
+          "ReceivedOn": "2023-04-02T00:00:00+05:30",
+          "RecordedOn": "2023-04-02T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "8a96ed82873f81c801874024f4ad1114"
         }
       ],
       "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00,
+      "CurrentOutstanding": 0.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
