@@ -112,6 +112,7 @@
                     x:Name="PenaltiesControl"
                     DataContext="{Binding}"
                     Visibility="{Binding DataContext.ShowOnlyPenalties, ElementName=Root, Converter={shared:BoolToVisibilityConverter}}" />
+
                 <reportComponents:OutstandingsControl DataContext="{Binding}">
                     <reportComponents:OutstandingsControl.Style>
                         <Style TargetType="reportComponents:OutstandingsControl">
@@ -127,6 +128,7 @@
                         </Style>
                     </reportComponents:OutstandingsControl.Style>
                 </reportComponents:OutstandingsControl>
+
             </Grid>
 
         </GroupBox>

@@ -61,8 +61,8 @@ function populateOutstandings() {
                 <td>${flatInfoCollection[i].CoOwnedBy}</td>
                 <td>${flatInfoCollection[i].TenantName}</td>
                 <td>${flatInfoCollection[i].ResidentType}</td>
-                <td>${jsonContents.ShowPenaltiesOnly ? flatInfoCollection[i].PenaltyTillSpecifiedDate :
-          flatInfoCollection[i].OutstandingOnSpecifiedDate}</td>
+                <td>${formatAmount(jsonContents.ShowPenaltiesOnly ? flatInfoCollection[i].PenaltyTillSpecifiedDate :
+        flatInfoCollection[i].OutstandingOnSpecifiedDate)}</td>
             </tr>`;
     }
 
@@ -73,7 +73,7 @@ function populateOutstandings() {
 
   tableBody.innerHTML += `<tr class="total-outstanding" >
             <td colspan="5" class="total-outstanding-desc">Total ${jsonContents.ShowPenaltiesOnly ? "penalty:" : "outstanding amount:"} </td>
-            <td colspan="1" class="total-outstanding-amount">${jsonContents.ShowPenaltiesOnly ? jsonContents.TotalPenalty : jsonContents.TotalOutstanding}</td>
+            <td colspan="1" class="total-outstanding-amount">${formatAmount(jsonContents.ShowPenaltiesOnly ? jsonContents.TotalPenalty : jsonContents.TotalOutstanding)}</td>
         </tr> `;
 
   tableBody.innerHTML += `<tr class="end-of-data">
@@ -167,6 +167,15 @@ function stripNumberFormatting(formattedValue) {
     formattedValue = formattedValue.replace(",", "");
   }
   return formattedValue;
+}
+
+function formatAmount(amount) {
+  if (amount.includes("(")) {
+    return amount.replace("(", "(₹");
+  }
+  else {
+    return "₹" + amount;
+  }
 }
 
 // #endregion

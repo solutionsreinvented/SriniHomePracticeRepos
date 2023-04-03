@@ -58,6 +58,7 @@
         <Setter Property="MaxHeight" Value="{StaticResource ViewMaximumHeight}" />
         <Setter Property="Width" Value="{StaticResource ViewWidth}" />
         <Setter Property="Height" Value="{StaticResource ViewHeight}" />
+
     </Style>
 
     <!--#endregion-->

@@ -7,7 +7,7 @@
   "DefaultedControlBackgroundBrush": "#22223b",
   "DefaultedControlBorderBrush": "#FF4A4A4A",
 
-  "StaticBackgroundBrush": "#22223b",
+  "StaticBackgroundBrush": "#FF1F1F1F", ///"StaticBackgroundBrush": "#22223b",
   "MouseOverBackgroundBrush": "#574b90",
   "PressedBackgroundBrush": "#FF1C1C1F",
   "DisabledBackgroundBrush": "#FF4A4A4A",
@@ -68,5 +68,4 @@
   "PressedBackgroundGradientBrush": "#FFDAECFC 0.0 #FFC4E0FC 1.0",
   "MouseOverEditableButtonBackgroundGradientBrush": "#FFEBF4FC 0.0 #FFDCECFC 1.0",
   "PressedEditableButtonBackgroundGradientBrush": "#FFDAEBFC 0.0 #FFC4E0FC 1.0"
-
 }

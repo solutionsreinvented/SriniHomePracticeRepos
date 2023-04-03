@@ -143,7 +143,7 @@ function populatePayments() {
               <td class="paid-on">${payments[i].ReceivedOn}</td>
               <td class="flat-number">${payments[i].FlatNumber}</td>
               <td class="owner-name">${payments[i].OwnerName}</td>
-              <td class="amount">${payments[i].Amount}</td>
+              <td class="amount">₹${payments[i].Amount}</td>
               <td class="payment-mode">${payments[i].Mode}</td>
               <td class="payment-category">${payments[i].Category}</td>
             </tr>
@@ -161,7 +161,7 @@ function populatePayments() {
 
   tableBody.innerHTML += `<tr class="total-collection">
             <td colspan="5" class="total-collection-desc">Total Payment Received:</td>
-            <td colspan="1" class="total-collection-amount">${jsonContents.TotalPayment}</td>
+            <td colspan="1" class="total-collection-amount">₹${jsonContents.TotalPayment}</td>
         </tr>`;
 
   tableBody.innerHTML += `<tr class="end-of-data">

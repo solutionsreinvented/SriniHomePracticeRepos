@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 
+using SlvParkview.FinanceManager.ViewModels;
+
 namespace SlvParkview.FinanceManager
 {
     /// <summary>
@@ -11,7 +13,10 @@ namespace SlvParkview.FinanceManager
         {
             base.OnStartup(e);
 
-            MainWindow = new MainWindow();
+            MainWindow = new MainWindow()
+            {
+                DataContext = new MainViewModel()
+            };
 
             MainWindow.Show();
         }

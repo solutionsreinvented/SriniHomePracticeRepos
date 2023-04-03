@@ -5,7 +5,7 @@
 
 .flat-number-header {
   vertical-align: middle;
-  width: 18%;
+  width: 14%;
 }
 
 .owner-name-header {
@@ -25,7 +25,7 @@
 
 .payment-category-header {
   vertical-align: middle;
-  width: 21%;
+  width: 25%;
 }
 
 .payments-table td {

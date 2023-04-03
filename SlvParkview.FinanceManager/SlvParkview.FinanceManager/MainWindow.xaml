@@ -11,16 +11,16 @@
     Width="{StaticResource MainWindowWidth}"
     Height="{StaticResource MainWindowHeight}"
     Background="#4a4e69"
-    DataContext="{DynamicResource MainViewModel}"
+    FontFamily="Adobe Clean UX Light"
     MouseDown="OnMouseDown"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
 
-    <Window.Resources>
+    <!--<Window.Resources>
         <vm:MainViewModel x:Key="MainViewModel" />
-    </Window.Resources>
+    </Window.Resources>-->
 
     <Grid>
 
@@ -51,6 +51,7 @@
                     Source="Assets/Images/ledger-light.png" />
                 <TextBlock
                     VerticalAlignment="Center"
+                    FontFamily="Adobe Clean UX"
                     FontWeight="DemiBold"
                     Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
                     Text="SLV Parkview Finance Manager" />

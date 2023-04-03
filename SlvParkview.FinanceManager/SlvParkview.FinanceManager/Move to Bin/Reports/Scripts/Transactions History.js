@@ -58,9 +58,9 @@ function populateFlatInformation() {
   flatInfoTable.querySelector(".owner-name").innerHTML = flat.OwnedBy;
   flatInfoTable.querySelector(".opening-date").innerHTML = flat.AccountOpenedOn;
   flatInfoTable.querySelector(".coowner-name").innerHTML = flat.CoOwnedBy;
-  flatInfoTable.querySelector(".opening-balance").innerHTML = flat.OpeningBalance;
+  flatInfoTable.querySelector(".opening-balance").innerHTML = formatAmount(flat.OpeningBalance);
   flatInfoTable.querySelector(".tenant-name").innerHTML = flat.TenantName;
-  flatInfoTable.querySelector(".current-outstanding").innerHTML = flat.CurrentOutstanding;
+  flatInfoTable.querySelector(".current-outstanding").innerHTML = formatAmount(flat.CurrentOutstanding);
 
   document.title = "Transaction Summary (" + flat.Description + ")";
 }
@@ -86,12 +86,12 @@ function populateTransactionDetails() {
       summaryTableBody.innerHTML += `
             <tr class="transaction-row">
                 <td>${transactions[i].TransactionDate.toString()}</td>
-                <td>${transactions[i].PaymentAmount}</td>
+                <td>${formatAmount(transactions[i].PaymentAmount)}</td>
                 <td>${transactions[i].PaymentMode}</td>
                 <td>${transactions[i].PaymentCategory}</td>
-                <td>${transactions[i].ExpenseAmount}</td>
+                <td>${formatAmount(transactions[i].ExpenseAmount)}</td>
                 <td>${transactions[i].ExpenseCategory}</td>
-                <td>${transactions[i].Outstanding}</td>
+                <td>${formatAmount(transactions[i].Outstanding)}</td>
             </tr>
             `;
 
@@ -121,6 +121,18 @@ function getFilename(fullPath) {
 function getCurrentDirectory() {
   var location = window.location.pathname;
   return location.substring(0, location.lastIndexOf("/"));
+}
+
+function formatAmount(amount) {
+  if (amount == "-") {
+    return amount;
+  }
+  else if (amount.includes("(")) {
+    return amount.replace("(", "(₹");
+  }
+  else {
+    return "₹" + amount;
+  }
 }
 
 // #endregion

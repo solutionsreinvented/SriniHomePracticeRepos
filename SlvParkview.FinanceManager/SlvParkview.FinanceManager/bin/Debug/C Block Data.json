@@ -1,5 +1,5 @@
 {
-  "LastUpdated": "2023-04-02T16:25:58.4796495+05:30",
+  "LastUpdated": "2023-04-03T12:40:04.7699041+05:30",
   "Name": "C",
   "Flats": [
     {
@@ -10,7 +10,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 4600.0,
       "Expenses": [
         {
@@ -115,7 +115,7 @@
           "ReferenceId": "8a96a682874021990187406f828a3f99"
         }
       ],
-      "OutstandingOnSpecifiedDate": 2800.00,
+      "OutstandingOnSpecifiedDate": 0.00,
       "CurrentOutstanding": 0.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
@@ -128,7 +128,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -233,7 +233,7 @@
           "ReferenceId": "8a96cc8287402436018740d8fef51894"
         }
       ],
-      "OutstandingOnSpecifiedDate": 2800.00,
+      "OutstandingOnSpecifiedDate": 0.00,
       "CurrentOutstanding": 0.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
@@ -246,7 +246,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 24240.0,
       "Expenses": [
         {
@@ -308,7 +308,7 @@
       "TenantName": "Manjunath K S",
       "ResidentType": 1,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -418,7 +418,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -528,7 +528,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -638,7 +638,7 @@
       "TenantName": "Raghunath",
       "ResidentType": 1,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 15683.0,
       "Expenses": [
         {
@@ -740,7 +740,7 @@
       "TenantName": null,
       "ResidentType": 1,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 2495.0,
       "Expenses": [
         {
@@ -842,7 +842,7 @@
       "TenantName": null,
       "ResidentType": 1,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 16800.0,
       "Expenses": [
         {
@@ -912,7 +912,7 @@
       "TenantName": "Santhosh",
       "ResidentType": 1,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 5600.0,
       "Expenses": [
         {
@@ -1022,7 +1022,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 14000.0,
       "Expenses": [
         {
@@ -1116,7 +1116,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 5600.0,
       "Expenses": [
         {
@@ -1234,7 +1234,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -1344,7 +1344,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 2845.0,
       "Expenses": [
         {
@@ -1454,7 +1454,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 6239.0,
       "Expenses": [
         {
@@ -1564,7 +1564,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -1674,7 +1674,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -1784,7 +1784,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -1886,7 +1886,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 5600.0,
       "Expenses": [
         {
@@ -1980,7 +1980,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 20100.0,
       "Expenses": [
         {
@@ -2050,7 +2050,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -2155,7 +2155,7 @@
           "ReferenceId": "8a96b1828740240a0187405134ba6f3a"
         }
       ],
-      "OutstandingOnSpecifiedDate": 2800.00,
+      "OutstandingOnSpecifiedDate": 0.00,
       "CurrentOutstanding": 0.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
@@ -2168,7 +2168,7 @@
       "TenantName": "Harish",
       "ResidentType": 1,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 5600.0,
       "Expenses": [
         {
@@ -2246,7 +2246,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 1400.0,
       "Expenses": [
         {
@@ -2351,7 +2351,7 @@
           "ReferenceId": "8a96cc8287402436018740d69b0813de"
         }
       ],
-      "OutstandingOnSpecifiedDate": 2800.00,
+      "OutstandingOnSpecifiedDate": 0.00,
       "CurrentOutstanding": 0.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
@@ -2364,7 +2364,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -2469,7 +2469,7 @@
           "ReferenceId": "8a969a82874021970187416a17877ff2"
         }
       ],
-      "OutstandingOnSpecifiedDate": 2800.00,
+      "OutstandingOnSpecifiedDate": 0.00,
       "CurrentOutstanding": 0.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
@@ -2482,7 +2482,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 0.0,
       "Expenses": [
         {
@@ -2579,7 +2579,7 @@
           "ReferenceId": "8a96ed82873f81c801874024f4ad1114"
         }
       ],
-      "OutstandingOnSpecifiedDate": 2800.00,
+      "OutstandingOnSpecifiedDate": 0.00,
       "CurrentOutstanding": 0.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
@@ -2592,7 +2592,7 @@
       "TenantName": null,
       "ResidentType": 1,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 16800.0,
       "Expenses": [
         {
@@ -2654,7 +2654,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 18240.0,
       "Expenses": [
         {
@@ -2740,7 +2740,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -2850,7 +2850,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 40385.0,
       "Expenses": [
         {
@@ -2923,12 +2923,12 @@
     {
       "Number": "322",
       "Description": "C322",
-      "OwnedBy": "Sai Shravanth Mudgal",
+      "OwnedBy": "Sai Shravanth Mudigal",
       "CoOwnedBy": null,
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 2800.0,
       "Expenses": [
         {
@@ -2990,7 +2990,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 21490.0,
       "Expenses": [
         {
@@ -3100,7 +3100,7 @@
       "TenantName": null,
       "ResidentType": 0,
       "AccountOpenedOn": "2022-09-01T00:00:00",
-      "DateSpecified": "2023-04-01T00:00:00+05:30",
+      "DateSpecified": "2023-04-03T00:00:00+05:30",
       "OpeningBalance": 2600.0,
       "Expenses": [
         {

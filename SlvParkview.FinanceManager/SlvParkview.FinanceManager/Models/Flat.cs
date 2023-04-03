@@ -287,9 +287,9 @@ namespace SlvParkview.FinanceManager.Models
             ///     b. Change the header of last column of the view to 'Total Penalty'.
 
             ///return Penalties == null || Penalties.Count() == 0 ? 0.0m :
-            ///                                                  Penalties.Where(p => p.OccuredOn <= calculatedTill).Sum(p => p.Amount);
+            /// Penalties.Where(p => p.OccuredOn <= calculatedTill).Sum(p => p.Amount);
 
-            var penaltyOnSpecifiedDate = Penalties?.FirstOrDefault(p => p.OccuredOn == DateSpecified);
+            Expense penaltyOnSpecifiedDate = Penalties?.FirstOrDefault(p => p.OccuredOn == DateSpecified);
 
             return penaltyOnSpecifiedDate == null ? 0.0m : penaltyOnSpecifiedDate.Amount;
 
