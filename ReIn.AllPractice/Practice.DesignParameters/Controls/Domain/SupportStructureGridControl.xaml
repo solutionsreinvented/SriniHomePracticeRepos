@@ -1,0 +1,245 @@
+﻿<UserControl
+    x:Class="ReInvented.ThickenerModelGenerator.UI.Controls.SupportStructureGridControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cc="http://schemas.reinvented.com/custom-controls"
+    xmlns:controls="clr-namespace:ReInvented.ThickenerModelGenerator.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:enums="clr-namespace:ReInvented.Structure.Domain.Enums;assembly=ReInvented.Structure.Domain"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    x:Name="Root"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <Grid x:Name="ContainerGrid">
+
+        <!--#region Support Structure Grids-->
+
+        <DataGrid
+            AutoGenerateColumns="False"
+            HorizontalScrollBarVisibility="Visible"
+            ItemsSource="{Binding SupportStructure.Grids}"
+            SelectedItem="{Binding SelectedGridRow}"
+            SelectionUnit="FullRow">
+
+            <DataGrid.Columns>
+
+                <!--#region Grid Basic Data Region-->
+
+                <DataGridTemplateColumn Header="Grid Id">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                IsEnabled="False"
+                                Text="{Binding Id, Mode=OneWay}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Description">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox
+                                HorizontalContentAlignment="Center"
+                                IsEnabled="{Binding DataContext.SupportStructure.CanModifyGrid, ElementName=Root}"
+                                Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="PCD (m)">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox
+                                HorizontalContentAlignment="Center"
+                                IsEnabled="{Binding DataContext.SupportStructure.CanModifyGrid, ElementName=Root}"
+                                Text="{Binding PCD, UpdateSourceTrigger=LostFocus, StringFormat={}{0:N2}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Base Plate Elevation (m)">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox HorizontalContentAlignment="Center" Text="{Binding ColumnBasePlateElevation, UpdateSourceTrigger=LostFocus, StringFormat={}{0:N3}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--#endregion-->
+
+                <!--#region Column Section-->
+
+                <DataGridTemplateColumn Width="Auto" Header="Column Section">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Margin="0"
+                                HorizontalContentAlignment="Center"
+                                Command="{Binding DataContext.SelectColumnCommand, ElementName=Root}"
+                                Content="{Binding ColumnDisplayText}">
+
+                                <!--#region Column Tool Tip-->
+
+                                <Button.ToolTip>
+                                    <ToolTip Padding="0">
+                                        <Grid>
+                                            <cc:ComponentCard Style="{DynamicResource ToolTipComponentCardStyle}">
+                                                <TextBlock Text="{Binding ColumnDisplayText}" Visibility="{Binding Column.SectionProfile.Material.HasASelectedMaterial, Converter={shared:InvertBooleanConverter}}" />
+                                            </cc:ComponentCard>
+                                            <controls:SectionProfileToolTipControl DataContext="{Binding Column}" />
+                                        </Grid>
+                                    </ToolTip>
+                                </Button.ToolTip>
+
+                                <!--#endregion-->
+
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--#endregion-->
+
+                <!--#region Cross Bracing Section-->
+
+                <DataGridTemplateColumn
+                    Width="Auto"
+                    MinWidth="150"
+                    Header="Provide Cross Bracing?">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox
+                                Margin="0"
+                                HorizontalAlignment="Center"
+                                IsChecked="{Binding HasCrossBracing, UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="Auto" Header="Cross Bracing">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Margin="0"
+                                HorizontalContentAlignment="Center"
+                                Command="{Binding DataContext.SelectCrossBracingCommand, ElementName=Root}"
+                                Content="{Binding CrossBracingDisplayText}"
+                                Visibility="{Binding HasCrossBracing, Converter={shared:BoolToVisibilityConverter}}">
+
+                                <!--#region Cross Bracing Tool Tip-->
+
+                                <Button.ToolTip>
+                                    <ToolTip Padding="0">
+                                        <Grid>
+                                            <cc:ComponentCard Style="{DynamicResource ToolTipComponentCardStyle}">
+                                                <TextBlock
+                                                    Background="Transparent"
+                                                    Text="{Binding CrossBracingDisplayText}"
+                                                    Visibility="{Binding CrossBracing.SectionProfile.Material.HasASelectedMaterial, Converter={shared:InvertBooleanConverter}}" />
+                                            </cc:ComponentCard>
+
+                                            <controls:SectionProfileToolTipControl DataContext="{Binding CrossBracing}" />
+                                        </Grid>
+                                    </ToolTip>
+                                </Button.ToolTip>
+
+                                <!--#endregion-->
+
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="Auto" Header="Cross Bracing Pattern">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox
+                                Margin="0"
+                                HorizontalContentAlignment="Center"
+                                ItemsSource="{shared:EnumBindingResource enums:BracingPattern}"
+                                SelectedItem="{Binding CrossBracingPattern}"
+                                Visibility="{Binding HasCrossBracing, Converter={shared:BoolToVisibilityConverter}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--#endregion-->
+
+                <!--#region Radial Bracing Section-->
+
+                <DataGridTemplateColumn
+                    Width="Auto"
+                    MinWidth="150"
+                    Header="Provide Radial Bracing?">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox
+                                Margin="0"
+                                HorizontalAlignment="Center"
+                                IsChecked="{Binding HasRadialBracing, UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="Auto" Header="Radial Bracing">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Margin="0"
+                                HorizontalContentAlignment="Center"
+                                Command="{Binding DataContext.SelectRadialBracingCommand, ElementName=Root}"
+                                Content="{Binding RadialBracingDisplayText}"
+                                Visibility="{Binding HasRadialBracing, Converter={shared:BoolToVisibilityConverter}}">
+
+                                <!--#region Radial Bracing Tool Tip-->
+
+                                <Button.ToolTip>
+                                    <ToolTip Padding="0">
+                                        <Grid>
+                                            <cc:ComponentCard Style="{DynamicResource ToolTipComponentCardStyle}">
+                                                <TextBlock Text="{Binding RadialBracingDisplayText}" Visibility="{Binding RadialBracing.SectionProfile.Material.HasASelectedMaterial, Converter={shared:InvertBooleanConverter}}" />
+                                            </cc:ComponentCard>
+                                            <controls:SectionProfileToolTipControl DataContext="{Binding RadialBracing}" />
+                                        </Grid>
+                                    </ToolTip>
+                                </Button.ToolTip>
+
+                                <!--#endregion-->
+
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="Auto" Header="Radial Bracing Pattern">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox
+                                Margin="0"
+                                HorizontalContentAlignment="Center"
+                                ItemsSource="{shared:EnumBindingResource enums:BracingPattern}"
+                                SelectedItem="{Binding RadialBracingPattern}"
+                                Visibility="{Binding HasRadialBracing, Converter={shared:BoolToVisibilityConverter}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--#endregion-->
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+        <!--#endregion-->
+
+    </Grid>
+
+
+
+
+</UserControl>

@@ -1,0 +1,167 @@
+﻿<UserControl
+    x:Class="ReInvented.ThickenerModelGenerator.UI.Controls.SupportStructureInputControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cc="http://schemas.reinvented.com/custom-controls"
+    xmlns:controls="clr-namespace:ReInvented.ThickenerModelGenerator.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:enums="clr-namespace:ReInvented.Structure.Domain.Enums;assembly=ReInvented.Structure.Domain"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    x:Name="Root"
+    d:DesignHeight="250"
+    d:DesignWidth="600"
+    mc:Ignorable="d">
+
+    <!--#region Support Structure Input-->
+
+    <Grid Margin="10" DataContext="{Binding DataContext.SupportStructure, ElementName=Root}">
+
+        <!--#region Grid Definitions-->
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--#endregion-->
+
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="0,0,5,0"
+            VerticalAlignment="Center"
+            Text="Angle of the first radial beam in plan:" />
+        <TextBox
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="0,0,0,5"
+            HorizontalContentAlignment="Center"
+            Text="{Binding FirstRadialBeamAngle, StringFormat={}{0:N2}°}" />
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="0,0,5,0"
+            VerticalAlignment="Center"
+            Text="Number of radial beams:" />
+        <TextBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="0,5,0,5"
+            HorizontalContentAlignment="Center"
+            IsEnabled="False"
+            Text="{Binding NumberOfRadialBeams, Mode=OneWay, StringFormat={}{0:N0}}"
+            ToolTip="Should be received from Tank"
+            ToolTipService.ShowOnDisabled="True" />
+
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="0"
+            Margin="0,0,5,0"
+            VerticalAlignment="Center"
+            Text="Number of columns per radial beam:" />
+        <TextBox
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="0,5,0,5"
+            HorizontalContentAlignment="Center"
+            Text="{Binding ColumnsPerRadialBeam, StringFormat={}{0:N0}}" />
+
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="0"
+            Margin="0,0,5,0"
+            VerticalAlignment="Center"
+            Text="Length of radial beam cantilever at the outer PCD:" />
+        <TextBox
+            Grid.Row="3"
+            Grid.Column="1"
+            Margin="0,5,0,5"
+            HorizontalContentAlignment="Center"
+            Text="{Binding CantileverLength, StringFormat={}{0:N3}}" />
+
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="0"
+            Margin="0,0,5,0"
+            VerticalAlignment="Center"
+            Text="Included angle between radial beams in plan:" />
+        <TextBox
+            Grid.Row="4"
+            Grid.Column="1"
+            Margin="0,5,0,5"
+            HorizontalContentAlignment="Center"
+            IsEnabled="False"
+            Text="{Binding SegmentIncludedAngle, Mode=OneWay, StringFormat={}{0:N1}°}" />
+
+        <TextBlock
+            Grid.Row="5"
+            Grid.Column="0"
+            Margin="0,0,5,0"
+            VerticalAlignment="Center"
+            Text="Mode of generation of the support structure grids:" />
+        <ComboBox
+            Grid.Row="5"
+            Grid.Column="1"
+            Height="26"
+            Margin="0,5,0,5"
+            HorizontalContentAlignment="Center"
+            ItemsSource="{shared:EnumBindingResource enums:GridGenerationMode}"
+            SelectedItem="{Binding GridGenerationMode}" />
+
+        <TextBlock
+            Grid.Row="6"
+            Grid.Column="0"
+            Margin="0,0,5,0"
+            VerticalAlignment="Center"
+            Text="Radial beam section profile:" />
+
+
+        <Button
+            Grid.Row="6"
+            Grid.Column="1"
+            Height="26"
+            Margin="0,5,0,5"
+            HorizontalContentAlignment="Center"
+            Command="{Binding DataContext.SelectRadialBeamCommand, ElementName=Root}"
+            Content="{Binding RadialBeamDisplayText}">
+
+            <!--#region Cross Bracing Tool Tip-->
+
+            <Button.ToolTip>
+                <ToolTip Padding="0">
+                    <Grid>
+                        <cc:ComponentCard Style="{DynamicResource ToolTipComponentCardStyle}">
+                            <TextBlock
+                                Background="Transparent"
+                                Text="{Binding RadialBeamDisplayText}"
+                                Visibility="{Binding RadialBeam.SectionProfile.Material.HasASelectedMaterial, Converter={shared:InvertBooleanConverter}}" />
+                        </cc:ComponentCard>
+
+                        <controls:SectionProfileToolTipControl DataContext="{Binding RadialBeam}" />
+                    </Grid>
+                </ToolTip>
+            </Button.ToolTip>
+
+            <!--#endregion-->
+
+        </Button>
+
+    </Grid>
+
+    <!--#endregion-->
+
+</UserControl>

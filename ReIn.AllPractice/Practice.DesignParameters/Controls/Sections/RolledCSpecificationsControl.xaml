@@ -1,0 +1,128 @@
+﻿<UserControl
+    x:Class="ReInvented.ThickenerModelGenerator.UI.Controls.RolledCSpecificationsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:theme="http://schemas.reinvented.com/ui/themes"
+    Width="400"
+    Height="200"
+    MinWidth="400"
+    MinHeight="200"
+    d:DesignHeight="200"
+    d:DesignWidth="400"
+    Background="{theme:ThemeResource ResourceKey=StaticBackgroundBrush}"
+    FontWeight="Normal"
+    Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
+    mc:Ignorable="d">
+
+    <!--#region Root Grid-->
+
+    <Grid Margin="0,10,5,0" VerticalAlignment="Top">
+
+        <!--#region Grid Definitions-->
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <!--#endregion-->
+
+        <!--#region Standard Channel-->
+
+        <RadioButton
+            x:Name="radStandard"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="0,5"
+            Content="_ST (Single Section from Table)"
+            GroupName="CShapeTypeSpecification" />
+
+        <!--#endregion-->
+
+        <!--#region Double Channel B2B BA-->
+
+        <RadioButton
+            x:Name="radDoubleChannelBackToBackBA"
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="0,5"
+            Content="_BA (Double Channel Back-to-Back)"
+            GroupName="CShapeTypeSpecification"
+            IsEnabled="False" />
+
+        <!--#endregion-->
+
+        <!--#region Double Channel B2B-->
+
+        <RadioButton
+            x:Name="radDoubleChannelBackToBack"
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="0,5"
+            Content="_D (Double Channel Back-to-Back)"
+            GroupName="CShapeTypeSpecification" />
+
+        <!--#endregion-->
+
+        <!--#region Double Channel F2F-->
+
+        <RadioButton
+            x:Name="radDoubleChannelFrontToFront"
+            Grid.Row="3"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="0,5"
+            Content="_FR (Double Channel Front-to-Front)"
+            GroupName="CShapeTypeSpecification" />
+
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="1"
+            Margin="0,5"
+            VerticalAlignment="Center"
+            Text="SP (Clear Spacing)">
+            <TextBlock.IsEnabled>
+                <MultiBinding Converter="{shared:BooleanOrConverter}">
+                    <Binding ElementName="radDoubleChannelBackToBack" Path="IsChecked" />
+                    <Binding ElementName="radDoubleChannelFrontToFront" Path="IsChecked" />
+                </MultiBinding>
+            </TextBlock.IsEnabled>
+        </TextBlock>
+
+        <TextBox
+            Grid.Row="4"
+            Grid.Column="2"
+            Height="24"
+            Margin="0,5"
+            VerticalAlignment="Center">
+            <TextBox.IsEnabled>
+                <MultiBinding Converter="{shared:BooleanOrConverter}">
+                    <Binding ElementName="radDoubleChannelBackToBack" Path="IsChecked" />
+                    <Binding ElementName="radDoubleChannelFrontToFront" Path="IsChecked" />
+                </MultiBinding>
+            </TextBox.IsEnabled>
+        </TextBox>
+
+        <!--#endregion-->
+
+    </Grid>
+
+    <!--#endregion-->
+
+</UserControl>

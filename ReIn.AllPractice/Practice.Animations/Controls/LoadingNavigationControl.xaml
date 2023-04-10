@@ -1,0 +1,46 @@
+﻿<UserControl
+    x:Class="Practice.DesignParameters.Controls.LoadingNavigationControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:theme="http://schemas.reinvented.com/ui/themes"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <StackPanel>
+
+        <TextBlock
+            Margin="2,5"
+            Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
+            Text="Loading" />
+
+        <Rectangle
+            Width="200"
+            Height="0.5"
+            Margin="0,2,0,5"
+            Fill="{theme:ThemeResource ResourceKey=StaticForegroundBrush}" />
+
+        <StackPanel>
+
+            <Button
+                Height="32"
+                Margin="0,1"
+                HorizontalContentAlignment="Left"
+                Content="Content Loads" />
+            <Button
+                Height="32"
+                Margin="0,1"
+                HorizontalContentAlignment="Left"
+                Content="Earthquake Loads" />
+            <Button
+                Height="32"
+                Margin="0,1"
+                HorizontalContentAlignment="Left"
+                Content="Wind Loads" />
+        </StackPanel>
+
+    </StackPanel>
+
+</UserControl>

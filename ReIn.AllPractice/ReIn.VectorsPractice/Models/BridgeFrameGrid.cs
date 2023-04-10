@@ -16,5 +16,10 @@ namespace ReIn.VectorsPractice.Models
         {
 
         }
+
+        protected override void UpdateType()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

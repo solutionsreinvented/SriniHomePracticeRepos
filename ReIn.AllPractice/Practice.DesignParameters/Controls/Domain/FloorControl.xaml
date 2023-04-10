@@ -1,0 +1,61 @@
+﻿<UserControl
+    x:Class="ReInvented.ThickenerModelGenerator.UI.Controls.FloorControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="120"
+    d:DesignWidth="400"
+    mc:Ignorable="d">
+
+    <Grid>
+
+        <!--#region Grid Definitions-->
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--#endregion-->
+
+        <!--#region Content-->
+
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="0,0,5,0"
+            VerticalAlignment="Center"
+            Text="Slope with horizontal:" />
+        <TextBox
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="0,0,0,5"
+            Padding="5,2"
+            Text="{Binding Slope, StringFormat={}{0:N3}°}" />
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="0,0,5,0"
+            VerticalAlignment="Center"
+            Text="Number of radial segments:" />
+        <TextBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="0,5,0,5"
+            Padding="5,2"
+            Text="{Binding NumberOfRadialSegments}" />
+
+        <!--#endregion-->
+
+    </Grid>
+
+</UserControl>

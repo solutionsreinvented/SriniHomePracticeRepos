@@ -10,5 +10,10 @@ namespace ReIn.VectorsPractice.Models
         {
             GridType = FrameGridType.ExtensionFrameGrid;
         }
+
+        protected override void UpdateType()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

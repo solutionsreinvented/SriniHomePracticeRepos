@@ -1,0 +1,33 @@
+﻿<UserControl
+    x:Class="ReInvented.ThickenerModelGenerator.UI.Controls.SectionSpecificationsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:theme="http://schemas.reinvented.com/ui/themes"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <!--#region Group Box for Section Specifications-->
+
+    <GroupBox
+        VerticalAlignment="Stretch"
+        BorderBrush="{theme:ThemeResource ResourceKey=StaticBorderBrush}"
+        BorderThickness="{DynamicResource GroupBoxBorderThickness}"
+        Header="Section Specifications"
+        Visibility="{Binding ShowSectionSpecifications, Converter={shared:BoolToVisibilityConverter}}">
+
+        <ContentControl
+            Margin="10,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="{Binding SelectedProfile}" />
+
+    </GroupBox>
+
+    <!--#endregion-->
+
+
+</UserControl>

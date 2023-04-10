@@ -1,0 +1,164 @@
+﻿<UserControl
+    x:Class="ReInvented.ThickenerModelGenerator.UI.Controls.MaterialsBrowserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    Width="Auto"
+    Height="Auto"
+    d:DesignHeight="300"
+    d:DesignWidth="700"
+    mc:Ignorable="d">
+
+    <!--#region Material Selection & Details Region-->
+
+    <Grid>
+
+        <!--#region Grid Definitions-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230" />
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="230" />
+        </Grid.ColumnDefinitions>
+        <!--#endregion-->
+
+        <!--#region Material Selection Container-->
+
+        <!--#region Material Specification Selection-->
+
+        <GroupBox
+            Grid.Column="0"
+            Padding="5"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            BorderThickness="{DynamicResource GroupBoxBorderThickness}"
+            Header="Material Specification">
+
+            <!--#region Material Specifications List-->
+
+            <ListBox
+                Padding="5"
+                BorderThickness="{DynamicResource ListBoxBorderThickness}"
+                ItemsSource="{Binding FilteredTables}"
+                SelectedItem="{Binding SelectedMaterialTable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+
+                <!--#region Material Table - ItemTemplate-->
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="2" Orientation="Horizontal">
+                            <TextBlock
+                                Grid.Row="0"
+                                Margin="6,0,0,0"
+                                VerticalAlignment="Center"
+                                FontWeight="Regular"
+                                Text="{Binding Name}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+                <!--#endregion-->
+
+            </ListBox>
+
+            <!--#endregion-->
+
+        </GroupBox>
+
+        <!--#endregion-->
+
+        <!--#region Material Grade Selection-->
+
+        <GroupBox
+            Grid.Column="1"
+            Margin="10,0"
+            Padding="5"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            BorderThickness="{DynamicResource GroupBoxBorderThickness}"
+            Header="Material Grade ">
+
+            <!--#region Material Grades List-->
+
+            <ListBox
+                Padding="5"
+                BorderThickness="{DynamicResource ListBoxBorderThickness}"
+                ItemsSource="{Binding SelectedMaterialTable.Grades}"
+                SelectedItem="{Binding SelectedMaterialGrade}">
+
+                <!--#region Section Shape ItemTemplate-->
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5" Orientation="Horizontal">
+                            <TextBlock
+                                Margin="6,0,0,0"
+                                VerticalAlignment="Center"
+                                FontWeight="Regular"
+                                Text="{Binding Designation}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+                <!--#endregion-->
+
+            </ListBox>
+
+            <!--#endregion-->
+
+        </GroupBox>
+
+        <!--#endregion-->
+
+        <!--#endregion-->
+
+        <!--#region Material Properties-->
+
+        <GroupBox
+            Grid.Column="2"
+            Padding="5"
+            VerticalAlignment="Stretch"
+            BorderThickness="{DynamicResource GroupBoxBorderThickness}"
+            Header="Material Properties"
+            Visibility="{Binding HasAValidMaterial, Converter={shared:BoolToVisibilityConverter}}">
+            <DataGrid
+                CellStyle="{DynamicResource SelectorDataGridCellStyle}"
+                ColumnHeaderStyle="{DynamicResource SelectorDataGridColumnHeaderStyle}"
+                ItemsSource="{Binding MaterialProperties}"
+                Style="{DynamicResource SelectorDataGridStyle}">
+
+                <DataGrid.Columns>
+
+                    <DataGridTemplateColumn Width="1.5*" Header="Property">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding PropertyName}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="*" Header="Value">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding Value, StringFormat={}{0:N1}}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+        </GroupBox>
+
+        <!--#endregion-->
+
+    </Grid>
+
+    <!--#endregion-->
+
+</UserControl>

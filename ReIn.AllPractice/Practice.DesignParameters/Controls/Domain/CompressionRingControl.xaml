@@ -1,0 +1,189 @@
+﻿<UserControl
+    x:Class="ReInvented.ThickenerModelGenerator.UI.Controls.CompressionRingControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cc="clr-namespace:ReInvented.CustomControls.Library;assembly=ReInvented.CustomControls.Library"
+    xmlns:components="clr-namespace:ReInvented.ThickenerModelGenerator.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    x:Name="Root"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    mc:Ignorable="d">
+
+    <StackPanel DataContext="{Binding Tank.CompressionRing}">
+
+        <TextBlock
+            Margin="0,2"
+            FontWeight="DemiBold"
+            Text="Compression Ring" />
+
+        <Rectangle Style="{StaticResource SeparatorRectangle}" />
+
+
+        <Grid>
+
+            <!--#region Grid Definitions-->
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <!--#endregion-->
+
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,0,5,0"
+                VerticalAlignment="Center"
+                Text="Outer diameter:" />
+            <TextBox
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="0,0,0,5"
+                Text="{Binding OuterDiameter, StringFormat={}{0:N3}}" />
+
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="0,0,5,0"
+                VerticalAlignment="Center"
+                Text="Vertical annulus height:" />
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="0,0,0,5"
+                Text="{Binding VerticalAnnulusHeight, StringFormat={}{0:N3}}" />
+
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="0,0,5,0"
+                VerticalAlignment="Center"
+                Text="Inner diameter:" />
+            <TextBox
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="0,0,0,5"
+                IsEnabled="False"
+                Text="{Binding InnerDiameter, Mode=OneWay, StringFormat={}{0:N3}}" />
+
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="0,0,5,0"
+                VerticalAlignment="Center"
+                Text="Width:" />
+            <TextBox
+                Grid.Row="3"
+                Grid.Column="1"
+                Margin="0,0,0,5"
+                IsEnabled="False"
+                Text="{Binding Width, Mode=OneWay, StringFormat={}{0:N3}}" />
+
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="0"
+                Margin="0,0,5,0"
+                VerticalAlignment="Center"
+                Text="Horizontal annulus property:" />
+            <Button
+                Grid.Row="4"
+                Grid.Column="1"
+                Height="26"
+                Margin="0,5,0,5"
+                Command="{Binding DataContext.ChangeHorizontalAnnulusPropertyCommand, ElementName=Root}"
+                Content="{Binding HorizontalAnnulusPropertyDisplayText}">
+                <Button.ToolTip>
+                    <ToolTip Margin="0" Padding="0">
+                        <Grid>
+                            <cc:ComponentCard Style="{DynamicResource ToolTipComponentCardStyle}">
+                                <TextBlock
+                                    Background="Transparent"
+                                    Text="{Binding HorizontalAnnulusPropertyDisplayText}"
+                                    Visibility="{Binding HorizontalAnnulusProperty.MaterialProperties.Material.HasASelectedMaterial, Converter={shared:InvertBooleanConverter}}" />
+                            </cc:ComponentCard>
+
+                            <components:PlatePropertyToolTipControl DataContext="{Binding HorizontalAnnulusProperty}" />
+                        </Grid>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+
+            <TextBlock
+                Grid.Row="5"
+                Grid.Column="0"
+                Margin="0,0,5,0"
+                VerticalAlignment="Center"
+                Text="Vertical annulus property:" />
+            <Button
+                Grid.Row="5"
+                Grid.Column="1"
+                Height="26"
+                Margin="0,5,0,5"
+                Command="{Binding DataContext.ChangeVerticalAnnulusPropertyCommand, ElementName=Root}"
+                Content="{Binding VerticalAnnulusPropertyDisplayText}">
+                <Button.ToolTip>
+                    <ToolTip Margin="0" Padding="0">
+                        <Grid>
+                            <cc:ComponentCard Style="{DynamicResource ToolTipComponentCardStyle}">
+                                <TextBlock
+                                    Background="Transparent"
+                                    Text="{Binding VerticalAnnulusPropertyDisplayText}"
+                                    Visibility="{Binding VerticalAnnulusProperty.MaterialProperties.Material.HasASelectedMaterial, Converter={shared:InvertBooleanConverter}}" />
+                            </cc:ComponentCard>
+
+                            <components:PlatePropertyToolTipControl DataContext="{Binding VerticalAnnulusProperty}" />
+                        </Grid>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+
+            <TextBlock
+                Grid.Row="6"
+                Grid.Column="0"
+                Margin="0,0,5,0"
+                VerticalAlignment="Center"
+                Text="Stiffeners property:" />
+            <Button
+                Grid.Row="6"
+                Grid.Column="1"
+                Height="26"
+                Margin="0,5,0,5"
+                Command="{Binding DataContext.ChangeStiffenersPropertyCommand, ElementName=Root}"
+                Content="{Binding StiffenersPropertyDisplayText}">
+                <Button.ToolTip>
+                    <ToolTip Margin="0" Padding="0">
+                        <Grid>
+                            <cc:ComponentCard Style="{DynamicResource ToolTipComponentCardStyle}">
+                                <TextBlock
+                                    Background="Transparent"
+                                    Text="{Binding StiffenersPropertyDisplayText}"
+                                    Visibility="{Binding StiffenersProperty.MaterialProperties.Material.HasASelectedMaterial, Converter={shared:InvertBooleanConverter}}" />
+                            </cc:ComponentCard>
+
+                            <components:PlatePropertyToolTipControl DataContext="{Binding StiffenersProperty}" />
+                        </Grid>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+
+
+        </Grid>
+
+    </StackPanel>
+
+</UserControl>

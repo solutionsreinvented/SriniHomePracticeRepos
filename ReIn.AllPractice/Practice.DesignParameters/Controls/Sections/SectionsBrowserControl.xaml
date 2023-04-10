@@ -1,0 +1,295 @@
+﻿<UserControl
+    x:Class="ReInvented.ThickenerModelGenerator.UI.Controls.SectionsBrowserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="clr-namespace:ReInvented.Sections.Domain.Converters;assembly=ReInvented.Sections.Domain"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:theme="http://schemas.reinvented.com/ui/themes"
+    x:Name="Root"
+    d:DesignHeight="550"
+    d:DesignWidth="740"
+    mc:Ignorable="d">
+
+    <!--#region Group Box - Section Profile Selection-->
+
+    <GroupBox
+        BorderBrush="{theme:ThemeResource ResourceKey=StaticBorderBrush}"
+        BorderThickness="{DynamicResource GroupBoxBorderThickness}"
+        FontWeight="Regular">
+
+        <GroupBox.Header>
+            <TextBlock FontWeight="SemiBold" Text="Section Property" />
+        </GroupBox.Header>
+
+        <!--#region Section Profile Browser Container-->
+
+        <Grid>
+
+            <!--#region Show Properties Button-->
+
+            <Button
+                Padding="3"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Background="Transparent"
+                BorderThickness="0.6"
+                Command="{Binding ShowSectionPropertiesCommand}"
+                DataContext="{Binding DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl, AncestorLevel=2}}"
+                IsEnabled="{Binding SectionProfileSelector.SectionProfile.HasASelectedProfile}">
+
+                <Button.ToolTip>
+                    <TextBlock Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}" Text="Show Selected Section Properties" />
+                </Button.ToolTip>
+
+                <Image Width="16" Source="{Binding PropertiesIcon, Converter={shared:StringToImageConverter}}" />
+
+            </Button>
+
+            <!--#endregion-->
+
+            <StackPanel
+                Height="500"
+                VerticalAlignment="Top"
+                Orientation="Horizontal">
+
+                <!--#region Database Selection-->
+
+                <Grid Margin="5,10">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <!--#region Header-->
+
+                    <TextBlock
+                        Grid.Row="0"
+                        Margin="0,0,0,5"
+                        FontSize="12"
+                        Text="Database:" />
+
+                    <!--#endregion-->
+
+                    <!--#region Databases List-->
+
+                    <ListBox
+                        Grid.Row="1"
+                        Width="200"
+                        Padding="5"
+                        HorizontalAlignment="Left"
+                        Background="Transparent"
+                        BorderThickness="{DynamicResource ListBoxBorderThickness}"
+                        ItemsSource="{Binding SectionDatabaseLibrary.Databases}"
+                        SelectedItem="{Binding SelectedDatabase}">
+
+                        <!--#region Database ItemTemplate-->
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="2" Orientation="Horizontal">
+                                    <Viewbox
+                                        Width="28"
+                                        Height="28"
+                                        Margin="4,0,8,0"
+                                        VerticalAlignment="Center"
+                                        Stretch="UniformToFill">
+                                        <Image Source="{Binding Country, Converter={conv:DatabaseNameToIconConverter}}" />
+                                    </Viewbox>
+
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Margin="6,0,0,0"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Regular"
+                                        Text="{Binding Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                        <!--#endregion-->
+
+                    </ListBox>
+
+                    <!--#endregion-->
+
+                </Grid>
+
+                <!--#endregion-->
+
+                <!--#region Section Shape Selection-->
+
+                <Grid Margin="5,10">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <!--#region Header-->
+
+                    <TextBlock
+                        Grid.Row="0"
+                        Margin="0,0,0,5"
+                        FontSize="12"
+                        Text="Shape:" />
+
+                    <!--#endregion-->
+
+                    <!--#region Section Shapes List-->
+
+                    <ListBox
+                        Grid.Row="1"
+                        Width="150"
+                        Padding="5"
+                        HorizontalAlignment="Left"
+                        BorderThickness="{DynamicResource ListBoxBorderThickness}"
+                        ItemsSource="{Binding SectionShapes}"
+                        SelectedItem="{Binding SelectedSectionShape}">
+
+                        <!--#region Section Shape ItemTemplate-->
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="5" Orientation="Horizontal">
+                                    <Viewbox
+                                        Width="20"
+                                        Height="20"
+                                        Margin="4,0,8,0"
+                                        VerticalAlignment="Center"
+                                        Stretch="UniformToFill">
+                                        <Image Source="{Binding Shape, Converter={conv:ShapeNameToIconConverter}}" />
+
+                                    </Viewbox>
+
+                                    <TextBlock
+                                        Margin="6,0,0,0"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Regular"
+                                        Text="{Binding Description}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                        <!--#endregion-->
+
+                    </ListBox>
+
+                    <!--#endregion-->
+
+                </Grid>
+
+                <!--#endregion-->
+
+                <!--#region Classification Selection-->
+
+                <Grid Margin="5,10">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <!--#region Header-->
+
+                    <TextBlock
+                        Grid.Row="0"
+                        Margin="0,0,0,5"
+                        FontSize="12"
+                        Text="Type:" />
+
+                    <!--#endregion-->
+
+                    <!--#region Classifications List-->
+
+                    <ListBox
+                        Grid.Row="1"
+                        Width="120"
+                        Padding="5"
+                        HorizontalAlignment="Left"
+                        BorderThickness="{DynamicResource ListBoxBorderThickness}"
+                        ItemsSource="{Binding SelectedSectionShape.Classifications}"
+                        SelectedItem="{Binding SelectedClassification}">
+
+                        <!--#region Classification ItemTemplate-->
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="5" Orientation="Horizontal">
+                                    <TextBlock FontWeight="Regular" Text="{Binding Category, Converter={conv:StringToSectionTypeConverter}}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                        <!--#endregion-->
+
+                    </ListBox>
+
+                    <!--#endregion-->
+
+                </Grid>
+
+                <!--#endregion-->
+
+                <!--#region Section Profile Selection-->
+
+                <Grid Margin="5,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <!--#region Header-->
+
+                    <TextBlock
+                        Grid.Row="0"
+                        Margin="0,0,0,5"
+                        FontSize="12"
+                        Text="Profiles:" />
+
+                    <!--#endregion-->
+
+                    <!--#region Profiles List-->
+
+                    <ListBox
+                        Grid.Row="1"
+                        Width="180"
+                        Padding="5"
+                        HorizontalAlignment="Left"
+                        BorderThickness="{DynamicResource ListBoxBorderThickness}"
+                        ItemsSource="{Binding Profiles}"
+                        SelectedItem="{Binding SelectedProfile, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, BindsDirectlyToSource=True}">
+
+                        <!--#region Classification ItemTemplate-->
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="5" Orientation="Horizontal">
+                                    <TextBlock FontWeight="Regular" Text="{Binding Designation}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                        <!--#endregion-->
+
+                    </ListBox>
+
+                    <!--#endregion-->
+
+                </Grid>
+
+                <!--#endregion-->
+
+            </StackPanel>
+
+        </Grid>
+
+        <!--#endregion-->
+
+    </GroupBox>
+
+    <!--#endregion-->
+
+</UserControl>

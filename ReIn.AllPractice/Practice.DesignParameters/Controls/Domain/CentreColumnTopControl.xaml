@@ -1,0 +1,97 @@
+﻿<UserControl
+    x:Class="ReInvented.ThickenerModelGenerator.UI.Controls.CentreColumnTopControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cc="clr-namespace:ReInvented.CustomControls.Library;assembly=ReInvented.CustomControls.Library"
+    xmlns:components="clr-namespace:ReInvented.ThickenerModelGenerator.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    x:Name="Root"
+    d:DesignHeight="150"
+    d:DesignWidth="400"
+    mc:Ignorable="d">
+
+    <StackPanel>
+
+        <TextBlock
+            Margin="0,2"
+            FontWeight="DemiBold"
+            Text="Center Column - Above Underflow Cone" />
+
+        <Rectangle Style="{StaticResource SeparatorRectangle}" />
+
+
+        <Grid DataContext="{Binding Tank.CentreColumnTop}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,0,5,0"
+                VerticalAlignment="Center"
+                Text="Diameter:" />
+            <TextBox
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="0,0,0,5"
+                IsEnabled="False"
+                Text="{Binding Diameter, Mode=OneWay, StringFormat={}{0:N3}}" />
+
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="0,0,5,0"
+                VerticalAlignment="Center"
+                Text="Height:" />
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="0,5,0,5"
+                Text="{Binding Height, StringFormat={}{0:N3}}" />
+
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="0,0,5,0"
+                VerticalAlignment="Center"
+                Text="Centre column top property:" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="1"
+                Height="26"
+                Margin="0,5,0,5"
+                Command="{Binding DataContext.ChangeCentreColumnTopPropertyCommand, ElementName=Root}"
+                Content="{Binding PropertyDisplayText}">
+                <Button.ToolTip>
+                    <ToolTip Margin="0" Padding="0">
+                        <Grid>
+                            <cc:ComponentCard Style="{DynamicResource ToolTipComponentCardStyle}">
+                                <TextBlock
+                                    Background="Transparent"
+                                    Text="{Binding PropertyDisplayText}"
+                                    Visibility="{Binding Property.MaterialProperties.Material.HasASelectedMaterial, Converter={shared:InvertBooleanConverter}}" />
+                            </cc:ComponentCard>
+
+                            <components:PlatePropertyToolTipControl DataContext="{Binding Property}" />
+                        </Grid>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+
+
+        </Grid>
+
+    </StackPanel>
+
+</UserControl>
