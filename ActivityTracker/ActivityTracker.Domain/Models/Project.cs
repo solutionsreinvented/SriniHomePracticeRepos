@@ -5,11 +5,18 @@ using ActivityTracker.Domain.Interfaces;
 using ActivityTracker.Domain.Stores;
 
 using System.Collections.ObjectModel;
+using System;
 
 namespace ActivityTracker.Domain.Models
 {
     public abstract class Project : PropertyStore, IProject
     {
+        #region Events
+
+        public event Action<IProject> ProjectCodeChanged;
+
+        #endregion
+
         public Project()
         {
             Activities = new ObservableCollection<IActivity>();

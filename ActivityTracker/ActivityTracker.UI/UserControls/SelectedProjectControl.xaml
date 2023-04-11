@@ -32,8 +32,7 @@
                 x:Name="chkModifyProjectDetails"
                 Grid.Row="1"
                 Margin="0,10"
-                Content="Modify project details"
-                IsEnabled="False" />
+                Content="Modify project details" />
 
             <Button
                 Grid.Row="2"

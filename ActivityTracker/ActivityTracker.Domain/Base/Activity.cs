@@ -28,6 +28,7 @@ namespace ActivityTracker.Domain.Base
         public Activity(IProject project)
         {
             Project = project;
+
             InitializeMandatoryData();
         }
 
@@ -37,6 +38,7 @@ namespace ActivityTracker.Domain.Base
 
         public Discipline Discipline { get => Get<Discipline>(); set { Set(value); UpdateCategories(); } }
 
+        [JsonProperty]
         public Category Category { get => Get<Category>(); set { Set(value); UpdateSubCategories(); } }
 
         public string SubCategory { get => Get<string>(); set { Set(value); GenerateActivityId(); } }
@@ -102,18 +104,14 @@ namespace ActivityTracker.Domain.Base
         {
             /// TODO: Proper user feedback in terms of validation shall be provided.
 
-            if (Project.Type == ProjectType.Development && Discipline != Discipline.Development) return false;
-            if (Discipline == Discipline.Detailing && Project.Type != ProjectType.Order) return false;
-            if (AllocatedHours <= 0) return false;
-
-            return true;
+            return (Project.Type != ProjectType.Development || Discipline == Discipline.Development) &&
+                   (Discipline != Discipline.Detailing || Project.Type == ProjectType.Order) && AllocatedHours > 0;
         }
 
         private void GenerateActivityId()
         {
             if (SubCategory != null && Project != null)
             {
-                //string projectBasedCode = $"{(int)Project.Type + 1}-{Project.Code}";
                 string projectBasedCode = $"{Project.Type.GetDescription().Substring(0, 3).ToUpper()}-{Project.Code}";
                 string activityCode = $"{(int)Discipline}-{ControlDigitService.Calculate(Category.Name)}-{ControlDigitService.Calculate(SubCategory)}-{ControlDigitService.Calculate(Structure)}";
 
@@ -148,6 +146,11 @@ namespace ActivityTracker.Domain.Base
 
         protected void InitializeMandatoryData()
         {
+            #region UnSubscribe and Subscribe to Events
+            //Project.ProjectCodeChanged -= OnProjectCodeChanged;
+            //Project.ProjectCodeChanged += OnProjectCodeChanged;
+            #endregion
+
             ActivityMaster = ActivityMasterService.ReadFromFile();
             Structures = ActivityMaster.Structures;
 
@@ -157,6 +160,12 @@ namespace ActivityTracker.Domain.Base
             Changes = new HashSet<Change>();
             Structure = Structures?.FirstOrDefault();
         }
+
+        // TODO: Complete the implementation. This method was introduced to update the activity ids when the project code is changed.
+        //private void OnProjectCodeChanged(IProject project)
+        //{
+
+        //}
 
         #endregion
 

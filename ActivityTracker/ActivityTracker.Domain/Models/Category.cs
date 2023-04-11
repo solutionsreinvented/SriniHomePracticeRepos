@@ -9,10 +9,5 @@ namespace ActivityTracker.Domain.Models
         public string Name { get => Get<string>(); set => Set(value); }
 
         public HashSet<string> SubCategories { get => Get<HashSet<string>>(); set => Set(value); }
-
-        public override string ToString()
-        {
-            return Name;
-        }
     }
 }

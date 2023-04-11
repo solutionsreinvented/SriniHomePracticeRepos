@@ -349,22 +349,53 @@
             "$ref": "17"
           },
           "ScheduledCompletion": "2023-02-22T00:00:00"
+        },
+        {
+          "$id": "28",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "29",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Staad Modeling",
+          "Structure": "Whole Thickener",
+          "InitiatedOn": "2023-04-11T00:00:00+05:30",
+          "AllocatedHours": 9.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "ORD-22-3807-11-601-668-748",
+          "Project": {
+            "$ref": "17"
+          },
+          "ScheduledCompletion": "2023-04-12T00:00:00+05:30"
         }
       ]
     },
     {
-      "$id": "28",
+      "$id": "30",
       "$type": "ActivityTracker.Domain.Models.PreOrder, ActivityTracker.Domain",
       "Type": 0,
       "Code": "E23030112",
       "Name": "40m Curragh",
       "Activities": [
         {
-          "$id": "29",
+          "$id": "31",
           "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
           "Discipline": 11,
           "Category": {
-            "$id": "30",
+            "$id": "32",
             "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
             "Name": "Structural",
             "SubCategories": [
@@ -386,16 +417,16 @@
           "Changes": [],
           "Id": "0-E23030112-11-601-668",
           "Project": {
-            "$ref": "28"
+            "$ref": "30"
           },
           "ScheduledCompletion": "2023-03-29T00:00:00"
         },
         {
-          "$id": "31",
+          "$id": "33",
           "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
           "Discipline": 11,
           "Category": {
-            "$id": "32",
+            "$id": "34",
             "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
             "Name": "Structural",
             "SubCategories": [
@@ -417,16 +448,16 @@
           "Changes": [],
           "Id": "0-E23030112-11-601-855",
           "Project": {
-            "$ref": "28"
+            "$ref": "30"
           },
           "ScheduledCompletion": "2023-03-30T00:00:00"
         },
         {
-          "$id": "33",
+          "$id": "35",
           "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
           "Discipline": 11,
           "Category": {
-            "$id": "34",
+            "$id": "36",
             "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
             "Name": "Structural",
             "SubCategories": [
@@ -448,16 +479,16 @@
           "Changes": [],
           "Id": "0-E23030112-11-601-897",
           "Project": {
-            "$ref": "28"
+            "$ref": "30"
           },
           "ScheduledCompletion": "2023-04-03T00:00:00"
         },
         {
-          "$id": "35",
+          "$id": "37",
           "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
           "Discipline": 11,
           "Category": {
-            "$id": "36",
+            "$id": "38",
             "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
             "Name": "Structural",
             "SubCategories": [
@@ -479,16 +510,16 @@
           "Changes": [],
           "Id": "0-E23030112-11-601-668",
           "Project": {
-            "$ref": "28"
+            "$ref": "30"
           },
           "ScheduledCompletion": "2023-04-05T00:00:00"
         },
         {
-          "$id": "37",
+          "$id": "39",
           "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
           "Discipline": 11,
           "Category": {
-            "$id": "38",
+            "$id": "40",
             "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
             "Name": "Structural",
             "SubCategories": [
@@ -510,16 +541,16 @@
           "Changes": [],
           "Id": "0-E23030112-11-601-855",
           "Project": {
-            "$ref": "28"
+            "$ref": "30"
           },
           "ScheduledCompletion": "2023-04-06T00:00:00"
         },
         {
-          "$id": "39",
+          "$id": "41",
           "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
           "Discipline": 11,
           "Category": {
-            "$id": "40",
+            "$id": "42",
             "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
             "Name": "Structural",
             "SubCategories": [
@@ -541,7 +572,7 @@
           "Changes": [],
           "Id": "0-E23030112-11-601-897",
           "Project": {
-            "$ref": "28"
+            "$ref": "30"
           },
           "ScheduledCompletion": "2023-04-07T00:00:00"
         }

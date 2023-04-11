@@ -21,7 +21,6 @@
                 <RowDefinition />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <uc:ActivityDetailsControl
@@ -41,8 +40,6 @@
                 Command="{Binding DeleteSelectedActivityCommand}"
                 Content="Delete Selected Activity"
                 IsEnabled="{Binding ActivityIsSelected}" />
-
-            <TextBlock Grid.Row="3" Text="{Binding}" />
 
         </Grid>
 
