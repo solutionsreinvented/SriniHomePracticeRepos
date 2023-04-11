@@ -1,0 +1,147 @@
+﻿<UserControl
+    x:Class="ActivityTracker.UI.Views.AdminDashboardView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:uc="clr-namespace:ActivityTracker.UI.UserControls"
+    x:Name="Root"
+    Width="1100"
+    Height="800"
+    MinWidth="1400"
+    MinHeight="800"
+    MaxWidth="1600"
+    MaxHeight="900"
+    d:DesignHeight="800"
+    d:DesignWidth="1400"
+    mc:Ignorable="d">
+
+    <Border Background="{StaticResource BackgroundBrush}" CornerRadius="5">
+
+        <!--#region Border Effects-->
+
+        <Border.Effect>
+
+            <DropShadowEffect
+                BlurRadius="15"
+                Direction="315"
+                ShadowDepth="10"
+                Color="Black" />
+
+        </Border.Effect>
+
+        <!--#endregion-->
+
+
+        <Grid Margin="15">
+
+            <!--#region Grid Definitions-->
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <!--#endregion-->
+
+            <!--#region Pre Orders List-->
+
+            <GroupBox
+                Grid.Row="0"
+                Grid.Column="0"
+                Header="Pre Orders">
+
+                <uc:ProjectsControl DataContext="{Binding PreOrders}" />
+
+            </GroupBox>
+
+            <!--#endregion-->
+
+            <!--#region Orders List-->
+
+            <GroupBox
+                Grid.Row="1"
+                Grid.Column="0"
+                Header="Orders">
+
+                <uc:ProjectsControl DataContext="{Binding Orders}" />
+
+            </GroupBox>
+
+            <!--#endregion-->
+
+            <!--#region Developments List-->
+
+            <GroupBox
+                Grid.Row="2"
+                Grid.Column="0"
+                Header="Developments">
+
+                <uc:ProjectsControl DataContext="{Binding Developments}" />
+
+            </GroupBox>
+
+            <!--#endregion-->
+
+            <!--#region Activities List-->
+
+            <GroupBox
+                Grid.Row="0"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Header="Activities"
+                Visibility="{Binding ProjectIsSelected, Converter={shared:BoolToVisibilityConverter}}">
+
+                <uc:ActivitiesControl />
+
+            </GroupBox>
+
+            <!--#endregion-->
+
+            <!--#region Selected Project Section-->
+
+            <uc:SelectedProjectControl
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Grid.Column="1"
+                DataContext="{Binding}"
+                Visibility="{Binding ProjectIsSelected, Converter={shared:BoolToVisibilityConverter}}" />
+
+            <!--#endregion-->
+
+            <uc:SelectedActivityControl
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Grid.Column="2"
+                DataContext="{Binding}"
+                Visibility="{Binding ActivityIsSelected, Converter={shared:BoolToVisibilityConverter}}" />
+
+
+            <!--#region Projects Management Button-->
+
+            <uc:ProjectsManagementButtonsControl
+                Grid.Row="3"
+                Grid.Column="0"
+                DataContext="{Binding}" />
+
+            <uc:DataManagementButtonsControl
+                Grid.Row="3"
+                Grid.Column="3"
+                DataContext="{Binding}" />
+
+            <!--#endregion-->
+
+        </Grid>
+
+    </Border>
+
+</UserControl>

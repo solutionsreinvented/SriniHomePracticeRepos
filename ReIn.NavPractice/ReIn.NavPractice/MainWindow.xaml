@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:markupextensions="clr-namespace:ReIn.NavPractice.MarkupExtensions"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:ReIn.NavPractice.ViewModels"
     Title="Thickener Support Structure"
@@ -15,6 +16,10 @@
 
     <Window.Resources>
         <vm:MainViewModel x:Key="MainViewModel" />
+        <DoubleAnimation
+            x:Key="RectangleWidthAnimation"
+            To="300"
+            Duration="0:0:0.5" />
     </Window.Resources>
 
     <Grid DataContext="{Binding}">
@@ -27,20 +32,48 @@
 
         <Border Grid.Row="0">
 
-            <Border.Effect>
+            <!--<Border.Effect>
                 <DropShadowEffect
                     BlurRadius="25"
                     Direction="135"
                     Opacity="0.3"
                     ShadowDepth="5"
                     Color="Black" />
-            </Border.Effect>
+            </Border.Effect>-->
 
-            <ContentControl
+            <!--<ContentControl
                 Width="900"
                 Height="450"
                 Margin="60"
-                Content="{Binding NavigationService.CurrentViewModel}" />
+                Content="{Binding NavigationService.CurrentViewModel}" />-->
+
+
+            <StackPanel
+                Width="500"
+                Height="400"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+                <TextBlock Text="Animation Area" />
+                <Rectangle x:Name="MyRectangle" Fill="Red">
+                    <Rectangle.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <markupextensions:AnimationResource
+                                        ResourceKey="AnimateWidth"
+                                        TargetProperty="Width"
+                                        TargetName="MyRectangle" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Rectangle.Triggers>
+                </Rectangle>
+            </StackPanel>
+
+
+
+
 
         </Border>
 

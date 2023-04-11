@@ -1,0 +1,107 @@
+﻿<Window
+    x:Class="ActivityTracker.UI.Dialogs.CreateProjectView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:enums="clr-namespace:ActivityTracker.Domain.Enums;assembly=ActivityTracker.Domain"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:uc="clr-namespace:ActivityTracker.UI.UserControls"
+    x:Name="Root"
+    Title="Create New Project"
+    Width="600"
+    Height="350"
+    AllowsTransparency="True"
+    Background="Transparent"
+    MouseDown="OnMouseDown"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+    <Border
+        Margin="25"
+        Background="{StaticResource BackgroundBrush}"
+        CornerRadius="5">
+
+        <!--#region Border Effects-->
+
+        <Border.Effect>
+
+            <DropShadowEffect
+                BlurRadius="15"
+                Direction="315"
+                ShadowDepth="10"
+                Color="Black" />
+
+        </Border.Effect>
+
+        <!--#endregion-->
+
+        <GroupBox Margin="10" Header="Add New Project">
+
+            <Grid DataContext="{Binding ProjectDefinition}">
+
+                <!--#region Grid Definitions-->
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <!--#endregion-->
+
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0,0,0,5"
+                    Text="Select project type:" />
+                <ComboBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,0,0,5"
+                    ItemsSource="{shared:EnumBindingResource enums:ProjectType}"
+                    SelectedItem="{Binding ProjectType}" />
+
+                <uc:ProjectDetailsControl
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    DataContext="{Binding Project}" />
+
+                <StackPanel
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Button
+                        Width="100"
+                        Margin="5,0"
+                        Command="{Binding DataContext.SaveCommand, ElementName=Root}"
+                        Content="Save"
+                        IsDefault="True"
+                        IsEnabled="{Binding Project.IsDataValid}"
+                        TabIndex="0" />
+                    <Button
+                        Width="100"
+                        Command="{Binding DataContext.DiscardCommand, ElementName=Root}"
+                        Content="Discard"
+                        IsCancel="True"
+                        TabIndex="1" />
+                </StackPanel>
+
+            </Grid>
+
+        </GroupBox>
+
+    </Border>
+
+</Window>

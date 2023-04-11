@@ -1,0 +1,551 @@
+{
+  "$id": "1",
+  "$type": "ActivityTracker.Domain.Models.ProjectMaster, ActivityTracker.Domain",
+  "Projects": [
+    {
+      "$id": "2",
+      "$type": "ActivityTracker.Domain.Models.Order, ActivityTracker.Domain",
+      "Type": 1,
+      "Code": "22-3849",
+      "Name": "25m Thickener Modified",
+      "Activities": []
+    },
+    {
+      "$id": "3",
+      "$type": "ActivityTracker.Domain.Models.Order, ActivityTracker.Domain",
+      "Type": 1,
+      "Code": "22-3877",
+      "Name": "48m Thickener",
+      "Activities": []
+    },
+    {
+      "$id": "4",
+      "$type": "ActivityTracker.Domain.Models.Order, ActivityTracker.Domain",
+      "Type": 1,
+      "Code": "22-3965",
+      "Name": "77m Thickener",
+      "Activities": []
+    },
+    {
+      "$id": "5",
+      "$type": "ActivityTracker.Domain.Models.Development, ActivityTracker.Domain",
+      "Type": 2,
+      "Code": "DTIPR 20.13",
+      "Name": "Thickener Design Automation",
+      "Activities": [
+        {
+          "$id": "6",
+          "$type": "ActivityTracker.Domain.Models.DevelopmentActivity, ActivityTracker.Domain",
+          "Discipline": 17,
+          "Category": {
+            "$id": "7",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Non Structural",
+            "SubCategories": [
+              "Bridge Geometry Modeling",
+              "Bridge Loads Implementation",
+              "Bridge Design Parameters Implementation",
+              "Tank Seismic Loads Implementation",
+              "Tank Content Loads Implementation",
+              "Support Structure Design Parameters"
+            ]
+          },
+          "SubCategory": "Bridge Geometry Modeling",
+          "Structure": "Whole Thickener",
+          "InitiatedOn": "2022-12-26T00:00:00+05:30",
+          "AllocatedHours": 90.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "2-DTIPR 20.13-17-740-1160",
+          "Project": {
+            "$ref": "5"
+          },
+          "ScheduledCompletion": "2023-01-09T00:00:00+05:30"
+        },
+        {
+          "$id": "8",
+          "$type": "ActivityTracker.Domain.Models.DevelopmentActivity, ActivityTracker.Domain",
+          "Discipline": 17,
+          "Category": {
+            "$id": "9",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Non Structural",
+            "SubCategories": [
+              "Bridge Geometry Modeling",
+              "Bridge Loads Implementation",
+              "Bridge Design Parameters Implementation",
+              "Tank Seismic Loads Implementation",
+              "Tank Content Loads Implementation",
+              "Support Structure Design Parameters"
+            ]
+          },
+          "SubCategory": "Bridge Loads Implementation",
+          "Structure": "Whole Thickener",
+          "InitiatedOn": "2022-12-26T00:00:00+05:30",
+          "AllocatedHours": 100.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "2-DTIPR 20.13-17-740-1334",
+          "Project": {
+            "$ref": "5"
+          },
+          "ScheduledCompletion": "2023-01-10T00:00:00+05:30"
+        },
+        {
+          "$id": "10",
+          "$type": "ActivityTracker.Domain.Models.DevelopmentActivity, ActivityTracker.Domain",
+          "Discipline": 17,
+          "Category": {
+            "$id": "11",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Non Structural",
+            "SubCategories": [
+              "Bridge Geometry Modeling",
+              "Bridge Loads Implementation",
+              "Bridge Design Parameters Implementation",
+              "Tank Seismic Loads Implementation",
+              "Tank Content Loads Implementation",
+              "Support Structure Design Parameters"
+            ]
+          },
+          "SubCategory": "Bridge Geometry Modeling",
+          "Structure": "Whole Thickener",
+          "InitiatedOn": "2022-12-26T00:00:00+05:30",
+          "AllocatedHours": 50.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "2-DTIPR 20.13-17-740-1160",
+          "Project": {
+            "$ref": "5"
+          },
+          "ScheduledCompletion": "2023-01-02T00:00:00+05:30"
+        }
+      ]
+    },
+    {
+      "$id": "12",
+      "$type": "ActivityTracker.Domain.Models.Development, ActivityTracker.Domain",
+      "Type": 2,
+      "Code": "DTIPR 20.15",
+      "Name": "Connection Templates Library - Russian Codes",
+      "Activities": [
+        {
+          "$id": "13",
+          "$type": "ActivityTracker.Domain.Models.DevelopmentActivity, ActivityTracker.Domain",
+          "Discipline": 17,
+          "Category": {
+            "$id": "14",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Non Structural",
+            "SubCategories": [
+              "Bridge Geometry Modeling",
+              "Bridge Loads Implementation",
+              "Bridge Design Parameters Implementation",
+              "Tank Seismic Loads Implementation",
+              "Tank Content Loads Implementation",
+              "Support Structure Design Parameters"
+            ]
+          },
+          "SubCategory": "Bridge Geometry Modeling",
+          "Structure": "Whole Thickener",
+          "InitiatedOn": "2023-01-02T00:00:00+05:30",
+          "AllocatedHours": 25.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "2-DTIPR 20.15-17-740-1160",
+          "Project": {
+            "$ref": "12"
+          },
+          "ScheduledCompletion": "2023-01-04T00:00:00+05:30"
+        },
+        {
+          "$id": "15",
+          "$type": "ActivityTracker.Domain.Models.DevelopmentActivity, ActivityTracker.Domain",
+          "Discipline": 17,
+          "Category": {
+            "$id": "16",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Non Structural",
+            "SubCategories": [
+              "Bridge Geometry Modeling",
+              "Bridge Loads Implementation",
+              "Bridge Design Parameters Implementation",
+              "Tank Seismic Loads Implementation",
+              "Tank Content Loads Implementation",
+              "Support Structure Design Parameters"
+            ]
+          },
+          "SubCategory": "Bridge Loads Implementation",
+          "Structure": "Whole Thickener",
+          "InitiatedOn": "2023-01-02T00:00:00+05:30",
+          "AllocatedHours": 35.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "2-DTIPR 20.15-17-740-1334",
+          "Project": {
+            "$ref": "12"
+          },
+          "ScheduledCompletion": "2023-01-05T00:00:00+05:30"
+        }
+      ]
+    },
+    {
+      "$id": "17",
+      "$type": "ActivityTracker.Domain.Models.Order, ActivityTracker.Domain",
+      "Type": 1,
+      "Code": "22-3807",
+      "Name": "11.3m Torex MML Clarifier",
+      "Activities": [
+        {
+          "$id": "18",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "19",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Non Structural",
+            "SubCategories": [
+              "Preamble"
+            ]
+          },
+          "SubCategory": "Preamble",
+          "Structure": "Whole Thickener",
+          "InitiatedOn": "2023-02-10T00:00:00",
+          "AllocatedHours": 9.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "1-22-3807-11-740-424",
+          "Project": {
+            "$ref": "17"
+          },
+          "ScheduledCompletion": "2023-02-13T00:00:00"
+        },
+        {
+          "$id": "20",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "21",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Staad Modeling",
+          "Structure": "Whole Thickener",
+          "InitiatedOn": "2023-02-13T00:00:00",
+          "AllocatedHours": 18.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "1-22-3807-11-601-668",
+          "Project": {
+            "$ref": "17"
+          },
+          "ScheduledCompletion": "2023-02-15T00:00:00"
+        },
+        {
+          "$id": "22",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "23",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Loads Application",
+          "Structure": "Whole Thickener",
+          "InitiatedOn": "2023-02-16T00:00:00",
+          "AllocatedHours": 9.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "1-22-3807-11-601-855",
+          "Project": {
+            "$ref": "17"
+          },
+          "ScheduledCompletion": "2023-02-17T00:00:00"
+        },
+        {
+          "$id": "24",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "25",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Analysis and Design",
+          "Structure": "Whole Thickener",
+          "InitiatedOn": "2023-02-20T00:00:00",
+          "AllocatedHours": 9.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "1-22-3807-11-601-897",
+          "Project": {
+            "$ref": "17"
+          },
+          "ScheduledCompletion": "2023-02-21T00:00:00"
+        },
+        {
+          "$id": "26",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "27",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Foundation Load Data",
+          "Structure": "Whole Thickener",
+          "InitiatedOn": "2023-02-21T00:00:00",
+          "AllocatedHours": 9.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "1-22-3807-11-601-913",
+          "Project": {
+            "$ref": "17"
+          },
+          "ScheduledCompletion": "2023-02-22T00:00:00"
+        }
+      ]
+    },
+    {
+      "$id": "28",
+      "$type": "ActivityTracker.Domain.Models.PreOrder, ActivityTracker.Domain",
+      "Type": 0,
+      "Code": "E23030112",
+      "Name": "40m Curragh",
+      "Activities": [
+        {
+          "$id": "29",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "30",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Staad Modeling",
+          "Structure": "Support Structure",
+          "InitiatedOn": "2023-03-27T00:00:00",
+          "AllocatedHours": 18.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "0-E23030112-11-601-668",
+          "Project": {
+            "$ref": "28"
+          },
+          "ScheduledCompletion": "2023-03-29T00:00:00"
+        },
+        {
+          "$id": "31",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "32",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Loads Application",
+          "Structure": "Support Structure",
+          "InitiatedOn": "2023-03-29T00:00:00",
+          "AllocatedHours": 9.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "0-E23030112-11-601-855",
+          "Project": {
+            "$ref": "28"
+          },
+          "ScheduledCompletion": "2023-03-30T00:00:00"
+        },
+        {
+          "$id": "33",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "34",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Analysis and Design",
+          "Structure": "Support Structure",
+          "InitiatedOn": "2023-03-30T00:00:00",
+          "AllocatedHours": 18.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "0-E23030112-11-601-897",
+          "Project": {
+            "$ref": "28"
+          },
+          "ScheduledCompletion": "2023-04-03T00:00:00"
+        },
+        {
+          "$id": "35",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "36",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Staad Modeling",
+          "Structure": "Rake Mechanism",
+          "InitiatedOn": "2023-04-03T00:00:00",
+          "AllocatedHours": 18.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "0-E23030112-11-601-668",
+          "Project": {
+            "$ref": "28"
+          },
+          "ScheduledCompletion": "2023-04-05T00:00:00"
+        },
+        {
+          "$id": "37",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "38",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Loads Application",
+          "Structure": "Rake Mechanism",
+          "InitiatedOn": "2023-04-05T00:00:00",
+          "AllocatedHours": 9.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "0-E23030112-11-601-855",
+          "Project": {
+            "$ref": "28"
+          },
+          "ScheduledCompletion": "2023-04-06T00:00:00"
+        },
+        {
+          "$id": "39",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "40",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Analysis and Design",
+          "Structure": "Rake Mechanism",
+          "InitiatedOn": "2023-04-06T00:00:00",
+          "AllocatedHours": 9.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "0-E23030112-11-601-897",
+          "Project": {
+            "$ref": "28"
+          },
+          "ScheduledCompletion": "2023-04-07T00:00:00"
+        }
+      ]
+    }
+  ]
+}

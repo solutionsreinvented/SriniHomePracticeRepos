@@ -1,0 +1,63 @@
+{
+  "Structures": [
+    "Whole Thickener",
+    "Tank",
+    "Support Structure",
+    "Bridge",
+    "Rake Mechanism"
+  ],
+  "Domains": [
+    {
+      "Descipline": "Design",
+      "Categories": [
+        {
+          "Name": "Structural",
+          "SubCategories": [
+            "Staad Modeling",
+            "Loads Application",
+            "Analysis and Design",
+            "Foundation Load Data",
+            "Base Plates Design",
+            "Member Design Calculation Report",
+            "Connections Design Calculation Report"
+          ]
+        },
+        {
+          "Name": "Non Structural",
+          "SubCategories": [ "Preamble" ]
+        }
+      ]
+    },
+    {
+      "Descipline": "Development",
+      "Categories": [
+        {
+          "Name": "Non Structural",
+          "SubCategories": [
+            "Bridge Geometry Modeling",
+            "Bridge Loads Implementation",
+            "Bridge Design Parameters Implementation",
+            "Tank Seismic Loads Implementation",
+            "Tank Content Loads Implementation",
+            "Support Structure Design Parameters"
+          ]
+        }
+      ]
+    },
+    {
+      "Descipline": "Detailing",
+      "Categories": [
+        {
+          "Name": "Structural",
+          "SubCategories": [
+            "3D Model Preparation",
+            "Design Drawings",
+            "Fabrication Drawings",
+            "Erection Drawings",
+            "Corrections and Revisions"
+          ]
+        }
+      ]
+    }
+  ]
+}
