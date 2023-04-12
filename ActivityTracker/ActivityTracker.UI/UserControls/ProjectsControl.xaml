@@ -13,14 +13,11 @@
         Grid.Row="0"
         Padding="3,8"
         AutoGenerateColumns="False"
-        Background="Transparent"
         BorderThickness="0"
-        HorizontalGridLinesBrush="{StaticResource BackgroundBrush}"
         IsReadOnly="True"
-        ItemsSource="{Binding DataContext, ElementName=Root}"
-        RowHeaderWidth="0"
-        SelectedItem="{Binding DataContext.SelectedProject, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=2, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"
-        VerticalGridLinesBrush="{StaticResource BackgroundBrush}">
+        ItemsSource="{Binding}"
+        SelectedValue="{Binding DataContext.SelectedProject, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=2, AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"
+        SelectionUnit="FullRow">
 
         <DataGrid.Columns>
             <DataGridTemplateColumn Width="*" Header="Code">
@@ -42,7 +39,6 @@
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-
         </DataGrid.Columns>
 
     </DataGrid>

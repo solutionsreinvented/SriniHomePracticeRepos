@@ -44,7 +44,9 @@ namespace ActivityTracker.Domain.Models
         public virtual void AddActivity(IActivity activity)
         {
             if (Activities.Contains(activity))
+            {
                 return;
+            }
 
             Activities.Add(activity);
         }
@@ -52,63 +54,14 @@ namespace ActivityTracker.Domain.Models
         public virtual void RemoveActivity(IActivity activity)
         {
             if (!Activities.Contains(activity))
+            {
                 return;
+            }
 
             _ = Activities.Remove(activity);
         }
 
         [JsonIgnore]
         public bool IsDataValid => !string.IsNullOrWhiteSpace(Code) && !string.IsNullOrWhiteSpace(Name);
-    }
-
-    public class Order : Project
-    {
-        public Order()
-        {
-            Type = ProjectType.Order;
-        }
-
-        #region Parameterized Constructors
-
-        public Order(string code, string name) : base(code, name)
-        {
-            Type = ProjectType.Order;
-        }
-
-        #endregion
-    }
-
-    public class PreOrder : Project
-    {
-        public PreOrder()
-        {
-            Type = ProjectType.PreOrder;
-        }
-
-        #region Parameterized Constructors
-
-        public PreOrder(string code, string name) : base(code, name)
-        {
-            Type = ProjectType.PreOrder;
-        }
-
-        #endregion
-    }
-
-    public class Development : Project
-    {
-        public Development()
-        {
-            Type = ProjectType.Development;
-        }
-
-        #region Parameterized Constructors
-
-        public Development(string code, string name) : base(code, name)
-        {
-            Type = ProjectType.Development;
-        }
-
-        #endregion
     }
 }

@@ -7,32 +7,11 @@
     xmlns:shared="http://schemas.reinvented.com/shared"
     xmlns:uc="clr-namespace:ActivityTracker.UI.UserControls"
     x:Name="Root"
-    Width="1100"
-    Height="800"
-    MinWidth="1400"
-    MinHeight="800"
-    MaxWidth="1600"
-    MaxHeight="900"
     d:DesignHeight="800"
     d:DesignWidth="1400"
     mc:Ignorable="d">
 
-    <Border Background="{StaticResource BackgroundBrush}" CornerRadius="5">
-
-        <!--#region Border Effects-->
-
-        <Border.Effect>
-
-            <DropShadowEffect
-                BlurRadius="15"
-                Direction="315"
-                ShadowDepth="10"
-                Color="Black" />
-
-        </Border.Effect>
-
-        <!--#endregion-->
-
+    <Grid Margin="15">
 
         <Grid Margin="15">
 
@@ -54,7 +33,6 @@
             <!--#endregion-->
 
             <!--#region Pre Orders List-->
-
             <GroupBox
                 Grid.Row="0"
                 Grid.Column="0"
@@ -63,11 +41,9 @@
                 <uc:ProjectsControl DataContext="{Binding PreOrders}" />
 
             </GroupBox>
-
             <!--#endregion-->
 
             <!--#region Orders List-->
-
             <GroupBox
                 Grid.Row="1"
                 Grid.Column="0"
@@ -76,11 +52,9 @@
                 <uc:ProjectsControl DataContext="{Binding Orders}" />
 
             </GroupBox>
-
             <!--#endregion-->
 
             <!--#region Developments List-->
-
             <GroupBox
                 Grid.Row="2"
                 Grid.Column="0"
@@ -89,7 +63,6 @@
                 <uc:ProjectsControl DataContext="{Binding Developments}" />
 
             </GroupBox>
-
             <!--#endregion-->
 
             <!--#region Activities List-->
@@ -131,17 +104,19 @@
             <uc:ProjectsManagementButtonsControl
                 Grid.Row="3"
                 Grid.Column="0"
+                Height="28"
                 DataContext="{Binding}" />
 
             <uc:DataManagementButtonsControl
                 Grid.Row="3"
                 Grid.Column="3"
+                Height="28"
                 DataContext="{Binding}" />
 
             <!--#endregion-->
 
         </Grid>
 
-    </Border>
+    </Grid>
 
 </UserControl>

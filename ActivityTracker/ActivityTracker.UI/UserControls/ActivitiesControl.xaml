@@ -12,20 +12,12 @@
     <DataGrid
         Padding="3,8"
         AutoGenerateColumns="False"
-        BorderThickness="0.4"
-        CanUserResizeColumns="False"
-        HorizontalGridLinesBrush="{StaticResource BackgroundBrush}"
+        Background="Transparent"
+        BorderThickness="0"
         IsReadOnly="True"
         ItemsSource="{Binding Activities}"
-        RowHeaderWidth="0"
         SelectedItem="{Binding SelectedActivity}"
-        VerticalGridLinesBrush="{StaticResource BackgroundBrush}"
-        VerticalScrollBarVisibility="Visible">
-        <DataGrid.Resources>
-            <Style x:Key="CenteredColumnHeader" TargetType="{x:Type DataGridColumnHeader}">
-                <Setter Property="HorizontalContentAlignment" Value="Center" />
-            </Style>
-        </DataGrid.Resources>
+        SelectionUnit="FullRow">
         <DataGrid.Columns>
             <DataGridTemplateColumn Width="Auto" Header="Activity Id">
                 <DataGridTemplateColumn.CellTemplate>
@@ -36,10 +28,7 @@
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTemplateColumn
-                Width="Auto"
-                Header="Discipline"
-                HeaderStyle="{StaticResource CenteredColumnHeader}">
+            <DataGridTemplateColumn Width="Auto" Header="Discipline">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <Border Margin="0" Padding="5,3">
@@ -75,10 +64,7 @@
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTemplateColumn
-                Width="Auto"
-                Header="Allocated Hours"
-                HeaderStyle="{StaticResource CenteredColumnHeader}">
+            <DataGridTemplateColumn Width="Auto" Header="Allocated Hours">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <Border Margin="0" Padding="5,3">
@@ -87,10 +73,7 @@
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTemplateColumn
-                Width="Auto"
-                Header="Starts On"
-                HeaderStyle="{StaticResource CenteredColumnHeader}">
+            <DataGridTemplateColumn Width="Auto" Header="Starts On">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <Border Margin="0" Padding="5,3">
@@ -99,10 +82,7 @@
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTemplateColumn
-                Width="Auto"
-                Header="Scheduled Completion"
-                HeaderStyle="{StaticResource CenteredColumnHeader}">
+            <DataGridTemplateColumn Width="Auto" Header="Scheduled Completion">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <Border Margin="0" Padding="5,3">

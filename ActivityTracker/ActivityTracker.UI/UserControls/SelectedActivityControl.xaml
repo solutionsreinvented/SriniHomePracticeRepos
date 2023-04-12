@@ -37,6 +37,7 @@
 
             <Button
                 Grid.Row="2"
+                Height="{StaticResource ControlHeight}"
                 Command="{Binding DeleteSelectedActivityCommand}"
                 Content="Delete Selected Activity"
                 IsEnabled="{Binding ActivityIsSelected}" />

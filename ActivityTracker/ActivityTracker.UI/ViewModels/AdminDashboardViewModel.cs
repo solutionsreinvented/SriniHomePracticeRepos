@@ -56,7 +56,6 @@ namespace ActivityTracker.UI.ViewModels
 
         public IEnumerable<IResource> Resources { get => Get<IEnumerable<IResource>>(); set => Set(value); }
 
-        ///public IEnumerable<IActivity> Activities => SelectedResource?.Activities;
 
         public IResource SelectedResource
         {

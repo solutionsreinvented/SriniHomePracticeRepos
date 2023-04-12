@@ -35,7 +35,7 @@ namespace ActivityTracker.UI
 
             ///navigationStore.CurrentViewModel = new DashboardViewModel(navigationStore);
 
-            MainWindow = new MainWindow()
+            MainWindow = new Home()
             {
                 DataContext = new MainViewModel(navigationStore)
                 {

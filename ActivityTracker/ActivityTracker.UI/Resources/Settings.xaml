@@ -1,0 +1,51 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <Thickness x:Key="ListBoxBorderThickness">0.5</Thickness>
+    <Thickness x:Key="GroupBoxBorderThickness">0.1</Thickness>
+
+    <!--#region Font Sizes-->
+
+    <sys:Double x:Key="SubScriptFontSize">7</sys:Double>
+
+    <!--#endregion-->
+
+    <sys:Double x:Key="InputLabelHeight">22</sys:Double>
+    <sys:Double x:Key="ControlHeight">26</sys:Double>
+
+    <!--#region Main Window-->
+
+    <sys:Double x:Key="MainWindowHeight">950</sys:Double>
+    <sys:Double x:Key="MainWindowWidth">1720</sys:Double>
+
+    <!--#endregion-->
+
+    <!--#region Host Dimensions-->
+
+    <sys:Double x:Key="HostMinimumHeight">800</sys:Double>
+    <sys:Double x:Key="HostMinimumWidth">1350</sys:Double>
+
+    <sys:Double x:Key="HostMaximumHeight">900</sys:Double>
+    <sys:Double x:Key="HostMaximumWidth">1450</sys:Double>
+
+    <sys:Double x:Key="HostHeight">850</sys:Double>
+    <sys:Double x:Key="HostWidth">1350</sys:Double>
+
+    <!--#endregion-->
+
+    <!--#region View Dimensions-->
+
+    <sys:Double x:Key="ViewMinimumHeight">750</sys:Double>
+    <sys:Double x:Key="ViewMinimumWidth">1300</sys:Double>
+
+    <sys:Double x:Key="ViewMaximumHeight">850</sys:Double>
+    <sys:Double x:Key="ViewMaximumWidth">1400</sys:Double>
+
+    <sys:Double x:Key="ViewHeight">800</sys:Double>
+    <sys:Double x:Key="ViewWidth">1300</sys:Double>
+
+    <!--#endregion-->
+
+</ResourceDictionary>

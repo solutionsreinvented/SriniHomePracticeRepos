@@ -38,11 +38,11 @@
             Grid.ColumnSpan="2"
             HorizontalAlignment="Stretch">
             <TextBlock
-                Height="24"
+                Height="{StaticResource ControlHeight}"
                 VerticalAlignment="Center"
                 Text="Activity Id:" />
             <TextBox
-                Height="24"
+                Height="{StaticResource ControlHeight}"
                 Margin="15,0,5,5"
                 HorizontalAlignment="Stretch"
                 VerticalContentAlignment="Center"
@@ -53,13 +53,13 @@
         <TextBlock
             Grid.Row="1"
             Grid.Column="0"
-            Height="24"
+            Height="{StaticResource InputLabelHeight}"
             VerticalAlignment="Center"
             Text="Discipline:" />
         <TextBox
             Grid.Row="2"
             Grid.Column="0"
-            Height="24"
+            Height="{StaticResource ControlHeight}"
             Margin="0,0,0,5"
             IsEnabled="False"
             Text="{Binding Discipline, Mode=OneWay}" />
@@ -67,52 +67,54 @@
         <TextBlock
             Grid.Row="1"
             Grid.Column="1"
-            Height="24"
+            Height="{StaticResource InputLabelHeight}"
             Margin="5,0,0,0"
             VerticalAlignment="Center"
             Text="Category:" />
         <ComboBox
             Grid.Row="2"
             Grid.Column="1"
+            Height="{StaticResource ControlHeight}"
             Margin="5,0,5,5"
+            HorizontalContentAlignment="Left"
+            DisplayMemberPath="Name"
             ItemsSource="{Binding Categories}"
-            SelectedItem="{Binding Category}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}" />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+            SelectedValue="{Binding Category}" />
 
         <TextBlock
             Grid.Row="3"
             Grid.Column="0"
-            Margin="0,0,5,5"
+            Height="{StaticResource InputLabelHeight}"
             Text="Sub Category:" />
         <ComboBox
             Grid.Row="4"
             Grid.Column="0"
+            Height="{StaticResource ControlHeight}"
             Margin="0,0,5,5"
+            HorizontalContentAlignment="Left"
             ItemsSource="{Binding SubCategories}"
-            SelectedItem="{Binding SubCategory}" />
+            SelectedValue="{Binding SubCategory}" />
 
         <TextBlock
             Grid.Row="3"
             Grid.Column="1"
             Grid.ColumnSpan="2"
-            Margin="5,0,5,5"
+            Height="{StaticResource InputLabelHeight}"
+            Margin="5,0,0,0"
             Text="Structure:" />
         <ComboBox
             Grid.Row="4"
             Grid.Column="1"
+            Height="{StaticResource ControlHeight}"
             Margin="5,0,5,5"
+            HorizontalContentAlignment="Left"
             ItemsSource="{Binding Structures}"
-            SelectedItem="{Binding Structure}" />
+            SelectedValue="{Binding Structure}" />
 
         <TextBlock
             Grid.Row="5"
             Grid.Column="0"
-            Margin="0,0,5,5"
+            Height="{StaticResource InputLabelHeight}"
             Text="Activity start date:" />
         <DatePicker
             Grid.Row="6"
@@ -126,11 +128,13 @@
         <TextBlock
             Grid.Row="5"
             Grid.Column="1"
-            Margin="5,0,5,5"
+            Height="{StaticResource InputLabelHeight}"
+            Margin="5,0"
             Text="Allocated man-hours:" />
         <TextBox
             Grid.Row="6"
             Grid.Column="1"
+            Height="{StaticResource ControlHeight}"
             Margin="5,0,5,5"
             VerticalAlignment="Center"
             VerticalContentAlignment="Center"
@@ -139,11 +143,12 @@
         <TextBlock
             Grid.Row="7"
             Grid.Column="0"
-            Margin="0,0,5,5"
+            Height="{StaticResource InputLabelHeight}"
             Text="Scheduled completion date:" />
         <TextBox
             Grid.Row="8"
             Grid.Column="0"
+            Height="{StaticResource ControlHeight}"
             Margin="0,0,5,5"
             VerticalAlignment="Center"
             VerticalContentAlignment="Center"

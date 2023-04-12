@@ -6,6 +6,7 @@
     xmlns:enums="clr-namespace:ActivityTracker.Domain.Enums;assembly=ActivityTracker.Domain"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:theme="http://schemas.reinvented.com/ui/themes"
     xmlns:uc="clr-namespace:ActivityTracker.UI.UserControls"
     x:Name="Root"
     Title="Create New Project"
@@ -13,6 +14,8 @@
     Height="350"
     AllowsTransparency="True"
     Background="Transparent"
+    FontFamily="Adobe Clean UX SemiLight"
+    Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
     MouseDown="OnMouseDown"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
@@ -21,12 +24,14 @@
 
     <Border
         Margin="25"
-        Background="{StaticResource BackgroundBrush}"
-        CornerRadius="5">
+        Background="{theme:ThemeResource ResourceKey=StaticBackgroundBrush}"
+        BorderThickness="0"
+        CornerRadius="5"
+        Style="{StaticResource BorderEffectStyle}">
 
         <!--#region Border Effects-->
 
-        <Border.Effect>
+        <!--<Border.Effect>
 
             <DropShadowEffect
                 BlurRadius="15"
@@ -34,11 +39,14 @@
                 ShadowDepth="10"
                 Color="Black" />
 
-        </Border.Effect>
+        </Border.Effect>-->
 
         <!--#endregion-->
 
-        <GroupBox Margin="10" Header="Add New Project">
+        <GroupBox
+            Margin="10"
+            Padding="5,10"
+            Header="Add New Project">
 
             <Grid DataContext="{Binding ProjectDefinition}">
 
@@ -61,12 +69,15 @@
                 <TextBlock
                     Grid.Row="0"
                     Grid.Column="0"
+                    Height="{StaticResource InputLabelHeight}"
                     Margin="0,0,0,5"
+                    VerticalAlignment="Center"
                     Text="Select project type:" />
                 <ComboBox
                     Grid.Row="0"
                     Grid.Column="1"
-                    Margin="0,0,0,5"
+                    Height="{StaticResource ControlHeight}"
+                    Margin="5,0,0,5"
                     ItemsSource="{shared:EnumBindingResource enums:ProjectType}"
                     SelectedItem="{Binding ProjectType}" />
 
@@ -74,6 +85,7 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
+                    Margin="0,10"
                     DataContext="{Binding Project}" />
 
                 <StackPanel
@@ -84,6 +96,7 @@
                     Orientation="Horizontal">
                     <Button
                         Width="100"
+                        Height="{StaticResource ControlHeight}"
                         Margin="5,0"
                         Command="{Binding DataContext.SaveCommand, ElementName=Root}"
                         Content="Save"
@@ -92,6 +105,7 @@
                         TabIndex="0" />
                     <Button
                         Width="100"
+                        Height="{StaticResource ControlHeight}"
                         Command="{Binding DataContext.DiscardCommand, ElementName=Root}"
                         Content="Discard"
                         IsCancel="True"

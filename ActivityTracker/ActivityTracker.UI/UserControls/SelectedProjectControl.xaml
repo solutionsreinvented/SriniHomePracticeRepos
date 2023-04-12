@@ -36,6 +36,7 @@
 
             <Button
                 Grid.Row="2"
+                Height="{StaticResource ControlHeight}"
                 Command="{Binding DeleteSelectedProjectCommand}"
                 Content="Delete Selected Project"
                 IsEnabled="{Binding ProjectIsSelected}" />

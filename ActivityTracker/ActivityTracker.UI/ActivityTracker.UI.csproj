@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Images\close-light.png" />
+    <None Remove="Assets\Images\maximize-light.png" />
+    <None Remove="Assets\Images\minimize-light.png" />
+    <None Remove="Assets\Images\restore-light.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
@@ -25,6 +32,16 @@
     <Reference Include="ReInvented.Shared">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\ApplicationData\Libraries\ReInvented.Shared.dll</HintPath>
     </Reference>
+    <Reference Include="ReInvented.UI.Themes">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\ApplicationData\Libraries\ReInvented.UI.Themes.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Images\close-light.png" />
+    <Resource Include="Assets\Images\maximize-light.png" />
+    <Resource Include="Assets\Images\minimize-light.png" />
+    <Resource Include="Assets\Images\restore-light.png" />
   </ItemGroup>
 
   <ItemGroup>
