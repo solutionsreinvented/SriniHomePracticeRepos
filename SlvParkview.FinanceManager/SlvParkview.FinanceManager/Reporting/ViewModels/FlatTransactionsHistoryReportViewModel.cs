@@ -1,5 +1,6 @@
 ﻿using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Reporting.Models;
+using SlvParkview.FinanceManager.Services;
 using SlvParkview.FinanceManager.ViewModels;
 
 using System;
@@ -15,8 +16,8 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
 
         #region Parameterized Constructor
 
-        public FlatTransactionsHistoryReportViewModel(SummaryViewModel summaryViewModel)
-            : base(summaryViewModel)
+        public FlatTransactionsHistoryReportViewModel(SummaryViewModel summaryViewModel, NavigationService navigationService)
+            : base(summaryViewModel, navigationService)
         {
 
         }

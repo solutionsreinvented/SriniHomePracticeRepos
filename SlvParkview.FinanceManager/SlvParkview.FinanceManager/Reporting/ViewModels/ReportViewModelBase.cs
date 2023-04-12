@@ -2,6 +2,7 @@
 
 using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Reporting.Interfaces;
+using SlvParkview.FinanceManager.Services;
 using SlvParkview.FinanceManager.ViewModels;
 
 namespace SlvParkview.FinanceManager.Reporting.ViewModels
@@ -10,15 +11,17 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
     {
         #region Private Fields
 
-        private protected readonly SummaryViewModel _summaryViewModel; 
+        private protected readonly SummaryViewModel _summaryViewModel;
+        private protected readonly NavigationService _navigationService;
 
         #endregion
 
         #region Parameterized Constructor
 
-        public ReportViewModelBase(SummaryViewModel summaryViewModel)
+        public ReportViewModelBase(SummaryViewModel summaryViewModel, NavigationService navigationService)
         {
             _summaryViewModel = summaryViewModel;
+            _navigationService = navigationService;
 
             Initialize();
         }

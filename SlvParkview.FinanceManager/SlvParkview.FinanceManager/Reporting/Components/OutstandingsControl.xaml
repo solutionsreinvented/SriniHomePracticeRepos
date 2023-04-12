@@ -24,6 +24,7 @@
 
         <DataGrid
             Grid.Row="0"
+            CanUserResizeColumns="True"
             ItemsSource="{Binding Report.FlatInfoCollection}"
             Style="{StaticResource ContentDataGridStyle}">
 
@@ -98,6 +99,21 @@
                                 Padding="40,0,0,0"
                                 HorizontalAlignment="Left"
                                 Text="{Binding OutstandingOnSpecifiedDate}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--#endregion-->
+
+                <!--#region Outstanding/Penalty On Specified Date Column-->
+
+                <DataGridTemplateColumn Width="1.2*" Header="Payment">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                Padding="40,0,0,0"
+                                HorizontalAlignment="Left"
+                                Text="{Binding DataContext, ElementName=Root}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

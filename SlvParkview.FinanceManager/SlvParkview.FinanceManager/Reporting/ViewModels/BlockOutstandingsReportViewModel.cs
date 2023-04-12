@@ -1,8 +1,12 @@
-﻿using SlvParkview.FinanceManager.Enums;
+﻿using ReInvented.Shared.Commands;
+using SlvParkview.FinanceManager.Enums;
+using SlvParkview.FinanceManager.Models;
 using SlvParkview.FinanceManager.Reporting.Models;
+using SlvParkview.FinanceManager.Services;
 using SlvParkview.FinanceManager.ViewModels;
 
 using System;
+using System.Windows.Input;
 
 namespace SlvParkview.FinanceManager.Reporting.ViewModels
 {
@@ -13,8 +17,8 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
     {
         #region Parameterized Constructor
 
-        public BlockOutstandingsReportViewModel(SummaryViewModel summaryViewModel)
-            : base(summaryViewModel)
+        public BlockOutstandingsReportViewModel(SummaryViewModel summaryViewModel, NavigationService navigationService)
+            : base(summaryViewModel, navigationService)
         {
 
         }
@@ -31,6 +35,20 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
 
         public string OutstandingHeader { get => Get<string>(); private set => Set(value); }
 
+        public Flat SelectedFlat { get => Get<Flat>(); set => Set(value); }
+
+        #endregion
+
+        #region Commands
+        public ICommand AddPaymentCommand { get; set; } 
+        #endregion
+
+        #region Command Handlers
+        private void OnAddPayment()
+        {
+            PaymentViewModel paymentViewModel = new PaymentViewModel(_summaryViewModel, _navigationService, SelectedFlat);
+            _navigationService.CurrentViewModel = paymentViewModel;
+        } 
         #endregion
 
         #region Private Helpers
@@ -39,7 +57,9 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
         {
             base.Initialize();
             ReportTill = DateTime.Today;
-            ///Filter = OutstandingsFilter.All;
+            //Filter = OutstandingsFilter.All;
+
+            AddPaymentCommand = new RelayCommand(OnAddPayment, true);
         }
 
         private void UpdateReport()

@@ -3,6 +3,7 @@ using SlvParkview.FinanceManager.Enums;
 using SlvParkview.FinanceManager.ViewModels;
 using SlvParkview.FinanceManager.Reporting.Interfaces;
 using SlvParkview.FinanceManager.Reporting.Factories;
+using SlvParkview.FinanceManager.Services;
 
 namespace SlvParkview.FinanceManager.Reporting.ViewModels
 {
@@ -13,8 +14,8 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
     {
         #region Parameterized Constructor
 
-        public PaymentsReportViewModel(SummaryViewModel summaryViewModel)
-            : base(summaryViewModel)
+        public PaymentsReportViewModel(SummaryViewModel summaryViewModel, NavigationService navigationService)
+            : base(summaryViewModel, navigationService)
         {
 
         }

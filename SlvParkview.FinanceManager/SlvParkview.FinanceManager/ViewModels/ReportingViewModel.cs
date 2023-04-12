@@ -97,7 +97,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void UpdateReportViewModel()
         {
-            CurrentReportViewModel = ReportViewModelFactory.Create(_summaryViewModel, ReportType);
+            CurrentReportViewModel = ReportViewModelFactory.Create(_summaryViewModel, _navigationService, ReportType);
         }
 
         private void OnGenerate()
