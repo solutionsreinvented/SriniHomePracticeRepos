@@ -84,6 +84,9 @@ namespace SlvParkview.FinanceManager.Services
 
             string serializedData = _dataSerializer.Serialize(block);
 
+            // Create a backup of the current data before overriding it.
+            CreateBackupFor(filePath);
+
             try
             {
                 File.WriteAllText(filePath, serializedData);
@@ -110,6 +113,24 @@ namespace SlvParkview.FinanceManager.Services
             _dataSerializer = new JsonDataSerializer<Block>();
 
             AllowSave = false;
+        }
+
+        private void CreateBackupFor(string sourceFileFullPath)
+        {
+            string sourceDirectory = Path.GetDirectoryName(sourceFileFullPath);
+            string sourceFileName = Path.GetFileNameWithoutExtension(sourceFileFullPath);
+            string sourceFileExtension = Path.GetExtension(sourceFileFullPath);
+
+            string backupDirectory = Path.Combine($"{sourceDirectory}", "Backup");
+
+            string backupFileFullPath = Path.Combine(backupDirectory, $"{sourceFileName}{DateTime.Now.ToString().Replace("-", "").Replace(" ", "").Replace(":", "")}{sourceFileExtension}");
+
+            if (!Directory.Exists(backupDirectory))
+            {
+                Directory.CreateDirectory(backupDirectory);
+            }
+
+            File.Copy(sourceFileFullPath, backupFileFullPath, true);
         }
 
         #endregion
