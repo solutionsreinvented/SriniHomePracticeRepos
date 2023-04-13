@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 
+using ActivityTracker.UI.Base;
 using ActivityTracker.UI.Commands;
 using ActivityTracker.UI.Stores;
 

@@ -1,6 +1,7 @@
 ﻿using ActivityTracker.Domain.Interfaces;
 using ActivityTracker.Domain.Models;
 using ActivityTracker.Domain.Services;
+using ActivityTracker.UI.Base;
 using ActivityTracker.UI.Stores;
 
 namespace ActivityTracker.UI.ViewModels

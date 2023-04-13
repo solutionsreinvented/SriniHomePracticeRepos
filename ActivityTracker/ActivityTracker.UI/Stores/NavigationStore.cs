@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-using ActivityTracker.UI.ViewModels;
+using ActivityTracker.UI.Base;
 
 using ReInvented.Shared.Interfaces;
 

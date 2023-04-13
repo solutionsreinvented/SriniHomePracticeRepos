@@ -2,21 +2,27 @@
 
 using ActivityTracker.Domain.Interfaces;
 using ActivityTracker.Domain.Repositories;
+using ActivityTracker.UI.Base;
 using ActivityTracker.UI.Commands;
 using ActivityTracker.UI.Stores;
 
 namespace ActivityTracker.UI.ViewModels
 {
-    public class LoginViewModel : ViewModelBase
+    public class LoginViewModel : ManageUserViewModel
     {
+        #region Private Fields
         private readonly UserRepository _usersRepository = new();
+        #endregion
 
+        #region Parameterized Constructor
         public LoginViewModel(NavigationStore navigationStore) : base(navigationStore)
         {
-            ChangePasswordCommand = new RelayCommand(OnChangePassword, true);
-            LogInCommand = new RelayCommand(OnLogIn, true);
+            Initialize();
         }
 
+        #endregion
+
+        #region Command Handlers
         private void OnLogIn()
         {
             if (ValidUser)
@@ -35,6 +41,7 @@ namespace ActivityTracker.UI.ViewModels
                 UserId = UserId,
             };
         }
+        #endregion
 
         public IUser User { get => Get<IUser>(); private set => Set(value); }
 
@@ -47,13 +54,6 @@ namespace ActivityTracker.UI.ViewModels
                 User = GetUser(value);
                 RaiseMultiplePropertiesChanged(nameof(ValidUser), nameof(UserExists));
             }
-        }
-
-        private IUser GetUser(string userId)
-        {
-            _ = int.TryParse(userId, out int result);
-
-            return _usersRepository.GetById(result);
         }
 
         public string Password
@@ -70,6 +70,13 @@ namespace ActivityTracker.UI.ViewModels
 
         public bool UserExists => User != null;
 
+        private IUser GetUser(string userId)
+        {
+            _ = int.TryParse(userId, out int result);
+
+            return _usersRepository.GetById(result);
+        }
+
         private bool ValidPassword()
         {
             return User != null && User.Password == Password;
@@ -79,9 +86,19 @@ namespace ActivityTracker.UI.ViewModels
 
         public bool IsLoggedIn { get => Get<bool>(); set => Set(value); }
 
+        #region Commands
         public ICommand ChangePasswordCommand { get; set; }
 
         public ICommand LogInCommand { get; set; }
+        #endregion
+
+        #region Abstract Methods Implementation
+        protected override void Initialize()
+        {
+            ChangePasswordCommand = new RelayCommand(OnChangePassword, true);
+            LogInCommand = new RelayCommand(OnLogIn, true);
+        }
+        #endregion
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using ActivityTracker.UI.Stores;
+﻿using ActivityTracker.UI.Base;
+using ActivityTracker.UI.Stores;
 
 namespace ActivityTracker.UI.ViewModels
 {
