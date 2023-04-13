@@ -6,9 +6,9 @@ using ActivityTracker.UI.Stores;
 
 namespace ActivityTracker.UI.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public class HomeViewModel : ViewModelBase
     {
-        public MainViewModel(NavigationStore navigationStore) : base(navigationStore)
+        public HomeViewModel(NavigationStore navigationStore) : base(navigationStore)
         {
             CloseCommand = new RelayCommand(OnClose, true);
 

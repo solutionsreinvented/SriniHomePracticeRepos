@@ -37,7 +37,7 @@ namespace ActivityTracker.UI
 
             MainWindow = new Home()
             {
-                DataContext = new MainViewModel(navigationStore)
+                DataContext = new HomeViewModel(navigationStore)
                 {
                     CloseCommand = new RelayCommand(OnClose, true),
                     MinimizeCommand = new RelayCommand(OnMinimize, true),

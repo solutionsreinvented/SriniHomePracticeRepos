@@ -78,8 +78,9 @@
             Margin="5,0,5,5"
             HorizontalContentAlignment="Left"
             DisplayMemberPath="Name"
+            IsSynchronizedWithCurrentItem="True"
             ItemsSource="{Binding Categories}"
-            SelectedValue="{Binding Category}" />
+            SelectedItem="{Binding Category}" />
 
         <TextBlock
             Grid.Row="3"

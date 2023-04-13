@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -7,7 +6,6 @@ using System.Windows.Input;
 using ActivityTracker.Domain.Enums;
 using ActivityTracker.Domain.Interfaces;
 using ActivityTracker.Domain.Models;
-using ActivityTracker.Domain.Repositories;
 using ActivityTracker.Domain.Services;
 using ActivityTracker.UI.Commands;
 using ActivityTracker.UI.Stores;
@@ -37,6 +35,7 @@ namespace ActivityTracker.UI.ViewModels
                 Set(value);
                 ProjectIsSelected = value != null;
                 RaisePropertyChanged(nameof(Activities));
+                SelectedActivity = Activities?.FirstOrDefault();
             }
         }
 
