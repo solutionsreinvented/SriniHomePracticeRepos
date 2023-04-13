@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
 
-using ActivityTracker.Domain.Interfaces;
-using ActivityTracker.Domain.Repositories;
 using ActivityTracker.UI.Base;
 using ActivityTracker.UI.Commands;
 using ActivityTracker.UI.Stores;
@@ -11,12 +9,6 @@ namespace ActivityTracker.UI.ViewModels
 {
     public class ChangePasswordViewModel : ManageUserViewModel
     {
-        #region Private Fields
-
-        private readonly UserRepository _usersRepository = new();
-
-        #endregion
-
         #region Parameterized Constructor
         public ChangePasswordViewModel(NavigationStore navigationStore) : base(navigationStore)
         {
@@ -25,7 +17,6 @@ namespace ActivityTracker.UI.ViewModels
         #endregion
 
         #region Public Properties
-        public IUser User { get => Get<IUser>(); private set => Set(value); }
 
         public string UserId
         {
@@ -65,8 +56,6 @@ namespace ActivityTracker.UI.ViewModels
         #region Readonly Properties
         public bool CanChangePassword => UserExists && CurrentPasswordMatches && NewPasswordsMatch();
 
-        private bool UserExists => User != null;
-
         public bool CurrentPasswordMatches => User.Password == CurrentPassword;
         #endregion
 
@@ -83,13 +72,6 @@ namespace ActivityTracker.UI.ViewModels
         #endregion
 
         #region Private Helpers
-        private IUser GetUser(string userId)
-        {
-            _ = int.TryParse(userId, out int result);
-
-            return _usersRepository.GetById(result);
-        }
-
         private bool NewPasswordsMatch()
         {
             return !string.IsNullOrEmpty(NewPassword) && !string.IsNullOrEmpty(ConfirmPassword) && NewPassword == ConfirmPassword;

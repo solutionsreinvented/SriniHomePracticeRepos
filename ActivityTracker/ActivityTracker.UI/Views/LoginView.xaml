@@ -76,6 +76,7 @@
                 Grid.Column="1"
                 Height="{StaticResource ControlHeight}"
                 Margin="10,5"
+                TabIndex="0"
                 Text="{Binding UserId, UpdateSourceTrigger=LostFocus}" />
 
             <TextBlock
@@ -89,6 +90,7 @@
                 Height="{StaticResource ControlHeight}"
                 Margin="10,5,10,10"
                 IsEnabled="False"
+                IsTabStop="False"
                 Text="{Binding User.FullName, UpdateSourceTrigger=PropertyChanged}" />
 
             <TextBlock
@@ -104,7 +106,8 @@
                 VerticalContentAlignment="Center"
                 shared:PasswordBoxProperties.IsBindingRequested="True"
                 shared:PasswordBoxProperties.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                IsEnabled="{Binding UserExists}" />
+                IsEnabled="{Binding UserExists}"
+                TabIndex="1" />
 
             <UniformGrid
                 Grid.Row="3"
@@ -118,7 +121,8 @@
                     HorizontalAlignment="Stretch"
                     Command="{Binding LogInCommand}"
                     Content="Log In"
-                    IsEnabled="{Binding ValidUser}" />
+                    IsEnabled="{Binding ValidUser}"
+                    TabIndex="2" />
                 <Button
                     Grid.Column="1"
                     Height="{StaticResource ControlHeight}"
@@ -126,7 +130,8 @@
                     HorizontalAlignment="Stretch"
                     Command="{Binding ChangePasswordCommand}"
                     Content="Change Password"
-                    IsEnabled="{Binding ValidUser}" />
+                    IsEnabled="{Binding ValidUser}"
+                    TabIndex="3" />
             </UniformGrid>
 
 

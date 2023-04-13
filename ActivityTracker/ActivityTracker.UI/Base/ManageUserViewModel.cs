@@ -1,4 +1,5 @@
-﻿using ActivityTracker.Domain.Repositories;
+﻿using ActivityTracker.Domain.Interfaces;
+using ActivityTracker.Domain.Repositories;
 using ActivityTracker.UI.Stores;
 
 namespace ActivityTracker.UI.Base
@@ -16,6 +17,23 @@ namespace ActivityTracker.UI.Base
         }
         #endregion
 
-        protected abstract void Initialize();
+        #region Public Properties
+        public IUser User { get => Get<IUser>(); protected set => Set(value); }
+
+        public bool UserExists => User != null;
+        #endregion
+
+        #region Private Helpers
+        protected IUser GetUser(string userId)
+        {
+            _ = int.TryParse(userId, out int result);
+
+            return _usersRepository.GetById(result);
+        } 
+        #endregion
+
+        #region Abstract Methods
+        protected abstract void Initialize(); 
+        #endregion
     }
 }
