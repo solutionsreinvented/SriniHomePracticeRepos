@@ -29,11 +29,11 @@ namespace ActivityTracker.UI
 
             NavigationStore navigationStore = new(dialogService);
 
-            ///navigationStore.CurrentViewModel = new LoginViewModel(navigationStore);
+            navigationStore.CurrentViewModel = new LoginViewModel(navigationStore);
 
-            navigationStore.CurrentViewModel = new AdminDashboardViewModel(navigationStore);
+            //navigationStore.CurrentViewModel = new AdminDashboardViewModel(navigationStore);
 
-            ///navigationStore.CurrentViewModel = new DashboardViewModel(navigationStore);
+            //navigationStore.CurrentViewModel = new DashboardViewModel(navigationStore);
 
             MainWindow = new Home()
             {

@@ -11,7 +11,7 @@
     Height="{StaticResource MainWindowHeight}"
     Background="#4a4e69"
     Focusable="False"
-    FontFamily="Adobe Clean UX SemiLight"
+    FontFamily="{StaticResource DefaultFontFamily}"
     MouseDown="OnMouseDown"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"

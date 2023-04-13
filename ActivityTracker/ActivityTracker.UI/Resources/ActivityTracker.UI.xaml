@@ -3,6 +3,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/ReInvented.UI.Themes;component/Themes/ReInvented.UI.Themes.xaml" />
         <ResourceDictionary Source="Settings.xaml" />
+        <ResourceDictionary Source="Fonts.xaml" />
         <ResourceDictionary Source="Styles.xaml" />
         <ResourceDictionary Source="DataTemplates.xaml" />
     </ResourceDictionary.MergedDictionaries>

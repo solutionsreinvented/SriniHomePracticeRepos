@@ -52,6 +52,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="AttachedProperties\PasswordBoxProperties.cs" />
     <Compile Include="PasswordBoxExtended.cs">
       <SubType>Code</SubType>
     </Compile>

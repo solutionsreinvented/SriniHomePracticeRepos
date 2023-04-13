@@ -9,6 +9,7 @@
     x:Name="Root"
     d:DesignHeight="800"
     d:DesignWidth="1400"
+    FontFamily="{StaticResource DefaultFontFamily}"
     mc:Ignorable="d">
 
     <Grid Margin="15">

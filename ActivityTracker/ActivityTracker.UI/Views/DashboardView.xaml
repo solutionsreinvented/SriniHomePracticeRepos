@@ -6,6 +6,7 @@
     xmlns:enums="clr-namespace:ActivityTracker.Domain.Enums;assembly=ActivityTracker.Domain"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:theme="http://schemas.reinvented.com/ui/themes"
     x:Name="Root"
     Width="1100"
     Height="600"
@@ -15,21 +16,12 @@
     MaxHeight="600"
     d:DesignHeight="600"
     d:DesignWidth="1100"
+    FontFamily="{StaticResource DefaultFontFamily}"
     mc:Ignorable="d">
 
-    <Border
-        Background="{StaticResource BackgroundBrush}"
-        CornerRadius="5"
-        DataContext="{Binding}">
+    <Grid DataContext="{Binding}">
 
-        <Border.Effect>
-            <DropShadowEffect
-                BlurRadius="15"
-                Direction="315"
-                ShadowDepth="10"
-                Color="Black" />
-
-        </Border.Effect>
+        <Border CornerRadius="5" Style="{StaticResource BorderEffectStyle}" />
 
         <Grid Margin="15">
 
@@ -39,7 +31,7 @@
                 <Style TargetType="{x:Type TextBlock}">
                     <Setter Property="VerticalAlignment" Value="Center" />
                     <Setter Property="Margin" Value="10,0" />
-                    <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+                    <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=StaticForegroundBrush}" />
                 </Style>
 
                 <Style TargetType="{x:Type TextBox}">
@@ -47,7 +39,7 @@
                     <Setter Property="VerticalContentAlignment" Value="Center" />
                     <Setter Property="Padding" Value="5,3" />
                     <Setter Property="Margin" Value="10,0" />
-                    <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+                    <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=StaticBackgroundBrush}" />
 
                     <!--<Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}" />-->
                 </Style>
@@ -124,6 +116,6 @@
 
         </Grid>
 
-    </Border>
+    </Grid>
 
 </UserControl>
