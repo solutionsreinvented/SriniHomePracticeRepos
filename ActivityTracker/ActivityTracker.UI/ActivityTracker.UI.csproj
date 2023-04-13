@@ -18,14 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ActivityTracker.CustomControls\ActivityTracker.CustomControls.csproj" />
     <ProjectReference Include="..\ActivityTracker.Domain\ActivityTracker.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="ReInvented.CustomControls.Library">
-      <HintPath>E:\SolutionsReInvented\BranchReorganization\ApplicationData\Libraries\ReInvented.CustomControls.Library.dll</HintPath>
-    </Reference>
     <Reference Include="ReInvented.DataAccess">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\ApplicationData\Libraries\ReInvented.DataAccess.dll</HintPath>
     </Reference>
