@@ -47,6 +47,9 @@
     <Compile Update="UserControls\SelectedActivityControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\StandardDashboardView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -55,6 +58,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\SelectedActivityControl.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\StandardDashboardView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

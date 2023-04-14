@@ -5,6 +5,7 @@
     xmlns:controls="clr-namespace:ActivityTracker.UI.UserControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
     xmlns:theme="http://schemas.reinvented.com/ui/themes"
     x:Name="Root"
     Width="{StaticResource MainWindowWidth}"
@@ -45,22 +46,51 @@
 
             <!--#endregion-->
 
-            <controls:WindowButtonsControl />
+
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button
+                    Margin="10,0"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Command="{Binding LogoutCommand}"
+                    Content="Logout"
+                    IsEnabled="{Binding ManageUserViewModel.IsLoggedIn}" />
+                <controls:WindowButtonsControl />
+            </StackPanel>
+
 
         </Grid>
 
         <!--#endregion-->
 
-        <Grid Grid.Row="1" Margin="50,25,50,30">
+        <Grid
+            Grid.Row="1"
+            Margin="50,25,50,30"
+            Visibility="{Binding ManageUserViewModel.IsLoggedIn, Converter={shared:BoolToVisibilityConverter}}">
+
+            <Border Style="{StaticResource BorderEffectStyle}" />
+            <ContentControl Content="{Binding DashboardViewModel}" Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}" />
+        </Grid>
+
+        <!--<Grid
+            Grid.Row="1"
+            Margin="50,25,50,30"
+            Visibility="{Binding ManageUserViewModel.IsLoggedIn, Converter={shared:BoolToVisibilityConverter IsInverse=True}}">
 
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Border Style="{StaticResource BorderEffectStyle}" />
-            <ContentControl Content="{Binding CurrentViewModel}" Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}" />
-        </Grid>
+            <Border Style="{StaticResource BorderEffectStyle}" />-->
+        <ContentControl
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Content="{Binding ManageUserViewModel}"
+            Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
+            Visibility="{Binding ManageUserViewModel.IsLoggedIn, Converter={shared:BoolToVisibilityConverter IsInverse=True}}" />
+        <!--</Grid>-->
 
 
         <!--<ContentControl

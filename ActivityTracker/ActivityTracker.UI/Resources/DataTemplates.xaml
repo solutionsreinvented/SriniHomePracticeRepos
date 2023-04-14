@@ -11,8 +11,8 @@
         <views:ChangePasswordView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
-        <views:DashboardView />
+    <DataTemplate DataType="{x:Type vm:StandardDashboardViewModel}">
+        <views:StandardDashboardView />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm:AdminDashboardViewModel}">

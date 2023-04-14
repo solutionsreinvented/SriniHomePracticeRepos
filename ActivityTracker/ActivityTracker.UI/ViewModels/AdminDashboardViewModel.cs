@@ -15,10 +15,12 @@ namespace ActivityTracker.UI.ViewModels
 {
     public class AdminDashboardViewModel : ViewModelBase
     {
+        #region Parameterized Constructor
         public AdminDashboardViewModel(NavigationStore navigationStore) : base(navigationStore)
         {
             InitializeProperties();
         }
+        #endregion
 
         #region Data Masters
 
@@ -27,18 +29,6 @@ namespace ActivityTracker.UI.ViewModels
         public ActivityMaster ActivityMaster { get => Get<ActivityMaster>(); private set => Set(value); }
 
         #endregion
-
-        public IProject SelectedProject
-        {
-            get => Get<IProject>();
-            set
-            {
-                Set(value);
-                ProjectIsSelected = value != null;
-                RaisePropertyChanged(nameof(Activities));
-                SelectedActivity = Activities?.FirstOrDefault();
-            }
-        }
 
         #region DataGrid Source Providers
 
@@ -52,10 +42,22 @@ namespace ActivityTracker.UI.ViewModels
 
         #endregion
 
+        #region Public Properties
+        public IProject SelectedProject
+        {
+            get => Get<IProject>();
+            set
+            {
+                Set(value);
+                ProjectIsSelected = value != null;
+                RaisePropertyChanged(nameof(Activities));
+                SelectedActivity = Activities?.FirstOrDefault();
+            }
+        }
+
         public string Title { get => Get<string>(); set => Set(value); }
 
         public IEnumerable<IResource> Resources { get => Get<IEnumerable<IResource>>(); set => Set(value); }
-
 
         public IResource SelectedResource
         {
@@ -68,6 +70,7 @@ namespace ActivityTracker.UI.ViewModels
         }
 
         public IActivity SelectedActivity { get => Get<IActivity>(); set { Set(value); ActivityIsSelected = value != null; } }
+        #endregion
 
         #region Commands
 
@@ -86,10 +89,11 @@ namespace ActivityTracker.UI.ViewModels
 
         #endregion
 
+        #region Readonly Properties
         public bool ProjectIsSelected { get => Get<bool>(); private set => Set(value); }
 
         public bool ActivityIsSelected { get => Get<bool>(); private set => Set(value); }
-
+        #endregion
 
         #region Command Handlers
 

@@ -8,7 +8,9 @@ namespace ActivityTracker.UI.Stores
 {
     public class NavigationStore
     {
-        private ViewModelBase _currentViewModel;
+        private ViewModelBase _dashboardViewModel;
+        private ManageUserViewModel _manageUserViewModel;
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -20,18 +22,30 @@ namespace ActivityTracker.UI.Stores
 
         public IDialogService DialogService { get; }
 
-        public ViewModelBase CurrentViewModel
+        public ViewModelBase DashboardViewModel
         {
-            get => _currentViewModel;
+            get => _dashboardViewModel;
             set
             {
-                if (_currentViewModel != value)
+                if (_dashboardViewModel != value)
                 {
-                    _currentViewModel = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentViewModel)));
+                    _dashboardViewModel = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DashboardViewModel)));
                 }
             }
         }
 
+        public ManageUserViewModel ManageUserViewModel
+        {
+            get => _manageUserViewModel;
+            set
+            {
+                if (_manageUserViewModel != value)
+                {
+                    _manageUserViewModel = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ManageUserViewModel)));
+                }
+            }
+        }
     }
 }

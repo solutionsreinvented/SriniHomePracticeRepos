@@ -6,9 +6,9 @@ using ActivityTracker.UI.Stores;
 
 namespace ActivityTracker.UI.ViewModels
 {
-    public class DashboardViewModel : ViewModelBase
+    public class StandardDashboardViewModel : ViewModelBase
     {
-        public DashboardViewModel(NavigationStore navigationStore) : base(navigationStore)
+        public StandardDashboardViewModel(NavigationStore navigationStore) : base(navigationStore)
         {
             Title = "I am the dashboard!";
             ActivityMaster = ActivityMasterService.ReadFromFile();

@@ -7,11 +7,19 @@ namespace ActivityTracker.UI.Commands
     {
         private readonly Action _execute;
         private readonly bool _canExecute;
+        private object onLogout;
+        private bool v;
 
         public RelayCommand(Action execute, bool canExecute)
         {
             _execute = execute;
             _canExecute = canExecute;
+        }
+
+        public RelayCommand(object onLogout, bool v)
+        {
+            this.onLogout = onLogout;
+            this.v = v;
         }
 
         public bool CanExecute(object parameter)

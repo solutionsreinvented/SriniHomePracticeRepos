@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 
-using ActivityTracker.Domain.Services;
 using ActivityTracker.UI.Commands;
 using ActivityTracker.UI.Dialogs;
 using ActivityTracker.UI.Stores;
@@ -29,7 +28,7 @@ namespace ActivityTracker.UI
 
             NavigationStore navigationStore = new(dialogService);
 
-            navigationStore.CurrentViewModel = new LoginViewModel(navigationStore);
+            navigationStore.ManageUserViewModel = new LoginViewModel(navigationStore);
 
             //navigationStore.CurrentViewModel = new AdminDashboardViewModel(navigationStore);
 

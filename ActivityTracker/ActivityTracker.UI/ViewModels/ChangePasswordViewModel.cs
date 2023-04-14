@@ -67,7 +67,7 @@ namespace ActivityTracker.UI.ViewModels
 
         private void OnGoBack()
         {
-            _navigationStore.CurrentViewModel = new LoginViewModel(_navigationStore) { UserId = User.Id.ToString() };
+            _navigationStore.ManageUserViewModel = new LoginViewModel(_navigationStore) { UserId = User.Id.ToString() };
         }
         #endregion
 
@@ -81,6 +81,7 @@ namespace ActivityTracker.UI.ViewModels
         #region Abstract Methods Implementation
         protected override void Initialize()
         {
+            IsLoggedIn = false;
             GoBackCommand = new RelayCommand(OnGoBack, true);
             SubmitCommand = new RelayCommand(OnPasswordChange, true);
         }

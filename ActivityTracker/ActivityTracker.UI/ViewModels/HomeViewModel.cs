@@ -9,29 +9,44 @@ namespace ActivityTracker.UI.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
+        #region Parameterized Constructor
         public HomeViewModel(NavigationStore navigationStore) : base(navigationStore)
         {
-            CloseCommand = new RelayCommand(OnClose, true);
-
-            _navigationStore.PropertyChanged += OnCurrentViewModelChanged;
+            LogoutCommand = new RelayCommand(OnLogout, true);
+            _navigationStore.PropertyChanged += OnViewModelsChanged;
         }
+        #endregion
 
-        private void OnClose()
+        #region Content View Models
+        public ViewModelBase DashboardViewModel => _navigationStore.DashboardViewModel;
+
+        public ManageUserViewModel ManageUserViewModel => _navigationStore.ManageUserViewModel;
+        #endregion
+
+        #region Commands
+        public ICommand MaximizeRestoreCommand { get => Get<ICommand>(); set => Set(value); }
+
+        public ICommand MinimizeCommand { get => Get<ICommand>(); set => Set(value); }
+
+        public ICommand CloseCommand { get => Get<ICommand>(); set => Set(value); }
+
+        public ICommand LogoutCommand { get => Get<ICommand>(); set => Set(value); }
+        #endregion
+
+        #region Command Handlers
+        private void OnLogout()
         {
-
+            _navigationStore.DashboardViewModel = null;
+            _navigationStore.ManageUserViewModel = new LoginViewModel(_navigationStore);
         }
+        #endregion
 
-        private void OnCurrentViewModelChanged(object sender, PropertyChangedEventArgs e)
+        #region Event Handlers
+        private void OnViewModelsChanged(object sender, PropertyChangedEventArgs e)
         {
-            RaiseMultiplePropertiesChanged(nameof(CurrentViewModel));
+            RaiseMultiplePropertiesChanged(nameof(DashboardViewModel));
+            RaiseMultiplePropertiesChanged(nameof(ManageUserViewModel));
         }
-
-        public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
-
-        public ICommand MaximizeRestoreCommand { get; set; }
-
-        public ICommand MinimizeCommand { get; set; }
-
-        public ICommand CloseCommand { get; set; }
+        #endregion
     }
 }
