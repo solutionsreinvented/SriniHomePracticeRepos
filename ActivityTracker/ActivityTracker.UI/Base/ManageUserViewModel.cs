@@ -1,21 +1,18 @@
 ﻿using ActivityTracker.Domain.Interfaces;
 using ActivityTracker.Domain.Repositories;
-using ActivityTracker.Domain.Stores;
 using ActivityTracker.UI.Stores;
 
 namespace ActivityTracker.UI.Base
 {
-    public abstract class ManageUserViewModel : PropertyStore
+    public abstract class ManageUserViewModel : ViewModelBase
     {
         #region Private Fields
         private readonly UserRepository _usersRepository = new();
-        private protected readonly NavigationStore _navigationStore;
         #endregion
 
         #region Parameterized Constructor
-        public ManageUserViewModel(NavigationStore navigationStore)
+        public ManageUserViewModel(NavigationStore navigationStore) : base(navigationStore)
         {
-            _navigationStore = navigationStore;
             Initialize();
         }
         #endregion

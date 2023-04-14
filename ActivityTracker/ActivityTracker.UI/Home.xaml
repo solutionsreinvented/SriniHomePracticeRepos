@@ -89,6 +89,7 @@
             VerticalAlignment="Center"
             Content="{Binding ManageUserViewModel}"
             Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
+            IsTabStop="False"
             Visibility="{Binding ManageUserViewModel.IsLoggedIn, Converter={shared:BoolToVisibilityConverter IsInverse=True}}" />
         <!--</Grid>-->
 

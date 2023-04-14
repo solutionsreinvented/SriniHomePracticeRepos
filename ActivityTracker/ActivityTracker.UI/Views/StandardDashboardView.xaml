@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:shared="http://schemas.reinvented.com/shared"
     xmlns:uc="clr-namespace:ActivityTracker.UI.UserControls"
     x:Name="Root"
     d:DesignHeight="800"
@@ -17,102 +16,39 @@
         <Grid Margin="15">
 
             <!--#region Grid Definitions-->
-
             <Grid.RowDefinitions>
                 <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-
             <!--#endregion-->
 
-            <!--#region Pre Orders List-->
-            <GroupBox
+            <!--#region Dashboard Content-->
+            <uc:DashboardContentsControl
                 Grid.Row="0"
                 Grid.Column="0"
-                Header="Pre Orders">
-
-                <uc:ProjectsControl DataContext="{Binding PreOrders}" />
-
-            </GroupBox>
+                Grid.ColumnSpan="3" />
             <!--#endregion-->
 
-            <!--#region Orders List-->
-            <GroupBox
-                Grid.Row="1"
-                Grid.Column="0"
-                Header="Orders">
-
-                <uc:ProjectsControl DataContext="{Binding Orders}" />
-
-            </GroupBox>
-            <!--#endregion-->
-
-            <!--#region Developments List-->
-            <GroupBox
-                Grid.Row="2"
-                Grid.Column="0"
-                Header="Developments">
-
-                <uc:ProjectsControl DataContext="{Binding Developments}" />
-
-            </GroupBox>
-            <!--#endregion-->
-
-            <!--#region Activities List-->
-
-            <GroupBox
-                Grid.Row="0"
-                Grid.Column="1"
-                Grid.ColumnSpan="2"
-                Header="Activities"
-                Visibility="{Binding ProjectIsSelected, Converter={shared:BoolToVisibilityConverter}}">
-
-                <uc:ActivitiesControl />
-
-            </GroupBox>
-
-            <!--#endregion-->
-
-            <!--#region Selected Project Section-->
-
-            <uc:SelectedProjectControl
-                Grid.Row="1"
-                Grid.RowSpan="2"
-                Grid.Column="1"
-                DataContext="{Binding}"
-                Visibility="{Binding ProjectIsSelected, Converter={shared:BoolToVisibilityConverter}}" />
-
-            <!--#endregion-->
-
-            <uc:SelectedActivityControl
-                Grid.Row="1"
-                Grid.RowSpan="2"
-                Grid.Column="2"
-                DataContext="{Binding}"
-                Visibility="{Binding ActivityIsSelected, Converter={shared:BoolToVisibilityConverter}}" />
-
-
-            <!--#region Projects Management Button-->
+            <!--#region Projects and Data Management Button-->
 
             <uc:ProjectsManagementButtonsControl
-                Grid.Row="3"
+                Grid.Row="1"
                 Grid.Column="0"
                 Height="28"
-                DataContext="{Binding}"
-                IsEnabled="False" />
+                Margin="15,0,0,0"
+                DataContext="{Binding}" />
 
             <uc:DataManagementButtonsControl
-                Grid.Row="3"
+                Grid.Row="1"
                 Grid.Column="3"
                 Height="28"
+                Margin="0,0,15,0"
                 DataContext="{Binding}" />
 
             <!--#endregion-->

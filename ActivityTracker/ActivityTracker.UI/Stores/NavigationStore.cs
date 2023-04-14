@@ -8,7 +8,7 @@ namespace ActivityTracker.UI.Stores
 {
     public class NavigationStore
     {
-        private ViewModelBase _dashboardViewModel;
+        private DashboardViewModel _dashboardViewModel;
         private ManageUserViewModel _manageUserViewModel;
 
 
@@ -22,7 +22,7 @@ namespace ActivityTracker.UI.Stores
 
         public IDialogService DialogService { get; }
 
-        public ViewModelBase DashboardViewModel
+        public DashboardViewModel DashboardViewModel
         {
             get => _dashboardViewModel;
             set

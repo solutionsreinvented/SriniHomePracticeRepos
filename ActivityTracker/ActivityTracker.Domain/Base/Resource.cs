@@ -17,11 +17,14 @@ namespace ActivityTracker.Domain.Base
 
         #endregion
 
+        #region Parameterized Constructor
         protected Resource(int employeeId)
         {
             InitializeData(employeeId);
         }
+        #endregion
 
+        #region Public Properties
         public int Id { get => Get<int>(); set => Set(value); }
 
         public HashSet<IActivity> Activities { get => Get<HashSet<IActivity>>(); set => Set(value); }
@@ -47,9 +50,11 @@ namespace ActivityTracker.Domain.Base
                 RaiseMultiplePropertiesChanged(nameof(FullName));
             }
         }
+        #endregion
 
+        #region Readonly Properties
         public string FullName => $"{FirstName} {LastName}";
-
+        #endregion
 
         #region Private Helpers
 
@@ -60,6 +65,5 @@ namespace ActivityTracker.Domain.Base
         }
 
         #endregion
-
     }
 }

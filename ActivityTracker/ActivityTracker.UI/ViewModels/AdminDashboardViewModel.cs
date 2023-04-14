@@ -1,19 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 
-using ActivityTracker.Domain.Enums;
 using ActivityTracker.Domain.Interfaces;
 using ActivityTracker.Domain.Models;
-using ActivityTracker.Domain.Services;
 using ActivityTracker.UI.Base;
 using ActivityTracker.UI.Commands;
 using ActivityTracker.UI.Stores;
 
 namespace ActivityTracker.UI.ViewModels
 {
-    public class AdminDashboardViewModel : ViewModelBase
+    public class AdminDashboardViewModel : DashboardViewModel
     {
         #region Parameterized Constructor
         public AdminDashboardViewModel(NavigationStore navigationStore) : base(navigationStore)
@@ -22,40 +19,9 @@ namespace ActivityTracker.UI.ViewModels
         }
         #endregion
 
-        #region Data Masters
 
-        public ProjectMaster ProjectMaster { get => Get<ProjectMaster>(); private set => Set(value); }
-
-        public ActivityMaster ActivityMaster { get => Get<ActivityMaster>(); private set => Set(value); }
-
-        #endregion
-
-        #region DataGrid Source Providers
-
-        public IEnumerable<IProject> PreOrders => ProjectMaster?.Projects?.Where(p => p.Type == ProjectType.PreOrder);
-
-        public IEnumerable<IProject> Orders => ProjectMaster?.Projects?.Where(p => p.Type == ProjectType.Order);
-
-        public IEnumerable<IProject> Developments => ProjectMaster?.Projects?.Where(p => p.Type == ProjectType.Development);
-
-        public IEnumerable<IActivity> Activities => SelectedProject?.Activities;
-
-        #endregion
 
         #region Public Properties
-        public IProject SelectedProject
-        {
-            get => Get<IProject>();
-            set
-            {
-                Set(value);
-                ProjectIsSelected = value != null;
-                RaisePropertyChanged(nameof(Activities));
-                SelectedActivity = Activities?.FirstOrDefault();
-            }
-        }
-
-        public string Title { get => Get<string>(); set => Set(value); }
 
         public IEnumerable<IResource> Resources { get => Get<IEnumerable<IResource>>(); set => Set(value); }
 
@@ -69,12 +35,9 @@ namespace ActivityTracker.UI.ViewModels
             }
         }
 
-        public IActivity SelectedActivity { get => Get<IActivity>(); set { Set(value); ActivityIsSelected = value != null; } }
         #endregion
 
         #region Commands
-
-        public ICommand CreateActivityCommand { get => Get<ICommand>(); private set => Set(value); }
 
         public ICommand CreateProjectCommand { get => Get<ICommand>(); private set => Set(value); }
 
@@ -82,18 +45,8 @@ namespace ActivityTracker.UI.ViewModels
 
         public ICommand DeleteSelectedActivityCommand { get => Get<ICommand>(); private set => Set(value); }
 
-        public ICommand LoadProjectsMasterCommand { get => Get<ICommand>(); private set => Set(value); }
-
-        public ICommand SaveProjectsMasterCommand { get => Get<ICommand>(); private set => Set(value); }
-
-
         #endregion
 
-        #region Readonly Properties
-        public bool ProjectIsSelected { get => Get<bool>(); private set => Set(value); }
-
-        public bool ActivityIsSelected { get => Get<bool>(); private set => Set(value); }
-        #endregion
 
         #region Command Handlers
 
@@ -107,21 +60,6 @@ namespace ActivityTracker.UI.ViewModels
             {
                 ProjectMaster.Projects.Add(viewModel.ProjectDefinition.Project);
                 RaiseMultiplePropertiesChanged(nameof(PreOrders), nameof(Orders), nameof(Developments));
-            }
-        }
-
-        private void OnCreateActivity()
-        {
-            CreateActivityViewModel viewModel = new(SelectedProject);
-
-            bool? result = _dialogService.ShowDialog(viewModel);
-
-            if (result.HasValue && result.Value)
-            {
-                if (!SelectedProject.Activities.Contains(viewModel.ActivityDefinition.Activity))
-                {
-                    SelectedProject.Activities.Add(viewModel.ActivityDefinition.Activity);
-                }
             }
         }
 
@@ -143,35 +81,20 @@ namespace ActivityTracker.UI.ViewModels
 
         #region Private Helpers
 
-        private void InitializeProperties()
+        protected override void InitializeProperties()
         {
 
             Title = "Admin Dashboard";
+            UserIsAdmin = true;
+
+            base.InitializeProperties();
 
             //ResourceRepository resourceRepository = new();
             //Resources = resourceRepository.GetAll();
 
-            ActivityMaster = ActivityMasterService.ReadFromFile();
-
             CreateProjectCommand = new RelayCommand(OnCreateProject, true);
-            CreateActivityCommand = new RelayCommand(OnCreateActivity, true);
             DeleteSelectedProjectCommand = new RelayCommand(OnDeleteSelectedProject, true);
             DeleteSelectedActivityCommand = new RelayCommand(OnDeleteSelectedActivity, true);
-
-            LoadProjectsMasterCommand = new RelayCommand(OnLoadProjectsMaster, true);
-            SaveProjectsMasterCommand = new RelayCommand(OnSaveProjectsMaster, true);
-        }
-
-        private void OnSaveProjectsMaster()
-        {
-            ProjectMasterService.SaveToFile(ProjectMaster);
-            _ = MessageBox.Show("Project master is saved successfully!", "Save project master", MessageBoxButton.OK);
-        }
-
-        private void OnLoadProjectsMaster()
-        {
-            ProjectMaster = ProjectMasterService.ReadFromFile();///.Retrieve();
-            RaiseMultiplePropertiesChanged(nameof(PreOrders), nameof(Orders), nameof(Developments));
         }
 
         #endregion
