@@ -30,9 +30,12 @@ namespace ActivityTracker.UI.Base
 
         #endregion
 
+
+        public IResource Resource { get; set; }
+
         #region DataGrid Source Providers
 
-        public IEnumerable<IProject> PreOrders => ProjectMaster?.Projects?.Where(p => p.Type == ProjectType.PreOrder);
+        public IEnumerable<IProject> PreOrders => ProjectMaster?.Projects?.Where(p => p.Type == ProjectType.PreOrder);// && p.Activities.Any(a => a.AllocatedResources.Contains(Resource)));
 
         public IEnumerable<IProject> Orders => ProjectMaster?.Projects?.Where(p => p.Type == ProjectType.Order);
 

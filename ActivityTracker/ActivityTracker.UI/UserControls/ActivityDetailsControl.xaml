@@ -157,6 +157,22 @@
             IsEnabled="False"
             Text="{Binding ScheduledCompletion, Mode=OneWay, StringFormat={}{0:dd-MM-yyyy}}" />
 
+        <!--<TextBlock
+            Grid.Row="7"
+            Grid.Column="1"
+            Height="{StaticResource InputLabelHeight}"
+            Text="Allocated resource:" />
+        <ComboBox
+            Grid.Row="8"
+            Grid.Column="1"
+            Height="{StaticResource ControlHeight}"
+            Margin="0,0,5,5"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
+            DisplayMemberPath="FullName"
+            ItemsSource="{Binding Resources}"
+            SelectedValue="{Binding SelectedResource}" />-->
+
     </Grid>
 
 </UserControl>

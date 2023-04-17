@@ -1,5 +1,4 @@
-﻿using ActivityTracker.Domain.Interfaces;
-using ActivityTracker.UI.Base;
+﻿using ActivityTracker.UI.Base;
 using ActivityTracker.UI.Stores;
 
 namespace ActivityTracker.UI.ViewModels
@@ -10,8 +9,6 @@ namespace ActivityTracker.UI.ViewModels
         {
             InitializeProperties();
         }
-
-        public IResource Resource { get => Get<IResource>(); set => Set(value); }
 
         public string UserPassword { get => Get<string>(); set => Set(value); }
 

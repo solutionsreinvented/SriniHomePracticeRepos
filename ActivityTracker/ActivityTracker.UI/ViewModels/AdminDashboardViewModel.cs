@@ -4,6 +4,7 @@ using System.Windows.Input;
 
 using ActivityTracker.Domain.Interfaces;
 using ActivityTracker.Domain.Models;
+using ActivityTracker.Domain.Repositories;
 using ActivityTracker.UI.Base;
 using ActivityTracker.UI.Commands;
 using ActivityTracker.UI.Stores;
@@ -22,6 +23,8 @@ namespace ActivityTracker.UI.ViewModels
 
 
         #region Public Properties
+
+        public ResourceRepository ResourceRepository { get => Get<ResourceRepository>(); private set => Set(value); }
 
         public IEnumerable<IResource> Resources { get => Get<IEnumerable<IResource>>(); set => Set(value); }
 
@@ -89,8 +92,8 @@ namespace ActivityTracker.UI.ViewModels
 
             base.InitializeProperties();
 
-            //ResourceRepository resourceRepository = new();
-            //Resources = resourceRepository.GetAll();
+            ResourceRepository resourceRepository = new();
+            Resources = resourceRepository.GetAll();
 
             CreateProjectCommand = new RelayCommand(OnCreateProject, true);
             DeleteSelectedProjectCommand = new RelayCommand(OnDeleteSelectedProject, true);
