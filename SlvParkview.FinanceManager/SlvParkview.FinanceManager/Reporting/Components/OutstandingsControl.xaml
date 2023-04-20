@@ -107,7 +107,7 @@
 
                 <!--#region Outstanding/Penalty On Specified Date Column-->
 
-                <DataGridTemplateColumn Width="1.2*" Header="Payment">
+                <!--<DataGridTemplateColumn Width="1.2*" Header="Payment">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock
@@ -116,7 +116,7 @@
                                 Text="{Binding DataContext, ElementName=Root}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                </DataGridTemplateColumn>-->
 
                 <!--#endregion-->
 
