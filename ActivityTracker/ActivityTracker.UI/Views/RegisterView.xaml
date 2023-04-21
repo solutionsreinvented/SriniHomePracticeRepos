@@ -1,0 +1,207 @@
+﻿<UserControl
+    x:Class="ActivityTracker.UI.Views.RegisterView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:theme="http://schemas.reinvented.com/ui/themes"
+    Width="500"
+    Height="290"
+    d:DesignHeight="250"
+    d:DesignWidth="500"
+    FontFamily="{StaticResource DefaultFontFamily}"
+    mc:Ignorable="d">
+
+    <Grid>
+
+        <Border Style="{StaticResource BorderEffectStyle}" />
+
+        <!--<Button
+            Grid.Row="0"
+            Grid.Column="0"
+            Width="{StaticResource ControlHeight}"
+            Height="{StaticResource ControlHeight}"
+            Margin="3"
+            Padding="0,3"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            Background="Transparent"
+            BorderThickness="0"
+            Command="{Binding GoBackCommand}"
+            Content="←"
+            FontSize="14"
+            FontWeight="ExtraBold"
+            Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}" />-->
+
+        <Grid Margin="15" VerticalAlignment="Center">
+
+            <!--#region Grid Resources-->
+
+            <Grid.Resources>
+
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="10,0" />
+                    <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=StaticForegroundBrush}" />
+                </Style>
+
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="Padding" Value="5,3" />
+                    <Setter Property="Margin" Value="10,5" />
+                    <Setter Property="Foreground" Value="{theme:ThemeResource ResourceKey=StaticBackgroundBrush}" />
+                </Style>
+
+            </Grid.Resources>
+
+            <!--#endregion-->
+
+            <!--#region Grid Definitions-->
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.2*" />
+                <ColumnDefinition Width="4*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--#endregion-->
+
+            <!--#region Title Row-->
+            <TextBlock
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Margin="0,5,0,20"
+                HorizontalAlignment="Center"
+                FontWeight="DemiBold"
+                Text="Register Your Product" />
+            <!--#endregion-->
+
+            <!--#region Employee Id Row-->
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="Employee Id: " />
+
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="1"
+                Height="{StaticResource ControlHeight}"
+                shared:TextBoxProperties.SelectAll="True"
+                Text="{Binding UserId}" />
+            <!--#endregion-->
+
+            <!--#region Password Row-->
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="Password: " />
+
+            <PasswordBox
+                Grid.Row="2"
+                Grid.Column="1"
+                Height="{StaticResource ControlHeight}"
+                Margin="10,0,10,5"
+                Padding="5,3"
+                VerticalContentAlignment="Center"
+                shared:PasswordBoxProperties.IsBindingRequested="True"
+                shared:PasswordBoxProperties.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                shared:TextBoxProperties.SelectAll="True" />
+            <!--#endregion-->
+
+            <!--#region Confirm Password Row-->
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="0"
+                Text="Confirm Password: " />
+
+            <PasswordBox
+                Grid.Row="3"
+                Grid.Column="1"
+                Height="{StaticResource ControlHeight}"
+                Margin="10,0,10,5"
+                Padding="5,3"
+                VerticalContentAlignment="Center"
+                shared:PasswordBoxProperties.IsBindingRequested="True"
+                shared:PasswordBoxProperties.Password="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                shared:TextBoxProperties.SelectAll="True" />
+            <!--#endregion-->
+
+            <!--#region License File Row-->
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="0"
+                Text="License File: " />
+            <Grid
+                Grid.Row="4"
+                Grid.Column="1"
+                Height="{StaticResource ControlHeight}"
+                Margin="10,0,10,5"
+                HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBox
+                    Grid.Column="0"
+                    Height="{StaticResource ControlHeight}"
+                    Margin="0,0,3,0"
+                    Padding="5,3"
+                    VerticalContentAlignment="Center"
+                    IsEnabled="False"
+                    Text="{Binding LicenseFilePath}" />
+                <Button
+                    Grid.Column="1"
+                    VerticalContentAlignment="Center"
+                    Command="{Binding SelectLicenseFileCommand}"
+                    Content="..."
+                    FontSize="16" />
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region Registration Key Row-->
+            <TextBlock
+                Grid.Row="5"
+                Grid.Column="0"
+                Text="Registration Key: " />
+
+            <TextBox
+                Grid.Row="5"
+                Grid.Column="1"
+                Height="{StaticResource ControlHeight}"
+                Margin="10,0,10,5"
+                Padding="5,3"
+                VerticalContentAlignment="Center"
+                shared:TextBoxProperties.SelectAll="True"
+                Tag="Enter your 16 digit registration key"
+                Text="{Binding RegistrationKey}" />
+            <!--#endregion-->
+
+            <!--#region Register Button Row-->
+            <Button
+                Grid.Row="6"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Height="{StaticResource ControlHeight}"
+                Margin="10,25,10,5"
+                HorizontalAlignment="Stretch"
+                Command="{Binding RegisterCommand}"
+                Content="Register"
+                IsEnabled="{Binding PasswordsMatch}" />
+            <!--#endregion-->
+
+        </Grid>
+
+    </Grid>
+
+</UserControl>

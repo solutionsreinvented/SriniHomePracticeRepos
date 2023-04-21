@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.IO;
+using System.Windows;
 
 using ActivityTracker.UI.Commands;
 using ActivityTracker.UI.Dialogs;
@@ -23,12 +25,14 @@ namespace ActivityTracker.UI
             dialogService.Register<CreateProjectViewModel, CreateProjectView>();
             dialogService.Register<CreateActivityViewModel, CreateActivityView>();
 
+            GetRegistrationStatus();
+
 
             ///base.OnStartup(e);
 
             NavigationStore navigationStore = new(dialogService);
 
-            navigationStore.ManageUserViewModel = new LoginViewModel(navigationStore);
+            navigationStore.ManageUserViewModel = new RegisterViewModel(navigationStore);
 
             //navigationStore.CurrentViewModel = new AdminDashboardViewModel(navigationStore);
 
@@ -49,7 +53,12 @@ namespace ActivityTracker.UI
 
         }
 
+        private void GetRegistrationStatus()
+        {
+            var appDataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
+            throw new NotImplementedException();
+        }
 
         private void OnMaximizeRestore()
         {
