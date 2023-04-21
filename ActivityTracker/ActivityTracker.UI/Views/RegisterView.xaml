@@ -7,8 +7,8 @@
     xmlns:shared="http://schemas.reinvented.com/shared"
     xmlns:theme="http://schemas.reinvented.com/ui/themes"
     Width="500"
-    Height="290"
-    d:DesignHeight="250"
+    Height="320"
+    d:DesignHeight="320"
     d:DesignWidth="500"
     FontFamily="{StaticResource DefaultFontFamily}"
     mc:Ignorable="d">
@@ -16,24 +16,6 @@
     <Grid>
 
         <Border Style="{StaticResource BorderEffectStyle}" />
-
-        <!--<Button
-            Grid.Row="0"
-            Grid.Column="0"
-            Width="{StaticResource ControlHeight}"
-            Height="{StaticResource ControlHeight}"
-            Margin="3"
-            Padding="0,3"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            VerticalContentAlignment="Center"
-            Background="Transparent"
-            BorderThickness="0"
-            Command="{Binding GoBackCommand}"
-            Content="←"
-            FontSize="14"
-            FontWeight="ExtraBold"
-            Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}" />-->
 
         <Grid Margin="15" VerticalAlignment="Center">
 
@@ -98,7 +80,7 @@
                 Grid.Column="1"
                 Height="{StaticResource ControlHeight}"
                 shared:TextBoxProperties.SelectAll="True"
-                Text="{Binding UserId}" />
+                Text="{Binding UserId, UpdateSourceTrigger=PropertyChanged}" />
             <!--#endregion-->
 
             <!--#region Password Row-->
@@ -184,20 +166,35 @@
                 VerticalContentAlignment="Center"
                 shared:TextBoxProperties.SelectAll="True"
                 Tag="Enter your 16 digit registration key"
-                Text="{Binding RegistrationKey}" />
+                Text="{Binding RegistrationKey, UpdateSourceTrigger=PropertyChanged}" />
             <!--#endregion-->
 
-            <!--#region Register Button Row-->
-            <Button
+            <!--#region Buttons Group-->
+            <UniformGrid
                 Grid.Row="6"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                Height="{StaticResource ControlHeight}"
-                Margin="10,25,10,5"
-                HorizontalAlignment="Stretch"
-                Command="{Binding RegisterCommand}"
-                Content="Register"
-                IsEnabled="{Binding PasswordsMatch}" />
+                Margin="10,25,10,5">
+                <!--#region Register-->
+                <Button
+                    Height="{StaticResource ControlHeight}"
+                    Margin="0,0,5,0"
+                    HorizontalAlignment="Stretch"
+                    Command="{Binding RegisterCommand}"
+                    Content="Register"
+                    IsEnabled="{Binding CanRegister}" />
+                <!--#endregion-->
+
+                <!--#region Request License-->
+                <Button
+                    Height="{StaticResource ControlHeight}"
+                    Margin="5,0,0,0"
+                    HorizontalAlignment="Stretch"
+                    Command="{Binding RequestLicenseCommand}"
+                    Content="Don't have a license, request one!" />
+                <!--#endregion-->
+
+            </UniformGrid>
             <!--#endregion-->
 
         </Grid>
