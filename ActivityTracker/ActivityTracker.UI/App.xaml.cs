@@ -7,6 +7,7 @@ using ActivityTracker.UI.Dialogs;
 using ActivityTracker.UI.Stores;
 using ActivityTracker.UI.ViewModels;
 
+using ReInvented.DataAccess.Factories;
 using ReInvented.Shared.Interfaces;
 using ReInvented.Shared.Services;
 
@@ -25,14 +26,28 @@ namespace ActivityTracker.UI
             dialogService.Register<CreateProjectViewModel, CreateProjectView>();
             dialogService.Register<CreateActivityViewModel, CreateActivityView>();
 
-            GetRegistrationStatus();
-
-
             ///base.OnStartup(e);
 
             NavigationStore navigationStore = new(dialogService);
 
-            navigationStore.ManageUserViewModel = new RegisterViewModel(navigationStore);
+            if (GetRegistrationStatus() == RegistrationStatus.Unregistered)
+            {
+                navigationStore.ManageUserViewModel = new RegisterViewModel(navigationStore);
+            }
+            else
+            {
+                if (KeyIsVerified())
+                {
+                    navigationStore.ManageUserViewModel = new LoginViewModel(navigationStore);
+                }
+                else
+                {
+                    navigationStore.ManageUserViewModel = new RegisterViewModel(navigationStore);
+                }
+            }
+
+
+
 
             //navigationStore.CurrentViewModel = new AdminDashboardViewModel(navigationStore);
 
@@ -53,11 +68,26 @@ namespace ActivityTracker.UI
 
         }
 
-        private void GetRegistrationStatus()
+        private bool KeyIsVerified()
         {
-            var appDataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            return true;
+        }
 
-            throw new NotImplementedException();
+        private enum RegistrationStatus
+        {
+            Registered,
+            Unregistered
+        }
+
+        private RegistrationStatus GetRegistrationStatus()
+        {
+            string regFilename = "reg.json";
+            string licFilename = "license.sal";
+            string appDataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "tmg");
+            string regFilePath = Path.Combine(appDataDirectory, regFilename);
+            string licFilePath = Path.Combine(appDataDirectory, licFilename);
+
+            return !File.Exists(regFilePath) || !File.Exists(licFilePath) ? RegistrationStatus.Unregistered : RegistrationStatus.Registered;
         }
 
         private void OnMaximizeRestore()
