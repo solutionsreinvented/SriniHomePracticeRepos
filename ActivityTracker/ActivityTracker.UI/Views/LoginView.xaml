@@ -109,8 +109,8 @@
                 VerticalContentAlignment="Center"
                 shared:PasswordBoxProperties.IsBindingRequested="True"
                 shared:PasswordBoxProperties.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                IsEnabled="{Binding UserExists}"
                 TabIndex="1" />
+            <!--  IsEnabled="{Binding UserExists}"  -->
 
             <CheckBox
                 Grid.Row="3"

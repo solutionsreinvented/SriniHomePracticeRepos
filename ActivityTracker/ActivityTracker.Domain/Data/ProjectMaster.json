@@ -374,13 +374,115 @@
             "$ref": "17"
           },
           "ScheduledCompletion": "2023-04-18T00:00:00"
-        },
+        }
+      ]
+    },
+    {
+      "$id": "28",
+      "$type": "ActivityTracker.Domain.Models.PreOrder, ActivityTracker.Domain",
+      "Type": 0,
+      "Code": "E23040204",
+      "Name": "Minera Exar 30m",
+      "Activities": [
         {
-          "$id": "28",
+          "$id": "29",
           "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
           "Discipline": 11,
           "Category": {
-            "$id": "29",
+            "$id": "30",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Staad Modeling",
+          "Structure": "Complete Thickener",
+          "InitiatedOn": "2023-04-21T00:00:00+05:30",
+          "AllocatedHours": 9.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "PRE-E23040204-11-601-668-918",
+          "Project": {
+            "$ref": "28"
+          },
+          "ScheduledCompletion": "2023-04-24T00:00:00+05:30"
+        },
+        {
+          "$id": "31",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "32",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Loads Application",
+          "Structure": "Complete Thickener",
+          "InitiatedOn": "2023-04-24T00:00:00",
+          "AllocatedHours": 9.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "PRE-E23040204-11-601-855-918",
+          "Project": {
+            "$ref": "28"
+          },
+          "ScheduledCompletion": "2023-04-25T00:00:00"
+        },
+        {
+          "$id": "33",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "34",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Analysis and Design",
+          "Structure": "Complete Thickener",
+          "InitiatedOn": "2023-04-25T00:00:00",
+          "AllocatedHours": 9.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "PRE-E23040204-11-601-897-918",
+          "Project": {
+            "$ref": "28"
+          },
+          "ScheduledCompletion": "2023-04-26T00:00:00"
+        },
+        {
+          "$id": "35",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "36",
             "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
             "Name": "Non Structural",
             "SubCategories": [
@@ -389,16 +491,16 @@
           },
           "SubCategory": "Preamble",
           "Structure": "Complete Thickener",
-          "InitiatedOn": "2023-04-21T00:00:00",
+          "InitiatedOn": "2023-04-26T00:00:00",
           "AllocatedHours": 18.0,
           "AllocatedResources": [],
           "CurrentStatus": 0,
           "Changes": [],
-          "Id": "ORD-23-4042-11-740-424-918",
+          "Id": "PRE-E23040204-11-740-424-918",
           "Project": {
-            "$ref": "17"
+            "$ref": "28"
           },
-          "ScheduledCompletion": "2023-04-25T00:00:00"
+          "ScheduledCompletion": "2023-04-28T00:00:00"
         }
       ]
     }
