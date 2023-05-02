@@ -123,8 +123,11 @@ namespace SlvParkview.FinanceManager.Services
 
             string backupDirectory = Path.Combine($"{sourceDirectory}", "Backup");
 
-            string backupFileFullPath = Path.Combine(backupDirectory, $"{sourceFileName}{DateTime.Now.ToString().Replace("-", "").Replace(" ", "").Replace(":", "")}{sourceFileExtension}");
+            //string backupFileFullPath = Path.Combine(backupDirectory, $"{sourceFileName}_{DateTime.Now.ToString().Replace("-", "").Replace(" ", "").Replace(":", "")}{sourceFileExtension}");
 
+            DateTime now = DateTime.Now;
+
+            string backupFileFullPath = Path.Combine(backupDirectory, $"{sourceFileName}_{now.ToShortDateString().Replace("-", "").Replace(" ", "")}_{now.ToLongTimeString().Replace(":", "")}{sourceFileExtension}");
             if (!Directory.Exists(backupDirectory))
             {
                 Directory.CreateDirectory(backupDirectory);
