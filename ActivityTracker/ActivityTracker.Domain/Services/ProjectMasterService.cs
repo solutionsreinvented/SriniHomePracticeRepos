@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 using ActivityTracker.Domain.Interfaces;
 using ActivityTracker.Domain.Models;
@@ -46,6 +47,12 @@ namespace ActivityTracker.Domain.Services
         public static void SaveToFile(ProjectMaster projectMaster, string fileFullPath = null)
         {
             string filePath = fileFullPath ?? FileServiceProvider.ProjectMasterFilePath;
+
+            if (!Directory.Exists(FileServiceProvider.BackupDirectory))
+            {
+                Directory.CreateDirectory(FileServiceProvider.BackupDirectory);
+            }
+            File.Copy(filePath, FileServiceProvider.BackupFilePath);
 
             string serializedContents =  _serializer.Serialize(projectMaster);
 
