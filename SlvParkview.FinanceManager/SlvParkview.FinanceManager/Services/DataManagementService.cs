@@ -109,7 +109,7 @@ namespace SlvParkview.FinanceManager.Services
 
         private void Initialize()
         {
-            _filePath = Path.Combine(ServiceProvider.AppDirectory, "C Block Data.json");
+            _filePath = Path.Combine(FileServiceProvider.AppDirectory, "C Block Data.json");
             _dataSerializer = new JsonDataSerializer<Block>();
 
             AllowSave = false;
@@ -117,23 +117,20 @@ namespace SlvParkview.FinanceManager.Services
 
         private void CreateBackupFor(string sourceFileFullPath)
         {
-            string sourceDirectory = Path.GetDirectoryName(sourceFileFullPath);
             string sourceFileName = Path.GetFileNameWithoutExtension(sourceFileFullPath);
             string sourceFileExtension = Path.GetExtension(sourceFileFullPath);
-
-            string backupDirectory = Path.Combine($"{sourceDirectory}", "Backup");
 
             //string backupFileFullPath = Path.Combine(backupDirectory, $"{sourceFileName}_{DateTime.Now.ToString().Replace("-", "").Replace(" ", "").Replace(":", "")}{sourceFileExtension}");
 
             DateTime now = DateTime.Now;
+            string backFilename = $"{sourceFileName}_{now.ToShortDateString().Replace("-", "").Replace(" ", "")}_{now.ToLongTimeString().Replace(":", "")}{sourceFileExtension}";
 
-            string backupFileFullPath = Path.Combine(backupDirectory, $"{sourceFileName}_{now.ToShortDateString().Replace("-", "").Replace(" ", "")}_{now.ToLongTimeString().Replace(":", "")}{sourceFileExtension}");
-            if (!Directory.Exists(backupDirectory))
+            if (!Directory.Exists(FileServiceProvider.BackupDirectory))
             {
-                Directory.CreateDirectory(backupDirectory);
+                Directory.CreateDirectory(FileServiceProvider.BackupDirectory);
             }
 
-            File.Copy(sourceFileFullPath, backupFileFullPath, true);
+            File.Copy(sourceFileFullPath, Path.Combine(FileServiceProvider.BackupDirectory, backFilename), true);
         }
 
         #endregion

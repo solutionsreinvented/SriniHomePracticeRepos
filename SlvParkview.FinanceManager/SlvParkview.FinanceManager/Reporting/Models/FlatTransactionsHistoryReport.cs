@@ -98,7 +98,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
             /// Create a new directory for Flatwise Reports if it does not exists.
 
-            string flatwiseReportsDirectory = Path.Combine(ServiceProvider.FlatwiseReportsDirectory);
+            string flatwiseReportsDirectory = Path.Combine(FileServiceProvider.FlatwiseReportsDirectory);
 
             if (!Directory.Exists(flatwiseReportsDirectory))
             {
@@ -119,7 +119,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         {
             string fileName = $"{GetFileName()}.html";
 
-            string[] htmlContents = File.ReadAllLines(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"));
+            string[] htmlContents = File.ReadAllLines(Path.Combine(FileServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"));
 
             List<string> finalHtmlFileContent = ConcatenateScriptTagIn(htmlContents, fileName);
 
@@ -130,7 +130,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         {
             string fileName = $"{GetFileName()}.js";
 
-            string jsFilePath = Path.Combine(ServiceProvider.ReportScriptsDirectory, $"{_fileName}.js");
+            string jsFilePath = Path.Combine(FileServiceProvider.ReportScriptsDirectory, $"{_fileName}.js");
             string[] jsContents = File.ReadAllLines(jsFilePath);
 
             string finalJavaScriptFileContent = ConcatenateJsonContentIn(jsContents);

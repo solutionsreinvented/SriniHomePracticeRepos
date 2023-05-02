@@ -169,7 +169,7 @@
                         Height="18"
                         Margin="5,0"
                         Source="/Assets/Images/reports-light.png" />
-                    <TextBlock VerticalAlignment="Center" Text="Go to Reports" />
+                    <TextBlock VerticalAlignment="Center" Text="Generate Reports" />
                 </StackPanel>
             </Button>
 

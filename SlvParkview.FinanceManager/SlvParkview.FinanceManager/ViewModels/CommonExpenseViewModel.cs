@@ -59,10 +59,12 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void OnSaveExpense()
         {
+            int expenseAdditionsCount = 0;
+
             if (AllowDuplicateEntry)
             {
                 _sender.Block.Flats.ForEach(f => f.AddExpense(Expense));
-                DataManagementService.Instance.SaveData(ApartmentBlockToBeProcessed);
+                expenseAdditionsCount = _sender.Block.Flats.Count;
             }
             else
             {
@@ -71,6 +73,7 @@ namespace SlvParkview.FinanceManager.ViewModels
                     if (!flat.ContainsSimilar(Expense))
                     {
                         flat.AddExpense(Expense);
+                        expenseAdditionsCount++;
                     }
                     else
                     {
@@ -79,10 +82,14 @@ namespace SlvParkview.FinanceManager.ViewModels
                         if (result == MessageBoxResult.Yes)
                         {
                             flat.AddExpense(Expense);
+                            expenseAdditionsCount++;
                         }
                     }
                 }
+
             }
+            _ = MessageBox.Show($"Expense added to a total of {expenseAdditionsCount} flats.", "Add common expense", MessageBoxButton.OK);
+            DataManagementService.Instance.SaveData(ApartmentBlockToBeProcessed);
 
             Expense = new Expense();
         }

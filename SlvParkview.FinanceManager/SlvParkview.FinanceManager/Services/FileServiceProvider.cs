@@ -3,11 +3,13 @@ using System.Reflection;
 
 namespace SlvParkview.FinanceManager.Services
 {
-    public class ServiceProvider
+    public class FileServiceProvider
     {
         public static string AppDirectory => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
         public static string AppDataDirectory => Path.Combine(AppDirectory, "ApplicationData");
+
+        public static string BackupDirectory => Path.Combine(AppDirectory, "Backup");
 
         public static string ReportsDirectory => Path.Combine(AppDirectory, "Reports");
 

@@ -64,7 +64,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
             /// Create a new directory to store Monthwise Payments reports if it does not exists.
 
-            _reportTargetDirectory = Path.Combine(ServiceProvider.PaymentsReportsDirectory);
+            _reportTargetDirectory = Path.Combine(FileServiceProvider.PaymentsReportsDirectory);
 
             if (!Directory.Exists(_reportTargetDirectory))
             {
@@ -76,7 +76,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         {
             string fileName = $"{GetFileName()}.html";
 
-            string[] htmlContents = File.ReadAllLines(Path.Combine(ServiceProvider.ReportTemplatesDirectory, $"{GetTemplateFileName()}.html"));
+            string[] htmlContents = File.ReadAllLines(Path.Combine(FileServiceProvider.ReportTemplatesDirectory, $"{GetTemplateFileName()}.html"));
 
             List<string> finalHtmlFileContent = ConcatenateScriptTagIn(htmlContents, fileName);
 
@@ -87,7 +87,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         {
             string fileName = $"{GetFileName()}.js";
 
-            string jsFilePath = Path.Combine(ServiceProvider.ReportScriptsDirectory, $"{GetTemplateFileName()}.js");
+            string jsFilePath = Path.Combine(FileServiceProvider.ReportScriptsDirectory, $"{GetTemplateFileName()}.js");
             string[] jsContents = File.ReadAllLines(jsFilePath);
 
             string finalJavaScriptFileContent = ConcatenateJsonContentIn(jsContents);

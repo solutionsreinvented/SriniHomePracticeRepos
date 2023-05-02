@@ -110,9 +110,9 @@ namespace SlvParkview.FinanceManager.Reporting.Models.Base
         private protected virtual void CreateRequiredDirectories()
         {
             /// Create if the Reports directory does not exists.
-            if (!Directory.Exists(ServiceProvider.ReportsDirectory))
+            if (!Directory.Exists(FileServiceProvider.ReportsDirectory))
             {
-                _ = Directory.CreateDirectory(ServiceProvider.ReportsDirectory);
+                _ = Directory.CreateDirectory(FileServiceProvider.ReportsDirectory);
             }
         }
 
