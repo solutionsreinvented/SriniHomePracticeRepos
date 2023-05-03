@@ -84,7 +84,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom">
             <Run Text="Developed by" />
-            <Run Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}" Text="Srinivasa Rao M" />
+            <Run Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}" Text="Srinivasa Rao M (C217)" />
         </TextBlock>
 
         <TextBlock
