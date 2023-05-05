@@ -405,22 +405,53 @@
             "$ref": "17"
           },
           "ScheduledCompletion": "2023-04-20T00:00:00"
+        },
+        {
+          "$id": "30",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "31",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Member Design Calculation Report",
+          "Structure": "Complete Thickener",
+          "InitiatedOn": "2023-05-04T00:00:00",
+          "AllocatedHours": 14.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "ORD-23-4042-11-601-1533-918",
+          "Project": {
+            "$ref": "17"
+          },
+          "ScheduledCompletion": "2023-05-05T00:00:00"
         }
       ]
     },
     {
-      "$id": "30",
+      "$id": "32",
       "$type": "ActivityTracker.Domain.Models.PreOrder, ActivityTracker.Domain",
       "Type": 0,
       "Code": "E23040204",
       "Name": "Minera Exar 30m",
       "Activities": [
         {
-          "$id": "31",
+          "$id": "33",
           "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
           "Discipline": 11,
           "Category": {
-            "$id": "32",
+            "$id": "34",
             "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
             "Name": "Structural",
             "SubCategories": [
@@ -442,16 +473,16 @@
           "Changes": [],
           "Id": "PRE-E23040204-11-601-668-918",
           "Project": {
-            "$ref": "30"
+            "$ref": "32"
           },
           "ScheduledCompletion": "2023-04-24T00:00:00+05:30"
         },
         {
-          "$id": "33",
+          "$id": "35",
           "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
           "Discipline": 11,
           "Category": {
-            "$id": "34",
+            "$id": "36",
             "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
             "Name": "Structural",
             "SubCategories": [
@@ -473,16 +504,16 @@
           "Changes": [],
           "Id": "PRE-E23040204-11-601-855-918",
           "Project": {
-            "$ref": "30"
+            "$ref": "32"
           },
           "ScheduledCompletion": "2023-04-25T00:00:00"
         },
         {
-          "$id": "35",
+          "$id": "37",
           "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
           "Discipline": 11,
           "Category": {
-            "$id": "36",
+            "$id": "38",
             "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
             "Name": "Structural",
             "SubCategories": [
@@ -504,16 +535,16 @@
           "Changes": [],
           "Id": "PRE-E23040204-11-601-897-918",
           "Project": {
-            "$ref": "30"
+            "$ref": "32"
           },
           "ScheduledCompletion": "2023-04-26T00:00:00"
         },
         {
-          "$id": "37",
+          "$id": "39",
           "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
           "Discipline": 11,
           "Category": {
-            "$id": "38",
+            "$id": "40",
             "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
             "Name": "Non Structural",
             "SubCategories": [
@@ -523,13 +554,13 @@
           "SubCategory": "Preamble",
           "Structure": "Complete Thickener",
           "InitiatedOn": "2023-05-02T00:00:00",
-          "AllocatedHours": 18.0,
+          "AllocatedHours": 22.0,
           "AllocatedResources": [],
           "CurrentStatus": 0,
           "Changes": [],
           "Id": "PRE-E23040204-11-740-424-918",
           "Project": {
-            "$ref": "30"
+            "$ref": "32"
           },
           "ScheduledCompletion": "2023-05-04T00:00:00"
         }
