@@ -117,13 +117,18 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private protected override void CreateHtmlFile()
         {
-            string fileName = $"{GetFileName()}.html";
+            base.CreateHtmlFile();
+            //string fileName = $"{GetFileName()}.html";
 
             string[] htmlContents = File.ReadAllLines(Path.Combine(FileServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"));
 
-            List<string> finalHtmlFileContent = ConcatenateScriptTagIn(htmlContents, fileName);
+            //List<string> finalHtmlFileContent = ConcatenateScriptTagIn(htmlContents, fileName);
+            List<string> finalHtmlFileContent = ConcatenateScriptTagIn(htmlContents, Path.GetFileName(HtmlFilePath));
 
-            File.WriteAllLines(Path.Combine(_reportTargetDirectory, fileName), finalHtmlFileContent);
+
+            //File.WriteAllLines(Path.Combine(_reportTargetDirectory, fileName), finalHtmlFileContent);
+            File.WriteAllLines(HtmlFilePath, finalHtmlFileContent);
+
         }
 
         private protected override void CreateJavaScriptFile()

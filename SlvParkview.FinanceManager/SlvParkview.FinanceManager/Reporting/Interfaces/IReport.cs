@@ -8,6 +8,8 @@
 
         string DocumentTitle { get; }
 
+        string HtmlFilePath { get; }
+
         void GenerateContents();
 
         void SaveReport();

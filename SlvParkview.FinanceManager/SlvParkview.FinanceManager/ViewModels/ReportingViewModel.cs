@@ -62,6 +62,8 @@ namespace SlvParkview.FinanceManager.ViewModels
             private set => Set(value);
         }
 
+        public bool ReportGenerated { get => Get<bool>(); private set => Set(value); }
+
         #endregion
 
         #region Public Commands
@@ -72,7 +74,9 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         public ICommand AddCommonExpenseCommand { get => Get<ICommand>(); set => Set(value); }
 
-        public ICommand GenerateCommand { get => Get<ICommand>(); set => Set(value); }
+        public ICommand GenerateReportCommand { get => Get<ICommand>(); set => Set(value); }
+
+        public ICommand ShowReportCommand { get => Get<ICommand>(); set => Set(value); }
 
         public ICommand GoToSummaryCommand { get => Get<ICommand>(); set => Set(value); }
 
@@ -84,6 +88,19 @@ namespace SlvParkview.FinanceManager.ViewModels
         {
             _navigationService.CurrentViewModel = _summaryViewModel;
         }
+        private void OnGenerateReport()
+        {
+            CurrentReportViewModel.Report.SaveReport();
+            ReportGenerated = true;
+        }
+
+        private void OnShowReport()
+        {
+            string htmlFilePath = CurrentReportViewModel.Report.HtmlFilePath;
+
+            ReportViewerViewModel reportViewerViewModel = new ReportViewerViewModel(_summaryViewModel, _navigationService, htmlFilePath);
+            _navigationService.CurrentViewModel = reportViewerViewModel;
+        }
 
         #endregion
 
@@ -91,18 +108,16 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void Initialize()
         {
-            GenerateCommand = new RelayCommand(OnGenerate, true);
+            ReportGenerated = false;
+
+            GenerateReportCommand = new RelayCommand(OnGenerateReport, true);
+            ShowReportCommand = new RelayCommand(OnShowReport, true);
             GoToSummaryCommand = new RelayCommand(OnGoToSummary, true);
         }
 
         private void UpdateReportViewModel()
         {
             CurrentReportViewModel = ReportViewModelFactory.Create(_summaryViewModel, _navigationService, ReportType);
-        }
-
-        private void OnGenerate()
-        {
-            CurrentReportViewModel.Report.SaveReport();
         }
 
         #endregion

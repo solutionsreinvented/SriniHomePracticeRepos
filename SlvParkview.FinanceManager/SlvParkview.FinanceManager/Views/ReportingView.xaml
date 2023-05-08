@@ -95,18 +95,33 @@
                 </StackPanel>
             </Button>
 
-            <Button
-                HorizontalAlignment="Left"
-                Command="{Binding GenerateCommand}"
-                IsDefault="True">
-                <StackPanel Orientation="Horizontal">
-                    <Image
-                        Height="18"
-                        Margin="0,0,5,0"
-                        Source="/Assets/Images/report-light.png" />
-                    <TextBlock VerticalAlignment="Center" Text="Generate Report" />
-                </StackPanel>
-            </Button>
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                <Button
+                    HorizontalAlignment="Left"
+                    Command="{Binding GenerateReportCommand}"
+                    IsDefault="True">
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Height="18"
+                            Margin="0,0,5,0"
+                            Source="/Assets/Images/report-light.png" />
+                        <TextBlock VerticalAlignment="Center" Text="Generate Report" />
+                    </StackPanel>
+                </Button>
+                <Button
+                    Margin="5,0,0,0"
+                    HorizontalAlignment="Left"
+                    Command="{Binding ShowReportCommand}"
+                    IsEnabled="{Binding ReportGenerated}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Height="18"
+                            Margin="0,0,5,0"
+                            Source="/Assets/Images/view-report.png" />
+                        <TextBlock VerticalAlignment="Center" Text="View Report" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
 
         </Grid>
 
