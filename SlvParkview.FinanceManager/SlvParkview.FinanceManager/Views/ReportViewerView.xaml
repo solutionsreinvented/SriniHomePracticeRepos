@@ -7,8 +7,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:theme="http://schemas.reinvented.com/ui/themes"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="{StaticResource ViewHeight}"
+    d:DesignWidth="{StaticResource ViewWidth}"
+    Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
+    Style="{StaticResource ViewStyle}"
     mc:Ignorable="d">
 
     <UserControl.Resources>

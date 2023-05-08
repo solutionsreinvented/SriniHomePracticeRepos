@@ -41,9 +41,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         #region Parameterized Constructor
 
-        public BlockOutstandingsReport(Block block, DateTime reportTill,
-                                       OutstandingsFilter filter = OutstandingsFilter.All,
-                                       bool showPenaltiesOnly = false)
+        public BlockOutstandingsReport(Block block, DateTime reportTill, OutstandingsFilter filter = OutstandingsFilter.All, bool showPenaltiesOnly = false)
         {
             _block = block;
             _reportTill = reportTill;
