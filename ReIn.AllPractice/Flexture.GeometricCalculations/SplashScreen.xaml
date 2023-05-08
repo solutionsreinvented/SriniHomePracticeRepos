@@ -27,18 +27,28 @@
     </UserControl.Background>
     <Grid>
         <StackPanel>
-            <TextBlock
-                Width="450"
-                Height="24"
-                Margin="100,50,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                FontFamily="Adobe"
-                FontSize="20"
-                FontWeight="Bold"
-                Foreground="#FFB2B2B2"
-                Text="THICKENER DESIGN AUTOMATION"
-                TextWrapping="Wrap" />
+            <Grid>
+                <TextBlock
+                    Width="450"
+                    Height="24"
+                    Margin="100,50,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Adobe"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="#FFB2B2B2"
+                    Text="THICKENER DESIGN AUTOMATION"
+                    TextWrapping="Wrap" />
+
+                <TextBlock
+                    Margin="0,0,50,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Foreground="#FFB2B2B2"
+                    Text="{Binding RemainingTime}" />
+
+            </Grid>
             <TextBlock
                 Margin="100,10,0,0"
                 FontSize="18"
