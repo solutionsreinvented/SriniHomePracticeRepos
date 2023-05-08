@@ -23,8 +23,6 @@ namespace SlvParkview.FinanceManager.Reporting.Models
     public class BlockOutstandingsReport : Report, IReport
     {
         #region Private Fields
-        /// Exercise cuation while changing this string. This string is used to access the linked js files.
-        private const string _fileName = "Block Outstandings";
 
         private readonly Block _block;
 
@@ -70,6 +68,9 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         public OutstandingsFilter Filter { get => Get<OutstandingsFilter>(); private set => Set(value); }
 
         public bool ShowPenaltiesOnly { get => Get<bool>(); private set => Set(value); }
+
+        /// Exercise cuation while changing this string. This string is used to access the linked js files.
+        private protected override string TemplateFileName => "Block Outstandings";
 
         #endregion
 
@@ -129,28 +130,11 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             }
         }
 
-        private protected override void CreateHtmlFile()
-        {
-            base.CreateHtmlFile();
-            //string fileName = $"{GetFileName()}.html";
-
-            string[] htmlContents = File.ReadAllLines(Path.Combine(FileServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"));
-
-            //List<string> finalHtmlFileContent = ConcatenateScriptTagIn(htmlContents, fileName);
-
-            List<string> finalHtmlFileContent = ConcatenateScriptTagIn(htmlContents, Path.GetFileName(HtmlFilePath));
-
-            //File.WriteAllLines(Path.Combine(_reportTargetDirectory, fileName), finalHtmlFileContent);
-
-            File.WriteAllLines(Path.Combine(_reportTargetDirectory, Path.GetFileName(HtmlFilePath)), finalHtmlFileContent);
-
-        }
-
         private protected override void CreateJavaScriptFile()
         {
             string fileName = $"{GetFileName()}.js";
 
-            string jsFilePath = Path.Combine(FileServiceProvider.ReportScriptsDirectory, $"{_fileName}.js");
+            string jsFilePath = Path.Combine(FileServiceProvider.ReportScriptsDirectory, $"{TemplateFileName}.js");
             string[] jsContents = File.ReadAllLines(jsFilePath);
 
             string finalJavaScriptFileContent = ConcatenateJsonContentIn(jsContents);

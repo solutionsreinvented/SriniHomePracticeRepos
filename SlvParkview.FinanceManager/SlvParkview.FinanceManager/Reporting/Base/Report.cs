@@ -1,15 +1,15 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Windows;
+
+using Newtonsoft.Json;
 
 using ReInvented.Shared.Stores;
 
 using SlvParkview.FinanceManager.Reporting.Interfaces;
 using SlvParkview.FinanceManager.Services;
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Windows;
 
 namespace SlvParkview.FinanceManager.Reporting.Models.Base
 {
@@ -43,6 +43,9 @@ namespace SlvParkview.FinanceManager.Reporting.Models.Base
 
         [JsonProperty]
         public string HtmlFilePath { get => Get<string>(); private protected set => Set(value); }
+
+        [JsonProperty]
+        private protected virtual string TemplateFileName => string.Empty;
 
         #endregion
 
@@ -94,6 +97,9 @@ namespace SlvParkview.FinanceManager.Reporting.Models.Base
         private protected virtual void CreateHtmlFile()
         {
             HtmlFilePath = Path.Combine(_reportTargetDirectory, $"{GetFileName()}.html");
+            string[] htmlContents = File.ReadAllLines(Path.Combine(FileServiceProvider.ReportTemplatesDirectory, $"{TemplateFileName}.html"));
+            List<string> finalHtmlFileContent = ConcatenateScriptTagIn(htmlContents, Path.GetFileName(HtmlFilePath));
+            File.WriteAllLines(HtmlFilePath, finalHtmlFileContent);
         }
 
         /// <summary>

@@ -54,6 +54,8 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         [JsonProperty]
         public string TotalPayment { get => Get<string>(); private protected set => Set(value); }
 
+        /// Exercise cuation while changing this string. This string is used to access the linked js files.
+        private protected override string TemplateFileName => GetTemplateFileName();
         #endregion
 
         #region Private Helper Methods
@@ -72,27 +74,11 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             }
         }
 
-        private protected override void CreateHtmlFile()
-        {
-            base.CreateHtmlFile();
-            //string fileName = $"{GetFileName()}.html";
-
-            string[] htmlContents = File.ReadAllLines(Path.Combine(FileServiceProvider.ReportTemplatesDirectory, $"{GetTemplateFileName()}.html"));
-
-            //List<string> finalHtmlFileContent = ConcatenateScriptTagIn(htmlContents, fileName);
-            List<string> finalHtmlFileContent = ConcatenateScriptTagIn(htmlContents, Path.GetFileName(HtmlFilePath));
-
-
-            //File.WriteAllLines(Path.Combine(_reportTargetDirectory, fileName), finalHtmlFileContent);
-            File.WriteAllLines(HtmlFilePath, finalHtmlFileContent);
-
-        }
-
         private protected override void CreateJavaScriptFile()
         {
             string fileName = $"{GetFileName()}.js";
 
-            string jsFilePath = Path.Combine(FileServiceProvider.ReportScriptsDirectory, $"{GetTemplateFileName()}.js");
+            string jsFilePath = Path.Combine(FileServiceProvider.ReportScriptsDirectory, $"{TemplateFileName}.js");
             string[] jsContents = File.ReadAllLines(jsFilePath);
 
             string finalJavaScriptFileContent = ConcatenateJsonContentIn(jsContents);

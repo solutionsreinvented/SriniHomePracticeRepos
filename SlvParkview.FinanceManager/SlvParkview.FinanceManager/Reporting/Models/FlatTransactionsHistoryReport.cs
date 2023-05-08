@@ -22,8 +22,6 @@ namespace SlvParkview.FinanceManager.Reporting.Models
     {
         #region Private Fields
 
-        private const string _fileName = "Transactions History";
-
         private readonly Block _block;
 
         private readonly Flat _flat;
@@ -65,6 +63,9 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         [JsonProperty]
         public List<TransactionInfo> Transactions { get => Get<List<TransactionInfo>>(); private set => Set(value); }
+
+        /// Exercise cuation while changing this string. This string is used to access the linked js files.
+        private protected override string TemplateFileName => "Transactions History";
 
         #endregion
 
@@ -115,27 +116,11 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             }
         }
 
-        private protected override void CreateHtmlFile()
-        {
-            base.CreateHtmlFile();
-            //string fileName = $"{GetFileName()}.html";
-
-            string[] htmlContents = File.ReadAllLines(Path.Combine(FileServiceProvider.ReportTemplatesDirectory, $"{_fileName}.html"));
-
-            //List<string> finalHtmlFileContent = ConcatenateScriptTagIn(htmlContents, fileName);
-            List<string> finalHtmlFileContent = ConcatenateScriptTagIn(htmlContents, Path.GetFileName(HtmlFilePath));
-
-
-            //File.WriteAllLines(Path.Combine(_reportTargetDirectory, fileName), finalHtmlFileContent);
-            File.WriteAllLines(HtmlFilePath, finalHtmlFileContent);
-
-        }
-
         private protected override void CreateJavaScriptFile()
         {
             string fileName = $"{GetFileName()}.js";
 
-            string jsFilePath = Path.Combine(FileServiceProvider.ReportScriptsDirectory, $"{_fileName}.js");
+            string jsFilePath = Path.Combine(FileServiceProvider.ReportScriptsDirectory, $"{TemplateFileName}.js");
             string[] jsContents = File.ReadAllLines(jsFilePath);
 
             string finalJavaScriptFileContent = ConcatenateJsonContentIn(jsContents);
@@ -157,7 +142,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         private protected override string GetFileName()
         {
-            return $"{_fileName} ({_reportTill:dd MMM yyyy})";
+            return $"{TemplateFileName} ({_reportTill:dd MMM yyyy})";
         }
 
         #endregion
