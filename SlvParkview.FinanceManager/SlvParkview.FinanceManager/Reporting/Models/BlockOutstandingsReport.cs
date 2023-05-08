@@ -130,18 +130,6 @@ namespace SlvParkview.FinanceManager.Reporting.Models
             }
         }
 
-        private protected override void CreateJavaScriptFile()
-        {
-            string fileName = $"{GetFileName()}.js";
-
-            string jsFilePath = Path.Combine(FileServiceProvider.ReportScriptsDirectory, $"{TemplateFileName}.js");
-            string[] jsContents = File.ReadAllLines(jsFilePath);
-
-            string finalJavaScriptFileContent = ConcatenateJsonContentIn(jsContents);
-
-            File.WriteAllText(Path.Combine(_reportTargetDirectory, fileName), finalJavaScriptFileContent);
-        }
-
         private string StripNumberFormat(string value)
         {
             string unformattedString = value;
