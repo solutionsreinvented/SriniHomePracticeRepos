@@ -61,6 +61,7 @@ namespace SlvParkview.FinanceManager.Reporting.Models.Base
                 CreateRequiredDirectories();
                 CreateJavaScriptFile();
                 CreateHtmlFile();
+                CreatePdfFromHtml();
 
                 _ = MessageBox.Show("Report generated successfully!!!", "Generate report", MessageBoxButton.OK);
             }
@@ -165,6 +166,14 @@ namespace SlvParkview.FinanceManager.Reporting.Models.Base
         }
 
         #endregion
+
+        private protected virtual void CreatePdfFromHtml()
+        {
+            string htmlFilePath = Path.Combine(_reportTargetDirectory, $"{GetFileName()}.html");
+            string pdfFilePath = Path.Combine(_reportTargetDirectory, $"{GetFileName()}.pdf");
+
+
+        }
 
     }
 }
