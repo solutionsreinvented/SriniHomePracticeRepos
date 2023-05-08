@@ -19,12 +19,11 @@ namespace Flexture.GeometricCalculations
             base.OnStartup(e);
 
             /// Create and show the SplashScreen
+            SplashScreenView splashScreenView = new SplashScreenView() { DataContext = new SplashScreenViewModel(splashTimer) };
+            splashScreenView.Show();
 
             /// Create a timer to close the SplashScreen after the specified time
             Timer splashTimer = new Timer(3000);
-
-            SplashScreenView splashScreenView = new SplashScreenView() { DataContext = new SplashScreenViewModel(splashTimer) };
-            splashScreenView.Show();
 
             splashTimer.Elapsed += (sender, args) =>
             {
