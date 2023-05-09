@@ -119,13 +119,7 @@ C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManage
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Reporting\Components\PenaltiesControl.g.cs
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\FlatExpensesControl.baml
 C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\FlatPaymentsControl.baml
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Slv Parkview Finance Manager.exe.config
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Slv Parkview Finance Manager.exe.manifest
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Slv Parkview Finance Manager.application
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Slv Parkview Finance Manager.exe
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Slv Parkview Finance Manager.pdb
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Newtonsoft.Json.dll
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Newtonsoft.Json.xml
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.csproj.AssemblyReference.cache
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\EditViewNavigationButtonsControl.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\FlatNavigationControl.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\MenuControl.baml
@@ -141,7 +135,6 @@ C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvPa
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Resources\OverridingStyles.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Resources\Settings.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Resources\Styles.baml
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReportViewerView.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\App.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\EditExpenseControl.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\EditPaymentControl.g.cs
@@ -174,9 +167,27 @@ C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvPa
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReportViewerView.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\SummaryView.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\App.g.cs
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager_Content.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager_MarkupCompile.cache
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager_MarkupCompile.lref
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\runtimes\win-x86\native\WebView2Loader.dll
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\runtimes\win-x64\native\WebView2Loader.dll
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\runtimes\win-arm64\native\WebView2Loader.dll
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Slv Parkview Finance Manager.exe.config
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Slv Parkview Finance Manager.exe.manifest
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Slv Parkview Finance Manager.application
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Slv Parkview Finance Manager.exe
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Slv Parkview Finance Manager.pdb
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Microsoft.Web.WebView2.Core.dll
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Microsoft.Web.WebView2.WinForms.dll
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Microsoft.Web.WebView2.Wpf.dll
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Newtonsoft.Json.dll
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Microsoft.Web.WebView2.Core.xml
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Microsoft.Web.WebView2.WinForms.xml
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Microsoft.Web.WebView2.Wpf.xml
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Newtonsoft.Json.xml
+C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Views\ReportViewerView.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\EditExpenseControl.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\EditPaymentControl.baml
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Components\FlatDetailControl.baml
@@ -204,92 +215,3 @@ C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvPa
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.csproj.CopyComplete
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager.exe
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager.pdb
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.csproj.AssemblyReference.cache
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\CefSharp.Core.Runtime.dll
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\CefSharp.Core.Runtime.pdb
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\CefSharp.Core.Runtime.xml
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\chrome_100_percent.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\chrome_200_percent.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\chrome_elf.dll
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\d3dcompiler_47.dll
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\icudtl.dat
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\libcef.dll
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\libEGL.dll
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\libGLESv2.dll
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\LICENSE.txt
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\af.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\am.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\ar.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\bg.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\bn.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\ca.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\cs.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\da.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\de.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\el.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\en-GB.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\en-US.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\es-419.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\es.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\et.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\fa.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\fi.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\fil.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\fr.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\gu.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\he.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\hi.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\hr.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\hu.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\id.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\it.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\ja.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\kn.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\ko.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\lt.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\lv.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\ml.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\mr.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\ms.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\nb.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\nl.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\pl.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\pt-BR.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\pt-PT.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\ro.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\ru.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\sk.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\sl.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\sr.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\sv.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\sw.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\ta.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\te.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\th.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\tr.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\uk.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\ur.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\vi.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\zh-CN.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\locales\zh-TW.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\README.txt
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\resources.pak
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\snapshot_blob.bin
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\v8_context_snapshot.bin
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\vk_swiftshader.dll
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\vk_swiftshader_icd.json
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\vulkan-1.dll
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\CefSharp.BrowserSubprocess.Core.dll
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\CefSharp.BrowserSubprocess.Core.pdb
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\CefSharp.BrowserSubprocess.exe
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\CefSharp.BrowserSubprocess.pdb
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\CefSharp.Core.dll
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\CefSharp.dll
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\CefSharp.Wpf.dll
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\CefSharp.pdb
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\CefSharp.xml
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\CefSharp.Core.pdb
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\CefSharp.Core.xml
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\CefSharp.Wpf.pdb
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\CefSharp.Wpf.xml
-C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager_Content.g.cs

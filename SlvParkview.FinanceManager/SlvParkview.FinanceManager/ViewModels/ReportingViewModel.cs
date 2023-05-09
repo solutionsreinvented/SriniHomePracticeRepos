@@ -54,21 +54,21 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         #region Read-only Properties
 
-        public List<TransactionInfo> TransactionsSummary
-        {
-            get => Get<List<TransactionInfo>>();
-            private set => Set(value);
-        }
+        //public List<TransactionInfo> TransactionsSummary
+        //{
+        //    get => Get<List<TransactionInfo>>();
+        //    private set => Set(value);
+        //}
 
         #endregion
 
         #region Public Commands
 
-        public ICommand AddExpenseCommand { get => Get<ICommand>(); set => Set(value); }
+        //public ICommand AddExpenseCommand { get => Get<ICommand>(); set => Set(value); }
 
-        public ICommand AddPaymentCommand { get => Get<ICommand>(); set => Set(value); }
+        //public ICommand AddPaymentCommand { get => Get<ICommand>(); set => Set(value); }
 
-        public ICommand AddCommonExpenseCommand { get => Get<ICommand>(); set => Set(value); }
+        //public ICommand AddCommonExpenseCommand { get => Get<ICommand>(); set => Set(value); }
 
         public ICommand GenerateReportCommand { get => Get<ICommand>(); set => Set(value); }
 
@@ -91,7 +91,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void OnShowReport()
         {
-            ReportViewerViewModel reportViewerViewModel = new ReportViewerViewModel(_summaryViewModel, _navigationService, CurrentReportViewModel.Report);
+            ReportViewerViewModel reportViewerViewModel = new ReportViewerViewModel(this, _navigationService);
             _navigationService.CurrentViewModel = reportViewerViewModel;
         }
 

@@ -2,26 +2,51 @@
     x:Class="SlvParkview.FinanceManager.Views.ReportViewerView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:ap="clr-namespace:SlvParkview.FinanceManager.AttachedProperties"
-    xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:theme="http://schemas.reinvented.com/ui/themes"
+    xmlns:wv="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
     d:DesignHeight="{StaticResource ViewHeight}"
     d:DesignWidth="{StaticResource ViewWidth}"
     Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
     Style="{StaticResource ViewStyle}"
     mc:Ignorable="d">
 
-    <UserControl.Resources>
-        <Style TargetType="{x:Type cef:ChromiumWebBrowser}">
-            <Setter Property="Background" Value="Red" />
-            <Setter Property="Foreground" Value="White" />
-        </Style>
-    </UserControl.Resources>
-
     <Grid>
-        <Border Style="{StaticResource BorderEffectStyle}" />
-        <cef:ChromiumWebBrowser Margin="10" Address="{Binding HtmlFileFullPath}" />
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Background="#EEEDE7"
+            Style="{StaticResource BorderEffectStyle}" />
+
+
+        <Button
+            Margin="5,10"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="Transparent"
+            BorderThickness="0"
+            Command="{Binding GoBackCommand}"
+            Content="Back"
+            FontWeight="Bold"
+            Foreground="Black" />
+
+        <Border
+            Grid.Row="1"
+            Margin="50,10"
+            Background="#EEEDE7"
+            BorderBrush="#E2DED0"
+            BorderThickness="1.5"
+            CornerRadius="4">
+            <wv:WebView2 DefaultBackgroundColor="Transparent" Source="{Binding HtmlFileFullPath}" />
+        </Border>
+
     </Grid>
+
 </UserControl>
