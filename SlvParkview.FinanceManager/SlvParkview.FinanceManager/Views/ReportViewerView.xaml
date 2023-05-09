@@ -2,6 +2,7 @@
     x:Class="SlvParkview.FinanceManager.Views.ReportViewerView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ap="clr-namespace:SlvParkview.FinanceManager.AttachedProperties"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:theme="http://schemas.reinvented.com/ui/themes"
@@ -44,7 +45,10 @@
             BorderBrush="#E2DED0"
             BorderThickness="1.5"
             CornerRadius="4">
-            <wv:WebView2 DefaultBackgroundColor="Transparent" Source="{Binding HtmlFileFullPath}" />
+            <wv:WebView2
+                ap:WebView2Properties.DisposeOnUnloaded="True"
+                ap:WebView2Properties.NullableSource="{Binding HtmlFileFullPath}"
+                DefaultBackgroundColor="Transparent" />
         </Border>
 
     </Grid>

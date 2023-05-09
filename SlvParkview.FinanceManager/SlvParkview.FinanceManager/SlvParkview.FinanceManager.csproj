@@ -113,6 +113,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AttachedProperties\WebView2Properties.cs" />
     <Compile Include="Components\EditExpenseControl.xaml.cs">
       <DependentUpon>EditExpenseControl.xaml</DependentUpon>
     </Compile>
@@ -473,7 +474,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Libraries\" />
-    <Folder Include="AttachedProperties\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Images\reports-light.png" />

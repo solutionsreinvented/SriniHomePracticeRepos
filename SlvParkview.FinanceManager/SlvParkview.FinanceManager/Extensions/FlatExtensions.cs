@@ -1,5 +1,4 @@
 ﻿using SlvParkview.FinanceManager.Models;
-using SlvParkview.FinanceManager.Reporting;
 using SlvParkview.FinanceManager.Reporting.Models;
 using SlvParkview.FinanceManager.Services;
 

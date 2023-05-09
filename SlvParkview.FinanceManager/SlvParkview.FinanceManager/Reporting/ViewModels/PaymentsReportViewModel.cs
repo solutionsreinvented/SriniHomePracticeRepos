@@ -14,8 +14,7 @@ namespace SlvParkview.FinanceManager.Reporting.ViewModels
     {
         #region Parameterized Constructor
 
-        public PaymentsReportViewModel(SummaryViewModel summaryViewModel, NavigationService navigationService)
-            : base(summaryViewModel, navigationService)
+        public PaymentsReportViewModel(SummaryViewModel summaryViewModel, NavigationService navigationService) : base(summaryViewModel, navigationService)
         {
 
         }

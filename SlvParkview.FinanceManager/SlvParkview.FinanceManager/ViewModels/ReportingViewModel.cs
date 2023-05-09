@@ -1,9 +1,7 @@
 ﻿using ReInvented.Shared.Commands;
-using System.Collections.Generic;
 using System.Windows.Input;
 using SlvParkview.FinanceManager.Services;
 using SlvParkview.FinanceManager.Enums;
-using SlvParkview.FinanceManager.Reporting.Models;
 using SlvParkview.FinanceManager.Reporting.ViewModels;
 using SlvParkview.FinanceManager.Factories;
 
@@ -52,23 +50,7 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         #endregion
 
-        #region Read-only Properties
-
-        //public List<TransactionInfo> TransactionsSummary
-        //{
-        //    get => Get<List<TransactionInfo>>();
-        //    private set => Set(value);
-        //}
-
-        #endregion
-
         #region Public Commands
-
-        //public ICommand AddExpenseCommand { get => Get<ICommand>(); set => Set(value); }
-
-        //public ICommand AddPaymentCommand { get => Get<ICommand>(); set => Set(value); }
-
-        //public ICommand AddCommonExpenseCommand { get => Get<ICommand>(); set => Set(value); }
 
         public ICommand GenerateReportCommand { get => Get<ICommand>(); set => Set(value); }
 
