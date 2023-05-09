@@ -493,6 +493,12 @@
   <ItemGroup>
     <Resource Include="Assets\Images\payment-light.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\return.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\view-report.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

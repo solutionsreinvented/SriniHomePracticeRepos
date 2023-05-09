@@ -28,15 +28,26 @@
 
 
         <Button
-            Margin="5,10"
+            Margin="10,10"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Background="Transparent"
             BorderThickness="0"
             Command="{Binding GoBackCommand}"
-            Content="Back"
             FontWeight="Bold"
-            Foreground="Black" />
+            Foreground="Black">
+            <StackPanel Orientation="Horizontal">
+                <Image
+                    Height="18"
+                    VerticalAlignment="Center"
+                    Source="/Assets/Images/return.png" />
+                <TextBlock
+                    Margin="5,0,0,0"
+                    VerticalAlignment="Center"
+                    Text="Back" />
+            </StackPanel>
+
+        </Button>
 
         <Border
             Grid.Row="1"
