@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="http://schemas.reinvented.com/shared"
     xmlns:theme="http://schemas.reinvented.com/ui/themes"
+    x:Name="Root"
     d:DesignHeight="{StaticResource ViewHeight}"
     d:DesignWidth="{StaticResource ViewWidth}"
     Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
@@ -112,13 +113,13 @@
                     Margin="5,0,0,0"
                     HorizontalAlignment="Left"
                     Command="{Binding ShowReportCommand}"
-                    IsEnabled="{Binding ReportGenerated}">
+                    IsEnabled="{Binding DataContext.CurrentReportViewModel.Report.ReportIsGenerated, ElementName=Root}">
                     <StackPanel Orientation="Horizontal">
                         <Image
                             Height="18"
                             Margin="0,0,5,0"
                             Source="/Assets/Images/view-report.png" />
-                        <TextBlock VerticalAlignment="Center" Text="View Report" />
+                        <TextBlock VerticalAlignment="Center" Text="View HTML Report" />
                     </StackPanel>
                 </Button>
             </StackPanel>

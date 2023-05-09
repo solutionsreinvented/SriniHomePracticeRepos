@@ -1,19 +1,24 @@
-﻿using SlvParkview.FinanceManager.Services;
+﻿using SlvParkview.FinanceManager.Reporting.Interfaces;
+using SlvParkview.FinanceManager.Services;
 
 namespace SlvParkview.FinanceManager.ViewModels
 {
     public class ReportViewerViewModel : BaseViewModel
     {
-        private SummaryViewModel _sender;
-        private NavigationService _navigationService;
+        private readonly SummaryViewModel _summaryViewModel;
+        private readonly NavigationService _navigationService;
 
-        public ReportViewerViewModel(SummaryViewModel sender, NavigationService navigationService, string reportFileFullPath)
+        public ReportViewerViewModel(SummaryViewModel sender, NavigationService navigationService, IReport report)
         {
-            _sender = sender;
+            _summaryViewModel = sender;
             _navigationService = navigationService;
-            ReportFileFullPath = reportFileFullPath;
+
+            Report = report;
         }
 
-        public string ReportFileFullPath { get => Get<string>(); set => Set(value); }
+        public IReport Report { get => Get<IReport>(); private set { Set(value); RaisePropertyChanged(nameof(HtmlFileFullPath)); } }
+
+        public string HtmlFileFullPath => Report.HtmlFilePath;
+
     }
 }

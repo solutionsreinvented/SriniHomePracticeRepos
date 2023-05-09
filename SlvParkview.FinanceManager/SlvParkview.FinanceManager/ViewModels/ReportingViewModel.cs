@@ -16,8 +16,6 @@ namespace SlvParkview.FinanceManager.ViewModels
     {
         #region Private Fields
 
-        ///private readonly string _reportTargetDirectory;
-
         private readonly SummaryViewModel _summaryViewModel;
 
         private readonly NavigationService _navigationService;
@@ -62,8 +60,6 @@ namespace SlvParkview.FinanceManager.ViewModels
             private set => Set(value);
         }
 
-        public bool ReportGenerated { get => Get<bool>(); private set => Set(value); }
-
         #endregion
 
         #region Public Commands
@@ -91,14 +87,11 @@ namespace SlvParkview.FinanceManager.ViewModels
         private void OnGenerateReport()
         {
             CurrentReportViewModel.Report.SaveReport();
-            ReportGenerated = true;
         }
 
         private void OnShowReport()
         {
-            string htmlFilePath = CurrentReportViewModel.Report.HtmlFilePath;
-
-            ReportViewerViewModel reportViewerViewModel = new ReportViewerViewModel(_summaryViewModel, _navigationService, htmlFilePath);
+            ReportViewerViewModel reportViewerViewModel = new ReportViewerViewModel(_summaryViewModel, _navigationService, CurrentReportViewModel.Report);
             _navigationService.CurrentViewModel = reportViewerViewModel;
         }
 
@@ -108,8 +101,6 @@ namespace SlvParkview.FinanceManager.ViewModels
 
         private void Initialize()
         {
-            ReportGenerated = false;
-
             GenerateReportCommand = new RelayCommand(OnGenerateReport, true);
             ShowReportCommand = new RelayCommand(OnShowReport, true);
             GoToSummaryCommand = new RelayCommand(OnGoToSummary, true);

@@ -24,8 +24,6 @@ namespace SlvParkview.FinanceManager.Reporting.Models
     {
         #region Private Fields
 
-        private readonly Block _block;
-
         private readonly DateTime _reportTill;
 
         #endregion

@@ -19,8 +19,6 @@ namespace SlvParkview.FinanceManager.Reporting.Models
     {
         #region Private Fields
 
-        private protected readonly Block _block;
-
         private protected readonly IReportOptions _reportOptions;
 
         #endregion

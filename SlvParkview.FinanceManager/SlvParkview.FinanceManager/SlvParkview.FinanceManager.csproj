@@ -116,6 +116,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AttachedProperties\ChromiumWebBrowserProperties.cs" />
     <Compile Include="AttachedProperties\WebBrowserAttachedProperties.cs" />
     <Compile Include="Components\EditExpenseControl.xaml.cs">
       <DependentUpon>EditExpenseControl.xaml</DependentUpon>

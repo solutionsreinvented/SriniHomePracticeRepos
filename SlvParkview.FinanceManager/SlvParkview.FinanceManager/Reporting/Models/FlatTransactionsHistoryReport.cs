@@ -22,8 +22,6 @@ namespace SlvParkview.FinanceManager.Reporting.Models
     {
         #region Private Fields
 
-        private readonly Block _block;
-
         private readonly Flat _flat;
 
         private readonly DateTime _reportTill;
@@ -41,18 +39,12 @@ namespace SlvParkview.FinanceManager.Reporting.Models
 
         #region Parameterized Constructor
 
-        public FlatTransactionsHistoryReport(Block block, Flat flat, DateTime reportTill)
+        public FlatTransactionsHistoryReport(Block block, Flat flat, DateTime reportTill) : base()
         {
             _block = block;
             _flat = flat;
             _reportTill = reportTill;
         }
-
-        ///public FlatTransactionsHistoryReport(Flat flat, DateTime reportTill)
-        ///{
-        ///    _flat = flat;
-        ///    _reportTill = reportTill;
-        ///}
 
         #endregion
 
@@ -92,7 +84,6 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         #endregion
 
         #region Private Helper Methods
-
         private protected override void CreateRequiredDirectories()
         {
             base.CreateRequiredDirectories();
@@ -115,11 +106,9 @@ namespace SlvParkview.FinanceManager.Reporting.Models
                 _ = Directory.CreateDirectory(_reportTargetDirectory);
             }
         }
-
         #endregion
 
         #region Private Helper Functions
-
         private protected override string GetSerializedData()
         {
             IDataSerializer<FlatTransactionsHistoryReport> serializer = new JsonDataSerializer<FlatTransactionsHistoryReport>();
@@ -131,7 +120,6 @@ namespace SlvParkview.FinanceManager.Reporting.Models
         {
             return $"{TemplateFileName} ({_reportTill:dd MMM yyyy})";
         }
-
         #endregion
 
     }

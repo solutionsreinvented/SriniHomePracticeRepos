@@ -22,7 +22,6 @@
 
     <Grid>
         <Border Style="{StaticResource BorderEffectStyle}" />
-        <cef:ChromiumWebBrowser Margin="10" Address="{Binding ReportFileFullPath}" />
-        <!--<WebBrowser  Margin="10" ap:WebBrowserAttachedProperties.HtmlFilePath="{Binding ReportFileFullPath}" />-->
+        <cef:ChromiumWebBrowser Margin="10" Address="{Binding HtmlFileFullPath}" />
     </Grid>
 </UserControl>
