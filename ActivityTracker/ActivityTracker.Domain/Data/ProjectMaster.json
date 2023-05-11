@@ -663,6 +663,205 @@
           "ScheduledCompletion": "2023-05-04T00:00:00"
         }
       ]
+    },
+    {
+      "$id": "47",
+      "$type": "ActivityTracker.Domain.Models.Order, ActivityTracker.Domain",
+      "Type": 1,
+      "Code": "23-4059",
+      "Name": "Yanacocha Pin Bed Clarifier (12m)",
+      "Activities": [
+        {
+          "$id": "48",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "49",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Material Take Off",
+              "Material Take Off - Alternative Sections",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Staad Modeling",
+          "Structure": "Complete Thickener",
+          "InitiatedOn": "2023-05-11T00:00:00+05:30",
+          "AllocatedHours": 9.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "ORD-23-4059-11-601-668-918",
+          "Project": {
+            "$ref": "47"
+          },
+          "ScheduledCompletion": "2023-05-12T00:00:00+05:30"
+        },
+        {
+          "$id": "50",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "51",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Material Take Off",
+              "Material Take Off - Alternative Sections",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Loads Application",
+          "Structure": "Complete Thickener",
+          "InitiatedOn": "2023-05-12T00:00:00",
+          "AllocatedHours": 9.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "ORD-23-4059-11-601-855-918",
+          "Project": {
+            "$ref": "47"
+          },
+          "ScheduledCompletion": "2023-05-15T00:00:00"
+        },
+        {
+          "$id": "52",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "53",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Material Take Off",
+              "Material Take Off - Alternative Sections",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Analysis and Design",
+          "Structure": "Complete Thickener",
+          "InitiatedOn": "2023-05-15T00:00:00",
+          "AllocatedHours": 9.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "ORD-23-4059-11-601-897-918",
+          "Project": {
+            "$ref": "47"
+          },
+          "ScheduledCompletion": "2023-05-16T00:00:00"
+        },
+        {
+          "$id": "54",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "55",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Material Take Off",
+              "Material Take Off - Alternative Sections",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Foundation Load Data",
+          "Structure": "Complete Thickener",
+          "InitiatedOn": "2023-05-16T00:00:00",
+          "AllocatedHours": 9.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "ORD-23-4059-11-601-913-918",
+          "Project": {
+            "$ref": "47"
+          },
+          "ScheduledCompletion": "2023-05-17T00:00:00"
+        },
+        {
+          "$id": "56",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "57",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Material Take Off",
+              "Material Take Off - Alternative Sections",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report"
+            ]
+          },
+          "SubCategory": "Base Plates Design",
+          "Structure": "Complete Thickener",
+          "InitiatedOn": "2023-05-17T00:00:00",
+          "AllocatedHours": 9.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "ORD-23-4059-11-601-798-918",
+          "Project": {
+            "$ref": "47"
+          },
+          "ScheduledCompletion": "2023-05-18T00:00:00"
+        },
+        {
+          "$id": "58",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "59",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Non Structural",
+            "SubCategories": [
+              "Preamble"
+            ]
+          },
+          "SubCategory": "Preamble",
+          "Structure": "Complete Thickener",
+          "InitiatedOn": "2023-05-18T00:00:00",
+          "AllocatedHours": 9.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "ORD-23-4059-11-740-424-918",
+          "Project": {
+            "$ref": "47"
+          },
+          "ScheduledCompletion": "2023-05-19T00:00:00"
+        }
+      ]
     }
   ]
 }
