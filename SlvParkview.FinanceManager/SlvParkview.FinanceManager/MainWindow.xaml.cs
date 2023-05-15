@@ -14,7 +14,11 @@ namespace SlvParkview.FinanceManager
 
         private void OnMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            DragMove();
+            if (!(e.RightButton == System.Windows.Input.MouseButtonState.Pressed))
+            {
+                DragMove();
+            }
+
         }
     }
 }

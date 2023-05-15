@@ -726,7 +726,7 @@
           },
           "SubCategory": "Loads Application",
           "Structure": "Complete Thickener",
-          "InitiatedOn": "2023-05-12T00:00:00",
+          "InitiatedOn": "2023-05-15T00:00:00",
           "AllocatedHours": 9.0,
           "AllocatedResources": [],
           "CurrentStatus": 0,
@@ -735,7 +735,7 @@
           "Project": {
             "$ref": "47"
           },
-          "ScheduledCompletion": "2023-05-15T00:00:00"
+          "ScheduledCompletion": "2023-05-16T00:00:00"
         },
         {
           "$id": "52",
@@ -759,7 +759,7 @@
           },
           "SubCategory": "Analysis and Design",
           "Structure": "Complete Thickener",
-          "InitiatedOn": "2023-05-15T00:00:00",
+          "InitiatedOn": "2023-05-16T00:00:00",
           "AllocatedHours": 9.0,
           "AllocatedResources": [],
           "CurrentStatus": 0,
@@ -768,7 +768,7 @@
           "Project": {
             "$ref": "47"
           },
-          "ScheduledCompletion": "2023-05-16T00:00:00"
+          "ScheduledCompletion": "2023-05-17T00:00:00"
         },
         {
           "$id": "54",
@@ -792,7 +792,7 @@
           },
           "SubCategory": "Foundation Load Data",
           "Structure": "Complete Thickener",
-          "InitiatedOn": "2023-05-16T00:00:00",
+          "InitiatedOn": "2023-05-17T00:00:00",
           "AllocatedHours": 9.0,
           "AllocatedResources": [],
           "CurrentStatus": 0,
@@ -801,7 +801,7 @@
           "Project": {
             "$ref": "47"
           },
-          "ScheduledCompletion": "2023-05-17T00:00:00"
+          "ScheduledCompletion": "2023-05-18T00:00:00"
         },
         {
           "$id": "56",
@@ -825,7 +825,7 @@
           },
           "SubCategory": "Base Plates Design",
           "Structure": "Complete Thickener",
-          "InitiatedOn": "2023-05-17T00:00:00",
+          "InitiatedOn": "2023-05-18T00:00:00",
           "AllocatedHours": 9.0,
           "AllocatedResources": [],
           "CurrentStatus": 0,
@@ -834,7 +834,7 @@
           "Project": {
             "$ref": "47"
           },
-          "ScheduledCompletion": "2023-05-18T00:00:00"
+          "ScheduledCompletion": "2023-05-19T00:00:00"
         },
         {
           "$id": "58",
@@ -850,7 +850,7 @@
           },
           "SubCategory": "Preamble",
           "Structure": "Complete Thickener",
-          "InitiatedOn": "2023-05-18T00:00:00",
+          "InitiatedOn": "2023-05-19T00:00:00",
           "AllocatedHours": 9.0,
           "AllocatedResources": [],
           "CurrentStatus": 0,
@@ -859,7 +859,50 @@
           "Project": {
             "$ref": "47"
           },
-          "ScheduledCompletion": "2023-05-19T00:00:00"
+          "ScheduledCompletion": "2023-05-22T00:00:00"
+        }
+      ]
+    },
+    {
+      "$id": "60",
+      "$type": "ActivityTracker.Domain.Models.Order, ActivityTracker.Domain",
+      "Type": 1,
+      "Code": "22-2601",
+      "Name": "AMAK 13m Thickener",
+      "Activities": [
+        {
+          "$id": "61",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "62",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Material Take Off",
+              "Material Take Off - Alternative Sections",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report",
+              "Site Query - Technical Verification"
+            ]
+          },
+          "SubCategory": "Site Query - Technical Verification",
+          "Structure": "Complete Thickener",
+          "InitiatedOn": "2023-05-12T00:00:00+05:30",
+          "AllocatedHours": 9.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "ORD-22-2601-11-601-1590-918",
+          "Project": {
+            "$ref": "60"
+          },
+          "ScheduledCompletion": "2023-05-15T00:00:00+05:30"
         }
       ]
     }
