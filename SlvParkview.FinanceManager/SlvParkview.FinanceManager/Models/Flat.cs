@@ -306,12 +306,14 @@ namespace SlvParkview.FinanceManager.Models
             {
                 decimal outstanding = GetOutstandingBalanceOnSpecifiedDate(dates[i]);
 
-                Expense previousPenalty = Penalties?.FirstOrDefault(p => p.OccuredOn == dates[i - 1]);
+                // TODO: Below commented code block when enabled is resulting in addition of penalties to outstanding twice
+                //       and hence resulting in higher penalty. Check if this needs to be enabled later.
+                //Expense previousPenalty = Penalties?.FirstOrDefault(p => p.OccuredOn == dates[i - 1]);
 
-                if (previousPenalty != null)
-                {
-                    outstanding += previousPenalty.Amount;
-                }
+                //if (previousPenalty != null)
+                //{
+                //    outstanding += previousPenalty.Amount;
+                //}
 
                 if (outstanding >= block.MinimumOutstandingForPenalty)
                 {
