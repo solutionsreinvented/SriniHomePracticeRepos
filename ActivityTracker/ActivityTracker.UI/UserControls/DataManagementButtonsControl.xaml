@@ -19,7 +19,8 @@
             Width="150"
             Margin="5,0"
             Command="{Binding SaveProjectsMasterCommand}"
-            Content="Save Projects Master" />
+            Content="Save Projects Master"
+            IsEnabled="{Binding ProjectsLoaded}" />
     </StackPanel>
 
 </UserControl>

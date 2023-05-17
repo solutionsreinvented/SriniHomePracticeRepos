@@ -69,6 +69,9 @@ namespace ActivityTracker.UI.Base
         public bool ProjectIsSelected { get => Get<bool>(); private set => Set(value); }
 
         public bool ActivityIsSelected { get => Get<bool>(); private set => Set(value); }
+
+        public bool ProjectsLoaded { get => Get<bool>(); private set => Set(value); }
+
         #endregion
 
         #region Commands
@@ -90,6 +93,7 @@ namespace ActivityTracker.UI.Base
         private void OnLoadProjectsMaster()
         {
             ProjectMaster = ProjectMasterService.ReadFromFile();///.Retrieve();
+            ProjectsLoaded = true;
             RaiseMultiplePropertiesChanged(nameof(PreOrders), nameof(Orders), nameof(Developments));
         }
 
@@ -113,7 +117,7 @@ namespace ActivityTracker.UI.Base
 
         protected virtual void InitializeProperties()
         {
-
+            ProjectsLoaded = false;
             ActivityMaster = ActivityMasterService.ReadFromFile();
 
             LoadProjectsMasterCommand = new RelayCommand(OnLoadProjectsMaster, true);
