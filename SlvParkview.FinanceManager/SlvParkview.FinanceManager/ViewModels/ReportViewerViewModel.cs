@@ -21,7 +21,8 @@ namespace SlvParkview.FinanceManager.ViewModels
             _navigationService = navigationService;
 
             Report = sender.CurrentReportViewModel.Report;
-            HtmlFileFullPath = Report.HtmlFilePath;  //@"E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\Reports\Templates\Pages\api650.html"; //
+            HtmlFileFullPath = Report.HtmlFilePath;
+            //HtmlFileFullPath = @"E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\Reports\Templates\Pages\api650.html";
 
             Initialize();
         }
