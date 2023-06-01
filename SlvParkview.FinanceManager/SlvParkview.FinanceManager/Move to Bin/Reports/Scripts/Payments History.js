@@ -169,6 +169,10 @@ function populatePayments() {
         </tr>`;
 }
 
+// <td class="payment-mode">
+// <div>${payments[i].Mode}</div><div style="font-size: 0.55rem;">(${payments[i].ReferenceId})</div>
+// </td>
+
 // #endregion
 
 // #region Helper Functions

@@ -1,5 +1,5 @@
 {
-  "LastUpdated": "2023-05-26T08:55:18.6302126+05:30",
+  "LastUpdated": "2023-06-01T17:34:47.099346+05:30",
   "Name": "C",
   "Flats": [
     {
@@ -50,6 +50,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -126,6 +131,14 @@
           "Category": 1,
           "Amount": 2800.00,
           "ReferenceId": "8a96bf8287d4d5640187d576113e0573"
+        },
+        {
+          "Mode": 3,
+          "ReceivedOn": "2023-06-01T00:00:00+05:30",
+          "RecordedOn": "2023-06-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "8a96cc8288766e74018876c6d4640223"
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
@@ -181,6 +194,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -260,7 +278,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -314,6 +332,11 @@
           "OccuredOn": "2023-05-01T00:00:00",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -327,7 +350,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 11200.00,
-      "CurrentOutstanding": 11200.00,
+      "CurrentOutstanding": 14000.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -379,6 +402,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -458,7 +486,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -510,6 +538,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -589,7 +622,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -641,6 +674,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -720,7 +758,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -772,6 +810,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -832,6 +875,14 @@
           "Category": 1,
           "Amount": 2800.00,
           "ReferenceId": "312212943403"
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2023-06-01T00:00:00+05:30",
+          "RecordedOn": "2023-06-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "41244954782"
         }
       ],
       "OutstandingOnSpecifiedDate": 1.00,
@@ -889,6 +940,11 @@
           "OccuredOn": "2023-05-01T00:00:00",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -942,7 +998,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 5395.00,
-      "CurrentOutstanding": 5395.00,
+      "CurrentOutstanding": 8195.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -996,6 +1052,11 @@
           "OccuredOn": "2023-05-01T00:00:00",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -1025,7 +1086,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00,
+      "CurrentOutstanding": 5600.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -1077,6 +1138,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1156,7 +1222,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -1208,6 +1274,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1263,7 +1334,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00,
+      "CurrentOutstanding": 5600.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -1315,6 +1386,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1402,7 +1478,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -1454,6 +1530,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1533,7 +1614,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -1585,6 +1666,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1664,7 +1750,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -1716,6 +1802,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1784,6 +1875,14 @@
           "Category": 1,
           "Amount": 2800.00,
           "ReferenceId": "8a96c98287d621b40187d6bde29b4a4c"
+        },
+        {
+          "Mode": 3,
+          "ReceivedOn": "2023-06-01T00:00:00+05:30",
+          "RecordedOn": "2023-06-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "8a96cc8288766e74018876c84bb1045d"
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
@@ -1839,6 +1938,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -1918,7 +2022,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -1970,6 +2074,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -2041,7 +2150,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 2800.00,
-      "CurrentOutstanding": 2800.00,
+      "CurrentOutstanding": 5600.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -2093,6 +2202,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -2164,7 +2278,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -2216,6 +2330,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -2279,7 +2398,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -2333,6 +2452,11 @@
           "OccuredOn": "2023-05-01T00:00:00",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -2354,7 +2478,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 22500.00,
-      "CurrentOutstanding": 22500.00,
+      "CurrentOutstanding": 25300.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -2406,6 +2530,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -2485,7 +2614,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -2539,6 +2668,11 @@
           "OccuredOn": "2023-05-01T00:00:00",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -2584,7 +2718,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -2636,6 +2770,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -2715,7 +2854,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -2767,6 +2906,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -2843,6 +2987,14 @@
           "Category": 1,
           "Amount": 2800.00,
           "ReferenceId": "8a96a28287d57f920187d5d1d04b2ee1"
+        },
+        {
+          "Mode": 3,
+          "ReceivedOn": "2023-06-01T00:00:00+05:30",
+          "RecordedOn": "2023-06-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "8a968c8288766923018876cc614813e9"
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
@@ -2898,6 +3050,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -2969,7 +3126,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -3023,6 +3180,11 @@
           "OccuredOn": "2023-05-01T00:00:00",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -3044,7 +3206,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -3096,6 +3258,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -3151,7 +3318,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -3203,6 +3370,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -3282,7 +3454,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -3336,6 +3508,11 @@
           "OccuredOn": "2023-05-01T00:00:00",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -3381,7 +3558,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -3435,6 +3612,11 @@
           "OccuredOn": "2023-05-01T00:00:00",
           "Category": 1,
           "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00
         }
       ],
       "Payments": [
@@ -3448,7 +3630,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 20200.00,
-      "CurrentOutstanding": 20200.00,
+      "CurrentOutstanding": 23000.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -3500,6 +3682,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -3579,7 +3766,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
@@ -3631,6 +3818,11 @@
         },
         {
           "OccuredOn": "2023-05-01T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00
+        },
+        {
+          "OccuredOn": "2023-06-01T00:00:00+05:30",
           "Category": 1,
           "Amount": 2800.00
         }
@@ -3710,7 +3902,7 @@
         }
       ],
       "OutstandingOnSpecifiedDate": 0.00,
-      "CurrentOutstanding": 0.00,
+      "CurrentOutstanding": 2800.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     }
