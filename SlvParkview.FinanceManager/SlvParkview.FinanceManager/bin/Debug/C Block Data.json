@@ -1,5 +1,5 @@
 {
-  "LastUpdated": "2023-06-06T08:56:30.5435836+05:30",
+  "LastUpdated": "2023-06-06T11:36:37.2148576+05:30",
   "Name": "C",
   "Flats": [
     {
@@ -1003,10 +1003,18 @@
           "Category": 1,
           "Amount": 2800.00,
           "ReferenceId": "T2303050902467074566195"
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2023-06-06T00:00:00+05:30",
+          "RecordedOn": "2023-06-06T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "T2306061133152253120381"
         }
       ],
-      "OutstandingOnSpecifiedDate": 8195.00,
-      "CurrentOutstanding": 8195.00,
+      "OutstandingOnSpecifiedDate": 5395.00,
+      "CurrentOutstanding": 5395.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
