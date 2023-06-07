@@ -215,3 +215,13 @@ C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvPa
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\SlvParkview.FinanceManager.csproj.CopyComplete
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager.exe
 C:\Users\masanams\source\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager.pdb
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\runtimes\win-x86\native\WebView2Loader.dll
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\runtimes\win-x64\native\WebView2Loader.dll
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\runtimes\win-arm64\native\WebView2Loader.dll
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Microsoft.Web.WebView2.Core.dll
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Microsoft.Web.WebView2.WinForms.dll
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Microsoft.Web.WebView2.Wpf.dll
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Microsoft.Web.WebView2.Core.xml
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Microsoft.Web.WebView2.WinForms.xml
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\Microsoft.Web.WebView2.Wpf.xml
+C:\Users\srini\source\repos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\obj\Debug\Slv Parkview Finance Manager_Content.g.cs

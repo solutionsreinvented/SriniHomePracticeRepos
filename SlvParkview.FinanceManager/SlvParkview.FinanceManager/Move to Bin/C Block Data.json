@@ -1,5 +1,5 @@
 {
-  "LastUpdated": "2023-06-06T11:36:37.2148576+05:30",
+  "LastUpdated": "2023-06-08T00:30:13.0044329+05:30",
   "Name": "C",
   "Flats": [
     {
@@ -1011,10 +1011,26 @@
           "Category": 1,
           "Amount": 2800.00,
           "ReferenceId": "T2306061133152253120381"
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2023-04-05T00:00:00",
+          "RecordedOn": "2023-06-08T00:00:00+05:30",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "T2304051706320386922754"
+        },
+        {
+          "Mode": 1,
+          "ReceivedOn": "2023-05-06T00:00:00",
+          "RecordedOn": "2023-05-06T00:00:00",
+          "Category": 1,
+          "Amount": 2800.00,
+          "ReferenceId": "T2305061712034797806854"
         }
       ],
-      "OutstandingOnSpecifiedDate": 5395.00,
-      "CurrentOutstanding": 5395.00,
+      "OutstandingOnSpecifiedDate": -205.00,
+      "CurrentOutstanding": -205.00,
       "PenaltyTillSpecifiedDate": 0.0,
       "CurrentTotalPenalty": 0.0
     },
