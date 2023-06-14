@@ -1,0 +1,131 @@
+﻿<UserControl
+    x:Class="StockAnalyzer.Controls.ScripFilteringCriteriaControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <!--#region Processing Input-->
+
+    <Grid>
+
+        <!--#region Grid Definitions-->
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <!--#endregion-->
+
+        <!--#region File Selection-->
+
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="0,10"
+            Text="Choose stock data file:" />
+
+        <Grid
+            Grid.Row="0"
+            Grid.Column="2"
+            Grid.ColumnSpan="2"
+            Margin="2,5">
+            <TextBox
+                Padding="5,2"
+                IsEnabled="False"
+                Text="{Binding FilePath}" />
+
+            <Button
+                Margin="2"
+                Padding="5,0"
+                HorizontalAlignment="Right"
+                Command="{Binding GetFilePathCommand}"
+                Content="..." />
+        </Grid>
+
+        <!--#endregion-->
+
+        <!--#region Range Selection-->
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="2,10"
+            Text="Minimum value of the scrip: " />
+
+        <TextBox
+            Grid.Row="1"
+            Grid.Column="3"
+            Margin="2,5"
+            Padding="5,2"
+            shared:TextBoxProperties.SelectAll="True"
+            Text="{Binding MinimumValue, UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="2,10"
+            Text="Maximum value of the scrip: " />
+
+        <TextBox
+            Grid.Row="2"
+            Grid.Column="3"
+            Margin="2,5"
+            Padding="5,2"
+            shared:TextBoxProperties.SelectAll="True"
+            Text="{Binding MaximumValue, UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="1"
+            Margin="2,10"
+            Text="Maximum number of scrips to be listed: " />
+
+        <TextBox
+            Grid.Row="3"
+            Grid.Column="3"
+            Margin="2,5"
+            Padding="5,2"
+            shared:TextBoxProperties.SelectAll="True"
+            Text="{Binding NumberOfScrips, UpdateSourceTrigger=PropertyChanged}" />
+
+        <!--#endregion-->
+
+        <!--#region Process Scrips-->
+
+        <StackPanel
+            Grid.Row="2"
+            Grid.Column="2"
+            VerticalAlignment="Bottom"
+            Visibility="Hidden">
+
+            <Button
+                Height="26"
+                Margin="2,5"
+                Command="{Binding ProcessScripsCommand}"
+                Content="Process"
+                IsDefault="True" />
+
+        </StackPanel>
+
+        <!--#endregion-->
+
+    </Grid>
+
+    <!--#endregion-->
+
+</UserControl>

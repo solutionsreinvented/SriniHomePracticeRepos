@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>stocks.ico</ApplicationIcon>
+    <AssemblyName>Stock Analyzer</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="stocks.ico" />
+    <None Remove="stocks.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ReInvented.Shared">
+      <HintPath>..\..\..\SriniHomePracticeRepos\SlvParkview.FinanceManager\SlvParkview.FinanceManager\bin\Debug\ReInvented.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <HintPath>..\..\..\..\..\..\Windows\WinSxS\amd64_netfx-system.windows.forms_b03f5f7f11d50a3a_10.0.19041.1_none_6ffddb374fbda91c\System.Windows.Forms.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="stocks.ico" />
+    <Resource Include="stocks.png" />
+  </ItemGroup>
+
+</Project>
