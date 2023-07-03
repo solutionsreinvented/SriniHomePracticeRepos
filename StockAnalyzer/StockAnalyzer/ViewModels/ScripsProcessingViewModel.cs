@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Windows.Input;
 ///using Microsoft.Win32;
 
 using StockAnalyzer.Commands;
+using StockAnalyzer.Enums;
 using StockAnalyzer.Models;
 using StockAnalyzer.Services;
 
@@ -32,6 +34,7 @@ namespace StockAnalyzer.ViewModels
         private string _dataStatus;
         private Scrip _selectedScrip;
         private bool _showCircuitStocksOnly;
+        private ScripFilter _scripFilter;
 
         #endregion
 
@@ -103,6 +106,17 @@ namespace StockAnalyzer.ViewModels
             {
                 _showCircuitStocksOnly = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public ScripFilter ScripFilter
+        {
+            get => _scripFilter;
+            set
+            {
+                _scripFilter = value;
+                OnPropertyChanged();
+                OnProcessScrips();
             }
         }
 
@@ -214,11 +228,12 @@ namespace StockAnalyzer.ViewModels
 
         private void Initialize()
         {
-            FilePath = @"C:\\Users\\masanams\\Desktop\\EQ090922.CSV";
+            FilePath = @"C:\\Users\\masanams\\Desktop\\EQ" + $"{DateTime.Today:ddMMyy}.CSV";
             MinimumValue = 100;
             MaximumValue = 150;
             NumberOfScrips = 15;
             ShowCircuitStocksOnly = false;
+            ScripFilter = ScripFilter.LastTraded;
 
             GetFilePathCommand = new RelayCommand(OnGetFilePath, true);
             ProcessScripsCommand = new RelayCommand(OnProcessScrips, true);
