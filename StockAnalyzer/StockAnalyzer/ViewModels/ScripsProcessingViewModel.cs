@@ -165,10 +165,46 @@ namespace StockAnalyzer.ViewModels
             {
                 if (DataIsValid())
                 {
+                    IEnumerable<Scrip> filteredScrips;
 
-                    ScripsInRange = StockDataProcessor.GetScrips(FilePath)
-                                                      .Where(s => s.LastTraded >= MinimumValue && s.LastTraded <= MaximumValue)
-                                                      .Take(NumberOfScrips).OrderBy(s => s.LastTraded);
+                    switch (ScripFilter)
+                    {
+                        case ScripFilter.LastTraded:
+                            filteredScrips = StockDataProcessor.GetScrips(FilePath)
+                                                               .Where(s => s.LastTraded >= MinimumValue && s.LastTraded <= MaximumValue)
+                                                               .Take(NumberOfScrips).OrderBy(s => s.LastTraded);
+                            break;
+                        case ScripFilter.Open:
+                            filteredScrips = StockDataProcessor.GetScrips(FilePath)
+                                                               .Where(s => s.Open >= MinimumValue && s.Open <= MaximumValue)
+                                                               .Take(NumberOfScrips).OrderBy(s => s.Open);
+                            break;
+                        case ScripFilter.High:
+                            filteredScrips = StockDataProcessor.GetScrips(FilePath)
+                                                               .Where(s => s.High >= MinimumValue && s.High <= MaximumValue)
+                                                               .Take(NumberOfScrips).OrderBy(s => s.High);
+                            break;
+                        case ScripFilter.Low:
+                            filteredScrips = StockDataProcessor.GetScrips(FilePath)
+                                                               .Where(s => s.Low >= MinimumValue && s.Low <= MaximumValue)
+                                                               .Take(NumberOfScrips).OrderBy(s => s.Low);
+                            break;
+                        case ScripFilter.Close:
+                            filteredScrips = StockDataProcessor.GetScrips(FilePath)
+                                                               .Where(s => s.Close >= MinimumValue && s.Close <= MaximumValue)
+                                                               .Take(NumberOfScrips).OrderBy(s => s.Close);
+                            break;
+                        case ScripFilter.PreviousClose:
+                            filteredScrips = StockDataProcessor.GetScrips(FilePath)
+                                                               .Where(s => s.PreviousClose >= MinimumValue && s.PreviousClose <= MaximumValue)
+                                                               .Take(NumberOfScrips).OrderBy(s => s.PreviousClose);
+                            break;
+                        default:
+                            filteredScrips = StockDataProcessor.GetScrips(FilePath).Take(NumberOfScrips);
+                            break;
+                    }
+
+                    ScripsInRange = filteredScrips;
 
                     DataStatus = "Check out the results below";
                 }
