@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Windows.Input;
+
+using ReInvented.Shared.Stores;
 
 ///using Microsoft.Win32;
 
@@ -16,28 +17,8 @@ using StockAnalyzer.Services;
 
 namespace StockAnalyzer.ViewModels
 {
-    public class ScripsProcessingViewModel : INotifyPropertyChanged
+    public class ScripsProcessingViewModel : PropertyStore
     {
-
-        #region INotifyPropertyChanged Events
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
-
-        #region Private Fields
-
-        private string _filePath;
-        private decimal _minimumValue;
-        private decimal _maximumValue;
-        private int _numberOfScrips;
-        private string _dataStatus;
-        private Scrip _selectedScrip;
-        private bool _showCircuitStocksOnly;
-        private ScripFilter _scripFilter;
-
-        #endregion
-
         #region Default Constructor
 
         public ScripsProcessingViewModel()
@@ -49,88 +30,23 @@ namespace StockAnalyzer.ViewModels
 
         #region Public Properties
 
-        public string FilePath
-        {
-            get => _filePath;
-            set
-            {
-                _filePath = value;
-                OnPropertyChanged(); OnProcessScrips();
-            }
-        }
+        public string FilePath { get => Get<string>(); set { Set(value); ProcessScrips(); } }
 
-        public decimal MinimumValue
-        {
-            get => _minimumValue;
-            set
-            {
-                _minimumValue = value;
-                OnPropertyChanged(); OnProcessScrips();
-            }
-        }
+        public decimal MinimumValue { get => Get<decimal>(); set { Set(value); ProcessScrips(); } }
 
-        public decimal MaximumValue
-        {
-            get => _maximumValue;
-            set
-            {
-                _maximumValue = value;
-                OnPropertyChanged(); OnProcessScrips();
-            }
-        }
+        public decimal MaximumValue { get => Get<decimal>(); set { Set(value); ProcessScrips(); } }
 
-        public int NumberOfScrips
-        {
-            get => _numberOfScrips;
-            set
-            {
-                _numberOfScrips = value;
-                OnPropertyChanged(); OnProcessScrips();
-            }
-        }
+        public int NumberOfScrips { get => Get<int>(); set { Set(value); ProcessScrips(); } }
 
-        public string DataStatus
-        {
-            get => _dataStatus;
-            set
-            {
-                _dataStatus = value;
-                OnPropertyChanged();
-            }
-        }
+        public string DataStatus { get => Get<string>(); set => Set(value); }
 
-        public bool ShowCircuitStocksOnly
-        {
-            get => _showCircuitStocksOnly;
-            set
-            {
-                _showCircuitStocksOnly = value;
-                OnPropertyChanged();
-            }
-        }
+        public bool CircuitStocksOnly { get => Get<bool>(); set { Set(value); ProcessScrips(); } }
 
-        public ScripFilter ScripFilter
-        {
-            get => _scripFilter;
-            set
-            {
-                _scripFilter = value;
-                OnPropertyChanged();
-                OnProcessScrips();
-            }
-        }
+        public ScripFilter ScripFilter { get => Get<ScripFilter>(); set { Set(value); ProcessScrips(); } }
 
-        public IEnumerable<Scrip> ScripsInRange { get; set; }
+        public Scrip SelectedScrip { get => Get<Scrip>(); set => Set(value); }
 
-        public Scrip SelectedScrip
-        {
-            get => _selectedScrip;
-            set
-            {
-                _selectedScrip = value;
-                OnPropertyChanged();
-            }
-        }
+        public IEnumerable<Scrip> ScripsInRange { get => Get<IEnumerable<Scrip>>(); private set => Set(value); }
 
         #endregion
 
@@ -138,7 +54,7 @@ namespace StockAnalyzer.ViewModels
 
         public ICommand GetFilePathCommand { get; set; }
 
-        public ICommand ProcessScripsCommand { get; set; }
+        //public ICommand ProcessScripsCommand { get; set; }
 
         #endregion
 
@@ -157,54 +73,29 @@ namespace StockAnalyzer.ViewModels
                 FilePath = openFileDialog.FileName;
             }
         }
-        private void OnProcessScrips()
+        private void ProcessScrips()
         {
             ScripsInRange = new List<Scrip>();
+
+            PropertyInfo filterPropInfo = typeof(Scrip).GetProperty(ScripFilter.ToString());
 
             if (File.Exists(FilePath))
             {
                 if (DataIsValid())
                 {
-                    IEnumerable<Scrip> filteredScrips;
 
-                    switch (ScripFilter)
+                    ScripsInRange = (from scrip in StockDataProcessor.GetScrips(FilePath)
+                                     let propertyValue = (decimal)filterPropInfo.GetValue(scrip)
+                                     where propertyValue >= MinimumValue && propertyValue <= MaximumValue
+                                     orderby propertyValue
+                                     select scrip);
+
+                    if (CircuitStocksOnly)
                     {
-                        case ScripFilter.LastTraded:
-                            filteredScrips = StockDataProcessor.GetScrips(FilePath)
-                                                               .Where(s => s.LastTraded >= MinimumValue && s.LastTraded <= MaximumValue)
-                                                               .Take(NumberOfScrips).OrderBy(s => s.LastTraded);
-                            break;
-                        case ScripFilter.Open:
-                            filteredScrips = StockDataProcessor.GetScrips(FilePath)
-                                                               .Where(s => s.Open >= MinimumValue && s.Open <= MaximumValue)
-                                                               .Take(NumberOfScrips).OrderBy(s => s.Open);
-                            break;
-                        case ScripFilter.High:
-                            filteredScrips = StockDataProcessor.GetScrips(FilePath)
-                                                               .Where(s => s.High >= MinimumValue && s.High <= MaximumValue)
-                                                               .Take(NumberOfScrips).OrderBy(s => s.High);
-                            break;
-                        case ScripFilter.Low:
-                            filteredScrips = StockDataProcessor.GetScrips(FilePath)
-                                                               .Where(s => s.Low >= MinimumValue && s.Low <= MaximumValue)
-                                                               .Take(NumberOfScrips).OrderBy(s => s.Low);
-                            break;
-                        case ScripFilter.Close:
-                            filteredScrips = StockDataProcessor.GetScrips(FilePath)
-                                                               .Where(s => s.Close >= MinimumValue && s.Close <= MaximumValue)
-                                                               .Take(NumberOfScrips).OrderBy(s => s.Close);
-                            break;
-                        case ScripFilter.PreviousClose:
-                            filteredScrips = StockDataProcessor.GetScrips(FilePath)
-                                                               .Where(s => s.PreviousClose >= MinimumValue && s.PreviousClose <= MaximumValue)
-                                                               .Take(NumberOfScrips).OrderBy(s => s.PreviousClose);
-                            break;
-                        default:
-                            filteredScrips = StockDataProcessor.GetScrips(FilePath).Take(NumberOfScrips);
-                            break;
+                        ScripsInRange = ScripsInRange?.Where(s => s.LastTraded == s.Open && s.LastTraded == s.High && s.LastTraded == s.Low && s.LastTraded == s.Close);
                     }
 
-                    ScripsInRange = filteredScrips;
+                    ScripsInRange = ScripsInRange.Take(NumberOfScrips);
 
                     DataStatus = "Check out the results below";
                 }
@@ -257,29 +148,17 @@ namespace StockAnalyzer.ViewModels
 
         #region Private Helpers
 
-        private void OnPropertyChanged([CallerMemberName] string propName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-        }
-
         private void Initialize()
         {
             FilePath = @"C:\\Users\\masanams\\Desktop\\EQ" + $"{DateTime.Today:ddMMyy}.CSV";
             MinimumValue = 100;
             MaximumValue = 150;
             NumberOfScrips = 15;
-            ShowCircuitStocksOnly = false;
+            CircuitStocksOnly = false;
             ScripFilter = ScripFilter.LastTraded;
 
             GetFilePathCommand = new RelayCommand(OnGetFilePath, true);
-            ProcessScripsCommand = new RelayCommand(OnProcessScrips, true);
         }
-
-        private bool CircuitOnly(Scrip scrip)
-        {
-            return scrip.High == scrip.Low && scrip.High == scrip.Open && scrip.High == scrip.Close;
-        }
-
 
         #endregion
 
