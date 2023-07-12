@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyConcepts", "Depen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flexture.GeometricCalculations", "Flexture.GeometricCalculations\Flexture.GeometricCalculations.csproj", "{B513CAF7-9D91-4417-A2E2-175F37358EE9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.Validation", "ReInvented.Validation\ReInvented.Validation.csproj", "{8DDC18CC-C0C6-4B55-B1B4-92FF99D0AE91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{B513CAF7-9D91-4417-A2E2-175F37358EE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B513CAF7-9D91-4417-A2E2-175F37358EE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B513CAF7-9D91-4417-A2E2-175F37358EE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DDC18CC-C0C6-4B55-B1B4-92FF99D0AE91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DDC18CC-C0C6-4B55-B1B4-92FF99D0AE91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DDC18CC-C0C6-4B55-B1B4-92FF99D0AE91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DDC18CC-C0C6-4B55-B1B4-92FF99D0AE91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

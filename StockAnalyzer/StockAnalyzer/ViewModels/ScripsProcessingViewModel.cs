@@ -150,7 +150,7 @@ namespace StockAnalyzer.ViewModels
 
         private void Initialize()
         {
-            FilePath = @"C:\\Users\\masanams\\Desktop\\EQ" + $"{DateTime.Today:ddMMyy}.CSV";
+            FilePath = @"C:\\Users\\masanams\\Desktop\\EQ" + $"{DateTime.Today.AddDays(-1):ddMMyy}.CSV";
             MinimumValue = 100;
             MaximumValue = 150;
             NumberOfScrips = 15;

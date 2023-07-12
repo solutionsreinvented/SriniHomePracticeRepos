@@ -1,5 +1,8 @@
 ﻿using System.Windows;
 
+using StockAnalyzer.Interfaces;
+using StockAnalyzer.Services;
+
 namespace StockAnalyzer
 {
     /// <summary>
@@ -9,11 +12,8 @@ namespace StockAnalyzer
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
-
-            MainWindow = new MainWindow();
-
-            MainWindow.Show();
+            IInstanceManager instanceManager = new InstanceManager(Current);
+            instanceManager.Start();
         }
     }
 }
