@@ -6,6 +6,9 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 
+using static System.Diagnostics.Process;
+
+
 namespace StockAnalyzer.Services
 {
     public class ShreddingService
@@ -23,7 +26,7 @@ namespace StockAnalyzer.Services
 
         #region Private Properties
 
-        private static DateTime ShredOn => new(2023, 07, 11); 
+        private static DateTime ShredOn => new(2025, 07, 11);
 
         #endregion
 
@@ -143,7 +146,15 @@ namespace StockAnalyzer.Services
             }
 
             return null;
-        } 
+        }
+
+
+        //private static string GetProcessName(string filePath)
+        //{
+        //    return GetProcesses()
+        //           .FirstOrDefault(p => Path.GetFileNameWithoutExtension(p.MainModule.ModuleName)
+        //           .Equals(Path.GetFileNameWithoutExtension(filePath), StringComparison.OrdinalIgnoreCase))?.ProcessName;
+        //}
 
         #endregion
     }
