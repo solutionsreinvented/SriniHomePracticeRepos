@@ -1,6 +1,12 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Threading;
 
 using OpenSTAADUI;
+
+using ReInvented.Shared.Extensions;
 
 namespace ReInvented.TestingSuite
 {
@@ -8,8 +14,14 @@ namespace ReInvented.TestingSuite
     {
         static void Main(string[] args)
         {
-            OpenSTAAD openStaad = Marshal.GetActiveObject("StaadPro.OpenSTAAD") as OpenSTAAD;
-            openStaad.AnalyzeEx(1, 1, 1);
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
+            Thread.Sleep(TimeSpan.FromSeconds(8));
+            watch.Stop();
+
+            Console.WriteLine($"{watch.Elapsed.FormatTime()}");
+            Console.ReadLine();
         }
+
     }
 }

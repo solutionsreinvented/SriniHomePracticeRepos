@@ -4,6 +4,8 @@
     {
         public int LoadCaseId { get; set; }
 
+        public int LoadCaseTitle { get; set; }
+
         public double Fx { get; set; }
 
         public double Fy { get; set; }
