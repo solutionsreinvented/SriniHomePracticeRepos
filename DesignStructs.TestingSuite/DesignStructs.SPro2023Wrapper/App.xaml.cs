@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace DesignStructs.SPro2023Wrapper
+namespace ReInvented.SPro2023Wrapper
 {
     /// <summary>
     /// Interaction logic for App.xaml

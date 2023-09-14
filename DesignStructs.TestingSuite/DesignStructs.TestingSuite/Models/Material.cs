@@ -1,4 +1,4 @@
-﻿namespace DesignStructs.TestingSuite.Models
+﻿namespace ReInvented.TestingSuite.Models
 {
     public class Material
     {

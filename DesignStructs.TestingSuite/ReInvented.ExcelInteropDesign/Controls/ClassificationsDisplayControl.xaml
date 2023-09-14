@@ -1,0 +1,31 @@
+﻿<UserControl
+    x:Class="ReInvented.ExcelInteropDesign.Controls.ClassificationsDisplayControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
+
+    <Grid>
+
+        <!--#region Chosen Classifications-->
+
+        <ListBox
+            Margin="5"
+            Padding="5"
+            ItemsSource="{Binding SelectedChoice.Classifications}"
+            SelectedItem="{Binding RemoveClassification}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Padding="0,3" Text="{Binding Category}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!--#endregion-->
+
+    </Grid>
+
+</UserControl>

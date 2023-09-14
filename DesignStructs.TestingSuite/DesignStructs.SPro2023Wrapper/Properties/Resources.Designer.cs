@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 
-namespace DesignStructs.SPro2023Wrapper.Properties
+namespace ReInvented.SPro2023Wrapper.Properties
 {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.

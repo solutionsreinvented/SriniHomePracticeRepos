@@ -1,8 +1,8 @@
-﻿using DesignStructs.FluentValidationExercise.Models;
+﻿using ReInvented.FluentValidationExercise.Models;
 
 using FluentValidation;
 
-namespace DesignStructs.FluentValidationExercise.Validators
+namespace ReInvented.FluentValidationExercise.Validators
 {
     public class ThickenerInputValidator : AbstractValidator<ThickenerInput>
     {

@@ -1,6 +1,6 @@
 ﻿using ReInvented.Shared.Stores;
 
-namespace DesignStructs.FluentValidationExercise.Models
+namespace ReInvented.FluentValidationExercise.Models
 {
     public class ThickenerInput : ErrorsEnabledPropertyStore
     {

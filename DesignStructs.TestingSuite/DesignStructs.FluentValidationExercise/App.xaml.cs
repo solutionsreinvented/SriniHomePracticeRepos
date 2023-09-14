@@ -1,11 +1,11 @@
 ﻿using System.Windows;
 
-using DesignStructs.FluentValidationExercise.Models;
-using DesignStructs.FluentValidationExercise.Validators;
+using ReInvented.FluentValidationExercise.Models;
+using ReInvented.FluentValidationExercise.Validators;
 
 using FluentValidation.Results;
 
-namespace DesignStructs.FluentValidationExercise
+namespace ReInvented.FluentValidationExercise
 {
     /// <summary>
     /// Interaction logic for App.xaml

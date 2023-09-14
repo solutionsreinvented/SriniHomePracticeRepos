@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.33927.289
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignStructs.TestingSuite", "DesignStructs.TestingSuite\DesignStructs.TestingSuite.csproj", "{B5D9D7BC-5A8B-41B2-AFB5-36714A039E6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignStructs.TestingSuiteUI", "DesignStructs.TestingSuiteUI\DesignStructs.TestingSuiteUI.csproj", "{14AC1788-4B24-40AC-AEB6-E9CB2D5FFA63}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignStructs.SPro2023Wrapper", "DesignStructs.SPro2023Wrapper\DesignStructs.SPro2023Wrapper.csproj", "{F1EF3B57-8CD9-4702-B17B-9BC82AB952A4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignStructs.FluentValidationExercise", "DesignStructs.FluentValidationExercise\DesignStructs.FluentValidationExercise.csproj", "{FB92D1AF-B78D-411E-B793-BD2A9539A1A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.ExcelInteropDesign", "ReInvented.ExcelInteropDesign\ReInvented.ExcelInteropDesign.csproj", "{14AC1788-4B24-40AC-AEB6-E9CB2D5FFA63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		{B5D9D7BC-5A8B-41B2-AFB5-36714A039E6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5D9D7BC-5A8B-41B2-AFB5-36714A039E6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5D9D7BC-5A8B-41B2-AFB5-36714A039E6B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{14AC1788-4B24-40AC-AEB6-E9CB2D5FFA63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{14AC1788-4B24-40AC-AEB6-E9CB2D5FFA63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{14AC1788-4B24-40AC-AEB6-E9CB2D5FFA63}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{14AC1788-4B24-40AC-AEB6-E9CB2D5FFA63}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F1EF3B57-8CD9-4702-B17B-9BC82AB952A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F1EF3B57-8CD9-4702-B17B-9BC82AB952A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1EF3B57-8CD9-4702-B17B-9BC82AB952A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{FB92D1AF-B78D-411E-B793-BD2A9539A1A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB92D1AF-B78D-411E-B793-BD2A9539A1A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB92D1AF-B78D-411E-B793-BD2A9539A1A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14AC1788-4B24-40AC-AEB6-E9CB2D5FFA63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14AC1788-4B24-40AC-AEB6-E9CB2D5FFA63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14AC1788-4B24-40AC-AEB6-E9CB2D5FFA63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14AC1788-4B24-40AC-AEB6-E9CB2D5FFA63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,7 +2,7 @@
 
 using OpenSTAADUI;
 
-namespace DesignStructs.TestingSuite
+namespace ReInvented.TestingSuite
 {
     class Program
     {

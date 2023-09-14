@@ -2,7 +2,7 @@
 
 using OpenSTAADUI;
 
-namespace DesignStructs.SPro2023Wrapper.Models
+namespace ReInvented.SPro2023Wrapper.Models
 {
     public class StaadWrapper
     {
