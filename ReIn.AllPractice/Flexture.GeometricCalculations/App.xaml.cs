@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Timers;
+using System.Security.Cryptography;
 using System.Windows;
-
-using Flexture.GeometricCalculations.ViewModels;
 
 using ReInvented.StaadPro.Interactivity.Entities;
 
@@ -13,36 +11,109 @@ namespace Flexture.GeometricCalculations
     /// </summary>
     public partial class App : Application
     {
+        // Simplified UserPrincipal class
+        class UserPrincipal
+        {
+            public string GivenName { get; }
+            public string Surname { get; }
+            public string EmailAddress { get; }
+
+            public UserPrincipal(string givenName, string surname, string emailAddress)
+            {
+                GivenName = givenName;
+                Surname = surname;
+                EmailAddress = emailAddress;
+            }
+        }
+
+        // Simplified key generation method based on the seed
+        static RSAParameters GenerateKeyPair(byte[] seed)
+        {
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                byte[] randomNumber = new byte[16];
+                rng.GetBytes(randomNumber);
+
+                // XOR the seed with random data to generate key components
+                byte[] privateExponent = new byte[16];
+                for (int i = 0; i < 16; i++)
+                {
+                    privateExponent[i] = (byte)(seed[i] ^ randomNumber[i]);
+                }
+
+                return new RSAParameters
+                {
+                    Modulus = seed,
+                    Exponent = new byte[] { 1, 0, 1 },
+                    D = privateExponent
+                };
+            }
+        }
+
+        private void GatherUserInformation()
+        {
+            try
+            {
+                UserPrincipal user = new UserPrincipal("John", "Doe", "johndoe@example.com");
+
+                // Combine common properties to create a seed
+                string seed = $"{user.GivenName}{user.Surname}{user.EmailAddress}";
+
+                // Convert seed to bytes (you might use a proper encoding)
+                byte[] seedBytes = System.Text.Encoding.UTF8.GetBytes(seed);
+
+                // Generate the keys based on the seed
+                using (var rsa = new RSACryptoServiceProvider())
+                {
+                    rsa.ImportParameters(GenerateKeyPair(seedBytes));
+
+                    // Get the public and private keys
+                    string publicKey = Convert.ToBase64String(rsa.ExportParameters(false).Modulus);
+                    string privateKey = Convert.ToBase64String(rsa.ExportParameters(true).D);
+
+                    Console.WriteLine("Public Key: " + publicKey);
+                    Console.WriteLine("Private Key: " + privateKey);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
+        }
+
+
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            /// Create and show the SplashScreen
-            SplashScreenView splashScreenView = new SplashScreenView() { DataContext = new SplashScreenViewModel(splashTimer) };
-            splashScreenView.Show();
+            GatherUserInformation();
 
-            /// Create a timer to close the SplashScreen after the specified time
-            Timer splashTimer = new Timer(3000);
+            ///// Create and show the SplashScreen
+            //SplashScreenView splashScreenView = new SplashScreenView() { DataContext = new SplashScreenViewModel(splashTimer) };
+            //splashScreenView.Show();
 
-            splashTimer.Elapsed += (sender, args) =>
-            {
-                splashTimer.Stop();
+            ///// Create a timer to close the SplashScreen after the specified time
+            //Timer splashTimer = new Timer(3000);
 
-                /// Swap the Home with the WelcomeScreen
-                Dispatcher.Invoke(() =>
-                {
-                    MainWindow = new Home();
-                    MainWindow.Show();
+            //splashTimer.Elapsed += (sender, args) =>
+            //{
+            //    splashTimer.Stop();
 
-                    /// Close the SplashScreen
-                    splashScreenView.Close();
-                });
-            };
+            //    /// Swap the Home with the WelcomeScreen
+            //    Dispatcher.Invoke(() =>
+            //    {
+            //        MainWindow = new Home();
+            //        MainWindow.Show();
 
-            splashTimer.Start();
+            //        /// Close the SplashScreen
+            //        splashScreenView.Close();
+            //    });
+            //};
 
-            //ChatBotFuctions();
+            //splashTimer.Start();
+
+            ////ChatBotFuctions();
 
         }
 
