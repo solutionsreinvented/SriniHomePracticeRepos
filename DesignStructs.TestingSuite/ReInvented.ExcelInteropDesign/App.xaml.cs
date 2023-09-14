@@ -10,6 +10,9 @@ using System.Linq;
 using ReInvented.ExcelInteropDesign.Services;
 using ReInvented.Sections.Domain.Services;
 using ReInvented.ExcelInteropDesign.ViewModels;
+using ReInvented.StaadPro.Interactivity.Models;
+using System.Collections.Generic;
+using ReInvented.ExcelInteropDesign.Models;
 
 namespace ReInvented.ExcelInteropDesign
 {
@@ -18,8 +21,6 @@ namespace ReInvented.ExcelInteropDesign
     /// </summary>
     public partial class App : Application
     {
-
-
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -31,6 +32,21 @@ namespace ReInvented.ExcelInteropDesign
 
             ///ExcelInterop();
 
+
+            StaadModel model = new StaadModel();
+
+            List<int> beams = new List<int>();
+            beams.AddRange(Enumerable.Range(5761, 8));
+
+            List<int> loadcases = new List<int>();
+            loadcases.AddRange(Enumerable.Range(101, 10));
+
+            HashSet<MemberForces> allforces = StaadOutputServices.SummarizeForces(model.StaadWrapper, beams, loadcases);
+
+            HashSet<MemberForces> summarized = new HashSet<MemberForces>();
+            var fx = allforces.Select(f => f.Fx).Max();
+
+
             MainWindow = new SectionChoicesWindow() { DataContext = new SectionChoicesViewModel() };
 
             MainWindow.Show();
@@ -38,7 +54,7 @@ namespace ReInvented.ExcelInteropDesign
 
         private void ExcelInterop(RolledSectionHShape section)
         {
-            
+
         }
 
         private static RolledSectionHShape PreviousSectionSelection()

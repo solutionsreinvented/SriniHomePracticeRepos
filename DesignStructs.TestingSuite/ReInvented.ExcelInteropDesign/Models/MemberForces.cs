@@ -1,10 +1,16 @@
-﻿namespace ReInvented.ExcelInteropDesign.Models
+﻿using ReInvented.StaadPro.Interactivity.Enums;
+
+namespace ReInvented.ExcelInteropDesign.Models
 {
     public class MemberForces
     {
         public int LoadCaseId { get; set; }
 
-        public int LoadCaseTitle { get; set; }
+        public string LoadCaseTitle { get; set; }
+
+        public int MemberId { get; set; }
+
+        public MemberEnd End { get; set; }
 
         public double Fx { get; set; }
 
