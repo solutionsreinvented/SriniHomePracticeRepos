@@ -17,24 +17,24 @@
             Margin="0,3"
             Command="{Binding AddSelectedClassificationCommand}"
             Content="&gt;"
-            IsEnabled="{Binding CanAddSelection}" />
+            IsEnabled="{Binding CanAddToPreference}" />
         <Button
             Margin="0,3"
             Command="{Binding AddAllClassificationsCommand}"
             Content="&gt;&gt;"
-            IsEnabled="{Binding CanAddSelection}" />
+            IsEnabled="{Binding CanAddToPreference}" />
 
 
         <Button
             Margin="0,20,0,3"
             Command="{Binding RemoveSelectedClassificationCommand}"
             Content="&lt;"
-            IsEnabled="{Binding CanRemoveSelection}" />
+            IsEnabled="{Binding CanRemoveFromPreference}" />
         <Button
             Margin="0,3"
             Command="{Binding RemoveAllClassificationsCommand}"
             Content="&lt;&lt;"
-            IsEnabled="{Binding CanRemoveAll}" />
+            IsEnabled="{Binding CanRemoveAllFromPreference}" />
 
     </StackPanel>
 

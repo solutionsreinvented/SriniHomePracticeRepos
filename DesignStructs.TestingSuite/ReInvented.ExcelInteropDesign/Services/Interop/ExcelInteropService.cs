@@ -10,6 +10,8 @@ using System.Timers;
 using System.Diagnostics;
 using ReInvented.Shared.Extensions;
 using ReInvented.Shared;
+using ReInvented.DataAccess.Services;
+using System.IO;
 
 namespace ReInvented.ExcelInteropDesign.Services
 {
@@ -17,10 +19,10 @@ namespace ReInvented.ExcelInteropDesign.Services
     {
         private Excel.Application _excelApp;
         private Excel.Workbook _workbook;
-        private Excel.Worksheet _wsCals;
+        private Excel.Worksheet _wsCalcs;
         private Excel.Worksheet _wsSummary;
 
-        public Dictionary<string, double> VerifyDesign(List<IRolledSection> sections)
+        public Dictionary<string, double> DesignBeams(List<IRolledSection> sections)
         {
             Stopwatch overallTimeStopwatch = new Stopwatch();
 
@@ -35,18 +37,33 @@ namespace ReInvented.ExcelInteropDesign.Services
 
             Excel.Dialogs dialogs = _excelApp.Dialogs;
 
-            string filePath = @"C:\Users\masanams\Desktop\Radial Beams.xlsm";
+            string filePath = Path.Combine(FileServiceProvider.ExcelTemplatesDirectory, "Beams", "I.xlsm");
 
             try
             {
                 _workbook = _excelApp.Workbooks.Open(filePath);
 
-                _wsCals = (Excel.Worksheet)_workbook.Sheets["Calcs"];
+                _wsCalcs = (Excel.Worksheet)_workbook.Sheets["Calcs"];
                 _wsSummary = (Excel.Worksheet)_workbook.Sheets["Summary"];
 
-                Excel.Range rngSectionProperties = _wsCals.Range["SectionProperties"];
+                #region Fill In Input Data
 
-                WorksheetSecurityService.UnprotectSheet(_wsCals);
+                ///_wsCalcs.Range["MaterialSpecification"].Value2;
+                ///_wsCalcs.Range["MaterialGrade"].Value2;
+                ///_wsCalcs.Range["SectionProfile"].Value2;
+                ///_wsCalcs.Range["Fy"].Value2;
+                ///_wsCalcs.Range["Fu"].Value2;
+
+                #endregion
+
+
+
+
+
+
+                Excel.Range rngSectionProperties = _wsCalcs.Range["SectionProperties"];
+
+                WorksheetSecurityService.UnprotectSheet(_wsCalcs);
 
                 Stopwatch designTimeStopwatch = new Stopwatch();
 
@@ -55,9 +72,12 @@ namespace ReInvented.ExcelInteropDesign.Services
                 sections.ForEach(s =>
                 {
                     rngSectionProperties.ClearContents();
-                    SectionPropertiesService.Instance.FillISectionPropertiesInSpreadSheet(_wsCals, s as RolledSectionHShape, rngSectionProperties.Row, rngSectionProperties.Column);
-                    double ur = Convert.ToDouble(_wsSummary.Range["MaxUR"].Value2);
-                    
+
+                    _wsCalcs.Range["SectionProfile"].Value2 = s.Designation;
+
+                    SectionPropertiesService.Instance.FillISectionPropertiesInSpreadSheet(_wsCalcs, s as RolledSectionHShape, rngSectionProperties.Row, rngSectionProperties.Column);
+                    double ur = Convert.ToDouble(_wsSummary.Range["GoverningUtilizationRatio"].Value2);
+
                     utilizationRatios.Add(s.Designation, ur.Ceiling(0.001));
                 });
 
@@ -65,7 +85,7 @@ namespace ReInvented.ExcelInteropDesign.Services
 
                 _ = MessageBox.Show($"Time took to complete the design of {sections.Count} sections is: {designTimeStopwatch.Elapsed.FormatTime()}");
 
-                WorksheetSecurityService.ProtectSheet(_wsCals);
+                WorksheetSecurityService.ProtectSheet(_wsCalcs);
 
                 _workbook.Save();///.SaveAs(filePath, ConflictResolution: Excel.XlSaveConflictResolution.xlLocalSessionChanges);
 
@@ -82,7 +102,7 @@ namespace ReInvented.ExcelInteropDesign.Services
                     _workbook.Close();
                     _excelApp.Quit();
 
-                    _ = Marshal.ReleaseComObject(_wsCals);
+                    _ = Marshal.ReleaseComObject(_wsCalcs);
                     _ = Marshal.ReleaseComObject(_workbook);
                 }
 

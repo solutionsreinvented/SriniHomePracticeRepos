@@ -1,4 +1,6 @@
-﻿using Excel = Microsoft.Office.Interop.Excel;
+﻿using Microsoft.Office.Core;
+
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ReInvented.ExcelInteropDesign.Services
 {
@@ -14,6 +16,26 @@ namespace ReInvented.ExcelInteropDesign.Services
         public static void ProtectSheet(Excel.Worksheet worksheet)
         {
             worksheet.Protect(_password);
+        }
+
+        public static void SetMacrosSecurityToRunMacros(Excel.Application excelApp)
+        {
+            MsoAutomationSecurity currentLevel = excelApp.AutomationSecurity;
+
+            if (currentLevel != MsoAutomationSecurity.msoAutomationSecurityLow)
+            {
+                excelApp.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityLow;
+            }
+        }
+
+        public static void ResetMacrosSecurityToDefaultRecommended(Excel.Application excelApp)
+        {
+            MsoAutomationSecurity currentLevel = excelApp.AutomationSecurity;
+
+            if (currentLevel != MsoAutomationSecurity.msoAutomationSecurityByUI)
+            {
+                excelApp.AutomationSecurity = MsoAutomationSecurity.msoAutomationSecurityByUI;
+            }
         }
     }
 }

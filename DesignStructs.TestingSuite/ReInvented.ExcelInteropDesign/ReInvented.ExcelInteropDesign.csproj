@@ -100,21 +100,23 @@
     <Compile Include="Controls\SelectionsNavigationControl.xaml.cs">
       <DependentUpon>SelectionsNavigationControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Enums\TransverseWebStiffeners.cs" />
+    <Compile Include="Interfaces\ISectionDesignService.cs" />
     <Compile Include="Models\MemberForces.cs" />
     <Compile Include="Models\SectionDesignData.cs" />
-    <Compile Include="Models\SectionsChoice.cs" />
-    <Compile Include="Services\BoxSectionDesignService.cs" />
-    <Compile Include="Services\ComAddInServices.cs" />
-    <Compile Include="Services\CSectionDesignService.cs" />
-    <Compile Include="Services\ExcelInteropService.cs" />
-    <Compile Include="Services\HSectionDesignService.cs" />
-    <Compile Include="Services\LSectionDesignService.cs" />
-    <Compile Include="Services\PipeSectionDesignService.cs" />
+    <Compile Include="Models\SectionsPreference.cs" />
+    <Compile Include="Services\Design\BoxSectionDesignService.cs" />
+    <Compile Include="Services\Interop\ComAddInServices.cs" />
+    <Compile Include="Services\Design\CSectionDesignService.cs" />
+    <Compile Include="Services\Interop\ExcelInteropService.cs" />
+    <Compile Include="Services\Design\HSectionDesignService.cs" />
+    <Compile Include="Services\Design\LSectionDesignService.cs" />
+    <Compile Include="Services\Design\PipeSectionDesignService.cs" />
     <Compile Include="Services\SectionDesignService.cs" />
     <Compile Include="Services\SectionPropertiesService.cs" />
     <Compile Include="Services\Staad\StaadOutputServices.cs" />
     <Compile Include="Services\WorksheetSecurityService.cs" />
-    <Compile Include="ViewModels\SectionChoicesViewModel.cs" />
+    <Compile Include="ViewModels\SectionsPreferenceViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SectionChoicesWindow.xaml.cs">
@@ -136,6 +138,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

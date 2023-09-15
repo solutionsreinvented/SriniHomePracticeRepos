@@ -36,7 +36,7 @@
             <TextBlock
                 Grid.Column="0"
                 VerticalAlignment="Center"
-                Text="Selections Name:" />
+                Text="Name for Sections Preference:" />
             <TextBox
                 Grid.Column="1"
                 Height="26"
@@ -44,13 +44,13 @@
                 Padding="5,2"
                 VerticalAlignment="Center"
                 VerticalContentAlignment="Center"
-                Text="{Binding SelectionChoiceName, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding SectionsPreferenceName, UpdateSourceTrigger=PropertyChanged}" />
             <Button
                 Grid.Column="2"
                 Padding="10,2"
-                Command="{Binding CreateNewChoiceCommand}"
+                Command="{Binding CreateNewPreferenceCommand}"
                 Content="+"
-                IsEnabled="{Binding CanCreateSelection}" />
+                IsEnabled="{Binding CanCreatePreference}" />
         </Grid>
 
         <!--#endregion-->
@@ -60,7 +60,7 @@
         <Grid
             Grid.Column="1"
             Margin="30,0,0,0"
-            IsEnabled="{Binding ChoicesExist}">
+            IsEnabled="{Binding PreferencesExist}">
 
             <!--#region Grid Definitions-->
 
@@ -80,8 +80,8 @@
                 Grid.Column="1"
                 Margin="12,0,5,0"
                 DisplayMemberPath="Key"
-                ItemsSource="{Binding SectionsChoiceCollection}"
-                SelectedItem="{Binding SelectedChoice}" />
+                ItemsSource="{Binding SectionsPreferenceCollection}"
+                SelectedItem="{Binding SelectedSectionsPreference}" />
 
             <!--  TODO: Commands are not bound yet  -->
             <Button

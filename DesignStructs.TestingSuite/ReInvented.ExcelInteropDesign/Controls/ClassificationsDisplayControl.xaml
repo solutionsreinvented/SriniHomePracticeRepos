@@ -15,7 +15,7 @@
         <ListBox
             Margin="5"
             Padding="5"
-            ItemsSource="{Binding SelectedChoice.Classifications}"
+            ItemsSource="{Binding SelectedSectionsPreference.Classifications}"
             SelectedItem="{Binding RemoveClassification}">
             <ListBox.ItemTemplate>
                 <DataTemplate>

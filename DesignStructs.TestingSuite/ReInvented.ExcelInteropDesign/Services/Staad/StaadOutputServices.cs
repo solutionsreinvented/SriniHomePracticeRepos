@@ -13,7 +13,7 @@ namespace ReInvented.ExcelInteropDesign.Services
     public class StaadOutputServices
     {
 
-        public static HashSet<MemberForces> SummarizeForces(IOSOutputUI openStaadOutput, IEnumerable<Beam> beams, IEnumerable<int> loadCases)
+        public static HashSet<MemberForces> RetrieveForces(IOSOutputUI openStaadOutput, IEnumerable<Beam> beams, IEnumerable<int> loadCases)
         {
             HashSet<MemberForces> memberForcesCollection = new HashSet<MemberForces>();
 
@@ -28,7 +28,7 @@ namespace ReInvented.ExcelInteropDesign.Services
             return new HashSet<MemberForces>();
         }
 
-        public static HashSet<MemberForces> SummarizeForces(StaadModelWrapper wrapper, IEnumerable<int> beams, IEnumerable<int> loadCases)
+        public static HashSet<MemberForces> RetrieveForces(StaadModelWrapper wrapper, IEnumerable<int> beams, IEnumerable<int> loadCases)
         {
             IOSOutputUI openStaadOutput = wrapper.Output;
             IOSLoadUI openStaadLoad = wrapper.Load;
@@ -87,6 +87,27 @@ namespace ReInvented.ExcelInteropDesign.Services
             }
 
             return memberForcesCollection;
+        }
+
+        public static List<MemberForces> SummarizeForces(HashSet<MemberForces> memberForcesSet)
+        {
+            List<MemberForces> summarySet = new List<MemberForces>(12)
+            {
+                memberForcesSet.OrderByDescending(f => f.Fx).FirstOrDefault(),
+                memberForcesSet.OrderBy(f => f.Fx).FirstOrDefault(),
+                memberForcesSet.OrderByDescending(f => f.Fy).FirstOrDefault(),
+                memberForcesSet.OrderBy(f => f.Fy).FirstOrDefault(),
+                memberForcesSet.OrderByDescending(f => f.Fz).FirstOrDefault(),
+                memberForcesSet.OrderBy(f => f.Fz).FirstOrDefault(),
+                memberForcesSet.OrderByDescending(f => f.Mx).FirstOrDefault(),
+                memberForcesSet.OrderBy(f => f.Mx).FirstOrDefault(),
+                memberForcesSet.OrderByDescending(f => f.My).FirstOrDefault(),
+                memberForcesSet.OrderBy(f => f.My).FirstOrDefault(),
+                memberForcesSet.OrderByDescending(f => f.Mz).FirstOrDefault(),
+                memberForcesSet.OrderBy(f => f.Mz).FirstOrDefault()
+            };
+
+            return summarySet;
         }
     }
 }

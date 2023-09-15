@@ -41,13 +41,11 @@ namespace ReInvented.ExcelInteropDesign
             List<int> loadcases = new List<int>();
             loadcases.AddRange(Enumerable.Range(101, 10));
 
-            HashSet<MemberForces> allforces = StaadOutputServices.SummarizeForces(model.StaadWrapper, beams, loadcases);
+            HashSet<MemberForces> allforces = StaadOutputServices.RetrieveForces(model.StaadWrapper, beams, loadcases);
+            List<MemberForces> summarized = StaadOutputServices.SummarizeForces(allforces);
+            
 
-            HashSet<MemberForces> summarized = new HashSet<MemberForces>();
-            var fx = allforces.Select(f => f.Fx).Max();
-
-
-            MainWindow = new SectionChoicesWindow() { DataContext = new SectionChoicesViewModel() };
+            MainWindow = new SectionChoicesWindow() { DataContext = new SectionsPreferenceViewModel() };
 
             MainWindow.Show();
         }

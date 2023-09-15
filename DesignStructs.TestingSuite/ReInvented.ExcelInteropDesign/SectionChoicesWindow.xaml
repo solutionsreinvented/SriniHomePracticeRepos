@@ -28,7 +28,7 @@
             Height="26"
             Margin="5,10" />
 
-        <Grid Grid.Row="1" Visibility="{Binding EnableSelections, Converter={shared:BoolToVisibilityConverter}}">
+        <Grid Grid.Row="1" Visibility="{Binding EnablePreferences, Converter={shared:BoolToVisibilityConverter}}">
 
             <!--#region Grid Definitions-->
 

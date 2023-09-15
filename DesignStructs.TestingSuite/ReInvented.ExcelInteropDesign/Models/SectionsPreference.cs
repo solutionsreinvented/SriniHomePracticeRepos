@@ -5,9 +5,9 @@ using ReInvented.Shared.Stores;
 
 namespace ReInvented.ExcelInteropDesign.Models
 {
-    public class SectionsChoice : ErrorsEnabledPropertyStore
+    public class SectionsPreference : ErrorsEnabledPropertyStore
     {
-        public SectionsChoice()
+        public SectionsPreference()
         {
             Classifications = new ObservableCollection<Classification>();
         }
