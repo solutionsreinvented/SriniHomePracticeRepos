@@ -43,10 +43,8 @@ namespace ReInvented.ExcelInteropDesign
 
             HashSet<MemberForces> allforces = StaadOutputServices.RetrieveForces(model.StaadWrapper, beams, loadcases);
             List<MemberForces> summarized = StaadOutputServices.SummarizeForces(allforces);
-            
 
             MainWindow = new SectionChoicesWindow() { DataContext = new SectionsPreferenceViewModel() };
-
             MainWindow.Show();
         }
 

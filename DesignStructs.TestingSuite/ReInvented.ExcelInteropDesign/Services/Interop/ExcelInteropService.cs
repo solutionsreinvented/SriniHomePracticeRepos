@@ -12,6 +12,7 @@ using ReInvented.Shared.Extensions;
 using ReInvented.Shared;
 using ReInvented.DataAccess.Services;
 using System.IO;
+using ReInvented.ExcelInteropDesign.Models;
 
 namespace ReInvented.ExcelInteropDesign.Services
 {
@@ -22,7 +23,7 @@ namespace ReInvented.ExcelInteropDesign.Services
         private Excel.Worksheet _wsCalcs;
         private Excel.Worksheet _wsSummary;
 
-        public Dictionary<string, double> DesignBeams(List<IRolledSection> sections)
+        public Dictionary<string, double> DesignBeams(List<IRolledSection> sections, SectionDesignData designData)
         {
             Stopwatch overallTimeStopwatch = new Stopwatch();
 
@@ -56,26 +57,19 @@ namespace ReInvented.ExcelInteropDesign.Services
 
                 #endregion
 
-
-
-
-
-
-                Excel.Range rngSectionProperties = _wsCalcs.Range["SectionProperties"];
-
                 WorksheetSecurityService.UnprotectSheet(_wsCalcs);
 
                 Stopwatch designTimeStopwatch = new Stopwatch();
 
                 designTimeStopwatch.Start();
 
+                CalculationsSheetService.FillMaterialProperties(_wsCalcs, designData.MaterialTable, designData.MaterialGrade);
+
                 sections.ForEach(s =>
                 {
-                    rngSectionProperties.ClearContents();
-
                     _wsCalcs.Range["SectionProfile"].Value2 = s.Designation;
-
-                    SectionPropertiesService.Instance.FillISectionPropertiesInSpreadSheet(_wsCalcs, s as RolledSectionHShape, rngSectionProperties.Row, rngSectionProperties.Column);
+                    CalculationsSheetService.FillISectionProperties(_wsCalcs, s as RolledSectionHShape);
+                    ///SectionPropertiesService.Instance.FillISectionPropertiesInSpreadSheet(_wsCalcs, s as RolledSectionHShape, rngSectionProperties.Row, rngSectionProperties.Column);
                     double ur = Convert.ToDouble(_wsSummary.Range["GoverningUtilizationRatio"].Value2);
 
                     utilizationRatios.Add(s.Designation, ur.Ceiling(0.001));

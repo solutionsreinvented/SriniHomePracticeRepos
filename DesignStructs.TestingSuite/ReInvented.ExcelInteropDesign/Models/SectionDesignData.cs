@@ -6,10 +6,14 @@ namespace ReInvented.ExcelInteropDesign.Models
 {
     public class SectionDesignData
     {
-        public HashSet<MemberForces> MemberForcesCollection { get; set; }
+        public List<MemberForces> ForcesSummary { get; set; }
+
+        public MaterialTable MaterialTable { get; set; }
 
         public MaterialGrade MaterialGrade { get; set; }
 
+        public WebTransverseStiffeners Stiffeners { get; set; }
 
+        public AxialStrengthParameters AxialStrengthParameters { get; set; }
     }
 }

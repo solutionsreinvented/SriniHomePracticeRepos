@@ -17,11 +17,15 @@
 
     <Grid Margin="10,20">
 
+        <!--#region Grid Definitions-->
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+
+        <!--#endregion-->
 
         <controls:SelectionsMainControl
             Grid.Row="0"

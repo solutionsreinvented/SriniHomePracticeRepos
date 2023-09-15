@@ -100,18 +100,23 @@
     <Compile Include="Controls\SelectionsNavigationControl.xaml.cs">
       <DependentUpon>SelectionsNavigationControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Enums\TransverseWebStiffeners.cs" />
+    <Compile Include="Enums\WebTransverseStiffenersConfiguration.cs" />
     <Compile Include="Interfaces\ISectionDesignService.cs" />
+    <Compile Include="Models\AxialStrengthParameters.cs" />
+    <Compile Include="Models\GoverningCriteria.cs" />
     <Compile Include="Models\MemberForces.cs" />
     <Compile Include="Models\SectionDesignData.cs" />
     <Compile Include="Models\SectionsPreference.cs" />
+    <Compile Include="Models\WebTransverseStiffeners.cs" />
     <Compile Include="Services\Design\BoxSectionDesignService.cs" />
+    <Compile Include="Services\Interop\CalculationsSheetService.cs" />
     <Compile Include="Services\Interop\ComAddInServices.cs" />
     <Compile Include="Services\Design\CSectionDesignService.cs" />
     <Compile Include="Services\Interop\ExcelInteropService.cs" />
     <Compile Include="Services\Design\HSectionDesignService.cs" />
     <Compile Include="Services\Design\LSectionDesignService.cs" />
     <Compile Include="Services\Design\PipeSectionDesignService.cs" />
+    <Compile Include="Services\Interop\SummarySheetService.cs" />
     <Compile Include="Services\SectionDesignService.cs" />
     <Compile Include="Services\SectionPropertiesService.cs" />
     <Compile Include="Services\Staad\StaadOutputServices.cs" />

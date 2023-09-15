@@ -2,13 +2,10 @@
 
 namespace ReInvented.ExcelInteropDesign.Enums
 {
-    public enum TransverseWebStiffeners
+    public enum WebTransverseStiffenersConfiguration
     {
-        Yes,
-        No
-    }
-    public enum WebStiffenersConfiguration
-    {
+        [Description("None")]
+        None,
         [Description("One Side")]
         OneSide,
         [Description("Both Sides")]
