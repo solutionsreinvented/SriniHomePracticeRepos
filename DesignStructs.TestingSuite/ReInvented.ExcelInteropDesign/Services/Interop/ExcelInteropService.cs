@@ -38,7 +38,7 @@ namespace ReInvented.ExcelInteropDesign.Services
 
             Excel.Dialogs dialogs = _excelApp.Dialogs;
 
-            string filePath = Path.Combine(FileServiceProvider.ExcelTemplatesDirectory, "Beams", "I.xlsm");
+            string filePath = Path.Combine(FileServiceProvider.ExcelTemplatesDirectory, "Beams", "IBeam.xlsm");
 
             try
             {
@@ -63,14 +63,14 @@ namespace ReInvented.ExcelInteropDesign.Services
 
                 designTimeStopwatch.Start();
 
-                CalculationsSheetService.FillMaterialProperties(_wsCalcs, designData.MaterialTable, designData.MaterialGrade);
+                ///CalculationsSheetService.FillMaterialProperties(_wsCalcs, designData.MaterialTable, designData.MaterialGrade);
 
                 sections.ForEach(s =>
                 {
-                    _wsCalcs.Range["SectionProfile"].Value2 = s.Designation;
+                    _wsCalcs.Range["InputSectionProfile"].Value2 = s.Designation;
                     CalculationsSheetService.FillISectionProperties(_wsCalcs, s as RolledSectionHShape);
                     ///SectionPropertiesService.Instance.FillISectionPropertiesInSpreadSheet(_wsCalcs, s as RolledSectionHShape, rngSectionProperties.Row, rngSectionProperties.Column);
-                    double ur = Convert.ToDouble(_wsSummary.Range["GoverningUtilizationRatio"].Value2);
+                    double ur = Convert.ToDouble(_wsSummary.Range["OutputGoverningUtilizationRatio"].Value2);
 
                     utilizationRatios.Add(s.Designation, ur.Ceiling(0.001));
                 });

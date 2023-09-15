@@ -100,6 +100,7 @@
     <Compile Include="Controls\SelectionsNavigationControl.xaml.cs">
       <DependentUpon>SelectionsNavigationControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Enums\DesignMethod.cs" />
     <Compile Include="Enums\WebTransverseStiffenersConfiguration.cs" />
     <Compile Include="Interfaces\ISectionDesignService.cs" />
     <Compile Include="Models\AxialStrengthParameters.cs" />

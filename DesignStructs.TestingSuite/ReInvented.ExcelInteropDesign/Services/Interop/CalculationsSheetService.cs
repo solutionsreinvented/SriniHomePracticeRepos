@@ -1,4 +1,5 @@
-﻿using ReInvented.ExcelInteropDesign.Models;
+﻿using ReInvented.ExcelInteropDesign.Enums;
+using ReInvented.ExcelInteropDesign.Models;
 using ReInvented.Sections.Domain.Models;
 using ReInvented.Shared;
 
@@ -25,6 +26,26 @@ namespace ReInvented.ExcelInteropDesign.Services
 
             rngAxialStrengthParameters[sRow + 0, sColumn] = parameters.PercentNetTensileArea;
             rngAxialStrengthParameters[sRow + 1, sColumn] = parameters.LateralUnsupportedLength;
+        }
+
+        public static void FillStiffenersParameters(Excel.Worksheet wsCalcs, WebTransverseStiffeners stiffeners)
+        {
+            Excel.Range rngStiffenersParameters = wsCalcs.Range["InputWebTransverseStiffeners"];
+
+            int sRow = rngStiffenersParameters.Row;
+            int sColumn = rngStiffenersParameters.Column;
+
+            rngStiffenersParameters[sRow + 0, sColumn] = stiffeners.Configuration == WebTransverseStiffenersConfiguration.None ? "No" : "Yes";
+            rngStiffenersParameters[sRow + 1, sColumn] = stiffeners.Configuration == WebTransverseStiffenersConfiguration.BothSides ?
+                                                         WebTransverseStiffenersConfiguration.BothSides.GetDescription() :
+                                                         WebTransverseStiffenersConfiguration.OneSide.GetDescription();
+            rngStiffenersParameters[sRow + 2, sColumn] = stiffeners.Thickness;
+            rngStiffenersParameters[sRow + 3, sColumn] = stiffeners.Spacing;
+        }
+
+        public static void FillMethodOfDesign(Excel.Worksheet wsCalcs, DesignMethod designMethod)
+        {
+            wsCalcs.Range["DesignMethod"].Value2 = designMethod.GetDescription();
         }
 
         public static void FillISectionProperties(Excel.Worksheet wsCalcs, RolledSectionHShape section)

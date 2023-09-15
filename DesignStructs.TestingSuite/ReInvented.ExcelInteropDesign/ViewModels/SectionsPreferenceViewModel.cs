@@ -180,7 +180,7 @@ namespace ReInvented.ExcelInteropDesign.ViewModels
         private void OnRunDesign()
         {
             ExcelInteropService excelInteropService = new ExcelInteropService();
-            ///Dictionary<string, double> urs = excelInteropService.DesignBeams(SelectedSectionsPreference.Classifications.SelectMany(c => c.Sections).ToList());
+            Dictionary<string, double> urs = excelInteropService.DesignBeams(SelectedSectionsPreference.Classifications.SelectMany(c => c.Sections).ToList(), null);
         }
 
         #endregion
