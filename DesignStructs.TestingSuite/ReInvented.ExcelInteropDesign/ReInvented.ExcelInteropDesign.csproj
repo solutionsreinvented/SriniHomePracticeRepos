@@ -108,6 +108,7 @@
     <Compile Include="Models\MemberForces.cs" />
     <Compile Include="Models\SectionDesignData.cs" />
     <Compile Include="Models\SectionsPreference.cs" />
+    <Compile Include="Models\RangeNames.cs" />
     <Compile Include="Models\WebTransverseStiffeners.cs" />
     <Compile Include="Services\Design\BoxSectionDesignService.cs" />
     <Compile Include="Services\Interop\CalculationsSheetService.cs" />

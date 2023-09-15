@@ -15,7 +15,7 @@ namespace ReInvented.ExcelInteropDesign.Services
                 throw new ArgumentException($"Invalid {nameof(forcesSummary)}. The items in the argument shall be exactly 12.");
             }
 
-            Excel.Range rngForcesSummary = wsSummary.Range["InputForcesSummaryTable"];
+            Excel.Range rngForcesSummary = wsSummary.Range[RangeNames.ForcesSummaryTable];
 
             int sRow = rngForcesSummary.Row;
             int sColumn = rngForcesSummary.Column;
@@ -36,7 +36,7 @@ namespace ReInvented.ExcelInteropDesign.Services
 
         public static GoverningCriteria GetGoverningCriteria(Excel.Worksheet wsSummary)
         {
-            Excel.Range rngGoverningCriteria = wsSummary.Range["OutputGoverningCriteria"];
+            Excel.Range rngGoverningCriteria = wsSummary.Range[RangeNames.GoverningCriteria];
 
             int sRow = rngGoverningCriteria.Row;
             int sColumn = rngGoverningCriteria.Column;

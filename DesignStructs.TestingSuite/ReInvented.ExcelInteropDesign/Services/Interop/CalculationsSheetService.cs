@@ -11,15 +11,15 @@ namespace ReInvented.ExcelInteropDesign.Services
     {
         public static void FillMaterialProperties(Excel.Worksheet wsCalcs, MaterialTable table, MaterialGrade grade)
         {
-            wsCalcs.Range["InputMaterialSpecification"].Value2 = table.Name;
-            wsCalcs.Range["InputMaterialGrade"].Value2 = grade.Designation;
-            wsCalcs.Range["Fy"].Value2 = grade.Fy;
-            wsCalcs.Range["Fu"].Value2 = grade.Fu;
+            wsCalcs.Range[RangeNames.MaterialSpecification].Value2 = table.Name;
+            wsCalcs.Range[RangeNames.MaterialGrade].Value2 = grade.Designation;
+            wsCalcs.Range[RangeNames.Fy].Value2 = grade.Fy;
+            wsCalcs.Range[RangeNames.Fu].Value2 = grade.Fu;
         }
 
         public static void FillAxialStrengthParameters(Excel.Worksheet wsCalcs, AxialStrengthParameters parameters)
         {
-            Excel.Range rngAxialStrengthParameters = wsCalcs.Range["InputAxialStength"];
+            Excel.Range rngAxialStrengthParameters = wsCalcs.Range[RangeNames.AxialStrength];
 
             int sRow = rngAxialStrengthParameters.Row;
             int sColumn = rngAxialStrengthParameters.Column;
@@ -30,7 +30,7 @@ namespace ReInvented.ExcelInteropDesign.Services
 
         public static void FillStiffenersParameters(Excel.Worksheet wsCalcs, WebTransverseStiffeners stiffeners)
         {
-            Excel.Range rngStiffenersParameters = wsCalcs.Range["InputWebTransverseStiffeners"];
+            Excel.Range rngStiffenersParameters = wsCalcs.Range[RangeNames.WebTransverseStiffeners];
 
             int sRow = rngStiffenersParameters.Row;
             int sColumn = rngStiffenersParameters.Column;
@@ -39,18 +39,19 @@ namespace ReInvented.ExcelInteropDesign.Services
             rngStiffenersParameters[sRow + 1, sColumn] = stiffeners.Configuration == WebTransverseStiffenersConfiguration.BothSides ?
                                                          WebTransverseStiffenersConfiguration.BothSides.GetDescription() :
                                                          WebTransverseStiffenersConfiguration.OneSide.GetDescription();
+
             rngStiffenersParameters[sRow + 2, sColumn] = stiffeners.Thickness;
             rngStiffenersParameters[sRow + 3, sColumn] = stiffeners.Spacing;
         }
 
         public static void FillMethodOfDesign(Excel.Worksheet wsCalcs, DesignMethod designMethod)
         {
-            wsCalcs.Range["DesignMethod"].Value2 = designMethod.GetDescription();
+            wsCalcs.Range[RangeNames.DesignMethod].Value2 = designMethod.GetDescription();
         }
 
         public static void FillISectionProperties(Excel.Worksheet wsCalcs, RolledSectionHShape section)
         {
-            Excel.Range rngSectionProperties = wsCalcs.Range["InputSectionProperties"];
+            Excel.Range rngSectionProperties = wsCalcs.Range[RangeNames.SectionProperties];
             int sRow = rngSectionProperties.Row;
             int sColumn = rngSectionProperties.Column;
 
@@ -97,6 +98,10 @@ namespace ReInvented.ExcelInteropDesign.Services
             wsCalcs.Cells[sRow + 36, sColumn].Value = section.Ey;
             wsCalcs.Cells[sRow + 37, sColumn].Value = section.Cz;
             wsCalcs.Cells[sRow + 38, sColumn].Value = section.Ez;
+            wsCalcs.Cells[sRow + 39, sColumn].Value = section.Iu;
+            wsCalcs.Cells[sRow + 40, sColumn].Value = section.Iv;
+            wsCalcs.Cells[sRow + 41, sColumn].Value = section.Ru;
+            wsCalcs.Cells[sRow + 42, sColumn].Value = section.Rv;
         }
     }
 }
