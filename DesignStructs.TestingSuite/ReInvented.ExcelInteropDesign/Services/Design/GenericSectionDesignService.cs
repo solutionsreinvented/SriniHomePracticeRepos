@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -48,7 +49,7 @@ namespace ReInvented.ExcelInteropDesign.Services.Design
 
         #endregion
 
-        public Dictionary<string, double> Design(List<TSection> sections, string fullFilePath, Action<Excel.Worksheet, IRolledSection> fillSectionProperties)
+        public Dictionary<string, double> Design(IEnumerable<TSection> sections, string fullFilePath, Action<Excel.Worksheet, IRolledSection> fillSectionProperties)
         {
             Stopwatch overallTimeStopwatch = new Stopwatch();
 
@@ -82,7 +83,7 @@ namespace ReInvented.ExcelInteropDesign.Services.Design
                 ///CalculationsSheetService.FillMethodOfDesign(_wsCalcs, (new SectionDesignData()).DesignMethod);
 
 
-                sections.ForEach(s =>
+                sections.ToList().ForEach(s =>
                 {
                     _wsCalcs.Range[RangeNames.SectionProfile].Value2 = s.Designation;
                     ///CalculationsSheetService.FillISectionProperties(_wsCalcs, s);
@@ -94,7 +95,7 @@ namespace ReInvented.ExcelInteropDesign.Services.Design
 
                 designTimeStopwatch.Stop();
 
-                _ = MessageBox.Show($"Time took to complete the design of {sections.Count} sections is: {designTimeStopwatch.Elapsed.FormatTime()}");
+                _ = MessageBox.Show($"Time took to complete the design of {sections.Count()} sections is: {designTimeStopwatch.Elapsed.FormatTime()}");
 
                 WorksheetSecurityService.ProtectSheet(_wsCalcs);
 

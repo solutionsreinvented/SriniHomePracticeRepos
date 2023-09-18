@@ -5,7 +5,8 @@ using System.Windows.Input;
 
 using ReInvented.ExcelInteropDesign.Models;
 using ReInvented.ExcelInteropDesign.Services;
-
+using ReInvented.ExcelInteropDesign.Services.Design;
+using ReInvented.Sections.Domain.Interfaces;
 using ReInvented.Sections.Domain.Models;
 using ReInvented.Sections.Domain.Repositories;
 using ReInvented.Shared.Commands;
@@ -30,7 +31,7 @@ namespace ReInvented.ExcelInteropDesign.ViewModels
 
         public Database Database { get => Get<Database>(); set { Set(value); Shape = Database.SectionShapes.FirstOrDefault(); } }
 
-        public SectionShape Shape { get => Get<SectionShape>(); set { Set(value); Classification = Shape.Classifications.FirstOrDefault(); } }
+        public SectionShape Shape { get => Get<SectionShape>(); set { Set(value); Classification = Shape?.Classifications.FirstOrDefault(); } }
 
         public string SectionsPreferenceName
         {
@@ -179,11 +180,45 @@ namespace ReInvented.ExcelInteropDesign.ViewModels
 
         private void OnRunDesign()
         {
-            ExcelInteropService excelInteropService = new ExcelInteropService();
-            Dictionary<string, double> urs = excelInteropService.DesignBeams(SelectedSectionsPreference.Classifications.SelectMany(c => c.Sections).ToList(), null);
+            ///var rolledH = GenericSectionDesignService<RolledSectionHShape>.Instance;
+            ///var rolledC = GenericSectionDesignService<RolledSectionCShape>.Instance;
+            ///rolledH.Design(new List<RolledSectionHShape>(), @"E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ApplicationData\Assets\Excel\Beams\IBeam.xlsm", CalculationsSheetService.FillISectionProperties);
+            ///rolledC.Design(new List<RolledSectionCShape>(), @"E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ApplicationData\Assets\Excel\Columns\CColumn.xlsm", CalculationsSheetService.FillISectionProperties);
+            ///bool compare = rolledH.Equals(rolledC);
+
+            ///ExcelInteropService excelInteropService = new ExcelInteropService();
+            ///Dictionary<string, double> urs = excelInteropService.DesignBeams(SelectedSectionsPreference.Classifications.SelectMany(c => c.Sections).ToList(), null);
+            
+            IEnumerable<IRolledSection> sections = SelectedSectionsPreference.Classifications.SelectMany(c => c.Sections);
+
+            var rolledHDesign = GenericSectionDesignService<RolledSectionHShape>.Instance;
+            rolledHDesign.Design(sections.OfType<RolledSectionHShape>(), "", CalculationsSheetService.FillISectionProperties);
+
+            
+            var rolledCDesign = GenericSectionDesignService<RolledSectionCShape>.Instance;
+            rolledCDesign.Design(sections.OfType<RolledSectionCShape>(), "", CalculationsSheetService.FillISectionProperties);
+
+            
+            var rolledLDesign = GenericSectionDesignService<RolledSectionLShape>.Instance;
+            rolledLDesign.Design(sections.OfType<RolledSectionLShape>(), "", CalculationsSheetService.FillISectionProperties);
+
+            var rolledODesign = GenericSectionDesignService<RolledSectionOShape>.Instance;
+            rolledODesign.Design(sections.OfType<RolledSectionOShape>(), "", CalculationsSheetService.FillISectionProperties);
+
+
+            var rolledBoxDesign = GenericSectionDesignService<RolledSectionBoxShape>.Instance;
+            rolledBoxDesign.Design(sections.OfType<RolledSectionBoxShape>(), "", CalculationsSheetService.FillISectionProperties);
+
+
         }
 
         #endregion
+
+        private void DoSomething<TSection>(IEnumerable<IRolledSection> sections) where TSection:IRolledSection
+        {
+            var design = GenericSectionDesignService<TSection>.Instance;
+        }
+
 
         #region Private Helpers
 

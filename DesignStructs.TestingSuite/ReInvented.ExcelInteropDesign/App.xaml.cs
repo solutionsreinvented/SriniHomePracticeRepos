@@ -33,25 +33,17 @@ namespace ReInvented.ExcelInteropDesign
 
             ///ExcelInterop();
 
-            var rolledH = GenericSectionDesignService<RolledSectionHShape>.Instance;
-            var rolledC = GenericSectionDesignService<RolledSectionCShape>.Instance;
 
-            rolledH.Design(new List<RolledSectionHShape>(), @"E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ApplicationData\Assets\Excel\Beams\IBeam.xlsm", CalculationsSheetService.FillISectionProperties);
-            rolledC.Design(new List<RolledSectionCShape>(), @"E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ApplicationData\Assets\Excel\Columns\CColumn.xlsm", CalculationsSheetService.FillISectionProperties);
+            ///StaadModel model = new StaadModel();
 
+            ///List<int> beams = new List<int>();
+            ///beams.AddRange(Enumerable.Range(5761, 8));
 
-            bool compare = rolledH.Equals(rolledC);
+            ///List<int> loadcases = new List<int>();
+            ///loadcases.AddRange(Enumerable.Range(101, 10));
 
-            //StaadModel model = new StaadModel();
-
-            //List<int> beams = new List<int>();
-            //beams.AddRange(Enumerable.Range(5761, 8));
-
-            //List<int> loadcases = new List<int>();
-            //loadcases.AddRange(Enumerable.Range(101, 10));
-
-            //HashSet<MemberForces> allforces = StaadOutputServices.RetrieveForces(model.StaadWrapper, beams, loadcases);
-            //List<MemberForces> summarized = StaadOutputServices.SummarizeForces(allforces);
+            ///HashSet<MemberForces> allforces = StaadOutputServices.RetrieveForces(model.StaadWrapper, beams, loadcases);
+            ///List<MemberForces> summarized = StaadOutputServices.SummarizeForces(allforces);
 
             MainWindow = new SectionChoicesWindow() { DataContext = new SectionsPreferenceViewModel() };
             MainWindow.Show();
