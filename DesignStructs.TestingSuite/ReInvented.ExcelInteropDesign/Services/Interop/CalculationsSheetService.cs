@@ -1,5 +1,6 @@
 ﻿using ReInvented.ExcelInteropDesign.Enums;
 using ReInvented.ExcelInteropDesign.Models;
+using ReInvented.Sections.Domain.Interfaces;
 using ReInvented.Sections.Domain.Models;
 using ReInvented.Shared;
 
@@ -49,8 +50,10 @@ namespace ReInvented.ExcelInteropDesign.Services
             wsCalcs.Range[RangeNames.DesignMethod].Value2 = designMethod.GetDescription();
         }
 
-        public static void FillISectionProperties(Excel.Worksheet wsCalcs, RolledSectionHShape section)
+        public static void FillISectionProperties(Excel.Worksheet wsCalcs, IRolledSection sectionProfile)
         {
+            RolledSectionHShape section = sectionProfile as RolledSectionHShape;
+
             Excel.Range rngSectionProperties = wsCalcs.Range[RangeNames.SectionProperties];
             int sRow = rngSectionProperties.Row;
             int sColumn = rngSectionProperties.Column;

@@ -111,6 +111,7 @@
     <Compile Include="Models\RangeNames.cs" />
     <Compile Include="Models\WebTransverseStiffeners.cs" />
     <Compile Include="Services\Design\BoxSectionDesignService.cs" />
+    <Compile Include="Services\Design\GenericSectionDesignService.cs" />
     <Compile Include="Services\Interop\CalculationsSheetService.cs" />
     <Compile Include="Services\Interop\ComAddInServices.cs" />
     <Compile Include="Services\Design\CSectionDesignService.cs" />

@@ -13,6 +13,7 @@ using ReInvented.ExcelInteropDesign.ViewModels;
 using ReInvented.StaadPro.Interactivity.Models;
 using System.Collections.Generic;
 using ReInvented.ExcelInteropDesign.Models;
+using ReInvented.ExcelInteropDesign.Services.Design;
 
 namespace ReInvented.ExcelInteropDesign
 {
@@ -32,20 +33,29 @@ namespace ReInvented.ExcelInteropDesign
 
             ///ExcelInterop();
 
+            var rolledH = GenericSectionDesignService<RolledSectionHShape>.Instance;
+            var rolledC = GenericSectionDesignService<RolledSectionCShape>.Instance;
 
-            StaadModel model = new StaadModel();
+            rolledH.Design(new List<RolledSectionHShape>(), @"E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ApplicationData\Assets\Excel\Beams\IBeam.xlsm", CalculationsSheetService.FillISectionProperties);
+            rolledC.Design(new List<RolledSectionCShape>(), @"E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ApplicationData\Assets\Excel\Columns\CColumn.xlsm", CalculationsSheetService.FillISectionProperties);
 
-            List<int> beams = new List<int>();
-            beams.AddRange(Enumerable.Range(5761, 8));
 
-            List<int> loadcases = new List<int>();
-            loadcases.AddRange(Enumerable.Range(101, 10));
+            bool compare = rolledH.Equals(rolledC);
 
-            HashSet<MemberForces> allforces = StaadOutputServices.RetrieveForces(model.StaadWrapper, beams, loadcases);
-            List<MemberForces> summarized = StaadOutputServices.SummarizeForces(allforces);
+            //StaadModel model = new StaadModel();
+
+            //List<int> beams = new List<int>();
+            //beams.AddRange(Enumerable.Range(5761, 8));
+
+            //List<int> loadcases = new List<int>();
+            //loadcases.AddRange(Enumerable.Range(101, 10));
+
+            //HashSet<MemberForces> allforces = StaadOutputServices.RetrieveForces(model.StaadWrapper, beams, loadcases);
+            //List<MemberForces> summarized = StaadOutputServices.SummarizeForces(allforces);
 
             MainWindow = new SectionChoicesWindow() { DataContext = new SectionsPreferenceViewModel() };
             MainWindow.Show();
+
         }
 
         private void ExcelInterop(RolledSectionHShape section)
