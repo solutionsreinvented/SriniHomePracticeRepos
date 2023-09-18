@@ -68,7 +68,7 @@ namespace ReInvented.ExcelInteropDesign.Services
                 sections.ForEach(s =>
                 {
                     _wsCalcs.Range[RangeNames.SectionProfile].Value2 = s.Designation;
-                    CalculationsSheetService.FillISectionProperties(_wsCalcs, s as RolledSectionHShape);
+                    CalculationsSheetService.FillHSectionProperties(_wsCalcs, s as RolledSectionHShape);
                     ///SectionPropertiesService.Instance.FillISectionPropertiesInSpreadSheet(_wsCalcs, s as RolledSectionHShape, rngSectionProperties.Row, rngSectionProperties.Column);
                     double ur = Convert.ToDouble(_wsSummary.Range[RangeNames.GoverningUtilizationRatio].Value2);
 

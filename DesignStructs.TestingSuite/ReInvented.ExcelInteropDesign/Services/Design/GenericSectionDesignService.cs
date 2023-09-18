@@ -49,7 +49,7 @@ namespace ReInvented.ExcelInteropDesign.Services.Design
 
         #endregion
 
-        public Dictionary<string, double> Design(IEnumerable<TSection> sections, string fullFilePath, Action<Excel.Worksheet, IRolledSection> fillSectionProperties)
+        public Dictionary<string, double> Design(IEnumerable<TSection> sections, string fullFilePath)
         {
             Stopwatch overallTimeStopwatch = new Stopwatch();
 
@@ -86,8 +86,7 @@ namespace ReInvented.ExcelInteropDesign.Services.Design
                 sections.ToList().ForEach(s =>
                 {
                     _wsCalcs.Range[RangeNames.SectionProfile].Value2 = s.Designation;
-                    ///CalculationsSheetService.FillISectionProperties(_wsCalcs, s);
-                    fillSectionProperties(_wsCalcs, s);
+                    CalculationsSheetService.FillSectionProperties(_wsCalcs, s);
                     double ur = Convert.ToDouble(_wsSummary.Range[RangeNames.GoverningUtilizationRatio].Value2);
 
                     utilizationRatios.Add(s.Designation, ur.Ceiling(0.001));

@@ -192,32 +192,27 @@ namespace ReInvented.ExcelInteropDesign.ViewModels
             IEnumerable<IRolledSection> sections = SelectedSectionsPreference.Classifications.SelectMany(c => c.Sections);
 
             var rolledHDesign = GenericSectionDesignService<RolledSectionHShape>.Instance;
-            rolledHDesign.Design(sections.OfType<RolledSectionHShape>(), "", CalculationsSheetService.FillISectionProperties);
+            rolledHDesign.Design(sections.OfType<RolledSectionHShape>(), "");
 
             
             var rolledCDesign = GenericSectionDesignService<RolledSectionCShape>.Instance;
-            rolledCDesign.Design(sections.OfType<RolledSectionCShape>(), "", CalculationsSheetService.FillISectionProperties);
+            rolledCDesign.Design(sections.OfType<RolledSectionCShape>(), "");
 
             
             var rolledLDesign = GenericSectionDesignService<RolledSectionLShape>.Instance;
-            rolledLDesign.Design(sections.OfType<RolledSectionLShape>(), "", CalculationsSheetService.FillISectionProperties);
+            rolledLDesign.Design(sections.OfType<RolledSectionLShape>(), "");
 
             var rolledODesign = GenericSectionDesignService<RolledSectionOShape>.Instance;
-            rolledODesign.Design(sections.OfType<RolledSectionOShape>(), "", CalculationsSheetService.FillISectionProperties);
+            rolledODesign.Design(sections.OfType<RolledSectionOShape>(), "");
 
 
             var rolledBoxDesign = GenericSectionDesignService<RolledSectionBoxShape>.Instance;
-            rolledBoxDesign.Design(sections.OfType<RolledSectionBoxShape>(), "", CalculationsSheetService.FillISectionProperties);
+            rolledBoxDesign.Design(sections.OfType<RolledSectionBoxShape>(), "");
 
 
         }
 
         #endregion
-
-        private void DoSomething<TSection>(IEnumerable<IRolledSection> sections) where TSection:IRolledSection
-        {
-            var design = GenericSectionDesignService<TSection>.Instance;
-        }
 
 
         #region Private Helpers
