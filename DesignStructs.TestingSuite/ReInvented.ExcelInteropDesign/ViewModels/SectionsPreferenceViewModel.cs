@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
+using ReInvented.ExcelInteropDesign.Interfaces;
 using ReInvented.ExcelInteropDesign.Models;
 using ReInvented.ExcelInteropDesign.Services;
 using ReInvented.Sections.Domain.Interfaces;
@@ -189,12 +190,18 @@ namespace ReInvented.ExcelInteropDesign.ViewModels
             SectionDesignData designData = new SectionDesignData()
             {
                 ForcesSummary = new List<MemberForces>(), /// Get this from Staad analysis results
-                AxialStrengthParameters = new HSectionAxialStrengthParameters() { Lus = 4.5, Anet = 0.95 },
+                AxialStrengthParametersDictionary = new Dictionary<RolledSectionKey, IAxialStrengthParameters>(),///new HSectionAxialStrengthParameters() { Lus = 4.5, Anet = 0.95 },
                 DesignMethod = Enums.DesignMethod.LRFD,
                 MaterialGrade = new MaterialGrade() { Designation = "A36", Fy = 248.0, Fu = 410.0, StaadName = "A36" },
                 MaterialTable = new MaterialTable() { Country = "American", Name = "ASTM", Group = Sections.Domain.Enums.MaterialShapeGroup.All },
-                ShearStrengthParameters = new HSectionShearStrengthParameters() { Ts = 10.0, Spacing = 120.0, StiffenersConfiguration = Enums.WebTransverseStiffenersConfiguration.OneSide }
+                ShearStrengthParametersDictionary = new Dictionary<RolledSectionKey, IShearStrengthParameters>() ///new HSectionShearStrengthParameters() { Ts = 10.0, Spacing = 120.0, StiffenersConfiguration = Enums.WebTransverseStiffenersConfiguration.OneSide }
             };
+
+            RolledSectionKey sectionKey = new RolledSectionKey(typeof(RolledSectionHShape));
+
+            designData.AxialStrengthParametersDictionary.Add(sectionKey, new HSectionAxialStrengthParameters() { Lus = 4.5, Anet = 0.95 });
+            designData.ShearStrengthParametersDictionary.Add(sectionKey, new HSectionShearStrengthParameters() { Ts = 10.0, Spacing = 120.0, StiffenersConfiguration = Enums.WebTransverseStiffenersConfiguration.OneSide });
+
 
             Dictionary<string, double> urs = SectionDesignService.Design(SelectedSectionsPreference.Classifications, designData);
         }

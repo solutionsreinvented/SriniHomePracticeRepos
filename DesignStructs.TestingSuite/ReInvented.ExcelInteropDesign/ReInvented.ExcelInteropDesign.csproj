@@ -126,6 +126,7 @@
     <Compile Include="Models\LSectionShearStrengthParameters.cs" />
     <Compile Include="Models\MemberForces.cs" />
     <Compile Include="Models\OSectionShearStrengthParameters.cs" />
+    <Compile Include="Models\RolledSectionKey.cs" />
     <Compile Include="Models\SectionDesignData.cs" />
     <Compile Include="Models\SectionsPreference.cs" />
     <Compile Include="Models\RangeNames.cs" />

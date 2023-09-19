@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignStructs.FluentValidat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.ExcelInteropDesign", "ReInvented.ExcelInteropDesign\ReInvented.ExcelInteropDesign.csproj", "{14AC1788-4B24-40AC-AEB6-E9CB2D5FFA63}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.Animations", "ReInvented.Animations\ReInvented.Animations.csproj", "{00EDD453-512F-4385-8F6E-88A728FD186A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{14AC1788-4B24-40AC-AEB6-E9CB2D5FFA63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14AC1788-4B24-40AC-AEB6-E9CB2D5FFA63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14AC1788-4B24-40AC-AEB6-E9CB2D5FFA63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00EDD453-512F-4385-8F6E-88A728FD186A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00EDD453-512F-4385-8F6E-88A728FD186A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00EDD453-512F-4385-8F6E-88A728FD186A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00EDD453-512F-4385-8F6E-88A728FD186A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -21,8 +21,8 @@ namespace ReInvented.ExcelInteropDesign.Models
 
         public DesignMethod DesignMethod { get; set; }
 
-        public IAxialStrengthParameters AxialStrengthParameters { get; set; }
+        public Dictionary<RolledSectionKey, IAxialStrengthParameters> AxialStrengthParametersDictionary { get; set; }
 
-        public IShearStrengthParameters ShearStrengthParameters { get; set; }
+        public Dictionary<RolledSectionKey, IShearStrengthParameters> ShearStrengthParametersDictionary { get; set; }
     }
 }

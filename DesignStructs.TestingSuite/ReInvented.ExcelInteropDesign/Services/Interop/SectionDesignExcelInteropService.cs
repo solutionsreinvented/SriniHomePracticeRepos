@@ -83,9 +83,11 @@ namespace ReInvented.ExcelInteropDesign.Services
 
                 ICalculationSheetService calculationSheetService = CalculationSheetServiceFactory.Get<TSection>();
 
+                RolledSectionKey parametersKey = new RolledSectionKey(typeof(TSection));
+
                 calculationSheetService.FillMaterialProperties(_wsCalcs, designData.MaterialTable, designData.MaterialGrade);
-                calculationSheetService.FillAxialStrengthParameters(_wsCalcs, designData.AxialStrengthParameters);
-                calculationSheetService.FillShearStrengthParameters(_wsCalcs, designData.ShearStrengthParameters);
+                calculationSheetService.FillAxialStrengthParameters(_wsCalcs, designData.AxialStrengthParametersDictionary[parametersKey]);
+                calculationSheetService.FillShearStrengthParameters(_wsCalcs, designData.ShearStrengthParametersDictionary[parametersKey]);
                 calculationSheetService.FillMethodOfDesign(_wsCalcs, designData.DesignMethod);
 
 
