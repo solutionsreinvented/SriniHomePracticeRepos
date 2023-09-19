@@ -5,8 +5,6 @@ using ReInvented.Sections.Domain.Interfaces;
 using System;
 using System.Windows;
 using System.Runtime.InteropServices;
-using ReInvented.Sections.Domain.Models;
-using System.Timers;
 using System.Diagnostics;
 using ReInvented.Shared.Extensions;
 using ReInvented.Shared;
@@ -68,8 +66,7 @@ namespace ReInvented.ExcelInteropDesign.Services
                 sections.ForEach(s =>
                 {
                     _wsCalcs.Range[RangeNames.SectionProfile].Value2 = s.Designation;
-                    CalculationsSheetService.FillHSectionProperties(_wsCalcs, s as RolledSectionHShape);
-                    ///SectionPropertiesService.Instance.FillISectionPropertiesInSpreadSheet(_wsCalcs, s as RolledSectionHShape, rngSectionProperties.Row, rngSectionProperties.Column);
+                    CalculationsSheetService.FillSectionProperties(_wsCalcs, s);
                     double ur = Convert.ToDouble(_wsSummary.Range[RangeNames.GoverningUtilizationRatio].Value2);
 
                     utilizationRatios.Add(s.Designation, ur.Ceiling(0.001));

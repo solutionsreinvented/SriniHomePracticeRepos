@@ -5,7 +5,6 @@ using System.Windows.Input;
 
 using ReInvented.ExcelInteropDesign.Models;
 using ReInvented.ExcelInteropDesign.Services;
-using ReInvented.ExcelInteropDesign.Services.Design;
 using ReInvented.Sections.Domain.Interfaces;
 using ReInvented.Sections.Domain.Models;
 using ReInvented.Sections.Domain.Repositories;
@@ -188,32 +187,15 @@ namespace ReInvented.ExcelInteropDesign.ViewModels
 
             ///ExcelInteropService excelInteropService = new ExcelInteropService();
             ///Dictionary<string, double> urs = excelInteropService.DesignBeams(SelectedSectionsPreference.Classifications.SelectMany(c => c.Sections).ToList(), null);
-            
+
             IEnumerable<IRolledSection> sections = SelectedSectionsPreference.Classifications.SelectMany(c => c.Sections);
 
-            var rolledHDesign = GenericSectionDesignService<RolledSectionHShape>.Instance;
-            rolledHDesign.Design(sections.OfType<RolledSectionHShape>(), "");
 
-            
-            var rolledCDesign = GenericSectionDesignService<RolledSectionCShape>.Instance;
-            rolledCDesign.Design(sections.OfType<RolledSectionCShape>(), "");
-
-            
-            var rolledLDesign = GenericSectionDesignService<RolledSectionLShape>.Instance;
-            rolledLDesign.Design(sections.OfType<RolledSectionLShape>(), "");
-
-            var rolledODesign = GenericSectionDesignService<RolledSectionOShape>.Instance;
-            rolledODesign.Design(sections.OfType<RolledSectionOShape>(), "");
-
-
-            var rolledBoxDesign = GenericSectionDesignService<RolledSectionBoxShape>.Instance;
-            rolledBoxDesign.Design(sections.OfType<RolledSectionBoxShape>(), "");
 
 
         }
 
         #endregion
-
 
         #region Private Helpers
 

@@ -110,20 +110,16 @@
     <Compile Include="Models\SectionsPreference.cs" />
     <Compile Include="Models\RangeNames.cs" />
     <Compile Include="Models\WebTransverseStiffeners.cs" />
-    <Compile Include="Services\Design\BoxSectionDesignService.cs" />
-    <Compile Include="Services\Design\GenericSectionDesignService.cs" />
+    <Compile Include="Services\Design\ExcelTemplateNameProvider.cs" />
+    <Compile Include="Services\Interop\SectionDesignExcelInteropService.cs" />
     <Compile Include="Services\Interop\CalculationsSheetService.cs" />
     <Compile Include="Services\Interop\ComAddInServices.cs" />
-    <Compile Include="Services\Design\CSectionDesignService.cs" />
     <Compile Include="Services\Interop\ExcelInteropService.cs" />
-    <Compile Include="Services\Design\HSectionDesignService.cs" />
-    <Compile Include="Services\Design\LSectionDesignService.cs" />
-    <Compile Include="Services\Design\PipeSectionDesignService.cs" />
     <Compile Include="Services\Interop\SummarySheetService.cs" />
-    <Compile Include="Services\SectionDesignService.cs" />
+    <Compile Include="Services\Design\SectionDesignService.cs" />
     <Compile Include="Services\SectionPropertiesService.cs" />
     <Compile Include="Services\Staad\StaadOutputServices.cs" />
-    <Compile Include="Services\WorksheetSecurityService.cs" />
+    <Compile Include="Services\Interop\WorksheetSecurityService.cs" />
     <Compile Include="ViewModels\SectionsPreferenceViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

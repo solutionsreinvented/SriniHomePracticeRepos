@@ -13,13 +13,13 @@ using ReInvented.Shared.Extensions;
 
 using Excel = Microsoft.Office.Interop.Excel;
 
-namespace ReInvented.ExcelInteropDesign.Services.Design
+namespace ReInvented.ExcelInteropDesign.Services
 {
-    public class GenericSectionDesignService<TSection> where TSection : RolledSection, IRolledSection
+    public class SectionDesignExcelInteropService<TSection> where TSection : RolledSection, IRolledSection
     {
         #region Private Fields
 
-        private static GenericSectionDesignService<TSection> _instance;
+        private static SectionDesignExcelInteropService<TSection> _instance;
 
         private Excel.Application _excelApp;
         private Excel.Workbook _workbook;
@@ -30,26 +30,28 @@ namespace ReInvented.ExcelInteropDesign.Services.Design
 
         #region Private Constructor
 
-        private GenericSectionDesignService()
+        private SectionDesignExcelInteropService()
         {
 
-        } 
+        }
 
         #endregion
 
         #region Instance Provider
 
-        public static GenericSectionDesignService<TSection> Instance
-        {
+        public static SectionDesignExcelInteropService<TSection> Instance
+        { 
             get
             {
-                return _instance ?? (_instance = new GenericSectionDesignService<TSection>());
+                return _instance ?? (_instance = new SectionDesignExcelInteropService<TSection>());
             }
-        } 
+        }
 
         #endregion
 
-        public Dictionary<string, double> Design(IEnumerable<TSection> sections, string fullFilePath)
+        #region Public Functions
+
+        public Dictionary<string, double> Design(IEnumerable<TSection> sections, SectionDesignData designData, string fullFilePath)
         {
             Stopwatch overallTimeStopwatch = new Stopwatch();
 
@@ -118,7 +120,6 @@ namespace ReInvented.ExcelInteropDesign.Services.Design
                 }
 
                 _ = Marshal.ReleaseComObject(_excelApp);
-
             }
 
             overallTimeStopwatch.Stop();
@@ -126,6 +127,8 @@ namespace ReInvented.ExcelInteropDesign.Services.Design
             _ = MessageBox.Show($"Time took to complete the entire process is: {overallTimeStopwatch.Elapsed.FormatTime()}");
 
             return utilizationRatios;
-        }
+        } 
+
+        #endregion
     }
 }
