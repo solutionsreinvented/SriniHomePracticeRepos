@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 
 using ReInvented.ExcelInteropDesign.Enums;
+using ReInvented.ExcelInteropDesign.Interfaces;
 using ReInvented.Sections.Domain.Models;
 
 namespace ReInvented.ExcelInteropDesign.Models
 {
-    public class SectionDesignData
+    public class SectionDesignData : ISectionDesignData
     {
         public SectionDesignData()
         {
@@ -18,10 +19,10 @@ namespace ReInvented.ExcelInteropDesign.Models
 
         public MaterialGrade MaterialGrade { get; set; }
 
-        public WebTransverseStiffeners Stiffeners { get; set; }
-
-        public AxialStrengthParameters AxialStrengthParameters { get; set; }
-
         public DesignMethod DesignMethod { get; set; }
+
+        public IAxialStrengthParameters AxialStrengthParameters { get; set; }
+
+        public ShearStrengthParameters ShearStrengthParameters { get; set; }
     }
 }

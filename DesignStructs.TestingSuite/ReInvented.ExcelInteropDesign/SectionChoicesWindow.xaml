@@ -15,50 +15,65 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
-    <Grid Margin="10,20">
-
-        <!--#region Grid Definitions-->
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-
-        <!--#endregion-->
-
-        <controls:SelectionsMainControl
-            Grid.Row="0"
-            Height="26"
-            Margin="5,10" />
-
-        <Grid Grid.Row="1" Visibility="{Binding EnablePreferences, Converter={shared:BoolToVisibilityConverter}}">
+    <Grid>
+        <Grid Margin="10,20">
 
             <!--#region Grid Definitions-->
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3.4*" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="1.2*" />
-            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
             <!--#endregion-->
 
-            <controls:SelectionsNavigationControl Grid.Column="0" />
+            <controls:SelectionsMainControl
+                Grid.Row="0"
+                Height="26"
+                Margin="5,10" />
 
-            <controls:AddRemoveItemsControls Grid.Column="1" IsEnabled="{Binding ChoicesExist}" />
+            <Grid Grid.Row="1" Visibility="{Binding EnablePreferences, Converter={shared:BoolToVisibilityConverter}}">
 
-            <controls:ClassificationsDisplayControl Grid.Column="2" IsEnabled="{Binding ChoicesExist}" />
+                <!--#region Grid Definitions-->
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3.4*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1.2*" />
+                </Grid.ColumnDefinitions>
+
+                <!--#endregion-->
+
+                <controls:SelectionsNavigationControl Grid.Column="0" />
+
+                <controls:AddRemoveItemsControls Grid.Column="1" IsEnabled="{Binding ChoicesExist}" />
+
+                <controls:ClassificationsDisplayControl Grid.Column="2" IsEnabled="{Binding ChoicesExist}" />
+
+            </Grid>
+
+            <Button
+                Grid.Row="2"
+                Height="24"
+                Margin="5"
+                Command="{Binding RunDesignCommand}"
+                Content="Run Design"
+                IsEnabled="{Binding CanRunDesign}" />
 
         </Grid>
 
-        <Button
-            Grid.Row="2"
-            Height="24"
-            Margin="5"
-            Command="{Binding RunDesignCommand}"
-            Content="Run Design"
-            IsEnabled="{Binding CanRunDesign}" />
+        <!--<StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Visibility="{Binding LibrariesLoaded, Converter={shared:BoolToVisibilityConverter IsInverse=True}}">
+            <TextBlock FontSize="13" Text="Please wait while the data is loading..." />
+            <ProgressBar
+                Height="3"
+                Margin="0,2,0,0"
+                VerticalAlignment="Bottom"
+                IsIndeterminate="True" />
+        </StackPanel>-->
 
     </Grid>
 

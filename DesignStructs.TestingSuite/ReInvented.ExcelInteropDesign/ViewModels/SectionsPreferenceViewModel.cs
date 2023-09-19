@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 using ReInvented.ExcelInteropDesign.Models;
@@ -11,6 +12,7 @@ using ReInvented.Sections.Domain.Repositories;
 using ReInvented.Shared.Commands;
 using ReInvented.Shared.Stores;
 
+
 namespace ReInvented.ExcelInteropDesign.ViewModels
 {
     public class SectionsPreferenceViewModel : ErrorsEnabledPropertyStore
@@ -19,6 +21,7 @@ namespace ReInvented.ExcelInteropDesign.ViewModels
 
         public SectionsPreferenceViewModel(ObservableCollection<SectionsPreference> seedChoices = null)
         {
+            //_ = Task.Run(() => Initialize(seedChoices));
             Initialize(seedChoices);
         }
 
@@ -61,6 +64,8 @@ namespace ReInvented.ExcelInteropDesign.ViewModels
         public Classification RemoveClassification { get => Get<Classification>(); set { Set(value); RaisePropertyChanged(nameof(CanRemoveFromPreference)); } }
 
         public ObservableCollection<SectionsPreference> SectionsPreferenceCollection { get => Get<ObservableCollection<SectionsPreference>>(); private set => Set(value); }
+
+        public bool LibrariesLoaded { get => Get<bool>(); private set => Set(value); }
 
         #endregion
 
@@ -179,20 +184,16 @@ namespace ReInvented.ExcelInteropDesign.ViewModels
 
         private void OnRunDesign()
         {
-            ///var rolledH = GenericSectionDesignService<RolledSectionHShape>.Instance;
-            ///var rolledC = GenericSectionDesignService<RolledSectionCShape>.Instance;
-            ///rolledH.Design(new List<RolledSectionHShape>(), @"E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ApplicationData\Assets\Excel\Beams\IBeam.xlsm", CalculationsSheetService.FillISectionProperties);
-            ///rolledC.Design(new List<RolledSectionCShape>(), @"E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ApplicationData\Assets\Excel\Columns\CColumn.xlsm", CalculationsSheetService.FillISectionProperties);
-            ///bool compare = rolledH.Equals(rolledC);
-
-            ///ExcelInteropService excelInteropService = new ExcelInteropService();
-            ///Dictionary<string, double> urs = excelInteropService.DesignBeams(SelectedSectionsPreference.Classifications.SelectMany(c => c.Sections).ToList(), null);
-
             IEnumerable<IRolledSection> sections = SelectedSectionsPreference.Classifications.SelectMany(c => c.Sections);
 
-
-
-
+            SectionDesignData designData = new SectionDesignData()
+            {
+                AxialStrengthParameters = new HSectionAxialStrengthParameters() { Lus = 4.5, Anet = 0.95 },
+                DesignMethod = Enums.DesignMethod.LRFD,
+                MaterialGrade = new MaterialGrade() { Designation = "A36", Fy = 248.0, Fu = 410.0, StaadName = "A36" },
+                MaterialTable = new MaterialTable() { Country = "American", Name = "ASTM", Group = Sections.Domain.Enums.MaterialShapeGroup.All },
+                ShearStrengthParameters = new HSectionShearStrengthParameters() { Ts = 10.0, Spacing = 120.0, StiffenersConfiguration = Enums.WebTransverseStiffenersConfiguration.OneSide }
+            };
         }
 
         #endregion
@@ -202,6 +203,8 @@ namespace ReInvented.ExcelInteropDesign.ViewModels
         private void Initialize(ObservableCollection<SectionsPreference> preferences)
         {
             SectionsLibrary = SectionsRepository.Instance.GetSectionsLibrary();
+
+            //LibrariesLoaded = true;
 
             if (preferences == null)
             {

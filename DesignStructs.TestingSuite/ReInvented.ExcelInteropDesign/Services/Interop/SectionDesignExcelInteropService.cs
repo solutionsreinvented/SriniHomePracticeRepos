@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
 
+using ReInvented.ExcelInteropDesign.Interfaces;
 using ReInvented.ExcelInteropDesign.Models;
 using ReInvented.Sections.Domain.Base;
 using ReInvented.Sections.Domain.Interfaces;
@@ -51,7 +52,7 @@ namespace ReInvented.ExcelInteropDesign.Services
 
         #region Public Functions
 
-        public Dictionary<string, double> Design(IEnumerable<TSection> sections, SectionDesignData designData, string fullFilePath)
+        public Dictionary<string, double> Design(IEnumerable<TSection> sections, ISectionDesignData designData, string fullFilePath)
         {
             Stopwatch overallTimeStopwatch = new Stopwatch();
 
@@ -78,11 +79,11 @@ namespace ReInvented.ExcelInteropDesign.Services
 
                 designTimeStopwatch.Start();
 
-                ///SummarySheetService.FillForcesInSummaryTable(_wsSummary, (new SectionDesignData()).ForcesSummary);
-                ///CalculationsSheetService.FillMaterialProperties(_wsCalcs, designData.MaterialTable, designData.MaterialGrade);
-                ///CalculationsSheetService.FillAxialStrengthParameters(_wsCalcs, (new SectionDesignData()).AxialStrengthParameters);
-                ///CalculationsSheetService.FillStiffenersParameters(_wsCalcs, (new SectionDesignData()).Stiffeners);
-                ///CalculationsSheetService.FillMethodOfDesign(_wsCalcs, (new SectionDesignData()).DesignMethod);
+                SummarySheetService.FillForcesInSummaryTable(_wsSummary, designData.ForcesSummary);
+                CalculationsSheetService.FillMaterialProperties(_wsCalcs, designData.MaterialTable, designData.MaterialGrade);
+                CalculationsSheetService.FillAxialStrengthParameters(_wsCalcs, designData.AxialStrengthParameters);
+                CalculationsSheetService.FillShearStrengthParameters(_wsCalcs, designData.ShearStrengthParameters);
+                CalculationsSheetService.FillMethodOfDesign(_wsCalcs, designData.DesignMethod);
 
 
                 sections.ToList().ForEach(s =>

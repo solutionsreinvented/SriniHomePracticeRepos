@@ -44,6 +44,7 @@
                 Padding="5,2"
                 VerticalAlignment="Center"
                 VerticalContentAlignment="Center"
+                Tag="Enter a name for sections preference"
                 Text="{Binding SectionsPreferenceName, UpdateSourceTrigger=PropertyChanged}" />
             <Button
                 Grid.Column="2"

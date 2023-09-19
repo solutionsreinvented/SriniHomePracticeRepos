@@ -1,12 +1,15 @@
 ﻿using System;
 
+using Microsoft.Office.Interop.Excel;
+
 using ReInvented.ExcelInteropDesign.Enums;
+using ReInvented.ExcelInteropDesign.Interfaces;
 using ReInvented.ExcelInteropDesign.Models;
 using ReInvented.Sections.Domain.Interfaces;
 using ReInvented.Sections.Domain.Models;
 using ReInvented.Shared;
 
-using Excel = Microsoft.Office.Interop.Excel;
+///using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ReInvented.ExcelInteropDesign.Services
 {
@@ -14,7 +17,7 @@ namespace ReInvented.ExcelInteropDesign.Services
     {
         #region Public Methods
 
-        public static void FillMaterialProperties(Excel.Worksheet wsCalcs, MaterialTable table, MaterialGrade grade)
+        public static void FillMaterialProperties(Worksheet wsCalcs, MaterialTable table, MaterialGrade grade)
         {
             wsCalcs.Range[RangeNames.MaterialSpecification].Value2 = table.Name;
             wsCalcs.Range[RangeNames.MaterialGrade].Value2 = grade.Designation;
@@ -22,41 +25,59 @@ namespace ReInvented.ExcelInteropDesign.Services
             wsCalcs.Range[RangeNames.Fu].Value2 = grade.Fu;
         }
 
-        public static void FillAxialStrengthParameters(Excel.Worksheet wsCalcs, AxialStrengthParameters parameters)
+        public static void FillAxialStrengthParameters(Worksheet wsCalcs, IAxialStrengthParameters parameters)
         {
-            Excel.Range rngAxialStrengthParameters = wsCalcs.Range[RangeNames.AxialStrength];
-
-            int sRow = rngAxialStrengthParameters.Row;
-            int sColumn = rngAxialStrengthParameters.Column;
-
-            rngAxialStrengthParameters[sRow + 0, sColumn] = parameters.PercentNetTensileArea;
-            rngAxialStrengthParameters[sRow + 1, sColumn] = parameters.LateralUnsupportedLength;
+            if (parameters is HSectionAxialStrengthParameters hParameters)
+            {
+                FillHSectionAxialStrengthParameters(wsCalcs, hParameters);
+            }
+            else if (parameters is CSectionAxialStrengthParameters cParameters)
+            {
+                FillCSectionAxialStrengthParameters(wsCalcs, cParameters);
+            }
+            else if (parameters is LSectionAxialStrengthParameters lParameters)
+            {
+                FillLSectionAxialStrengthParameters(wsCalcs, lParameters);
+            }
+            else if (parameters is BoxOrOSectionAxialStrengthParameters boxOrOParameters)
+            {
+                FillBoxOrOSectionAxialStrengthParameters(wsCalcs, boxOrOParameters);
+            }
         }
 
-        public static void FillStiffenersParameters(Excel.Worksheet wsCalcs, WebTransverseStiffeners stiffeners)
+        public static void FillShearStrengthParameters(Worksheet wsCalcs, IShearStrengthParameters parameters)
         {
-            Excel.Range rngStiffenersParameters = wsCalcs.Range[RangeNames.WebTransverseStiffeners];
-
-            int sRow = rngStiffenersParameters.Row;
-            int sColumn = rngStiffenersParameters.Column;
-
-            rngStiffenersParameters[sRow + 0, sColumn] = stiffeners.Configuration == WebTransverseStiffenersConfiguration.None ? "No" : "Yes";
-            rngStiffenersParameters[sRow + 1, sColumn] = stiffeners.Configuration == WebTransverseStiffenersConfiguration.BothSides ?
-                                                         WebTransverseStiffenersConfiguration.BothSides.GetDescription() :
-                                                         WebTransverseStiffenersConfiguration.OneSide.GetDescription();
-
-            rngStiffenersParameters[sRow + 2, sColumn] = stiffeners.Thickness;
-            rngStiffenersParameters[sRow + 3, sColumn] = stiffeners.Spacing;
+            if (parameters is HSectionShearStrengthParameters hParameters)
+            {
+                FillHSectionShearStrengthParameters(wsCalcs, hParameters);
+            }
+            else if (parameters is CSectionShearStrengthParameters cParameters)
+            {
+                FillCSectionShearStrengthParameters(wsCalcs, cParameters);
+            }
+            else if (parameters is LSectionShearStrengthParameters lParameters)
+            {
+                FillLSectionShearStrengthParameters(wsCalcs, lParameters);
+            }
+            else if (parameters is OSectionShearStrengthParameters oParameters)
+            {
+                FillOSectionShearStrengthParameters(wsCalcs, oParameters);
+            }
+            else if (parameters is BoxSectionShearStrengthParameters boxParameters)
+            {
+                FillBoxSectionShearStrengthParameters(wsCalcs, boxParameters);
+            }
         }
 
-        public static void FillMethodOfDesign(Excel.Worksheet wsCalcs, DesignMethod designMethod)
+
+        public static void FillMethodOfDesign(Worksheet wsCalcs, DesignMethod designMethod)
         {
             wsCalcs.Range[RangeNames.DesignMethod].Value2 = designMethod.GetDescription();
         }
 
-        public static void FillSectionProperties(Excel.Worksheet wsCalcs, IRolledSection section)
+        public static void FillSectionProperties(Worksheet wsCalcs, IRolledSection section)
         {
-            Excel.Range rngSectionProperties = wsCalcs.Range[RangeNames.SectionProperties];
+            Range rngSectionProperties = wsCalcs.Range[RangeNames.SectionProperties];
             int sRow = rngSectionProperties.Row;
             int sColumn = rngSectionProperties.Column;
 
@@ -84,9 +105,9 @@ namespace ReInvented.ExcelInteropDesign.Services
 
         #endregion
 
-        #region Private Helpers
+        #region Private Helpers - Fill Section Properties
 
-        private static void FillCommonProperties(Excel.Worksheet wsCalcs, IRolledSection section, int sRow, int sColumn)
+        private static void FillCommonProperties(Worksheet wsCalcs, IRolledSection section, int sRow, int sColumn)
         {
             wsCalcs.Cells[sRow + 00, sColumn].Value = section.Designation;
             wsCalcs.Cells[sRow + 01, sColumn].Value = section.Mass;
@@ -119,7 +140,7 @@ namespace ReInvented.ExcelInteropDesign.Services
             wsCalcs.Cells[sRow + 42, sColumn].Value = section.Rv;
         }
 
-        private static void FillHAndCSpecificProperties(Excel.Worksheet wsCalcs, IRolledSectionHAndC section, int sRow, int sColumn)
+        private static void FillHAndCSpecificProperties(Worksheet wsCalcs, IRolledSectionHAndC section, int sRow, int sColumn)
         {
             wsCalcs.Cells[sRow + 03, sColumn].Value = section.H;
             wsCalcs.Cells[sRow + 04, sColumn].Value = section.Bf;
@@ -134,7 +155,7 @@ namespace ReInvented.ExcelInteropDesign.Services
             wsCalcs.Cells[sRow + 32, sColumn].Value = section.Alpha;
         }
 
-        private static void FillBoxSpecificProperties(Excel.Worksheet wsCalcs, RolledSectionBoxShape section, int sRow, int sColumn)
+        private static void FillBoxSpecificProperties(Worksheet wsCalcs, RolledSectionBoxShape section, int sRow, int sColumn)
         {
             wsCalcs.Cells[sRow + 04, sColumn].Value = section.B;
             wsCalcs.Cells[sRow + 06, sColumn].Value = section.Tw;
@@ -143,7 +164,7 @@ namespace ReInvented.ExcelInteropDesign.Services
             wsCalcs.Cells[sRow + 18, sColumn].Value = section.AGI;
         }
 
-        private static void FillOSpecificProperties(Excel.Worksheet wsCalcs, RolledSectionOShape section, int sRow, int sColumn)
+        private static void FillOSpecificProperties(Worksheet wsCalcs, RolledSectionOShape section, int sRow, int sColumn)
         {
             wsCalcs.Cells[sRow + 00, sColumn].Value = section.Designation;
             wsCalcs.Cells[sRow + 01, sColumn].Value = section.Mass;
@@ -155,6 +176,76 @@ namespace ReInvented.ExcelInteropDesign.Services
 
             wsCalcs.Cells[sRow + 16, sColumn].Value = section.ALI;
             wsCalcs.Cells[sRow + 18, sColumn].Value = section.AGI;
+        }
+
+        #endregion
+
+        #region Private Helpers - Fill Axial Strength Parameters
+
+        private static void FillHSectionAxialStrengthParameters(Worksheet wsCalcs, HSectionAxialStrengthParameters parameters)
+        {
+            wsCalcs.Range[RangeNames.Anet].Value2 = parameters.Anet;
+            wsCalcs.Range[RangeNames.Lus].Value2 = parameters.Lus;
+            wsCalcs.Range[RangeNames.Ltub].Value2 = parameters.Ltub;
+        }
+
+        private static void FillCSectionAxialStrengthParameters(Worksheet wsCalcs, CSectionAxialStrengthParameters parameters)
+        {
+            wsCalcs.Range[RangeNames.Anet].Value2 = parameters.Anet;
+            wsCalcs.Range[RangeNames.Lus].Value2 = parameters.Lus;
+            wsCalcs.Range[RangeNames.Ltub].Value2 = parameters.Ltub;
+
+            wsCalcs.Range[RangeNames.GussetsConnectedTo].Value2 = parameters.GussetConnectedTo.GetDescription();
+            wsCalcs.Range[RangeNames.Tg].Value2 = parameters.Tg;
+            wsCalcs.Range[RangeNames.Lcon].Value2 = parameters.Lcon;
+        }
+
+        private static void FillLSectionAxialStrengthParameters(Worksheet wsCalcs, LSectionAxialStrengthParameters parameters)
+        {
+            throw new NotImplementedException($"Filling {nameof(LSectionAxialStrengthParameters)} is not implemented yet.");
+        }
+
+        private static void FillBoxOrOSectionAxialStrengthParameters(Worksheet wsCalcs, BoxOrOSectionAxialStrengthParameters parameters)
+        {
+            wsCalcs.Range[RangeNames.Lus].Value2 = parameters.Lus;
+            wsCalcs.Range[RangeNames.Lcon].Value2 = parameters.Lcon;
+            wsCalcs.Range[RangeNames.Tg].Value2 = parameters.Tg;
+        }
+
+        #endregion
+
+        #region Private Helpers - Fill Shear Strength Parameters
+
+        private static void FillHSectionShearStrengthParameters(Worksheet wsCalcs, HSectionShearStrengthParameters parameters)
+        {
+            wsCalcs.Range[RangeNames.HasStiffeners].Value2 = parameters.StiffenersConfiguration != WebTransverseStiffenersConfiguration.None ? "Yes" : "No";
+            wsCalcs.Range[RangeNames.StiffenersConfiguration].Value2 = parameters.StiffenersConfiguration.GetDescription();
+            wsCalcs.Range[RangeNames.Ts].Value2 = parameters.Ts;
+            wsCalcs.Range[RangeNames.Spacing].Value2 = parameters.Spacing;
+        }
+
+        private static void FillCSectionShearStrengthParameters(Worksheet wsCalcs, CSectionShearStrengthParameters parameters)
+        {
+            wsCalcs.Range[RangeNames.HasStiffeners].Value2 = parameters.StiffenersConfiguration != WebTransverseStiffenersConfiguration.None ? "Yes" : "No";
+            wsCalcs.Range[RangeNames.Ts].Value2 = parameters.Ts;
+            wsCalcs.Range[RangeNames.Spacing].Value2 = parameters.Spacing;
+        }
+
+        private static void FillLSectionShearStrengthParameters(Worksheet wsCalcs, LSectionShearStrengthParameters parameters)
+        {
+            throw new NotImplementedException($"Filling {nameof(LSectionShearStrengthParameters)} is not implemented yet.");
+        }
+
+        private static void FillOSectionShearStrengthParameters(Worksheet wsCalcs, OSectionShearStrengthParameters parameters)
+        {
+            wsCalcs.Range[RangeNames.HssForm].Value2 = parameters.HssForm.GetDescription();
+        }
+
+        private static void FillBoxSectionShearStrengthParameters(Worksheet wsCalcs, BoxSectionShearStrengthParameters parameters)
+        {
+            wsCalcs.Range[RangeNames.HssForm].Value2 = parameters.HssForm.GetDescription();
+            wsCalcs.Range[RangeNames.GussetConfiguration].Value2 = parameters.GussetConfiguration.GetDescription();
+            wsCalcs.Range[RangeNames.GussetsConnectedTo].Value2 = parameters.GussetConnectedTo.GetDescription();
         }
 
         #endregion

@@ -4,8 +4,7 @@ using System.IO;
 using System.Linq;
 
 using ReInvented.DataAccess.Services;
-using ReInvented.ExcelInteropDesign.Models;
-
+using ReInvented.ExcelInteropDesign.Interfaces;
 using ReInvented.Sections.Domain.Interfaces;
 using ReInvented.Sections.Domain.Models;
 
@@ -15,7 +14,7 @@ namespace ReInvented.ExcelInteropDesign.Services
     {
         #region Public Functions
 
-        public static Dictionary<string, double> Design(IEnumerable<Classification> classifications, SectionDesignData designData)
+        public static Dictionary<string, double> Design(IEnumerable<Classification> classifications, ISectionDesignData designData)
         {
             string filePath;
             Dictionary<string, double> allUtilizationRatios = new Dictionary<string, double>();
@@ -23,9 +22,9 @@ namespace ReInvented.ExcelInteropDesign.Services
             List<IRolledSection> allSections = classifications.SelectMany(c => c.Sections).ToList();
             Dictionary<Type, List<IRolledSection>> segregatedSections = SegregateSectionsByType(allSections);
 
-            foreach (var key in segregatedSections.Keys)
+            foreach (Type key in segregatedSections.Keys)
             {
-                filePath = Path.Combine(FileServiceProvider.ExcelTemplatesDirectory, "Columns", ExcelTemplateNameProvider.GetName(key));
+                filePath = Path.Combine(FileServiceProvider.ExcelTemplatesTestingDirectory, "Columns", ExcelTemplateNameProvider.GetName(key));
                 List<IRolledSection> sections = segregatedSections[key];
 
                 Dictionary<string, double> currentUtilizationRatios;
@@ -60,7 +59,7 @@ namespace ReInvented.ExcelInteropDesign.Services
             }
 
             return allUtilizationRatios;
-        } 
+        }
 
         #endregion
 
@@ -87,7 +86,7 @@ namespace ReInvented.ExcelInteropDesign.Services
             }
 
             return segregatedSections;
-        } 
+        }
 
         #endregion
     }
