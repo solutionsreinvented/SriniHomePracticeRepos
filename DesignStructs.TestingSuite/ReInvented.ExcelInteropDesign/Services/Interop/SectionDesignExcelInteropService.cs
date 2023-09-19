@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
 
+using ReInvented.ExcelInteropDesign.Factories;
 using ReInvented.ExcelInteropDesign.Interfaces;
 using ReInvented.ExcelInteropDesign.Models;
 using ReInvented.Sections.Domain.Base;
@@ -74,22 +75,24 @@ namespace ReInvented.ExcelInteropDesign.Services
                 _wsSummary = (Excel.Worksheet)_workbook.Sheets["Summary"];
 
                 WorksheetSecurityService.UnprotectSheet(_wsCalcs);
-
                 Stopwatch designTimeStopwatch = new Stopwatch();
 
                 designTimeStopwatch.Start();
 
                 SummarySheetService.FillForcesInSummaryTable(_wsSummary, designData.ForcesSummary);
-                CalculationsSheetService.FillMaterialProperties(_wsCalcs, designData.MaterialTable, designData.MaterialGrade);
-                CalculationsSheetService.FillAxialStrengthParameters(_wsCalcs, designData.AxialStrengthParameters);
-                CalculationsSheetService.FillShearStrengthParameters(_wsCalcs, designData.ShearStrengthParameters);
-                CalculationsSheetService.FillMethodOfDesign(_wsCalcs, designData.DesignMethod);
+
+                ICalculationSheetService calculationSheetService = CalculationSheetServiceFactory.Get<TSection>();
+
+                calculationSheetService.FillMaterialProperties(_wsCalcs, designData.MaterialTable, designData.MaterialGrade);
+                calculationSheetService.FillAxialStrengthParameters(_wsCalcs, designData.AxialStrengthParameters);
+                calculationSheetService.FillShearStrengthParameters(_wsCalcs, designData.ShearStrengthParameters);
+                calculationSheetService.FillMethodOfDesign(_wsCalcs, designData.DesignMethod);
 
 
                 sections.ToList().ForEach(s =>
                 {
                     _wsCalcs.Range[RangeNames.SectionProfile].Value2 = s.Designation;
-                    CalculationsSheetService.FillSectionProperties(_wsCalcs, s);
+                    calculationSheetService.FillSectionProperties(_wsCalcs, s);
                     double ur = Convert.ToDouble(_wsSummary.Range[RangeNames.GoverningUtilizationRatio].Value2);
 
                     utilizationRatios.Add(s.Designation, ur.Ceiling(0.001));

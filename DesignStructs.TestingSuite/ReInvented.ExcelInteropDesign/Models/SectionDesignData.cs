@@ -23,6 +23,6 @@ namespace ReInvented.ExcelInteropDesign.Models
 
         public IAxialStrengthParameters AxialStrengthParameters { get; set; }
 
-        public ShearStrengthParameters ShearStrengthParameters { get; set; }
+        public IShearStrengthParameters ShearStrengthParameters { get; set; }
     }
 }
