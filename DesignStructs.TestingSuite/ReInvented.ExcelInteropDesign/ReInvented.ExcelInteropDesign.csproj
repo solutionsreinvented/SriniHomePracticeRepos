@@ -88,6 +88,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Base\CalculationSheetService.cs" />
     <Compile Include="Controls\AddRemoveItemsControls.xaml.cs">
       <DependentUpon>AddRemoveItemsControls.xaml</DependentUpon>
     </Compile>
@@ -106,7 +107,9 @@
     <Compile Include="Enums\GussetToCSectionConnectionElement.cs" />
     <Compile Include="Enums\HssForm.cs" />
     <Compile Include="Enums\WebTransverseStiffenersConfiguration.cs" />
+    <Compile Include="Factories\CalculationSheetServiceFactory.cs" />
     <Compile Include="Interfaces\IAxialStrengthParameters.cs" />
+    <Compile Include="Interfaces\ICalculationSheetService.cs" />
     <Compile Include="Interfaces\IGussetParameters.cs" />
     <Compile Include="Interfaces\ISectionDesignCriteria.cs" />
     <Compile Include="Interfaces\ISectionDesignService.cs" />
@@ -127,10 +130,13 @@
     <Compile Include="Models\SectionsPreference.cs" />
     <Compile Include="Models\RangeNames.cs" />
     <Compile Include="Services\Design\ExcelTemplateNameProvider.cs" />
+    <Compile Include="Services\Interop\CSectionCalculationSheetService.cs" />
+    <Compile Include="Services\Interop\HSectionCalculationSheetService.cs" />
+    <Compile Include="Services\Interop\LSectionCalculationSheetService.cs" />
+    <Compile Include="Services\Interop\OSectionCalculationSheetService.cs" />
     <Compile Include="Services\Interop\SectionDesignExcelInteropService.cs" />
-    <Compile Include="Services\Interop\CalculationsSheetService.cs" />
+    <Compile Include="Services\Interop\BoxSectionCalculationSheetService.cs" />
     <Compile Include="Services\Interop\ComAddInServices.cs" />
-    <Compile Include="Services\Interop\ExcelInteropService.cs" />
     <Compile Include="Services\Interop\SummarySheetService.cs" />
     <Compile Include="Services\Design\SectionDesignService.cs" />
     <Compile Include="Services\Staad\StaadOutputServices.cs" />

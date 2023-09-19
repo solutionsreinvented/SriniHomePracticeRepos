@@ -55,7 +55,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\Section.cs" />
     <Compile Include="ExcelInterop.cs" />
+    <Compile Include="Interfaces\ISection.cs" />
+    <Compile Include="Models\HSection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaadQuery.cs" />
