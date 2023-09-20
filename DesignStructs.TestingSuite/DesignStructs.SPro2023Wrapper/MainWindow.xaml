@@ -8,6 +8,8 @@
     Title="MainWindow"
     Width="800"
     Height="450"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid />
 </Window>

@@ -34,7 +34,6 @@ namespace ReInvented.ExcelInteropDesign.Services
                 throw new InvalidDataException($"Inadequate information is provided in {nameof(designData.ShearStrengthParametersDictionary)}");
             }
 
-
             foreach (RolledSectionKey key in segregatedSections.Keys)
             {
                 filePath = Path.Combine(FileServiceProvider.ExcelTemplatesTestingDirectory, "Columns", ExcelTemplateNameProvider.GetName(key.KeyType));
@@ -75,6 +74,7 @@ namespace ReInvented.ExcelInteropDesign.Services
         }
 
         #endregion
+
 
         #region Private Helpers
 

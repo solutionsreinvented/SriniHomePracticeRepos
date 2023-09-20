@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
+using Microsoft.Win32;
+
 using OpenSTAADUI;
 
+using ReInvented.StaadPro.Interactivity.Enums;
+using ReInvented.StaadPro.Interactivity.Models;
 using ReInvented.TestingSuite.Interfaces;
 using ReInvented.TestingSuite.Models;
 
@@ -11,6 +15,19 @@ namespace ReInvented.TestingSuite
     class Program
     {
         static void Main(string[] args)
+        {
+            ///DerivedClassSingletonVerification();
+
+
+
+            Console.ReadLine();
+        }
+
+ 
+
+        #region Previous
+
+        private static void DerivedClassSingletonVerification()
         {
             ISection h1 = SectionFactory.Get<HSection>();
             ISection c1 = SectionFactory.Get<CSection>();
@@ -33,10 +50,8 @@ namespace ReInvented.TestingSuite
 
             Console.WriteLine($"{nameof(o1)} and {nameof(o2)} are {AreEqualResult(o1, o2)}equal.");
             Console.WriteLine($"{nameof(o1)} and {nameof(h1)} are {AreEqualResult(o1, h1)}equal.");
-
-
-            Console.ReadLine();
         }
+
         private static string AreEqualResult(ISection left, ISection right) => left == right ? string.Empty : "not ";
     }
 
@@ -65,6 +80,8 @@ namespace ReInvented.TestingSuite
 
             return section;
         }
-    }
+    } 
+
+    #endregion
 }
 

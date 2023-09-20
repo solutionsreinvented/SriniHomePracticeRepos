@@ -106,6 +106,7 @@
     <Compile Include="Enums\GussetToBoxSectionConnectionSide.cs" />
     <Compile Include="Enums\GussetToCSectionConnectionElement.cs" />
     <Compile Include="Enums\HssForm.cs" />
+    <Compile Include="Models\WorksheetNames.cs" />
     <Compile Include="Enums\WebTransverseStiffenersConfiguration.cs" />
     <Compile Include="Factories\CalculationSheetServiceFactory.cs" />
     <Compile Include="Interfaces\IAxialStrengthParameters.cs" />

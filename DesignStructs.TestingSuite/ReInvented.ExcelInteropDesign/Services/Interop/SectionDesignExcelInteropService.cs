@@ -71,8 +71,9 @@ namespace ReInvented.ExcelInteropDesign.Services
             try
             {
                 _workbook = _excelApp.Workbooks.Open(fullFilePath);
-                _wsCalcs = (Excel.Worksheet)_workbook.Sheets["Calcs"];
-                _wsSummary = (Excel.Worksheet)_workbook.Sheets["Summary"];
+
+                _wsCalcs = (Excel.Worksheet)_workbook.Sheets[WorksheetNames.Calcs];
+                _wsSummary = (Excel.Worksheet)_workbook.Sheets[WorksheetNames.Summary];
 
                 WorksheetSecurityService.UnprotectSheet(_wsCalcs);
                 Stopwatch designTimeStopwatch = new Stopwatch();
