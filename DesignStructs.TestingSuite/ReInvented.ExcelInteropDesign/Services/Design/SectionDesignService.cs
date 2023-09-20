@@ -21,17 +21,11 @@ namespace ReInvented.ExcelInteropDesign.Services
 
             Dictionary<RolledSectionKey, List<IRolledSection>> segregatedSections = SegregateSectionsByType(classifications.SelectMany(c => c.Sections).ToList());
 
-            /// Check if the Axial Strength Parameters and Shear Strength Parameters are provided completely before starting the design process.
-            if (segregatedSections.Keys.Any(k => !designData.AxialStrengthParametersDictionary.ContainsKey(k)) ||
-                designData.AxialStrengthParametersDictionary.Values.Any(v => v == null))
-            {
-                throw new InvalidDataException($"Inadequate information is provided in {nameof(designData.AxialStrengthParametersDictionary)}");
-            }
+            DataValidationResult validationResult = ValidateData(designData, segregatedSections);
 
-            if (segregatedSections.Keys.Any(k => !designData.ShearStrengthParametersDictionary.ContainsKey(k)) ||
-                designData.ShearStrengthParametersDictionary.Values.Any(v => v == null))
+            if (!validationResult.IsValid)
             {
-                throw new InvalidDataException($"Inadequate information is provided in {nameof(designData.ShearStrengthParametersDictionary)}");
+                throw new InvalidDataException(validationResult.ExceptionMessage);
             }
 
             foreach (RolledSectionKey key in segregatedSections.Keys)
@@ -67,14 +61,13 @@ namespace ReInvented.ExcelInteropDesign.Services
                     currentUtilizationRatios = designService.Design(sections.OfType<RolledSectionCShape>(), designData, filePath);
                 }
 
-                allUtilizationRatios.Union(currentUtilizationRatios);
+                _ = allUtilizationRatios.Union(currentUtilizationRatios);
             }
 
             return allUtilizationRatios;
         }
 
         #endregion
-
 
         #region Private Helpers
 
@@ -99,6 +92,35 @@ namespace ReInvented.ExcelInteropDesign.Services
             }
 
             return segregatedSections;
+        }
+
+        private static DataValidationResult ValidateData(ISectionDesignData designData, Dictionary<RolledSectionKey, List<IRolledSection>> segregatedSections)
+        {
+            DataValidationResult dataValidationResult = new DataValidationResult() { IsValid = false };
+
+            /// Check if the Axial Strength Parameters and Shear Strength Parameters are provided completely before starting the design process.
+            if (segregatedSections.Keys.Any(k => !designData.AxialStrengthParametersDictionary.ContainsKey(k)) ||
+                designData.AxialStrengthParametersDictionary.Values.Any(v => v == null))
+            {
+                dataValidationResult.ExceptionMessage = $"Inadequate information is provided in {nameof(designData.AxialStrengthParametersDictionary)}";
+            }
+            else if (segregatedSections.Keys.Any(k => !designData.ShearStrengthParametersDictionary.ContainsKey(k)) ||
+                     designData.ShearStrengthParametersDictionary.Values.Any(v => v == null))
+            {
+                dataValidationResult.ExceptionMessage = $"Inadequate information is provided in {nameof(designData.ShearStrengthParametersDictionary)}";
+            }
+            else if (designData.ForcesSummary == null || designData.ForcesSummary.Count != 12)
+            {
+                dataValidationResult.ExceptionMessage = $"Invalid {nameof(designData.ForcesSummary)}. The total number items in {nameof(designData.ForcesSummary)} shall be exactly 12.";
+            }
+            else
+            {
+                dataValidationResult.IsValid = true;
+                dataValidationResult.ExceptionMessage = string.Empty;
+            }
+
+
+            return dataValidationResult;
         }
 
         #endregion

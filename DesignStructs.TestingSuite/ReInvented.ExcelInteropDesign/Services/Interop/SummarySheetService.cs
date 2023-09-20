@@ -12,7 +12,7 @@ namespace ReInvented.ExcelInteropDesign.Services
         {
             if (forcesSummary.Count != 12)
             {
-                throw new ArgumentException($"Invalid {nameof(forcesSummary)}. The items in the argument shall be exactly 12.");
+                throw new ArgumentException($"Invalid {nameof(forcesSummary)}. The items in the {nameof(forcesSummary)} shall be exactly 12.");
             }
 
             Excel.Range rngForcesSummary = wsSummary.Range[RangeNames.ForcesSummaryTable];
