@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+
+using ReInvented.Animations.ViewModels;
+using ReInvented.Animations.Views;
 
 namespace ReInvented.Animations
 {
@@ -13,5 +10,11 @@ namespace ReInvented.Animations
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            MainWindow = new Home() { DataContext = new HomeViewModel() };
+            MainWindow.Show();
+        }
     }
 }
