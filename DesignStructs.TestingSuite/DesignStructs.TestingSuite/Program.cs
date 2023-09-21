@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
-using Microsoft.Win32;
-
-using OpenSTAADUI;
-
-using ReInvented.StaadPro.Interactivity.Enums;
-using ReInvented.StaadPro.Interactivity.Models;
 using ReInvented.TestingSuite.Interfaces;
 using ReInvented.TestingSuite.Models;
 
@@ -17,8 +10,6 @@ namespace ReInvented.TestingSuite
         static void Main(string[] args)
         {
             ///DerivedClassSingletonVerification();
-
-
 
             Console.ReadLine();
         }

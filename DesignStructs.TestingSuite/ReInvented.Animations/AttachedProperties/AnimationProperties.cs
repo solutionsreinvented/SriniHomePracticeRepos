@@ -65,7 +65,6 @@ namespace ReInvented.Animations.AttachedProperties
 
         #endregion
 
-
         #region LoadAnimationKindProperty and UnloadAnimationKindProperty
 
         public static readonly DependencyProperty LoadAnimationKindProperty =
@@ -123,7 +122,6 @@ namespace ReInvented.Animations.AttachedProperties
         }
 
         #endregion
-
 
     }
 }
