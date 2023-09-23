@@ -3,8 +3,9 @@
 using OpenSTAADUI;
 
 using ReInvented.Shared;
-
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -12,20 +13,43 @@ using System.Threading.Tasks;
 
 namespace SPro2023ConsoleApp
 {
+    class NodesCollectionGenerator
+    {
+        public static NodesCollection Generate()
+        {
+            var nodesCollection = new NodesCollection();
+
+            var totalNodes = 150000;
+
+            for (int i = 0; i < totalNodes; i++)
+            {
+                double iEff = (double)(i <= 360 ? i : (i - ((i / 360).Floor(1) * 360m)));
+                Node node = new Node() { Id = i + 1, X = iEff * Math.Cos(iEff.ToRadians()), Y = iEff * 0.3, Z = iEff * Math.Sin(iEff.ToRadians()) };
+                nodesCollection.Nodes.Add(node);
+            }
+
+            return nodesCollection;
+        }
+    }
+
     class Program
     {
         static async Task Main(string[] args)
         {
-            string fileFullPath = @"C:\Users\masanams\Desktop\Desktop\Code\STAAD\0D35.0H2.50S09.00OC1.113SC1.219IMP0.240CON0.0300MOT1250.std";
+            string fileFullPath = @"C:\Users\srini\Desktop\On Screen\Coding\Staad\0D35.0H2.50S09.00OC1.113SC1.219IMP0.240CON0.0300MOT1250.std";
 
             StaadWrapper wrapper = new StaadWrapper();
             OSGeometryUI geometry = wrapper.Geometry;
 
-            NodesCollection nodesCollection = ReadNodesFromJson();
+            NodesCollection nodesCollection = NodesCollectionGenerator.Generate(); ///ReadNodesFromJson();
 
-            int threadCount = 12;
+            int threadCount = 1200;
 
-            if (nodesCollection.Nodes.Count / threadCount >= 1)
+            Stopwatch stopwatch = new Stopwatch();
+
+            stopwatch.Start();
+
+            if (threadCount > 1 && nodesCollection.Nodes.Count / threadCount > 1)
             {
                 var nodeCountInEachThread = (int)(nodesCollection.Nodes.Count / threadCount).Floor(1);
                 var threadNodesCollections = new List<List<Node>>();
@@ -53,6 +77,8 @@ namespace SPro2023ConsoleApp
 
                 await Task.Run(() => CreateNodesOneByOne(geometry, nodesCollection.Nodes.ToList()));
             }
+
+            stopwatch.Stop();
 
             ///// Case 1:
             //CreateNodesOneByOne(geometry, nodesCollection.Nodes.ToList());

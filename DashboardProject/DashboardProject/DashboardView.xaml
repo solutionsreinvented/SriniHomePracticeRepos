@@ -1,0 +1,140 @@
+﻿<Window x:Class="DashboardProject.DashboardView" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="MainWindow" Height="550" Width="925" Background="#fbfefb">
+    <Grid>
+        <Grid.Resources>
+            <sys:Double x:Key="UniformOpacity">0.8</sys:Double>
+            
+            <Style TargetType="{x:Type Border}" x:Key="BorderEffectStyle">
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Background" Value="Gray" />
+                <Setter Property="CornerRadius" Value="2" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Color="WhiteSmoke" BlurRadius="8" ShadowDepth="8" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="{x:Type Border}" x:Key="ContainerBorderStyle">
+                <Setter Property="Width" Value="200" />
+                <Setter Property="Height" Value="200" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="CornerRadius" Value="2" />
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <SolidColorBrush Color="Gray" Opacity="{StaticResource UniformOpacity}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderThickness" Value="0.3" />
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <!--<SolidColorBrush Color="White" Opacity="{StaticResource UniformOpacity}" />-->
+                        <LinearGradientBrush StartPoint="0.2 0.2" EndPoint="0.8 0.8" Opacity="1">
+                            <GradientStop Offset="0" Color="#e8e8e4"/>
+                            <GradientStop Offset="0.5" Color="#d8e2dc" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+        <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid>
+                <Border Style="{StaticResource BorderEffectStyle}" />
+                <Border Style="{StaticResource ContainerBorderStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="32" />
+                    </Grid.RowDefinitions>
+
+                    <Image Source="Images/design.png" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <Grid Grid.Row="1" Margin="-5 5 -5 -5" Background="#14213d">
+                            <TextBlock VerticalAlignment="Center" Foreground="White" Text="New Project" Grid.Row="1" HorizontalAlignment="Center" FontSize="9" Margin="0 5" />
+                        </Grid>
+                            
+                </Grid>
+            </Border>
+            </Grid>
+            <Grid>
+                <Border Style="{StaticResource BorderEffectStyle}" />
+                <Border Style="{StaticResource ContainerBorderStyle}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Image Source="Images/interiordesign.png" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                        <Grid Grid.Row="1" Margin="-5 5 -5 -5" Background="#2a9d8f">
+                            <TextBlock Foreground="White" Text="Recent Projects" Grid.Row="1" HorizontalAlignment="Center" FontSize="9" Margin="0 5" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid>
+                <Border Style="{StaticResource BorderEffectStyle}" />
+                <Border Style="{StaticResource ContainerBorderStyle}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Image Source="Images/overclocking.png" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <Grid Grid.Row="1" Margin="-5 5 -5 -5" Background="#ef233c">
+                            <TextBlock Foreground="White" Text="Open Existing Project" Grid.Row="1" HorizontalAlignment="Center" FontSize="9" Margin="0 5" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid>
+                <Border Style="{StaticResource BorderEffectStyle}" />
+                <Border Style="{StaticResource ContainerBorderStyle}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Existing" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBlock TextWrapping="Wrap" Text="Open Existing Project" Grid.Row="1" HorizontalAlignment="Center" FontSize="9" Margin="0 5" />
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid>
+                <Border Style="{StaticResource BorderEffectStyle}" />
+                <Border Style="{StaticResource ContainerBorderStyle}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Image Source="Images/videocard.png" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBlock TextWrapping="Wrap" Text="Open Existing Project" Grid.Row="1" HorizontalAlignment="Center" FontSize="9" Margin="0 5" />
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid>
+                <Border Style="{StaticResource BorderEffectStyle}" />
+                <Border Style="{StaticResource ContainerBorderStyle}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Existing" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBlock TextWrapping="Wrap" Text="Open Existing Project" Grid.Row="1" HorizontalAlignment="Center" FontSize="9" Margin="0 5" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </WrapPanel>
+    </Grid>
+</Window>
