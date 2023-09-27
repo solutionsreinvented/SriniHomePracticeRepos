@@ -1,6 +1,10 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.IO;
+using System.Runtime.InteropServices;
+using System.Threading;
 
 using OpenSTAADUI;
+
+using ReInvented.StaadPro.Interactivity.Enums;
 
 namespace ReInvented.TestingSuite
 {
@@ -16,9 +20,19 @@ namespace ReInvented.TestingSuite
 
             openStaad.OpenSTAADFile(filePath);
 
+            object fileName = string.Empty;
+
+            do
+            {
+
+                openStaad.GetSTAADFile(ref fileName, filePath);
+                Thread.Sleep(200);
+
+            } while ((string)fileName != Path.GetFileName(filePath));
+
             if (!output.AreResultsAvailable())
             {
-                int result = openStaad.AnalyzeEx(SilentMode.Enable, HiddenMode.Disable, WaitMode.Wait);
+                var result = (AnalysisResult)openStaad.AnalyzeEx(SilentMode.Enable, HiddenMode.Disable, WaitMode.Wait);
             }
 
 

@@ -10,7 +10,7 @@ namespace ReInvented.TestingSuite
         static void Main(string[] args)
         {
             ///DerivedClassSingletonVerification();
-
+            StaadQuery.Run();
             Console.ReadLine();
         }
 
