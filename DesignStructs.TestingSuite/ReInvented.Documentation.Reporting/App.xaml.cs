@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+
+using ReInvented.Documentation.Reporting.ViewModels;
+using ReInvented.Documentation.Reporting.Views;
 
 namespace ReInvented.Documentation.Reporting
 {
@@ -13,5 +10,11 @@ namespace ReInvented.Documentation.Reporting
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            MainWindow = new ReportsBrowserView() { DataContext = new ReportsBrowserViewModel() };
+            MainWindow.Show();
+        }
     }
 }
