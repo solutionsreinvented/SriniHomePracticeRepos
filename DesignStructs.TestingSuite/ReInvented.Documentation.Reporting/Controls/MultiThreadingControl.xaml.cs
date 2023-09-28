@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ReInvented.Documentation.Reporting.Views
+namespace ReInvented.Documentation.Reporting.Controls
 {
     /// <summary>
-    /// Interaction logic for ReportsBrowser.xaml
+    /// Interaction logic for MultiThreadingControl.xaml
     /// </summary>
-    public partial class ReportsBrowser : UserControl
+    public partial class MultiThreadingControl : UserControl
     {
-        public ReportsBrowser()
+        public MultiThreadingControl()
         {
             InitializeComponent();
         }

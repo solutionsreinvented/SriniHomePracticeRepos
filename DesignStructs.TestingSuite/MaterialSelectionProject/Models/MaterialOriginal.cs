@@ -16,12 +16,12 @@ namespace MaterialSelectionProject.Models
     /// <summary>
     /// Main class that captures all the information related to a section profile and material data.
     /// </summary>
-    public class Material : ErrorsEnabledPropertyStore
+    public class MaterialOriginal : ErrorsEnabledPropertyStore
     {
 
         #region Default Constructor
 
-        public Material()
+        public MaterialOriginal()
         {
             Initialize();
         }
@@ -53,14 +53,15 @@ namespace MaterialSelectionProject.Models
             }
         }
 
+        //[JsonConverter(typeof(MaterialTableConverter))]
         [JsonProperty(Order = 2)]
-        public MaterialTable Table
+        public MaterialTable SelectedMaterialTable
         {
             get => Get<MaterialTable>();
             set
             {
                 Set(value);
-                SelectedMaterialGrade = Table?.Grades?.FirstOrDefault();
+                SelectedMaterialGrade = SelectedMaterialTable?.Grades?.FirstOrDefault();
             }
         }
 
@@ -71,7 +72,7 @@ namespace MaterialSelectionProject.Models
             set
             {
                 Set(value);
-                SelectedMaterialGrade = Table.Grades.FirstOrDefault(g => g.Designation == value);
+                SelectedMaterialGrade = SelectedMaterialTable.Grades.FirstOrDefault(g => g.Designation == value);
             }
         }
 
@@ -108,7 +109,7 @@ namespace MaterialSelectionProject.Models
             private set
             {
                 Set(value);
-                Table = value.Tables.FirstOrDefault();
+                SelectedMaterialTable = value.Tables.FirstOrDefault();
             }
         }
 
@@ -140,7 +141,7 @@ namespace MaterialSelectionProject.Models
 
         private void FilterTables()
         {
-            FilteredTables = MaterialsLibrary.Tables.Where(t => t == Table && t.Group == SelectedShapeGroup);
+            FilteredTables = MaterialsLibrary.Tables.Where(t => t.Country == SelectedCountry && t.Group == SelectedShapeGroup);
 
             if (FilteredTables?.Count() == 0)
             {
@@ -156,7 +157,7 @@ namespace MaterialSelectionProject.Models
         ///       method in the above method.
         private void UpdateMaterialSelections()
         {
-            Table = FilteredTables?.FirstOrDefault();
+            SelectedMaterialTable = FilteredTables?.FirstOrDefault();
             OnSelectedMaterialTableChanged();
         }
 

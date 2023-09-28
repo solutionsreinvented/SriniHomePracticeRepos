@@ -28,8 +28,8 @@
             Margin="5"
             VerticalContentAlignment="Center"
             DisplayMemberPath="Name"
-            ItemsSource="{Binding MaterialsLibrary.Tables}"
-            SelectedItem="{Binding SelectedMaterialTable}" />
+            ItemsSource="{Binding FilteredTables}"
+            SelectedItem="{Binding Table}" />
 
         <ComboBox
             Grid.Row="0"

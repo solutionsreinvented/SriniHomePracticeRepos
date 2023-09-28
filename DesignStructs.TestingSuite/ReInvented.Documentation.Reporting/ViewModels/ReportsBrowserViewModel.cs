@@ -10,7 +10,7 @@ using ReInvented.Shared.Stores;
 
 namespace ReInvented.Documentation.Reporting.ViewModels
 {
-    public class ReportsBrowserViewModel : ErrorsEnabledPropertyStore
+    public class ReportsBrowserViewModel : BaseViewModel
     {
         private int _currentIndex;
 

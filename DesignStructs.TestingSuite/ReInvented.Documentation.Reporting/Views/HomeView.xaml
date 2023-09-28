@@ -1,0 +1,17 @@
+﻿<Window
+    x:Class="ReInvented.Documentation.Reporting.Views.HomeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ReInvented.Documentation.Reporting.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="HomeView"
+    Width="1080"
+    Height="850"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid Margin="15">
+        <ContentControl Content="{Binding CurrentViewModel}" FocusVisualStyle="{x:Null}" />
+    </Grid>
+</Window>

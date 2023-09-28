@@ -13,7 +13,7 @@ namespace ReInvented.Documentation.Reporting
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            MainWindow = new ReportsBrowserView() { DataContext = new ReportsBrowserViewModel() };
+            MainWindow = new HomeView() { DataContext = new MainViewModel() };
             MainWindow.Show();
         }
     }
