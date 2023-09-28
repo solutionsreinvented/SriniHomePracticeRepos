@@ -47,10 +47,10 @@
       <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2045.28\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.DataAccess">
-      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.DataAccess\bin\Debug\ReInvented.DataAccess.dll</HintPath>
+      <HintPath>F:\06. ReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Shared\bin\Debug\ReInvented.DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.Shared">
-      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Shared\bin\Debug\ReInvented.Shared.dll</HintPath>
+      <HintPath>F:\06. ReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Shared\bin\Debug\ReInvented.Shared.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -90,8 +90,8 @@
     <Compile Include="Controls\MultiThreadingControl.xaml.cs">
       <DependentUpon>MultiThreadingControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ProjectSetupControl.xaml.cs">
-      <DependentUpon>ProjectSetupControl.xaml</DependentUpon>
+    <Compile Include="Controls\ProjectControl.xaml.cs">
+      <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\StaadOperationsControl.xaml.cs">
       <DependentUpon>StaadOperationsControl.xaml</DependentUpon>
@@ -102,11 +102,11 @@
     <Compile Include="Converters\BooleanToSilentModeConverter.cs" />
     <Compile Include="Enums\ProjectType.cs" />
     <Compile Include="Interfaces\IProject.cs" />
-    <Compile Include="Models\ProjectSettings.cs" />
+    <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\Scrutinizer.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\ProjectSetupViewModel.cs" />
+    <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="ViewModels\ReportsBrowserViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -138,7 +138,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ProjectSetupControl.xaml">
+    <Page Include="Controls\ProjectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

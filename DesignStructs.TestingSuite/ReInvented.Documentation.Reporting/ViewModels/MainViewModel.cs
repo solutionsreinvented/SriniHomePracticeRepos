@@ -6,7 +6,7 @@ namespace ReInvented.Documentation.Reporting.ViewModels
     {
         public MainViewModel()
         {
-            CurrentViewModel = new ProjectSetupViewModel();
+            CurrentViewModel = new ProjectViewModel();
         }
 
         public BaseViewModel CurrentViewModel { get => Get<BaseViewModel>(); set => Set(value); }

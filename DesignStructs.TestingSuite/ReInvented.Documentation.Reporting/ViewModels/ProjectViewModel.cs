@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Windows.Input;
-
+using ReInvented.Documentation.Reporting.Interfaces;
 using ReInvented.Documentation.Reporting.Models;
 using ReInvented.Shared.Commands;
 
 namespace ReInvented.Documentation.Reporting.ViewModels
 {
-    public class ProjectSetupViewModel : BaseViewModel
+    public class ProjectViewModel : BaseViewModel
     {
-        public ProjectSetupViewModel()
+        public ProjectViewModel()
         {
-            ProjectSettings = new ProjectSettings();
+            Project = new Project();
             VerificationCommand = new RelayCommand(OnVerification, true);
         }
 
@@ -19,7 +19,7 @@ namespace ReInvented.Documentation.Reporting.ViewModels
 
         }
 
-        public ProjectSettings ProjectSettings { get => Get<ProjectSettings>(); private set => Set(value); }
+        public IProject Project { get => Get<IProject>(); private set => Set(value); }
 
         public ICommand VerificationCommand { get; set; }
     }

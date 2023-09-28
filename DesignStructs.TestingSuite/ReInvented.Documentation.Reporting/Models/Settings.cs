@@ -1,25 +1,16 @@
-﻿using ReInvented.Documentation.Reporting.Interfaces;
-using ReInvented.Shared.Stores;
+﻿using ReInvented.Shared.Stores;
 using ReInvented.TestingSuite;
 
 namespace ReInvented.Documentation.Reporting.Models
 {
-    public class ProjectSettings : ErrorsEnabledPropertyStore
+    public class Settings : ErrorsEnabledPropertyStore
     {
-        public ProjectSettings()
+        public Settings()
         {
-            Project = new Project();
-
-            CanStartStaadApplication = false;
-            FileOpeningTimeout = 10.0;
-            AnalysisTimeout = 120.0;
-            AutoDesignTimeout = 540.0;
-            ModelAvailabilityCheckInterval = 0.5;
+            Initialize();
         }
 
-        public IProject Project { get => Get<IProject>(); set => Set(value); }
-
-        #region Staad Limits
+        #region Time Limits
 
         public double FileOpeningTimeout { get => Get<double>(); set => Set(value); }
 
@@ -83,6 +74,17 @@ namespace ReInvented.Documentation.Reporting.Models
 
         #endregion
 
+        #region Private Helpers
 
+        private void Initialize()
+        {
+            CanStartStaadApplication = false;
+            FileOpeningTimeout = 10.0;
+            AnalysisTimeout = 120.0;
+            AutoDesignTimeout = 540.0;
+            ModelAvailabilityCheckInterval = 0.5;
+        }
+
+        #endregion
     }
 }

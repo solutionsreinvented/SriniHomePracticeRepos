@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:ReInvented.Documentation.Reporting.Controls"
     xmlns:vm="clr-namespace:ReInvented.Documentation.Reporting.ViewModels">
-    <DataTemplate DataType="{x:Type vm:ProjectSetupViewModel}">
-        <controls:ProjectSetupControl />
+    <DataTemplate DataType="{x:Type vm:ProjectViewModel}">
+        <controls:ProjectControl />
     </DataTemplate>
 </ResourceDictionary>

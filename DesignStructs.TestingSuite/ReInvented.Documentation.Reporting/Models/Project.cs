@@ -10,10 +10,7 @@ namespace ReInvented.Documentation.Reporting.Models
 
         public Project()
         {
-            Type = ProjectType.Order;
-            Originator = new Scrutinizer();
-            Reviewer = new Scrutinizer();
-            Approver = new Scrutinizer();
+            Initialize();
         }
 
         #endregion
@@ -35,6 +32,21 @@ namespace ReInvented.Documentation.Reporting.Models
         public Scrutinizer Reviewer { get => Get<Scrutinizer>(); set => Set(value); }
 
         public Scrutinizer Approver { get => Get<Scrutinizer>(); set => Set(value); }
+
+        public Settings Settings { get => Get<Settings>(); private set => Set(value); }
+
+        #endregion
+
+        #region Private Helpers
+
+        private void Initialize()
+        {
+            Type = ProjectType.Order;
+            Originator = new Scrutinizer();
+            Reviewer = new Scrutinizer();
+            Approver = new Scrutinizer();
+            Settings = new Settings();
+        }
 
         #endregion
     }

@@ -4,7 +4,7 @@ using System.Threading;
 
 using OpenSTAADUI;
 
-using ReInvented.StaadPro.Interactivity.Enums;
+//using ReInvented.StaadPro.Interactivity.Enums;
 
 namespace ReInvented.TestingSuite
 {
@@ -30,10 +30,10 @@ namespace ReInvented.TestingSuite
 
             } while ((string)fileName != Path.GetFileName(filePath));
 
-            if (!output.AreResultsAvailable())
-            {
-                var result = (AnalysisResult)openStaad.AnalyzeEx(SilentMode.Enable, HiddenMode.Disable, WaitMode.Wait);
-            }
+            //if (!output.AreResultsAvailable())
+            //{
+            //    var result = (AnalysisResult)openStaad.AnalyzeEx(SilentMode.Enable, HiddenMode.Disable, WaitMode.Wait);
+            //}
 
 
         }
