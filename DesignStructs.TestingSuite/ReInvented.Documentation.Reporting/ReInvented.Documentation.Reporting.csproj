@@ -78,11 +78,14 @@
     <Compile Include="CommonControls\ScrutinizerControl.xaml.cs">
       <DependentUpon>ScrutinizerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DesignOptionsControl.xaml.cs">
+      <DependentUpon>DesignOptionsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BooleanToHiddenModeConverter.cs" />
     <Compile Include="Converters\BooleanToWaitModeConverter.cs" />
     <Compile Include="Models\Project.cs" />
-    <Compile Include="Controls\DesignAndReportingControl.xaml.cs">
-      <DependentUpon>DesignAndReportingControl.xaml</DependentUpon>
+    <Compile Include="Controls\ReportingOptionsControl.xaml.cs">
+      <DependentUpon>ReportingOptionsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="CommonControls\HorizontalTextBoxInputControl.xaml.cs">
       <DependentUpon>HorizontalTextBoxInputControl.xaml</DependentUpon>
@@ -93,8 +96,8 @@
     <Compile Include="Controls\ProjectControl.xaml.cs">
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\StaadOperationsControl.xaml.cs">
-      <DependentUpon>StaadOperationsControl.xaml</DependentUpon>
+    <Compile Include="Controls\AnalysisOptionsControl.xaml.cs">
+      <DependentUpon>AnalysisOptionsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TimeLimitsControl.xaml.cs">
       <DependentUpon>TimeLimitsControl.xaml</DependentUpon>
@@ -122,7 +125,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\DesignAndReportingControl.xaml">
+    <Page Include="Controls\ReportingOptionsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -134,6 +137,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\DesignOptionsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MultiThreadingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -142,7 +149,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\StaadOperationsControl.xaml">
+    <Page Include="Controls\AnalysisOptionsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

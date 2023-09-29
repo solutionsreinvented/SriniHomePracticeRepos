@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="http://schemas.reinvented.com/shared"
     x:Name="Root"
-    d:DesignHeight="750"
+    d:DesignHeight="850"
     d:DesignWidth="1000"
     mc:Ignorable="d">
 
@@ -80,13 +80,16 @@
                 </StackPanel>
             </GroupBox>
 
-            <controls:StaadOperationsControl DataContext="{Binding Settings}" />
+            <controls:AnalysisOptionsControl DataContext="{Binding Settings}" />
 
-            <controls:DesignAndReportingControl DataContext="{Binding Settings}" />
+            <controls:DesignOptionsControl DataContext="{Binding Settings}" />
+
 
         </StackPanel>
 
         <StackPanel Grid.Column="1" Margin="5,0,0,0">
+
+            <controls:ReportingOptionsControl DataContext="{Binding Settings}" />
 
             <controls:TimeLimitsControl DataContext="{Binding Settings}" />
 

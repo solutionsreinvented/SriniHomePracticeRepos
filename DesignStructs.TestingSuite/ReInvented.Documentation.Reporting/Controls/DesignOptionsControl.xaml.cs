@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ReInvented.Documentation.Reporting.Controls
 {
     /// <summary>
-    /// Interaction logic for DesignAndReportingControl.xaml
+    /// Interaction logic for DesignOptionsControl.xaml
     /// </summary>
-    public partial class DesignAndReportingControl : UserControl
+    public partial class DesignOptionsControl : UserControl
     {
-        public DesignAndReportingControl()
+        public DesignOptionsControl()
         {
             InitializeComponent();
         }

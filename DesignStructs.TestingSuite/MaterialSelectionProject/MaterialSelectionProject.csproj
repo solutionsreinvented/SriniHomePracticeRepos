@@ -39,10 +39,10 @@
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.Sections.Domain">
-      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Sections.Core\bin\Debug\ReInvented.Sections.Domain.dll</HintPath>
+      <HintPath>F:\06. ReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Sections.Domain\bin\Debug\ReInvented.Sections.Domain.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.Shared">
-      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Shared\bin\Debug\ReInvented.Shared.dll</HintPath>
+      <HintPath>F:\06. ReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Shared\bin\Debug\ReInvented.Shared.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

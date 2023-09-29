@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="ReInvented.Documentation.Reporting.Controls.StaadOperationsControl"
+    x:Class="ReInvented.Documentation.Reporting.Controls.AnalysisOptionsControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="clr-namespace:ReInvented.Documentation.Reporting.Converters"
@@ -9,7 +9,7 @@
     d:DesignHeight="150"
     d:DesignWidth="500"
     mc:Ignorable="d">
-    <GroupBox Padding="5" Header="Staad Operations">
+    <GroupBox Padding="5" Header="Analysis">
         <StackPanel>
             <CheckBox
                 Margin="0,5"

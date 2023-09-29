@@ -43,10 +43,10 @@
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\PresentationFramework.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.Shared">
-      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Shared\bin\Debug\ReInvented.Shared.dll</HintPath>
+      <HintPath>F:\06. ReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Shared\bin\Debug\ReInvented.Shared.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.StaadPro.Interactivity">
-      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.StaadPro.Interactivity\bin\Debug\ReInvented.StaadPro.Interactivity.dll</HintPath>
+      <HintPath>F:\06. ReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.StaadPro.Interactivity\bin\Debug\ReInvented.StaadPro.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
