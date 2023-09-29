@@ -5,34 +5,33 @@
     xmlns:controls="clr-namespace:ReInvented.Documentation.Reporting.Controls"
     xmlns:converters="clr-namespace:ReInvented.Documentation.Reporting.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:ReInvented.Documentation.Reporting.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="150"
+    d:DesignHeight="180"
     d:DesignWidth="500"
     mc:Ignorable="d">
     <GroupBox Padding="5" Header="Time Limits">
         <StackPanel>
-            <controls:HorizontalTextBoxInputControl
+            <controls:TextBoxInputControl
                 Margin="0,2"
                 Label="Maximum wait time for opening a Staad file (mins):"
                 LabelColumnWidth="*"
                 TextBoxColumnWidth="0.35*"
                 Value="{Binding FileOpeningTimeout, Mode=TwoWay}" />
-            <controls:HorizontalTextBoxInputControl
+            <controls:TextBoxInputControl
                 Margin="0,2"
                 IsEnabled="{Binding WaitMode, Converter={converters:BooleanToWaitModeConverter}}"
                 Label="Maximum wait time for completing analysis (mins):"
                 LabelColumnWidth="*"
                 TextBoxColumnWidth="0.35*"
                 Value="{Binding AnalysisTimeout, Mode=TwoWay}" />
-            <controls:HorizontalTextBoxInputControl
+            <controls:TextBoxInputControl
                 Margin="0,2"
                 IsEnabled="{Binding PerformAutoDesign}"
                 Label="Maximum wait time for completing auto design (mins):"
                 LabelColumnWidth="*"
                 TextBoxColumnWidth="0.35*"
                 Value="{Binding AutoDesignTimeout, Mode=TwoWay}" />
-            <controls:HorizontalTextBoxInputControl
+            <controls:TextBoxInputControl
                 Margin="0,2"
                 Label="Interval to check the Staad model availability (secs):"
                 LabelColumnWidth="*"

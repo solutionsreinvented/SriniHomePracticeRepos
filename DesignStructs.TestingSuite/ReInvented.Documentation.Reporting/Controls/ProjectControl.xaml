@@ -36,31 +36,31 @@
                 DataContext="{Binding}"
                 Header="Project Details">
                 <StackPanel>
-                    <controls:HorizontalComboBoxInputControl
+                    <controls:ComboBoxInputControl
                         ComboBoxColumnWidth="0.35*"
                         ItemsSource="{shared:EnumBindingResource enums:ProjectType}"
                         Label="Type:"
                         LabelColumnWidth="*"
                         SelectedItem="{Binding Type, Mode=TwoWay}" />
-                    <controls:HorizontalTextBoxInputControl
+                    <controls:TextBoxInputControl
                         Margin="0,2"
                         Label="Code:"
                         LabelColumnWidth="*"
                         TextBoxColumnWidth="0.35*"
                         Value="{Binding Code, Mode=TwoWay}" />
-                    <controls:HorizontalTextBoxInputControl
+                    <controls:TextBoxInputControl
                         Margin="0,2"
                         Label="Name:"
                         LabelColumnWidth="0.4*"
                         TextBoxColumnWidth="0.6*"
                         Value="{Binding Name, Mode=TwoWay}" />
-                    <controls:HorizontalTextBoxInputControl
+                    <controls:TextBoxInputControl
                         Margin="0,2"
                         Label="Client:"
                         LabelColumnWidth="0.4*"
                         TextBoxColumnWidth="0.6*"
                         Value="{Binding Client, Mode=TwoWay}" />
-                    <controls:HorizontalTextBoxInputControl
+                    <controls:TextBoxInputControl
                         Margin="0,2"
                         Label="Reference document:"
                         LabelColumnWidth="0.4*"

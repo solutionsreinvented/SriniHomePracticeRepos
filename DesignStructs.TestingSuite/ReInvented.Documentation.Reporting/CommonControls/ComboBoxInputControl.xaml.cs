@@ -5,11 +5,11 @@ using System.Windows.Controls;
 namespace ReInvented.Documentation.Reporting.Controls
 {
     /// <summary>
-    /// Interaction logic for HorizontalComboBoxInputControl.xaml
+    /// Interaction logic for ComboBoxInputControl.xaml
     /// </summary>
-    public partial class HorizontalComboBoxInputControl : UserControl
+    public partial class ComboBoxInputControl : UserControl
     {
-        public HorizontalComboBoxInputControl()
+        public ComboBoxInputControl()
         {
             InitializeComponent();
         }
@@ -32,23 +32,23 @@ namespace ReInvented.Documentation.Reporting.Controls
 
         // Using a DependencyProperty as the backing store for Label.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LabelProperty =
-            DependencyProperty.Register("Label", typeof(string), typeof(HorizontalComboBoxInputControl), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("Label", typeof(string), typeof(ComboBoxInputControl), new PropertyMetadata(string.Empty));
 
         // Using a DependencyProperty as the backing store for ItemsSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(HorizontalComboBoxInputControl), new PropertyMetadata(null));
+            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ComboBoxInputControl), new PropertyMetadata(null));
 
         // Using a DependencyProperty as the backing store for SelectedItem.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register("SelectedItem", typeof(object), typeof(HorizontalComboBoxInputControl), new PropertyMetadata(null));
+            DependencyProperty.Register("SelectedItem", typeof(object), typeof(ComboBoxInputControl), new PropertyMetadata(null));
 
         // Using a DependencyProperty as the backing store for LabelColumnWidth.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LabelColumnWidthProperty =
-            DependencyProperty.Register("LabelColumnWidth", typeof(GridLength), typeof(HorizontalComboBoxInputControl), new PropertyMetadata(GridLength.Auto));
+            DependencyProperty.Register("LabelColumnWidth", typeof(GridLength), typeof(ComboBoxInputControl), new PropertyMetadata(GridLength.Auto));
 
         // Using a DependencyProperty as the backing store for ComboBoxColumnWidth.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ComboBoxColumnWidthProperty =
-            DependencyProperty.Register("ComboBoxColumnWidth", typeof(GridLength), typeof(HorizontalComboBoxInputControl), new PropertyMetadata(GridLength.Auto));
+            DependencyProperty.Register("ComboBoxColumnWidth", typeof(GridLength), typeof(ComboBoxInputControl), new PropertyMetadata(GridLength.Auto));
 
         #endregion
 

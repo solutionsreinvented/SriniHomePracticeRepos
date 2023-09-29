@@ -4,14 +4,18 @@ using System.Windows.Controls;
 namespace ReInvented.Documentation.Reporting.Controls
 {
     /// <summary>
-    /// Interaction logic for HorizontalTextBoxInputControl.xaml
+    /// Interaction logic for TextBoxInputControl.xaml
     /// </summary>
-    public partial class HorizontalTextBoxInputControl : UserControl
+    public partial class TextBoxInputControl : UserControl
     {
-        public HorizontalTextBoxInputControl()
+        #region Constructor
+
+        public TextBoxInputControl()
         {
             InitializeComponent();
         }
+
+        #endregion
 
         #region CLR Wrappers
 
@@ -29,19 +33,19 @@ namespace ReInvented.Documentation.Reporting.Controls
 
         // Using a DependencyProperty as the backing store for Label.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LabelProperty =
-            DependencyProperty.Register("Label", typeof(string), typeof(HorizontalTextBoxInputControl), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("Label", typeof(string), typeof(TextBoxInputControl), new PropertyMetadata(string.Empty));
 
         // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(object), typeof(HorizontalTextBoxInputControl), new PropertyMetadata(null));
+            DependencyProperty.Register("Value", typeof(object), typeof(TextBoxInputControl), new PropertyMetadata(null));
 
         // Using a DependencyProperty as the backing store for LabelColumnWidth.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LabelColumnWidthProperty =
-            DependencyProperty.Register("LabelColumnWidth", typeof(GridLength), typeof(HorizontalTextBoxInputControl), new PropertyMetadata(GridLength.Auto));
+            DependencyProperty.Register("LabelColumnWidth", typeof(GridLength), typeof(TextBoxInputControl), new PropertyMetadata(GridLength.Auto));
 
         // Using a DependencyProperty as the backing store for TextBoxColumnWidth.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TextBoxColumnWidthProperty =
-            DependencyProperty.Register("TextBoxColumnWidth", typeof(GridLength), typeof(HorizontalTextBoxInputControl), new PropertyMetadata(GridLength.Auto));
+            DependencyProperty.Register("TextBoxColumnWidth", typeof(GridLength), typeof(TextBoxInputControl), new PropertyMetadata(GridLength.Auto));
 
 
         #endregion

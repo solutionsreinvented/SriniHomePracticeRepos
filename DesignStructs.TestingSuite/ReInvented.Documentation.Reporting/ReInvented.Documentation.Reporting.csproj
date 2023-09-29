@@ -72,8 +72,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CommonControls\HorizontalComboBoxInputControl.xaml.cs">
-      <DependentUpon>HorizontalComboBoxInputControl.xaml</DependentUpon>
+    <Compile Include="CommonControls\ComboBoxInputControl.xaml.cs">
+      <DependentUpon>ComboBoxInputControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\TextBoxWithUnitInputControl.xaml.cs">
+      <DependentUpon>TextBoxWithUnitInputControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="CommonControls\ScrutinizerControl.xaml.cs">
       <DependentUpon>ScrutinizerControl.xaml</DependentUpon>
@@ -87,8 +90,8 @@
     <Compile Include="Controls\ReportingOptionsControl.xaml.cs">
       <DependentUpon>ReportingOptionsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CommonControls\HorizontalTextBoxInputControl.xaml.cs">
-      <DependentUpon>HorizontalTextBoxInputControl.xaml</DependentUpon>
+    <Compile Include="CommonControls\TextBoxInputControl.xaml.cs">
+      <DependentUpon>TextBoxInputControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MultiThreadingControl.xaml.cs">
       <DependentUpon>MultiThreadingControl.xaml</DependentUpon>
@@ -121,6 +124,10 @@
     <Compile Include="Views\ReportsBrowserView.xaml.cs">
       <DependentUpon>ReportsBrowserView.xaml</DependentUpon>
     </Compile>
+    <Page Include="CommonControls\TextBoxWithUnitInputControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CommonControls\ScrutinizerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -129,11 +136,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CommonControls\HorizontalComboBoxInputControl.xaml">
+    <Page Include="CommonControls\ComboBoxInputControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CommonControls\HorizontalTextBoxInputControl.xaml">
+    <Page Include="CommonControls\TextBoxInputControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
