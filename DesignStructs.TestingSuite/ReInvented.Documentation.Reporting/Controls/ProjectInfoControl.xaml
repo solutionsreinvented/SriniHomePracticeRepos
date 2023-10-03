@@ -1,0 +1,47 @@
+﻿<UserControl
+    x:Class="ReInvented.Documentation.Reporting.Controls.ProjectInfoControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:ReInvented.Documentation.Reporting.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:enums="clr-namespace:ReInvented.Documentation.Reporting.Enums"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    d:DesignHeight="200"
+    d:DesignWidth="500"
+    mc:Ignorable="d">
+    <GroupBox Padding="5" Header="Project Info">
+        <StackPanel>
+            <controls:ComboBoxInputControl
+                ComboBoxColumnWidth="0.35*"
+                ItemsSource="{shared:EnumBindingResource enums:ProjectType}"
+                Label="Type:"
+                LabelColumnWidth="*"
+                SelectedItem="{Binding Type, Mode=TwoWay}" />
+            <controls:TextBoxInputControl
+                Margin="0,2"
+                Label="Code:"
+                LabelColumnWidth="*"
+                TextBoxColumnWidth="0.35*"
+                Value="{Binding Code, Mode=TwoWay}" />
+            <controls:TextBoxInputControl
+                Margin="0,2"
+                Label="Name:"
+                LabelColumnWidth="0.4*"
+                TextBoxColumnWidth="0.6*"
+                Value="{Binding Name, Mode=TwoWay}" />
+            <controls:TextBoxInputControl
+                Margin="0,2"
+                Label="Client:"
+                LabelColumnWidth="0.4*"
+                TextBoxColumnWidth="0.6*"
+                Value="{Binding Client, Mode=TwoWay}" />
+            <controls:TextBoxInputControl
+                Margin="0,2"
+                Label="Reference document:"
+                LabelColumnWidth="0.4*"
+                TextBoxColumnWidth="0.6*"
+                Value="{Binding ReferenceDocument, Mode=TwoWay}" />
+        </StackPanel>
+    </GroupBox>
+</UserControl>

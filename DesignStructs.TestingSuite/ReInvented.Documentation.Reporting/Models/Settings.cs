@@ -1,4 +1,8 @@
-﻿using ReInvented.Shared.Stores;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+using ReInvented.Shared.Stores;
 using ReInvented.TestingSuite;
 
 namespace ReInvented.Documentation.Reporting.Models
@@ -22,7 +26,7 @@ namespace ReInvented.Documentation.Reporting.Models
 
         #endregion
 
-        #region Staad Operations
+        #region Analysis
 
         public bool CanStartStaadApplication { get => Get<bool>(); set => Set(value); }
 
@@ -34,7 +38,7 @@ namespace ReInvented.Documentation.Reporting.Models
 
         #endregion
 
-        #region Design and Reporting
+        #region Design
 
         public bool PerformAutoDesign
         {
@@ -49,6 +53,11 @@ namespace ReInvented.Documentation.Reporting.Models
                 }
             }
         }
+        public bool CheckNonPreferredSectionsAlso { get => Get<bool>(); set => Set(value); }
+
+        #endregion
+
+        #region Reports
 
         public bool GenerateMTO
         {
@@ -65,12 +74,30 @@ namespace ReInvented.Documentation.Reporting.Models
 
         public bool IncludeMTONotes { get => Get<bool>(); set => Set(value); }
 
-        public bool CheckNonPreferredSectionsAlso { get => Get<bool>(); set => Set(value); }
-
         public bool GenerateContentLoadsCalculationReport { get => Get<bool>(); set => Set(value); }
 
         public bool GenerateStructureSeismicCalculationReport { get => Get<bool>(); set => Set(value); }
 
+        #endregion
+
+        #region Performance
+
+        public bool UseMultipleThreads
+        {
+            get => Get<bool>();
+            set
+            {
+                Set(value);
+                if (!value)
+                {
+                    NumberOfThreads = PossibleNumberOfThreads.FirstOrDefault();
+                }
+            }
+        }
+
+        public IEnumerable<int> PossibleNumberOfThreads => Enumerable.Range(1, 12);
+
+        public int NumberOfThreads { get => Get<int>(); set => Set(value); }
 
         #endregion
 
@@ -83,6 +110,7 @@ namespace ReInvented.Documentation.Reporting.Models
             AnalysisTimeout = 120.0;
             AutoDesignTimeout = 540.0;
             ModelAvailabilityCheckInterval = 0.5;
+            NumberOfThreads = PossibleNumberOfThreads.FirstOrDefault();
         }
 
         #endregion

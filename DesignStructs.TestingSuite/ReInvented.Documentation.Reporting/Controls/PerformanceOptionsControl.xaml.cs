@@ -3,11 +3,11 @@
 namespace ReInvented.Documentation.Reporting.Controls
 {
     /// <summary>
-    /// Interaction logic for MultiThreadingControl.xaml
+    /// Interaction logic for PerformanceOptionsControl.xaml
     /// </summary>
-    public partial class MultiThreadingControl : UserControl
+    public partial class PerformanceOptionsControl : UserControl
     {
-        public MultiThreadingControl()
+        public PerformanceOptionsControl()
         {
             InitializeComponent();
         }

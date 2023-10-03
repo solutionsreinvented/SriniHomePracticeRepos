@@ -84,6 +84,12 @@
     <Compile Include="Controls\DesignOptionsControl.xaml.cs">
       <DependentUpon>DesignOptionsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ProjectInfoControl.xaml.cs">
+      <DependentUpon>ProjectInfoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ScrutinyHistoryControl.xaml.cs">
+      <DependentUpon>ScrutinyHistoryControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BooleanToHiddenModeConverter.cs" />
     <Compile Include="Converters\BooleanToWaitModeConverter.cs" />
     <Compile Include="Models\Project.cs" />
@@ -93,8 +99,8 @@
     <Compile Include="CommonControls\TextBoxInputControl.xaml.cs">
       <DependentUpon>TextBoxInputControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MultiThreadingControl.xaml.cs">
-      <DependentUpon>MultiThreadingControl.xaml</DependentUpon>
+    <Compile Include="Controls\PerformanceOptionsControl.xaml.cs">
+      <DependentUpon>PerformanceOptionsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ProjectControl.xaml.cs">
       <DependentUpon>ProjectControl.xaml</DependentUpon>
@@ -132,6 +138,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ProjectInfoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ReportingOptionsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -148,7 +158,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\MultiThreadingControl.xaml">
+    <Page Include="Controls\PerformanceOptionsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -157,6 +167,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\AnalysisOptionsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ScrutinyHistoryControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
