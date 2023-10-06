@@ -34,11 +34,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Interop.OpenSTAADUI">
-      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ApplicationData\Interop.OpenSTAADUI.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -168,6 +167,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -175,6 +175,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+	  <COMFileReference Include="C:\Program Files\Bentley\Engineering\STAAD.Pro 2023\STAAD\StaadPro.dll">
+		  <EmbedInteropTypes>True</EmbedInteropTypes>
+	  </COMFileReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\AddRemoveItemsControls.xaml">
