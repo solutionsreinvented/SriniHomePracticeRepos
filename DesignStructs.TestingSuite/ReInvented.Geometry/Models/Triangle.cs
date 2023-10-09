@@ -1,26 +1,44 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Media.Media3D;
+
+using ReInvented.Shared;
+using ReInvented.StaadPro.Interactivity.Entities;
 
 namespace ReInvented.Geometry.Models
 {
     public class Triangle
     {
-        public Triangle(Point3D p1, Point3D p2, Point3D p3)
+        public Triangle(Node vertexA, Node vertexB, Node vertexC)
         {
-            Vertices = new Point3DCollection() { p1, p2, p3 };
+            Vertices = (new HashSet<Node>() { vertexA, vertexB, vertexC }).ToList();
 
             CalculateProperties();
         }
 
 
-        public Point3DCollection Vertices { get; private set; }
+        public List<Node> Vertices { get; private set; }
+
+        public List<Node> PerpendicularNodes { get; private set; }
 
         public Vector3DCollection Sides { get; private set; }
 
+        public double Area { get; private set; }
+
         public double[] Angles { get; private set; }
 
+        //public double[] Perpendiculars { get; private set; }
+
+        public double MinimumAngle { get; private set; } = 15.0;
+
+        public double MaximumAngle { get; private set; } = 30.0;
+
         public bool IsATriangle => !Angles.Any(a => a == 180.0 || a == double.NaN);
+
+        //public bool IsQualified => AreAnglesInRange(MinimumAngle);
+
+        public bool IsQualified(double minimumAngle) => Angles.All(c => c >= minimumAngle);
 
         #region Private Helpers
 
@@ -40,6 +58,23 @@ namespace ReInvented.Geometry.Models
                 Math.Round(Vector3D.AngleBetween(Sides[2], (-1) * Sides[1]), 1)
             };
 
+            Area = 0.50 * Sides.First().Length * Sides.Last().Length * Math.Sin(Angles.First().ToRadians());
+
+            //Perpendiculars = new double[]
+            //{
+            //    Sides.Last().Length * Math.Sin(Angles.First().ToRadians()),
+            //    Sides.First().Length * Math.Sin(Angles.First().ToRadians()),
+            //    Sides.Last().Length * Math.Sin(Angles.Last().ToRadians())
+            //};
+
+            PerpendicularNodes = new List<Node>()
+            {
+                /// Nodes on the triangle side where the perpendicular bisector is created from the vertex. 
+                /// Node at index 0 indicates the node created on the side AB and continues sequentially to side AC
+                Node.CreateNewNodeByDistance(Vertices.First(), Vertices[1], Sides.Last().Length * Math.Cos(Angles.First().ToRadians())),
+                Node.CreateNewNodeByDistance(Vertices.First(), Vertices.Last(), Sides.First().Length * Math.Cos(Angles.First().ToRadians())),
+                Node.CreateNewNodeByDistance(Vertices.Last(), Vertices[1], Sides.Last().Length * Math.Cos(Angles.Last().ToRadians()))
+            };
         }
 
         #endregion

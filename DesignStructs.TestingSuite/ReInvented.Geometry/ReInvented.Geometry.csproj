@@ -32,10 +32,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="ReInvented.Shared">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Shared\bin\Debug\ReInvented.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="ReInvented.StaadPro.Interactivity">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.StaadPro.Interactivity\bin\Debug\ReInvented.StaadPro.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,6 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="app.manifest" />
+	  <COMFileReference Include="C:\Program Files\Bentley\Engineering\STAAD.Pro 2023\STAAD\StaadPro.dll">
+		  <EmbedInteropTypes>True</EmbedInteropTypes>
+	  </COMFileReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
