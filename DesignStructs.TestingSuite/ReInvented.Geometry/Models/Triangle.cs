@@ -40,6 +40,29 @@ namespace ReInvented.Geometry.Models
 
         public bool IsQualified(double minimumAngle) => Angles.All(c => c >= minimumAngle);
 
+        public static Triangle GetSuitableTriangle(Triangle forwardTriangle, Triangle backwardTriangle, double minimumQualifyingAngle = 30.0)
+        {
+            Triangle suitableTriangle = null;
+
+            if (forwardTriangle.IsATriangle && forwardTriangle.IsQualified(minimumQualifyingAngle))
+            {
+                if (backwardTriangle.IsATriangle && backwardTriangle.IsQualified(minimumQualifyingAngle))
+                {
+                    suitableTriangle = forwardTriangle.Angles.Max() < backwardTriangle.Angles.Max() ? forwardTriangle : backwardTriangle;
+                }
+                else
+                {
+                    suitableTriangle = forwardTriangle;
+                }
+            }
+            else if (backwardTriangle.IsATriangle && backwardTriangle.IsQualified(minimumQualifyingAngle))
+            {
+                suitableTriangle = backwardTriangle;
+            }
+
+            return suitableTriangle;
+        }
+
         #region Private Helpers
 
         private void CalculateProperties()

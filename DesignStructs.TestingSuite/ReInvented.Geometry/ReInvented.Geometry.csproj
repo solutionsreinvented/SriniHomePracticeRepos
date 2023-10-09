@@ -55,17 +55,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Arc.cs" />
+    <Compile Include="Models\PointsProvider.cs" />
     <Compile Include="Models\Polygon.cs" />
+    <Compile Include="PolygonMesher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Triangle.cs" />
+    <Compile Include="TriangularPlatesGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="app.manifest" />
-	  <COMFileReference Include="C:\Program Files\Bentley\Engineering\STAAD.Pro 2023\STAAD\StaadPro.dll">
-		  <EmbedInteropTypes>True</EmbedInteropTypes>
-	  </COMFileReference>
+    <COMFileReference Include="C:\Program Files\Bentley\Engineering\STAAD.Pro 2023\STAAD\StaadPro.dll">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMFileReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

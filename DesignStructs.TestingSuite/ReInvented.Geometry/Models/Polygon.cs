@@ -8,17 +8,6 @@ using ReInvented.StaadPro.Interactivity.Entities;
 
 namespace ReInvented.Geometry.Models
 {
-    public class PointsProvider
-    {
-        public static HashSet<Node> GetPoints()
-        {
-            return new HashSet<Node>()
-            {
-                new Node(1, 0, 0, 0), new Node(2, 0, 5, 0), new Node(3, 0, 10, 0), new Node(4, 0, 15, 0), new Node(5, 0, 20, 0), new Node(6, 5, 20, 0),
-                new Node(7, 10, 20, 0), new Node(8, 15, 20, 0), new Node(9, 20, 20, 0), new Node(10, 20, 15, 0), new Node(11, 20, 10, 0), new Node(12, 20, 5, 0)
-            };
-        }
-    }
     public class Polygon
     {
         public Polygon(List<Node> points)
@@ -33,6 +22,8 @@ namespace ReInvented.Geometry.Models
         public double TotalIncludeAngle => CalculateTotalIncludedAngle();
 
         public List<Node> ClosingLinePoints => GenerateClosingLinePoints();
+
+        public IReadOnlyList<Node> ClosedPolygonPoints => Points; ///Points.Union(ClosingLinePoints).ToList();
 
         public Vector3DCollection Vectors { get; private set; }
 
