@@ -8,6 +8,13 @@ using ReInvented.StaadPro.Interactivity.Entities;
 
 namespace ReInvented.Geometry.Models
 {
+    public enum TriangleFormation
+    {
+        Clockwise,
+        CounterClockwise,
+        Collinear
+    }
+
     public class Triangle
     {
         public Triangle(Node vertexA, Node vertexB, Node vertexC)
@@ -22,6 +29,8 @@ namespace ReInvented.Geometry.Models
 
         public List<Node> PerpendicularNodes { get; private set; }
 
+        public List<Node> MidNodes { get; private set; }
+
         public Vector3DCollection Sides { get; private set; }
 
         public double Area { get; private set; }
@@ -35,6 +44,8 @@ namespace ReInvented.Geometry.Models
         public double MaximumAngle { get; private set; } = 30.0;
 
         public bool IsATriangle => !Angles.Any(a => a == 180.0 || a == double.NaN);
+
+        public TriangleFormation TriangleFormation => GetTriangleFormation();
 
         //public bool IsQualified => AreAnglesInRange(MinimumAngle);
 
@@ -98,8 +109,41 @@ namespace ReInvented.Geometry.Models
                 Node.CreateNewNodeByDistance(Vertices.First(), Vertices.Last(), Sides.First().Length * Math.Cos(Angles.First().ToRadians())),
                 Node.CreateNewNodeByDistance(Vertices.Last(), Vertices[1], Sides.Last().Length * Math.Cos(Angles.Last().ToRadians()))
             };
+            MidNodes = new List<Node>()
+            {
+                /// Nodes on the triangle side where the mid node is created from the vertex. 
+                /// Node at index 0 indicates the node created on the side AB and continues sequentially to side AC
+                Node.CreateNewNodeByProportion(Vertices.First(), Vertices[1], 0.50),
+                Node.CreateNewNodeByProportion(Vertices[1], Vertices.Last(), 0.50),
+                Node.CreateNewNodeByProportion(Vertices.First(), Vertices.Last(), 0.50)
+            };
         }
 
         #endregion
+
+        #region Private Static Functions
+
+        private TriangleFormation GetTriangleFormation()
+        {
+            Vector3D crossProduct = Vector3D.CrossProduct(Sides[0], Sides[1]);
+            TriangleFormation direction;
+            if (crossProduct.Z > 0)
+            {
+                direction = TriangleFormation.CounterClockwise;
+            }
+            else if (crossProduct.Z < 0)
+            {
+                direction = TriangleFormation.Clockwise;
+            }
+            else
+            {
+                direction = TriangleFormation.Collinear;
+            }
+
+            return direction;
+        } 
+
+        #endregion
+
     }
 }

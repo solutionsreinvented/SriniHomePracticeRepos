@@ -10,20 +10,21 @@ using ReInvented.StaadPro.Interactivity.Models;
 
 namespace ReInvented.Geometry
 {
-
     class Program
     {
         static void Main(string[] args)
         {
-            Polygon polygon = new Polygon(PointsProvider.GetPoints().ToList());
+            List<Node> annularRingPoints = OpenAnnularRingPointsProvider.GetPoints(10.0, 8.0, 30, 30);
+
+            Polygon polygon = new Polygon(annularRingPoints);
 
             StaadModel model = new StaadModel();
             OpenSTAAD instance = model.StaadWrapper.StaadInstance;
             IOSGeometryUI geometry = instance.Geometry;
 
-            polygon.ClosedPolygonPoints.ToList().ForEach(n => geometry.CreateNode(n.Id, n.X, n.Y, n.Z));
+            polygon.ClosedPolygonPoints.ToHashSet().ToList().ForEach(n => geometry.CreateNode(n.Id, n.X, n.Y, n.Z));
 
-            (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) = PolygonMesher.GenerateMesh(polygon, geometry);
+            (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) = Triangulation.GenerateMesh(polygon, geometry);
 
             if (AdditionalNodes != null && AdditionalNodes.Count > 1)
             {

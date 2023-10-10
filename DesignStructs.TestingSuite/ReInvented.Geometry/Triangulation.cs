@@ -15,7 +15,7 @@ namespace ReInvented.Geometry
         public int NodeCurrentId { get; set; }
     }
 
-    public class PolygonMesher
+    public class Triangulation
     {
         /// TODO: This function seems to be messy and carefully review the usage of nodeId and plateId.
         ///       Issue is as follows:
@@ -31,13 +31,13 @@ namespace ReInvented.Geometry
             List<Node> remainingNodes = new List<Node>(polygon.ClosedPolygonPoints);
             List<Node> remainingNodesPrevious = new List<Node>(polygon.ClosedPolygonPoints);
 
-            double maxDim = 7;
+            double maxDim = 1.3;
             var plateId = 0;
 
             int runningNodeId = polygon.ClosedPolygonPoints.Count();
 
             double verificationAngle = 30.0;
-            double minimumAngle = 15.0;
+            double minimumAngle = 5.0;
 
             do
             {
@@ -67,7 +67,8 @@ namespace ReInvented.Geometry
                         }
                         else
                         {
-                            Node intermediateNode = triangle.PerpendicularNodes[1];
+                            //Node intermediateNode = triangle.PerpendicularNodes[1];
+                            Node intermediateNode = triangle.MidNodes.Last();
 
                             intermediateNode.Id = ++runningNodeId;
 
@@ -112,11 +113,11 @@ namespace ReInvented.Geometry
                     remainingNodes = new List<Node>(polygon.ClosedPolygonPoints);
                     remainingNodesPrevious = new List<Node>(polygon.ClosedPolygonPoints);
 
-                    ///// Testing only. Delete.
-                    //plates.ToList().ForEach(p => geometry.DeletePlate(p.Id));
-                    //additionalNodes.ToList().ForEach(n => geometry.DeleteNode(n.Id));
-                    ///// Till here.
-                    
+                    /// Testing only. Delete.
+                    plates.ToList().ForEach(p => geometry.DeletePlate(p.Id));
+                    additionalNodes.ToList().ForEach(n => geometry.DeleteNode(n.Id));
+                    /// Till here.
+
                     additionalNodes = new HashSet<Node>();
                     plates = new HashSet<Plate>();
 
@@ -125,8 +126,8 @@ namespace ReInvented.Geometry
                 {
                     remainingNodesPrevious = remainingNodes;
                 }
-                //additionalNodes.ToList().ForEach(an => geometry.CreateNode(an.Id, an.X, an.Y, an.Z));
-                //plates.ToList().ForEach(p => geometry.CreatePlate(p.Id, p.A.Id, p.B.Id, p.C.Id, p.D.Id));
+                additionalNodes.ToList().ForEach(an => geometry.CreateNode(an.Id, an.X, an.Y, an.Z));
+                plates.ToList().ForEach(p => geometry.CreatePlate(p.Id, p.A.Id, p.B.Id, p.C.Id, p.D.Id));
 
             } while (remainingNodes.Count > 2 && verificationAngle >= minimumAngle);
 
