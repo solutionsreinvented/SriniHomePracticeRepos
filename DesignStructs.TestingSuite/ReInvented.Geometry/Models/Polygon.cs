@@ -10,10 +10,11 @@ namespace ReInvented.Geometry.Models
 {
     public class Polygon
     {
-        public Polygon(List<Node> points)
+        public Polygon(List<Node> points, bool closingLinePointsAdded = true)
         {
             /// TODO: Implement verification for nulls
             Points = points;
+            ClosingLinePointsAdded = closingLinePointsAdded;
             GenerateVector3DCollection();
         }
 
@@ -23,7 +24,9 @@ namespace ReInvented.Geometry.Models
 
         public List<Node> ClosingLinePoints => GenerateClosingLinePoints();
 
-        public IReadOnlyList<Node> ClosedPolygonPoints => Points; ///Points.Union(ClosingLinePoints).ToList();
+        public IReadOnlyList<Node> ClosedPolygonPoints =>  ClosingLinePointsAdded ? Points : Points.Union(ClosingLinePoints).ToList();
+
+        public bool ClosingLinePointsAdded { get; private set; }
 
         public Vector3DCollection Vectors { get; private set; }
 
@@ -55,7 +58,7 @@ namespace ReInvented.Geometry.Models
             return Math.Round(totalAngle, 1);
         }
 
-        private List<Node> GenerateClosingLinePoints(double maxDimension = 5)
+        private List<Node> GenerateClosingLinePoints()
         {
             var closingLinePoints = new List<Node>();
             var nodeId = Points.Count();
@@ -64,7 +67,9 @@ namespace ReInvented.Geometry.Models
             Vector3D lineVector = Vectors.Last();
             lineVector.Normalize();
 
-            int nNewNodes = (int)(lineLength / maxDimension).Floor(1);
+            double maximumDimension = Node.LeastDistanceBetweenNodes(Points.ToList());
+
+            int nNewNodes = (int)(lineLength / maximumDimension).Floor(1);
             double adjustedDimension = lineLength / nNewNodes;
 
             for (int i = 1; i < nNewNodes; i++)

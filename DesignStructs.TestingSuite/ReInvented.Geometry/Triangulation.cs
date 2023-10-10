@@ -23,7 +23,7 @@ namespace ReInvented.Geometry
         ///       2. However, these ids have to be in sync and continuation with the staad model ids.
         ///       3. MeshCriteria is defined within the function which needs to be separated and obtained from the user may be as part of the settings.
         ///       4. Check the possibility of refactoring this function in to multiple separate functions which follows SRP.
-        public static (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) GenerateMesh(Polygon polygon, IOSGeometryUI geometry)
+        public static (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) GenerateMesh(Polygon polygon, IOSGeometryUI geometry, int currentNodeId = 0, int currentPlateId = 0, double maximumDimension = 0.0)
         {
             HashSet<Plate> plates = new HashSet<Plate>();
             HashSet<Node> additionalNodes = new HashSet<Node>();
@@ -31,13 +31,13 @@ namespace ReInvented.Geometry
             List<Node> remainingNodes = new List<Node>(polygon.ClosedPolygonPoints);
             List<Node> remainingNodesPrevious = new List<Node>(polygon.ClosedPolygonPoints);
 
-            double maxDim = 1.3;
-            var plateId = 0;
-
-            int runningNodeId = polygon.ClosedPolygonPoints.Count();
+            if (maximumDimension == 0.0)
+            {
+                maximumDimension = Node.LeastDistanceBetweenNodes(remainingNodes);
+            }
 
             double verificationAngle = 30.0;
-            double minimumAngle = 5.0;
+            double minimumAngle = 15.0;
 
             do
             {
@@ -58,24 +58,24 @@ namespace ReInvented.Geometry
 
                     if (triangle != null)
                     {
-                        if (triangle.Sides.Last().Length <= maxDim)
+                        if (triangle.Sides.Last().Length <= maximumDimension)
                         {
-                            plates.Add(new Plate(++plateId, triangle.Vertices.First(), triangle.Vertices[1], triangle.Vertices.Last()));
+                            plates.Add(new Plate(++currentPlateId, triangle.Vertices.First(), triangle.Vertices[1], triangle.Vertices.Last()));
 
                             ///remainingNodes.RemoveAt(i + 1);
                             remainingNodes.Remove(triangle.Vertices[1]);
                         }
                         else
                         {
-                            //Node intermediateNode = triangle.PerpendicularNodes[1];
-                            Node intermediateNode = triangle.MidNodes.Last();
+                            Node intermediateNode = triangle.PerpendicularNodes[1];
+                            ///Node intermediateNode = triangle.MidNodes.Last();
 
-                            intermediateNode.Id = ++runningNodeId;
+                            intermediateNode.Id = ++currentNodeId;
 
                             additionalNodes.Add(intermediateNode);
 
-                            plates.Add(new Plate(++plateId, triangle.Vertices.First(), triangle.Vertices[1], intermediateNode));
-                            plates.Add(new Plate(++plateId, intermediateNode, triangle.Vertices[1], triangle.Vertices.Last()));
+                            plates.Add(new Plate(++currentPlateId, triangle.Vertices.First(), triangle.Vertices[1], intermediateNode));
+                            plates.Add(new Plate(++currentPlateId, intermediateNode, triangle.Vertices[1], triangle.Vertices.Last()));
 
                             ///remainingNodes.RemoveAt(i + 1);
                             remainingNodes.Remove(triangle.Vertices[1]);
@@ -108,8 +108,8 @@ namespace ReInvented.Geometry
                 if (infiniteLoopEncountered)
                 {
                     verificationAngle -= 1.0;
-                    runningNodeId = polygon.ClosedPolygonPoints.Count;
-                    plateId = 0;
+                    currentNodeId = polygon.ClosedPolygonPoints.Count;
+                    currentPlateId = 0;
                     remainingNodes = new List<Node>(polygon.ClosedPolygonPoints);
                     remainingNodesPrevious = new List<Node>(polygon.ClosedPolygonPoints);
 

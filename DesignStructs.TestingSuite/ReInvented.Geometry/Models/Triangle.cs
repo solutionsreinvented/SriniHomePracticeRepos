@@ -19,7 +19,7 @@ namespace ReInvented.Geometry.Models
     {
         public Triangle(Node vertexA, Node vertexB, Node vertexC)
         {
-            Vertices = (new HashSet<Node>() { vertexA, vertexB, vertexC }).ToList();
+            Vertices = new HashSet<Node>() { vertexA, vertexB, vertexC }.ToList();
 
             CalculateProperties();
         }
@@ -37,8 +37,6 @@ namespace ReInvented.Geometry.Models
 
         public double[] Angles { get; private set; }
 
-        //public double[] Perpendiculars { get; private set; }
-
         public double MinimumAngle { get; private set; } = 15.0;
 
         public double MaximumAngle { get; private set; } = 30.0;
@@ -46,8 +44,6 @@ namespace ReInvented.Geometry.Models
         public bool IsATriangle => !Angles.Any(a => a == 180.0 || a == double.NaN);
 
         public TriangleFormation TriangleFormation => GetTriangleFormation();
-
-        //public bool IsQualified => AreAnglesInRange(MinimumAngle);
 
         public bool IsQualified(double minimumAngle) => Angles.All(c => c >= minimumAngle);
 
@@ -82,7 +78,7 @@ namespace ReInvented.Geometry.Models
             {
                 new Vector3D(Vertices[1].X - Vertices[0].X, Vertices[1].Y - Vertices[0].Y, Vertices[1].Z - Vertices[0].Z),
                 new Vector3D(Vertices[2].X - Vertices[1].X, Vertices[2].Y - Vertices[1].Y, Vertices[2].Z - Vertices[1].Z),
-                new Vector3D(Vertices[0].X - Vertices[2].X, Vertices[0].Y - Vertices[2].Y, Vertices[0].Z - Vertices[1].Z)
+                new Vector3D(Vertices[0].X - Vertices[2].X, Vertices[0].Y - Vertices[2].Y, Vertices[0].Z - Vertices[2].Z)
             };
 
             Angles = new double[]
@@ -93,13 +89,6 @@ namespace ReInvented.Geometry.Models
             };
 
             Area = 0.50 * Sides.First().Length * Sides.Last().Length * Math.Sin(Angles.First().ToRadians());
-
-            //Perpendiculars = new double[]
-            //{
-            //    Sides.Last().Length * Math.Sin(Angles.First().ToRadians()),
-            //    Sides.First().Length * Math.Sin(Angles.First().ToRadians()),
-            //    Sides.Last().Length * Math.Sin(Angles.Last().ToRadians())
-            //};
 
             PerpendicularNodes = new List<Node>()
             {

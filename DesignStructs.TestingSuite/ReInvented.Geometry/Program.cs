@@ -14,9 +14,13 @@ namespace ReInvented.Geometry
     {
         static void Main(string[] args)
         {
-            List<Node> annularRingPoints = OpenAnnularRingPointsProvider.GetPoints(10.0, 8.0, 30, 30);
+            double aspectRatio = 2.5;
 
-            Polygon polygon = new Polygon(annularRingPoints);
+            //List<Node> polygonPoints = OpenAnnularRingPointsProvider.GetPoints(10.0, 10.0, 30, 30, 0.0, -6.50);
+            var polygonPoints = RegularPointsProvider.GetPoints();
+
+
+            Polygon polygon = new Polygon(polygonPoints, closingLinePointsAdded: false);
 
             StaadModel model = new StaadModel();
             OpenSTAAD instance = model.StaadWrapper.StaadInstance;
@@ -24,7 +28,7 @@ namespace ReInvented.Geometry
 
             polygon.ClosedPolygonPoints.ToHashSet().ToList().ForEach(n => geometry.CreateNode(n.Id, n.X, n.Y, n.Z));
 
-            (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) = Triangulation.GenerateMesh(polygon, geometry);
+            (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) = Triangulation.GenerateMesh(polygon, geometry, polygon.ClosedPolygonPoints.Count(), 0, aspectRatio * Node.LeastDistanceBetweenNodes(polygon.ClosedPolygonPoints.ToList()));
 
             if (AdditionalNodes != null && AdditionalNodes.Count > 1)
             {

@@ -55,8 +55,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Arc.cs" />
+    <Compile Include="Models\CirclePointsGenerator.cs" />
+    <Compile Include="Models\IntermediateNodesGenerator.cs" />
     <Compile Include="Models\OpenAnnularRingPointsProvider.cs" />
     <Compile Include="Models\Polygon.cs" />
+    <Compile Include="Models\RegularPointsProvider.cs" />
     <Compile Include="Triangulation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
