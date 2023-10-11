@@ -7,11 +7,11 @@ namespace ReInvented.Geometry.Models
 {
     public class ClosedAnnularRingPointsProvider
     {
-        public static List<Node> GetPoints(double outerRadius, double innerRadius, int nOuterPoints = 8, int nInnerPoints = 8, 
+        public static List<Node> GetPoints(Node origin, double outerRadius, double innerRadius, int nOuterPoints = 8, int nInnerPoints = 8,
                                            double yOuter = 0.0, double yInner = 0.0, double maximumDimension = 0.0, int currentNodeId = 0)
         {
-            List<Node> outerNodes = CirclePointsGenerator.GetPoints(outerRadius, nOuterPoints, yOuter, currentNodeId);
-            List<Node> innerNodes = CirclePointsGenerator.GetPoints(innerRadius, nInnerPoints, yInner, outerNodes.Last().Id);
+            List<Node> outerNodes = Circle.GenerateNodes(origin, outerRadius, nOuterPoints, yOuter, currentNodeId);
+            List<Node> innerNodes = Circle.GenerateNodes(origin, innerRadius, nInnerPoints, yInner, outerNodes.Last().Id);
 
             if (maximumDimension == 0.0)
             {
@@ -21,7 +21,7 @@ namespace ReInvented.Geometry.Models
             List<Node> closingPoints = IntermediateNodesGenerator.GenerateNodes(outerNodes.First(), innerNodes.First(), maximumDimension, innerNodes.Last().Id);
 
             List<Node> polygonNodes = outerNodes.Take(1).Union(closingPoints).Union(innerNodes).ToList();
-            
+
             polygonNodes.Add(innerNodes.First());
 
             for (int i = closingPoints.Count - 1; i >= 0; i--)

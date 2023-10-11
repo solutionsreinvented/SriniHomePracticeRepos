@@ -1,34 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using OpenSTAADUI;
 
+using ReInvented.Geometry.Base;
+using ReInvented.Geometry.Interfaces;
 using ReInvented.Geometry.Models;
+using ReInvented.Geometry.Enums;
 using ReInvented.StaadPro.Interactivity.Entities;
 
-namespace ReInvented.Geometry
+namespace ReInvented.Geometry.Services
 {
-    public enum TriangleSplitMethod
+    public class PlanarPolygonTriangulationService : PolygonTriangulationService, IPolygonTriangulationService
     {
-        PerpendicularNode,
-        MidNode
-    }
+        #region Parameterized Constructor
 
-    public class MeshCriteria
-    {
-        public double MaximumDimension { get; set; }
-        public int PlateCurrentId { get; set; }
-        public int NodeCurrentId { get; set; }
-    }
-
-    public class Triangulation
-    {
-        public Triangulation(TriangleSplitMethod triangleSplitMethod = TriangleSplitMethod.PerpendicularNode)
+        public PlanarPolygonTriangulationService(TriangleSplitMethod triangleSplitMethod = TriangleSplitMethod.PerpendicularNode) : base(triangleSplitMethod)
         {
-            TriangleSplitMethod = triangleSplitMethod;
-        }
 
-        public TriangleSplitMethod TriangleSplitMethod { get; private set; }
+        } 
+
+        #endregion
 
         /// TODO: This function seems to be messy and carefully review the usage of nodeId and plateId.
         ///       Issue is as follows:
@@ -36,8 +29,20 @@ namespace ReInvented.Geometry
         ///       2. However, these ids have to be in sync and continuation with the staad model ids.
         ///       3. MeshCriteria is defined within the function which needs to be separated and obtained from the user may be as part of the settings.
         ///       4. Check the possibility of refactoring this function in to multiple separate functions which follows SRP.
-        public (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) GenerateMesh(List<Node> polygonPoints, IOSGeometryUI geometry, int currentNodeId = 0, int currentPlateId = 0, double maximumDimension = 0.0)
+        public override (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) GenerateMesh(IPolygon polygon, IOSGeometryUI geometry, int currentNodeId = 0, int currentPlateId = 0, double maximumDimension = 0.0)
         {
+            if (!(polygon is PlanarPolygon planarPolygon))
+            {
+                throw new ArgumentException($"{nameof(polygon)} shall of type {typeof(PlanarPolygon)}");
+            }
+
+            List<Node> polygonPoints = polygon.Points.ToList();
+
+            if (currentNodeId == 0)
+            {
+                currentNodeId = polygonPoints.OrderBy(p => p.Id).Last().Id;
+            }
+
             HashSet<Plate> plates = new HashSet<Plate>();
             HashSet<Node> additionalNodes = new HashSet<Node>();
 
@@ -62,7 +67,6 @@ namespace ReInvented.Geometry
                     Node nodeB = remainingNodes[i + 1];
                     Node nodeC = remainingNodes[i + 2];
                     Node nodeN = i == 0 ? remainingNodes.Last() : remainingNodes[i - 1];
-
 
                     Triangle forwardTriangle = new Triangle(nodeA, nodeB, nodeC);
                     Triangle backwardTriangle = new Triangle(nodeN, nodeA, nodeB);

@@ -1,22 +1,20 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using ReInvented.StaadPro.Interactivity.Entities;
+using ReInvented.Geometry.Services;
 
 namespace ReInvented.Geometry.Models
 {
     public class SolidCircularPlatePointsProvider
     {
         ///TODO: Not Working
-        public static List<Node> GetPoints(double radius, int nPoints = 8, double yCoordinate = 0.0, double maximumDimension = 0.0, int currentNodeId = 0)
+        public static List<Node> GetPoints(Node origin, double radius, int nPoints = 8, double yCoordinate = 0.0, double maximumDimension = 0.0, int currentNodeId = 0)
         {
-            List<Node> nodesOnCircle = CirclePointsGenerator.GetPoints(radius, nPoints, yCoordinate, currentNodeId);
+            List<Node> nodesOnCircle = Circle.GenerateNodes(origin, radius, nPoints, yCoordinate, currentNodeId);
 
             currentNodeId = nodesOnCircle.OrderBy(n => n.Id).Last().Id;
 
             currentNodeId += 1;
-
-            /// TODO: This should be an input
-            Node origin = new Node(currentNodeId, 0.0, 0.0, 0.0);
 
             if (maximumDimension == 0.0)
             {

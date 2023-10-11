@@ -17,10 +17,14 @@ namespace ReInvented.Geometry.Models
                 new Node(5, 0, 0.6, -0.2),
                 new Node(6, 0, 0.8, -0.1),
                 new Node(7, 0, 1.0, 0),
-                new Node(8, -0.3, 1.0, 0),
-                new Node(9, -0.6, 1.0, 0),
-                new Node(10, -0.9, 1.0, 0),
-                new Node(11, -0.9, 0.8, -0.1)
+                new Node(8, -0.3, 1.1, 0),
+                new Node(9, -0.6, 1.2, 0),
+                new Node(10, -0.9, 1.3, 0),
+                new Node(11, -0.9, 1.2, -0.1),
+                new Node(12, -0.9, 1.1, -0.2),
+                new Node(13, -0.9, 1.0, -0.3),
+                new Node(14, -0.9, 0.9, -0.4),
+                new Node(15, -0.9, 0.8, -0.5)
             };
         }
     }

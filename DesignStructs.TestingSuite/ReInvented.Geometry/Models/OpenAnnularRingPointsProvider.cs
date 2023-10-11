@@ -3,17 +3,18 @@ using System.Linq;
 using System.Collections.Generic;
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.Shared;
+using ReInvented.Geometry.Services;
 
 namespace ReInvented.Geometry.Models
 {
     public class OpenAnnularRingPointsProvider
     {
-        public static List<Node> GetPoints(double outerRadius, double innerRadius, int nOuterPoints = 8, int nInnerPoints = 8,
+        public static List<Node> GetPoints(Node origin, double outerRadius, double innerRadius, int nOuterPoints = 8, int nInnerPoints = 8,
                                            double yOuter = 0.0, double yInner = 0.0, double maximumDimension = 0.0, int currentNodeId = 0)
         {
 
-            List<Node> outerNodes = CirclePointsGenerator.GetPoints(outerRadius, nOuterPoints, yOuter, currentNodeId);
-            List<Node> innerNodes = CirclePointsGenerator.GetPoints(innerRadius, nInnerPoints, yInner, outerNodes.Last().Id);
+            List<Node> outerNodes = Circle.GenerateNodes(origin, outerRadius, nOuterPoints, yOuter, currentNodeId);
+            List<Node> innerNodes = Circle.GenerateNodes(origin, innerRadius, nInnerPoints, yInner, outerNodes.Last().Id);
 
             if (maximumDimension == 0.0)
             {
@@ -35,11 +36,11 @@ namespace ReInvented.Geometry.Models
     }
     public class MountingPlateNodesProvider
     {
-        public static List<Node> GetPoints(double radius, int nPointsTotal = 8, int nCoveredPoints = 5,
+        public static List<Node> GetPoints(Node origin, double radius, int nPointsTotal = 8, int nCoveredPoints = 5,
                                            double yCoordinate = 0.0, double maximumDimension = 0.0, int currentNodeId = 0)
         {
 
-            List<Node> outerNodes = CirclePointsGenerator.GetPoints(radius, nPointsTotal, yCoordinate, currentNodeId);
+            List<Node> outerNodes = Circle.GenerateNodes(origin, radius, nPointsTotal, yCoordinate, currentNodeId);
             int nNodesEitherSide = (int)(nCoveredPoints / 2.0).Floor(1);
 
             var ringNodes = outerNodes.Take(nNodesEitherSide + 1).ToList();

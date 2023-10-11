@@ -4,7 +4,11 @@ using System.Linq;
 
 using OpenSTAADUI;
 
+using ReInvented.Geometry.Enums;
+using ReInvented.Geometry.Interfaces;
 using ReInvented.Geometry.Models;
+using ReInvented.Geometry.Services;
+using ReInvented.Shared;
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Models;
 
@@ -12,34 +16,43 @@ namespace ReInvented.Geometry
 {
     class Program
     {
+
+        #region Usages
+
+        static (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) UsingPlanarPolygonTriangulationService(IOSGeometryUI geometry, double aspectRatio = 2.0)
+        {
+            List<Node> polygonPoints = RegularPolygonPointsProvider.GetPoints();
+            PlanarPolygon polygon = new PlanarPolygon(polygonPoints);
+            IReadOnlyList<Node> closedPolygonPoints = polygon.Points;
+
+            closedPolygonPoints.ToHashSet().ToList().ForEach(n => geometry.CreateNode(n.Id, n.X, n.Y, n.Z));
+
+            IPolygonTriangulationService triangulationService = new PlanarPolygonTriangulationService(TriangleSplitMethod.MidNode);
+            return triangulationService.GenerateMesh(polygon, geometry, 0, 0, aspectRatio * Node.LeastDistanceBetweenNodes(closedPolygonPoints.ToList()));
+        } 
+
+        #endregion
+
+
         static void Main(string[] args)
         {
-            double aspectRatio = 4;
+            Node origin = new Node(0.0, 0.0, 0.0);
 
-            ///List<Node> polygonPoints = RegularPolygonPointsProvider.GetPoints();
-            ///List<Node> polygonPoints = OpenAnnularRingPointsProvider.GetPoints(10.0, 8.0, 30, 30, 0.0, 0);
-            ///List<Node> polygonPoints = ClosedAnnularRingPointsProvider.GetPoints(10.0, 3.0, 30, 25, 0.0, 0);
-            ///List<Node> polygonPoints = ClosedAnnularRingPointsProvider.GetPoints(10.0, 7.0, 60, 48, 0.0, 0);
-            ///List<Node> polygonPoints = SolidCircularPlatePointsProvider.GetPoints(10.0, 60, 0.0, 0, 0);
-
-            var polygonPoints = MountingPlateNodesProvider.GetPoints(6, 34, 5);
-
-            Polygon polygon = new Polygon(polygonPoints);
+            ConeFrustum coneFrustum = new ConeFrustum(10.0, 12.0, 32, 32, edgesAreOpen: true);
+            var polygon = coneFrustum.GetPolygon();
 
             StaadModel model = new StaadModel();
             OpenSTAAD instance = model.StaadWrapper.StaadInstance;
             IOSGeometryUI geometry = instance.Geometry;
 
-            ///List<Node> closedPolygonPoints = polygon.Points.Union(polygon.GetClosingLinePoints()).ToList();
-            List<Node> closedPolygonPoints = polygon.Points.ToList();
+            double aspectRatio = 2.5;
 
-            closedPolygonPoints.ToHashSet().ToList().ForEach(n => geometry.CreateNode(n.Id, n.X, n.Y, n.Z));
+            polygon.Points.ToHashSet().ToList().ForEach(p => geometry.CreateNode(p.Id, p.X, p.Y, p.Z));
 
-            ///Triangulation triangulation = new Triangulation(TriangleSplitMethod.PerpendicularNode);
-            Triangulation triangulation = new Triangulation(TriangleSplitMethod.MidNode);
+            var triangulationService = new FrustumTriangulationService();
+            triangulationService.GenerateMesh(polygon, geometry);
 
-
-            (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) = triangulation.GenerateMesh(closedPolygonPoints, geometry, closedPolygonPoints.Count(), 0, aspectRatio * Node.LeastDistanceBetweenNodes(closedPolygonPoints));
+            var (AdditionalNodes, Plates) = UsingPlanarPolygonTriangulationService(geometry, aspectRatio);
 
             if (AdditionalNodes != null && AdditionalNodes.Count > 1)
             {
@@ -52,5 +65,20 @@ namespace ReInvented.Geometry
 
             Console.ReadLine();
         }
+
+        #region Tests
+
+        private static void TestMethod(Node origin)
+        {
+            List<Node> points = Circle.GenerateNodes(origin, 10, 25, 0.5);
+
+            double x = points.Average(p => p.X);
+            double y = points.Average(p => p.Y);
+            double z = points.Average(p => p.Z);
+
+            double radius = Math.Sqrt((points.First().X - x).Squared() + (points.First().Y - y).Squared() + (points.First().Z - z).Squared());
+        }
+
+        #endregion
     }
 }
