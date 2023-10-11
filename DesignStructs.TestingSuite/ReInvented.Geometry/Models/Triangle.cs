@@ -74,6 +74,14 @@ namespace ReInvented.Geometry.Models
 
         private void CalculateProperties()
         {
+            ///TODO: In some cases the vertices are only two. Not sure why this is happening but at this moment
+            ///      due to the lack of time this is not explored. So fix this as soon as the other implementations
+            ///      are completed. For the time being the control is returned. 
+            if (Vertices.Count != 3)
+            {
+                return;
+            }
+
             Sides = new Vector3DCollection
             {
                 new Vector3D(Vertices[1].X - Vertices[0].X, Vertices[1].Y - Vertices[0].Y, Vertices[1].Z - Vertices[0].Z),

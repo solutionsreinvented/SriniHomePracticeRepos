@@ -8,6 +8,12 @@ using ReInvented.StaadPro.Interactivity.Entities;
 
 namespace ReInvented.Geometry
 {
+    public enum TriangleSplitMethod
+    {
+        PerpendicularNode,
+        MidNode
+    }
+
     public class MeshCriteria
     {
         public double MaximumDimension { get; set; }
@@ -17,19 +23,26 @@ namespace ReInvented.Geometry
 
     public class Triangulation
     {
+        public Triangulation(TriangleSplitMethod triangleSplitMethod = TriangleSplitMethod.PerpendicularNode)
+        {
+            TriangleSplitMethod = triangleSplitMethod;
+        }
+
+        public TriangleSplitMethod TriangleSplitMethod { get; private set; }
+
         /// TODO: This function seems to be messy and carefully review the usage of nodeId and plateId.
         ///       Issue is as follows:
         ///       1. Since this mesh generation involves iterative process, these Ids are considered independently.
         ///       2. However, these ids have to be in sync and continuation with the staad model ids.
         ///       3. MeshCriteria is defined within the function which needs to be separated and obtained from the user may be as part of the settings.
         ///       4. Check the possibility of refactoring this function in to multiple separate functions which follows SRP.
-        public static (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) GenerateMesh(Polygon polygon, IOSGeometryUI geometry, int currentNodeId = 0, int currentPlateId = 0, double maximumDimension = 0.0)
+        public (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) GenerateMesh(List<Node> polygonPoints, IOSGeometryUI geometry, int currentNodeId = 0, int currentPlateId = 0, double maximumDimension = 0.0)
         {
             HashSet<Plate> plates = new HashSet<Plate>();
             HashSet<Node> additionalNodes = new HashSet<Node>();
 
-            List<Node> remainingNodes = new List<Node>(polygon.ClosedPolygonPoints);
-            List<Node> remainingNodesPrevious = new List<Node>(polygon.ClosedPolygonPoints);
+            List<Node> remainingNodes = new List<Node>(polygonPoints);
+            List<Node> remainingNodesPrevious = new List<Node>(polygonPoints);
 
             if (maximumDimension == 0.0)
             {
@@ -37,7 +50,7 @@ namespace ReInvented.Geometry
             }
 
             double verificationAngle = 30.0;
-            double minimumAngle = 15.0;
+            double minimumAngle = 5.0;
 
             do
             {
@@ -67,8 +80,16 @@ namespace ReInvented.Geometry
                         }
                         else
                         {
-                            Node intermediateNode = triangle.PerpendicularNodes[1];
-                            ///Node intermediateNode = triangle.MidNodes.Last();
+                            Node intermediateNode;
+
+                            if (TriangleSplitMethod == TriangleSplitMethod.PerpendicularNode)
+                            {
+                                intermediateNode = triangle.PerpendicularNodes[1];
+                            }
+                            else
+                            {
+                                intermediateNode = triangle.MidNodes.Last();
+                            }
 
                             intermediateNode.Id = ++currentNodeId;
 
@@ -108,10 +129,10 @@ namespace ReInvented.Geometry
                 if (infiniteLoopEncountered)
                 {
                     verificationAngle -= 1.0;
-                    currentNodeId = polygon.ClosedPolygonPoints.Count;
+                    currentNodeId = polygonPoints.Count;
                     currentPlateId = 0;
-                    remainingNodes = new List<Node>(polygon.ClosedPolygonPoints);
-                    remainingNodesPrevious = new List<Node>(polygon.ClosedPolygonPoints);
+                    remainingNodes = new List<Node>(polygonPoints);
+                    remainingNodesPrevious = new List<Node>(polygonPoints);
 
                     /// Testing only. Delete.
                     plates.ToList().ForEach(p => geometry.DeletePlate(p.Id));

@@ -10,11 +10,10 @@ namespace ReInvented.Geometry.Models
 {
     public class Polygon
     {
-        public Polygon(List<Node> points, bool closingLinePointsAdded = true)
+        public Polygon(List<Node> points)
         {
             /// TODO: Implement verification for nulls
             Points = points;
-            ClosingLinePointsAdded = closingLinePointsAdded;
             GenerateVector3DCollection();
         }
 
@@ -22,13 +21,44 @@ namespace ReInvented.Geometry.Models
 
         public double TotalIncludeAngle => CalculateTotalIncludedAngle();
 
-        public List<Node> ClosingLinePoints => GenerateClosingLinePoints();
-
-        public IReadOnlyList<Node> ClosedPolygonPoints =>  ClosingLinePointsAdded ? Points : Points.Union(ClosingLinePoints).ToList();
-
-        public bool ClosingLinePointsAdded { get; private set; }
-
         public Vector3DCollection Vectors { get; private set; }
+
+        #region Public Functions
+
+        public List<Node> GetClosingLinePoints(int currentNodeId = 0)
+        {
+            var closingLinePoints = new List<Node>();
+
+            if (Points == null || Points.Count <= 3)
+            {
+                return null;
+            }
+
+            if (currentNodeId == 0)
+            {
+                currentNodeId = Points.OrderBy(p => p.Id).Last().Id;
+            }
+
+            double lineLength = (Points.Last().ToVector - Points.First().ToVector).Length;
+            Vector3D lineVector = Vectors.Last();
+            lineVector.Normalize();
+
+            double maximumDimension = Node.LeastDistanceBetweenNodes(Points.ToList());
+
+            int nNewNodes = (int)(lineLength / maximumDimension).Floor(1);
+            double adjustedDimension = lineLength / nNewNodes;
+
+            for (int i = 1; i < nNewNodes; i++)
+            {
+                Vector3D newVector = Vector3D.Multiply(i * adjustedDimension, lineVector);
+                currentNodeId += 1;
+                closingLinePoints.Add(new Node(currentNodeId, Points.Last().X + newVector.X, Points.Last().Y + newVector.Y, Points.Last().Z + newVector.Z));
+            }
+
+            return closingLinePoints;
+        } 
+
+        #endregion
 
         #region Private Helpers
 
@@ -56,30 +86,6 @@ namespace ReInvented.Geometry.Models
             }
 
             return Math.Round(totalAngle, 1);
-        }
-
-        private List<Node> GenerateClosingLinePoints()
-        {
-            var closingLinePoints = new List<Node>();
-            var nodeId = Points.Count();
-
-            double lineLength = (Points.Last().ToVector - Points.First().ToVector).Length;
-            Vector3D lineVector = Vectors.Last();
-            lineVector.Normalize();
-
-            double maximumDimension = Node.LeastDistanceBetweenNodes(Points.ToList());
-
-            int nNewNodes = (int)(lineLength / maximumDimension).Floor(1);
-            double adjustedDimension = lineLength / nNewNodes;
-
-            for (int i = 1; i < nNewNodes; i++)
-            {
-                Vector3D newVector = Vector3D.Multiply(i * adjustedDimension, lineVector);
-                nodeId += 1;
-                closingLinePoints.Add(new Node(nodeId, Points.Last().X + newVector.X, Points.Last().Y + newVector.Y, Points.Last().Z + newVector.Z));
-            }
-
-            return closingLinePoints;
         }
 
         private void GenerateVector3DCollection()

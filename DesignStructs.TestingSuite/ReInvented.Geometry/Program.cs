@@ -14,21 +14,32 @@ namespace ReInvented.Geometry
     {
         static void Main(string[] args)
         {
-            double aspectRatio = 2.5;
+            double aspectRatio = 4;
 
-            //List<Node> polygonPoints = OpenAnnularRingPointsProvider.GetPoints(10.0, 10.0, 30, 30, 0.0, -6.50);
-            var polygonPoints = RegularPointsProvider.GetPoints();
+            ///List<Node> polygonPoints = RegularPolygonPointsProvider.GetPoints();
+            ///List<Node> polygonPoints = OpenAnnularRingPointsProvider.GetPoints(10.0, 8.0, 30, 30, 0.0, 0);
+            ///List<Node> polygonPoints = ClosedAnnularRingPointsProvider.GetPoints(10.0, 3.0, 30, 25, 0.0, 0);
+            ///List<Node> polygonPoints = ClosedAnnularRingPointsProvider.GetPoints(10.0, 7.0, 60, 48, 0.0, 0);
+            ///List<Node> polygonPoints = SolidCircularPlatePointsProvider.GetPoints(10.0, 60, 0.0, 0, 0);
 
+            var polygonPoints = MountingPlateNodesProvider.GetPoints(6, 34, 5);
 
-            Polygon polygon = new Polygon(polygonPoints, closingLinePointsAdded: false);
+            Polygon polygon = new Polygon(polygonPoints);
 
             StaadModel model = new StaadModel();
             OpenSTAAD instance = model.StaadWrapper.StaadInstance;
             IOSGeometryUI geometry = instance.Geometry;
 
-            polygon.ClosedPolygonPoints.ToHashSet().ToList().ForEach(n => geometry.CreateNode(n.Id, n.X, n.Y, n.Z));
+            ///List<Node> closedPolygonPoints = polygon.Points.Union(polygon.GetClosingLinePoints()).ToList();
+            List<Node> closedPolygonPoints = polygon.Points.ToList();
 
-            (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) = Triangulation.GenerateMesh(polygon, geometry, polygon.ClosedPolygonPoints.Count(), 0, aspectRatio * Node.LeastDistanceBetweenNodes(polygon.ClosedPolygonPoints.ToList()));
+            closedPolygonPoints.ToHashSet().ToList().ForEach(n => geometry.CreateNode(n.Id, n.X, n.Y, n.Z));
+
+            ///Triangulation triangulation = new Triangulation(TriangleSplitMethod.PerpendicularNode);
+            Triangulation triangulation = new Triangulation(TriangleSplitMethod.MidNode);
+
+
+            (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) = triangulation.GenerateMesh(closedPolygonPoints, geometry, closedPolygonPoints.Count(), 0, aspectRatio * Node.LeastDistanceBetweenNodes(closedPolygonPoints));
 
             if (AdditionalNodes != null && AdditionalNodes.Count > 1)
             {

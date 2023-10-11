@@ -56,10 +56,12 @@
   <ItemGroup>
     <Compile Include="Models\Arc.cs" />
     <Compile Include="Models\CirclePointsGenerator.cs" />
+    <Compile Include="Models\ClosedAnnularRingPointsProvider.cs" />
     <Compile Include="Models\IntermediateNodesGenerator.cs" />
     <Compile Include="Models\OpenAnnularRingPointsProvider.cs" />
     <Compile Include="Models\Polygon.cs" />
-    <Compile Include="Models\RegularPointsProvider.cs" />
+    <Compile Include="Models\RegularPolygonPointsProvider.cs" />
+    <Compile Include="Models\SolidCircularPlatePointsProvider.cs" />
     <Compile Include="Triangulation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
