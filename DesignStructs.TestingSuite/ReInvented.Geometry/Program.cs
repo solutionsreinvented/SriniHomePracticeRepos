@@ -37,7 +37,7 @@ namespace ReInvented.Geometry
             List<Node> startCircleNodes = Circle.GenerateNodes(origin, 12.0, 48);
             List<Node> endCircleNodes = Circle.GenerateNodes(origin, 15.0, 64, 0, startCircleNodes.OrderBy(n => n.Id).Last().Id);
 
-            ConeFrustum coneFrustum = new ConeFrustum(startCircleNodes, endCircleNodes, edgesAreOpen: false, formation: MeshFormation.Clockwise);
+            Frustum coneFrustum = new Frustum(startCircleNodes, endCircleNodes, edgesAreOpen: false, formation: MeshFormation.Clockwise);
             IPolygon polygon = coneFrustum.GetPolygon();
 
             polygon.Points.ToHashSet().ToList().ForEach(p => geometry.CreateNode(p.Id, p.X, p.Y, p.Z));

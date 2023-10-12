@@ -3,14 +3,15 @@ using System.Linq;
 using System.Collections.Generic;
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.Geometry.Interfaces;
+using ReInvented.Geometry.Helpers;
 
 namespace ReInvented.Geometry.Models
 {
-    public class ConeFrustum
+    public class Frustum
     {
         #region Parameterized Constructor
 
-        public ConeFrustum(List<Node> startCircleNodes, List<Node> endCircleNodes, MeshFormation formation = MeshFormation.Clockwise, bool edgesAreOpen = false)
+        public Frustum(List<Node> startCircleNodes, List<Node> endCircleNodes, MeshFormation formation = MeshFormation.Clockwise, bool edgesAreOpen = false)
         {
             StartCircleNodes = startCircleNodes;
             EndCircleNodes = endCircleNodes;
@@ -53,14 +54,14 @@ namespace ReInvented.Geometry.Models
 
             if (EdgesAreOpen)
             {
-                List<Node> startEdgeClosingNodes = IntermediateNodesGenerator.GenerateNodes(StartCircleNodes.First(), EndCircleNodes.First(), maximumDimension, currentNodeId);
-                List<Node> endEdgeClosingNodes = IntermediateNodesGenerator.GenerateNodes(StartCircleNodes.Last(), EndCircleNodes.Last(), maximumDimension, startEdgeClosingNodes.Last().Id);
+                List<Node> startEdgeClosingNodes = NodeHelpers.GenerateIntermediateNodes(StartCircleNodes.First(), EndCircleNodes.First(), maximumDimension, currentNodeId);
+                List<Node> endEdgeClosingNodes = NodeHelpers.GenerateIntermediateNodes(StartCircleNodes.Last(), EndCircleNodes.Last(), maximumDimension, startEdgeClosingNodes.Last().Id);
 
                 polygonNodes = GeneratePolygonNodes(StartCircleNodes, EndCircleNodes, startEdgeClosingNodes, endEdgeClosingNodes, Formation);
             }
             else
             {
-                List<Node> closingNodes = IntermediateNodesGenerator.GenerateNodes(StartCircleNodes.First(), EndCircleNodes.First(), maximumDimension, currentNodeId);
+                List<Node> closingNodes = NodeHelpers.GenerateIntermediateNodes(StartCircleNodes.First(), EndCircleNodes.First(), maximumDimension, currentNodeId);
 
                 polygonNodes = GeneratePolygonNodes(StartCircleNodes, EndCircleNodes, closingNodes, Formation);
             }

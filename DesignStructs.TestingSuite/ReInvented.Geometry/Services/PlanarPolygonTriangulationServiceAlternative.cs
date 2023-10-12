@@ -5,34 +5,29 @@ using System.Linq;
 using OpenSTAADUI;
 
 using ReInvented.Geometry.Base;
-using ReInvented.Geometry.Enums;
-using ReInvented.Geometry.Helpers;
 using ReInvented.Geometry.Interfaces;
 using ReInvented.Geometry.Models;
-using ReInvented.Shared;
+using ReInvented.Geometry.Enums;
 using ReInvented.StaadPro.Interactivity.Entities;
 
-namespace ReInvented.Geometry
+namespace ReInvented.Geometry.Services
 {
-
-    public class FrustumTriangulationService : PolygonTriangulationService, IPolygonTriangulationService
+    public class PlanarPolygonTriangulationServiceAlternative : PolygonTriangulationService, IPolygonTriangulationService
     {
         #region Parameterized Constructor
 
-        public FrustumTriangulationService(TriangleSplitMethod triangleSplitMethod = TriangleSplitMethod.PerpendicularNode) : base(triangleSplitMethod)
+        public PlanarPolygonTriangulationServiceAlternative(TriangleSplitMethod triangleSplitMethod = TriangleSplitMethod.PerpendicularNode) : base(triangleSplitMethod)
         {
 
-        }
+        } 
 
         #endregion
 
-        #region Public Functions
-
-        public override (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) GenerateMesh(IPolygon polygon, IOSGeometryUI geometry, int currentNodeId = 0, int currentPlateId = 0, double maximumDimension = 0)
+        public override (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) GenerateMesh(IPolygon polygon, IOSGeometryUI geometry, int currentNodeId = 0, int currentPlateId = 0, double maximumDimension = 0.0)
         {
-            if (!(polygon is ConicalPolygon conicalPolygon))
+            if (!(polygon is PlanarPolygon planarPolygon))
             {
-                throw new ArgumentException($"{nameof(polygon)} shall of type {typeof(ConicalPolygon)}");
+                throw new ArgumentException($"{nameof(polygon)} shall of type {typeof(PlanarPolygon)}");
             }
 
             List<Node> polygonPoints = polygon.Points.ToList();
@@ -78,6 +73,7 @@ namespace ReInvented.Geometry
                         {
                             plates.Add(new Plate(++currentPlateId, triangle.Vertices.First(), triangle.Vertices[1], triangle.Vertices.Last()));
 
+                            ///remainingNodes.RemoveAt(i + 1);
                             remainingNodes.Remove(triangle.Vertices[1]);
                         }
                         else
@@ -92,9 +88,6 @@ namespace ReInvented.Geometry
                             {
                                 intermediateNode = triangle.MidNodes.Last();
                             }
-
-                            /// TODO: This is directly resulting in infinite loop if the frustum is just a plane.
-                            ///intermediateNode = AdjustIntermediateNodeCoordinatesForConicalSurface(conicalPolygon, intermediateNode);
 
                             intermediateNode.Id = ++currentNodeId;
 
@@ -152,35 +145,12 @@ namespace ReInvented.Geometry
                 {
                     remainingNodesPrevious = remainingNodes;
                 }
-
                 additionalNodes.ToList().ForEach(an => geometry.CreateNode(an.Id, an.X, an.Y, an.Z));
                 plates.ToList().ForEach(p => geometry.CreatePlate(p.Id, p.A.Id, p.B.Id, p.C.Id, p.D.Id));
 
             } while (remainingNodes.Count > 2 && verificationAngle >= minimumAngle);
 
             return (additionalNodes, plates);
-        } 
-
-        #endregion
-
-        #region Private Helpers
-
-        private static Node AdjustIntermediateNodeCoordinatesForConicalSurface(ConicalPolygon conicalPolygon, Node intermediateNode)
-        {
-            double angle = NodeHelpers.AngleIn360Degrees(conicalPolygon.StartCenter, intermediateNode);
-
-            double intermediateRadius = conicalPolygon.StartRadius +
-                                        ((conicalPolygon.EndRadius - conicalPolygon.StartRadius) / (conicalPolygon.EndYCoordinate - conicalPolygon.StartYCoordinate) * (intermediateNode.Y - conicalPolygon.StartCenter.Y));
-
-            var updatedX = conicalPolygon.StartCenter.X + intermediateRadius * Math.Cos(angle.Radians());
-            var updatedZ = conicalPolygon.StartCenter.Z + intermediateRadius * Math.Sin(angle.Radians());
-
-            intermediateNode.X = updatedX;
-            intermediateNode.Z = updatedZ;
-
-            return intermediateNode;
-        } 
-
-        #endregion
+        }
     }
 }

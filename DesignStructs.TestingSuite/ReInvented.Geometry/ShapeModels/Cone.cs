@@ -4,18 +4,25 @@ using System.Collections.Generic;
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.Geometry.Interfaces;
 using ReInvented.Shared;
+using ReInvented.Geometry.Helpers;
 
 namespace ReInvented.Geometry.Models
 {
     public class Cone
     {
+        #region Parameterized Constructor
+
         public Cone(Node apex, List<Node> endCircleNodes, int nPolygons = 2, bool edgesAreOpen = false)
         {
             Apex = apex;
             CircleNodes = endCircleNodes;
             NumberOfPolygons = nPolygons;
             EdgesAreOpen = edgesAreOpen;
-        }
+        } 
+
+        #endregion
+
+        #region Public Properties
 
         public Node Apex { get; private set; }
 
@@ -24,6 +31,10 @@ namespace ReInvented.Geometry.Models
         public bool EdgesAreOpen { get; private set; }
 
         public int NumberOfPolygons { get; private set; }
+
+        #endregion
+
+        #region Public Functions
 
         public HashSet<IPolygon> GetPolygons(double maximumDimension = 0.0)
         {
@@ -46,9 +57,8 @@ namespace ReInvented.Geometry.Models
 
             if (EdgesAreOpen)
             {
-
-                List<Node> startEdgeClosingNodes = IntermediateNodesGenerator.GenerateNodes(Apex, CircleNodes.First(), maximumDimension, currentNodeId); ;
-                List<Node> endEdgeClosingNodes = IntermediateNodesGenerator.GenerateNodes(Apex, CircleNodes.Last(), maximumDimension, startEdgeClosingNodes.Last().Id); ;
+                List<Node> startEdgeClosingNodes = NodeHelpers.GenerateIntermediateNodes(Apex, CircleNodes.First(), maximumDimension, currentNodeId); ;
+                List<Node> endEdgeClosingNodes = NodeHelpers.GenerateIntermediateNodes(Apex, CircleNodes.Last(), maximumDimension, startEdgeClosingNodes.Last().Id); ;
 
                 currentNodeId = endEdgeClosingNodes.OrderBy(n => n.Id).Last().Id;
 
@@ -69,7 +79,7 @@ namespace ReInvented.Geometry.Models
 
                     if (iPolygon < NumberOfPolygons - 1)
                     {
-                        intermediateEdgeClosingNodes = IntermediateNodesGenerator.GenerateNodes(Apex, polygonCurveNodes.Last(), maximumDimension, currentNodeId);
+                        intermediateEdgeClosingNodes = NodeHelpers.GenerateIntermediateNodes(Apex, polygonCurveNodes.Last(), maximumDimension, currentNodeId);
                     }
                     else
                     {
@@ -97,8 +107,7 @@ namespace ReInvented.Geometry.Models
             }
             else
             {
-
-                List<Node> commonEdgeClosingNodes = IntermediateNodesGenerator.GenerateNodes(Apex, CircleNodes.First(), maximumDimension, currentNodeId);
+                List<Node> commonEdgeClosingNodes = NodeHelpers.GenerateIntermediateNodes(Apex, CircleNodes.First(), maximumDimension, currentNodeId);
                 List<Node> startEdgeClosingNodes = commonEdgeClosingNodes;
 
                 currentNodeId = commonEdgeClosingNodes.OrderBy(n => n.Id).Last().Id;
@@ -124,7 +133,7 @@ namespace ReInvented.Geometry.Models
 
                     if (iPolygon < NumberOfPolygons - 1)
                     {
-                        intermediateEdgeClosingNodes = IntermediateNodesGenerator.GenerateNodes(Apex, polygonCurveEndNode, maximumDimension);
+                        intermediateEdgeClosingNodes = NodeHelpers.GenerateIntermediateNodes(Apex, polygonCurveEndNode, maximumDimension);
                     }
                     else
                     {
@@ -152,6 +161,8 @@ namespace ReInvented.Geometry.Models
 
             return polygons;
         }
-    }
+    } 
+
+    #endregion
 
 }

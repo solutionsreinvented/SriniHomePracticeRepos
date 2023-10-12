@@ -58,25 +58,23 @@
     <Compile Include="Base\PolygonTriangulationService.cs" />
     <Compile Include="Interfaces\IPolygon.cs" />
     <Compile Include="Interfaces\IPolygonTriangulationService.cs" />
-    <Compile Include="Models\Arc.cs" />
-    <Compile Include="Models\Circle.cs" />
-    <Compile Include="Models\ClosedAnnularRingPointsProvider.cs" />
-    <Compile Include="Models\Cone.cs" />
-    <Compile Include="Models\ConeFrustum.cs" />
+    <Compile Include="Services\MeshCriteria.cs" />
+    <Compile Include="Services\PlanarPolygonTriangulationServiceAlternative.cs" />
+    <Compile Include="ShapeModels\Arc.cs" />
+    <Compile Include="ShapeModels\Circle.cs" />
+    <Compile Include="ShapeModels\Cone.cs" />
+    <Compile Include="ShapeModels\Frustum.cs" />
     <Compile Include="Models\ConicalPolygon.cs" />
-    <Compile Include="Models\IntermediateNodesGenerator.cs" />
-    <Compile Include="Models\OpenAnnularRingPointsProvider.cs" />
     <Compile Include="Models\PlanarPolygon.cs" />
     <Compile Include="Models\RegularPolygonPointsProvider.cs" />
-    <Compile Include="Models\SolidCircularPlatePointsProvider.cs" />
     <Compile Include="Enums\TriangleSplitMethod.cs" />
+    <Compile Include="Helpers\NodeHelpers.cs" />
     <Compile Include="Services\PlanarPolygonTriangulationService.cs" />
     <Compile Include="Services\FrustumTriangulationService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\Triangle.cs" />
+    <Compile Include="ShapeModels\Triangle.cs" />
     <Compile Include="Services\TriangulaPlatesGenerationService.cs" />
-    <Compile Include="TriangularPlatesGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -85,5 +83,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMFileReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
