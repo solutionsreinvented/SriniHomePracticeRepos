@@ -19,11 +19,18 @@ namespace ReInvented.Geometry.Services
         public PlanarPolygonTriangulationServiceAlternative(TriangleSplitMethod triangleSplitMethod = TriangleSplitMethod.PerpendicularNode) : base(triangleSplitMethod)
         {
 
-        } 
+        }
 
         #endregion
 
-        public override (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) GenerateMesh(IPolygon polygon, IOSGeometryUI geometry, int currentNodeId = 0, int currentPlateId = 0, double maximumDimension = 0.0)
+        public override (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) GenerateMesh(IPolygon polygon, IOSGeometryUI geometry, int currentNodeId = 0, int currentPlateId = 0, double maximumDimension = 0)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) GenerateMesh(IPolygon polygon, IOSGeometryUI geometry, double highestMinAngle = 30.0, double leastMinAngle = 15.0,
+                                                                                            int currentNodeId = 0, int currentPlateId = 0, double maximumDimension = 0.0)
         {
             if (!(polygon is PlanarPolygon planarPolygon))
             {
@@ -48,8 +55,7 @@ namespace ReInvented.Geometry.Services
                 maximumDimension = Node.LeastDistanceBetweenNodes(remainingNodes);
             }
 
-            double verificationAngle = 30.0;
-            double minimumAngle = 5.0;
+            double verificationAngle = highestMinAngle;
 
             do
             {
@@ -73,7 +79,6 @@ namespace ReInvented.Geometry.Services
                         {
                             plates.Add(new Plate(++currentPlateId, triangle.Vertices.First(), triangle.Vertices[1], triangle.Vertices.Last()));
 
-                            ///remainingNodes.RemoveAt(i + 1);
                             remainingNodes.Remove(triangle.Vertices[1]);
                         }
                         else
@@ -96,7 +101,6 @@ namespace ReInvented.Geometry.Services
                             plates.Add(new Plate(++currentPlateId, triangle.Vertices.First(), triangle.Vertices[1], intermediateNode));
                             plates.Add(new Plate(++currentPlateId, intermediateNode, triangle.Vertices[1], triangle.Vertices.Last()));
 
-                            ///remainingNodes.RemoveAt(i + 1);
                             remainingNodes.Remove(triangle.Vertices[1]);
 
                             if (triangle == forwardTriangle)
@@ -126,6 +130,41 @@ namespace ReInvented.Geometry.Services
 
                 if (infiniteLoopEncountered)
                 {
+                    List<Node> subPolygonPoints;
+
+                    for (int i = 2; i < remainingNodes.Count - 1; i++)
+                    {
+                        subPolygonPoints = remainingNodes.Take(i + 1).ToList();
+                        PlanarPolygon subPolygon = new PlanarPolygon(subPolygonPoints, true);
+
+                        var (AdditionalNodes, Plates) = GenerateMesh(subPolygon, geometry, verificationAngle, verificationAngle, currentNodeId, currentPlateId);
+
+                        if (AdditionalNodes != null && AdditionalNodes.Count > 0 && Plates != null && Plates.Count > 0)
+                        {
+                            AdditionalNodes.ToList().ForEach(an => additionalNodes.Add(an));
+                            Plates.ToList().ForEach(p => plates.Add(p));
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     verificationAngle -= 1.0;
                     currentNodeId = polygonPoints.Count;
                     currentPlateId = 0;
@@ -148,7 +187,7 @@ namespace ReInvented.Geometry.Services
                 additionalNodes.ToList().ForEach(an => geometry.CreateNode(an.Id, an.X, an.Y, an.Z));
                 plates.ToList().ForEach(p => geometry.CreatePlate(p.Id, p.A.Id, p.B.Id, p.C.Id, p.D.Id));
 
-            } while (remainingNodes.Count > 2 && verificationAngle >= minimumAngle);
+            } while (remainingNodes.Count > 2 && verificationAngle >= leastMinAngle);
 
             return (additionalNodes, plates);
         }
