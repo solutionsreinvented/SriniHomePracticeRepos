@@ -8,20 +8,41 @@ using ReInvented.Geometry.Base;
 using ReInvented.Geometry.Enums;
 using ReInvented.Geometry.Interfaces;
 using ReInvented.Geometry.Models;
+using ReInvented.Shared;
 using ReInvented.StaadPro.Interactivity.Entities;
 
 namespace ReInvented.Geometry
 {
+    public class NodeHelpers
+    {
+        public static double AngleIn360Degrees(Node reference, Node target)
+        {
+            double angleInDegrees = Math.Atan2(target.Z - reference.Z, target.X - reference.X).Degrees() % 360.0;
 
+            if (angleInDegrees < 0)
+            {
+                angleInDegrees += 360.0;
+            }
+
+            return angleInDegrees;
+        }
+    }
     public class MeshCriteria
     {
         public double MaximumDimension { get; set; }
         public int PlateCurrentId { get; set; }
         public int NodeCurrentId { get; set; }
+        public int HighestMinimumAngle { get; set; }
+
+        public int LeastMinimumAngle { get; set; }
     }
 
     public class FrustumTriangulationService : PolygonTriangulationService, IPolygonTriangulationService
     {
+        public FrustumTriangulationService(TriangleSplitMethod triangleSplitMethod = TriangleSplitMethod.PerpendicularNode) : base(triangleSplitMethod)
+        {
+
+        }
 
         public override (HashSet<Node> AdditionalNodes, HashSet<Plate> Plates) GenerateMesh(IPolygon polygon, IOSGeometryUI geometry, int currentNodeId = 0, int currentPlateId = 0, double maximumDimension = 0)
         {
@@ -73,7 +94,6 @@ namespace ReInvented.Geometry
                         {
                             plates.Add(new Plate(++currentPlateId, triangle.Vertices.First(), triangle.Vertices[1], triangle.Vertices.Last()));
 
-                            ///remainingNodes.RemoveAt(i + 1);
                             remainingNodes.Remove(triangle.Vertices[1]);
                         }
                         else
@@ -88,6 +108,9 @@ namespace ReInvented.Geometry
                             {
                                 intermediateNode = triangle.MidNodes.Last();
                             }
+
+                            /// TODO: This is directly resulting in infinite loop if the frustum is just a plane.
+                            ///intermediateNode = AdjustIntermediateNodeCoordinatesForConicalSurface(conicalPolygon, intermediateNode);
 
                             intermediateNode.Id = ++currentNodeId;
 
@@ -145,6 +168,7 @@ namespace ReInvented.Geometry
                 {
                     remainingNodesPrevious = remainingNodes;
                 }
+
                 additionalNodes.ToList().ForEach(an => geometry.CreateNode(an.Id, an.X, an.Y, an.Z));
                 plates.ToList().ForEach(p => geometry.CreatePlate(p.Id, p.A.Id, p.B.Id, p.C.Id, p.D.Id));
 
@@ -152,5 +176,25 @@ namespace ReInvented.Geometry
 
             return (additionalNodes, plates);
         }
+
+        #region Private Helpers
+
+        private static Node AdjustIntermediateNodeCoordinatesForConicalSurface(ConicalPolygon conicalPolygon, Node intermediateNode)
+        {
+            double angle = NodeHelpers.AngleIn360Degrees(conicalPolygon.StartCenter, intermediateNode);
+
+            double intermediateRadius = conicalPolygon.StartRadius +
+                                        ((conicalPolygon.EndRadius - conicalPolygon.StartRadius) / (conicalPolygon.EndYCoordinate - conicalPolygon.StartYCoordinate) * (intermediateNode.Y - conicalPolygon.StartCenter.Y));
+
+            var updatedX = conicalPolygon.StartCenter.X + intermediateRadius * Math.Cos(angle.Radians());
+            var updatedZ = conicalPolygon.StartCenter.Z + intermediateRadius * Math.Sin(angle.Radians());
+
+            intermediateNode.X = updatedX;
+            intermediateNode.Z = updatedZ;
+
+            return intermediateNode;
+        } 
+
+        #endregion
     }
 }

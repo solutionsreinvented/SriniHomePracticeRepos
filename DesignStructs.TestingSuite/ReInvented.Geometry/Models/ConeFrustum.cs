@@ -8,12 +8,19 @@ namespace ReInvented.Geometry.Models
 {
     public class ConeFrustum
     {
-        public ConeFrustum(List<Node> startCircleNodes, List<Node> endCircleNodes, bool edgesAreOpen = false)
+        #region Parameterized Constructor
+
+        public ConeFrustum(List<Node> startCircleNodes, List<Node> endCircleNodes, MeshFormation formation = MeshFormation.Clockwise, bool edgesAreOpen = false)
         {
             StartCircleNodes = startCircleNodes;
             EndCircleNodes = endCircleNodes;
             EdgesAreOpen = edgesAreOpen;
+            Formation = formation;
         }
+
+        #endregion
+
+        #region Public Properties
 
         public List<Node> StartCircleNodes { get; private set; }
 
@@ -21,14 +28,19 @@ namespace ReInvented.Geometry.Models
 
         public bool EdgesAreOpen { get; private set; }
 
+        public MeshFormation Formation { get; private set; }
+
+        #endregion
+
+        #region Public Functions
 
         public IPolygon GetPolygon(double maximumDimension = 0.0)
         {
             Node startCenter = Circle.GetCenter(StartCircleNodes);
             Node endCenter = Circle.GetCenter(EndCircleNodes);
 
-            var startRadius = Node.Radius(StartCircleNodes.First(), startCenter);
-            var endRadius = Node.Radius(EndCircleNodes.First(), endCenter);
+            double startRadius = Node.Radius(StartCircleNodes.First(), startCenter);
+            double endRadius = Node.Radius(EndCircleNodes.First(), endCenter);
 
             List<Node> polygonNodes;
 
@@ -41,48 +53,108 @@ namespace ReInvented.Geometry.Models
 
             if (EdgesAreOpen)
             {
-                List<Node> startClosingPoints = IntermediateNodesGenerator.GenerateNodes(StartCircleNodes.First(), EndCircleNodes.First(), maximumDimension, currentNodeId);
-                List<Node> endClosingPoints = IntermediateNodesGenerator.GenerateNodes(StartCircleNodes.Last(), EndCircleNodes.Last(), maximumDimension, startClosingPoints.Last().Id);
+                List<Node> startEdgeClosingNodes = IntermediateNodesGenerator.GenerateNodes(StartCircleNodes.First(), EndCircleNodes.First(), maximumDimension, currentNodeId);
+                List<Node> endEdgeClosingNodes = IntermediateNodesGenerator.GenerateNodes(StartCircleNodes.Last(), EndCircleNodes.Last(), maximumDimension, startEdgeClosingNodes.Last().Id);
 
-                polygonNodes = StartCircleNodes.Take(1).Union(startClosingPoints).Union(EndCircleNodes).ToList();
+                polygonNodes = GeneratePolygonNodes(StartCircleNodes, EndCircleNodes, startEdgeClosingNodes, endEdgeClosingNodes, Formation);
+            }
+            else
+            {
+                List<Node> closingNodes = IntermediateNodesGenerator.GenerateNodes(StartCircleNodes.First(), EndCircleNodes.First(), maximumDimension, currentNodeId);
 
-                for (int i = endClosingPoints.Count - 1; i >= 0; i--)
+                polygonNodes = GeneratePolygonNodes(StartCircleNodes, EndCircleNodes, closingNodes, Formation);
+            }
+
+            ConicalPolygon polygon = new ConicalPolygon(polygonNodes, startCenter, endCenter, startRadius, endRadius, startCenter.Y, endCenter.Y);
+
+            return polygon;
+        } 
+
+        #endregion
+
+        #region Private Helpers
+
+        private static List<Node> GeneratePolygonNodes(List<Node> startCircleNodes, List<Node> endCircleNodes, List<Node> startEdgeClosingNodes, List<Node> endEdgeClosingNodes, MeshFormation formation = MeshFormation.Clockwise)
+        {
+            List<Node> polygonNodes;
+
+            if (formation == MeshFormation.Clockwise)
+            {
+                polygonNodes = startCircleNodes.Take(1).Union(startEdgeClosingNodes).Union(endCircleNodes).ToList();
+
+                for (int i = endEdgeClosingNodes.Count - 1; i >= 0; i--)
                 {
-                    polygonNodes.Add(endClosingPoints[i]);
+                    polygonNodes.Add(endEdgeClosingNodes[i]);
                 }
 
-                for (int i = StartCircleNodes.Count - 1; i > 0; i--)
+                for (int i = startCircleNodes.Count - 1; i > 0; i--)
                 {
-                    polygonNodes.Add(StartCircleNodes[i]);
+                    polygonNodes.Add(startCircleNodes[i]);
                 }
             }
             else
             {
+                polygonNodes = startCircleNodes.Union(endEdgeClosingNodes).ToList();
 
-                List<Node> closingPoints = IntermediateNodesGenerator.GenerateNodes(StartCircleNodes.First(), EndCircleNodes.First(), maximumDimension, currentNodeId);
-
-                polygonNodes = StartCircleNodes.Take(1).Union(closingPoints).Union(EndCircleNodes).ToList();
-
-                polygonNodes.Add(EndCircleNodes.First());
-
-                for (int i = closingPoints.Count - 1; i >= 0; i--)
+                for (int i = endCircleNodes.Count - 1; i >= 0; i--)
                 {
-                    polygonNodes.Add(closingPoints[i]);
+                    polygonNodes.Add(endCircleNodes[i]);
                 }
 
-                polygonNodes.Add(StartCircleNodes.First());
-
-                for (int i = StartCircleNodes.Count - 1; i > 0; i--)
+                for (int i = startEdgeClosingNodes.Count - 1; i >= 0; i--)
                 {
-                    polygonNodes.Add(StartCircleNodes[i]);
+                    polygonNodes.Add(startEdgeClosingNodes[i]);
                 }
             }
 
-
-            ConicalPolygon polygon = new ConicalPolygon(polygonNodes, startRadius, endRadius, startCenter.Y, endCenter.Y);
-
-            return polygon;
+            return polygonNodes;
         }
+
+        private static List<Node> GeneratePolygonNodes(List<Node> startCircleNodes, List<Node> endCircleNodes, List<Node> closingNodes, MeshFormation formation = MeshFormation.Clockwise)
+        {
+            List<Node> polygonNodes;
+
+            if (formation == MeshFormation.Clockwise)
+            {
+                polygonNodes = startCircleNodes.Take(1).Union(closingNodes).Union(endCircleNodes).ToList();
+
+                polygonNodes.Add(endCircleNodes.First());
+
+                for (int i = closingNodes.Count - 1; i >= 0; i--)
+                {
+                    polygonNodes.Add(closingNodes[i]);
+                }
+
+                polygonNodes.Add(startCircleNodes.First());
+
+                for (int i = startCircleNodes.Count - 1; i > 0; i--)
+                {
+                    polygonNodes.Add(startCircleNodes[i]);
+                }
+            }
+            else
+            {
+                polygonNodes = startCircleNodes;
+                polygonNodes.Add(startCircleNodes.First());
+                polygonNodes.AddRange(closingNodes);
+                polygonNodes.Add(endCircleNodes.First());
+
+                for (int i = endCircleNodes.Count - 1; i >= 0; i--)
+                {
+                    polygonNodes.Add(endCircleNodes[i]);
+                }
+
+                for (int i = closingNodes.Count - 1; i >= 0; i--)
+                {
+                    polygonNodes.Add(closingNodes[i]);
+                }
+            }
+
+            return polygonNodes;
+        }
+
+        #endregion
+
     }
 
 }

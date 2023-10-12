@@ -51,9 +51,9 @@ namespace ReInvented.Geometry.Models
             for (int i = 0; i < nPoints; i++)
             {
                 currentNodeId += 1;
-                double xCoordinate = center.X + radius * Math.Cos((i * dTheta).ToRadians());
+                double xCoordinate = center.X + radius * Math.Cos((i * dTheta).Radians());
                 double yCoordinate = center.Y + elevationFromCenter;
-                double zCoordinate = center.Z + radius * Math.Sin((i * dTheta).ToRadians());
+                double zCoordinate = center.Z + radius * Math.Sin((i * dTheta).Radians());
 
                 nodes.Add(new Node(currentNodeId, xCoordinate, yCoordinate, zCoordinate));
             }

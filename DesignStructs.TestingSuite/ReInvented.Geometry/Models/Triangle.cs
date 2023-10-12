@@ -14,6 +14,11 @@ namespace ReInvented.Geometry.Models
         CounterClockwise,
         Collinear
     }
+    public enum MeshFormation
+    {
+        Clockwise,
+        CounterClockwise,
+    }
 
     public class Triangle
     {
@@ -96,15 +101,15 @@ namespace ReInvented.Geometry.Models
                 Math.Round(Vector3D.AngleBetween(Sides[2], (-1) * Sides[1]), 1)
             };
 
-            Area = 0.50 * Sides.First().Length * Sides.Last().Length * Math.Sin(Angles.First().ToRadians());
+            Area = 0.50 * Sides.First().Length * Sides.Last().Length * Math.Sin(Angles.First().Radians());
 
             PerpendicularNodes = new List<Node>()
             {
                 /// Nodes on the triangle side where the perpendicular bisector is created from the vertex. 
                 /// Node at index 0 indicates the node created on the side AB and continues sequentially to side AC
-                Node.CreateNewNodeByDistance(Vertices.First(), Vertices[1], Sides.Last().Length * Math.Cos(Angles.First().ToRadians())),
-                Node.CreateNewNodeByDistance(Vertices.First(), Vertices.Last(), Sides.First().Length * Math.Cos(Angles.First().ToRadians())),
-                Node.CreateNewNodeByDistance(Vertices.Last(), Vertices[1], Sides.Last().Length * Math.Cos(Angles.Last().ToRadians()))
+                Node.CreateNewNodeByDistance(Vertices.First(), Vertices[1], Sides.Last().Length * Math.Cos(Angles.First().Radians())),
+                Node.CreateNewNodeByDistance(Vertices.First(), Vertices.Last(), Sides.First().Length * Math.Cos(Angles.First().Radians())),
+                Node.CreateNewNodeByDistance(Vertices.Last(), Vertices[1], Sides.Last().Length * Math.Cos(Angles.Last().Radians()))
             };
             MidNodes = new List<Node>()
             {
