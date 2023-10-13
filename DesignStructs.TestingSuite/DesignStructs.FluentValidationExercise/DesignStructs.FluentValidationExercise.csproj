@@ -119,11 +119,5 @@
   <ItemGroup>
     <Folder Include="Views\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ReInvented.Documentation.Reporting\ReInvented.Documentation.Reporting.csproj">
-      <Project>{6cc1aa6f-c4c1-4093-a82a-4b9a7f2ffefc}</Project>
-      <Name>ReInvented.Documentation.Reporting</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

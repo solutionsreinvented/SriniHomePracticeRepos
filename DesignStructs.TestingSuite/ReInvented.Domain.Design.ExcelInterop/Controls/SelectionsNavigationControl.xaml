@@ -1,0 +1,81 @@
+﻿<UserControl
+    x:Class="ReInvented.Domain.Design.ExcelInterop.Controls.SelectionsNavigationControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <Grid>
+
+        <!--#region Grid Definitions-->
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.2*" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="1.2*" />
+        </Grid.ColumnDefinitions>
+
+        <!--#endregion-->
+
+        <!--#region Database ListBox-->
+
+        <ListBox
+            Grid.Column="0"
+            Margin="5"
+            Padding="5"
+            ItemsSource="{Binding SectionsLibrary.Databases}"
+            SelectedItem="{Binding Database}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Margin="0,3" Text="{Binding Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!--#endregion-->
+
+        <!--#region Shapes ListBox-->
+
+        <ListBox
+            Grid.Column="1"
+            Margin="5"
+            Padding="5"
+            ItemsSource="{Binding Database.SectionShapes}"
+            SelectedItem="{Binding Shape}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Margin="0,3" Text="{Binding Shape}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!--#endregion-->
+
+        <!--#region Classifications ListBox-->
+
+        <ListBox
+            Grid.Column="2"
+            Margin="5"
+            Padding="5"
+            ItemsSource="{Binding Shape.Classifications}"
+            SelectedItem="{Binding Classification}">
+            <!--<ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <EventSetter Event="MouseDoubleClick" Handler="{Binding AddSelectedClassificationCommand}" />
+                </Style>
+            </ListBox.ItemContainerStyle>-->
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Padding="0,3" Text="{Binding Category}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!--#endregion-->
+
+    </Grid>
+
+</UserControl>
