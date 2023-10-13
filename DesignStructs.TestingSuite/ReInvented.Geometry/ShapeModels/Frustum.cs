@@ -54,14 +54,14 @@ namespace ReInvented.Geometry.Models
 
             if (EdgesAreOpen)
             {
-                List<Node> startEdgeClosingNodes = NodeHelpers.GenerateIntermediateNodes(StartCircleNodes.First(), EndCircleNodes.First(), maximumDimension, currentNodeId);
-                List<Node> endEdgeClosingNodes = NodeHelpers.GenerateIntermediateNodes(StartCircleNodes.Last(), EndCircleNodes.Last(), maximumDimension, startEdgeClosingNodes.Last().Id);
+                List<Node> startEdgeClosingNodes = Node.GenerateIntermediateNodes(StartCircleNodes.First(), EndCircleNodes.First(), maximumDimension, currentNodeId);
+                List<Node> endEdgeClosingNodes = Node.GenerateIntermediateNodes(StartCircleNodes.Last(), EndCircleNodes.Last(), maximumDimension, startEdgeClosingNodes.Last().Id);
 
                 polygonNodes = GeneratePolygonNodes(StartCircleNodes, EndCircleNodes, startEdgeClosingNodes, endEdgeClosingNodes, Formation);
             }
             else
             {
-                List<Node> closingNodes = NodeHelpers.GenerateIntermediateNodes(StartCircleNodes.First(), EndCircleNodes.First(), maximumDimension, currentNodeId);
+                List<Node> closingNodes = Node.GenerateIntermediateNodes(StartCircleNodes.First(), EndCircleNodes.First(), maximumDimension, currentNodeId);
 
                 polygonNodes = GeneratePolygonNodes(StartCircleNodes, EndCircleNodes, closingNodes, Formation);
             }

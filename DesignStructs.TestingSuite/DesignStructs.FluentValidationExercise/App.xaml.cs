@@ -4,6 +4,7 @@ using ReInvented.FluentValidationExercise.Models;
 using ReInvented.FluentValidationExercise.Validators;
 
 using FluentValidation.Results;
+using DesignStructs.FluentValidationExercise.ViewModels;
 
 namespace ReInvented.FluentValidationExercise
 {
@@ -15,19 +16,13 @@ namespace ReInvented.FluentValidationExercise
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            ThickenerInput input = new ThickenerInput();
-            ThickenerInputValidator validator = new ThickenerInputValidator();
+            Input input = new Input();
 
-            MainWindow = new MainWindow() { DataContext = input };
+            MainWindow = new MainWindow() { DataContext = new MainViewModel() };
 
             MainWindow.Show();
 
-            ValidationResult results = validator.Validate(input);
 
-            foreach (ValidationFailure f in results.Errors)
-            {
-
-            }
         }
     }
 }

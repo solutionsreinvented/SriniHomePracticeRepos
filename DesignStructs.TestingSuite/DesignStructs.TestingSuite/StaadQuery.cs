@@ -38,19 +38,5 @@ namespace ReInvented.TestingSuite
 
         }
     }
-    public enum SilentMode
-    {
-        Disable = 0,
-        Enable = 1
-    }
-    public enum HiddenMode
-    {
-        Disable = 0,
-        Enable = 1
-    }
-    public enum WaitMode
-    {
-        Return = 0,
-        Wait = 1
-    }
+    
 }

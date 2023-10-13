@@ -1,0 +1,53 @@
+﻿<UserControl
+    x:Class="ReInvented.Domain.ProjectSetup.Controls.PerformanceOptionsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:ReInvented.Domain.ProjectSetup.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="Root"
+    d:DesignHeight="250"
+    d:DesignWidth="500"
+    mc:Ignorable="d">
+    <GroupBox
+        Padding="5"
+        DataContext="{Binding PerformanceSettings}"
+        Header="Performance">
+        <StackPanel>
+            <CheckBox
+                Margin="0,5"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Content="Use multiple threads for Staad operations"
+                IsChecked="{Binding UseMultipleThreads}">
+                <CheckBox.ToolTip>
+                    <TextBlock
+                        Width="350"
+                        Text="This option reduces the time consumed by this application in generating the Staad model and loadings. It does not reduce the time consumed by Staad for performing the analysis, design etc.,"
+                        TextWrapping="Wrap" />
+                </CheckBox.ToolTip>
+            </CheckBox>
+            <controls:ComboBoxInputControl
+                Margin="0,2"
+                ComboBoxColumnWidth="0.35*"
+                IsEnabled="{Binding UseMultipleThreads}"
+                ItemsSource="{Binding PossibleNumberOfThreads}"
+                Label="Number of threads to be considered:"
+                LabelColumnWidth="*"
+                SelectedItem="{Binding NumberOfThreads, Mode=TwoWay}" />
+            <!--<controls:TextBoxInputControl
+                Margin="0,2"
+                IsEnabled="{Binding PerformAutoDesign}"
+                Label="Maximum wait time for completing auto design (mins):"
+                LabelColumnWidth="*"
+                TextBoxColumnWidth="0.35*"
+                Value="{Binding AutoDesignTimeout, Mode=TwoWay}" />
+            <controls:TextBoxInputControl
+                Margin="0,2"
+                Label="Interval to check the Staad model availability (secs):"
+                LabelColumnWidth="*"
+                TextBoxColumnWidth="0.35*"
+                Value="{Binding ModelAvailabilityCheckInterval, Mode=TwoWay}" />-->
+        </StackPanel>
+    </GroupBox>
+</UserControl>

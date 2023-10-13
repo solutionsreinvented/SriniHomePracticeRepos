@@ -1,17 +1,19 @@
-﻿using ReInvented.Shared.Stores;
+﻿using ReInvented.FluentValidationExercise.Validators;
+using ReInvented.Shared.Stores;
 
 namespace ReInvented.FluentValidationExercise.Models
 {
-    public class Feedwell : ErrorsEnabledPropertyStore
+    public class FeedWell : ErrorsEnabledPropertyStore
     {
-        public Feedwell()
+        public FeedWell(Input input)
         {
-
+            Input = input;
         }
 
         public double Diameter { get => Get<double>(); set => Set(value); }
 
         public double SubmergedHeight { get => Get<double>(); set => Set(value); }
 
+        public Input Input { get; private set; }
     }
 }

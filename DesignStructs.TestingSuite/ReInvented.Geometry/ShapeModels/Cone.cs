@@ -57,8 +57,8 @@ namespace ReInvented.Geometry.Models
 
             if (EdgesAreOpen)
             {
-                List<Node> startEdgeClosingNodes = NodeHelpers.GenerateIntermediateNodes(Apex, CircleNodes.First(), maximumDimension, currentNodeId); ;
-                List<Node> endEdgeClosingNodes = NodeHelpers.GenerateIntermediateNodes(Apex, CircleNodes.Last(), maximumDimension, startEdgeClosingNodes.Last().Id); ;
+                List<Node> startEdgeClosingNodes = Node.GenerateIntermediateNodes(Apex, CircleNodes.First(), maximumDimension, currentNodeId); ;
+                List<Node> endEdgeClosingNodes = Node.GenerateIntermediateNodes(Apex, CircleNodes.Last(), maximumDimension, startEdgeClosingNodes.Last().Id); ;
 
                 currentNodeId = endEdgeClosingNodes.OrderBy(n => n.Id).Last().Id;
 
@@ -79,7 +79,7 @@ namespace ReInvented.Geometry.Models
 
                     if (iPolygon < NumberOfPolygons - 1)
                     {
-                        intermediateEdgeClosingNodes = NodeHelpers.GenerateIntermediateNodes(Apex, polygonCurveNodes.Last(), maximumDimension, currentNodeId);
+                        intermediateEdgeClosingNodes = Node.GenerateIntermediateNodes(Apex, polygonCurveNodes.Last(), maximumDimension, currentNodeId);
                     }
                     else
                     {
@@ -107,7 +107,7 @@ namespace ReInvented.Geometry.Models
             }
             else
             {
-                List<Node> commonEdgeClosingNodes = NodeHelpers.GenerateIntermediateNodes(Apex, CircleNodes.First(), maximumDimension, currentNodeId);
+                List<Node> commonEdgeClosingNodes = Node.GenerateIntermediateNodes(Apex, CircleNodes.First(), maximumDimension, currentNodeId);
                 List<Node> startEdgeClosingNodes = commonEdgeClosingNodes;
 
                 currentNodeId = commonEdgeClosingNodes.OrderBy(n => n.Id).Last().Id;
@@ -133,7 +133,7 @@ namespace ReInvented.Geometry.Models
 
                     if (iPolygon < NumberOfPolygons - 1)
                     {
-                        intermediateEdgeClosingNodes = NodeHelpers.GenerateIntermediateNodes(Apex, polygonCurveEndNode, maximumDimension);
+                        intermediateEdgeClosingNodes = Node.GenerateIntermediateNodes(Apex, polygonCurveEndNode, maximumDimension);
                     }
                     else
                     {

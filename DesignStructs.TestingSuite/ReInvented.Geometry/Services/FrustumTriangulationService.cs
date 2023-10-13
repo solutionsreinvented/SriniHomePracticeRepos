@@ -6,7 +6,6 @@ using OpenSTAADUI;
 
 using ReInvented.Geometry.Base;
 using ReInvented.Geometry.Enums;
-using ReInvented.Geometry.Helpers;
 using ReInvented.Geometry.Interfaces;
 using ReInvented.Geometry.Models;
 using ReInvented.Shared;
@@ -167,7 +166,7 @@ namespace ReInvented.Geometry
 
         private static Node AdjustIntermediateNodeCoordinatesForConicalSurface(ConicalPolygon conicalPolygon, Node intermediateNode)
         {
-            double angle = NodeHelpers.AngleIn360Degrees(conicalPolygon.StartCenter, intermediateNode);
+            double angle = Node.AngleIn360Degrees(conicalPolygon.StartCenter, intermediateNode);
 
             double intermediateRadius = conicalPolygon.StartRadius +
                                         ((conicalPolygon.EndRadius - conicalPolygon.StartRadius) / (conicalPolygon.EndYCoordinate - conicalPolygon.StartYCoordinate) * (intermediateNode.Y - conicalPolygon.StartCenter.Y));

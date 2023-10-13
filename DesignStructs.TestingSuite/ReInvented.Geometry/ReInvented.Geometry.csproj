@@ -68,7 +68,6 @@
     <Compile Include="Models\PlanarPolygon.cs" />
     <Compile Include="Models\RegularPolygonPointsProvider.cs" />
     <Compile Include="Enums\TriangleSplitMethod.cs" />
-    <Compile Include="Helpers\NodeHelpers.cs" />
     <Compile Include="Services\PlanarPolygonTriangulationService.cs" />
     <Compile Include="Services\FrustumTriangulationService.cs" />
     <Compile Include="Program.cs" />

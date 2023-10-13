@@ -15,9 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.Animations", "Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPro2023ConsoleApp", "..\..\repos\SPro2023ConsoleApp\SPro2023ConsoleApp\SPro2023ConsoleApp.csproj", "{00CEE675-75E5-4508-A7AD-09AB1C28E5AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialSelectionProject", "MaterialSelectionProject\MaterialSelectionProject.csproj", "{B5605F2C-CC5B-4D14-AB5E-16002A084C18}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.Documentation.Reporting", "ReInvented.Documentation.Reporting\ReInvented.Documentation.Reporting.csproj", "{6CC1AA6F-C4C1-4093-A82A-4B9A7F2FFEFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.Domain.ProjectSetup", "ReInvented.Domain.ProjectSetup\ReInvented.Domain.ProjectSetup.csproj", "{6CC1AA6F-C4C1-4093-A82A-4B9A7F2FFEFC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.Geometry", "ReInvented.Geometry\ReInvented.Geometry.csproj", "{ACEEC400-61BC-4914-8ED2-474F11E41E13}"
 EndProject
@@ -51,10 +49,6 @@ Global
 		{00CEE675-75E5-4508-A7AD-09AB1C28E5AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00CEE675-75E5-4508-A7AD-09AB1C28E5AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00CEE675-75E5-4508-A7AD-09AB1C28E5AE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B5605F2C-CC5B-4D14-AB5E-16002A084C18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B5605F2C-CC5B-4D14-AB5E-16002A084C18}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B5605F2C-CC5B-4D14-AB5E-16002A084C18}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B5605F2C-CC5B-4D14-AB5E-16002A084C18}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6CC1AA6F-C4C1-4093-A82A-4B9A7F2FFEFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6CC1AA6F-C4C1-4093-A82A-4B9A7F2FFEFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CC1AA6F-C4C1-4093-A82A-4B9A7F2FFEFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
