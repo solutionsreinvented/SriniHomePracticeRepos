@@ -2,10 +2,11 @@
 using ReInvented.Shared;
 
 using System;
-using System.Collections.Generic;
+
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace ReInvented.Domain.Drawing
@@ -62,6 +63,36 @@ namespace ReInvented.Domain.Drawing
     }
     #endregion
 
+    public class DrawingToImageConversionService
+    {
+        public static void PrintToPNG(Canvas canvas)
+        {
+            try
+            {
+                // Render the Canvas to a RenderTargetBitmap
+                RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap((int)canvas.Width, (int)canvas.Height, 96, 96, PixelFormats.Pbgra32);
+                renderTargetBitmap.Render(canvas);
+
+                // Create a PNG encoder
+                PngBitmapEncoder pngEncoder = new PngBitmapEncoder();
+                pngEncoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
+
+                // Save the PNG image to a file
+                string fileName = @"D:\02. Due\01. Everything Else\02. Resumé\canvas_image.png";
+                using (System.IO.FileStream stream = new System.IO.FileStream(fileName, System.IO.FileMode.Create))
+                {
+                    pngEncoder.Save(stream);
+                }
+
+                MessageBox.Show($"Canvas content saved as {fileName}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while saving the image: {ex.Message}");
+            }
+        }
+    }
+
     public class LabelGenerationService
     {
         public static (UIElement Rectangle, UIElement LabelText) GenerateLabelPositionedOnCircle(double centerX, double centerY, double circleRadius, double dotRadius, double angle, double labelGap, string label, Brush foreground, double rotateDegrees)
@@ -103,6 +134,7 @@ namespace ReInvented.Domain.Drawing
         {
             InitializeComponent();
             PlotPointsOnCircle(450.0, 36);
+            DrawingToImageConversionService.PrintToPNG(plotCanvas);
         }
         private void PlotPointsOnCircle(double diameter, int pointCount)
         {
@@ -141,6 +173,9 @@ namespace ReInvented.Domain.Drawing
                 }
 
             }
+
+
+
         }
     }
 }
