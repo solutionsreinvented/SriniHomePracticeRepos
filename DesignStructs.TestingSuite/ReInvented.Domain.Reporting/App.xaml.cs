@@ -5,7 +5,9 @@ using System.Windows;
 
 using ReInvented.DataAccess;
 using ReInvented.DataAccess.Services;
+using ReInvented.Domain.ProjectSetup.Models;
 using ReInvented.Domain.Reporting.Models;
+using ReInvented.Domain.Reporting.Services;
 using ReInvented.StaadPro.Interactivity.Models;
 
 namespace ReInvented.Domain.Reporting
@@ -18,6 +20,10 @@ namespace ReInvented.Domain.Reporting
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            FoundationLoadDataService service = new FoundationLoadDataService();
+            FoundationLoadData foundationLoadData = service.GenerateReportContent(new ProjectInfo());
+
 
             ///string filePath = @"C:\Users\masanams\Desktop\Desktop\Code\foundation-load-data-content.js";
 
