@@ -2,9 +2,9 @@
 
 namespace ReInvented.Domain.Reporting.Services
 {
-    public class MTOGenerationService
+    public class MaterialTakeOffService
     {
-        public static MaterialTakeOff Generate()
+        public static MaterialTakeOff GenerateReportContent()
         {
             return null;
         }

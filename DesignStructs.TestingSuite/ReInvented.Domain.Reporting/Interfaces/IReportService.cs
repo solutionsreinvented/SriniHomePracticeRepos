@@ -1,6 +1,6 @@
 ﻿namespace ReInvented.Domain.Reporting.Interfaces
 {
-    public interface IReportContentGenerationService
+    public interface IReportService
     {
         T Generate<T>() where T : IReportContent;
     }

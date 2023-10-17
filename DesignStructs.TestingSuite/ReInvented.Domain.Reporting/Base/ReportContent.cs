@@ -9,11 +9,11 @@ namespace ReInvented.Domain.Reporting.Base
     {
         public ReportContent()
         {
-            GeneratedOn = DateTime.Now;
+            
         }
 
-        public DateTime GeneratedOn { get; private set; }
+        public string GeneratedOn { get; set; }
 
-        public DataSourceInformation DataSourceInformation { get; private set; }
+        public DataSourceInformation DataSourceInformation { get; set; }
     }
 }

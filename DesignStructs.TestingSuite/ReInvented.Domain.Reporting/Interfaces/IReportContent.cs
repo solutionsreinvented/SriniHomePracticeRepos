@@ -6,7 +6,7 @@ namespace ReInvented.Domain.Reporting.Interfaces
 {
     public interface IReportContent
     {
-        DateTime GeneratedOn { get; }
+        string GeneratedOn { get; }
 
         DataSourceInformation DataSourceInformation { get; }
 

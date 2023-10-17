@@ -14,6 +14,6 @@ namespace ReInvented.Domain.Reporting.Models
 
         public Dictionary<int, string> LoadCases { get; set; }
 
+        public HashSet<PCDLoads> PCDLoadsCollection { get; set; }
     }
-
 }

@@ -34,9 +34,24 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="ReInvented.DataAccess">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.DataAccess\bin\Debug\ReInvented.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="ReInvented.Domain.ProjectSetup">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Domain.ProjectSetup.dll</HintPath>
+    </Reference>
+    <Reference Include="ReInvented.Shared">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Shared\bin\Debug\ReInvented.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="ReInvented.StaadPro.Interactivity">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.StaadPro.Interactivity\bin\Debug\ReInvented.StaadPro.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -60,10 +75,15 @@
     </ApplicationDefinition>
     <Compile Include="Base\ReportContent.cs" />
     <Compile Include="Interfaces\IReportContent.cs" />
-    <Compile Include="Interfaces\IReportContentGenerationService.cs" />
+    <Compile Include="Interfaces\IReportService.cs" />
     <Compile Include="Models\FDL\FoundationLoadData.cs" />
-    <Compile Include="Services\FoundationLoadDataContentGenerationService.cs" />
-    <Compile Include="Services\MTOGenerationService.cs" />
+    <Compile Include="Models\FDL\LoadCaseForces.cs" />
+    <Compile Include="Models\FDL\PCDLoads.cs" />
+    <Compile Include="Models\FDL\SupportLoads.cs" />
+    <Compile Include="Models\FDL\SupportsInformation.cs" />
+    <Compile Include="Services\FoundationLoadDataService.cs" />
+    <Compile Include="Services\MaterialTakeOffService.cs" />
+    <Compile Include="Services\SupportLoadsSummaryService.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -103,6 +123,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.manifest" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -111,6 +133,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMFileReference Include="C:\Program Files\Bentley\Engineering\STAAD.Pro 2023\STAAD\StaadPro.dll">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMFileReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReInvented.Domain.Geometry\ReInvented.Domain.Geometry.csproj">
+      <Project>{ACEEC400-61BC-4914-8ED2-474F11E41E13}</Project>
+      <Name>ReInvented.Domain.Geometry</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
