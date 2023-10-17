@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.Domain.Geometry"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.Domain.Drawing", "ReInvented.Domain.Drawing\ReInvented.Domain.Drawing.csproj", "{1091C9A6-89BA-4236-B4D1-EC1B89C76622}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.Domain.Reporting", "ReInvented.Domain.Reporting\ReInvented.Domain.Reporting.csproj", "{2AF4E5A8-54A6-4AA0-AE08-41E301309F0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{1091C9A6-89BA-4236-B4D1-EC1B89C76622}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1091C9A6-89BA-4236-B4D1-EC1B89C76622}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1091C9A6-89BA-4236-B4D1-EC1B89C76622}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AF4E5A8-54A6-4AA0-AE08-41E301309F0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AF4E5A8-54A6-4AA0-AE08-41E301309F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AF4E5A8-54A6-4AA0-AE08-41E301309F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AF4E5A8-54A6-4AA0-AE08-41E301309F0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -134,7 +134,7 @@ namespace ReInvented.Domain.Drawing
         {
             InitializeComponent();
             PlotPointsOnCircle(450.0, 36);
-            DrawingToImageConversionService.PrintToPNG(plotCanvas);
+            ///DrawingToImageConversionService.PrintToPNG(plotCanvas);
         }
         private void PlotPointsOnCircle(double diameter, int pointCount)
         {
@@ -173,9 +173,6 @@ namespace ReInvented.Domain.Drawing
                 }
 
             }
-
-
-
         }
     }
 }
