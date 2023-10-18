@@ -27,15 +27,15 @@ namespace ReInvented.Domain.Drawing.Services
             double straightLineLength = totalLength - arrowWidth;
             double halfThickness = thickness / 2.0;
 
-            List<PathSegment> segments = new List<PathSegment>
+            List<PathSegment> segments = new List<PathSegment>()
             {
-            new LineSegment(new Point(startX, startY + halfThickness), true),
-            new LineSegment(new Point(startX + straightLineLength, startY + halfThickness), true),
-            new LineSegment(new Point(startX + straightLineLength, startY + arrowHeight / 2.0), true),
-            new LineSegment(new Point(startX + straightLineLength + arrowWidth, startY), true),
-            new LineSegment(new Point(startX + straightLineLength, startY + (-1.0) * arrowHeight / 2.0), true),
-            new LineSegment(new Point(startX + straightLineLength, startY + (-1.0) * halfThickness), true),
-            new LineSegment(new Point(startX, startY + (-1.0) * halfThickness), true)
+                new LineSegment(new Point(startX, startY + halfThickness), true),
+                new LineSegment(new Point(startX + straightLineLength, startY + halfThickness), true),
+                new LineSegment(new Point(startX + straightLineLength, startY + arrowHeight / 2.0), true),
+                new LineSegment(new Point(startX + straightLineLength + arrowWidth, startY), true),
+                new LineSegment(new Point(startX + straightLineLength, startY + (-1.0) * arrowHeight / 2.0), true),
+                new LineSegment(new Point(startX + straightLineLength, startY + (-1.0) * halfThickness), true),
+                new LineSegment(new Point(startX, startY + (-1.0) * halfThickness), true)
             };
 
             PathFigure arrowFigure = new PathFigure(new Point(startX, startY), segments, true);
