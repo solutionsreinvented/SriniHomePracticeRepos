@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Windows;
+﻿using System.Windows;
 
-using ReInvented.DataAccess;
-using ReInvented.DataAccess.Services;
-using ReInvented.Domain.ProjectSetup.Models;
-using ReInvented.Domain.Reporting.Models;
-using ReInvented.Domain.Reporting.Services;
-using ReInvented.StaadPro.Interactivity.Models;
+using ReInvented.Domain.Reporting.ViewModels;
+using ReInvented.Domain.Reporting.Views;
 
 namespace ReInvented.Domain.Reporting
 {
@@ -21,9 +14,8 @@ namespace ReInvented.Domain.Reporting
         {
             base.OnStartup(e);
 
-            FoundationLoadDataService service = new FoundationLoadDataService();
-            FoundationLoadData foundationLoadData = service.GenerateReportContent(new ProjectInfo());
-
+            MainWindow = new FoundationLoadDataView() { DataContext = new FoundationLoadDataViewModel() };
+            MainWindow.Show();
 
             ///string filePath = @"C:\Users\masanams\Desktop\Desktop\Code\foundation-load-data-content.js";
 

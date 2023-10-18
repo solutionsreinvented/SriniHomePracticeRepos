@@ -74,6 +74,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Base\ReportContent.cs" />
+    <Compile Include="Controls\ProjectSetupControl.xaml.cs">
+      <DependentUpon>ProjectSetupControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\IReportContent.cs" />
     <Compile Include="Interfaces\IReportService.cs" />
     <Compile Include="Models\FDL\FoundationLoadData.cs" />
@@ -82,9 +85,16 @@
     <Compile Include="Models\FDL\SupportLoads.cs" />
     <Compile Include="Models\FDL\SupportsInformation.cs" />
     <Compile Include="Services\FoundationLoadDataService.cs" />
+    <Compile Include="Services\HtmlContentManager.cs" />
     <Compile Include="Services\MaterialTakeOffService.cs" />
+    <Compile Include="Services\ReportFileNames.cs" />
     <Compile Include="Services\SupportLoadsSummaryService.cs" />
-    <Page Include="MainWindow.xaml">
+    <Compile Include="ViewModels\FoundationLoadDataViewModel.cs" />
+    <Page Include="Controls\ProjectSetupControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FoundationLoadDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -92,8 +102,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Views\FoundationLoadDataView.xaml.cs">
+      <DependentUpon>FoundationLoadDataView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -144,5 +154,6 @@
       <Name>ReInvented.Domain.Geometry</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

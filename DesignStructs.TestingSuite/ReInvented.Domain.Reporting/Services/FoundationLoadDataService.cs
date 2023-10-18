@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 using OpenSTAADUI;
 
+using ReInvented.DataAccess;
+using ReInvented.DataAccess.Services;
 using ReInvented.Domain.Geometry.Models;
 using ReInvented.Domain.ProjectSetup.Interfaces;
-using ReInvented.Domain.ProjectSetup.Models;
 using ReInvented.Domain.Reporting.Models;
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Enums;
@@ -16,6 +18,61 @@ namespace ReInvented.Domain.Reporting.Services
 {
     public class FoundationLoadDataService
     {
+        #region File Operations
+
+        public static void CreateReportHtmlFile(DirectoryInfo projectDirectory)
+        {
+            string fdlHtmlSourceFileFullPath = Path.Combine(FileServiceProvider.TemplatesDirectory, "Pages", ReportFileNames.HtmlFoundationLoadData);
+            string fdlHtmlDestinationFileFullPath = Path.Combine(projectDirectory.FullName, ReportFileNames.HtmlFoundationLoadData);
+
+            List<string> htmlContent = File.ReadAllLines(fdlHtmlSourceFileFullPath).ToList();
+            htmlContent = HtmlContentManager.AddScriptTagsTo(htmlContent);
+
+            File.WriteAllLines(fdlHtmlDestinationFileFullPath, htmlContent);
+        }
+
+        public static void CopyCssStyleFiles(DirectoryInfo projectDirectory)
+        {
+            string sourceStylesDirectory = Path.Combine(FileServiceProvider.TemplatesDirectory, "Styles");
+            string destinationStylesDirectory = Path.Combine(projectDirectory.FullName, "Styles");
+
+            if (!Directory.Exists(destinationStylesDirectory))
+            {
+                _ = Directory.CreateDirectory(destinationStylesDirectory);
+            }
+
+            File.Copy(Path.Combine(sourceStylesDirectory, ReportFileNames.CssCommon), Path.Combine(destinationStylesDirectory, ReportFileNames.CssCommon), true);
+            File.Copy(Path.Combine(sourceStylesDirectory, ReportFileNames.CssFoundationLoadData), Path.Combine(destinationStylesDirectory, ReportFileNames.CssFoundationLoadData), true);
+
+        }
+
+        public static void CopyJavaScriptFiles(DirectoryInfo projectDirectory)
+        {
+            string sourceScriptsDirectory = Path.Combine(FileServiceProvider.TemplatesDirectory, "Scripts");
+            string destinationScriptsDirectory = Path.Combine(projectDirectory.FullName, "Scripts");
+
+            if (!Directory.Exists(destinationScriptsDirectory))
+            {
+                _ = Directory.CreateDirectory(destinationScriptsDirectory);
+            }
+
+            File.Copy(Path.Combine(sourceScriptsDirectory, ReportFileNames.JavaScriptFoundationLoadData), Path.Combine(destinationScriptsDirectory, ReportFileNames.JavaScriptFoundationLoadData), true);
+        }
+
+        public static void CreateReportContentsFile(DirectoryInfo projectDirectory, FoundationLoadData foundationLoadData)
+        {
+            DirectoryInfo projectDataDirectory = Directory.CreateDirectory(Path.Combine(projectDirectory.FullName, "Data"));
+
+            JsonDataSerializer<FoundationLoadData> serializer = new JsonDataSerializer<FoundationLoadData>();
+            string seializedContent = "const FoundationLoadData = " + serializer.Serialize(foundationLoadData, JsonSerializerSettingsProvider.MinifiedSettings());
+
+            File.WriteAllText(Path.Combine(projectDataDirectory.FullName, ReportFileNames.ContentsFoundationLoadData), seializedContent);
+        }
+
+        #endregion
+
+        #region Public Functions
+
         public FoundationLoadData GenerateReportContent(IProjectInfo projectInfo)
         {
             StaadModel model = new StaadModel();
@@ -44,6 +101,7 @@ namespace ReInvented.Domain.Reporting.Services
             return foundationLoadData;
         }
 
+        #endregion
 
         #region Private Helpers - Core
 
@@ -98,7 +156,7 @@ namespace ReInvented.Domain.Reporting.Services
         private static PCDLoads RetrievePCDLoadsFor(string groupName, List<Node> supportNodes, List<LoadCase> loadCases, OSOutputUI output)
         {
             Node center = Circle.GetCenter(supportNodes);
-            double diameter = Node.Diameter(supportNodes.First(), center);
+            double diameter = Math.Round(Node.Diameter(supportNodes.First(), center), 3);
 
             PCDLoads pcdLoads = new PCDLoads()
             {
@@ -107,7 +165,7 @@ namespace ReInvented.Domain.Reporting.Services
                 {
                     NumberOfSupports = supportNodes.Count(),
                     Center = center,
-                    Diameter = diameter
+                    Diameter = diameter.ToString("N3")
                 },
                 SupportLoadsCollection = new HashSet<SupportLoads>()
             };
@@ -125,6 +183,8 @@ namespace ReInvented.Domain.Reporting.Services
 
         private static SupportLoads RetrieveSupportLoadsFor(int supportId, List<LoadCase> loadCases, OSOutputUI output)
         {
+            int roundDigits = 1;
+
             SupportLoads supportLoads = new SupportLoads() { NodeNumber = supportId, Loads = new HashSet<LoadCaseForces>() };
 
             for (int iLoadCase = 0; iLoadCase < loadCases.Count(); iLoadCase++)
@@ -136,12 +196,12 @@ namespace ReInvented.Domain.Reporting.Services
                 _ = supportLoads.Loads.Add(new LoadCaseForces()
                 {
                     Id = loadCases[iLoadCase].Id,
-                    Fx = ((double[])reactions)[0],
-                    Fy = ((double[])reactions)[1],
-                    Fz = ((double[])reactions)[2],
-                    Mx = ((double[])reactions)[3],
-                    My = ((double[])reactions)[4],
-                    Mz = ((double[])reactions)[5],
+                    Fx = Math.Round(((double[])reactions)[0], roundDigits),
+                    Fy = Math.Round(((double[])reactions)[1], roundDigits),
+                    Fz = Math.Round(((double[])reactions)[2], roundDigits),
+                    Mx = Math.Round(((double[])reactions)[3], roundDigits),
+                    My = Math.Round(((double[])reactions)[4], roundDigits),
+                    Mz = Math.Round(((double[])reactions)[5], roundDigits)
                 });
             }
 
@@ -224,6 +284,5 @@ namespace ReInvented.Domain.Reporting.Services
         }
 
         #endregion
-
     }
 }

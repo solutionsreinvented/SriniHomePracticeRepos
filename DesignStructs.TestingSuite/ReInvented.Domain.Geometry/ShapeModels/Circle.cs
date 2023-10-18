@@ -37,11 +37,6 @@ namespace ReInvented.Domain.Geometry.Models
             return GenerateNodes(Center, Radius, nPoints, elevationFromCenter, currentNodeId);
         }
 
-        internal static object GetCenter(IReadOnlyList<Node> startCircleNodes)
-        {
-            throw new NotImplementedException();
-        }
-
         public static List<Node> GenerateNodes(Node center, double radius, int nPoints, double elevationFromCenter = 0.0, int currentNodeId = 0)
         {
             List<Node> nodes = new List<Node>();
@@ -61,9 +56,10 @@ namespace ReInvented.Domain.Geometry.Models
             return nodes;
         }
 
-        public static Node GetCenter(List<Node> nodesOnCircle)
+        public static Node GetCenter(List<Node> nodesOnCircle, int roundRigits = 3)
         {
-            return new Node(nodesOnCircle.Average(n => n.X), nodesOnCircle.Average(n => n.Y), nodesOnCircle.Average(n => n.Z));
+            Node center = new Node(Math.Round(nodesOnCircle.Average(n => n.X), roundRigits), Math.Round(nodesOnCircle.Average(n => n.Y), roundRigits), Math.Round(nodesOnCircle.Average(n => n.Z), roundRigits));
+            return center;
         }
     }
 }

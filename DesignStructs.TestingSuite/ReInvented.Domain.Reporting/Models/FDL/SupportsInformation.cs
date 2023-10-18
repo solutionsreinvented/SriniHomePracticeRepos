@@ -6,7 +6,7 @@ namespace ReInvented.Domain.Reporting.Models
     {
         public Node Center { get; set; }
 
-        public double Diameter { get; set; }
+        public string Diameter { get; set; }
 
         public int NumberOfSupports { get; set; }
     }
