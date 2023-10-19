@@ -38,6 +38,10 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.11.54.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.54\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -86,6 +90,7 @@
     <Compile Include="Models\FDL\SupportsInformation.cs" />
     <Compile Include="Services\FoundationLoadDataService.cs" />
     <Compile Include="Services\HtmlContentManager.cs" />
+    <Compile Include="Services\HtmlDocumentManager.cs" />
     <Compile Include="Services\MaterialTakeOffService.cs" />
     <Compile Include="Services\ReportFileNames.cs" />
     <Compile Include="Services\SupportLoadsSummaryService.cs" />

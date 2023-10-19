@@ -172,7 +172,7 @@ namespace ReInvented.Domain.Reporting.Services
 
             for (int iSupport = 0; iSupport < supportNodes.Count(); iSupport++)
             {
-                SupportLoads supportLoads = RetrieveSupportLoadsFor(supportNodes[iSupport].Id, loadCases, output);
+                SupportLoads supportLoads = RetrieveSupportLoadsFor(supportNodes[iSupport], loadCases, output);
                 _ = pcdLoads.SupportLoadsCollection.Add(supportLoads);
             }
 
@@ -181,17 +181,17 @@ namespace ReInvented.Domain.Reporting.Services
             return pcdLoads;
         }
 
-        private static SupportLoads RetrieveSupportLoadsFor(int supportId, List<LoadCase> loadCases, OSOutputUI output)
+        private static SupportLoads RetrieveSupportLoadsFor(Node support, List<LoadCase> loadCases, OSOutputUI output)
         {
             int roundDigits = 1;
 
-            SupportLoads supportLoads = new SupportLoads() { NodeNumber = supportId, Loads = new HashSet<LoadCaseForces>() };
+            SupportLoads supportLoads = new SupportLoads() { Support = support, Loads = new HashSet<LoadCaseForces>() };
 
             for (int iLoadCase = 0; iLoadCase < loadCases.Count(); iLoadCase++)
             {
                 object reactions = new double[6];
 
-                output.GetSupportReactions(supportLoads.NodeNumber, loadCases[iLoadCase].Id, ref reactions);
+                output.GetSupportReactions(supportLoads.Support.Id, loadCases[iLoadCase].Id, ref reactions);
 
                 _ = supportLoads.Loads.Add(new LoadCaseForces()
                 {

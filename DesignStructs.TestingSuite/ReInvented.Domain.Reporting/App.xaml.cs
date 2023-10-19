@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 
+using HtmlAgilityPack;
+
 using ReInvented.Domain.Reporting.ViewModels;
 using ReInvented.Domain.Reporting.Views;
 
@@ -12,6 +14,11 @@ namespace ReInvented.Domain.Reporting
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            //string filePath = @"C:\Users\masanams\Desktop\Desktop\Code\Reports\23-4042\foundation-load-data.html";
+            //HtmlDocument htmlDocument = new HtmlDocument();
+            //htmlDocument.Load(filePath);
+
+
             base.OnStartup(e);
 
             MainWindow = new FoundationLoadDataView() { DataContext = new FoundationLoadDataViewModel() };
