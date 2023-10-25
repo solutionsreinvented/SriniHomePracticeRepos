@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
+using HtmlAgilityPack;
+
 using OpenSTAADUI;
 
 using ReInvented.DataAccess;
@@ -25,10 +27,12 @@ namespace ReInvented.Domain.Reporting.Services
             string fdlHtmlSourceFileFullPath = Path.Combine(FileServiceProvider.TemplatesDirectory, "Pages", ReportFileNames.HtmlFoundationLoadData);
             string fdlHtmlDestinationFileFullPath = Path.Combine(projectDirectory.FullName, ReportFileNames.HtmlFoundationLoadData);
 
-            List<string> htmlContent = File.ReadAllLines(fdlHtmlSourceFileFullPath).ToList();
-            htmlContent = HtmlContentManager.AddScriptTagsTo(htmlContent);
+            HtmlDocument htmlDocument = new HtmlDocument();
+            htmlDocument.Load(fdlHtmlSourceFileFullPath);
+            htmlDocument = HtmlContentManager.LinkCssAndScriptsTo(htmlDocument);
 
-            File.WriteAllLines(fdlHtmlDestinationFileFullPath, htmlContent);
+            htmlDocument.Save(fdlHtmlDestinationFileFullPath);
+
         }
 
         public static void CopyCssStyleFiles(DirectoryInfo projectDirectory)
@@ -43,7 +47,6 @@ namespace ReInvented.Domain.Reporting.Services
 
             File.Copy(Path.Combine(sourceStylesDirectory, ReportFileNames.CssCommon), Path.Combine(destinationStylesDirectory, ReportFileNames.CssCommon), true);
             File.Copy(Path.Combine(sourceStylesDirectory, ReportFileNames.CssFoundationLoadData), Path.Combine(destinationStylesDirectory, ReportFileNames.CssFoundationLoadData), true);
-
         }
 
         public static void CopyJavaScriptFiles(DirectoryInfo projectDirectory)
@@ -73,7 +76,7 @@ namespace ReInvented.Domain.Reporting.Services
 
         #region Public Functions
 
-        public FoundationLoadData GenerateReportContent(IProjectInfo projectInfo)
+        public FoundationLoadData GenerateReportContent(IProjectInfo projectInfo, IEnumerable<int> reportLoadsIds)
         {
             StaadModel model = new StaadModel();
             OpenSTAAD openStaad = model.StaadWrapper.StaadInstance;
@@ -81,20 +84,20 @@ namespace ReInvented.Domain.Reporting.Services
 
             HashSet<Node> nodes = RetrieveAllNodesFromStaadModel(openStaad.Geometry);
             HashSet<EntityGroup> pcdSupportGroups = GetSupportEntityGroups(openStaad.Geometry);
-            List<LoadCase> loadCases = GetPrimaryLoadCasesForLoadDataGeneration(openStaad.Load);
+            List<LoadCase> loadCases = GetPrimaryLoadCasesForLoadDataGeneration(openStaad.Load, reportLoadsIds);
 
             FoundationLoadData foundationLoadData = GenerateFoundationLoadData(output, pcdSupportGroups, nodes, loadCases, projectInfo, model.ModelName);
 
             return foundationLoadData;
         }
 
-        public FoundationLoadData GenerateReportContent(StaadModel model, IProjectInfo projectInfo)
+        public FoundationLoadData GenerateReportContent(StaadModel model, IProjectInfo projectInfo, IEnumerable<int> reportLoadsIds)
         {
             OpenSTAAD openStaad = model.StaadWrapper.StaadInstance;
             OSOutputUI output = openStaad.Output;
 
             HashSet<EntityGroup> pcdSupportGroups = model.EntityGroups.Where(g => g.GroupName.Contains("_SUP_") && g.EntityType == EntityType.Nodes).ToHashSet();
-            List<LoadCase> loadCases = model.PrimaryLoads.Where(pl => pl.Id >= 601 && pl.Id <= 615).ToList();
+            List<LoadCase> loadCases = model.PrimaryLoads.Where(pl => reportLoadsIds.Contains(pl.Id)).OrderBy(lc => lc.Id).ToList();
 
             FoundationLoadData foundationLoadData = GenerateFoundationLoadData(output, pcdSupportGroups, model.Nodes, loadCases, projectInfo, model.FileName);
 
@@ -133,6 +136,11 @@ namespace ReInvented.Domain.Reporting.Services
             loadCases.ForEach(lc => foundationLoadData.LoadCases.Add(lc.Id, lc.Title));
 
             foundationLoadData.PCDLoadsCollection = RetrievePCDLoadsCollection(pcdSupportGroups, nodes, loadCases, output);
+
+            foreach (PCDLoads pcd in foundationLoadData.PCDLoadsCollection)
+            {
+                pcd.SupportLoadsSummary = SupportLoadsSummaryService.Generate(pcd);
+            }
 
             return foundationLoadData;
         }
@@ -268,16 +276,14 @@ namespace ReInvented.Domain.Reporting.Services
             return entityGroups;
         }
 
-        private static List<LoadCase> GetPrimaryLoadCasesForLoadDataGeneration(OSLoadUI load)
+        private static List<LoadCase> GetPrimaryLoadCasesForLoadDataGeneration(OSLoadUI load, IEnumerable<int> reportLoadCasesIds)
         {
             List<LoadCase> loadCases = new List<LoadCase>();
 
-            IEnumerable<int> primaryLoadCaseNumbers = Enumerable.Range(601, 15);
-
-            foreach (int lcNumber in primaryLoadCaseNumbers)
+            foreach (int lcId in reportLoadCasesIds)
             {
-                string lcTitle = (string)load.GetLoadCaseTitle(lcNumber);
-                loadCases.Add(new LoadCase(lcNumber) { Title = lcTitle });
+                string lcTitle = (string)load.GetLoadCaseTitle(lcId);
+                loadCases.Add(new LoadCase(lcId) { Title = lcTitle });
             }
 
             return loadCases;

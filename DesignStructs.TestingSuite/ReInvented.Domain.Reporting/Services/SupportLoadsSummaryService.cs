@@ -17,24 +17,24 @@ namespace ReInvented.Domain.Reporting.Services
 
             HashSet<LoadCaseForces> supportLoadsSummary = new HashSet<LoadCaseForces>();
 
-
-
             for (int i = 0; i < nLoadCaseCount; i++)
             {
-                List<LoadCaseForces> loads = supportLoadsCollection[i].Loads.ToList();
-
                 LoadCaseForces lcForces = new LoadCaseForces()
                 {
+                    Id = supportLoadsCollection[0].Loads.ToList()[i].Id,
                     Fx = supportLoadsCollection.Sum(slc => slc.Loads.ToList()[i].Fx),
                     Fy = supportLoadsCollection.Sum(slc => slc.Loads.ToList()[i].Fy),
                     Fz = supportLoadsCollection.Sum(slc => slc.Loads.ToList()[i].Fz),
-                    Mx = supportLoadsCollection.Sum(slc => slc.Loads.ToList()[i].Mx) + supportLoadsCollection.Sum(slc => (-1) * slc.Loads.ToList()[i].Fy * (slc.Support.Z - center.Z)),
-                    My = supportLoadsCollection.Sum(slc => slc.Loads.ToList()[i].My) + supportLoadsCollection.Sum(slc => 1 * slc.Loads.ToList()[i].Fy * (slc.Support.Z - center.Z))
-                }
+                    Mx = supportLoadsCollection.Sum(slc => slc.Loads.ToList()[i].Mx) + supportLoadsCollection.Sum(slc => (-1.0) * slc.Loads.ToList()[i].Fy * (slc.Support.Z - center.Z)),
+                    My = supportLoadsCollection.Sum(slc => slc.Loads.ToList()[i].My) + supportLoadsCollection.Sum(slc => 1.0 * slc.Loads.ToList()[i].Fx * (slc.Support.Z - center.Z))
+                                                                                     + supportLoadsCollection.Sum(slc => (-1.0) * slc.Loads.ToList()[i].Fz * (slc.Support.X - center.X)),
+                    Mz = supportLoadsCollection.Sum(slc => slc.Loads.ToList()[i].Mz) + supportLoadsCollection.Sum(slc => 1.0 * slc.Loads.ToList()[i].Fy * (slc.Support.X - center.X))
+                };
+
+                _ = supportLoadsSummary.Add(lcForces);
             }
 
-
-            return null;
+            return supportLoadsSummary;
         }
     }
 }

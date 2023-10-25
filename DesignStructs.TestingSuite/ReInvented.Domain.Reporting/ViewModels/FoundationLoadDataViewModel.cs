@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 using ReInvented.DataAccess.Services;
@@ -16,7 +18,7 @@ namespace ReInvented.Domain.Reporting.ViewModels
     {
         public FoundationLoadDataViewModel()
         {
-            ProjectInfo = new ProjectInfo();
+            ProjectInfo = new ProjectInfo() { ProjectDirectory = @"C:\Users\masanams\Desktop\Desktop\Code\Reports" };
             GenerateFoundationLoadDataCommand = new RelayCommand(OnGenerateFoundationLoadData, true);
             SelectProjectDirectoryCommand = new RelayCommand(OnSelectProjectDirectory, true);
         }
@@ -36,15 +38,21 @@ namespace ReInvented.Domain.Reporting.ViewModels
             }
 
             FoundationLoadDataService service = new FoundationLoadDataService();
-            FoundationLoadData foundationLoadData = service.GenerateReportContent(ProjectInfo);
+            FoundationLoadData foundationLoadData = service.GenerateReportContent(ProjectInfo, Enumerable.Range(601, 15));
+            if (foundationLoadData != null)
+            {
+                DirectoryInfo projectDirectory = Directory.CreateDirectory(Path.Combine(ProjectInfo.ProjectDirectory, ProjectInfo.Code));
 
-            DirectoryInfo projectDirectory = Directory.CreateDirectory(Path.Combine(ProjectInfo.ProjectDirectory, ProjectInfo.Code));
+                FoundationLoadDataService.CreateReportHtmlFile(projectDirectory);
+                FoundationLoadDataService.CopyCssStyleFiles(projectDirectory);
+                FoundationLoadDataService.CopyJavaScriptFiles(projectDirectory);
+                FoundationLoadDataService.CreateReportContentsFile(projectDirectory, foundationLoadData);
 
-            FoundationLoadDataService.CreateReportHtmlFile(projectDirectory);
-            FoundationLoadDataService.CopyCssStyleFiles(projectDirectory);
-            FoundationLoadDataService.CopyJavaScriptFiles(projectDirectory);
-            FoundationLoadDataService.CreateReportContentsFile(projectDirectory, foundationLoadData);
-
+            }
+            else
+            {
+                MessageBox.Show("It appears that the analysis results are not available. Make sure to run the analysis before generating foundation load data!", "Foundation Load Data", MessageBoxButton.OK);
+            }
         }
 
 
