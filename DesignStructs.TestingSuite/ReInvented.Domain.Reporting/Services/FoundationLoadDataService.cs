@@ -22,14 +22,14 @@ namespace ReInvented.Domain.Reporting.Services
     {
         #region File Operations
 
-        public static void CreateReportHtmlFile(DirectoryInfo projectDirectory)
+        public static void CreateReportHtmlFile(DirectoryInfo projectDirectory, bool useAbsolutePaths)
         {
             string fdlHtmlSourceFileFullPath = Path.Combine(FileServiceProvider.TemplatesDirectory, "Pages", ReportFileNames.HtmlFoundationLoadData);
             string fdlHtmlDestinationFileFullPath = Path.Combine(projectDirectory.FullName, ReportFileNames.HtmlFoundationLoadData);
 
             HtmlDocument htmlDocument = new HtmlDocument();
             htmlDocument.Load(fdlHtmlSourceFileFullPath);
-            htmlDocument = HtmlContentManager.LinkCssAndScriptsTo(htmlDocument);
+            htmlDocument = HtmlContentManager.LinkCssAndScriptsTo(htmlDocument, useAbsolutePaths);
 
             htmlDocument.Save(fdlHtmlDestinationFileFullPath);
 
@@ -59,6 +59,8 @@ namespace ReInvented.Domain.Reporting.Services
                 _ = Directory.CreateDirectory(destinationScriptsDirectory);
             }
 
+            File.Copy(Path.Combine(sourceScriptsDirectory, ReportFileNames.JavaScriptCanvasGraphics), Path.Combine(destinationScriptsDirectory, ReportFileNames.JavaScriptCanvasGraphics), true);
+            File.Copy(Path.Combine(sourceScriptsDirectory, ReportFileNames.JavaScriptSupportLayoutHelpers), Path.Combine(destinationScriptsDirectory, ReportFileNames.JavaScriptSupportLayoutHelpers), true);
             File.Copy(Path.Combine(sourceScriptsDirectory, ReportFileNames.JavaScriptFoundationLoadData), Path.Combine(destinationScriptsDirectory, ReportFileNames.JavaScriptFoundationLoadData), true);
         }
 

@@ -12,6 +12,10 @@
 
         public const string CssMTO = "mto.css";
 
+        public const string JavaScriptCanvasGraphics = "canvas-graphics.js";
+ 
+        public const string JavaScriptSupportLayoutHelpers = "support-layout-helpers.js";
+
         public const string JavaScriptFoundationLoadData = "foundation-load-data.js";
 
         public const string JavaScriptMTO = "mto.js";
@@ -19,5 +23,6 @@
         public const string ContentsFoundationLoadData = "foundation-load-data-contents.js";
 
         public const string ContentsMTO = "mto-contents.js";
+
     }
 }

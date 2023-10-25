@@ -1,26 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 using HtmlAgilityPack;
+
+using ReInvented.DataAccess.Services;
 
 namespace ReInvented.Domain.Reporting.Services
 {
     public class HtmlContentManager
     {
+        #region Public Functions
 
-        public static HtmlDocument LinkCssAndScriptsTo(HtmlDocument htmlDocument)
+        public static HtmlDocument LinkCssAndScriptsTo(HtmlDocument htmlDocument, bool useAbsolutePaths)
         {
-            htmlDocument = AddCssLinkTagsToHeadElement(htmlDocument);
-            htmlDocument = AddScriptTagsToBodyElement(htmlDocument);
+            htmlDocument = AddCssLinkTagsToHeadElement(htmlDocument, useAbsolutePaths);
+            htmlDocument = AddScriptTagsToBodyElement(htmlDocument, useAbsolutePaths);
 
             return htmlDocument;
         }
 
+        #endregion
 
         #region Private Helpers
 
-        private static HtmlDocument AddCssLinkTagsToHeadElement(HtmlDocument htmlDocument)
+        private static HtmlDocument AddCssLinkTagsToHeadElement(HtmlDocument htmlDocument, bool useAbsolutePaths)
         {
             if (htmlDocument is null)
             {
@@ -41,18 +45,23 @@ namespace ReInvented.Domain.Reporting.Services
                     }
                 }
 
-                // Create and add two new <script> elements
-                HtmlNode commonCssNode = GetStylesheetNodeWithAttributes($"Styles/{ReportFileNames.CssCommon}");
-                HtmlNode fdlCssNode = GetStylesheetNodeWithAttributes($"Styles/{ReportFileNames.CssFoundationLoadData}");
+                if (useAbsolutePaths)
+                {
+                    _ = head.AppendChild(GetStylesheetNodeWithAttributes(FileServiceProvider.GetAbsolutePathInWebFormat(FileServiceProvider.StylesDirectory, ReportFileNames.CssCommon)));
+                    _ = head.AppendChild(GetStylesheetNodeWithAttributes(FileServiceProvider.GetAbsolutePathInWebFormat(FileServiceProvider.StylesDirectory, ReportFileNames.CssFoundationLoadData)));
+                }
+                else
+                {
+                    _ = head.AppendChild(GetStylesheetNodeWithAttributes($"Styles/{ReportFileNames.CssCommon}"));
+                    _ = head.AppendChild(GetStylesheetNodeWithAttributes($"Styles/{ReportFileNames.CssFoundationLoadData}"));
+                }
 
-                _ = head.AppendChild(commonCssNode);
-                _ = head.AppendChild(fdlCssNode);
             }
 
             return htmlDocument;
         }
 
-        private static HtmlDocument AddScriptTagsToBodyElement(HtmlDocument htmlDocument)
+        private static HtmlDocument AddScriptTagsToBodyElement(HtmlDocument htmlDocument, bool useAbsolutePaths)
         {
             if (htmlDocument is null)
             {
@@ -73,12 +82,19 @@ namespace ReInvented.Domain.Reporting.Services
                     }
                 }
 
-                // Create and add two new <script> elements
-                HtmlNode fdlContentsScriptTag = GetScriptNodeWithAttributes($"Data/{ReportFileNames.ContentsFoundationLoadData}");
-                _ = body.AppendChild(fdlContentsScriptTag);
-
-                HtmlNode fdlReportGeneratorScriptTag = GetScriptNodeWithAttributes($"Scripts/{ReportFileNames.JavaScriptFoundationLoadData}");
-                _ = body.AppendChild(fdlReportGeneratorScriptTag);
+                _ = body.AppendChild(GetScriptNodeWithAttributes($"Data/{ReportFileNames.ContentsFoundationLoadData}"));
+                if (useAbsolutePaths)
+                {
+                    _ = body.AppendChild(GetScriptNodeWithAttributes(FileServiceProvider.GetAbsolutePathInWebFormat(FileServiceProvider.ScriptsDirectory, ReportFileNames.JavaScriptCanvasGraphics)));
+                    _ = body.AppendChild(GetScriptNodeWithAttributes(FileServiceProvider.GetAbsolutePathInWebFormat(FileServiceProvider.ScriptsDirectory, ReportFileNames.JavaScriptSupportLayoutHelpers)));
+                    _ = body.AppendChild(GetScriptNodeWithAttributes(FileServiceProvider.GetAbsolutePathInWebFormat(FileServiceProvider.ScriptsDirectory, ReportFileNames.JavaScriptFoundationLoadData)));
+                }
+                else
+                {
+                    _ = body.AppendChild(GetScriptNodeWithAttributes($"Scripts/{ReportFileNames.JavaScriptCanvasGraphics}"));
+                    _ = body.AppendChild(GetScriptNodeWithAttributes($"Scripts/{ReportFileNames.JavaScriptSupportLayoutHelpers}"));
+                    _ = body.AppendChild(GetScriptNodeWithAttributes($"Scripts/{ReportFileNames.JavaScriptFoundationLoadData}"));
+                }
             }
 
             return htmlDocument;
@@ -101,28 +117,8 @@ namespace ReInvented.Domain.Reporting.Services
             scriptNode.Attributes.Add("src", scriptFilePath);
 
             return scriptNode;
-        } 
+        }
 
         #endregion
-
-
-        //public static List<string> AddScriptTagsTo(List<string> originalHtmlContent)
-        //{
-        //    List<string> scriptContent = new List<string>()
-        //    {
-        //        $"<script src=\"./Data/{ReportFileNames.ContentsFoundationLoadData}\"></script>",
-        //        $"<script src=\"./Scripts/{ReportFileNames.JavaScriptFoundationLoadData}\"></script>"
-        //    };
-        //    return AddScriptTagsTo(originalHtmlContent, scriptContent);
-        //}
-
-        //public static List<string> AddScriptTagsTo(List<string> originalHtmlContent, List<string> scriptContent)
-        //{
-        //    int bodyClosingTagIndex = originalHtmlContent.IndexOf("</body>");
-
-        //    originalHtmlContent.InsertRange(bodyClosingTagIndex - 1, scriptContent);
-
-        //    return originalHtmlContent;
-        //}
     }
 }

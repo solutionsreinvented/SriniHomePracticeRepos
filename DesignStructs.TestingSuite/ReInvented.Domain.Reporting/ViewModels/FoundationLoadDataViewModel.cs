@@ -41,13 +41,17 @@ namespace ReInvented.Domain.Reporting.ViewModels
             FoundationLoadData foundationLoadData = service.GenerateReportContent(ProjectInfo, Enumerable.Range(601, 15));
             if (foundationLoadData != null)
             {
+                bool useAbsolutePaths = true;
+
                 DirectoryInfo projectDirectory = Directory.CreateDirectory(Path.Combine(ProjectInfo.ProjectDirectory, ProjectInfo.Code));
 
-                FoundationLoadDataService.CreateReportHtmlFile(projectDirectory);
-                FoundationLoadDataService.CopyCssStyleFiles(projectDirectory);
-                FoundationLoadDataService.CopyJavaScriptFiles(projectDirectory);
+                FoundationLoadDataService.CreateReportHtmlFile(projectDirectory, useAbsolutePaths);
+                if (!useAbsolutePaths)
+                {
+                    FoundationLoadDataService.CopyCssStyleFiles(projectDirectory);
+                    FoundationLoadDataService.CopyJavaScriptFiles(projectDirectory);
+                }
                 FoundationLoadDataService.CreateReportContentsFile(projectDirectory, foundationLoadData);
-
             }
             else
             {
