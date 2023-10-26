@@ -78,9 +78,23 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Base\ReportContent.cs" />
+    <Compile Include="Controls\DocumentInfoControl.xaml.cs">
+      <DependentUpon>DocumentInfoControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ProjectSetupControl.xaml.cs">
       <DependentUpon>ProjectSetupControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RevisionDescriptionsControl.xaml.cs">
+      <DependentUpon>RevisionDescriptionsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RevisionDetailControl.xaml.cs">
+      <DependentUpon>RevisionDetailControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RevisionsControl.xaml.cs">
+      <DependentUpon>RevisionsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Enums\SubmissionCategory.cs" />
+    <Compile Include="Extensions\HtmlDocumentExtensions.cs" />
     <Compile Include="Interfaces\IReportContent.cs" />
     <Compile Include="Interfaces\IReportService.cs" />
     <Compile Include="Models\FDL\FoundationLoadData.cs" />
@@ -88,14 +102,36 @@
     <Compile Include="Models\FDL\PCDLoads.cs" />
     <Compile Include="Models\FDL\SupportLoads.cs" />
     <Compile Include="Models\FDL\SupportsInformation.cs" />
+    <Compile Include="Models\DocumentHistory.cs" />
+    <Compile Include="Models\Revision.cs" />
+    <Compile Include="Models\RevisionDescriptionItem.cs" />
     <Compile Include="Services\FoundationLoadDataService.cs" />
-    <Compile Include="Services\HtmlContentManager.cs" />
-    <Compile Include="Services\HtmlDocumentManager.cs" />
+    <Compile Include="Services\HtmlNodesService.cs" />
     <Compile Include="Services\MaterialTakeOffService.cs" />
     <Compile Include="Services\ReportFileNames.cs" />
     <Compile Include="Services\SupportLoadsSummaryService.cs" />
     <Compile Include="ViewModels\FoundationLoadDataViewModel.cs" />
+    <Page Include="Controls\DocumentInfoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ProjectSetupControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RevisionDescriptionsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RevisionDetailControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RevisionsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ReInvented.Domain.Reporting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

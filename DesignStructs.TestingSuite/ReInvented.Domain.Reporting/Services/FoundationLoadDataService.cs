@@ -11,6 +11,7 @@ using ReInvented.DataAccess;
 using ReInvented.DataAccess.Services;
 using ReInvented.Domain.Geometry.Models;
 using ReInvented.Domain.ProjectSetup.Interfaces;
+using ReInvented.Domain.Reporting.Extensions;
 using ReInvented.Domain.Reporting.Models;
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Enums;
@@ -29,7 +30,7 @@ namespace ReInvented.Domain.Reporting.Services
 
             HtmlDocument htmlDocument = new HtmlDocument();
             htmlDocument.Load(fdlHtmlSourceFileFullPath);
-            htmlDocument = HtmlContentManager.LinkCssAndScriptsTo(htmlDocument, useAbsolutePaths);
+            htmlDocument = htmlDocument.LinkCssAndScriptsTo(useAbsolutePaths);
 
             htmlDocument.Save(fdlHtmlDestinationFileFullPath);
 
