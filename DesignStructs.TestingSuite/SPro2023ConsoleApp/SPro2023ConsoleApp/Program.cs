@@ -7,6 +7,9 @@ using ReInvented.Shared.Services;
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Models;
 
+using SPro2023ConsoleApp.Interfaces;
+using SPro2023ConsoleApp.Services;
+
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -25,7 +28,9 @@ namespace SPro2023ConsoleApp
             StaadModel model = new StaadModel();
             StaadModelWrapper wrapper = model.StaadWrapper;
 
-            MaterialTakeOffService.GeneratePlatesMtoTableInStaadModel(wrapper);
+            IMaterialTakeOffService mtoService = new PlatesMaterialTakeOffService();
+
+            mtoService.GenerateMTO(wrapper);
 
             OSGeometryUI geometry = wrapper.StaadInstance.Geometry;
             OSPropertyUI property = wrapper.StaadInstance.Property;

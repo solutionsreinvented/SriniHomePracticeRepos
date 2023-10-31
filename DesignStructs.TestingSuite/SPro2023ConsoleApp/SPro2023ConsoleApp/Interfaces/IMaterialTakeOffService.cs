@@ -5,9 +5,5 @@ namespace SPro2023ConsoleApp.Interfaces
     public interface IMaterialTakeOffService
     {
         void GenerateMTO(StaadModelWrapper wrapper);
-
-        string[] GetColumnHeaders();
-
-        string[] GetColumnUnits();
     }
 }

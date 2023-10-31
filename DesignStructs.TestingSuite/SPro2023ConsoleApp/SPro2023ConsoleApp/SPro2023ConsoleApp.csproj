@@ -69,13 +69,14 @@
     <Compile Include="Interfaces\IMaterialTakeOffService.cs" />
     <Compile Include="Interfaces\IMTOTableRow.cs" />
     <Compile Include="Models\BeamMTOTableRow.cs" />
-    <Compile Include="MaterialTakeOffService.cs" />
     <Compile Include="Models\UnitsData.cs" />
     <Compile Include="NodesCollection.cs" />
     <Compile Include="Models\PlateMTOTableRow.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\PlatesMaterialTakeOffService.cs" />
     <Compile Include="Services\PlateSurfaceAreaService.cs" />
+    <Compile Include="Services\SectionsMaterialTakeOffService.cs" />
     <Compile Include="VerticalStiffeners.cs" />
   </ItemGroup>
   <ItemGroup>
