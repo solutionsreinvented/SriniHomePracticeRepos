@@ -4,16 +4,73 @@ using OpenSTAADUI;
 
 using ReInvented.Shared;
 using ReInvented.Shared.Services;
+using ReInvented.StaadPro.Interactivity.Entities;
+using ReInvented.StaadPro.Interactivity.Models;
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Media.Media3D;
 
 namespace SPro2023ConsoleApp
 {
+    
+
+    public class Polygon
+    {
+
+        public Polygon()
+        {
+            Vertices = new List<Node>();
+        }
+
+        public List<Node> Vertices { get; set; }
+
+        public double GetArea()
+        {
+            List<Node> vertices = Vertices.ToList();
+
+            double sum1 = 0.0;
+            double sum2 = 0.0;
+
+            for (int i = 0; i < vertices.Count(); i++)
+            {
+                Node currentNode = vertices[i];
+                Node nextNode = i == vertices.Count() - 1 ? vertices[0] : vertices[i + 1];
+                sum1 += currentNode.X * nextNode.Y;
+                sum2 += currentNode.Y * nextNode.X;
+            }
+
+            return 0.50 * Math.Abs(sum1 - sum2);
+        }
+
+        public double GetArea3D()
+        {
+            List<Node> vertices = Vertices.ToList();
+
+            Vector3D v1 = vertices[1].ToVector - vertices[0].ToVector;
+            Vector3D v2 = vertices[2].ToVector - vertices[0].ToVector;
+            Vector3D v3 = vertices[3].ToVector - vertices[0].ToVector;
+
+            Vector3D normal1 = Vector3D.CrossProduct(v1, v2);
+            Vector3D normal2 = Vector3D.CrossProduct(v1, v3);
+
+            double area1 = 0.5 * normal1.Length;
+            double area2 = 0.5 * normal2.Length;
+
+            double totalArea = area1 + area2;
+
+            return totalArea;
+        }
+
+    }
+
+
+
 
     class Program
     {
@@ -21,14 +78,15 @@ namespace SPro2023ConsoleApp
         {
             ///await Previous();
 
-            StaadWrapper wrapper = new StaadWrapper();
+            StaadModel model = new StaadModel();
+            StaadModelWrapper wrapper = model.StaadWrapper;
 
-            ImmediateTakeOff.GeneratePlatesMtoTableInStaadModel(wrapper.OpenStaad);
+            ImmediateTakeOff.GeneratePlatesMtoTableInStaadModel(wrapper);
 
-            OSGeometryUI geometry = wrapper.Geometry;
-            OSPropertyUI property = wrapper.OpenStaad.Property;
+            OSGeometryUI geometry = wrapper.StaadInstance.Geometry;
+            OSPropertyUI property = wrapper.StaadInstance.Property;
 
-            OSOutputUI output = wrapper.OpenStaad.Output;
+            OSOutputUI output = wrapper.StaadInstance.Output;
 
             if (output.AreResultsAvailable())
             {
