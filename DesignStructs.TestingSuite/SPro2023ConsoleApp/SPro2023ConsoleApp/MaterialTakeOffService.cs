@@ -2,55 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Media.Media3D;
 
 using OpenSTAADUI;
 
-using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Models;
-using ReInvented.StaadPro.Interactivity.Services;
 
+using SPro2023ConsoleApp.Models;
 using SPro2023ConsoleApp.Services;
 
 namespace SPro2023ConsoleApp
 {
 
-    public class UnitsData
-    {
-        public string Length { get; set; }
-
-        public string Display { get; set; }
-
-        public string Angle { get; set; }
-
-        public string Weight { get; set; }
-    }
-
-    public class PlateMtoRow
-    {
-        public double Thickness { get; set; }
-
-        public int ObjectsCount { get; set; }
-
-        public double TotalPlanArea { get; set; }
-
-        public double TotalWeight { get; set; }
-
-    }
-
-    public class BeamMtoRow
-    {
-        public string PropertyName { get; set; }
-
-        public int ObjectsCount { get; set; }
-
-        public double TotalLength { get; set; }
-
-        public double TotalWeight { get; set; }
-
-    }
-
-    public class ImmediateTakeOff
+    public class MaterialTakeOffService
     {
         public static void GeneratePlatesMtoTableInStaadModel(StaadModelWrapper wrapper)
         {
@@ -71,12 +34,12 @@ namespace SPro2023ConsoleApp
                 int nColumns = 4;
                 int nRows = property.GetThicknessPropertyCount();
 
-                Dictionary<int, PlateMtoRow> propertiesTable = new Dictionary<int, PlateMtoRow>(nRows);
+                Dictionary<int, PlateMTOTableRow> propertiesTable = new Dictionary<int, PlateMTOTableRow>(nRows);
 
                 (int ReportId, int TableId) tableData = CreateTable(wrapper.StaadInstance, nRows, nColumns);
 
-                string[] columnHeaders = GetPlatesMtoTableColumnHeadersContent(wrapper.StaadInstance, nRows, nColumns, tableData.ReportId, tableData.TableId);
-                string[] columnUnits = GetTableColumnUnitsContent(wrapper.StaadInstance, nRows, nColumns, tableData.ReportId, tableData.TableId);
+                string[] columnHeaders = GetPlatesMtoTableColumnHeadersContent();
+                string[] columnUnits = GetTableColumnUnitsContent(wrapper.StaadInstance);
 
                 GenerateTableHeaders(wrapper.StaadInstance, tableData.ReportId, tableData.TableId, nColumns, columnHeaders, columnUnits);
 
@@ -90,7 +53,7 @@ namespace SPro2023ConsoleApp
 
                     propertyId = property.GetPlateThicknessPropertyRefNo(PlateId);
 
-                    PlateMtoRow row;
+                    PlateMTOTableRow row;
 
                     if (propertiesTable.Keys.Contains(propertyId))
                     {
@@ -98,7 +61,7 @@ namespace SPro2023ConsoleApp
                     }
                     else
                     {
-                        row = new PlateMtoRow();
+                        row = new PlateMTOTableRow();
                         propertiesTable.Add(propertyId, row);
                     }
 
@@ -109,7 +72,7 @@ namespace SPro2023ConsoleApp
                 for (int iRow = 0; iRow < nRows; iRow++)
                 {
                     propertyId = propertiesTable.Keys.ToList()[iRow];
-                    PlateMtoRow row = propertiesTable[propertyId];
+                    PlateMTOTableRow row = propertiesTable[propertyId];
 
                     object plateThickness = new double[4];
 
@@ -141,8 +104,10 @@ namespace SPro2023ConsoleApp
         }
 
 
-        public static void GenerateSectionsMtoTableInStaadModel(OpenSTAAD instance)
+        public static void GenerateSectionsMtoTableInStaadModel(StaadModelWrapper wrapper)
         {
+            OpenSTAAD instance = wrapper.StaadInstance;
+
             object staadFile = string.Empty;
 
             instance.GetSTAADFile(ref staadFile, "TRUE");
@@ -160,12 +125,12 @@ namespace SPro2023ConsoleApp
                 int nColumns = 4;
                 int nRows = property.GetSectionPropertyCount();
 
-                Dictionary<int, BeamMtoRow> propertiesTable = new Dictionary<int, BeamMtoRow>(nRows);
+                Dictionary<int, BeamMTOTableRow> propertiesTable = new Dictionary<int, BeamMTOTableRow>(nRows);
 
                 (int ReportId, int TableId) tableData = CreateTable(instance, nRows, nColumns);
 
-                string[] columnHeaders = GetSectionsMtoTableColumnHeadersContent(instance, nRows, nColumns, tableData.ReportId, tableData.TableId);
-                string[] columnUnits = GetTableColumnUnitsContent(instance, nRows, nColumns, tableData.ReportId, tableData.TableId);
+                string[] columnHeaders = GetSectionsMtoTableColumnHeadersContent();
+                string[] columnUnits = GetTableColumnUnitsContent(instance);
 
                 GenerateTableHeaders(instance, tableData.ReportId, tableData.TableId, nColumns, columnHeaders, columnUnits);
 
@@ -179,7 +144,7 @@ namespace SPro2023ConsoleApp
 
                     propertyId = property.GetBeamSectionPropertyRefNo(beamId);
 
-                    BeamMtoRow row;
+                    BeamMTOTableRow row;
 
                     if (propertiesTable.Keys.Contains(propertyId))
                     {
@@ -187,7 +152,7 @@ namespace SPro2023ConsoleApp
                     }
                     else
                     {
-                        row = new BeamMtoRow();
+                        row = new BeamMTOTableRow();
                         propertiesTable.Add(propertyId, row);
                     }
 
@@ -198,7 +163,7 @@ namespace SPro2023ConsoleApp
                 for (int iRow = 0; iRow < nRows; iRow++)
                 {
                     propertyId = propertiesTable.Keys.ToList()[iRow];
-                    BeamMtoRow row = propertiesTable[propertyId];
+                    BeamMTOTableRow row = propertiesTable[propertyId];
 
                     object propertyName = string.Empty;
 
@@ -228,8 +193,9 @@ namespace SPro2023ConsoleApp
             }
         }
 
-        private static string[] GetSectionsMtoTableColumnHeadersContent(OpenSTAAD instance, int nRows, int nColumns, int reportId, int tableId)
+        private static string[] GetSectionsMtoTableColumnHeadersContent()
         {
+            int nColumns = 4;
             string[] columnHeaders = new string[nColumns];
 
             columnHeaders[0] = "Profile";
@@ -240,8 +206,9 @@ namespace SPro2023ConsoleApp
             return columnHeaders;
         }
 
-        private static string[] GetPlatesMtoTableColumnHeadersContent(OpenSTAAD instance, int nRows, int nColumns, int reportId, int tableId)
+        private static string[] GetPlatesMtoTableColumnHeadersContent()
         {
+            int nColumns = 4;
             string[] columnHeaders = new string[nColumns];
 
             columnHeaders[0] = "Plate";
@@ -252,8 +219,9 @@ namespace SPro2023ConsoleApp
             return columnHeaders;
         }
 
-        private static string[] GetTableColumnUnitsContent(OpenSTAAD instance, int nRows, int nColumns, int reportId, int tableId)
+        private static string[] GetTableColumnUnitsContent(OpenSTAAD instance)
         {
+            int nColumns = 4;
             string[] columnUnits = new string[nColumns];
 
             UnitsData units = new UnitsData();
@@ -309,13 +277,13 @@ namespace SPro2023ConsoleApp
             }
         }
 
-        private static void FillSectionsMtoTable(OpenSTAAD instance, Dictionary<int, BeamMtoRow> propertiesTable, int reportId, int tableId)
+        private static void FillSectionsMtoTable(OpenSTAAD instance, Dictionary<int, BeamMTOTableRow> propertiesTable, int reportId, int tableId)
         {
             OSTableUI table = instance.Table;
 
             for (int iRow = 0; iRow < propertiesTable.Values.Count(); iRow++)
             {
-                BeamMtoRow row = propertiesTable.Values.ToList()[iRow];
+                BeamMTOTableRow row = propertiesTable.Values.ToList()[iRow];
 
                 table.SetCellValue(reportId, tableId, iRow + 1, 1, row.PropertyName);
                 table.SetCellValue(reportId, tableId, iRow + 1, 2, row.ObjectsCount);
@@ -324,13 +292,13 @@ namespace SPro2023ConsoleApp
             }
 
         }
-        private static void FillPlatesMtoTable(OpenSTAAD instance, Dictionary<int, PlateMtoRow> propertiesTable, int reportId, int tableId)
+        private static void FillPlatesMtoTable(OpenSTAAD instance, Dictionary<int, PlateMTOTableRow> propertiesTable, int reportId, int tableId)
         {
             OSTableUI table = instance.Table;
 
             for (int iRow = 0; iRow < propertiesTable.Values.Count(); iRow++)
             {
-                PlateMtoRow row = propertiesTable.Values.ToList()[iRow];
+                PlateMTOTableRow row = propertiesTable.Values.ToList()[iRow];
 
                 table.SetCellValue(reportId, tableId, iRow + 1, 1, $"{row.Thickness * 1000}mm THK.");
                 table.SetCellValue(reportId, tableId, iRow + 1, 2, row.ObjectsCount);

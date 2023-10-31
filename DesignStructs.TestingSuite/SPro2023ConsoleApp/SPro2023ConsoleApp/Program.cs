@@ -7,71 +7,15 @@ using ReInvented.Shared.Services;
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Models;
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Media.Media3D;
 
 namespace SPro2023ConsoleApp
 {
-    
-
-    public class Polygon
-    {
-
-        public Polygon()
-        {
-            Vertices = new List<Node>();
-        }
-
-        public List<Node> Vertices { get; set; }
-
-        public double GetArea()
-        {
-            List<Node> vertices = Vertices.ToList();
-
-            double sum1 = 0.0;
-            double sum2 = 0.0;
-
-            for (int i = 0; i < vertices.Count(); i++)
-            {
-                Node currentNode = vertices[i];
-                Node nextNode = i == vertices.Count() - 1 ? vertices[0] : vertices[i + 1];
-                sum1 += currentNode.X * nextNode.Y;
-                sum2 += currentNode.Y * nextNode.X;
-            }
-
-            return 0.50 * Math.Abs(sum1 - sum2);
-        }
-
-        public double GetArea3D()
-        {
-            List<Node> vertices = Vertices.ToList();
-
-            Vector3D v1 = vertices[1].ToVector - vertices[0].ToVector;
-            Vector3D v2 = vertices[2].ToVector - vertices[0].ToVector;
-            Vector3D v3 = vertices[3].ToVector - vertices[0].ToVector;
-
-            Vector3D normal1 = Vector3D.CrossProduct(v1, v2);
-            Vector3D normal2 = Vector3D.CrossProduct(v1, v3);
-
-            double area1 = 0.5 * normal1.Length;
-            double area2 = 0.5 * normal2.Length;
-
-            double totalArea = area1 + area2;
-
-            return totalArea;
-        }
-
-    }
-
-
-
-
     class Program
     {
         static void Main(string[] args)
@@ -81,7 +25,7 @@ namespace SPro2023ConsoleApp
             StaadModel model = new StaadModel();
             StaadModelWrapper wrapper = model.StaadWrapper;
 
-            ImmediateTakeOff.GeneratePlatesMtoTableInStaadModel(wrapper);
+            MaterialTakeOffService.GeneratePlatesMtoTableInStaadModel(wrapper);
 
             OSGeometryUI geometry = wrapper.StaadInstance.Geometry;
             OSPropertyUI property = wrapper.StaadInstance.Property;
@@ -109,8 +53,10 @@ namespace SPro2023ConsoleApp
         {
             string fileFullPath = @"C:\Users\masanams\Desktop\Desktop\Code\STAAD\0D35.0H2.50S09.00OC1.113SC1.219IMP0.240CON0.0300MOT1250.std";
 
-            StaadWrapper wrapper = new StaadWrapper();
-            OSGeometryUI geometry = wrapper.Geometry;
+            StaadModel model = new StaadModel();
+            StaadModelWrapper wrapper = model.StaadWrapper;
+            OpenSTAAD instance = wrapper.StaadInstance;
+            OSGeometryUI geometry = instance.Geometry;
 
 
             NodesCollection nodesCollection = ReadNodesFromJson();
@@ -131,7 +77,7 @@ namespace SPro2023ConsoleApp
 
                 } while (tracker * nodeCountInEachThread < nodesCollection.Nodes.Count());
 
-                await Task.Run(() => wrapper.OpenStaad.NewSTAADFile(fileFullPath, LengthUnit.M, ForceUnit.KN));
+                await Task.Run(() => instance.NewSTAADFile(fileFullPath, LengthUnit.M, ForceUnit.KN));
                 Thread.Sleep(5000);
 
                 List<Task> tasks = threadNodesCollections.Select(tnc => CreateNodesOneByOne(geometry, tnc)).ToList();
@@ -140,7 +86,7 @@ namespace SPro2023ConsoleApp
             }
             else
             {
-                wrapper.OpenStaad.NewSTAADFile(fileFullPath, LengthUnit.M, ForceUnit.KN);
+                instance.NewSTAADFile(fileFullPath, LengthUnit.M, ForceUnit.KN);
                 Thread.Sleep(5000);
 
                 await Task.Run(() => CreateNodesOneByOne(geometry, nodesCollection.Nodes.ToList()));
