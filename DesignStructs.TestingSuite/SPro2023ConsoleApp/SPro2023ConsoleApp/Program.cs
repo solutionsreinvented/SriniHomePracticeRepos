@@ -7,9 +7,9 @@ using ReInvented.Shared.Services;
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Models;
 
-using SPro2023ConsoleApp.Interfaces;
-using SPro2023ConsoleApp.Services;
+using SPro2023ConsoleApp.Models;
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -28,9 +28,9 @@ namespace SPro2023ConsoleApp
             StaadModel model = new StaadModel();
             StaadModelWrapper wrapper = model.StaadWrapper;
 
-            IMaterialTakeOffService mtoService = new PlatesMaterialTakeOffService();
+            MaterialTakeOff mto = MaterialTakeOff.Generate(wrapper);
 
-            mtoService.GenerateMTO(wrapper);
+            double totalWeight = mto.TotalWeight;
 
             OSGeometryUI geometry = wrapper.StaadInstance.Geometry;
             OSPropertyUI property = wrapper.StaadInstance.Property;
@@ -45,8 +45,8 @@ namespace SPro2023ConsoleApp
             }
 
 
-            var staadProcess = Process.GetProcesses().FirstOrDefault(p => p.ProcessName.StartsWith("Bentley") && p.ProcessName.EndsWith("Staad"));
-            var staadWindowHandle = staadProcess.MainWindowHandle;
+            Process staadProcess = Process.GetProcesses().FirstOrDefault(p => p.ProcessName.StartsWith("Bentley") && p.ProcessName.EndsWith("Staad"));
+            IntPtr staadWindowHandle = staadProcess.MainWindowHandle;
 
             WindowServices.MinimizeWindow(staadWindowHandle);
             WindowServices.RestoreWindow(staadWindowHandle);
@@ -70,10 +70,10 @@ namespace SPro2023ConsoleApp
 
             if (nodesCollection.Nodes.Count / threadCount >= 1)
             {
-                var nodeCountInEachThread = (int)(nodesCollection.Nodes.Count / threadCount).Floor(1);
-                var threadNodesCollections = new List<List<Node>>();
+                int nodeCountInEachThread = (int)(nodesCollection.Nodes.Count / threadCount).Floor(1);
+                List<List<Node>> threadNodesCollections = new List<List<Node>>();
 
-                var tracker = 0;
+                int tracker = 0;
 
                 do
                 {

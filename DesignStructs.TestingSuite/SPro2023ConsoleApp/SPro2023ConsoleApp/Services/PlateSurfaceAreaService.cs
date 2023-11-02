@@ -33,23 +33,32 @@ namespace SPro2023ConsoleApp.Services
             }
             if (plateVertices.Count == 3)
             {
-                plateVertices.Add(plateVertices[0]);
+                return Calculate(plateVertices[0], plateVertices[1], plateVertices[2]);
             }
 
-            Vector3D v1 = plateVertices[1].ToVector - plateVertices[0].ToVector;
-            Vector3D v2 = plateVertices[2].ToVector - plateVertices[0].ToVector;
-            Vector3D v3 = plateVertices[3].ToVector - plateVertices[0].ToVector;
-
-            Vector3D normal1 = Vector3D.CrossProduct(v1, v2);
-            Vector3D normal2 = Vector3D.CrossProduct(v1, v3);
-
-            double area1 = 0.5 * normal1.Length;
-            double area2 = 0.5 * normal2.Length;
+            double area1 = Calculate(plateVertices[0], plateVertices[1], plateVertices[2]);
+            double area2 = Calculate(plateVertices[0], plateVertices[2], plateVertices[3]);
 
             double totalArea = area1 + area2;
 
             return totalArea;
+        }
 
+        public static double Calculate(Node a, Node b, Node c)
+        {
+            if (a == null || b == null || c == null)
+            {
+                throw new ArgumentException($"One or more of the provided vertices is/are null. Please provide valid vertices data.");
+            }
+
+            Vector3D v1 = b.ToVector - a.ToVector;
+            Vector3D v2 = c.ToVector - a.ToVector;
+
+            Vector3D normal1 = Vector3D.CrossProduct(v1, v2);
+
+            double area = 0.5 * normal1.Length;
+
+            return area;
         }
     }
 }

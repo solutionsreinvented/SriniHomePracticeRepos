@@ -45,6 +45,9 @@
     <Reference Include="PresentationFramework">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\PresentationFramework.dll</HintPath>
     </Reference>
+    <Reference Include="ReInvented.Sections.Domain">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Sections.Core\bin\Debug\ReInvented.Sections.Domain.dll</HintPath>
+    </Reference>
     <Reference Include="ReInvented.Shared">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Shared\bin\Debug\ReInvented.Shared.dll</HintPath>
     </Reference>
@@ -64,9 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\MaterialTakeOffService.cs" />
     <Compile Include="Base\MTOTableRow.cs" />
-    <Compile Include="Interfaces\IMaterialTakeOffService.cs" />
     <Compile Include="Interfaces\IMTOTableRow.cs" />
     <Compile Include="Models\BeamMTOTableRow.cs" />
     <Compile Include="Models\UnitsData.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Models\PlateMTOTableRow.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\MaterialTakeOff.cs" />
     <Compile Include="Services\PlatesMaterialTakeOffService.cs" />
     <Compile Include="Services\PlateSurfaceAreaService.cs" />
     <Compile Include="Services\SectionsMaterialTakeOffService.cs" />
