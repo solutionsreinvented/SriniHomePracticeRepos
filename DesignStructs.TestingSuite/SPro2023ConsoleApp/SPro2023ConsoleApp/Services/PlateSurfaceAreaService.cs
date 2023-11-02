@@ -3,26 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Media.Media3D;
 
+using OpenSTAADUI;
+
 using ReInvented.StaadPro.Interactivity.Entities;
-using ReInvented.StaadPro.Interactivity.Models;
 using ReInvented.StaadPro.Interactivity.Services;
 
 namespace SPro2023ConsoleApp.Services
 {
     public class PlateSurfaceAreaService
     {
-        public static double Calculate(StaadModelWrapper wrapper, HashSet<int> platesList)
+
+        public static double Calculate(OSGeometryUI geometry, HashSet<int> platesList)
         {
             List<int> platesIds = platesList.ToList();
             double totalSurfaceArea = 0.0;
 
             for (int i = 0; i < platesIds.Count; i++)
             {
-                IEnumerable<Node> plateIncidence = StaadGeometryServices.GetPlateIncidence(wrapper, platesIds[i]);
+                IEnumerable<Node> plateIncidence = StaadGeometryServices.GetPlateIncidence(geometry, platesIds[i]);
                 totalSurfaceArea += Calculate(plateIncidence.ToList());
             }
 
             return totalSurfaceArea;
+        }
+
+        public static double Calculate(Plate plate)
+        {
+            if (plate == null || plate.A == null || plate.B == null || plate.C == null || plate.D == null)
+            {
+                throw new ArgumentException($"{nameof(plate)} contains invalid data.");
+            }
+
+            return plate.A == plate.D ? Calculate(plate.A, plate.B, plate.C) :
+                                        Calculate(plate.A, plate.B, plate.C) + Calculate(plate.A, plate.C, plate.D);
         }
 
         public static double Calculate(List<Node> plateVertices)

@@ -4,17 +4,20 @@ using System.Linq;
 
 using OpenSTAADUI;
 
+using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Models;
+using ReInvented.StaadPro.Interactivity.Services;
 
 using SPro2023ConsoleApp.Models;
 
 namespace SPro2023ConsoleApp.Services
 {
+
     public class SectionsMaterialTakeOffService
     {
         #region Public Functions
 
-        public static Dictionary<int, BeamMTOTableRow> Generate(StaadModelWrapper wrapper)
+        public static Dictionary<int, SectionMtoRow> Generate(StaadModelWrapper wrapper)
         {
             OpenSTAAD instance = wrapper.StaadInstance;
 
@@ -27,11 +30,10 @@ namespace SPro2023ConsoleApp.Services
                 OSPropertyUI property = instance.Property;
                 OSGeometryUI geometry = instance.Geometry;
 
-                int[] beams = GetAllBeamsList(geometry);
+                HashSet<Beam> beams = StaadGeometryServices.GetAllBeams(geometry);
 
-                Dictionary<int, BeamMTOTableRow> propertiesTable = SegregateBeamsByPropertyIds(property, beams);
+                Dictionary<int, SectionMtoRow> propertiesTable = SegregateBeamsByPropertyIds(property, beams);
                 propertiesTable = FillSectionNames(property, propertiesTable);
-                propertiesTable.Values.ToList().ForEach(r => r.EntitiesIds.ForEach(e => r.TotalLength += Math.Round(geometry.GetBeamLength(e), 3)));
                 propertiesTable = FillTotalWeights(property, propertiesTable);
 
                 return propertiesTable;
@@ -44,41 +46,32 @@ namespace SPro2023ConsoleApp.Services
 
         #region Private Helpers
 
-        private static int[] GetAllBeamsList(OSGeometryUI geometry)
-        {
-            int nBeams = geometry.GetMemberCount();
-            object beams = new int[nBeams];
-            geometry.GetBeamList(ref beams);
-
-            return (int[])beams;
-        }
-
-        private static Dictionary<int, BeamMTOTableRow> SegregateBeamsByPropertyIds(OSPropertyUI property, int[] beams)
+        private static Dictionary<int, SectionMtoRow> SegregateBeamsByPropertyIds(OSPropertyUI property, HashSet<Beam> beams)
         {
             int nRows = property.GetSectionPropertyCount();
 
-            Dictionary<int, BeamMTOTableRow> propertiesTable = new Dictionary<int, BeamMTOTableRow>(nRows);
+            Dictionary<int, SectionMtoRow> propertiesTable = new Dictionary<int, SectionMtoRow>(nRows);
 
-            foreach (int beamId in beams)
+            foreach (Beam beam in beams)
             {
-                int propertyId = property.GetBeamSectionPropertyRefNo(beamId);
+                int propertyId = property.GetBeamSectionPropertyRefNo(beam.Id);
 
-                if (!propertiesTable.TryGetValue(propertyId, out BeamMTOTableRow row))
+                if (!propertiesTable.TryGetValue(propertyId, out SectionMtoRow row))
                 {
-                    row = new BeamMTOTableRow { EntitiesIds = new List<int>() };
+                    row = new SectionMtoRow();
                     propertiesTable.Add(propertyId, row);
                 }
 
-                row.EntitiesIds.Add(beamId);
+                _ = row.Beams.Add(beam);
             }
 
-            propertiesTable = new Dictionary<int, BeamMTOTableRow>(propertiesTable.OrderBy(pair => pair.Key)
+            propertiesTable = new Dictionary<int, SectionMtoRow>(propertiesTable.OrderBy(pair => pair.Key)
                                   .ToDictionary(pair => pair.Key, pair => pair.Value));
 
             return propertiesTable;
         }
 
-        private static Dictionary<int, BeamMTOTableRow> FillSectionNames(OSPropertyUI property, Dictionary<int, BeamMTOTableRow> propertiesTable)
+        private static Dictionary<int, SectionMtoRow> FillSectionNames(OSPropertyUI property, Dictionary<int, SectionMtoRow> propertiesTable)
         {
             foreach (int propertyId in propertiesTable.Keys)
             {
@@ -91,17 +84,18 @@ namespace SPro2023ConsoleApp.Services
             return propertiesTable;
         }
 
-        private static Dictionary<int, BeamMTOTableRow> FillTotalWeights(OSPropertyUI property, Dictionary<int, BeamMTOTableRow> propertiesTable)
+        private static Dictionary<int, SectionMtoRow> FillTotalWeights(OSPropertyUI property, Dictionary<int, SectionMtoRow> propertiesTable)
         {
             foreach (int propertyId in propertiesTable.Keys)
             {
-                BeamMTOTableRow row = propertiesTable[propertyId];
+                SectionMtoRow row = propertiesTable[propertyId];
 
                 int count = property.GetCountofSectionPropertyValuesEx();
                 object propertyValues = new double[count];
                 object propertyType = 0;
 
                 property.GetSectionPropertyValuesEx(propertyId, ref propertyType, ref propertyValues);
+                row.SectionalArea = ((double[])propertyValues)[0];
 
                 /// TODO:Notes:
                 ///     1. First value in the propertyValues gives sectional area for most of the section types.
@@ -111,7 +105,7 @@ namespace SPro2023ConsoleApp.Services
                 ///        In the below line of code a value 7.85 (t/m3) is used directly for testing purposes.
                 ///        Actual weight has to be calculated using the density that is specific to the material selected.
 
-                row.TotalWeight = Math.Round(((double[])propertyValues)[0] * row.TotalLength * 7.85, 3);
+                row.TotalWeight = Math.Round(row.SectionalArea * row.TotalLength * 7.85, 3);
 
             }
 

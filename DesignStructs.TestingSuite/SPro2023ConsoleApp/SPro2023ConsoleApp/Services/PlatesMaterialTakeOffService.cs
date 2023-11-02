@@ -4,7 +4,9 @@ using System.Linq;
 
 using OpenSTAADUI;
 
+using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Models;
+using ReInvented.StaadPro.Interactivity.Services;
 
 using SPro2023ConsoleApp.Models;
 
@@ -14,7 +16,7 @@ namespace SPro2023ConsoleApp.Services
     {
         #region Public Functions
 
-        public static Dictionary<int, PlateMTOTableRow> Generate(StaadModelWrapper wrapper)
+        public static Dictionary<int, PlateMtoRow> Generate(StaadModelWrapper wrapper)
         {
             object staadFile = string.Empty;
 
@@ -25,9 +27,9 @@ namespace SPro2023ConsoleApp.Services
                 OSPropertyUI property = wrapper.StaadInstance.Property;
                 OSGeometryUI geometry = wrapper.StaadInstance.Geometry;
 
-                int[] plates = GetAllPlatesList(geometry);
+                HashSet<Plate> plates = StaadGeometryServices.GetAllPlates(geometry);
 
-                Dictionary<int, PlateMTOTableRow> propertiesTable = SegregatePlatesByPropertyIds(property, plates);
+                Dictionary<int, PlateMtoRow> propertiesTable = SegregatePlatesByPropertyIds(property, plates);
                 propertiesTable = FillPlateThicknesses(property, propertiesTable);
                 propertiesTable = FillTotalPlanAreas(wrapper, propertiesTable);
 
@@ -51,67 +53,54 @@ namespace SPro2023ConsoleApp.Services
 
         #region Private Functions
 
-        private static int[] GetAllPlatesList(OSGeometryUI geometry)
-        {
-            int nPlates = geometry.GetPlateCount();
-            object plates = new int[nPlates];
-            geometry.GetPlateList(ref plates);
-
-            return (int[])plates;
-        }
-
-        private static Dictionary<int, PlateMTOTableRow> SegregatePlatesByPropertyIds(OSPropertyUI property, int[] plates)
+        private static Dictionary<int, PlateMtoRow> SegregatePlatesByPropertyIds(OSPropertyUI property, HashSet<Plate> plates)
         {
             int nRows = property.GetThicknessPropertyCount();
 
-            Dictionary<int, PlateMTOTableRow> propertiesTable = new Dictionary<int, PlateMTOTableRow>(nRows);
+            Dictionary<int, PlateMtoRow> propertiesTable = new Dictionary<int, PlateMtoRow>(nRows);
 
-            foreach (int plateId in plates)
+            foreach (Plate plate in plates)
             {
-                int propertyId = property.GetPlateThicknessPropertyRefNo(plateId);
+                int propertyId = property.GetPlateThicknessPropertyRefNo(plate.Id);
 
-                if (!propertiesTable.TryGetValue(propertyId, out PlateMTOTableRow row))
+                if (!propertiesTable.TryGetValue(propertyId, out PlateMtoRow row))
                 {
-                    row = new PlateMTOTableRow { EntitiesIds = new List<int>() };
+                    row = new PlateMtoRow();
                     propertiesTable.Add(propertyId, row);
                 }
 
-                row.EntitiesIds.Add(plateId);
+                row.Plates.Add(plate);
             }
 
-            propertiesTable = new Dictionary<int, PlateMTOTableRow>(propertiesTable.OrderBy(pair => pair.Key)
+            propertiesTable = new Dictionary<int, PlateMtoRow>(propertiesTable.OrderBy(pair => pair.Key)
                                   .ToDictionary(pair => pair.Key, pair => pair.Value));
 
             return propertiesTable;
         }
 
-        private static Dictionary<int, PlateMTOTableRow> FillPlateThicknesses(OSPropertyUI property, Dictionary<int, PlateMTOTableRow> propertiesTable)
+        private static Dictionary<int, PlateMtoRow> FillPlateThicknesses(OSPropertyUI property, Dictionary<int, PlateMtoRow> propertiesTable)
         {
-            foreach (PlateMTOTableRow row in propertiesTable.Values)
+            foreach (PlateMtoRow row in propertiesTable.Values)
             {
                 object plateThickness = new double[4];
-                property.GetPlateThickness(row.EntitiesIds.FirstOrDefault(), ref plateThickness);
+                property.GetPlateThickness(row.Plates.FirstOrDefault().Id, ref plateThickness);
                 row.Thickness = Math.Round(((double[])plateThickness).Average(), 5);
             }
 
             return propertiesTable;
         }
 
-        private static Dictionary<int, PlateMTOTableRow> FillTotalPlanAreas(StaadModelWrapper wrapper, Dictionary<int, PlateMTOTableRow> propertiesTable)
+        private static Dictionary<int, PlateMtoRow> FillTotalPlanAreas(StaadModelWrapper wrapper, Dictionary<int, PlateMtoRow> propertiesTable)
         {
             OSPropertyUI property = wrapper.StaadInstance.Property;
 
             foreach (int propertyId in propertiesTable.Keys)
             {
-                PlateMTOTableRow row = propertiesTable[propertyId];
-
                 int propertyAssignedCount = property.GetThicknessPropertyAssignedPlateCount(propertyId);
 
                 object propertyAssignedList = new int[propertyAssignedCount];
 
                 property.GetThicknessPropertyAssignedPlateList(propertyId, ref propertyAssignedList);
-
-                row.TotalPlanArea = PlateSurfaceAreaService.Calculate(wrapper, ((int[])propertyAssignedList).ToHashSet());
             }
 
             return propertiesTable;

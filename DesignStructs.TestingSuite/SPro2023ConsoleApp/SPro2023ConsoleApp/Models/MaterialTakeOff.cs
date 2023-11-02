@@ -15,21 +15,23 @@ namespace SPro2023ConsoleApp.Models
 
         private MaterialTakeOff()
         {
-            Sections = new Dictionary<int, BeamMTOTableRow>();
-            Plates = new Dictionary<int, PlateMTOTableRow>();
+            SectionsRows = new Dictionary<int, SectionMtoRow>();
+            PlatesRows = new Dictionary<int, PlateMtoRow>();
         }
 
         #endregion
 
         #region Public Properties
 
-        public Dictionary<int, BeamMTOTableRow> Sections { get; private set; }
+        public Dictionary<int, SectionMtoRow> SectionsRows { get; private set; }
 
-        public Dictionary<int, PlateMTOTableRow> Plates { get; private set; }
+        public Dictionary<int, PlateMtoRow> PlatesRows { get; private set; }
 
-        public double TotalWeight => Math.Round(Sections.Values.Sum(v => v.TotalWeight) + Plates.Values.Sum(v => v.TotalWeight), 3);
+        public double TotalWeight => Math.Round(SectionsRows.Values.Sum(v => v.TotalWeight) + PlatesRows.Values.Sum(v => v.TotalWeight), 3);
 
         #endregion
+
+        #region Public Functions
 
         public static MaterialTakeOff Generate(StaadModelWrapper wrapper)
         {
@@ -47,11 +49,13 @@ namespace SPro2023ConsoleApp.Models
 
             MaterialTakeOff takeOff = new MaterialTakeOff()
             {
-                Sections = SectionsMaterialTakeOffService.Generate(wrapper),
-                Plates = PlatesMaterialTakeOffService.Generate(wrapper)
+                SectionsRows = SectionsMaterialTakeOffService.Generate(wrapper),
+                PlatesRows = PlatesMaterialTakeOffService.Generate(wrapper)
             };
 
             return takeOff;
-        }
+        } 
+
+        #endregion
     }
 }
