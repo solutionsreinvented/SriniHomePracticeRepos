@@ -27,7 +27,11 @@ namespace SPro2023ConsoleApp.Models
 
         public Dictionary<int, PlateMtoRow> PlatesRows { get; private set; }
 
-        public double TotalWeight => Math.Round(SectionsRows.Values.Sum(v => v.TotalWeight) + PlatesRows.Values.Sum(v => v.TotalWeight), 3);
+        public double SectionsTotalWeight => Math.Round(SectionsRows.Values.Sum(v => v.TotalWeight), 3);
+
+        public double PlatesTotalWeight => Math.Round(PlatesRows.Values.Sum(v => v.TotalWeight), 3);
+
+        public double TotalWeight => Math.Round(SectionsTotalWeight + PlatesTotalWeight, 3);
 
         #endregion
 
