@@ -4,13 +4,13 @@ using System.Linq;
 
 using OpenSTAADUI;
 
+using ReInvented.Domain.Reporting.Models;
+using ReInvented.Sections.Domain.Repositories;
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Models;
 using ReInvented.StaadPro.Interactivity.Services;
 
-using SPro2023ConsoleApp.Models;
-
-namespace SPro2023ConsoleApp.Services
+namespace ReInvented.Domain.Reporting.Services
 {
     public class PlatesMaterialTakeOffService
     {
@@ -32,6 +32,7 @@ namespace SPro2023ConsoleApp.Services
                 Dictionary<int, PlateMtoRow> propertiesTable = SegregatePlatesByPropertyIds(property, plates);
                 propertiesTable = FillPlateThicknesses(property, propertiesTable);
                 propertiesTable = FillTotalPlanAreas(wrapper, propertiesTable);
+                propertiesTable = FillMaterialGrades(property, propertiesTable);
 
                 /// TODO: Notes:
                 ///     1. First value in the propertyValues gives sectional area for most of the section types.
@@ -41,7 +42,7 @@ namespace SPro2023ConsoleApp.Services
                 ///        In the below line of code a value 7.85 (t/m³) is used directly for testing purposes.
                 ///        Actual weight has to be calculated using the density that is specific to the material selected.
 
-                propertiesTable.Values.ToList().ForEach(p => p.TotalWeight = Math.Round(p.TotalPlanArea * p.Thickness * 7.85, 3));
+                propertiesTable.Values.ToList().ForEach(row => row.TotalWeight = Math.Round(row.TotalPlanArea * row.Thickness * (row.MaterialGrade.Density / 1000), 3));
 
                 return propertiesTable;
             }
@@ -101,6 +102,16 @@ namespace SPro2023ConsoleApp.Services
                 object propertyAssignedList = new int[propertyAssignedCount];
 
                 property.GetThicknessPropertyAssignedPlateList(propertyId, ref propertyAssignedList);
+            }
+
+            return propertiesTable;
+        }
+
+        private static Dictionary<int, PlateMtoRow> FillMaterialGrades(OSPropertyUI property, Dictionary<int, PlateMtoRow> propertiesTable)
+        {
+            foreach (PlateMtoRow row in propertiesTable.Values)
+            {
+                row.MaterialGrade = MaterialsRepository.Instance.GetMaterialGradeFrom(property.GetPlateMaterialName(row.Plates.FirstOrDefault().Id));
             }
 
             return propertiesTable;

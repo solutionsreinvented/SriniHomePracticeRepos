@@ -4,13 +4,13 @@ using System.Linq;
 
 using OpenSTAADUI;
 
+using ReInvented.Domain.Reporting.Models;
+using ReInvented.Sections.Domain.Repositories;
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Models;
 using ReInvented.StaadPro.Interactivity.Services;
 
-using SPro2023ConsoleApp.Models;
-
-namespace SPro2023ConsoleApp.Services
+namespace ReInvented.Domain.Reporting.Services
 {
 
     public class SectionsMaterialTakeOffService
@@ -34,6 +34,7 @@ namespace SPro2023ConsoleApp.Services
 
                 Dictionary<int, SectionMtoRow> propertiesTable = SegregateBeamsByPropertyIds(property, beams);
                 propertiesTable = FillSectionNames(property, propertiesTable);
+                propertiesTable = FillMaterialGrades(property, propertiesTable);
                 propertiesTable = FillTotalWeights(property, propertiesTable);
 
                 return propertiesTable;
@@ -84,6 +85,16 @@ namespace SPro2023ConsoleApp.Services
             return propertiesTable;
         }
 
+        private static Dictionary<int, SectionMtoRow> FillMaterialGrades(OSPropertyUI property, Dictionary<int, SectionMtoRow> propertiesTable)
+        {
+            foreach (SectionMtoRow row in propertiesTable.Values)
+            {
+                row.MaterialGrade = MaterialsRepository.Instance.GetMaterialGradeFrom(property.GetBeamMaterialName(row.Beams.FirstOrDefault().Id));
+            }
+
+            return propertiesTable;
+        }
+
         private static Dictionary<int, SectionMtoRow> FillTotalWeights(OSPropertyUI property, Dictionary<int, SectionMtoRow> propertiesTable)
         {
             foreach (int propertyId in propertiesTable.Keys)
@@ -105,7 +116,7 @@ namespace SPro2023ConsoleApp.Services
                 ///        In the below line of code a value 7.85 (t/m3) is used directly for testing purposes.
                 ///        Actual weight has to be calculated using the density that is specific to the material selected.
 
-                row.TotalWeight = Math.Round(row.SectionalArea * row.TotalLength * 7.85, 3);
+                row.TotalWeight = Math.Round(row.SectionalArea * row.TotalLength * (row.MaterialGrade.Density / 1000), 3);
 
             }
 

@@ -1,4 +1,4 @@
-﻿namespace SPro2023ConsoleApp.Models
+﻿namespace ReInvented.Domain.Reporting.Models
 {
     public class UnitsData
     {

@@ -51,6 +51,9 @@
     <Reference Include="ReInvented.Domain.ProjectSetup">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Domain.ProjectSetup.dll</HintPath>
     </Reference>
+    <Reference Include="ReInvented.Sections.Domain">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Sections.Core\bin\Debug\ReInvented.Sections.Domain.dll</HintPath>
+    </Reference>
     <Reference Include="ReInvented.Shared">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Shared\bin\Debug\ReInvented.Shared.dll</HintPath>
     </Reference>
@@ -77,6 +80,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Base\MtoTableRow.cs" />
     <Compile Include="Base\ReportContent.cs" />
     <Compile Include="Controls\DocumentInfoControl.xaml.cs">
       <DependentUpon>DocumentInfoControl.xaml</DependentUpon>
@@ -95,6 +99,7 @@
     </Compile>
     <Compile Include="Enums\SubmissionCategory.cs" />
     <Compile Include="Extensions\HtmlDocumentExtensions.cs" />
+    <Compile Include="Interfaces\IMtoTableRow.cs" />
     <Compile Include="Interfaces\IReportContent.cs" />
     <Compile Include="Interfaces\IReportService.cs" />
     <Compile Include="Models\FDL\FoundationLoadData.cs" />
@@ -103,13 +108,19 @@
     <Compile Include="Models\FDL\SupportLoads.cs" />
     <Compile Include="Models\FDL\SupportsInformation.cs" />
     <Compile Include="Models\DocumentHistory.cs" />
+    <Compile Include="Models\MTO\PlateMtoRow.cs" />
+    <Compile Include="Models\MTO\SectionMtoRow.cs" />
+    <Compile Include="Models\MTO\UnitsData.cs" />
     <Compile Include="Models\Revision.cs" />
     <Compile Include="Models\RevisionDescriptionItem.cs" />
-    <Compile Include="Services\FoundationLoadDataService.cs" />
+    <Compile Include="Services\FDL\FoundationLoadDataService.cs" />
     <Compile Include="Services\HtmlNodesService.cs" />
-    <Compile Include="Services\MaterialTakeOffService.cs" />
+    <Compile Include="Services\MTO\MaterialTakeOffService.cs" />
+    <Compile Include="Services\MTO\PlatesMaterialTakeOffService.cs" />
+    <Compile Include="Services\MTO\PlateSurfaceAreaService.cs" />
+    <Compile Include="Services\MTO\SectionsMaterialTakeOffService.cs" />
     <Compile Include="Services\ReportFileNames.cs" />
-    <Compile Include="Services\SupportLoadsSummaryService.cs" />
+    <Compile Include="Services\FDL\SupportLoadsSummaryService.cs" />
     <Compile Include="ViewModels\FoundationLoadDataViewModel.cs" />
     <Page Include="Controls\DocumentInfoControl.xaml">
       <SubType>Designer</SubType>
@@ -152,11 +163,11 @@
     <Compile Include="Models\MTO\Contingencies.cs" />
     <Compile Include="Models\MTO\DataSourceInformation.cs" />
     <Compile Include="Models\MTO\MaterialTakeOff.cs" />
-    <Compile Include="Base\TakeOffItem.cs" />
+    <Compile Include="Base\SummaryItem.cs" />
     <Compile Include="Models\MTO\OverallSummary.cs" />
-    <Compile Include="Models\MTO\OverallSummaryTakeOffItem.cs" />
+    <Compile Include="Models\MTO\OverallSummaryItem.cs" />
     <Compile Include="Models\MTO\PropertyWiseSummary.cs" />
-    <Compile Include="Models\MTO\PropertyWiseSummaryTakeOffItem.cs" />
+    <Compile Include="Models\MTO\PropertyWiseSummaryItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

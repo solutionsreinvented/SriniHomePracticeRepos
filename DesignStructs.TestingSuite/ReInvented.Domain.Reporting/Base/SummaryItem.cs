@@ -1,6 +1,6 @@
 ﻿namespace ReInvented.Domain.Reporting.Models.Base
 {
-    public abstract class TakeOffItem
+    public abstract class SummaryItem
     {
         public int SlNo { get; set; }
 

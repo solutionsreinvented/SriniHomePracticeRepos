@@ -3,5 +3,8 @@ using ReInvented.Domain.Reporting.Models.Base;
 
 namespace ReInvented.Domain.Reporting.Models
 {
-    public sealed class OverallSummaryTakeOffItem : TakeOffItem { }
+    public sealed class OverallSummaryItem : SummaryItem
+    {
+
+    }
 }

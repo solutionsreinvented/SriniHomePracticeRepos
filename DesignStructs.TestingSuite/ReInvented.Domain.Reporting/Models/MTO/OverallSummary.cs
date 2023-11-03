@@ -4,6 +4,6 @@ namespace ReInvented.Domain.Reporting.Models
 {
     public sealed class OverallSummary
     {
-        public HashSet<OverallSummaryTakeOffItem> Items { get; set; }
+        public HashSet<OverallSummaryItem> Items { get; set; }
     }
 }

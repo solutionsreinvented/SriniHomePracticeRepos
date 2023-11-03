@@ -8,7 +8,7 @@ using OpenSTAADUI;
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Services;
 
-namespace SPro2023ConsoleApp.Services
+namespace ReInvented.Domain.Reporting.Services
 {
     public class PlateSurfaceAreaService
     {

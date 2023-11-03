@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using ReInvented.Domain.Reporting.Base;
+using ReInvented.Domain.Reporting.Interfaces;
 using ReInvented.StaadPro.Interactivity.Entities;
 
-using SPro2023ConsoleApp.Base;
-using SPro2023ConsoleApp.Interfaces;
-
-namespace SPro2023ConsoleApp.Models
+namespace ReInvented.Domain.Reporting.Models
 {
-    public class SectionMtoRow : MTOTableRow, IMTOTableRow
+    public class SectionMtoRow : MtoTableRow, IMtoTableRow
     {
         public SectionMtoRow()
         {

@@ -45,6 +45,9 @@
     <Reference Include="PresentationFramework">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\PresentationFramework.dll</HintPath>
     </Reference>
+    <Reference Include="ReInvented.Domain.TASS">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Domain.TASS.dll</HintPath>
+    </Reference>
     <Reference Include="ReInvented.Sections.Domain">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Sections.Core\bin\Debug\ReInvented.Sections.Domain.dll</HintPath>
     </Reference>
@@ -67,18 +70,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\MTOTableRow.cs" />
-    <Compile Include="Interfaces\IMTOTableRow.cs" />
-    <Compile Include="Models\SectionMtoRow.cs" />
-    <Compile Include="Models\UnitsData.cs" />
     <Compile Include="NodesCollection.cs" />
-    <Compile Include="Models\PlateMtoRow.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\MaterialTakeOff.cs" />
-    <Compile Include="Services\PlatesMaterialTakeOffService.cs" />
-    <Compile Include="Services\PlateSurfaceAreaService.cs" />
-    <Compile Include="Services\SectionsMaterialTakeOffService.cs" />
+    <Compile Include="Models\MaterialTakeOffService.cs" />
     <Compile Include="VerticalStiffeners.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +84,14 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMFileReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ReInvented.Domain.Reporting\ReInvented.Domain.Reporting.csproj">
+      <Project>{2AF4E5A8-54A6-4AA0-AE08-41E301309F0E}</Project>
+      <Name>ReInvented.Domain.Reporting</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
