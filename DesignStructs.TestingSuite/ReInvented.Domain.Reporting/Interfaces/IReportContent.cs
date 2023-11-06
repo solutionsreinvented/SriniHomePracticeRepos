@@ -4,6 +4,6 @@ namespace ReInvented.Domain.Reporting.Interfaces
 {
     public interface IReportContent
     {
-        DataSourceInformation DataSourceInformation { get; }
+        DataSourceInformation DataSourceInformation { get; set; }
     }
 }

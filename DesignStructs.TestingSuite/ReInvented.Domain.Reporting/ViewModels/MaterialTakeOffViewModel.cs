@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Windows;
 
 using ReInvented.DataAccess.Models;
@@ -10,20 +9,20 @@ using ReInvented.Domain.Reporting.Services;
 
 namespace ReInvented.Domain.Reporting.ViewModels
 {
-    public class FoundationLoadDataViewModel : ReportViewModel, INotifyPropertyChanged
+    public class MaterialTakeOffViewModel : ReportViewModel, INotifyPropertyChanged
     {
         #region Default Constructor
 
-        public FoundationLoadDataViewModel()
+        public MaterialTakeOffViewModel()
         {
-            
+            Report = new Report<MaterialTakeOff>();
         }
 
         #endregion
 
         #region Public Properties
 
-        public Report<FoundationLoadData> Report { get; private set; }
+        public Report<MaterialTakeOff> Report { get; set; }
 
         #endregion
 
@@ -33,8 +32,8 @@ namespace ReInvented.Domain.Reporting.ViewModels
         {
             base.OnGenerateReport();
 
-            FoundationLoadDataService service = new FoundationLoadDataService();
-            FoundationLoadData foundationLoadData = service.GenerateReportContent(ProjectInfo, Enumerable.Range(601, 15));
+            MaterialTakeOff mto = MaterialTakeOffService.Generate(,)
+
 
             if (foundationLoadData != null)
             {

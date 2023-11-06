@@ -113,10 +113,11 @@
     <Compile Include="Models\FDL\PCDLoads.cs" />
     <Compile Include="Models\FDL\SupportLoads.cs" />
     <Compile Include="Models\FDL\SupportsInformation.cs" />
-    <Compile Include="Models\DocumentHistory.cs" />
+    <Compile Include="Models\DocumentInfo.cs" />
     <Compile Include="Models\MTO\PlateMtoRow.cs" />
     <Compile Include="Models\MTO\SectionMtoRow.cs" />
     <Compile Include="Models\MTO\UnitsData.cs" />
+    <Compile Include="Models\Report`.cs" />
     <Compile Include="Models\Revision.cs" />
     <Compile Include="Models\RevisionDescriptionItem.cs" />
     <Compile Include="Services\FDL\FoundationLoadDataService.cs" />
@@ -164,6 +165,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\MaterialTakeOffViewModel.cs" />
+    <Compile Include="ViewModels\ReportViewModel.cs" />
     <Compile Include="Views\FoundationLoadDataView.xaml.cs">
       <DependentUpon>FoundationLoadDataView.xaml</DependentUpon>
       <SubType>Code</SubType>

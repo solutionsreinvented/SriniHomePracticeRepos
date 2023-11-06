@@ -4,6 +4,7 @@ using OpenSTAADUI;
 
 using ReInvented.Domain.ProjectSetup.Interfaces;
 using ReInvented.Domain.ProjectSetup.Models;
+using ReInvented.Domain.Reporting.Interfaces;
 using ReInvented.Domain.Reporting.Models;
 using ReInvented.Domain.Reporting.Services;
 using ReInvented.Shared;
@@ -30,11 +31,20 @@ namespace SPro2023ConsoleApp
             StaadModel model = new StaadModel();
             StaadModelWrapper wrapper = model.StaadWrapper;
 
-            IProjectInfo projectInfo = new ProjectInfo() { };
+            Report<FoundationLoadData> foundationLoadData = new Report<FoundationLoadData>();
+            Report<MaterialTakeOff> materialTakeOff = new Report<MaterialTakeOff>();
 
-            MaterialTakeOff mto = MaterialTakeOffService.Generate(wrapper, projectInfo);
 
-            double totalWeight = mto.TotalWeight;
+            DataSourceInformation sourceInfo = new DataSourceInformation()
+            {
+                PreparedOn = DateTime.Now.ToString("F")
+            };
+
+            materialTakeOff.Content = MaterialTakeOffService.Generate(wrapper, sourceInfo);
+
+            //MaterialTakeOff mto = MaterialTakeOffService.Generate(wrapper, sourceInfo);
+
+            //double totalWeight = mto.TotalWeight;
 
             OSGeometryUI geometry = wrapper.StaadInstance.Geometry;
             OSPropertyUI property = wrapper.StaadInstance.Property;
