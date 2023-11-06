@@ -1,6 +1,4 @@
-﻿using System;
-
-using ReInvented.Domain.Reporting.Interfaces;
+﻿using ReInvented.Domain.Reporting.Interfaces;
 using ReInvented.Domain.Reporting.Models;
 
 namespace ReInvented.Domain.Reporting.Base
@@ -9,10 +7,8 @@ namespace ReInvented.Domain.Reporting.Base
     {
         public ReportContent()
         {
-            
-        }
 
-        public string GeneratedOn { get; set; }
+        }
 
         public DataSourceInformation DataSourceInformation { get; set; }
     }

@@ -8,5 +8,4 @@ namespace ReInvented.Domain.Reporting.Interfaces
 
         double TotalWeight { get; set; }
     }
-
 }

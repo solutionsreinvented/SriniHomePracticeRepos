@@ -51,6 +51,9 @@
     <Reference Include="ReInvented.Domain.ProjectSetup">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Domain.ProjectSetup.dll</HintPath>
     </Reference>
+    <Reference Include="ReInvented.Domain.TASS">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Domain.TASS.dll</HintPath>
+    </Reference>
     <Reference Include="ReInvented.Sections.Domain">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Sections.Core\bin\Debug\ReInvented.Sections.Domain.dll</HintPath>
     </Reference>
@@ -88,6 +91,9 @@
     <Compile Include="Controls\ProjectSetupControl.xaml.cs">
       <DependentUpon>ProjectSetupControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ReportControl.xaml.cs">
+      <DependentUpon>ReportControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RevisionDescriptionsControl.xaml.cs">
       <DependentUpon>RevisionDescriptionsControl.xaml</DependentUpon>
     </Compile>
@@ -116,9 +122,9 @@
     <Compile Include="Services\FDL\FoundationLoadDataService.cs" />
     <Compile Include="Services\HtmlNodesService.cs" />
     <Compile Include="Services\MTO\MaterialTakeOffService.cs" />
-    <Compile Include="Services\MTO\PlatesMaterialTakeOffService.cs" />
+    <Compile Include="Services\MTO\PlatesTakeOffService.cs" />
     <Compile Include="Services\MTO\PlateSurfaceAreaService.cs" />
-    <Compile Include="Services\MTO\SectionsMaterialTakeOffService.cs" />
+    <Compile Include="Services\MTO\SectionsTakeOffService.cs" />
     <Compile Include="Services\ReportFileNames.cs" />
     <Compile Include="Services\FDL\SupportLoadsSummaryService.cs" />
     <Compile Include="ViewModels\FoundationLoadDataViewModel.cs" />
@@ -127,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ProjectSetupControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ReportControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

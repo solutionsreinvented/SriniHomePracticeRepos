@@ -12,7 +12,7 @@ using ReInvented.StaadPro.Interactivity.Services;
 
 namespace ReInvented.Domain.Reporting.Services
 {
-    public class PlatesMaterialTakeOffService
+    public class PlatesTakeOffService
     {
         #region Public Functions
 
@@ -33,14 +33,6 @@ namespace ReInvented.Domain.Reporting.Services
                 propertiesTable = FillPlateThicknesses(property, propertiesTable);
                 propertiesTable = FillTotalPlanAreas(wrapper, propertiesTable);
                 propertiesTable = FillMaterialGrades(property, propertiesTable);
-
-                /// TODO: Notes:
-                ///     1. First value in the propertyValues gives sectional area for most of the section types.
-                ///        Introduce additional conditions or use a separate class to retrieve the sectional area for sections
-                ///        which does not contain the sectional area in the propertyValues array.
-                ///     2. To calculate the total weight multiply the total plan area with thickness and then with density of the material.
-                ///        In the below line of code a value 7.85 (t/m³) is used directly for testing purposes.
-                ///        Actual weight has to be calculated using the density that is specific to the material selected.
 
                 propertiesTable.Values.ToList().ForEach(row => row.TotalWeight = Math.Round(row.TotalPlanArea * row.Thickness * (row.MaterialGrade.Density / 1000), 3));
 
@@ -70,11 +62,10 @@ namespace ReInvented.Domain.Reporting.Services
                     propertiesTable.Add(propertyId, row);
                 }
 
-                row.Plates.Add(plate);
+                _ = row.Plates.Add(plate);
             }
 
-            propertiesTable = new Dictionary<int, PlateMtoRow>(propertiesTable.OrderBy(pair => pair.Key)
-                                  .ToDictionary(pair => pair.Key, pair => pair.Value));
+            propertiesTable = new Dictionary<int, PlateMtoRow>(propertiesTable.OrderBy(pair => pair.Key).ToDictionary(pair => pair.Key, pair => pair.Value));
 
             return propertiesTable;
         }

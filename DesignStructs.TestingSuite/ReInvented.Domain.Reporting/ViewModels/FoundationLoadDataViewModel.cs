@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -14,31 +15,65 @@ using ReInvented.Shared.Stores;
 
 namespace ReInvented.Domain.Reporting.ViewModels
 {
-    public class FoundationLoadDataViewModel : ErrorsEnabledPropertyStore
+    public class ReportViewModel : ErrorsEnabledPropertyStore
     {
-        public FoundationLoadDataViewModel()
+        #region Default Constructor
+
+        public ReportViewModel()
         {
             ProjectInfo = new ProjectInfo() { ProjectDirectory = @"C:\Users\masanams\Desktop\Desktop\Code\Reports" };
-            GenerateFoundationLoadDataCommand = new RelayCommand(OnGenerateFoundationLoadData, true);
+            GenerateReportCommand = new RelayCommand(OnGenerateReport, true);
             SelectProjectDirectoryCommand = new RelayCommand(OnSelectProjectDirectory, true);
         }
 
+        #endregion
+
+        #region Public Properties
+
         public IProjectInfo ProjectInfo { get => Get<IProjectInfo>(); private set => Set(value); }
 
-        public ICommand GenerateFoundationLoadDataCommand { get => Get<ICommand>(); private set => Set(value); }
+        #endregion
 
-        public ICommand SelectProjectDirectoryCommand { get; set; }
+        #region Commands
 
+        public ICommand SelectProjectDirectoryCommand { get => Get<ICommand>(); private set => Set(value); }
 
-        private void OnGenerateFoundationLoadData()
+        public ICommand GenerateReportCommand { get => Get<ICommand>(); private set => Set(value); }
+
+        #endregion
+
+        #region Event Handlers
+
+        private void OnSelectProjectDirectory()
+        {
+            ProjectInfo.ProjectDirectory = FileServiceProvider.GetDirectoryPathUsingFolderBrowserDialog(ProjectInfo.ProjectDirectory);
+        }
+
+        protected virtual void OnGenerateReport()
         {
             if (ProjectInfo.ProjectDirectory == null || ProjectInfo.Code == null)
             {
                 throw new ArgumentNullException($"{nameof(ProjectInfo.ProjectDirectory)} or {nameof(ProjectInfo.Code)} or both null.");
             }
+        }
+
+        #endregion
+    }
+
+    public class FoundationLoadDataViewModel : ReportViewModel, INotifyPropertyChanged
+    {
+        public FoundationLoadDataViewModel()
+        {
+
+        }
+
+        protected override void OnGenerateReport()
+        {
+            base.OnGenerateReport();
 
             FoundationLoadDataService service = new FoundationLoadDataService();
             FoundationLoadData foundationLoadData = service.GenerateReportContent(ProjectInfo, Enumerable.Range(601, 15));
+
             if (foundationLoadData != null)
             {
                 bool useAbsolutePaths = true;
@@ -55,19 +90,9 @@ namespace ReInvented.Domain.Reporting.ViewModels
             }
             else
             {
-                MessageBox.Show("It appears that the analysis results are not available. Make sure to run the analysis before generating foundation load data!", "Foundation Load Data", MessageBoxButton.OK);
+                _ = MessageBox.Show("It appears that the analysis results are not available. Make sure to run the analysis before generating foundation load data!", "Foundation Load Data", MessageBoxButton.OK);
             }
         }
-
-
-        #region Event Handlers
-
-        private void OnSelectProjectDirectory()
-        {
-            ProjectInfo.ProjectDirectory = FileServiceProvider.GetDirectoryPathUsingFolderBrowserDialog(ProjectInfo.ProjectDirectory);
-        }
-
-        #endregion
 
     }
 }

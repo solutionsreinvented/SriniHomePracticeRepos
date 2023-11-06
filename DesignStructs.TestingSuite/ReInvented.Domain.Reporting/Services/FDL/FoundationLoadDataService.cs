@@ -119,16 +119,13 @@ namespace ReInvented.Domain.Reporting.Services
                 return null;
             }
 
-            string generatedOn = DateTime.Now.ToString("F");
-
             FoundationLoadData foundationLoadData = new FoundationLoadData()
             {
-                GeneratedOn = generatedOn,
                 DataSourceInformation = new DataSourceInformation()
                 {
                     ///TODO: Hard coded properties below shall be replaced with user input.
                     Engineer = projectInfo.Originator.FullName,
-                    PreparedOn = generatedOn,
+                    PreparedOn = DateTime.Now.ToString("F"),
                     ProjectCode = projectInfo.Code,
                     ProjectName = projectInfo.Name,
                     StaadFilename = staadFilename

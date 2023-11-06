@@ -11,32 +11,5 @@
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid Margin="10,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.75*" />
-            <ColumnDefinition Width="*" />
-
-        </Grid.ColumnDefinitions>
-        <reportingControls:ProjectSetupControl Grid.Row="0" Grid.Column="0" />
-        <reportingControls:DocumentInfoControl Grid.Row="1" Grid.Column="0" />
-        <reportingControls:RevisionsControl
-            Grid.Row="0"
-            Grid.RowSpan="2"
-            Grid.Column="1"
-            Margin="5,0,0,0" />
-
-        <Button
-            Grid.Row="2"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Height="24"
-            Margin="0,15,0,5"
-            Command="{Binding GenerateFoundationLoadDataCommand}"
-            Content="Generate Foundation Load Data" />
-    </Grid>
+    <reportingControls:ReportControl />
 </Window>

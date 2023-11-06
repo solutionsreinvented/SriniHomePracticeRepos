@@ -2,15 +2,14 @@
 
 using OpenSTAADUI;
 
+using ReInvented.Domain.ProjectSetup.Interfaces;
+using ReInvented.Domain.ProjectSetup.Models;
 using ReInvented.Domain.Reporting.Models;
-using ReInvented.Sections.Domain.Models;
-using ReInvented.Sections.Domain.Repositories;
+using ReInvented.Domain.Reporting.Services;
 using ReInvented.Shared;
 using ReInvented.Shared.Services;
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Models;
-
-using SPro2023ConsoleApp.Models;
 
 using System;
 using System.Collections.Generic;
@@ -31,7 +30,9 @@ namespace SPro2023ConsoleApp
             StaadModel model = new StaadModel();
             StaadModelWrapper wrapper = model.StaadWrapper;
 
-            MaterialTakeOff mto = MaterialTakeOffService.Generate(wrapper);
+            IProjectInfo projectInfo = new ProjectInfo() { };
+
+            MaterialTakeOff mto = MaterialTakeOffService.Generate(wrapper, projectInfo);
 
             double totalWeight = mto.TotalWeight;
 
