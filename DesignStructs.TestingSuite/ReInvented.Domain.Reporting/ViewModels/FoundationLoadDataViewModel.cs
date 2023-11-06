@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -29,14 +30,21 @@ namespace ReInvented.Domain.Reporting.ViewModels
 
         #region Event Handlers
 
+        protected override void OnSelectProjectDirectory()
+        {
+            Report.ProjectInfo.ProjectDirectory = FileServiceProvider.GetDirectoryPathUsingFolderBrowserDialog(Report.ProjectInfo.ProjectDirectory);
+        }
+
         protected override void OnGenerateReport()
         {
-            base.OnGenerateReport();
+            if (Report.ProjectInfo.ProjectDirectory == null || Report.ProjectInfo.Code == null)
+            {
+                throw new ArgumentNullException($"{nameof(Report.ProjectInfo.ProjectDirectory)} or {nameof(Report.ProjectInfo.Code)} or both null.");
+            }
 
-            FoundationLoadDataService service = new FoundationLoadDataService();
-            FoundationLoadData foundationLoadData = service.GenerateReportContent(ProjectInfo, Enumerable.Range(601, 15));
+            Report.Content = FoundationLoadDataService.Generate(Report.ProjectInfo, Enumerable.Range(601, 15));
 
-            if (foundationLoadData != null)
+            if (Report.Content != null)
             {
                 bool useAbsolutePaths = true;
 
@@ -50,7 +58,7 @@ namespace ReInvented.Domain.Reporting.ViewModels
                     FoundationLoadDataService.CopyJavaScriptFiles(projectDirectory);
                 }
 
-                FoundationLoadDataService.CreateReportContentsFile(projectDirectory, foundationLoadData);
+                FoundationLoadDataService.CreateReportContentsFile(projectDirectory, Report.Content);
             }
             else
             {

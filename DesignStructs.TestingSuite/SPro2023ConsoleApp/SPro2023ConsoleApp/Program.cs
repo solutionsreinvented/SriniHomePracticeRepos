@@ -40,7 +40,7 @@ namespace SPro2023ConsoleApp
                 PreparedOn = DateTime.Now.ToString("F")
             };
 
-            materialTakeOff.Content = MaterialTakeOffService.Generate(wrapper, sourceInfo);
+            materialTakeOff.Content = MaterialTakeOffService.Generate(wrapper);
 
             //MaterialTakeOff mto = MaterialTakeOffService.Generate(wrapper, sourceInfo);
 

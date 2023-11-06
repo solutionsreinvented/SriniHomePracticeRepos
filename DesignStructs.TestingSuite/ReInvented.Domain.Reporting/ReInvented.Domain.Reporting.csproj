@@ -84,7 +84,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Base\MtoTableRow.cs" />
-    <Compile Include="Base\ReportContent.cs" />
     <Compile Include="Controls\DocumentInfoControl.xaml.cs">
       <DependentUpon>DocumentInfoControl.xaml</DependentUpon>
     </Compile>
@@ -106,7 +105,7 @@
     <Compile Include="Enums\SubmissionCategory.cs" />
     <Compile Include="Extensions\HtmlDocumentExtensions.cs" />
     <Compile Include="Interfaces\IMtoTableRow.cs" />
-    <Compile Include="Interfaces\IReportContent.cs" />
+    <Compile Include="Interfaces\IReport.cs" />
     <Compile Include="Interfaces\IReportService.cs" />
     <Compile Include="Models\FDL\FoundationLoadData.cs" />
     <Compile Include="Models\FDL\PCDLoads.cs" />

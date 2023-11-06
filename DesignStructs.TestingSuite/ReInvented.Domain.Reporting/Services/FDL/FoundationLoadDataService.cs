@@ -22,7 +22,39 @@ namespace ReInvented.Domain.Reporting.Services
 {
     public class FoundationLoadDataService
     {
-        #region File Operations
+        #region Public Functions
+
+        public static FoundationLoadData Generate(IProjectInfo projectInfo, IEnumerable<int> reportLoadsIds)
+        {
+            StaadModel model = new StaadModel();
+            OpenSTAAD instance = model.StaadWrapper.StaadInstance;
+            OSOutputUI output = instance.Output;
+
+            HashSet<Node> nodes = StaadGeometryServices.GetAllNodes(instance.Geometry);
+            HashSet<EntityGroup> pcdSupportGroups = GetSupportEntityGroups(instance.Geometry);
+            List<LoadCase> loadCases = GetPrimaryLoadCasesForLoadDataGeneration(instance.Load, reportLoadsIds);
+
+            FoundationLoadData foundationLoadData = GenerateFoundationLoadData(output, pcdSupportGroups, nodes, loadCases, projectInfo, model.ModelName);
+
+            return foundationLoadData;
+        }
+
+        public static FoundationLoadData Generate(StaadModel model, IProjectInfo projectInfo, IEnumerable<int> reportLoadsIds)
+        {
+            OpenSTAAD openStaad = model.StaadWrapper.StaadInstance;
+            OSOutputUI output = openStaad.Output;
+
+            HashSet<EntityGroup> pcdSupportGroups = model.EntityGroups.Where(g => g.GroupName.Contains("_SUP_") && g.EntityType == EntityType.Nodes).ToHashSet();
+            List<LoadCase> loadCases = model.PrimaryLoads.Where(pl => reportLoadsIds.Contains(pl.Id)).OrderBy(lc => lc.Id).ToList();
+
+            FoundationLoadData foundationLoadData = GenerateFoundationLoadData(output, pcdSupportGroups, model.Nodes, loadCases, projectInfo, model.FileName);
+
+            return foundationLoadData;
+        }
+
+        #endregion
+
+        #region Report Documents Generation
 
         public static void CreateReportHtmlFile(DirectoryInfo projectDirectory, bool useAbsolutePaths)
         {
@@ -71,41 +103,9 @@ namespace ReInvented.Domain.Reporting.Services
             DirectoryInfo projectDataDirectory = Directory.CreateDirectory(Path.Combine(projectDirectory.FullName, "Data"));
 
             JsonDataSerializer<FoundationLoadData> serializer = new JsonDataSerializer<FoundationLoadData>();
-            string seializedContent = "const FoundationLoadData = " + serializer.Serialize(foundationLoadData, JsonSerializerSettingsProvider.MinifiedSettings());
+            string seializedContent = "const FoundationLoadDataReport = " + serializer.Serialize(foundationLoadData, JsonSerializerSettingsProvider.MinifiedSettings());
 
             File.WriteAllText(Path.Combine(projectDataDirectory.FullName, ReportFileNames.ContentsFoundationLoadData), seializedContent);
-        }
-
-        #endregion
-
-        #region Public Functions
-
-        public FoundationLoadData GenerateReportContent(IProjectInfo projectInfo, IEnumerable<int> reportLoadsIds)
-        {
-            StaadModel model = new StaadModel();
-            OpenSTAAD instance = model.StaadWrapper.StaadInstance;
-            OSOutputUI output = instance.Output;
-
-            HashSet<Node> nodes = StaadGeometryServices.GetAllNodes(instance.Geometry);
-            HashSet<EntityGroup> pcdSupportGroups = GetSupportEntityGroups(instance.Geometry);
-            List<LoadCase> loadCases = GetPrimaryLoadCasesForLoadDataGeneration(instance.Load, reportLoadsIds);
-
-            FoundationLoadData foundationLoadData = GenerateFoundationLoadData(output, pcdSupportGroups, nodes, loadCases, projectInfo, model.ModelName);
-
-            return foundationLoadData;
-        }
-
-        public FoundationLoadData GenerateReportContent(StaadModel model, IProjectInfo projectInfo, IEnumerable<int> reportLoadsIds)
-        {
-            OpenSTAAD openStaad = model.StaadWrapper.StaadInstance;
-            OSOutputUI output = openStaad.Output;
-
-            HashSet<EntityGroup> pcdSupportGroups = model.EntityGroups.Where(g => g.GroupName.Contains("_SUP_") && g.EntityType == EntityType.Nodes).ToHashSet();
-            List<LoadCase> loadCases = model.PrimaryLoads.Where(pl => reportLoadsIds.Contains(pl.Id)).OrderBy(lc => lc.Id).ToList();
-
-            FoundationLoadData foundationLoadData = GenerateFoundationLoadData(output, pcdSupportGroups, model.Nodes, loadCases, projectInfo, model.FileName);
-
-            return foundationLoadData;
         }
 
         #endregion
@@ -120,18 +120,7 @@ namespace ReInvented.Domain.Reporting.Services
                 return null;
             }
 
-            FoundationLoadData foundationLoadData = new FoundationLoadData()
-            {
-                DataSourceInformation = new DataSourceInformation()
-                {
-                    ///TODO: Hard coded properties below shall be replaced with user input.
-                    Engineer = projectInfo.Originator.FullName,
-                    PreparedOn = DateTime.Now.ToString("F"),
-                    ProjectCode = projectInfo.Code,
-                    ProjectName = projectInfo.Name,
-                    StaadFilename = staadFilename
-                }
-            };
+            FoundationLoadData foundationLoadData = new FoundationLoadData();
 
             foundationLoadData.LoadCases = new Dictionary<int, string>();
             loadCases.ForEach(lc => foundationLoadData.LoadCases.Add(lc.Id, lc.Title));

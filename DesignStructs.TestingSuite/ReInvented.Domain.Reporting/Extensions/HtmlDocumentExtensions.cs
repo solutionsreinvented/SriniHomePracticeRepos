@@ -70,7 +70,6 @@ namespace ReInvented.Domain.Reporting.Extensions
             {
                 _ = head.AppendChild(HtmlNodesService.GetStylesheetNodeWithAttributes(ReportFileNames.CssCommon, useAbsolutePaths));
                 _ = head.AppendChild(HtmlNodesService.GetStylesheetNodeWithAttributes(ReportFileNames.CssFoundationLoadData, useAbsolutePaths));
-
             }
 
             return htmlDocument;

@@ -32,28 +32,27 @@ namespace ReInvented.Domain.Reporting.ViewModels
         {
             base.OnGenerateReport();
 
-            MaterialTakeOff mto = MaterialTakeOffService.Generate(,)
+            Report.Content = MaterialTakeOffService.Generate(Wrapper);
 
-
-            if (foundationLoadData != null)
+            if (Report.Content != null)
             {
                 bool useAbsolutePaths = true;
 
                 DirectoryInfo projectDirectory = Directory.CreateDirectory(Path.Combine(ProjectInfo.ProjectDirectory, ProjectInfo.Code));
 
-                FoundationLoadDataService.CreateReportHtmlFile(projectDirectory, useAbsolutePaths);
+                MaterialTakeOffService.CreateReportHtmlFile(projectDirectory, useAbsolutePaths);
 
                 if (!useAbsolutePaths)
                 {
-                    FoundationLoadDataService.CopyCssStyleFiles(projectDirectory);
-                    FoundationLoadDataService.CopyJavaScriptFiles(projectDirectory);
+                    MaterialTakeOffService.CopyCssStyleFiles(projectDirectory);
+                    MaterialTakeOffService.CopyJavaScriptFiles(projectDirectory);
                 }
 
-                FoundationLoadDataService.CreateReportContentsFile(projectDirectory, foundationLoadData);
+                MaterialTakeOffService.CreateReportContentsFile(projectDirectory, Report);
             }
             else
             {
-                _ = MessageBox.Show("It appears that the analysis results are not available. Make sure to run the analysis before generating foundation load data!", "Foundation Load Data", MessageBoxButton.OK);
+                _ = MessageBox.Show("It appears that the report contents are empty. Make sure to generate the report contents first!", "Material Take Off", MessageBoxButton.OK);
             }
         }
 

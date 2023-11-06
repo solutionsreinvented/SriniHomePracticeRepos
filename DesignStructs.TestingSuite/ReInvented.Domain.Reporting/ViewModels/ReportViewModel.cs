@@ -2,7 +2,6 @@
 using System.Windows.Input;
 
 using ReInvented.DataAccess.Services;
-using ReInvented.Domain.ProjectSetup.Interfaces;
 using ReInvented.Domain.ProjectSetup.Models;
 using ReInvented.Shared.Commands;
 using ReInvented.Shared.Stores;
@@ -26,8 +25,6 @@ namespace ReInvented.Domain.Reporting.ViewModels
 
         #region Public Properties
 
-        public IProjectInfo ProjectInfo { get => Get<IProjectInfo>(); private set => Set(value); }
-
         protected StaadModelWrapper Wrapper { get; private set; }
 
         #endregion
@@ -44,20 +41,11 @@ namespace ReInvented.Domain.Reporting.ViewModels
 
         #region Event Handlers
 
-        private void OnSelectProjectDirectory()
-        {
-            ProjectInfo.ProjectDirectory = FileServiceProvider.GetDirectoryPathUsingFolderBrowserDialog(ProjectInfo.ProjectDirectory);
-        }
+        protected abstract void OnSelectProjectDirectory();
 
         protected abstract void OnSelectRevisionHistoryFile();
 
-        protected virtual void OnGenerateReport()
-        {
-            if (ProjectInfo.ProjectDirectory == null || ProjectInfo.Code == null)
-            {
-                throw new ArgumentNullException($"{nameof(ProjectInfo.ProjectDirectory)} or {nameof(ProjectInfo.Code)} or both null.");
-            }
-        }
+        protected abstract void OnGenerateReport();
 
         #endregion
     }

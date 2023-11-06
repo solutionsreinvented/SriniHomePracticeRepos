@@ -4,15 +4,12 @@ using System.Linq;
 
 using Newtonsoft.Json;
 
-using ReInvented.Domain.Reporting.Base;
-using ReInvented.Domain.Reporting.Interfaces;
 using ReInvented.StaadPro.Interactivity.Entities;
 
 namespace ReInvented.Domain.Reporting.Models
 {
-    public sealed class MaterialTakeOff : ReportContent, IReportContent
+    public sealed class MaterialTakeOff
     {
-
         #region Facilitating Properties
 
         [JsonIgnore]

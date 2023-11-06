@@ -2,6 +2,6 @@
 {
     public interface IReportService
     {
-        T Generate<T>() where T : IReportContent;
+        T Generate<T>() where T : IReport;
     }
 }
