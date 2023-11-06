@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using ReInvented.StaadPro.Interactivity.Entities;
+
 namespace ReInvented.Domain.Reporting.Models
 {
     public sealed class PCDLoads

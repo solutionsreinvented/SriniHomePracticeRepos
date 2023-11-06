@@ -109,7 +109,6 @@
     <Compile Include="Interfaces\IReportContent.cs" />
     <Compile Include="Interfaces\IReportService.cs" />
     <Compile Include="Models\FDL\FoundationLoadData.cs" />
-    <Compile Include="Models\FDL\LoadCaseForces.cs" />
     <Compile Include="Models\FDL\PCDLoads.cs" />
     <Compile Include="Models\FDL\SupportLoads.cs" />
     <Compile Include="Models\FDL\SupportsInformation.cs" />

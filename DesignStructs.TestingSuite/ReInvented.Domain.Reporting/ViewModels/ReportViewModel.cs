@@ -6,6 +6,7 @@ using ReInvented.Domain.ProjectSetup.Interfaces;
 using ReInvented.Domain.ProjectSetup.Models;
 using ReInvented.Shared.Commands;
 using ReInvented.Shared.Stores;
+using ReInvented.StaadPro.Interactivity.Models;
 
 namespace ReInvented.Domain.Reporting.ViewModels
 {
@@ -26,6 +27,8 @@ namespace ReInvented.Domain.Reporting.ViewModels
         #region Public Properties
 
         public IProjectInfo ProjectInfo { get => Get<IProjectInfo>(); private set => Set(value); }
+
+        protected StaadModelWrapper Wrapper { get; private set; }
 
         #endregion
 
