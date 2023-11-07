@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-
-using HtmlAgilityPack;
 
 using OpenSTAADUI;
 
-using ReInvented.DataAccess;
-using ReInvented.DataAccess.Services;
-using ReInvented.Domain.Reporting.Extensions;
 using ReInvented.Domain.Reporting.Models;
 using ReInvented.Domain.Tass.Enums;
 using ReInvented.Shared;
@@ -48,61 +42,6 @@ namespace ReInvented.Domain.Reporting.Services
             mto.OverallSummary = GenerateOverallSummary(mto.PropertyWiseSummary);
 
             return mto;
-        }
-
-        #endregion
-
-        #region Report Documents Generation
-
-        public static void CreateReportHtmlFile(DirectoryInfo projectDirectory, bool useAbsolutePaths)
-        {
-            string mtoHtmlSourceFileFullPath = Path.Combine(FileServiceProvider.TemplatesDirectory, "Pages", ReportFileNames.HtmlMTO);
-            string mtoHtmlDestinationFileFullPath = Path.Combine(projectDirectory.FullName, ReportFileNames.HtmlMTO);
-
-            HtmlDocument htmlDocument = new HtmlDocument();
-            htmlDocument.Load(mtoHtmlSourceFileFullPath);
-            ///TODO: Update the CssAndScripts linking
-            htmlDocument = htmlDocument.LinkCssAndScriptsTo(useAbsolutePaths);
-
-            htmlDocument.Save(mtoHtmlDestinationFileFullPath);
-
-        }
-
-        public static void CopyCssStyleFiles(DirectoryInfo projectDirectory)
-        {
-            string sourceStylesDirectory = Path.Combine(FileServiceProvider.TemplatesDirectory, "Styles");
-            string destinationStylesDirectory = Path.Combine(projectDirectory.FullName, "Styles");
-
-            if (!Directory.Exists(destinationStylesDirectory))
-            {
-                _ = Directory.CreateDirectory(destinationStylesDirectory);
-            }
-
-            File.Copy(Path.Combine(sourceStylesDirectory, ReportFileNames.CssCommon), Path.Combine(destinationStylesDirectory, ReportFileNames.CssCommon), true);
-            File.Copy(Path.Combine(sourceStylesDirectory, ReportFileNames.CssMTO), Path.Combine(destinationStylesDirectory, ReportFileNames.CssMTO), true);
-        }
-
-        public static void CopyJavaScriptFiles(DirectoryInfo projectDirectory)
-        {
-            string sourceScriptsDirectory = Path.Combine(FileServiceProvider.TemplatesDirectory, "Scripts");
-            string destinationScriptsDirectory = Path.Combine(projectDirectory.FullName, "Scripts");
-
-            if (!Directory.Exists(destinationScriptsDirectory))
-            {
-                _ = Directory.CreateDirectory(destinationScriptsDirectory);
-            }
-
-            File.Copy(Path.Combine(sourceScriptsDirectory, ReportFileNames.JavaScriptMTO), Path.Combine(destinationScriptsDirectory, ReportFileNames.JavaScriptMTO), true);
-        }
-
-        public static void CreateReportContentsFile(DirectoryInfo projectDirectory, Report<MaterialTakeOff> reportContent)
-        {
-            DirectoryInfo projectDataDirectory = Directory.CreateDirectory(Path.Combine(projectDirectory.FullName, "Data"));
-
-            JsonDataSerializer<Report<MaterialTakeOff>> serializer = new JsonDataSerializer<Report<MaterialTakeOff>>();
-            string seializedContent = "const MaterialTakeOffReport = " + serializer.Serialize(reportContent, JsonSerializerSettingsProvider.MinifiedSettings());
-
-            File.WriteAllText(Path.Combine(projectDataDirectory.FullName, ReportFileNames.ContentsMTO), seializedContent);
         }
 
         #endregion

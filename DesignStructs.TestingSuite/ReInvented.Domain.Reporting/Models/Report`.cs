@@ -35,7 +35,7 @@ namespace ReInvented.Domain.Reporting.Models
             ProjectInfo = new ProjectInfo();
             DocumentInfo = new DocumentInfo();
             DataSourceInformation = new DataSourceInformation();
-        } 
+        }
 
         #endregion
 

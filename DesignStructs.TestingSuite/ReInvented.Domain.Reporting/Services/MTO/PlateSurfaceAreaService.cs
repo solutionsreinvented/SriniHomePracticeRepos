@@ -7,6 +7,7 @@ using OpenSTAADUI;
 
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Services;
+using ReInvented.StaadPro.Interactivity.Services.Staad;
 
 namespace ReInvented.Domain.Reporting.Services
 {

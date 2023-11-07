@@ -106,7 +106,7 @@
     <Compile Include="Extensions\HtmlDocumentExtensions.cs" />
     <Compile Include="Interfaces\IMtoTableRow.cs" />
     <Compile Include="Interfaces\IReport.cs" />
-    <Compile Include="Interfaces\IReportService.cs" />
+    <Compile Include="Interfaces\IReportDocumentsGenerationService.cs" />
     <Compile Include="Models\FDL\FoundationLoadData.cs" />
     <Compile Include="Models\FDL\PCDLoads.cs" />
     <Compile Include="Models\FDL\SupportLoads.cs" />
@@ -120,13 +120,19 @@
     <Compile Include="Models\RevisionDescriptionItem.cs" />
     <Compile Include="Services\FDL\FoundationLoadDataService.cs" />
     <Compile Include="Services\HtmlNodesService.cs" />
+    <Compile Include="Services\ReportDocuments\FDLReportDocumentsGenerationService.cs" />
     <Compile Include="Services\MTO\MaterialTakeOffService.cs" />
+    <Compile Include="Services\ReportDocuments\MTOReportDocumentsGenerationService.cs" />
     <Compile Include="Services\MTO\PlatesTakeOffService.cs" />
     <Compile Include="Services\MTO\PlateSurfaceAreaService.cs" />
+    <Compile Include="Base\ReportDocumentsGenerationService.cs" />
     <Compile Include="Services\MTO\SectionsTakeOffService.cs" />
     <Compile Include="Services\ReportFileNames.cs" />
     <Compile Include="Services\FDL\SupportLoadsSummaryService.cs" />
     <Compile Include="ViewModels\FoundationLoadDataViewModel.cs" />
+    <Compile Include="Views\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\DocumentInfoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -155,20 +161,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FoundationLoadDataView.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Resources\Settings.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\MaterialTakeOffViewModel.cs" />
     <Compile Include="ViewModels\ReportViewModel.cs" />
-    <Compile Include="Views\FoundationLoadDataView.xaml.cs">
-      <DependentUpon>FoundationLoadDataView.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="Views\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\MTO\Contingencies.cs" />
