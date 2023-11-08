@@ -84,8 +84,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Base\MtoTableRow.cs" />
-    <Compile Include="Controls\DocumentInfoControl.xaml.cs">
-      <DependentUpon>DocumentInfoControl.xaml</DependentUpon>
+    <Compile Include="Controls\DocumentControl.xaml.cs">
+      <DependentUpon>DocumentControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ProjectSetupControl.xaml.cs">
       <DependentUpon>ProjectSetupControl.xaml</DependentUpon>
@@ -103,15 +103,16 @@
       <DependentUpon>RevisionsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Enums\SubmissionCategory.cs" />
+    <Compile Include="Extensions\CharExtensions.cs" />
     <Compile Include="Extensions\HtmlDocumentExtensions.cs" />
     <Compile Include="Interfaces\IMtoTableRow.cs" />
-    <Compile Include="Interfaces\IReport.cs" />
-    <Compile Include="Interfaces\IReportDocumentsGenerationService.cs" />
+    <Compile Include="Interfaces\IReport`.cs" />
+    <Compile Include="Interfaces\IReportDocumentsGenerationService`.cs" />
     <Compile Include="Models\FDL\FoundationLoadData.cs" />
     <Compile Include="Models\FDL\PCDLoads.cs" />
     <Compile Include="Models\FDL\SupportLoads.cs" />
     <Compile Include="Models\FDL\SupportsInformation.cs" />
-    <Compile Include="Models\DocumentInfo.cs" />
+    <Compile Include="Models\Document.cs" />
     <Compile Include="Models\MTO\PlateMtoRow.cs" />
     <Compile Include="Models\MTO\SectionMtoRow.cs" />
     <Compile Include="Models\MTO\UnitsData.cs" />
@@ -125,7 +126,7 @@
     <Compile Include="Services\ReportDocuments\MTOReportDocumentsGenerationService.cs" />
     <Compile Include="Services\MTO\PlatesTakeOffService.cs" />
     <Compile Include="Services\MTO\PlateSurfaceAreaService.cs" />
-    <Compile Include="Base\ReportDocumentsGenerationService.cs" />
+    <Compile Include="Base\ReportDocumentsGenerationService`.cs" />
     <Compile Include="Services\MTO\SectionsTakeOffService.cs" />
     <Compile Include="Services\ReportFileNames.cs" />
     <Compile Include="Services\FDL\SupportLoadsSummaryService.cs" />
@@ -133,7 +134,7 @@
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Controls\DocumentInfoControl.xaml">
+    <Page Include="Controls\DocumentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -179,7 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\MTO\Contingencies.cs" />
-    <Compile Include="Models\MTO\DataSourceInformation.cs" />
+    <Compile Include="Models\MTO\DataSource.cs" />
     <Compile Include="Models\MTO\MaterialTakeOff.cs" />
     <Compile Include="Base\SummaryItem.cs" />
     <Compile Include="Models\MTO\OverallSummary.cs" />

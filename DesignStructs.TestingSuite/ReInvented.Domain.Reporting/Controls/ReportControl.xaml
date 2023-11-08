@@ -29,7 +29,7 @@
             Grid.Row="0"
             Grid.Column="0"
             DataContext="{Binding Report}" />
-        <reportingControls:DocumentInfoControl
+        <reportingControls:DocumentControl
             Grid.Row="1"
             Grid.Column="0"
             DataContext="{Binding Report}" />
@@ -38,7 +38,7 @@
             Grid.RowSpan="2"
             Grid.Column="1"
             Margin="5,0,0,0"
-            DataContext="{Binding Report.DocumentInfo}" />
+            DataContext="{Binding Report.Document}" />
 
         <Button
             Grid.Row="2"

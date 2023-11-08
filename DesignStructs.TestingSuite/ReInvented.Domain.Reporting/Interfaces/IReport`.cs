@@ -7,9 +7,9 @@ namespace ReInvented.Domain.Reporting.Interfaces
     {
         IProjectInfo ProjectInfo { get; }
 
-        DocumentInfo DocumentInfo { get; }
+        Document Document { get; }
 
-        DataSourceInformation DataSourceInformation { get; }
+        DataSource DataSource { get; }
 
         T Content { get; set; }
     }

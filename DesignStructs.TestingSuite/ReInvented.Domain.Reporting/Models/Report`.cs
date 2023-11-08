@@ -20,9 +20,9 @@ namespace ReInvented.Domain.Reporting.Models
 
         public IProjectInfo ProjectInfo { get => Get<IProjectInfo>(); private set => Set(value); }
 
-        public DocumentInfo DocumentInfo { get => Get<DocumentInfo>(); private set => Set(value); }
+        public Document Document { get => Get<Document>(); private set => Set(value); }
 
-        public DataSourceInformation DataSourceInformation { get => Get<DataSourceInformation>(); private set => Set(value); }
+        public DataSource DataSource { get => Get<DataSource>(); private set => Set(value); }
 
         public T Content { get; set; }
 
@@ -33,8 +33,8 @@ namespace ReInvented.Domain.Reporting.Models
         private void Initialize()
         {
             ProjectInfo = new ProjectInfo();
-            DocumentInfo = new DocumentInfo();
-            DataSourceInformation = new DataSourceInformation();
+            Document = new Document();
+            DataSource = new DataSource();
         }
 
         #endregion

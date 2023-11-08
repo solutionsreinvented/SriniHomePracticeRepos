@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
@@ -16,11 +17,11 @@ using ReInvented.Shared.Stores;
 
 namespace ReInvented.Domain.Reporting.Models
 {
-    public class DocumentInfo : ErrorsEnabledPropertyStore
+    public class Document : ErrorsEnabledPropertyStore
     {
         #region Default Constructor
 
-        public DocumentInfo()
+        public Document()
         {
             Initialize();
         }
@@ -46,6 +47,21 @@ namespace ReInvented.Domain.Reporting.Models
             {
                 Set(value);
                 RaiseMultiplePropertiesChanged(nameof(LastRevisionSelected), nameof(HasARevisionSelected));
+                if (value != null)
+                {
+                    value.PropertyChanged -= OnSelectedRevisionPropertyChanged;
+                    value.PropertyChanged += OnSelectedRevisionPropertyChanged;
+                }
+            }
+        }
+
+        private void OnSelectedRevisionPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Revision revision = sender as Revision;
+
+            if (e.PropertyName == nameof(Revision.Code))
+            {
+                Revision.CoerceRevisionCode(revision, Revisions);
             }
         }
 
@@ -80,9 +96,9 @@ namespace ReInvented.Domain.Reporting.Models
 
         private void OnAddNewRevision()
         {
-            string currentRevisionCode = GetNextRevisionCode(Revisions);
+            char sequentialRevisionCode = Revision.GetSequentialRevisionCode(Revisions);
 
-            Revision revision = new Revision() { Code = currentRevisionCode };
+            Revision revision = new Revision() { Code = sequentialRevisionCode };
             Revisions.Add(revision);
             SelectedRevision = revision;
         }
@@ -116,35 +132,7 @@ namespace ReInvented.Domain.Reporting.Models
             }
         }
 
-        private string GetNextRevisionCode(IEnumerable<Revision> revisions)
-        {
-            string nextCode = "A";
 
-            if (revisions.ToList().Count > 0)
-            {
-                Revision lastRevision = revisions.Last();
-
-                // Determine the type of the last revision
-                bool isAlphabetical = Char.IsLetter(lastRevision.Code[0]);
-
-                // Increment the last revision based on its type
-                if (isAlphabetical)
-                {
-                    // If it's alphabetical, increment it to the next alphabet
-                    char nextAlphabet = (char)(lastRevision.Code[0] + 1);
-                    nextCode = nextAlphabet.ToString();
-                }
-                else
-                {
-                    // If it's numeric, increment the number by one
-                    int numericValue = int.Parse(lastRevision.Code);
-                    numericValue++;
-                    nextCode = numericValue.ToString();
-                }
-            }
-
-            return nextCode;
-        }
 
         #endregion
 

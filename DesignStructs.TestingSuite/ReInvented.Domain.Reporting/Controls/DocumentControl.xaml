@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="ReInvented.Domain.Reporting.Controls.DocumentInfoControl"
+    x:Class="ReInvented.Domain.Reporting.Controls.DocumentControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,7 +12,7 @@
 
     <GroupBox Padding="5" Header="Document Info">
 
-        <StackPanel DataContext="{Binding DocumentInfo}">
+        <StackPanel DataContext="{Binding Document}">
 
             <projectSetupControls:TextBoxInputControl
                 Grid.Row="0"
