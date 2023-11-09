@@ -4,9 +4,10 @@ using HtmlAgilityPack;
 
 using ReInvented.DataAccess.Services;
 using ReInvented.Domain.Reporting.Base;
-using ReInvented.Domain.Reporting.Extensions;
 using ReInvented.Domain.Reporting.Interfaces;
 using ReInvented.Domain.Reporting.Models;
+using ReInvented.Shared.Extensions;
+using ReInvented.Shared.Services;
 
 namespace ReInvented.Domain.Reporting.Services
 {
@@ -23,32 +24,12 @@ namespace ReInvented.Domain.Reporting.Services
 
         #region Abstract Methods Implementation
 
-        protected override void CreateReportHtmlFile()
+        protected override void SetFileNames()
         {
-            string htmlSourceFileFullPath = Path.Combine(FileServiceProvider.TemplatesDirectory, "Pages", ReportFileNames.HtmlMTO);
-            string htmlDestinationFileFullPath = Path.Combine(ProjectReportsDirectory.FullName, ReportFileNames.HtmlMTO);
-
-            HtmlDocument htmlDocument = new HtmlDocument();
-            htmlDocument.Load(htmlSourceFileFullPath);
-
-            ///TODO: Update the CssAndScripts linking
-            htmlDocument = htmlDocument.LinkCssAndScriptsTo(UseAbsolutePaths);
-
-            htmlDocument.Save(htmlDestinationFileFullPath);
-        }
-
-        protected override void CopyCssStyleFiles()
-        {
-            string sourceStylesDirectory = Path.Combine(FileServiceProvider.TemplatesDirectory, "Styles");
-            string destinationStylesDirectory = Path.Combine(ProjectReportsDirectory.FullName, "Styles");
-
-            if (!Directory.Exists(destinationStylesDirectory))
-            {
-                _ = Directory.CreateDirectory(destinationStylesDirectory);
-            }
-
-            File.Copy(Path.Combine(sourceStylesDirectory, ReportFileNames.CssCommon), Path.Combine(destinationStylesDirectory, ReportFileNames.CssCommon), true);
-            File.Copy(Path.Combine(sourceStylesDirectory, ReportFileNames.CssMTO), Path.Combine(destinationStylesDirectory, ReportFileNames.CssMTO), true);
+            ReportSpecificHtmlFileName = ReportFileNames.HtmlMTO;
+            ReportSpecificCssFileName = ReportFileNames.CssMTO;
+            ReportSpecificContentsFileName = ReportFileNames.ContentsMTO;
+            ReportSpecificJavaScriptFileName = ReportFileNames.JavaScriptMTO;
         }
 
         protected override void CopyJavaScriptFiles()
@@ -61,8 +42,22 @@ namespace ReInvented.Domain.Reporting.Services
                 _ = Directory.CreateDirectory(destinationScriptsDirectory);
             }
 
-            File.Copy(Path.Combine(sourceScriptsDirectory, ReportFileNames.JavaScriptMTO), Path.Combine(destinationScriptsDirectory, ReportFileNames.JavaScriptMTO), true);
-        } 
+            File.Copy(Path.Combine(sourceScriptsDirectory, ReportSpecificJavaScriptFileName), Path.Combine(destinationScriptsDirectory, ReportSpecificJavaScriptFileName), true);
+        }
+
+        protected override HtmlDocument AppendScriptTagsToBodyElement(HtmlDocument htmlDocument, bool useAbsolutePaths)
+        {
+            HtmlNode body = htmlDocument.GetBodyElementNode();
+
+            if (body != null)
+            {
+                _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes($"Data/{ReportSpecificContentsFileName}"));
+                _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes(ReportSpecificJavaScriptFileName, useAbsolutePaths));
+            }
+
+            return htmlDocument;
+        }
+
 
         #endregion
     }

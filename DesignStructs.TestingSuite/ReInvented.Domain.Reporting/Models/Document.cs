@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -90,7 +88,7 @@ namespace ReInvented.Domain.Reporting.Models
 
         private void OnSelectRevisionHistoryFile()
         {
-            FileFilter filter = new FileFilter("Revision History Files", FileExtensions.RevisionHistoryFile);
+            FileFilter filter = new FileFilter("Revision History Files", FileExtensions.RevisionHistory);
             RevisionHistoryFilePath = FileServiceProvider.GetFilePathUsingOpenFileDialog(filter);
         }
 
@@ -132,9 +130,6 @@ namespace ReInvented.Domain.Reporting.Models
             }
         }
 
-
-
         #endregion
-
     }
 }

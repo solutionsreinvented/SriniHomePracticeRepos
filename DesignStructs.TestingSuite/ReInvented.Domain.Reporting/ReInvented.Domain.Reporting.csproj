@@ -103,8 +103,6 @@
       <DependentUpon>RevisionsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Enums\SubmissionCategory.cs" />
-    <Compile Include="Extensions\CharExtensions.cs" />
-    <Compile Include="Extensions\HtmlDocumentExtensions.cs" />
     <Compile Include="Interfaces\IMtoTableRow.cs" />
     <Compile Include="Interfaces\IReport`.cs" />
     <Compile Include="Interfaces\IReportDocumentsGenerationService`.cs" />
@@ -120,7 +118,6 @@
     <Compile Include="Models\Revision.cs" />
     <Compile Include="Models\RevisionDescriptionItem.cs" />
     <Compile Include="Services\FDL\FoundationLoadDataService.cs" />
-    <Compile Include="Services\HtmlNodesService.cs" />
     <Compile Include="Services\ReportDocuments\FDLReportDocumentsGenerationService.cs" />
     <Compile Include="Services\MTO\MaterialTakeOffService.cs" />
     <Compile Include="Services\ReportDocuments\MTOReportDocumentsGenerationService.cs" />

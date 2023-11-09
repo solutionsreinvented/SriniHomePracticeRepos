@@ -8,8 +8,8 @@ using Newtonsoft.Json;
 
 using ReInvented.Domain.ProjectSetup.Models;
 using ReInvented.Domain.Reporting.Enums;
-using ReInvented.Domain.Reporting.Extensions;
 using ReInvented.Shared.Commands;
+using ReInvented.Shared.Extensions;
 using ReInvented.Shared.Stores;
 
 namespace ReInvented.Domain.Reporting.Models
@@ -57,11 +57,6 @@ namespace ReInvented.Domain.Reporting.Models
 
         #region Public Static Functions
 
-        public static Revision GetPenultimateRevision(IEnumerable<Revision> revisions)
-        {
-            return revisions == null || revisions.Count() < 2 ? null : revisions.ToList()[revisions.Count() - 2];
-        }
-
         public static char GetSequentialRevisionCode(IEnumerable<Revision> revisions)
         {
             return GetSequentialRevisionCode(revisions.LastOrDefault());
@@ -71,7 +66,7 @@ namespace ReInvented.Domain.Reporting.Models
         {
             IEnumerable<Revision> revisionsExceptLast = revisions.Take(revisions.Count() - 1);
 
-            Revision lastRevision = GetPenultimateRevision(revisions);
+            Revision lastRevision = revisions.PenultimateItem();
 
             if (lastRevision != null)
             {
@@ -110,12 +105,14 @@ namespace ReInvented.Domain.Reporting.Models
             {
                 if (revision.Code.IsDigit() && revision.Code != '0')
                 {
-
+                    revision.Code = '0';
+                }
+                if (revision.Code.IsLetter() && revision.Code != 'A')
+                {
+                    revision.Code = 'A';
                 }
             }
-
         }
-
 
         public static char GetSequentialRevisionCode(Revision lastRevision)
         {
