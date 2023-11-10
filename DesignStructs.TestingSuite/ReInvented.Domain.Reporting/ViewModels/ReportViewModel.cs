@@ -2,10 +2,13 @@
 using System.Windows;
 using System.Windows.Input;
 
+using Newtonsoft.Json;
+
 using ReInvented.Domain.Reporting.Interfaces;
 using ReInvented.Domain.Reporting.Models;
 using ReInvented.Shared.Commands;
 using ReInvented.Shared.Stores;
+using ReInvented.StaadPro.Interactivity.Extensions;
 using ReInvented.StaadPro.Interactivity.Models;
 
 namespace ReInvented.Domain.Reporting.ViewModels
@@ -19,8 +22,10 @@ namespace ReInvented.Domain.Reporting.ViewModels
     {
         #region Default Constructor
 
-        public ReportViewModel()
+        public ReportViewModel(StaadModelWrapper wrapper)
         {
+            Wrapper = wrapper;
+
             Initialize();
         }
 
@@ -28,9 +33,12 @@ namespace ReInvented.Domain.Reporting.ViewModels
 
         #region Public Properties
 
-        protected StaadModelWrapper Wrapper { get; private set; }
+        [JsonIgnore]
+        public StaadModelWrapper Wrapper { get; protected set; }
 
         public Report<T> Report { get; private set; }
+
+        public string Title { get => Get<string>(); protected set => Set(value); }
 
         #endregion
 
@@ -55,18 +63,31 @@ namespace ReInvented.Domain.Reporting.ViewModels
             {
                 IReportDocumentsGenerationService<T> documentsService = GetReportDocumentsGenerationService();
                 documentsService.Generate();
+
+                _ = MessageBox.Show("Report is succesfully generated!", "Report Documents Generation", MessageBoxButton.OK);
             }
             else
             {
-                _ = MessageBox.Show("It appears that the analysis results are not available. Make sure to run the analysis before generating foundation load data!", "Foundation Load Data", MessageBoxButton.OK);
+                _ = MessageBox.Show("It appears that the report content is not generated. Make sure to generate the report content before generating the documents!", "Report Documents Generation", MessageBoxButton.OK);
             }
         }
 
         #endregion
 
-        #region Abstract Methods
+        #region Virtual Methods
 
-        protected abstract void GenerateReportContent();
+        protected virtual void GenerateReportContent()
+        {
+            Report.DataSource.Engineer = Report.ProjectInfo.ScrutinyHistory.Originator.FullName;
+            Report.DataSource.PreparedOn = DateTime.Now.ToString("F");
+            Report.DataSource.ProjectCode = Report.ProjectInfo.Code;
+            Report.DataSource.ProjectName = Report.ProjectInfo.Name;
+            Report.DataSource.StaadFilename = Wrapper.StaadInstance.GetStaadFileNameOnly();
+        }
+
+        #endregion
+
+        #region Abstract Methods
 
         protected abstract IReportDocumentsGenerationService<T> GetReportDocumentsGenerationService();
 

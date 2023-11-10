@@ -9,8 +9,8 @@ using ReInvented.Domain.ProjectSetup.Interfaces;
 using ReInvented.Domain.Reporting.Models;
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Enums;
+using ReInvented.StaadPro.Interactivity.Extensions;
 using ReInvented.StaadPro.Interactivity.Models;
-using ReInvented.StaadPro.Interactivity.Services.Staad;
 
 namespace ReInvented.Domain.Reporting.Services
 {
@@ -24,7 +24,7 @@ namespace ReInvented.Domain.Reporting.Services
             OpenSTAAD instance = model.StaadWrapper.StaadInstance;
             OSOutputUI output = instance.Output;
 
-            HashSet<Node> nodes = StaadGeometryServices.GetAllNodes(instance.Geometry);
+            HashSet<Node> nodes = instance.Geometry.GetAllNodes();
             HashSet<EntityGroup> pcdSupportGroups = GetSupportEntityGroups(instance.Geometry);
             List<LoadCase> loadCases = GetPrimaryLoadCasesForLoadDataGeneration(instance.Load, reportLoadsIds);
 
@@ -123,7 +123,7 @@ namespace ReInvented.Domain.Reporting.Services
         {
             SupportLoads supportLoads = new SupportLoads() { Support = support, Loads = new HashSet<LoadCaseForces>() };
 
-            loadCases.ForEach(lc => supportLoads.Loads.Add(StaadOutputServices.RetrieveLoadCaseForces(output, support.Id, lc.Id)));
+            loadCases.ForEach(lc => supportLoads.Loads.Add(output.RetrieveLoadCaseForces(support.Id, lc.Id)));
 
             return supportLoads;
         }
@@ -134,7 +134,7 @@ namespace ReInvented.Domain.Reporting.Services
 
         private static HashSet<EntityGroup> GetSupportEntityGroups(OSGeometryUI geometry)
         {
-            HashSet<EntityGroup<Node>> supportEntityGroups = StaadGeometryServices.GetEntityGroupsOfType<Node>(geometry).Where(g => g.GroupName.Contains("_SUP_")).ToHashSet();
+            HashSet<EntityGroup<Node>> supportEntityGroups = geometry.GetEntityGroupsOfType<Node>().Where(g => g.GroupName.Contains("_SUP_")).ToHashSet();
 
             return EntityGroup<Node>.Transform(supportEntityGroups);
         }

@@ -38,6 +38,5 @@ namespace ReInvented.Domain.Reporting.Models
         }
 
         #endregion
-
     }
 }

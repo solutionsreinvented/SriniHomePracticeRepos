@@ -14,16 +14,37 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Button
+        <StackPanel
             Grid.Row="0"
-            Width="200"
-            Height="24"
-            Margin="0,5"
             HorizontalAlignment="Center"
-            Command="{Binding MoveToNextReportCommand}"
-            Content="Next Report" />
-        <reportingControls:ReportControl Grid.Row="1" DataContext="{Binding ReportViewModel}" />
+            Orientation="Horizontal">
+            <Button
+                Width="200"
+                Height="24"
+                Margin="5"
+                HorizontalAlignment="Center"
+                Command="{Binding CreateFDLReportCommand}"
+                Content="Foundation Load Data Report" />
+            <Button
+                Width="200"
+                Height="24"
+                Margin="5"
+                HorizontalAlignment="Center"
+                Command="{Binding CreateMTOReportCommand}"
+                Content="Material Take Off Report" />
+        </StackPanel>
+
+        <TextBlock
+            Grid.Row="1"
+            Margin="5,10"
+            HorizontalAlignment="Center"
+            FontSize="12"
+            FontWeight="DemiBold"
+            Text="{Binding ReportViewModel.Title}" />
+
+        <reportingControls:ReportControl Grid.Row="2" DataContext="{Binding ReportViewModel}" />
     </Grid>
 </Window>

@@ -112,6 +112,7 @@
     <Compile Include="Models\FDL\SupportsInformation.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\MTO\PlateMtoRow.cs" />
+    <Compile Include="Models\MTO\PlatesSummaryItem.cs" />
     <Compile Include="Models\MTO\SectionMtoRow.cs" />
     <Compile Include="Models\MTO\UnitsData.cs" />
     <Compile Include="Models\Report`.cs" />
@@ -183,7 +184,7 @@
     <Compile Include="Models\MTO\OverallSummary.cs" />
     <Compile Include="Models\MTO\OverallSummaryItem.cs" />
     <Compile Include="Models\MTO\PropertyWiseSummary.cs" />
-    <Compile Include="Models\MTO\PropertyWiseSummaryItem.cs" />
+    <Compile Include="Models\MTO\SectionsSummaryItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

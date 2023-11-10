@@ -6,8 +6,7 @@ using System.Windows.Media.Media3D;
 using OpenSTAADUI;
 
 using ReInvented.StaadPro.Interactivity.Entities;
-using ReInvented.StaadPro.Interactivity.Services;
-using ReInvented.StaadPro.Interactivity.Services.Staad;
+using ReInvented.StaadPro.Interactivity.Extensions;
 
 namespace ReInvented.Domain.Reporting.Services
 {
@@ -21,7 +20,7 @@ namespace ReInvented.Domain.Reporting.Services
 
             for (int i = 0; i < platesIds.Count; i++)
             {
-                IEnumerable<Node> plateIncidence = StaadGeometryServices.GetPlateIncidence(geometry, platesIds[i]);
+                IEnumerable<Node> plateIncidence = geometry.GetPlateIncidence(platesIds[i]);
                 totalSurfaceArea += Calculate(plateIncidence.ToList());
             }
 

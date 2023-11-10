@@ -41,7 +41,7 @@ namespace ReInvented.Domain.Reporting.Models
 
         public PropertyWiseSummary PropertyWiseSummary { get; set; }
 
-        public Contingencies Contingencies { get; set; } 
+        public Contingencies Contingencies { get; set; }
 
         #endregion
     }

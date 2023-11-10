@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.IO;
-using System.Windows;
 
 using HtmlAgilityPack;
 
@@ -33,31 +31,17 @@ namespace ReInvented.Domain.Reporting.Base
 
         public virtual void Generate()
         {
-            if (Report.ProjectInfo.ProjectDirectory == null || Report.ProjectInfo.Code == null)
+            ProjectReportsDirectory = Directory.CreateDirectory(Path.Combine(Report.ProjectInfo.ProjectDirectory, "Reports"));
+
+            CreateReportHtmlFile();
+
+            if (!UseAbsolutePaths)
             {
-                throw new ArgumentNullException($"{nameof(Report.ProjectInfo.ProjectDirectory)} or {nameof(Report.ProjectInfo.Code)} or both null.");
+                CopyCssStyleFiles();
+                CopyJavaScriptFiles();
             }
 
-            if (Report.Content != null)
-            {
-                bool useAbsolutePaths = true;
-
-                ProjectReportsDirectory = Directory.CreateDirectory(Path.Combine(Report.ProjectInfo.ProjectDirectory, "Reports"));
-
-                CreateReportHtmlFile();
-
-                if (!useAbsolutePaths)
-                {
-                    CopyCssStyleFiles();
-                    CopyJavaScriptFiles();
-                }
-
-                CreateReportContentsFile();
-            }
-            else
-            {
-                _ = MessageBox.Show("It appears that the report content is not generated. Make sure to generate the report content before generating the documents!", "Report Documents Generation", MessageBoxButton.OK);
-            }
+            CreateReportContentsFile();
         }
 
         #endregion

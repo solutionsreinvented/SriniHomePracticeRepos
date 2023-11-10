@@ -7,9 +7,8 @@ using OpenSTAADUI;
 using ReInvented.Domain.Reporting.Models;
 using ReInvented.Sections.Domain.Repositories;
 using ReInvented.StaadPro.Interactivity.Entities;
+using ReInvented.StaadPro.Interactivity.Extensions;
 using ReInvented.StaadPro.Interactivity.Models;
-using ReInvented.StaadPro.Interactivity.Services;
-using ReInvented.StaadPro.Interactivity.Services.Staad;
 
 namespace ReInvented.Domain.Reporting.Services
 {
@@ -22,16 +21,14 @@ namespace ReInvented.Domain.Reporting.Services
         {
             OpenSTAAD instance = wrapper.StaadInstance;
 
-            object staadFile = string.Empty;
+            string staadFile = instance.GetStaadFileFullPath();
 
-            instance.GetSTAADFile(ref staadFile, "TRUE");
-
-            if (!string.IsNullOrWhiteSpace((string)staadFile))
+            if (!string.IsNullOrWhiteSpace(staadFile))
             {
                 OSPropertyUI property = instance.Property;
                 OSGeometryUI geometry = instance.Geometry;
 
-                HashSet<Beam> beams = StaadGeometryServices.GetAllBeams(geometry);
+                HashSet<Beam> beams = geometry.GetAllBeams();
 
                 Dictionary<int, SectionMtoRow> propertiesTable = SegregateBeamsByPropertyIds(property, beams);
                 propertiesTable = FillSectionNames(property, propertiesTable);

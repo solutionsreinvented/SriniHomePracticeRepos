@@ -52,7 +52,6 @@ namespace ReInvented.Domain.Reporting.Models
         [JsonIgnore]
         public bool HasARevisionDescriptionSelected => SelectedRevisionDescriptionItem != null;
 
-
         #endregion
 
         #region Public Static Functions

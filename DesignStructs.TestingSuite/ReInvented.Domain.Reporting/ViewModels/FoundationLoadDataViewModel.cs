@@ -4,6 +4,7 @@ using System.Linq;
 using ReInvented.Domain.Reporting.Interfaces;
 using ReInvented.Domain.Reporting.Models;
 using ReInvented.Domain.Reporting.Services;
+using ReInvented.StaadPro.Interactivity.Models;
 
 namespace ReInvented.Domain.Reporting.ViewModels
 {
@@ -11,9 +12,9 @@ namespace ReInvented.Domain.Reporting.ViewModels
     {
         #region Default Constructor
 
-        public FoundationLoadDataViewModel()
+        public FoundationLoadDataViewModel(StaadModelWrapper wrapper) : base(wrapper)
         {
-
+            Title = "Report - Foundatio Load Data";
         }
 
         #endregion
@@ -22,6 +23,7 @@ namespace ReInvented.Domain.Reporting.ViewModels
 
         protected override void GenerateReportContent()
         {
+            base.GenerateReportContent();
             Report.Content = FoundationLoadDataService.Generate(Report.ProjectInfo, Enumerable.Range(601, 15));
         }
 
