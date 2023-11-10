@@ -3,11 +3,11 @@
 namespace ReInvented.Domain.Reporting.Controls
 {
     /// <summary>
-    /// Interaction logic for DocumentInfoControl.xaml
+    /// Interaction logic for ContingenciesControl.xaml
     /// </summary>
-    public partial class DocumentInfoControl : UserControl
+    public partial class ContingenciesControl : UserControl
     {
-        public DocumentInfoControl()
+        public ContingenciesControl()
         {
             InitializeComponent();
         }

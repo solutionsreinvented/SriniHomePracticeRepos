@@ -1,68 +1,35 @@
 ﻿using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using System.Windows;
 
-using ReInvented.DataAccess.Models;
-using ReInvented.DataAccess.Services;
+using ReInvented.Domain.Reporting.Interfaces;
 using ReInvented.Domain.Reporting.Models;
 using ReInvented.Domain.Reporting.Services;
+using ReInvented.StaadPro.Interactivity.Models;
 
 namespace ReInvented.Domain.Reporting.ViewModels
 {
-    public class FoundationLoadDataViewModel : ReportViewModel, INotifyPropertyChanged
+    public class FoundationLoadDataViewModel : ReportViewModel<FoundationLoadData>, INotifyPropertyChanged
     {
         #region Default Constructor
 
-        public FoundationLoadDataViewModel()
+        public FoundationLoadDataViewModel(StaadModelWrapper wrapper) : base(wrapper)
         {
-            
+            Title = "Report - Foundatio Load Data";
         }
 
         #endregion
 
-        #region Public Properties
+        #region Abstract Methods Implementation
 
-        public Report<FoundationLoadData> Report { get; private set; }
-
-        #endregion
-
-        #region Event Handlers
-
-        protected override void OnGenerateReport()
+        protected override void GenerateReportContent()
         {
-            base.OnGenerateReport();
-
-            FoundationLoadDataService service = new FoundationLoadDataService();
-            FoundationLoadData foundationLoadData = service.GenerateReportContent(ProjectInfo, Enumerable.Range(601, 15));
-
-            if (foundationLoadData != null)
-            {
-                bool useAbsolutePaths = true;
-
-                DirectoryInfo projectDirectory = Directory.CreateDirectory(Path.Combine(ProjectInfo.ProjectDirectory, ProjectInfo.Code));
-
-                FoundationLoadDataService.CreateReportHtmlFile(projectDirectory, useAbsolutePaths);
-
-                if (!useAbsolutePaths)
-                {
-                    FoundationLoadDataService.CopyCssStyleFiles(projectDirectory);
-                    FoundationLoadDataService.CopyJavaScriptFiles(projectDirectory);
-                }
-
-                FoundationLoadDataService.CreateReportContentsFile(projectDirectory, foundationLoadData);
-            }
-            else
-            {
-                _ = MessageBox.Show("It appears that the analysis results are not available. Make sure to run the analysis before generating foundation load data!", "Foundation Load Data", MessageBoxButton.OK);
-            }
+            base.GenerateReportContent();
+            Report.Content = FoundationLoadDataService.Generate(Report.ProjectInfo, Enumerable.Range(601, 15));
         }
 
-        protected override void OnSelectRevisionHistoryFile()
+        protected override IReportDocumentsGenerationService<FoundationLoadData> GetReportDocumentsGenerationService()
         {
-            FileFilter filter = new FileFilter("Revision History Files", FileExtensions.RevisionHistoryFile);
-
-            Report.DocumentInfo.RevisionHistoryFilePath = FileServiceProvider.GetFilePathUsingOpenFileDialog(filter);
+            return new FDLReportDocumentsGenerationService(Report, true);
         }
 
         #endregion

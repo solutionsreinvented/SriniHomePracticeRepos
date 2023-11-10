@@ -14,7 +14,7 @@ namespace ReInvented.Domain.Reporting
         {
             base.OnStartup(e);
 
-            MainWindow = new FoundationLoadDataView() { DataContext = new FoundationLoadDataViewModel() };
+            MainWindow = new HomeView() { DataContext = new HomeViewModel() };
             MainWindow.Show();
 
             ///string filePath = @"C:\Users\masanams\Desktop\Desktop\Code\foundation-load-data-content.js";

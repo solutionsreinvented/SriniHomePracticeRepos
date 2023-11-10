@@ -2,8 +2,8 @@
 
 namespace ReInvented.Domain.Reporting.Interfaces
 {
-    public interface IReportContent
+    public interface IReportDocumentsGenerationService<T>
     {
-        DataSourceInformation DataSourceInformation { get; set; }
+        void Generate();
     }
 }

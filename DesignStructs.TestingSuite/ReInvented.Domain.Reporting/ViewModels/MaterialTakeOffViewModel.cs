@@ -1,67 +1,34 @@
 ﻿using System.ComponentModel;
-using System.IO;
-using System.Windows;
 
-using ReInvented.DataAccess.Models;
-using ReInvented.DataAccess.Services;
+using ReInvented.Domain.Reporting.Interfaces;
 using ReInvented.Domain.Reporting.Models;
 using ReInvented.Domain.Reporting.Services;
+using ReInvented.StaadPro.Interactivity.Models;
 
 namespace ReInvented.Domain.Reporting.ViewModels
 {
-    public class MaterialTakeOffViewModel : ReportViewModel, INotifyPropertyChanged
+    public class MaterialTakeOffViewModel : ReportViewModel<MaterialTakeOff>, INotifyPropertyChanged
     {
         #region Default Constructor
 
-        public MaterialTakeOffViewModel()
+        public MaterialTakeOffViewModel(StaadModelWrapper wrapper) : base(wrapper)
         {
-            Report = new Report<MaterialTakeOff>();
+            Title = "Report - Material Take Off";
         }
 
         #endregion
 
-        #region Public Properties
+        #region Abstract Methods Implementation
 
-        public Report<MaterialTakeOff> Report { get; set; }
-
-        #endregion
-
-        #region Event Handlers
-
-        protected override void OnGenerateReport()
+        protected override void GenerateReportContent()
         {
-            base.OnGenerateReport();
-
-            MaterialTakeOff mto = MaterialTakeOffService.Generate(,)
-
-
-            if (foundationLoadData != null)
-            {
-                bool useAbsolutePaths = true;
-
-                DirectoryInfo projectDirectory = Directory.CreateDirectory(Path.Combine(ProjectInfo.ProjectDirectory, ProjectInfo.Code));
-
-                FoundationLoadDataService.CreateReportHtmlFile(projectDirectory, useAbsolutePaths);
-
-                if (!useAbsolutePaths)
-                {
-                    FoundationLoadDataService.CopyCssStyleFiles(projectDirectory);
-                    FoundationLoadDataService.CopyJavaScriptFiles(projectDirectory);
-                }
-
-                FoundationLoadDataService.CreateReportContentsFile(projectDirectory, foundationLoadData);
-            }
-            else
-            {
-                _ = MessageBox.Show("It appears that the analysis results are not available. Make sure to run the analysis before generating foundation load data!", "Foundation Load Data", MessageBoxButton.OK);
-            }
+            base.GenerateReportContent();
+            Report.Content = MaterialTakeOffService.Generate(Wrapper);
         }
 
-        protected override void OnSelectRevisionHistoryFile()
+        protected override IReportDocumentsGenerationService<MaterialTakeOff> GetReportDocumentsGenerationService()
         {
-            FileFilter filter = new FileFilter("Revision History Files", FileExtensions.RevisionHistoryFile);
-
-            Report.DocumentInfo.RevisionHistoryFilePath = FileServiceProvider.GetFilePathUsingOpenFileDialog(filter);
+            return new MTOReportDocumentsGenerationService(Report, true);
         }
 
         #endregion

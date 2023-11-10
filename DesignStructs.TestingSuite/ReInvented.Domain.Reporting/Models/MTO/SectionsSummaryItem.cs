@@ -2,11 +2,11 @@
 
 namespace ReInvented.Domain.Reporting.Models
 {
-    public sealed class PropertyWiseSummaryItem : SummaryItem
+    public sealed class SectionsSummaryItem : SummaryItem
     {
         #region Default Constructor
 
-        public PropertyWiseSummaryItem()
+        public SectionsSummaryItem()
         {
 
         }
@@ -15,9 +15,9 @@ namespace ReInvented.Domain.Reporting.Models
 
         #region Public Properties
 
-        public string ProfileOrThickness { get; set; }
+        public string Section { get; set; }
 
-        public double LengthOrArea { get; set; }
+        public double Length { get; set; }
 
         public string MaterialGrade { get; set; }
 

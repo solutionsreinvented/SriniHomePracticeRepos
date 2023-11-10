@@ -1,6 +1,6 @@
 ﻿namespace ReInvented.Domain.Reporting.Models
 {
-    public sealed class DataSourceInformation
+    public sealed class DataSource
     {
         public string StaadFilename { get; set; }
 

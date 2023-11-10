@@ -1,28 +1,30 @@
-﻿namespace ReInvented.Domain.Reporting.Services
+﻿using ReInvented.DataAccess.Services;
+
+namespace ReInvented.Domain.Reporting.Services
 {
     public class ReportFileNames
     {
-        public const string HtmlFoundationLoadData = "foundation-load-data.html";
+        public static string HtmlFoundationLoadData = $"{FileNames.FoundationLoadDataReport}.{FileExtensions.Html}";
 
-        public const string HtmlMTO = "mto.html";
+        public static string HtmlMTO = $"{FileNames.MtoReport}.{FileExtensions.Html}";
 
-        public const string CssCommon = "common.css";
+        public static string CssCommon = $"common.{FileExtensions.Css}";
 
-        public const string CssFoundationLoadData = "foundation-load-data.css";
+        public static string CssFoundationLoadData = $"{FileNames.FoundationLoadDataReport}.{FileExtensions.Css}";
 
-        public const string CssMTO = "mto.css";
+        public static string CssMTO = $"{FileNames.MtoReport}.{FileExtensions.Css}";
 
-        public const string JavaScriptCanvasGraphics = "canvas-graphics.js";
+        public static string JavaScriptCanvasGraphics = $"canvas-graphics.{FileExtensions.Javascript}";
  
-        public const string JavaScriptSupportLayoutHelpers = "support-layout-helpers.js";
+        public static string JavaScriptSupportLayoutHelpers = $"support-layout-helpers.{FileExtensions.Javascript}";
 
-        public const string JavaScriptFoundationLoadData = "foundation-load-data.js";
+        public static string JavaScriptFoundationLoadData = $"{FileNames.FoundationLoadDataReport}.{FileExtensions.Javascript}";
 
-        public const string JavaScriptMTO = "mto.js";
+        public static string JavaScriptMTO = $"{FileNames.MtoReport}.{FileExtensions.Javascript}";
 
-        public const string ContentsFoundationLoadData = "foundation-load-data-contents.js";
+        public static string ContentsFoundationLoadData = $"{FileNames.FoundationLoadDataReport}-contents.{FileExtensions.Javascript}";
 
-        public const string ContentsMTO = "mto-contents.js";
+        public static string ContentsMTO = $"{FileNames.MtoReport}-contents.{FileExtensions.Javascript}";
 
     }
 }

@@ -7,8 +7,8 @@ using OpenSTAADUI;
 using ReInvented.Domain.Reporting.Models;
 using ReInvented.Sections.Domain.Repositories;
 using ReInvented.StaadPro.Interactivity.Entities;
+using ReInvented.StaadPro.Interactivity.Extensions;
 using ReInvented.StaadPro.Interactivity.Models;
-using ReInvented.StaadPro.Interactivity.Services;
 
 namespace ReInvented.Domain.Reporting.Services
 {
@@ -18,16 +18,14 @@ namespace ReInvented.Domain.Reporting.Services
 
         public static Dictionary<int, PlateMtoRow> Generate(StaadModelWrapper wrapper)
         {
-            object staadFile = string.Empty;
+            string staadFile = wrapper.StaadInstance.GetStaadFileNameOnly();
 
-            wrapper.StaadInstance.GetSTAADFile(ref staadFile, "TRUE");
-
-            if (!string.IsNullOrWhiteSpace((string)staadFile))
+            if (!string.IsNullOrWhiteSpace(staadFile))
             {
                 OSPropertyUI property = wrapper.StaadInstance.Property;
                 OSGeometryUI geometry = wrapper.StaadInstance.Geometry;
 
-                HashSet<Plate> plates = StaadGeometryServices.GetAllPlates(geometry);
+                HashSet<Plate> plates = geometry.GetAllPlates();
 
                 Dictionary<int, PlateMtoRow> propertiesTable = SegregatePlatesByPropertyIds(property, plates);
                 propertiesTable = FillPlateThicknesses(property, propertiesTable);

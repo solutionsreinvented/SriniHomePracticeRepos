@@ -35,12 +35,12 @@ namespace SPro2023ConsoleApp
             Report<MaterialTakeOff> materialTakeOff = new Report<MaterialTakeOff>();
 
 
-            DataSourceInformation sourceInfo = new DataSourceInformation()
+            DataSource sourceInfo = new DataSource()
             {
                 PreparedOn = DateTime.Now.ToString("F")
             };
 
-            materialTakeOff.Content = MaterialTakeOffService.Generate(wrapper, sourceInfo);
+            materialTakeOff.Content = MaterialTakeOffService.Generate(wrapper);
 
             //MaterialTakeOff mto = MaterialTakeOffService.Generate(wrapper, sourceInfo);
 

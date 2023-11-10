@@ -9,7 +9,7 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <GroupBox Header="Revisions History">
+    <GroupBox Header="Revision History">
 
         <Grid>
 
@@ -38,27 +38,43 @@
                 Grid.Column="0"
                 Margin="5"
                 Padding="5,10"
-                BorderBrush="LightGray" />
+                BorderBrush="LightGray"
+                ItemsSource="{Binding Revisions}"
+                SelectedItem="{Binding SelectedRevision, UpdateSourceTrigger=PropertyChanged}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="2">
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Code}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
             <reportingControls:RevisionDetailControl
                 Grid.Row="0"
                 Grid.RowSpan="2"
                 Grid.Column="1"
-                Margin="5" />
+                Margin="5"
+                IsEnabled="{Binding HasARevisionSelected}" />
 
             <UniformGrid
                 Grid.Row="2"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Columns="2">
+
                 <Button
                     Height="24"
                     Margin="5"
-                    Content="Add Revision" />
+                    Command="{Binding AddNewRevisionCommand}"
+                    Content="Add New Revision" />
+
                 <Button
                     Height="24"
                     Margin="5"
-                    Content="Remove Revision" />
+                    Command="{Binding RemoveSelectedRevisionCommand}"
+                    Content="Remove Revision"
+                    IsEnabled="{Binding LastRevisionSelected}" />
             </UniformGrid>
 
         </Grid>
