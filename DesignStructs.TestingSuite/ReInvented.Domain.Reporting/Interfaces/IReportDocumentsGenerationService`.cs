@@ -1,8 +1,6 @@
-﻿using ReInvented.Domain.Reporting.Models;
-
-namespace ReInvented.Domain.Reporting.Interfaces
+﻿namespace ReInvented.Domain.Reporting.Interfaces
 {
-    public interface IReportDocumentsGenerationService<T>
+    public interface IReportDocumentsGenerationService
     {
         void Generate();
     }

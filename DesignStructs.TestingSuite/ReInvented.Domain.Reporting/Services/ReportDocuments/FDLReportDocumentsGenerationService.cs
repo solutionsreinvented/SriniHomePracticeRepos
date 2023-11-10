@@ -11,11 +11,11 @@ using ReInvented.Shared.Services;
 
 namespace ReInvented.Domain.Reporting.Services
 {
-    public class FDLReportDocumentsGenerationService : ReportDocumentsGenerationService<FoundationLoadData>, IReportDocumentsGenerationService<FoundationLoadData>
+    public class FDLReportDocumentsGenerationService : ReportDocumentsGenerationService, IReportDocumentsGenerationService
     {
         #region Parameterized Constructor
 
-        public FDLReportDocumentsGenerationService(Report<FoundationLoadData> report, bool useAbsolutePaths) : base(report, useAbsolutePaths)
+        public FDLReportDocumentsGenerationService(Report report, bool useAbsolutePaths) : base(report, useAbsolutePaths)
         {
 
         }

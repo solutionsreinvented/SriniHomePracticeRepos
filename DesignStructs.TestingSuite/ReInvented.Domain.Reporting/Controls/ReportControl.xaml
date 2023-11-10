@@ -51,7 +51,7 @@
         <TextBlock
             Grid.Row="2"
             Grid.Column="0"
-            DataContext="{Binding Report.Content}"
+            DataContext="{Binding Report.Content.Contingencies}"
             Text="{Binding}" />
 
         <Button

@@ -11,11 +11,11 @@ using ReInvented.Shared.Services;
 
 namespace ReInvented.Domain.Reporting.Services
 {
-    public class MTOReportDocumentsGenerationService : ReportDocumentsGenerationService<MaterialTakeOff>, IReportDocumentsGenerationService<MaterialTakeOff>
+    public class MTOReportDocumentsGenerationService : ReportDocumentsGenerationService, IReportDocumentsGenerationService
     {
         #region Parameterized Constructor
 
-        public MTOReportDocumentsGenerationService(Report<MaterialTakeOff> report, bool useAbsolutePaths) : base(report, useAbsolutePaths)
+        public MTOReportDocumentsGenerationService(Report report, bool useAbsolutePaths) : base(report, useAbsolutePaths)
         {
 
         }

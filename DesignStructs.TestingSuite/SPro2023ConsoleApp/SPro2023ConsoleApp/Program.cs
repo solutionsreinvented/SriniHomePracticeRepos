@@ -31,16 +31,11 @@ namespace SPro2023ConsoleApp
             StaadModel model = new StaadModel();
             StaadModelWrapper wrapper = model.StaadWrapper;
 
-            Report<FoundationLoadData> foundationLoadData = new Report<FoundationLoadData>();
-            Report<MaterialTakeOff> materialTakeOff = new Report<MaterialTakeOff>();
-
 
             DataSource sourceInfo = new DataSource()
             {
                 PreparedOn = DateTime.Now.ToString("F")
             };
-
-            materialTakeOff.Content = MaterialTakeOffService.Generate(wrapper);
 
             //MaterialTakeOff mto = MaterialTakeOffService.Generate(wrapper, sourceInfo);
 

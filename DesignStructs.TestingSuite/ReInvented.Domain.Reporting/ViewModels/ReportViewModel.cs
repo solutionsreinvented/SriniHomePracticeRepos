@@ -36,7 +36,7 @@ namespace ReInvented.Domain.Reporting.ViewModels
         [JsonIgnore]
         public StaadModelWrapper Wrapper { get; protected set; }
 
-        public Report<T> Report { get => Get<Report<T>>(); private set => Set(value); }
+        public Report Report { get => Get<Report>(); private set => Set(value); }
 
         public string Title { get => Get<string>(); protected set => Set(value); }
 
@@ -61,7 +61,7 @@ namespace ReInvented.Domain.Reporting.ViewModels
 
             if (Report.Content != null)
             {
-                IReportDocumentsGenerationService<T> documentsService = GetReportDocumentsGenerationService();
+                IReportDocumentsGenerationService documentsService = GetReportDocumentsGenerationService();
                 documentsService.Generate();
 
                 _ = MessageBox.Show("Report is succesfully generated!", "Report Documents Generation", MessageBoxButton.OK);
@@ -89,7 +89,7 @@ namespace ReInvented.Domain.Reporting.ViewModels
 
         #region Abstract Methods
 
-        protected abstract IReportDocumentsGenerationService<T> GetReportDocumentsGenerationService();
+        protected abstract IReportDocumentsGenerationService GetReportDocumentsGenerationService();
 
         #endregion
 
@@ -99,7 +99,7 @@ namespace ReInvented.Domain.Reporting.ViewModels
         {
             GenerateReportCommand = new RelayCommand(OnGenerateReport, true);
 
-            Report = new Report<T>();
+            Report = new Report();
         }
 
         #endregion

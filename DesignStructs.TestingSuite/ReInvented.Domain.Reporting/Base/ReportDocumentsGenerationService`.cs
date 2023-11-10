@@ -13,11 +13,11 @@ using ReInvented.Shared.Services;
 
 namespace ReInvented.Domain.Reporting.Base
 {
-    public abstract class ReportDocumentsGenerationService<T> : IReportDocumentsGenerationService<T>
+    public abstract class ReportDocumentsGenerationService : IReportDocumentsGenerationService
     {
         #region Parameterized Constructor
 
-        public ReportDocumentsGenerationService(Report<T> report, bool useAbsolutePaths)
+        public ReportDocumentsGenerationService(Report report, bool useAbsolutePaths)
         {
             Report = report;
             UseAbsolutePaths = useAbsolutePaths;
@@ -48,7 +48,7 @@ namespace ReInvented.Domain.Reporting.Base
 
         #region Protected Properties
 
-        protected Report<T> Report { get; set; }
+        protected Report Report { get; set; }
 
         protected DirectoryInfo ProjectReportsDirectory { get; set; }
 
@@ -105,11 +105,11 @@ namespace ReInvented.Domain.Reporting.Base
 
         protected virtual void CreateReportContentsFile()
         {
-            string dataFilename = typeof(T) == typeof(FoundationLoadData) ? ReportFileNames.ContentsFoundationLoadData : ReportFileNames.ContentsMTO;
+            string dataFilename = Report.Content.GetType() == typeof(FoundationLoadData) ? ReportFileNames.ContentsFoundationLoadData : ReportFileNames.ContentsMTO;
 
             DirectoryInfo dataDirectory = Directory.CreateDirectory(Path.Combine(ProjectReportsDirectory.FullName, "Data"));
 
-            JsonDataSerializer<Report<T>> serializer = new JsonDataSerializer<Report<T>>();
+            JsonDataSerializer<Report> serializer = new JsonDataSerializer<Report>();
             string seializedContent = "const ReportContent = " + serializer.Serialize(Report, JsonSerializerSettingsProvider.MinifiedSettings());
 
             File.WriteAllText(Path.Combine(dataDirectory.FullName, dataFilename), seializedContent);

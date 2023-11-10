@@ -2,7 +2,7 @@
 
 namespace ReInvented.Domain.Reporting.Models
 {
-    public sealed class FoundationLoadData
+    public sealed class FoundationLoadData : IReportContent
     {
         #region Default Constructor
 

@@ -8,7 +8,12 @@ using ReInvented.StaadPro.Interactivity.Entities;
 
 namespace ReInvented.Domain.Reporting.Models
 {
-    public sealed class MaterialTakeOff
+    public interface IReportContent
+    {
+
+    }
+
+    public sealed class MaterialTakeOff : IReportContent
     {
         #region Default Constructor
 

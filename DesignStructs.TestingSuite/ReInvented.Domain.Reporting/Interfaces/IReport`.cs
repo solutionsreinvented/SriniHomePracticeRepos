@@ -3,7 +3,7 @@ using ReInvented.Domain.Reporting.Models;
 
 namespace ReInvented.Domain.Reporting.Interfaces
 {
-    public interface IReport<T>
+    public interface IReport
     {
         IProjectInfo ProjectInfo { get; }
 
@@ -11,6 +11,6 @@ namespace ReInvented.Domain.Reporting.Interfaces
 
         DataSource DataSource { get; }
 
-        T Content { get; set; }
+        IReportContent Content { get; set; }
     }
 }

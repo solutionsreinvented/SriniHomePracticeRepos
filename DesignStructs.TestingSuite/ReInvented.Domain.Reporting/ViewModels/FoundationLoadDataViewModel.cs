@@ -27,7 +27,7 @@ namespace ReInvented.Domain.Reporting.ViewModels
             Report.Content = FoundationLoadDataService.Generate(Report.ProjectInfo, Enumerable.Range(601, 15));
         }
 
-        protected override IReportDocumentsGenerationService<FoundationLoadData> GetReportDocumentsGenerationService()
+        protected override IReportDocumentsGenerationService GetReportDocumentsGenerationService()
         {
             return new FDLReportDocumentsGenerationService(Report, true);
         }

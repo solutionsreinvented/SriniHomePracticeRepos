@@ -5,7 +5,7 @@ using ReInvented.Shared.Stores;
 
 namespace ReInvented.Domain.Reporting.Models
 {
-    public class Report<T> : ErrorsEnabledPropertyStore, IReport<T>
+    public class Report : ErrorsEnabledPropertyStore, IReport
     {
         #region Default Constructor
 
@@ -24,7 +24,7 @@ namespace ReInvented.Domain.Reporting.Models
 
         public DataSource DataSource { get => Get<DataSource>(); private set => Set(value); }
 
-        public T Content { get => Get<T>(); set => Set(value); }
+        public IReportContent Content { get => Get<IReportContent>(); set => Set(value); }
 
         #endregion
 

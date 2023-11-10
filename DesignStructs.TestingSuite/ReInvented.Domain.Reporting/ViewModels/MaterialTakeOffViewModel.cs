@@ -26,7 +26,7 @@ namespace ReInvented.Domain.Reporting.ViewModels
             Report.Content = MaterialTakeOffService.Generate(Wrapper);
         }
 
-        protected override IReportDocumentsGenerationService<MaterialTakeOff> GetReportDocumentsGenerationService()
+        protected override IReportDocumentsGenerationService GetReportDocumentsGenerationService()
         {
             return new MTOReportDocumentsGenerationService(Report, true);
         }
