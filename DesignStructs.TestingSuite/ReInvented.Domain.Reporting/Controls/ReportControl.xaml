@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:projectSetupControls="clr-namespace:ReInvented.Domain.ProjectSetup.Controls;assembly=ReInvented.Domain.ProjectSetup"
     xmlns:reportingControls="clr-namespace:ReInvented.Domain.Reporting.Controls"
     d:DesignHeight="750"
     d:DesignWidth="1200"
@@ -15,6 +16,8 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -25,7 +28,7 @@
 
         <!--#endregion-->
 
-        <reportingControls:ProjectSetupControl
+        <projectSetupControls:ProjectInfoControl
             Grid.Row="0"
             Grid.Column="0"
             DataContext="{Binding Report}" />
@@ -35,13 +38,24 @@
             DataContext="{Binding Report}" />
         <reportingControls:RevisionsControl
             Grid.Row="0"
-            Grid.RowSpan="2"
+            Grid.RowSpan="4"
             Grid.Column="1"
             Margin="5,0,0,0"
             DataContext="{Binding Report.Document}" />
 
-        <Button
+        <!--<reportingControls:ContingenciesControl
             Grid.Row="2"
+            Grid.Column="0"
+            DataContext="{Binding Report.Content}" />-->
+
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="0"
+            DataContext="{Binding Report.Content}"
+            Text="{Binding}" />
+
+        <Button
+            Grid.Row="4"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Height="24"

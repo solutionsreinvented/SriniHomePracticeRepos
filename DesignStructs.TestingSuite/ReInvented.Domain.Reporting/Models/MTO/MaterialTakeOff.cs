@@ -10,6 +10,15 @@ namespace ReInvented.Domain.Reporting.Models
 {
     public sealed class MaterialTakeOff
     {
+        #region Default Constructor
+
+        public MaterialTakeOff()
+        {
+            Contingencies = new Contingencies() { Connections = 0.12, Plates = 0.05, Sections = 0.12 };
+        }
+
+        #endregion
+
         #region Facilitating Properties
 
         [JsonIgnore]

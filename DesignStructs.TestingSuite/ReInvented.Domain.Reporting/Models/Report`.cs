@@ -24,7 +24,7 @@ namespace ReInvented.Domain.Reporting.Models
 
         public DataSource DataSource { get => Get<DataSource>(); private set => Set(value); }
 
-        public T Content { get; set; }
+        public T Content { get => Get<T>(); set => Set(value); }
 
         #endregion
 

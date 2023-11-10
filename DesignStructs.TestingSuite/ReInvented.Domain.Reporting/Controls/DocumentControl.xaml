@@ -15,20 +15,18 @@
         <StackPanel DataContext="{Binding Document}">
 
             <projectSetupControls:TextBoxInputControl
-                Grid.Row="0"
                 Margin="0,5"
                 Label="Document number:"
                 LabelColumnWidth="2*"
                 TextBoxColumnWidth="3.0*"
                 Value="{Binding Number}" />
             <projectSetupControls:TextBoxInputControl
-                Grid.Row="1"
                 Margin="0,0,0,5"
                 Label="Document title:"
                 LabelColumnWidth="2*"
                 TextBoxColumnWidth="3.0*"
                 Value="{Binding Title}" />
-            <Grid Grid.Row="2" Margin="0,0,5,5">
+            <Grid Margin="0,0,5,5">
                 <projectSetupControls:TextBoxInputControl
                     IsEnabled="False"
                     Label="Select revision history file:"

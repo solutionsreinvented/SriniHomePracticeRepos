@@ -36,7 +36,7 @@ namespace ReInvented.Domain.Reporting.ViewModels
         [JsonIgnore]
         public StaadModelWrapper Wrapper { get; protected set; }
 
-        public Report<T> Report { get; private set; }
+        public Report<T> Report { get => Get<Report<T>>(); private set => Set(value); }
 
         public string Title { get => Get<string>(); protected set => Set(value); }
 

@@ -84,6 +84,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Base\MtoTableRow.cs" />
+    <Compile Include="Controls\ContingenciesControl.xaml.cs">
+      <DependentUpon>ContingenciesControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DocumentControl.xaml.cs">
       <DependentUpon>DocumentControl.xaml</DependentUpon>
     </Compile>
@@ -132,6 +135,10 @@
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\ContingenciesControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\DocumentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
