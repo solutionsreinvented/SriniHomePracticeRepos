@@ -11,14 +11,14 @@ using ReInvented.Shared.Stores;
 using ReInvented.StaadPro.Interactivity.Extensions;
 using ReInvented.StaadPro.Interactivity.Models;
 
-namespace ReInvented.Domain.Reporting.ViewModels
+namespace ReInvented.Domain.Reporting.Base
 {
     public class BaseViewModel : ErrorsEnabledPropertyStore
     {
 
     }
 
-    public abstract class ReportViewModel<T> : BaseViewModel
+    public abstract class ReportViewModel : BaseViewModel
     {
         #region Default Constructor
 
@@ -36,7 +36,7 @@ namespace ReInvented.Domain.Reporting.ViewModels
         [JsonIgnore]
         public StaadModelWrapper Wrapper { get; protected set; }
 
-        public Report Report { get => Get<Report>(); private set => Set(value); }
+        public Report Report { get => Get<Report>(); protected set => Set(value); }
 
         public string Title { get => Get<string>(); protected set => Set(value); }
 
@@ -95,11 +95,9 @@ namespace ReInvented.Domain.Reporting.ViewModels
 
         #region Private Helpers
 
-        private void Initialize()
+        protected virtual void Initialize()
         {
             GenerateReportCommand = new RelayCommand(OnGenerateReport, true);
-
-            Report = new Report();
         }
 
         #endregion

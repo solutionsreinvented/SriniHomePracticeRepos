@@ -4,14 +4,11 @@ using System.Linq;
 
 using Newtonsoft.Json;
 
+using ReInvented.Domain.Reporting.Interfaces;
 using ReInvented.StaadPro.Interactivity.Entities;
 
 namespace ReInvented.Domain.Reporting.Models
 {
-    public interface IReportContent
-    {
-
-    }
 
     public sealed class MaterialTakeOff : IReportContent
     {
@@ -19,7 +16,7 @@ namespace ReInvented.Domain.Reporting.Models
 
         public MaterialTakeOff()
         {
-            Contingencies = new Contingencies() { Connections = 0.12, Plates = 0.05, Sections = 0.12 };
+            
         }
 
         #endregion
@@ -54,8 +51,6 @@ namespace ReInvented.Domain.Reporting.Models
         public OverallSummary OverallSummary { get; set; }
 
         public PropertyWiseSummary PropertyWiseSummary { get; set; }
-
-        public Contingencies Contingencies { get; set; }
 
         #endregion
     }

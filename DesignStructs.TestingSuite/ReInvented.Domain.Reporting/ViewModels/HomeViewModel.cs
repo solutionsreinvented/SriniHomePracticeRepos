@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 
+using ReInvented.Domain.Reporting.Base;
 using ReInvented.Shared.Commands;
 using ReInvented.Shared.Stores;
 using ReInvented.StaadPro.Interactivity.Models;
@@ -23,7 +24,7 @@ namespace ReInvented.Domain.Reporting.ViewModels
 
         public BaseViewModel ReportViewModel { get => Get<BaseViewModel>(); set => Set(value); }
 
-        public ICommand CreateFDLReportCommand { get; set; }
+        public ICommand CreateFLDReportCommand { get; set; }
 
         public ICommand CreateMTOReportCommand { get; set; }
 
@@ -31,18 +32,18 @@ namespace ReInvented.Domain.Reporting.ViewModels
 
         #region Command Handlers
 
-        private void OnCreateFDLReportCommand()
+        private void OnCreateFLDReportCommand()
         {
-            if (ReportViewModel.GetType() != typeof(FoundationLoadDataViewModel))
+            if (ReportViewModel.GetType() != typeof(FLDReportViewModel))
             {
-                ReportViewModel = new FoundationLoadDataViewModel(Wrapper);
+                ReportViewModel = new FLDReportViewModel(Wrapper);
             }
         }
         private void OnCreateMTOReportCommand()
         {
-            if (ReportViewModel.GetType() != typeof(MaterialTakeOffViewModel))
+            if (ReportViewModel.GetType() != typeof(MTOReportViewModel))
             {
-                ReportViewModel = new MaterialTakeOffViewModel(Wrapper);
+                ReportViewModel = new MTOReportViewModel(Wrapper);
             }
         }
 
@@ -55,9 +56,9 @@ namespace ReInvented.Domain.Reporting.ViewModels
             StaadModel model = new StaadModel();
             Wrapper = model.StaadWrapper;
 
-            ReportViewModel = new MaterialTakeOffViewModel(Wrapper);
+            ReportViewModel = new MTOReportViewModel(Wrapper);
 
-            CreateFDLReportCommand = new RelayCommand(OnCreateFDLReportCommand, true);
+            CreateFLDReportCommand = new RelayCommand(OnCreateFLDReportCommand, true);
             CreateMTOReportCommand = new RelayCommand(OnCreateMTOReportCommand, true);
         }
 

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using ReInvented.Domain.Reporting.Interfaces;
+
 namespace ReInvented.Domain.Reporting.Models
 {
     public sealed class FoundationLoadData : IReportContent

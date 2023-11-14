@@ -14,6 +14,31 @@ using ReInvented.StaadPro.Interactivity.Models;
 
 namespace ReInvented.Domain.Reporting.Services
 {
+    public static class OSOutputExtensionsLocal
+    {
+        public static HashSet<StaticCheckResult> GetStaticCheckResults(OSOutputUI output, HashSet<int> loadCaseIds)
+        {
+            HashSet<StaticCheckResult> staticCheckResults = new HashSet<StaticCheckResult>();
+
+            foreach (int lcId in loadCaseIds)
+            {
+                int loadCaseId = lcId;
+                object forces = new double[6];
+                object reactions = new double[6];
+                
+                var result = output.GetStaticCheckResult(loadCaseId, forces, reactions);
+
+                StaticCheckResult staticCheckResult = new StaticCheckResult(lcId) { Forces = Forces.ParseFromArray((double[])forces), Reactions = Forces.ParseFromArray((double[])reactions) };
+
+                _ = staticCheckResults.Add(staticCheckResult);
+            }
+
+            return staticCheckResults;
+        }
+
+    }
+
+
     public class FoundationLoadDataService
     {
         #region Public Functions
@@ -23,8 +48,10 @@ namespace ReInvented.Domain.Reporting.Services
             StaadModel model = new StaadModel();
             OpenSTAAD instance = model.StaadWrapper.StaadInstance;
             OSOutputUI output = instance.Output;
+            OSGeometryUI geometry = instance.Geometry;
+            HashSet<StaticCheckResult> staticsCheck = OSOutputExtensionsLocal.GetStaticCheckResults(output, reportLoadsIds.ToHashSet());
 
-            HashSet<Node> nodes = instance.Geometry.GetAllNodes();
+            HashSet<Node> nodes = geometry.GetAllNodes();
             HashSet<EntityGroup> pcdSupportGroups = GetSupportEntityGroups(instance.Geometry);
             List<LoadCase> loadCases = GetPrimaryLoadCasesForLoadDataGeneration(instance.Load, reportLoadsIds);
 
@@ -124,7 +151,7 @@ namespace ReInvented.Domain.Reporting.Services
             SupportLoads supportLoads = new SupportLoads() { Support = support, Loads = new HashSet<LoadCaseForces>() };
 
             loadCases.ForEach(lc => supportLoads.Loads.Add(output.RetrieveLoadCaseForces(support.Id, lc.Id)));
-
+            
             return supportLoads;
         }
 

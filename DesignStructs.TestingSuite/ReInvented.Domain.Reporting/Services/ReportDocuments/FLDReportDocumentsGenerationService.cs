@@ -5,17 +5,16 @@ using HtmlAgilityPack;
 using ReInvented.DataAccess.Services;
 using ReInvented.Domain.Reporting.Base;
 using ReInvented.Domain.Reporting.Interfaces;
-using ReInvented.Domain.Reporting.Models;
 using ReInvented.Shared.Extensions;
 using ReInvented.Shared.Services;
 
 namespace ReInvented.Domain.Reporting.Services
 {
-    public class FDLReportDocumentsGenerationService : ReportDocumentsGenerationService, IReportDocumentsGenerationService
+    public class FLDReportDocumentsGenerationService : ReportDocumentsGenerationService, IReportDocumentsGenerationService
     {
         #region Parameterized Constructor
 
-        public FDLReportDocumentsGenerationService(Report report, bool useAbsolutePaths) : base(report, useAbsolutePaths)
+        public FLDReportDocumentsGenerationService(Report report, bool useAbsolutePaths) : base(report, useAbsolutePaths)
         {
 
         }

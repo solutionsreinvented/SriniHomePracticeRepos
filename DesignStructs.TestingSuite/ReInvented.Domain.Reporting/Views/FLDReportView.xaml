@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="ReInvented.Domain.Reporting.Controls.ReportControl"
+    x:Class="ReInvented.Domain.Reporting.Views.FLDReportView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -43,11 +43,6 @@
             Margin="5,0,0,0"
             DataContext="{Binding Report.Document}" />
 
-        <reportingControls:ContingenciesControl
-            Grid.Row="2"
-            Grid.Column="0"
-            DataContext="{Binding Report}" />
-
         <Button
             Grid.Row="4"
             Grid.Column="0"
@@ -57,5 +52,4 @@
             Command="{Binding GenerateReportCommand}"
             Content="Generate Report" />
     </Grid>
-
 </UserControl>

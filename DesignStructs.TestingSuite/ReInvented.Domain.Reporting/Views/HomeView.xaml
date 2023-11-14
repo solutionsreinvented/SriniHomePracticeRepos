@@ -26,7 +26,7 @@
                 Height="24"
                 Margin="5"
                 HorizontalAlignment="Center"
-                Command="{Binding CreateFDLReportCommand}"
+                Command="{Binding CreateFLDReportCommand}"
                 Content="Foundation Load Data Report" />
             <Button
                 Width="200"
@@ -45,6 +45,7 @@
             FontWeight="DemiBold"
             Text="{Binding ReportViewModel.Title}" />
 
-        <reportingControls:ReportControl Grid.Row="2" DataContext="{Binding ReportViewModel}" />
+        <!--<reportingControls:ReportControl Grid.Row="2" DataContext="{Binding ReportViewModel}" />-->
+        <ContentControl Grid.Row="2" Content="{Binding ReportViewModel}" />
     </Grid>
 </Window>

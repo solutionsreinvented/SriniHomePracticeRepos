@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -126,7 +127,7 @@ namespace ReInvented.Domain.Reporting.Models
                 IDataSerializer<ObservableCollection<Revision>> serializer = SerializerFactory.GetSerializer<ObservableCollection<Revision>>();
                 Revisions = serializer.Deserialize(RevisionHistoryFilePath);
 
-                SelectedRevision = Revisions.FirstOrDefault();
+                SelectedRevision = Revisions?.FirstOrDefault();
             }
         }
 

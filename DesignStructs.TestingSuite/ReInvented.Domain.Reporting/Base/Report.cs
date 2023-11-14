@@ -1,9 +1,10 @@
 ﻿using ReInvented.Domain.ProjectSetup.Interfaces;
 using ReInvented.Domain.ProjectSetup.Models;
 using ReInvented.Domain.Reporting.Interfaces;
+using ReInvented.Domain.Reporting.Models;
 using ReInvented.Shared.Stores;
 
-namespace ReInvented.Domain.Reporting.Models
+namespace ReInvented.Domain.Reporting.Base
 {
     public class Report : ErrorsEnabledPropertyStore, IReport
     {
@@ -32,7 +33,7 @@ namespace ReInvented.Domain.Reporting.Models
 
         private void Initialize()
         {
-            ProjectInfo = new ProjectInfo();
+            ProjectInfo = new ProjectInfo() { ProjectDirectory = @"C:\Users\masanams\Desktop\Desktop\Code\Reports\23-4042" };
             Document = new Document();
             DataSource = new DataSource();
         }

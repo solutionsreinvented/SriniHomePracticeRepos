@@ -19,7 +19,7 @@ namespace ReInvented.Domain.Reporting.Services
     {
         #region Public Functions
 
-        public static MaterialTakeOff Generate(StaadModelWrapper wrapper)
+        public static MaterialTakeOff Generate(StaadModelWrapper wrapper, Contingencies contingencies)
         {
             OSGeometryUI geometry = wrapper.StaadInstance.Geometry;
 
@@ -41,7 +41,7 @@ namespace ReInvented.Domain.Reporting.Services
             mto.BeamEntityGroups.ToList().ForEach(g => g.MTODescription = EnumExtensions.ParseEnumFromGroupName<FeatureType>(g.GroupName).GetMTODescription());
             mto.PlateEntityGroups.ToList().ForEach(g => g.MTODescription = EnumExtensions.ParseEnumFromGroupName<FeatureType>(g.GroupName).GetMTODescription());
 
-            mto.PropertyWiseSummary = GeneratePropertyWiseSummary(mto);
+            mto.PropertyWiseSummary = GeneratePropertyWiseSummary(mto, contingencies);
 
             mto.OverallSummary = GenerateOverallSummary(mto.PropertyWiseSummary);
 
@@ -52,7 +52,7 @@ namespace ReInvented.Domain.Reporting.Services
 
         #region Private Functions - Main
 
-        private static PropertyWiseSummary GeneratePropertyWiseSummary(MaterialTakeOff mto)
+        private static PropertyWiseSummary GeneratePropertyWiseSummary(MaterialTakeOff mto, Contingencies contingencies)
         {
             PropertyWiseSummary propertyWiseSummary = new PropertyWiseSummary() { };
 
@@ -69,6 +69,9 @@ namespace ReInvented.Domain.Reporting.Services
             {
                 platesSummaryItems.AddRange(SegregatePlatesByDescription(item, mto.PlateEntityGroups.Where(g => g.MTODescription != "Unidentified"), platesSummaryItems.Count));
             }
+
+            sectionsSummaryItems.ToList().ForEach(i => i.Weight = i.Weight * (1 + contingencies.Sections) * (1 + contingencies.Connections));
+            platesSummaryItems.ToList().ForEach(i => i.Weight = i.Weight * (1 + contingencies.Plates));
 
             propertyWiseSummary.SectionsItems = sectionsSummaryItems.ToHashSet();
             propertyWiseSummary.PlatesItems = platesSummaryItems.ToHashSet();
@@ -152,10 +155,10 @@ namespace ReInvented.Domain.Reporting.Services
                     descriptionItemPairs.Add(mtoDescription, item);
                 }
 
-                item.Length += Math.Round(b.Length, 3);
-                item.Weight += Math.Round(row.SectionalArea * b.Length * row.MaterialGrade.Density / 1000, 3);
+                item.Length += b.Length;
+                item.Weight += row.SectionalArea * b.Length * row.MaterialGrade.Density / 1000;
             }
-
+            
             return descriptionItemPairs.Values.ToHashSet();
         }
 
@@ -167,7 +170,18 @@ namespace ReInvented.Domain.Reporting.Services
             {
                 EntityGroup<Plate> matchedGroup = plateEntityGroups.FirstOrDefault(g => g.Entities.Contains(p));
 
-                string mtoDescription = matchedGroup.MTODescription;
+                string mtoDescription = string.Empty;
+
+                if (matchedGroup.GroupName.ToUpper().Contains("PCD"))
+                {
+                    string pcd = GetPcdFromGroupName(matchedGroup.GroupName);
+                    mtoDescription = $"{matchedGroup.MTODescription} ({pcd})";
+                }
+                else
+                {
+                    mtoDescription = matchedGroup.MTODescription;
+                }
+
                 string assemblyGroup = EnumExtensions.ParseEnumFromGroupName<FeatureType>(matchedGroup.GroupName).GetAssemblyGroup();
 
                 if (!descriptionItemPairs.TryGetValue(mtoDescription, out PlatesSummaryItem item))
@@ -176,8 +190,8 @@ namespace ReInvented.Domain.Reporting.Services
                     descriptionItemPairs.Add(mtoDescription, item);
                 }
 
-                item.Area += Math.Round(p.Area, 3);
-                item.Weight += Math.Round(row.Thickness * p.Area * row.MaterialGrade.Density / 1000, 3);
+                item.Area += p.Area;
+                item.Weight += row.Thickness * p.Area * row.MaterialGrade.Density / 1000;
             }
 
             return descriptionItemPairs.Values.ToHashSet();

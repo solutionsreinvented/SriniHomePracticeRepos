@@ -107,33 +107,42 @@
     </Compile>
     <Compile Include="Enums\SubmissionCategory.cs" />
     <Compile Include="Interfaces\IMtoTableRow.cs" />
-    <Compile Include="Interfaces\IReport`.cs" />
-    <Compile Include="Interfaces\IReportDocumentsGenerationService`.cs" />
+    <Compile Include="Interfaces\IReport.cs" />
+    <Compile Include="Interfaces\IReportDocumentsGenerationService.cs" />
+    <Compile Include="Models\FDL\FLDReport.cs" />
     <Compile Include="Models\FDL\FoundationLoadData.cs" />
     <Compile Include="Models\FDL\PCDLoads.cs" />
     <Compile Include="Models\FDL\SupportLoads.cs" />
     <Compile Include="Models\FDL\SupportsInformation.cs" />
     <Compile Include="Models\Document.cs" />
+    <Compile Include="Interfaces\IReportContent.cs" />
+    <Compile Include="Models\MTO\MTOReport.cs" />
     <Compile Include="Models\MTO\PlateMtoRow.cs" />
     <Compile Include="Models\MTO\PlatesSummaryItem.cs" />
     <Compile Include="Models\MTO\SectionMtoRow.cs" />
     <Compile Include="Models\MTO\UnitsData.cs" />
-    <Compile Include="Models\Report`.cs" />
+    <Compile Include="Base\Report.cs" />
     <Compile Include="Models\Revision.cs" />
     <Compile Include="Models\RevisionDescriptionItem.cs" />
-    <Compile Include="Services\FDL\FoundationLoadDataService.cs" />
-    <Compile Include="Services\ReportDocuments\FDLReportDocumentsGenerationService.cs" />
+    <Compile Include="Services\FLD\FoundationLoadDataService.cs" />
+    <Compile Include="Services\ReportDocuments\FLDReportDocumentsGenerationService.cs" />
     <Compile Include="Services\MTO\MaterialTakeOffService.cs" />
     <Compile Include="Services\ReportDocuments\MTOReportDocumentsGenerationService.cs" />
     <Compile Include="Services\MTO\PlatesTakeOffService.cs" />
     <Compile Include="Services\MTO\PlateSurfaceAreaService.cs" />
-    <Compile Include="Base\ReportDocumentsGenerationService`.cs" />
+    <Compile Include="Base\ReportDocumentsGenerationService.cs" />
     <Compile Include="Services\MTO\SectionsTakeOffService.cs" />
     <Compile Include="Services\ReportFileNames.cs" />
-    <Compile Include="Services\FDL\SupportLoadsSummaryService.cs" />
-    <Compile Include="ViewModels\FoundationLoadDataViewModel.cs" />
+    <Compile Include="Services\FLD\SupportLoadsSummaryService.cs" />
+    <Compile Include="ViewModels\FLDReportViewModel.cs" />
+    <Compile Include="Views\FLDReportView.xaml.cs">
+      <DependentUpon>FLDReportView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MTOReportView.xaml.cs">
+      <DependentUpon>MTOReportView.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\ContingenciesControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -163,6 +172,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\DataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\ReInvented.Domain.Reporting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -176,9 +189,17 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModels\HomeViewModel.cs" />
-    <Compile Include="ViewModels\MaterialTakeOffViewModel.cs" />
-    <Compile Include="ViewModels\ReportViewModel.cs" />
+    <Compile Include="ViewModels\MTOReportViewModel.cs" />
+    <Compile Include="Base\ReportViewModel.cs" />
+    <Page Include="Views\FLDReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MTOReportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Linq;
 
+using ReInvented.Domain.Reporting.Base;
 using ReInvented.Domain.Reporting.Interfaces;
 using ReInvented.Domain.Reporting.Models;
 using ReInvented.Domain.Reporting.Services;
@@ -8,13 +9,13 @@ using ReInvented.StaadPro.Interactivity.Models;
 
 namespace ReInvented.Domain.Reporting.ViewModels
 {
-    public class FoundationLoadDataViewModel : ReportViewModel<FoundationLoadData>, INotifyPropertyChanged
+    public class FLDReportViewModel : ReportViewModel, INotifyPropertyChanged
     {
         #region Default Constructor
 
-        public FoundationLoadDataViewModel(StaadModelWrapper wrapper) : base(wrapper)
+        public FLDReportViewModel(StaadModelWrapper wrapper) : base(wrapper)
         {
-            Title = "Report - Foundatio Load Data";
+            Title = "Report - Foundation Load Data";
         }
 
         #endregion
@@ -29,7 +30,13 @@ namespace ReInvented.Domain.Reporting.ViewModels
 
         protected override IReportDocumentsGenerationService GetReportDocumentsGenerationService()
         {
-            return new FDLReportDocumentsGenerationService(Report, true);
+            return new FLDReportDocumentsGenerationService(Report, true);
+        }
+
+        protected override void Initialize()
+        {
+            base.Initialize();
+            Report = new FLDReport();
         }
 
         #endregion
