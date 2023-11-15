@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
+
 
 using Newtonsoft.Json;
 
@@ -11,7 +12,9 @@ using ReInvented.DataAccess.Factories;
 using ReInvented.DataAccess.Interfaces;
 using ReInvented.DataAccess.Models;
 using ReInvented.DataAccess.Services;
+using ReInvented.Domain.ProjectSetup.Models;
 using ReInvented.Shared.Commands;
+using ReInvented.Shared.Services;
 using ReInvented.Shared.Stores;
 
 namespace ReInvented.Domain.Reporting.Models
@@ -118,6 +121,9 @@ namespace ReInvented.Domain.Reporting.Models
             SelectRevisionHistoryFileCommand = new RelayCommand(OnSelectRevisionHistoryFile, true);
             AddNewRevisionCommand = new RelayCommand(OnAddNewRevision, true);
             RemoveSelectedRevisionCommand = new RelayCommand(OnRemoveSelectedRevision, true);
+
+            /// Initialize with a new revision and replace with revisions from file if selected
+            InitializeRevision();
         }
 
         private void RetrieveOrGenerateRevisionHistory()
@@ -129,6 +135,29 @@ namespace ReInvented.Domain.Reporting.Models
 
                 SelectedRevision = Revisions?.FirstOrDefault();
             }
+        }
+
+        private void InitializeRevision()
+        {
+            Revisions.Clear();
+            OnAddNewRevision();
+
+            string userInitial = PlatformServices.GetInitialOfCurrentUser();
+            string userFullname = PlatformServices.GetCurrentUserFullNameInTitleCase();
+
+            Revision recentRevision = Revisions.LastOrDefault();
+            ScrutinyHistory scrutinyHistory = recentRevision.ScrutinyHistory;
+
+            scrutinyHistory.Originator.ShortName = userInitial;
+            scrutinyHistory.Reviewer.ShortName = userInitial;
+            scrutinyHistory.Approver.ShortName = userInitial;
+
+            scrutinyHistory.Originator.FullName = userFullname;
+            scrutinyHistory.Reviewer.FullName = userFullname;
+            scrutinyHistory.Approver.FullName = userFullname;
+
+            recentRevision.RevisionDescriptionItems.Clear();
+            recentRevision.RevisionDescriptionItems.Add(new RevisionDescriptionItem() { Section = "-", Description = "Issued for Approval" });
         }
 
         #endregion

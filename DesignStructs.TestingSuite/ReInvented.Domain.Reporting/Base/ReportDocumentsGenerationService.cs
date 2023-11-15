@@ -42,6 +42,19 @@ namespace ReInvented.Domain.Reporting.Base
             }
 
             CreateReportContentsFile();
+            CreateDocumentFile();
+        }
+
+        private void CreateDocumentFile()
+        {
+            if (string.IsNullOrWhiteSpace(Report.Document.RevisionHistoryFilePath))
+            {
+                Report.Document.RevisionHistoryFilePath = Path.Combine(Report.ProjectInfo.ProjectDirectory, $"{Report.Document.Number}.{FileExtensions.RevisionHistory}");
+            }
+
+            JsonDataSerializer<Document> serializer = new JsonDataSerializer<Document>();
+            string serialized = "const DocumentData = " + serializer.Serialize(Report.Document);
+            File.WriteAllText(Report.Document.RevisionHistoryFilePath, serialized);
         }
 
         #endregion

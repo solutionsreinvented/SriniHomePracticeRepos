@@ -1,7 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using HtmlAgilityPack;
+
+using Newtonsoft.Json;
 
 using OpenSTAADUI;
 
+using ReInvented.DataAccess;
+using ReInvented.DataAccess.Services;
 using ReInvented.Domain.ProjectSetup.Interfaces;
 using ReInvented.Domain.ProjectSetup.Models;
 using ReInvented.Domain.Reporting.Interfaces;
@@ -62,6 +66,8 @@ namespace SPro2023ConsoleApp
             WindowServices.HideWindow(staadWindowHandle);
             WindowServices.MaximizeWindow(staadWindowHandle);
         }
+
+
 
         private static async Task Previous()
         {

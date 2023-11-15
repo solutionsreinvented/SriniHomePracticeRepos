@@ -24,9 +24,9 @@ namespace ReInvented.Domain.Reporting.ViewModels
 
         public BaseViewModel ReportViewModel { get => Get<BaseViewModel>(); set => Set(value); }
 
-        public ICommand CreateFLDReportCommand { get; set; }
+        public ICommand CreateFLDReportCommand { get; private set; }
 
-        public ICommand CreateMTOReportCommand { get; set; }
+        public ICommand CreateMTOReportCommand { get; private set; }
 
         #endregion
 

@@ -85,6 +85,7 @@
                     Text="Detailed description of the revision:" />
                 <TextBox
                     Grid.Row="3"
+                    Height="Auto"
                     Padding="5,2"
                     VerticalAlignment="Stretch"
                     VerticalContentAlignment="Stretch"

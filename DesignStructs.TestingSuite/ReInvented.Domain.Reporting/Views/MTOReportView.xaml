@@ -32,10 +32,12 @@
             Grid.Row="0"
             Grid.Column="0"
             DataContext="{Binding Report}" />
+
         <reportingControls:DocumentControl
             Grid.Row="1"
             Grid.Column="0"
             DataContext="{Binding Report}" />
+
         <reportingControls:RevisionsControl
             Grid.Row="0"
             Grid.RowSpan="4"

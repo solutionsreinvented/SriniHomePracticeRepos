@@ -22,11 +22,10 @@ namespace ReInvented.Domain.Reporting.Services
 
             foreach (int lcId in loadCaseIds)
             {
-                int loadCaseId = lcId;
                 object forces = new double[6];
                 object reactions = new double[6];
                 
-                var result = output.GetStaticCheckResult(loadCaseId, forces, reactions);
+                bool result = output.GetStaticCheckResult(lcId, forces, reactions);
 
                 StaticCheckResult staticCheckResult = new StaticCheckResult(lcId) { Forces = Forces.ParseFromArray((double[])forces), Reactions = Forces.ParseFromArray((double[])reactions) };
 
