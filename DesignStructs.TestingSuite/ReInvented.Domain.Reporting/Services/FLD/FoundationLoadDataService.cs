@@ -42,7 +42,7 @@ namespace ReInvented.Domain.Reporting.Services
     {
         #region Public Functions
 
-        public static FoundationLoadData Generate(IProjectInfo projectInfo, IEnumerable<int> reportLoadsIds)
+        public static FoundationLoadData Generate(IProjectData projectData, IEnumerable<int> reportLoadsIds)
         {
             StaadModel model = new StaadModel();
             OpenSTAAD instance = model.StaadWrapper.StaadInstance;
@@ -54,12 +54,12 @@ namespace ReInvented.Domain.Reporting.Services
             HashSet<EntityGroup> pcdSupportGroups = GetSupportEntityGroups(instance.Geometry);
             List<LoadCase> loadCases = GetPrimaryLoadCasesForLoadDataGeneration(instance.Load, reportLoadsIds);
 
-            FoundationLoadData foundationLoadData = GenerateFoundationLoadData(output, pcdSupportGroups, nodes, loadCases, projectInfo, model.ModelName);
+            FoundationLoadData foundationLoadData = GenerateFoundationLoadData(output, pcdSupportGroups, nodes, loadCases, projectData, model.ModelName);
 
             return foundationLoadData;
         }
 
-        public static FoundationLoadData Generate(StaadModel model, IProjectInfo projectInfo, IEnumerable<int> reportLoadsIds)
+        public static FoundationLoadData Generate(StaadModel model, IProjectData projectData, IEnumerable<int> reportLoadsIds)
         {
             OpenSTAAD openStaad = model.StaadWrapper.StaadInstance;
             OSOutputUI output = openStaad.Output;
@@ -67,7 +67,7 @@ namespace ReInvented.Domain.Reporting.Services
             HashSet<EntityGroup> pcdSupportGroups = model.EntityGroups.Where(g => g.GroupName.Contains("_SUP_") && g.EntityType == EntityType.Nodes).ToHashSet();
             List<LoadCase> loadCases = model.PrimaryLoads.Where(pl => reportLoadsIds.Contains(pl.Id)).OrderBy(lc => lc.Id).ToList();
 
-            FoundationLoadData foundationLoadData = GenerateFoundationLoadData(output, pcdSupportGroups, model.Nodes, loadCases, projectInfo, model.FileName);
+            FoundationLoadData foundationLoadData = GenerateFoundationLoadData(output, pcdSupportGroups, model.Nodes, loadCases, projectData, model.FileName);
 
             return foundationLoadData;
         }
@@ -77,7 +77,7 @@ namespace ReInvented.Domain.Reporting.Services
         #region Private Helpers
 
         private static FoundationLoadData GenerateFoundationLoadData(OSOutputUI output, HashSet<EntityGroup> pcdSupportGroups, HashSet<Node> nodes,
-                                                                     List<LoadCase> loadCases, IProjectInfo projectInfo, string staadFilename)
+                                                                     List<LoadCase> loadCases, IProjectData projectData, string staadFilename)
         {
             if (!output.AreResultsAvailable())
             {

@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
@@ -93,7 +92,7 @@ namespace ReInvented.Domain.Reporting.Models
         private void OnSelectRevisionHistoryFile()
         {
             FileFilter filter = new FileFilter("Revision History Files", FileExtensions.RevisionHistory);
-            RevisionHistoryFilePath = FileServiceProvider.GetFilePathUsingOpenFileDialog(filter);
+            RevisionHistoryFilePath = FileServiceProvider.GetFilePathUsingOpenFileDialog(filter, RevisionHistoryFilePath);
         }
 
         private void OnAddNewRevision()
@@ -133,7 +132,7 @@ namespace ReInvented.Domain.Reporting.Models
                 IDataSerializer<ObservableCollection<Revision>> serializer = SerializerFactory.GetSerializer<ObservableCollection<Revision>>();
                 Revisions = serializer.Deserialize(RevisionHistoryFilePath);
 
-                SelectedRevision = Revisions?.FirstOrDefault();
+                SelectedRevision = Revisions?.LastOrDefault();
             }
         }
 
@@ -157,7 +156,7 @@ namespace ReInvented.Domain.Reporting.Models
             scrutinyHistory.Approver.FullName = userFullname;
 
             recentRevision.RevisionDescriptionItems.Clear();
-            recentRevision.RevisionDescriptionItems.Add(new RevisionDescriptionItem() { Section = "-", Description = "Issued for Approval" });
+            recentRevision.RevisionDescriptionItems.Add(new RevisionDescriptionItem() { Section = "-", Description = "Issued for Approval"});
         }
 
         #endregion

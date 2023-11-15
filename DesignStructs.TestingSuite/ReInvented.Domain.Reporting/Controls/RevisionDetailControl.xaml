@@ -28,7 +28,7 @@
         <GroupBox
             Grid.Row="0"
             Padding="10,5"
-            DataContext="{Binding SelectedRevision}"
+            DataContext="{Binding SelectedRevision, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Header="Revision">
 
             <Grid Height="24">

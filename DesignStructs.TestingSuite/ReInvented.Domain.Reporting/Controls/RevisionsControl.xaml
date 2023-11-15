@@ -40,7 +40,7 @@
                 Padding="5,10"
                 BorderBrush="LightGray"
                 ItemsSource="{Binding Revisions}"
-                SelectedItem="{Binding SelectedRevision, UpdateSourceTrigger=PropertyChanged}">
+                SelectedValue="{Binding SelectedRevision, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="2">

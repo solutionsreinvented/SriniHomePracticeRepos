@@ -5,7 +5,7 @@ namespace ReInvented.Domain.Reporting.Interfaces
 {
     public interface IReport
     {
-        IProjectInfo ProjectInfo { get; }
+        IProjectData ProjectData { get; }
 
         Document Document { get; }
 

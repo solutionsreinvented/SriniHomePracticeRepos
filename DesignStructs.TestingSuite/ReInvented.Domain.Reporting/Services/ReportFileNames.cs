@@ -22,6 +22,8 @@ namespace ReInvented.Domain.Reporting.Services
 
         public static string JavaScriptMTO = $"{FileNames.MtoReport}.{FileExtensions.Javascript}";
 
+        public static string JavaScriptDocumentDataProcessor = $"{FileNames.DocumentDataProcessor}.{FileExtensions.Javascript}";
+
         public static string ContentsFoundationLoadData = $"{FileNames.FoundationLoadDataReport}-contents.{FileExtensions.Javascript}";
 
         public static string ContentsMTO = $"{FileNames.MtoReport}-contents.{FileExtensions.Javascript}";

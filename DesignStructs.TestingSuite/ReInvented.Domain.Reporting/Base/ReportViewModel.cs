@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -7,6 +8,7 @@ using Newtonsoft.Json;
 using ReInvented.Domain.Reporting.Interfaces;
 using ReInvented.Domain.Reporting.Models;
 using ReInvented.Shared.Commands;
+using ReInvented.Shared.Services;
 using ReInvented.Shared.Stores;
 using ReInvented.StaadPro.Interactivity.Extensions;
 using ReInvented.StaadPro.Interactivity.Models;
@@ -52,9 +54,9 @@ namespace ReInvented.Domain.Reporting.Base
 
         private void OnGenerateReport()
         {
-            if (Report.ProjectInfo.ProjectDirectory == null || Report.ProjectInfo.Code == null)
+            if (Report.ProjectData.ProjectDirectory == null || Report.ProjectData.Code == null)
             {
-                throw new ArgumentNullException($"{nameof(Report.ProjectInfo.ProjectDirectory)} or {nameof(Report.ProjectInfo.Code)} or both null.");
+                throw new ArgumentNullException($"{nameof(Report.ProjectData.ProjectDirectory)} or {nameof(Report.ProjectData.Code)} or both null.");
             }
 
             GenerateReportContent();
@@ -78,10 +80,12 @@ namespace ReInvented.Domain.Reporting.Base
 
         protected virtual void GenerateReportContent()
         {
-            Report.DataSource.Engineer = Report.ProjectInfo.ScrutinyHistory.Originator.FullName;
+            Revision lastRevision = Report.Document.Revisions.LastOrDefault();
+
+            Report.DataSource.Engineer = lastRevision.ScrutinyHistory.Originator.FullName;
             Report.DataSource.PreparedOn = DateTime.Now.ToString("F");
-            Report.DataSource.ProjectCode = Report.ProjectInfo.Code;
-            Report.DataSource.ProjectName = Report.ProjectInfo.Name;
+            Report.DataSource.ProjectCode = Report.ProjectData.Code;
+            Report.DataSource.ProjectName = Report.ProjectData.Name;
             Report.DataSource.StaadFilename = Wrapper.StaadInstance.GetStaadFileNameOnly();
         }
 

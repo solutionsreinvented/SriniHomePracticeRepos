@@ -111,7 +111,7 @@
     <Compile Include="Enums\SubmissionCategory.cs" />
     <Compile Include="Interfaces\IMtoTableRow.cs" />
     <Compile Include="Interfaces\IReport.cs" />
-    <Compile Include="Interfaces\IDocumentsGenerationService.cs" />
+    <Compile Include="Interfaces\IReportDocumentsGenerationService.cs" />
     <Compile Include="Models\FDL\FLDReport.cs" />
     <Compile Include="Models\FDL\FoundationLoadData.cs" />
     <Compile Include="Models\FDL\PCDLoads.cs" />

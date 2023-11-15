@@ -10,6 +10,7 @@ using ReInvented.Domain.ProjectSetup.Models;
 using ReInvented.Domain.Reporting.Enums;
 using ReInvented.Shared.Commands;
 using ReInvented.Shared.Extensions;
+using ReInvented.Shared.JsonConverters;
 using ReInvented.Shared.Stores;
 
 namespace ReInvented.Domain.Reporting.Models
@@ -29,10 +30,11 @@ namespace ReInvented.Domain.Reporting.Models
 
         public char Code { get => Get<char>(); set => Set(value); }
 
-        public DateTime Date { get => Get<DateTime>(); set => Set(value); }
+        //public DateTime Date { get => Get<DateTime>(); set => Set(value); }
 
         public ScrutinyHistory ScrutinyHistory { get => Get<ScrutinyHistory>(); set => Set(value); }
 
+        [JsonConverter(typeof(EnumDescriptionJsonConverter))]
         public SubmissionCategory SubmissionCategory { get => Get<SubmissionCategory>(); set => Set(value); }
 
         [JsonProperty]

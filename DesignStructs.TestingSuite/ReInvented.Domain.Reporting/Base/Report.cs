@@ -19,7 +19,7 @@ namespace ReInvented.Domain.Reporting.Base
 
         #region Public Properties
 
-        public IProjectInfo ProjectInfo { get => Get<IProjectInfo>(); private set => Set(value); }
+        public IProjectData ProjectData { get => Get<IProjectData>(); private set => Set(value); }
 
         public Document Document { get => Get<Document>(); private set => Set(value); }
 
@@ -33,7 +33,7 @@ namespace ReInvented.Domain.Reporting.Base
 
         private void Initialize()
         {
-            ProjectInfo = new ProjectInfo() { ProjectDirectory = @"C:\Users\masanams\Desktop\Desktop\Code\Reports\23-4042" };
+            ProjectData = new ProjectData() { ProjectDirectory = @"C:\Users\masanams\Desktop\Desktop\Code\Reports\23-4042" };
             Document = new Document();
             DataSource = new DataSource();
         }

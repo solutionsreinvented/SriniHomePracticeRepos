@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.IO;
 
 using HtmlAgilityPack;
@@ -31,7 +32,7 @@ namespace ReInvented.Domain.Reporting.Base
 
         public virtual void Generate()
         {
-            ProjectReportsDirectory = Directory.CreateDirectory(Path.Combine(Report.ProjectInfo.ProjectDirectory, "Reports"));
+            ProjectReportsDirectory = Directory.CreateDirectory(Path.Combine(Report.ProjectData.ProjectDirectory, "Reports"));
 
             CreateReportHtmlFile();
 
@@ -42,19 +43,16 @@ namespace ReInvented.Domain.Reporting.Base
             }
 
             CreateReportContentsFile();
-            CreateDocumentFile();
+            CreateRevisionHistoryFile();
         }
 
-        private void CreateDocumentFile()
+        private void CreateRevisionHistoryFile()
         {
-            if (string.IsNullOrWhiteSpace(Report.Document.RevisionHistoryFilePath))
-            {
-                Report.Document.RevisionHistoryFilePath = Path.Combine(Report.ProjectInfo.ProjectDirectory, $"{Report.Document.Number}.{FileExtensions.RevisionHistory}");
-            }
+            JsonDataSerializer<ObservableCollection<Revision>> serializer = new JsonDataSerializer<ObservableCollection<Revision>>();
+            string serialized = serializer.Serialize(Report.Document.Revisions, JsonSerializerSettingsProvider.MinifiedSettings());
 
-            JsonDataSerializer<Document> serializer = new JsonDataSerializer<Document>();
-            string serialized = "const DocumentData = " + serializer.Serialize(Report.Document);
-            File.WriteAllText(Report.Document.RevisionHistoryFilePath, serialized);
+            string revisionHistoryFilePath = Path.Combine(Report.ProjectData.ProjectDirectory, $"{Report.Document.Number}.{FileExtensions.RevisionHistory}");
+            File.WriteAllText(revisionHistoryFilePath, serialized);
         }
 
         #endregion
