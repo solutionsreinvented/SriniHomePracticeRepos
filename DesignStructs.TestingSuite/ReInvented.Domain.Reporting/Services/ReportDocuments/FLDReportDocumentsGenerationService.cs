@@ -55,7 +55,7 @@ namespace ReInvented.Domain.Reporting.Services
                 _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes($"Data/{ReportSpecificContentsFileName}"));
                 _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes(ReportFileNames.JavaScriptCanvasGraphics, useAbsolutePaths));
                 _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes(ReportFileNames.JavaScriptSupportLayoutHelpers, useAbsolutePaths));
-                _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes(ReportFileNames.JavaScriptDocumentDataProcessor, useAbsolutePaths));
+                _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes(ReportFileNames.JavaScriptShared, useAbsolutePaths));
                 _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes(ReportSpecificJavaScriptFileName, useAbsolutePaths));
             }
 

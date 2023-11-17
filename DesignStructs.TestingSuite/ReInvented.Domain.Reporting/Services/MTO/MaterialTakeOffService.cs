@@ -25,9 +25,9 @@ namespace ReInvented.Domain.Reporting.Services
 
             MaterialTakeOff mto = new MaterialTakeOff();
 
-            if (wrapper == null)
+            if (wrapper == null || string.IsNullOrWhiteSpace(wrapper.StaadInstance.GetStaadFileNameOnly()))
             {
-                throw new ArgumentNullException($"{nameof(wrapper)} shall not be null.");
+                throw new ArgumentNullException($"Either the Staad application is not running or a valid Staad model is not opened.");
             }
 
             OSPropertyUI property = wrapper.StaadInstance.Property;
