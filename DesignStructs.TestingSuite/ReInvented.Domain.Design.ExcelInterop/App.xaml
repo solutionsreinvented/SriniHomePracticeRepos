@@ -1,7 +1,0 @@
-﻿<Application
-    x:Class="ReInvented.Domain.Design.ExcelInterop.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:ReInvented.Domain.Design.ExcelInterop">
-    <Application.Resources />
-</Application>

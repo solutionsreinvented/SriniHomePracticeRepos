@@ -36,6 +36,10 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.11.54.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\HtmlAgilityPack.1.11.54\lib\Net45\HtmlAgilityPack.dll</HintPath>
       <Private>True</Private>
@@ -81,6 +85,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backup\HtmlTableRetriever.cs" />
+    <Compile Include="Enums\StructureType.cs" />
+    <Compile Include="Models\StaadFile.cs" />
     <Compile Include="NodesCollection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,14 +101,8 @@
     </COMFileReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Folder Include="AttachedProperties\" />
     <Folder Include="Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\ReInvented.Domain.Reporting\ReInvented.Domain.Reporting.csproj">
-      <Project>{2AF4E5A8-54A6-4AA0-AE08-41E301309F0E}</Project>
-      <Name>ReInvented.Domain.Reporting</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
