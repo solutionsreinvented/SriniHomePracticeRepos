@@ -86,7 +86,7 @@
   <ItemGroup>
     <Compile Include="Backup\HtmlTableRetriever.cs" />
     <Compile Include="Enums\StructureType.cs" />
-    <Compile Include="Models\StaadFile.cs" />
+    <Compile Include="Models\StaadEditorFile.cs" />
     <Compile Include="NodesCollection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,18 +5,12 @@ using OpenSTAADUI;
 
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Models;
-using ReInvented.Shared.Extensions;
-
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using ReInvented.Shared;
 using ReInvented.StaadPro.Interactivity.Extensions;
 using SPro2023ConsoleApp.Models;
+using ReInvented.StaadPro.Interactivity.Enums;
 
 namespace SPro2023ConsoleApp
 {
@@ -32,10 +26,21 @@ namespace SPro2023ConsoleApp
 
     class Program
     {
+
         static void Main(string[] args)
         {
+            var text = "1 16777 16825 16826 16778; 2 16778 16826 16827 16778;";
+
+            var plates = StaadEditorFile.RectifyPlateIncidences(text);
+
+
             string filePath = @"C:\Users\masanams\Desktop\Desktop\Code\STAAD\D35.0H2.50S09.00OC1.113SC1.219IMP0.240CON0.0300MOT1250_Staad Editor Testing.std";
-            StaadFile staadFile = new StaadFile(filePath);
+            StaadEditorFile staadFile = new StaadEditorFile(filePath, StaadEditorSettings.GetDefaultSettings());
+
+            staadFile.FormatEntityIncidences(EntityType.Nodes);
+
+            var (StartIndex, EndIndex) = StaadEditorFile.GetEntityIncidencesRange(staadFile, EntityType.Plates);
+
 
             ///await Previous();
 
@@ -49,7 +54,8 @@ namespace SPro2023ConsoleApp
                          .AddBeforeLineContaining("", new List<string>())
                          .AddAfterLineContaining("", new List<string>())
                          .FixFourNodedTriangularPlate(new Plate())
-                         .FixTriangularPlatesIncidences(new List<Plate>());
+                         .FixTriangularPlatesIncidences(new List<Plate>())
+                         .FixSyntaxForTriangularPlates();
 
             var allPlates = geometry.GetAllEntitiesOfType<Plate>();
 
