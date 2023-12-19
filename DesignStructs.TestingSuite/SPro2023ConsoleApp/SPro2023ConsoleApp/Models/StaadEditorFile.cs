@@ -27,16 +27,26 @@ namespace SPro2023ConsoleApp.Models
 
     public class StaadEditorSettings
     {
+        #region Default Constructor
+
         public StaadEditorSettings()
         {
 
         }
 
+        #endregion
+
+        #region Public Properties
+
         public int LineWidth { get; set; }
 
-        public string IncidenceSeparator { get; set; } = ";";
+        public string Separator { get; set; } = ";";
 
         public StructureType StructureType { get; set; } = StructureType.Space;
+
+        #endregion
+
+        #region Static Functions
 
         public static StaadEditorSettings GetDefaultSettings()
         {
@@ -45,7 +55,9 @@ namespace SPro2023ConsoleApp.Models
                 LineWidth = 79,
                 StructureType = StructureType.Space
             };
-        }
+        } 
+
+        #endregion
     }
 
     public class StaadEditorFile
@@ -127,7 +139,7 @@ namespace SPro2023ConsoleApp.Models
             (int StartIndex, int EndIndex) = GetEntityIncidencesRange(this, entityType);
             IEnumerable<string> incidenceContent = GetEntityIncidencesContent(this, entityType);
 
-            List<string> formattedContent = FormatIncidenceText(string.Join(" ", incidenceContent), EditorSettings.LineWidth, EditorSettings.IncidenceSeparator);
+            List<string> formattedContent = FormatIncidenceText(string.Join(" ", incidenceContent), EditorSettings.LineWidth, EditorSettings.Separator);
 
             Content.RemoveRange(StartIndex + 1, EndIndex - StartIndex);
             Content.InsertRange(StartIndex + 1, formattedContent);
@@ -146,7 +158,7 @@ namespace SPro2023ConsoleApp.Models
                 rectifiedIncidenceContent.Add(RectifyPlateIncidences(incidenceLine));
             }
 
-            List<string> formattedContent = FormatIncidenceText(string.Join(" ", rectifiedIncidenceContent), EditorSettings.LineWidth, EditorSettings.IncidenceSeparator);
+            List<string> formattedContent = FormatIncidenceText(string.Join(" ", rectifiedIncidenceContent), EditorSettings.LineWidth, EditorSettings.Separator);
 
             Content.RemoveRange(StartIndex + 1, EndIndex - StartIndex);
             Content.InsertRange(StartIndex + 1, formattedContent);
@@ -224,16 +236,46 @@ namespace SPro2023ConsoleApp.Models
             return this;
         }
 
+        public StaadEditorFile InsertBetweenLinesContaining(string startLineSearchText, string endLineSearchText, List<string> lines)
+        {
+            int startIndex = Content.FindIndex(l => l.Contains(startLineSearchText));
+            int endIndex = Content.FindIndex(l => l.Contains(endLineSearchText));
+
+            if (startIndex != -1 && endIndex != -1)
+            {
+                Content.RemoveRange(startIndex + 1, endIndex - startIndex);
+                Content.InsertRange(startIndex + 1, lines);
+            }
+
+            return this;
+        }
+
+        public StaadEditorFile InsertBetweenLinesContaining(string startLineSearchText, string endLineSearchText, string line)
+        {
+            return InsertBetweenLinesContaining(startLineSearchText, endLineSearchText, new List<string>() { line });
+        }
+
         public StaadEditorFile AddBeforeLineContaining(string searchText, string line)
         {
             return AddBeforeLineContaining(searchText, new List<string>() { line });
-
         }
 
         public StaadEditorFile AddAfterLineContaining(string searchText, string line)
         {
             return AddAfterLineContaining(searchText, new List<string>() { line });
         }
+
+        public void Save()
+        {
+            File.WriteAllLines(Path, Content);
+        }
+
+        //public StaadEditorFile Read()
+        //{
+        //    Content = File.ReadAllLines(Path).ToList();
+
+        //    return this;
+        //}
 
         #endregion
 
@@ -275,8 +317,8 @@ namespace SPro2023ConsoleApp.Models
                 entitySearchText = StaadEditorCommands.ElementIncidences.GetDescription();
             }
 
-            int startIndex = editorFile.Content.FindIndex(l => l.Contains(entitySearchText));
-            int endIndex = startIndex + editorFile.Content.Skip(startIndex + 1).ToList().FindIndex(l => !l.Contains(";"));
+            int startIndex = editorFile.Content.FindIndex(l => l.Contains(entitySearchText.ToUpperInvariant()));
+            int endIndex = startIndex + editorFile.Content.Skip(startIndex + 1).ToList().FindIndex(l => !l.Contains(editorFile.EditorSettings.Separator));
 
             return (startIndex, endIndex);
         }
