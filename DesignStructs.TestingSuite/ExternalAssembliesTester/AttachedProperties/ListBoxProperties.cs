@@ -39,7 +39,7 @@ namespace ExternalAssembliesTester.AttachedProperties
         public AutoScrollHandler(ListBox target)
         {
             Target = target;
-            var binding = new Binding(nameof(ItemsSource)) { Source = Target };
+            Binding binding = new Binding(nameof(ItemsSource)) { Source = Target };
             BindingOperations.SetBinding(this, ItemsSourceProperty, binding);
         } 
 

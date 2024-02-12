@@ -1,157 +1,144 @@
-﻿
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 using OpenSTAADUI;
 
+using ReInvented.Domain.Tass.Common.Services;
+using ReInvented.Sections.Domain.Interfaces;
+using ReInvented.Sections.Domain.Repositories;
 using ReInvented.StaadPro.Interactivity.Entities;
+using ReInvented.StaadPro.Interactivity.Enums;
+using ReInvented.StaadPro.Interactivity.Extensions;
 using ReInvented.StaadPro.Interactivity.Models;
+
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using ReInvented.StaadPro.Interactivity.Extensions;
-using SPro2023ConsoleApp.Models;
-using ReInvented.StaadPro.Interactivity.Enums;
+using System.Reflection;
 
 namespace SPro2023ConsoleApp
 {
 
-
-    public class Student
+    public class TestClass
     {
-        public int Id { get; set; }
+        public double Property1 { get; set; }
 
-        public string Name { get; set; }
+        [ClassRecog]
+        public double Property2 { get; set; }
+    }
 
+    [AttributeUsage(AttributeTargets.Property)]
+    public class ClassRecogAttribute : Attribute
+    {
+        // You can add additional properties or methods to the attribute if needed
     }
 
     class Program
     {
+        // Method to get instances of a given type
+        static IEnumerable<object> GetInstances(Type type)
+        {
+            // Get all loaded assemblies
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+            // Iterate over each assembly and get instances of the given type
+            foreach (Assembly assembly in assemblies)
+            {
+                // Get all types in the assembly
+                IEnumerable<Type> allTypes = assembly.GetTypes();
+
+                // Filter types to find those assignable to the given type
+                var compatibleTypes = allTypes.Where(t => type.IsAssignableFrom(t) && !t.IsAbstract && !t.IsInterface);
+
+                // Iterate over compatible types and create instances
+                foreach (Type compatibleType in compatibleTypes)
+                {
+                    // Create an instance of the type
+                    object instance = Activator.CreateInstance(compatibleType);
+                    yield return instance;
+                }
+            }
+        }
 
         static void Main(string[] args)
         {
-            var text = "1 16777 16825 16826 16778; 2 16778 16826 16827 16778;";
 
-            var plates = StaadEditorFile.RectifyPlateIncidences(text);
+            // Get all loaded assemblies
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
-
-            string filePath = @"C:\Users\masanams\Desktop\Desktop\Code\STAAD\D35.0H2.50S09.00OC1.113SC1.219IMP0.240CON0.0300MOT1250_Staad Editor Testing.std";
-            StaadEditorFile staadFile = new StaadEditorFile(filePath, StaadEditorSettings.GetDefaultSettings());
-
-            staadFile.FormatEntityIncidences(EntityType.Nodes);
-
-            var (StartIndex, EndIndex) = StaadEditorFile.GetEntityIncidencesRange(staadFile, EntityType.Plates);
-
-
-            ///await Previous();
-
-            StaadModel model = new StaadModel();
-            StaadModelWrapper wrapper = model.StaadWrapper;
-
-            OSGeometryUI geometry = wrapper.Geometry as OSGeometryUI;
-
-            _ = staadFile.RemoveFilePath()
-                         .AddCopyRight(new List<string>())
-                         .AddBeforeLineContaining("", new List<string>())
-                         .AddAfterLineContaining("", new List<string>())
-                         .FixFourNodedTriangularPlate(new Plate())
-                         .FixTriangularPlatesIncidences(new List<Plate>())
-                         .FixSyntaxForTriangularPlates();
-
-            var allPlates = geometry.GetAllEntitiesOfType<Plate>();
-
-            var triangularPlates = allPlates.Where(p => p.D == null || p.A == p.D);
-
-            foreach (var tp in triangularPlates)
+            // Iterate over each assembly
+            foreach (Assembly assembly in assemblies)
             {
-                geometry.DeletePlate(tp.Id);
-                geometry.CreatePlate(tp.Id, tp.A.Id, tp.C.Id, tp.B.Id, tp.A.Id);
+                // Get all types in the assembly
+                IEnumerable<Type> allTypes = assembly.GetTypes().Where(t => t.GetProperties().Any(prop => Attribute.IsDefined(prop, typeof(ClassRecogAttribute))));
+
+                // Iterate over each type
+                foreach (Type type in allTypes)
+                {
+                    // Check if any instance of the type exists
+                    var instances = GetInstances(type);
+
+                    // If instances exist, do something with them
+                    if (instances.Any())
+                    {
+                        Console.WriteLine($"Instances of type '{type.FullName}' with properties decorated with ClassRecog attribute:");
+
+                        // Print details of each instance
+                        foreach (var instance in instances)
+                        {
+                            Console.WriteLine($"Instance: {instance}");
+                            // Access properties of instance here if needed
+                        }
+                    }
+
+                }
             }
 
 
-            //DataSource sourceInfo = new DataSource()
-            //{
-            //    PreparedOn = DateTime.Now.ToString("F")
-            //};
+            string filePath = @"C:\Users\masanams\OneDrive - TAKRAF\Desktop\Desktop\STAAD\Multi Instances\D35.0H2.50S09.00OC1.113SC1.219IMP0.240CON0.0300MOT1250_2.std"; // Replace with the actual file path
 
-            ////MaterialTakeOff mto = MaterialTakeOffService.Generate(wrapper, sourceInfo);
-
-            ////double totalWeight = mto.TotalWeight;
-
-            //OSGeometryUI geometry = wrapper.StaadInstance.Geometry;
-            //OSPropertyUI property = wrapper.StaadInstance.Property;
-
-            //OSOutputUI output = wrapper.StaadInstance.Output;
-
-            //if (output.AreResultsAvailable())
-            //{
-            //    int nodeNumber = 16925;
-            //    object reactions = new double[6];
-            //    output.GetSupportReactions(nodeNumber, 601, ref reactions);
-            //}
+            // Check if the file exists
+            if (File.Exists(filePath))
+            {
+                // Open the file using its default application
+                Process.Start(filePath);
+            }
 
 
-            //Process staadProcess = Process.GetProcesses().FirstOrDefault(p => p.ProcessName.StartsWith("Bentley") && p.ProcessName.EndsWith("Staad"));
-            //IntPtr staadWindowHandle = staadProcess.MainWindowHandle;
+            StaadModel model = new StaadModel();
+            OpenSTAAD OpenStaad = model.OpenStaadWrapper.StaadInstance;
 
-            //WindowServices.MinimizeWindow(staadWindowHandle);
-            //WindowServices.RestoreWindow(staadWindowHandle);
-            //WindowServices.HideWindow(staadWindowHandle);
-            //WindowServices.MaximizeWindow(staadWindowHandle);
+            OSDesignUI design = OpenStaad.Design;
+            OSMemberSteelDgnParams osMemberSteelDgnParams = new OSMemberSteelDgnParams();
+            design.GetMemberDesignParameters(1, 25354, osMemberSteelDgnParams);
+
+            IEnumerable<IRolledSection> sections = SectionsRepository.Instance.GetSectionsLibrary().AllSections;
+            int count = sections.Count();
+            sections.ToList().ForEach(s => Console.WriteLine($"{s.Designation}"));
+            //LoadListCreationTest();
+
+
+
+
+            Console.ReadLine();
+
+            ///await Previous();
         }
 
+        private static void LoadListCreationTest()
+        {
+            StaadModel model = new StaadModel();
+            OSLoadUI OSLoad = model.OpenStaadWrapper.Load as OSLoadUI;
+            OpenSTAAD OpenStaad = model.OpenStaadWrapper.StaadInstance;
 
+            OSLoad.CreateLoadList(LoadListType.EnvelopList, 1);
 
-        //private static async Task Previous()
-        //{
-        //    string fileFullPath = @"C:\Users\masanams\Desktop\Desktop\Code\STAAD\0D35.0H2.50S09.00OC1.113SC1.219IMP0.240CON0.0300MOT1250.std";
-
-        //    StaadModel model = new StaadModel();
-        //    StaadModelWrapper wrapper = model.StaadWrapper;
-        //    OpenSTAAD instance = wrapper.StaadInstance;
-        //    OSGeometryUI geometry = instance.Geometry;
-
-
-        //    NodesCollection nodesCollection = ReadNodesFromJson();
-
-        //    int threadCount = 360;
-
-        //    if (nodesCollection.Nodes.Count / threadCount >= 1)
-        //    {
-        //        int nodeCountInEachThread = (int)(nodesCollection.Nodes.Count / threadCount).Floor(1);
-        //        List<List<Node>> threadNodesCollections = new List<List<Node>>();
-
-        //        int tracker = 0;
-
-        //        do
-        //        {
-        //            threadNodesCollections.Add(new List<Node>(nodesCollection.Nodes.Skip(tracker * nodeCountInEachThread).Take(nodeCountInEachThread)));
-        //            tracker++;
-
-        //        } while (tracker * nodeCountInEachThread < nodesCollection.Nodes.Count());
-
-        //        await Task.Run(() => instance.NewSTAADFile(fileFullPath, LengthUnit.M, ForceUnit.KN));
-        //        Thread.Sleep(5000);
-
-        //        //List<Task> tasks = threadNodesCollections.Select(tnc => CreateNodesOneByOne(geometry, tnc)).ToList();
-
-        //        await Task.WhenAll(tasks);
-        //    }
-        //    else
-        //    {
-        //        instance.NewSTAADFile(fileFullPath, LengthUnit.M, ForceUnit.KN);
-        //        Thread.Sleep(5000);
-
-        //        await Task.Run(() => CreateNodesOneByOne(geometry, nodesCollection.Nodes.ToList()));
-        //    }
-
-        //    ///// Case 1:
-        //    //CreateNodesOneByOne(geometry, nodesCollection.Nodes.ToList());
-        //    ///// Case 2a:
-        //    /////CreateNodesAllAtOnceUsingArrayTypeOne(geometry, nodesCollection.Nodes.ToList());
-        //    ///// Case 2b:
-        //    /////CreateNodesAllAtOnceUsingArrayTypeTwo(geometry, nodesCollection.Nodes.ToList());
-        //    //wrapper.OpenStaad.SaveModel(1);
-        //}
+            IEnumerable<Node> nodes = (model.OpenStaadWrapper.Geometry as OSGeometryUI).GetUniqueNodesFromPlateGroup(GroupNames.CapPlateOuter);
+            Node origin = new Node(0.0, nodes.FirstOrDefault().Y, 0.0);
+            double leastRadius = nodes.Select(n => n.Radius(origin)).Min();
+            _ = nodes.Select(n => n.Radius(origin) <= leastRadius);
+        }
 
         private static NodesCollection ReadNodesFromJson()
         {

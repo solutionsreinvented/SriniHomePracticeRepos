@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ReInvented.Validation.Models;
+
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -16,6 +18,16 @@ namespace ReInvented.Validation
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            ValidationClass validator = new ValidationClass
+            {
+                AnotherOne = new OtherOne() { PropertyOne = 0.5, PropertyTwo = 0.8 },
+                AnotherTwo = new OtherTwo() { PropertyThree = 1.2, PropertyFour = 1.6 }
+            };
+
+
+
+
+
             base.OnStartup(e);
 
             string folderPath = @"D:\";
@@ -26,9 +38,8 @@ namespace ReInvented.Validation
             DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);
             FileInfo[] files = directoryInfo.GetFiles(searchPattern);
 
-            var filteredFiles = files
-                .Where(file => !exclusionKeywords.Any(keyword => file.Name.Contains(keyword)))
-                .ToArray();
+            var filteredFiles = files.Where(file => !exclusionKeywords.Any(keyword => file.Name.Contains(keyword)))
+                                     .ToArray();
 
             Console.WriteLine("Files found:");
             foreach (var file in filteredFiles)

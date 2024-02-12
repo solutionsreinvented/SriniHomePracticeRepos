@@ -1,17 +1,17 @@
-﻿using ReInvented.Shared.Base;
-using ReInvented.Shared.Stores;
+﻿using ReInvented.Shared.Stores;
 
 namespace ReInvented.Validation.Models
 {
-    public abstract class ValidationPropertyStore : PropertyStore
+    public abstract class ValidationPropertyStore : ErrorsEnabledPropertyStore
     {
-        public NotifyDataErrorInfo NotifyDataErrorInfo { get; set; }
-
 
     }
 
-    public class TestModel : ValidationPropertyStore
+    public class BaseModel : ErrorsEnabledPropertyStore
     {
-        override 
+        public BaseModel(ErrorsEnabledPropertyStore store)
+        {
+
+        }
     }
 }

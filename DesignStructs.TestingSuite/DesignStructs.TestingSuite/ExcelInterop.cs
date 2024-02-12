@@ -12,8 +12,8 @@ namespace ReInvented.TestingSuite
     public class ExcelInterop
     {
         Excel.Application _excelApp;
-        Excel.Workbook _workbook;
-        Dictionary<string, Excel.Workbook> _workbooks = new Dictionary<string, Excel.Workbook>();
+        readonly Excel.Workbook _workbook;
+        readonly Dictionary<string, Excel.Workbook> _workbooks = new Dictionary<string, Excel.Workbook>();
 
         public void Design()
         {

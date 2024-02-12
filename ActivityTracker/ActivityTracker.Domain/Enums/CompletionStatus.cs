@@ -1,6 +1,6 @@
-﻿using ReInvented.Shared.TypeConverters;
+﻿using System.ComponentModel;
 
-using System.ComponentModel;
+using ReInvented.Shared.TypeConverters;
 
 namespace ActivityTracker.Domain.Enums
 {

@@ -1,7 +1,6 @@
 C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\obj\Debug\netcoreapp3.1\AllCorePracticeApp.csproj.AssemblyReference.cache
 C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\obj\Debug\netcoreapp3.1\App.g.cs
 C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\obj\Debug\netcoreapp3.1\AllCorePracticeApp_MarkupCompile.cache
-C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\obj\Debug\netcoreapp3.1\AllCorePracticeApp_MarkupCompile.lref
 C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\AllCorePracticeApp.exe
 C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\AllCorePracticeApp.deps.json
 C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\AllCorePracticeApp.runtimeconfig.json
@@ -9,8 +8,6 @@ C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracti
 C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\AllCorePracticeApp.dll
 C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\AllCorePracticeApp.pdb
 C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
-C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\obj\Debug\netcoreapp3.1\App.baml
-C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\obj\Debug\netcoreapp3.1\AllCorePracticeApp.g.resources
 C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\obj\Debug\netcoreapp3.1\AllCorePracticeApp.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\obj\Debug\netcoreapp3.1\AllCorePracticeApp.AssemblyInfoInputs.cache
 C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\obj\Debug\netcoreapp3.1\AllCorePracticeApp.AssemblyInfo.cs
@@ -21,3 +18,16 @@ C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracti
 C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\obj\Debug\netcoreapp3.1\AllCorePracticeApp.genruntimeconfig.cache
 C:\Users\srini\source\repos\AllCorePracticeApp\AllCorePracticeApp\obj\Debug\netcoreapp3.1\AllCorePracticeApp.dll
 C:\Users\srini\source\repos\AllCorePracticeApp\AllCorePracticeApp\obj\Debug\netcoreapp3.1\AllCorePracticeApp.pdb
+C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\MathNet.Numerics.dll
+C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\FluentValidation.dll
+C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\ReInvented.Shared.dll
+C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\HtmlAgilityPack.dll
+C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\ReInvented.DataAccess.dll
+C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\ReInvented.Licensing.Security.dll
+C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\ReInvented.Shared.pdb
+C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\HtmlAgilityPack.pdb
+C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\HtmlAgilityPack.xml
+C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\ReInvented.DataAccess.pdb
+C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\AutoMapper.xml
+C:\Users\masanams\source\SriniHomePracticeRepos\AllCorePracticeApp\AllCorePracticeApp\bin\Debug\netcoreapp3.1\ReInvented.Licensing.Security.pdb

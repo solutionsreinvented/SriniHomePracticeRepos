@@ -93,7 +93,7 @@ namespace ActivityTracker.Domain.Base
 
         public void SetCompletionInHours(int totalHoursRequired)
         {
-            ScheduledCompletion = InitiatedOn.AddDays((totalHoursRequired / (double)_workingHoursPerDay).CeilingTo(1));
+            ScheduledCompletion = InitiatedOn.AddDays((totalHoursRequired / (double)_workingHoursPerDay).Ceiling(1));
         }
 
         #endregion

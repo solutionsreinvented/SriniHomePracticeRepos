@@ -26,16 +26,11 @@ namespace ReInvented.Animations.ViewModels
             NewProjectCommand = new RelayCommand(OnNewProject, true);
         }
 
-        private void OnNewProject()
-        {
-            CurrentViewModel = new NewProjectViewModel();
-        }
+        private void OnNewProject() { CurrentViewModel = new NewProjectViewModel(); }
 
-        private void OnRecentItems()
-        {
-            CurrentViewModel = new RecentItemsViewModel();
-        }
+        private void OnRecentItems() { CurrentViewModel = new RecentItemsViewModel(); }
     }
+
     public abstract class BaseViewModel : ErrorsEnabledPropertyStore
     {
         public BaseViewModel()
@@ -48,17 +43,11 @@ namespace ReInvented.Animations.ViewModels
 
     public class RecentItemsViewModel : BaseViewModel
     {
-        public RecentItemsViewModel()
-        {
-            Title = "Recent Items";
-        }
+        public RecentItemsViewModel() { Title = "Recent Items"; }
     }
 
     public class NewProjectViewModel : BaseViewModel
     {
-        public NewProjectViewModel()
-        {
-            Title = "New Project";
-        }
+        public NewProjectViewModel() { Title = "New Project"; }
     }
 }

@@ -77,7 +77,7 @@ namespace ActivityTracker.Domain.Extensions
         /// <returns>A <see cref="DateTime"/> object representing the next business/working day.</returns>
         public static DateTime NextBusinessDay(this DateTime fromDate, int totalWorkHours, HashSet<DateTime> holidays = null, int workHoursPerDay = 9)
         {
-            int totalWorkDays = MathExtensions.CeilingTo(totalWorkHours / workHoursPerDay, 1);
+            int totalWorkDays = MathExtensions.Ceiling(totalWorkHours / workHoursPerDay, 1);
 
             return NextBusinessDay(fromDate, holidays, totalWorkDays);
         }
@@ -96,7 +96,7 @@ namespace ActivityTracker.Domain.Extensions
             TimeSpan timeSpanFromGivenDate = fromDate.ExtractTimeSpan();
             TimeSpan timeSpanFromWorkStartHour = TimeSpan.FromHours(workStartHour);
 
-            int wholeWorkDays = (int)MathExtensions.FloorTo((decimal)(totalWorkHours / workHoursPerDay), 1);
+            int wholeWorkDays = (int)MathExtensions.Floor((decimal)(totalWorkHours / workHoursPerDay), 1);
 
             DateTime nextBusinessDay = NextBusinessDay(fromDate, holidays, wholeWorkDays);
 

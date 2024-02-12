@@ -1,9 +1,6 @@
 ﻿using System.Windows;
 
 using ReInvented.FluentValidationExercise.Models;
-using ReInvented.FluentValidationExercise.Validators;
-
-using FluentValidation.Results;
 using DesignStructs.FluentValidationExercise.ViewModels;
 
 namespace ReInvented.FluentValidationExercise

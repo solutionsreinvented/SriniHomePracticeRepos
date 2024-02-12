@@ -17,7 +17,7 @@ namespace ReInvented.Domain.Drawing
         public static void Generate(Canvas plotCanvas, double centerX, double centerY, double diameter)
         {
             GenerateOrigin(plotCanvas, centerX, centerY);
-            GenerateCoordinateAxes(plotCanvas, 25.0, 25.0, 80.0, 5);
+            GenerateCoordinateAxes(plotCanvas, 75.0, 75.0, 80.0, 5);
             GenerateRadiusLine(plotCanvas, centerX, centerY, diameter);
         }
 
@@ -100,7 +100,7 @@ namespace ReInvented.Domain.Drawing
             double labelPivotX = centerX + ((circleRadius + dotRadius + labelGap) * Math.Cos(angle.Radians()));
             double labelPivotY = centerY + ((circleRadius + dotRadius + labelGap) * Math.Sin(angle.Radians()));
 
-            Rectangle rectangle = new Rectangle() { Width = 20, Height = 10, Fill = Brushes.Red, Stroke = Brushes.Gray, StrokeThickness = 0.6 };
+            Rectangle rectangle = new Rectangle() { Width = 20, Height = 10, Fill = Brushes.AntiqueWhite, Stroke = Brushes.Gray, StrokeThickness = 0.6 };
 
             TextBlock labelText = new TextBlock()
             {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 using ActivityTracker.Domain.Interfaces;
 using ActivityTracker.Domain.Models;
@@ -41,7 +40,7 @@ namespace ActivityTracker.Domain.Services
         {
             string filePath = fileFullPath ?? FileServiceProvider.ProjectMasterFilePath;
 
-            return _serializer.Deserialize(filePath);
+            return _serializer.DeserializeText(File.ReadAllText(filePath));
         }
 
         public static void SaveToFile(ProjectMaster projectMaster, string fileFullPath = null)

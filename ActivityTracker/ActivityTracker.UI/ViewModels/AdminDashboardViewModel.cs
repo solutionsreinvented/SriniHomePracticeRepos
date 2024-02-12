@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 
@@ -61,6 +62,10 @@ namespace ActivityTracker.UI.ViewModels
 
             if (result.HasValue && result.Value)
             {
+                if (ProjectMaster == null)
+                {
+                    ProjectMaster = new ProjectMaster();
+                }
                 ProjectMaster.Projects.Add(viewModel.ProjectDefinition.Project);
                 RaiseMultiplePropertiesChanged(nameof(PreOrders), nameof(Orders), nameof(Developments));
             }
@@ -68,15 +73,19 @@ namespace ActivityTracker.UI.ViewModels
 
         private void OnDeleteSelectedProject()
         {
-            _ = ProjectMaster.Projects.Remove(SelectedProject);
+            Type selectedProjectType = SelectedProject.GetType();
+
+            ProjectMaster.Projects.Remove(SelectedProject);
             RaiseMultiplePropertiesChanged(nameof(PreOrders), nameof(Orders), nameof(Developments));
-            SelectedProject = ProjectMaster?.Projects?.FirstOrDefault();
+
+            SelectedProject = ProjectMaster?.Projects?.Where(p => p.GetType() == selectedProjectType).FirstOrDefault();
         }
 
         private void OnDeleteSelectedActivity()
         {
-            _ = SelectedProject.Activities.Remove(SelectedActivity);
+            SelectedProject.Activities.Remove(SelectedActivity);
             RaiseMultiplePropertiesChanged(nameof(Activities));
+            
             SelectedActivity = SelectedProject?.Activities.FirstOrDefault();
         }
 

@@ -56,11 +56,23 @@
     <Reference Include="ReInvented.DataAccess">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.DataAccess\bin\Debug\ReInvented.DataAccess.dll</HintPath>
     </Reference>
+    <Reference Include="ReInvented.Domain.Design.ExcelInterop">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Domain.Design.ExcelInterop\bin\Debug\ReInvented.Domain.Design.ExcelInterop.exe</HintPath>
+    </Reference>
+    <Reference Include="ReInvented.Domain.EarthquakeLoading">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Domain.EarthquakeLoading\bin\Debug\ReInvented.Domain.EarthquakeLoading.exe</HintPath>
+    </Reference>
     <Reference Include="ReInvented.Domain.ProjectSetup">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Domain.ProjectSetup.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.Domain.TASS">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Domain.TASS.dll</HintPath>
+    </Reference>
+    <Reference Include="ReInvented.Domain.Tass.Common">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Domain.Tass.Common\bin\Debug\ReInvented.Domain.Tass.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ReInvented.Sections.Core">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Sections.Core\bin\Debug\ReInvented.Sections.Core.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.Sections.Domain">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Sections.Core\bin\Debug\ReInvented.Sections.Domain.dll</HintPath>
@@ -71,8 +83,15 @@
     <Reference Include="ReInvented.StaadPro.Interactivity">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.StaadPro.Interactivity\bin\Debug\ReInvented.StaadPro.Interactivity.dll</HintPath>
     </Reference>
+    <Reference Include="ReInvented.StaadTools.StaadInteractionVB">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.StaadTools.StaadInteractionVB\bin\Debug\ReInvented.StaadTools.StaadInteractionVB.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -85,10 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backup\HtmlTableRetriever.cs" />
-    <Compile Include="Enums\StructureType.cs" />
-    <Compile Include="Models\StaadEditorFile.cs" />
+    <Compile Include="Enums\DesignCodes.cs" />
+    <Compile Include="FileRenamer.cs" />
+    <Compile Include="LoadCombinationsHardCoded.cs" />
     <Compile Include="NodesCollection.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ProjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VerticalStiffeners.cs" />
   </ItemGroup>
@@ -102,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AttachedProperties\" />
+    <Folder Include="Models\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
