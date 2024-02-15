@@ -23,6 +23,8 @@ namespace ActivityTracker.Domain.Interfaces
 
         string SubCategory { get; set; }
 
+        string Description { get; set; }
+
         double AllocatedHours { get; set; }
 
         HashSet<string> SubCategories { get; }

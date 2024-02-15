@@ -63,7 +63,6 @@ namespace SPro2023ConsoleApp
 
         static void Main(string[] args)
         {
-
             // Get all loaded assemblies
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
 

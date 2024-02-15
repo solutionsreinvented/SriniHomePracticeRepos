@@ -11,15 +11,9 @@ namespace ReInvented.Domain.Drawing
 {
     public class DotGenerationService
     {
-        public static Ellipse GenerateDotPositionedOnCircle(double circleRadius, double angle)
-        {
-            return GenerateDotPositionedOnCircle(Defaults.CenterX, Defaults.CenterY, circleRadius, angle);
-        }
+        public static Ellipse GenerateDotPositionedOnCircle(double circleRadius, double angle) => GenerateDotPositionedOnCircle(Defaults.CenterX, Defaults.CenterY, circleRadius, angle);
 
-        public static Ellipse GenerateDotPositionedOnCircle(double centerX, double centerY, double circleRadius, double angle)
-        {
-            return GenerateDotPositionedOnCircle(centerX, centerY, circleRadius, Defaults.DotRadius, angle, Defaults.Stroke, Defaults.StrokeThickness);
-        }
+        public static Ellipse GenerateDotPositionedOnCircle(double centerX, double centerY, double circleRadius, double angle) => GenerateDotPositionedOnCircle(centerX, centerY, circleRadius, Defaults.DotRadius, angle, Defaults.Stroke, Defaults.StrokeThickness);
 
         public static Ellipse GenerateDotPositionedOnCircle(double centerX, double centerY, double circleRadius, double dotRadius, double angle, Brush stroke, double strokeThickness)
         {

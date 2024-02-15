@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="Root"
-    d:DesignHeight="250"
+    d:DesignHeight="280"
     d:DesignWidth="800"
     FontFamily="{StaticResource DefaultFontFamily}"
     mc:Ignorable="d">
@@ -24,6 +24,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -33,32 +34,65 @@
 
         <!--#endregion-->
 
-        <DockPanel
+        <Grid
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             HorizontalAlignment="Stretch">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="6*" />
+            </Grid.ColumnDefinitions>
+
             <TextBlock
+                Grid.Column="0"
                 Height="{StaticResource ControlHeight}"
                 VerticalAlignment="Center"
                 Text="Activity Id:" />
             <TextBox
+                Grid.Column="1"
                 Height="{StaticResource ControlHeight}"
                 Margin="15,0,5,5"
                 HorizontalAlignment="Stretch"
                 VerticalContentAlignment="Center"
                 IsEnabled="False"
                 Text="{Binding Id, Mode=OneWay}" />
-        </DockPanel>
+        </Grid>
+
+        <Grid
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Stretch">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="6*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                Grid.Column="0"
+                Height="{StaticResource ControlHeight}"
+                VerticalAlignment="Center"
+                Text="Description:" />
+            <TextBox
+                Grid.Column="1"
+                Height="{StaticResource ControlHeight}"
+                Margin="15,0,5,5"
+                HorizontalAlignment="Stretch"
+                VerticalContentAlignment="Center"
+                Text="{Binding Description}" />
+        </Grid>
 
         <TextBlock
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="0"
             Height="{StaticResource InputLabelHeight}"
             VerticalAlignment="Center"
             Text="Discipline:" />
         <TextBox
-            Grid.Row="2"
+            Grid.Row="3"
             Grid.Column="0"
             Height="{StaticResource ControlHeight}"
             Margin="0,0,0,5"
@@ -66,14 +100,14 @@
             Text="{Binding Discipline, Mode=OneWay}" />
 
         <TextBlock
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="1"
             Height="{StaticResource InputLabelHeight}"
             Margin="5,0,0,0"
             VerticalAlignment="Center"
             Text="Category:" />
         <ComboBox
-            Grid.Row="2"
+            Grid.Row="3"
             Grid.Column="1"
             Height="{StaticResource ControlHeight}"
             Margin="5,0,5,5"
@@ -84,12 +118,12 @@
             SelectedItem="{Binding Category}" />
 
         <TextBlock
-            Grid.Row="3"
+            Grid.Row="4"
             Grid.Column="0"
             Height="{StaticResource InputLabelHeight}"
             Text="Sub Category:" />
         <ComboBox
-            Grid.Row="4"
+            Grid.Row="5"
             Grid.Column="0"
             Height="{StaticResource ControlHeight}"
             Margin="0,0,5,5"
@@ -98,14 +132,14 @@
             SelectedValue="{Binding SubCategory}" />
 
         <TextBlock
-            Grid.Row="3"
+            Grid.Row="4"
             Grid.Column="1"
             Grid.ColumnSpan="2"
             Height="{StaticResource InputLabelHeight}"
             Margin="5,0,0,0"
             Text="Structure:" />
         <ComboBox
-            Grid.Row="4"
+            Grid.Row="5"
             Grid.Column="1"
             Height="{StaticResource ControlHeight}"
             Margin="5,0,5,5"
@@ -114,12 +148,12 @@
             SelectedValue="{Binding Structure}" />
 
         <TextBlock
-            Grid.Row="5"
+            Grid.Row="6"
             Grid.Column="0"
             Height="{StaticResource InputLabelHeight}"
             Text="Activity start date:" />
         <DatePicker
-            Grid.Row="6"
+            Grid.Row="7"
             Grid.Column="0"
             Margin="0,0,5,5"
             VerticalAlignment="Center"
@@ -128,13 +162,13 @@
             SelectedDate="{Binding InitiatedOn}" />
 
         <TextBlock
-            Grid.Row="5"
+            Grid.Row="6"
             Grid.Column="1"
             Height="{StaticResource InputLabelHeight}"
             Margin="5,0"
             Text="Allocated man-hours:" />
         <TextBox
-            Grid.Row="6"
+            Grid.Row="7"
             Grid.Column="1"
             Height="{StaticResource ControlHeight}"
             Margin="5,0,5,5"
@@ -143,12 +177,12 @@
             Text="{Binding AllocatedHours, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBlock
-            Grid.Row="7"
+            Grid.Row="8"
             Grid.Column="0"
             Height="{StaticResource InputLabelHeight}"
             Text="Scheduled completion date:" />
         <TextBox
-            Grid.Row="8"
+            Grid.Row="9"
             Grid.Column="0"
             Height="{StaticResource ControlHeight}"
             Margin="0,0,5,5"

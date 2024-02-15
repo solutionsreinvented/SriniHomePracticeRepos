@@ -46,7 +46,7 @@
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            <DataGridTemplateColumn Width="*" Header="Description">
+            <DataGridTemplateColumn Width="*" Header="Sub Category">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <Border Margin="0" Padding="5,3">

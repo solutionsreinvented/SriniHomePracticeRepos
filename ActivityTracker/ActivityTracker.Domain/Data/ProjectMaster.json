@@ -47,9 +47,10 @@
             ]
           },
           "SubCategory": "Connections Design Calculation Report",
+          "Description": "25m Bridge Connections Design",
           "Structure": "Bridge",
           "InitiatedOn": "2024-02-13T00:00:00",
-          "AllocatedHours": 54.0,
+          "AllocatedHours": 18.0,
           "AllocatedResources": [],
           "CurrentStatus": 0,
           "Changes": [],
@@ -57,7 +58,7 @@
           "Project": {
             "$ref": "4"
           },
-          "ScheduledCompletion": "2024-02-21T00:00:00"
+          "ScheduledCompletion": "2024-02-15T00:00:00"
         },
         {
           "$id": "7",
@@ -80,18 +81,54 @@
               "Site Query - Technical Verification"
             ]
           },
-          "SubCategory": "Connections Design Calculation Report",
-          "Structure": "Complete Thickener",
-          "InitiatedOn": "2024-02-22T00:00:00",
-          "AllocatedHours": 54.0,
+          "SubCategory": "Foundation Load Data",
+          "Description": "Revised Foundation Load Data for the 32m to 35m Converted Thickener",
+          "Structure": "Bridge",
+          "InitiatedOn": "2024-02-15T00:00:00",
+          "AllocatedHours": 9.0,
           "AllocatedResources": [],
           "CurrentStatus": 0,
           "Changes": [],
-          "Id": "ORD-23-4104-11-601-1848-918",
+          "Id": "ORD-23-4104-11-601-913-301",
           "Project": {
             "$ref": "4"
           },
-          "ScheduledCompletion": "2024-03-01T00:00:00"
+          "ScheduledCompletion": "2024-02-16T00:00:00"
+        },
+        {
+          "$id": "9",
+          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "Discipline": 11,
+          "Category": {
+            "$id": "10",
+            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "Name": "Structural",
+            "SubCategories": [
+              "Staad Modeling",
+              "Loads Application",
+              "Analysis and Design",
+              "Foundation Load Data",
+              "Base Plates Design",
+              "Material Take Off",
+              "Material Take Off - Alternative Sections",
+              "Member Design Calculation Report",
+              "Connections Design Calculation Report",
+              "Site Query - Technical Verification"
+            ]
+          },
+          "SubCategory": "Connections Design Calculation Report",
+          "Description": "25m Bridge Connections Continuation",
+          "Structure": "Bridge",
+          "InitiatedOn": "2024-02-16T00:00:00",
+          "AllocatedHours": 36.0,
+          "AllocatedResources": [],
+          "CurrentStatus": 0,
+          "Changes": [],
+          "Id": "ORD-23-4104-11-601-1848-301",
+          "Project": {
+            "$ref": "4"
+          },
+          "ScheduledCompletion": "2024-02-22T00:00:00"
         }
       ]
     }
