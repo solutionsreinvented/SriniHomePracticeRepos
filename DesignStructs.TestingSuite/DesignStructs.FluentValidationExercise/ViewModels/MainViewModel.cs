@@ -41,6 +41,16 @@ namespace DesignStructs.FluentValidationExercise.ViewModels
 
             ReportViewModel = new FLDReportViewModel(Project, null) { IsStandAlone = true };
             ValidateDataCommand = new RelayCommand(OnValidateData, true);
+            SwitchReportCommand = new RelayCommand(OnSwitchReport, true);
+        }
+
+        public bool IsFLDReportViewModel => ReportViewModel.GetType() == typeof(FLDReportViewModel);
+
+        private void OnSwitchReport()
+        {
+            ReportViewModel = ReportViewModel.GetType() == typeof(FLDReportViewModel) ? new MTOReportViewModel(Project, null) : new FLDReportViewModel(Project, null) as ReportViewModel;
+            ReportViewModel.IsStandAlone = true;
+            RaisePropertyChanged(nameof(IsFLDReportViewModel));
         }
 
         private void OnValidateData()
@@ -69,6 +79,8 @@ namespace DesignStructs.FluentValidationExercise.ViewModels
         public ValidationResult ValidationResult { get => Get<ValidationResult>(); set => Set(value); }
 
         public ICommand ValidateDataCommand { get; private set; }
+
+        public ICommand SwitchReportCommand { get; private set; }
 
     }
 }

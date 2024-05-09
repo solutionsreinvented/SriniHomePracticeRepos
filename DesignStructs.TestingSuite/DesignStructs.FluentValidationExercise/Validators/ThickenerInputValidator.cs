@@ -90,6 +90,7 @@ namespace ReInvented.FluentValidationExercise.Validators
                 RuleFor(p => p.MaterialTakeoffReport).SetValidator(new ReportValidator());
                 RuleFor(p => (p.MaterialTakeoffReport as MTOReport).Contingencies).SetValidator(new ContingenciesValidator());
             });
+
             When(p => p.Settings.ReportSettings.GenerateFoundationLoadData && p.FoundationLoadDataReport != null, () =>
             {
                 RuleFor(p => p.FoundationLoadDataReport).SetValidator(new ReportValidator()).When(p => p.Settings.ReportSettings.GenerateFoundationLoadData);
