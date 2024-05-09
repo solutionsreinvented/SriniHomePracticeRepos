@@ -9,13 +9,13 @@ using PerformanceManager.Domain.Extensions;
 using PerformanceManager.Domain.Interfaces;
 using PerformanceManager.Domain.Models;
 using PerformanceManager.Domain.Services;
-using PerformanceManager.Domain.Stores;
 
 using ReInvented.Shared;
+using ReInvented.Shared.Stores;
 
 namespace PerformanceManager.Domain.Base
 {
-    public abstract class Activity : PropertyStore, IActivity
+    public abstract class Activity : ErrorsEnabledPropertyStore, IActivity
     {
         #region Private Constants
 
@@ -86,7 +86,7 @@ namespace PerformanceManager.Domain.Base
 
         public void SetCompletionInHours(int totalHoursRequired)
         {
-            ScheduledCompletion = InitiatedOn.AddDays((totalHoursRequired / (double)_workingHoursPerDay).CeilingTo(1));
+            ScheduledCompletion = InitiatedOn.AddDays((totalHoursRequired / (double)_workingHoursPerDay).Ceiling(1));
         }
 
         #endregion

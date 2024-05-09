@@ -6,7 +6,7 @@ using ReInvented.Shared.Stores;
 
 namespace ReInvented.FluentValidationExercise.Models
 {
-    public class Shell : ErrorsEnabledPropertyStore, INotifyDataErrorInfo
+    public class Shell : ValidatablePropertyStore, INotifyDataErrorInfo
     {
         public Shell(Input input)
         {

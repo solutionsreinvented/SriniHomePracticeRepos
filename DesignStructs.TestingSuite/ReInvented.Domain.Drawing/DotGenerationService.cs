@@ -1,5 +1,4 @@
-﻿
-using ReInvented.Domain.Drawing.Services;
+﻿using ReInvented.Domain.Drawing.Services;
 using ReInvented.Shared;
 
 using System;
@@ -25,14 +24,7 @@ namespace ReInvented.Domain.Drawing
             double dotCenterX = centerX + (circleRadius * Math.Cos(angle.Radians()));
             double dotCenterY = centerY - (circleRadius * Math.Sin(angle.Radians()));
 
-            Ellipse ellipse = new Ellipse
-            {
-                Width = 2 * dotRadius,
-                Height = 2 * dotRadius,
-                Stroke = stroke,
-                StrokeThickness = strokeThickness,
-                Fill = fill
-            };
+            Ellipse ellipse = new Ellipse { Width = 2.0 * dotRadius, Height = 2.0 * dotRadius, Stroke = stroke, StrokeThickness = strokeThickness, Fill = fill };
 
             Canvas.SetLeft(ellipse, dotCenterX - (ellipse.Width / 2.0));
             Canvas.SetTop(ellipse, dotCenterY - (ellipse.Height / 2.0));

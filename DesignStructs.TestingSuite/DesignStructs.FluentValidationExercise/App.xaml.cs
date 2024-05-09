@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 
-using ReInvented.FluentValidationExercise.Models;
 using DesignStructs.FluentValidationExercise.ViewModels;
 
 namespace ReInvented.FluentValidationExercise
@@ -12,10 +11,10 @@ namespace ReInvented.FluentValidationExercise
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
-            Input input = new Input();
+            MainViewModel viewModel = new MainViewModel();
 
-            MainWindow = new MainWindow() { DataContext = new MainViewModel() };
+            base.OnStartup(e);
+            MainWindow = new MainWindow() { DataContext = viewModel };
 
             MainWindow.Show();
 

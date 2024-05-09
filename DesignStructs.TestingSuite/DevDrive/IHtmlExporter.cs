@@ -9,16 +9,13 @@ namespace DevDrive
 
     public class HtmlToExcelExporter
     {
-        string htmlFilePath = @"C:\Users\masanams\OneDrive - TAKRAF\Desktop\Desktop\STAAD\Reports\fld.html";
-        string pdfFilePath = @"C:\Users\masanams\OneDrive - TAKRAF\Desktop\Desktop\STAAD\Reports\pdf.html";
+        readonly string htmlFilePath = @"C:\Users\masanams\OneDrive - TAKRAF\Desktop\Desktop\STAAD\Reports\fld.html";
+        readonly string pdfFilePath = @"C:\Users\masanams\OneDrive - TAKRAF\Desktop\Desktop\STAAD\Reports\pdf.html";
 
 
         public async Task Export()
         {
-            WebView2 webView = new WebView2
-            {
-                Source = new Uri(htmlFilePath)
-            };
+            WebView2 webView = new WebView2 { Source = new Uri(htmlFilePath) };
 
             await webView.EnsureCoreWebView2Async();
 
@@ -28,10 +25,7 @@ namespace DevDrive
         public async Task PrintHtmlToPdfAsync(WebView2 webView, string htmlFilePath, string pdfFilePath)
         {
             // Check if webView is initialized
-            if (webView.CoreWebView2 == null)
-            {
-                throw new InvalidOperationException("WebView2 control is not initialized yet.");
-            }
+            if (webView.CoreWebView2 == null) { throw new InvalidOperationException("WebView2 control is not initialized yet."); }
 
             // Load the HTML file into the WebView2 control
             webView.CoreWebView2.Navigate("file:///" + Path.GetFullPath(htmlFilePath));

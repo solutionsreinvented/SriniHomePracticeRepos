@@ -1,60 +1,74 @@
-﻿using System.ComponentModel;
+﻿
+using System;
 using System.Windows;
+using System.Windows.Input;
 
 using FluentValidation.Results;
 
-using ReInvented.FluentValidationExercise.Models;
+using ReInvented.Domain.ProjectSetup.Enums;
+using ReInvented.Domain.ProjectSetup.Interfaces;
+using ReInvented.Domain.Reporting.Models;
+using ReInvented.Domain.Tass.Common.Interfaces;
 using ReInvented.FluentValidationExercise.Validators;
+using ReInvented.Shared.Commands;
 using ReInvented.Shared.Stores;
+using ReInvented.ThickenerModelGenerator.UI.Base;
+using ReInvented.ThickenerModelGenerator.UI.Dialogs.ViewModels;
+using ReInvented.ThickenerModelGenerator.UI.Models;
 
 namespace DesignStructs.FluentValidationExercise.ViewModels
 {
-    public class MainViewModel : ErrorsEnabledPropertyStore
+    public class MainViewModel : ValidatablePropertyStore
     {
 
         public MainViewModel()
         {
-            Input = new Input();
-            Validator = new ThickenerInputValidator();
-            ///AttachEvents();
+            Project = new Project();
+            IProjectData projectData = Project.Settings.ProjectData;
+            projectData.Name = "Coal Handling Project";
+            projectData.Client = "Takraf India Pvt. Ltd.";
+            projectData.Code = "24-4042";
+            projectData.ProjectDirectory = @"C:\Users\masanams\OneDrive - TAKRAF\Desktop\Demo\35m";
+            projectData.Structure = "35m Diameter High Rate Thickener";
+
+            Project.Settings.ReportSettings.GenerateMTO = true;
+            Project.Settings.ReportSettings.GenerateFoundationLoadData = true;
+
+
+            //var mtoReport = Project.MaterialTakeoffReport as MTOReport;
+            //mtoReport.Document.Number = "4042A0TR035CX001";
+            //mtoReport.Document.Revisions.Add(new Revision());
+
+            ReportViewModel = new FLDReportViewModel(Project, null) { IsStandAlone = true };
+            ValidateDataCommand = new RelayCommand(OnValidateData, true);
         }
 
-        private void AttachEvents()
+        private void OnValidateData()
         {
-            if (Input.Shell != null)
+            ProjectValidator = new ProjectValidator();
+            var subValidator = new ContingenciesValidator();
+            try
             {
-                Input.Shell.PropertyChanged -= OnShellPropertyChanged;
-                Input.Shell.PropertyChanged += OnShellPropertyChanged;
+                //ValidationResult = subValidator.Validate((Project.MaterialTakeoffReport as MTOReport).Contingencies);
+
+                ValidationResult = ProjectValidator.Validate(Project);
             }
-            if (Input.FeedWell != null)
+            catch (Exception ex)
             {
-                Input.FeedWell.PropertyChanged -= OnFeedWellPropertyChanged;
-                Input.FeedWell.PropertyChanged += OnFeedWellPropertyChanged;
-            }
-        }
-
-        private void OnShellPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            ValidateInputData();
-        }
-        private void OnFeedWellPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            ValidateInputData();
-        }
-
-        public Input Input { get; private set; }
-
-        public ThickenerInputValidator Validator { get; private set; }
-
-        private void ValidateInputData()
-        {
-            ValidationResult results = Validator.Validate(Input);
-
-            foreach (ValidationFailure f in results.Errors)
-            {
-                MessageBox.Show("Invalid data identified");
+                MessageBox.Show(ex.Message);
+                throw;
             }
         }
+
+        public ReportViewModel ReportViewModel { get => Get<ReportViewModel>(); private set => Set(value); }
+
+        public ProjectValidator ProjectValidator { get => Get<ProjectValidator>(); private set => Set(value); }
+
+        public IProject Project { get => Get<IProject>(); private set => Set(value); }
+
+        public ValidationResult ValidationResult { get => Get<ValidationResult>(); set => Set(value); }
+
+        public ICommand ValidateDataCommand { get; private set; }
 
     }
 }

@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalAssembliesTester", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevDrive", "DevDrive\DevDrive.csproj", "{AE652D7C-C971-453C-9AD9-9CB6CBC5884F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.AsyncPracticeApp", "ReInvented.AsyncPracticeApp\ReInvented.AsyncPracticeApp.csproj", "{4FC287FC-49B6-4A8D-AA22-F5B2688B2DC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.UI", "ReInvented.UI\ReInvented.UI.csproj", "{E8BF176B-E06D-484B-8D96-639E05D6CF29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,14 @@ Global
 		{AE652D7C-C971-453C-9AD9-9CB6CBC5884F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE652D7C-C971-453C-9AD9-9CB6CBC5884F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE652D7C-C971-453C-9AD9-9CB6CBC5884F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FC287FC-49B6-4A8D-AA22-F5B2688B2DC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FC287FC-49B6-4A8D-AA22-F5B2688B2DC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FC287FC-49B6-4A8D-AA22-F5B2688B2DC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FC287FC-49B6-4A8D-AA22-F5B2688B2DC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8BF176B-E06D-484B-8D96-639E05D6CF29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8BF176B-E06D-484B-8D96-639E05D6CF29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8BF176B-E06D-484B-8D96-639E05D6CF29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8BF176B-E06D-484B-8D96-639E05D6CF29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

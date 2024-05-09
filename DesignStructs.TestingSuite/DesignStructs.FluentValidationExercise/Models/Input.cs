@@ -3,7 +3,7 @@ using ReInvented.Shared.Stores;
 
 namespace ReInvented.FluentValidationExercise.Models
 {
-    public class Input : ErrorsEnabledPropertyStore
+    public class Input : ValidatablePropertyStore
     {
         public Input()
         {

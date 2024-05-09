@@ -6,7 +6,7 @@ using System;
 
 namespace PerformanceManager.Domain.Base
 {
-    public class Measure : PropertyStore
+    public class Measure : ErrorsEnabledPropertyStore
     {
         public Measure()
         {
