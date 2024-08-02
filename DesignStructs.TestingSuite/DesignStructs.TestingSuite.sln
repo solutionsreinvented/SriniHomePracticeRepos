@@ -21,6 +21,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.AsyncPracticeApp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.UI", "ReInvented.UI\ReInvented.UI.csproj", "{E8BF176B-E06D-484B-8D96-639E05D6CF29}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.MathJaxer", "ReInvented.MathJaxer\ReInvented.MathJaxer.csproj", "{97448062-126C-43F3-BC1D-AFF7005946EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesignStructs.MeshingApp", "DesignStructs.MeshingApp\DesignStructs.MeshingApp.csproj", "{59799B71-A867-4EB1-88BC-8032DAF12F3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiom.Financials", "Axiom.Financials\Axiom.Financials.csproj", "{F60BCCD5-E8D1-4444-A94E-AE6BCA511588}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +69,18 @@ Global
 		{E8BF176B-E06D-484B-8D96-639E05D6CF29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8BF176B-E06D-484B-8D96-639E05D6CF29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8BF176B-E06D-484B-8D96-639E05D6CF29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97448062-126C-43F3-BC1D-AFF7005946EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97448062-126C-43F3-BC1D-AFF7005946EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97448062-126C-43F3-BC1D-AFF7005946EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97448062-126C-43F3-BC1D-AFF7005946EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59799B71-A867-4EB1-88BC-8032DAF12F3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59799B71-A867-4EB1-88BC-8032DAF12F3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59799B71-A867-4EB1-88BC-8032DAF12F3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59799B71-A867-4EB1-88BC-8032DAF12F3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F60BCCD5-E8D1-4444-A94E-AE6BCA511588}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F60BCCD5-E8D1-4444-A94E-AE6BCA511588}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F60BCCD5-E8D1-4444-A94E-AE6BCA511588}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F60BCCD5-E8D1-4444-A94E-AE6BCA511588}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -248,12 +248,12 @@ namespace SPro2023ConsoleApp
                                       .AddCombination(429, "0.6(D) - 1.0EL - 0.3ET - 0.7EV", "1 0.6 2 0.6 3 0.6 4 0.6 5 0.6 6 0.6 64 0.7 62 0.21 65 -0.7", EnvelopGroup.Serviceability);
 
             JsonDataSerializer<LoadCombinationsDefinition> serializer = new JsonDataSerializer<LoadCombinationsDefinition>();
-            string serialized = serializer.Serialize(loadCombinationsSource, JsonSerializerSettingsProvider.MinifiedSettings());
+            //string serialized = serializer.Serialize(loadCombinationsSource, JsonSerializerSettingsProvider.MinifiedSettings());
 
             string filename = $"{loadCombinationsSource.Code}-{loadCombinationsSource.Year}-{loadCombinationsSource.ThickenerDescription}-{loadCombinationsSource.Identifier}.json";
             string fullName = Path.Combine(@"C:\Users\masanams\OneDrive - TAKRAF\Desktop\", filename);
 
-            File.WriteAllText(fullName, serialized);
+            //File.WriteAllText(fullName, serialized);
 
             LoadCombinationsDefinition deserialized = serializer.Deserialize(fullName);
         }

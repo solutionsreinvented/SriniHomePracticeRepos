@@ -1,5 +1,4 @@
-﻿using ReInvented.FluentValidationExercise.Validators;
-using ReInvented.Shared.Stores;
+﻿using ReInvented.Shared.Stores;
 
 namespace ReInvented.FluentValidationExercise.Models
 {

@@ -2,7 +2,9 @@
     x:Class="ReInvented.FluentValidationExercise.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ap="clr-namespace:DesignStructs.FluentValidationExercise.AttachedProperties"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:da="http://schemas.reinvented.com/data-access"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pc="clr-namespace:ReInvented.ThickenerModelGenerator.UI.Controls;assembly=ReInvented.ThickenerModelGenerator.UI"
     xmlns:shared="http://schemas.reinvented.com/shared"
@@ -19,50 +21,57 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.7*" />
-            <ColumnDefinition Width="7*" />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
+
+
         <ListBox
-            Grid.Column="0"
+            Grid.Column="1"
+            Margin="5,20,0,0"
+            Padding="5"
+            HorizontalContentAlignment="Stretch"
+            BorderThickness="0.4"
             DataContext="{Binding ValidationResult}"
             ItemsSource="{Binding Errors}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock
-                        Width="250"
-                        Margin="0,5"
-                        Text="{Binding}"
-                        TextWrapping="Wrap"
-                        ToolTip="{Binding}" />
+                    <Border HorizontalAlignment="Stretch">
+                        <Border.Background>
+                            <SolidColorBrush Opacity="0.2" Color="Orange" />
+                        </Border.Background>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Border BorderBrush="DarkGray" BorderThickness="0,0,0.4,0">
+                                <Border.Background>
+                                    <SolidColorBrush Opacity="0.4" Color="PaleVioletRed" />
+                                </Border.Background>
+                                <Image
+                                    Width="12"
+                                    Margin="3"
+                                    Source="{Binding Source={x:Static da:Icons.CloseLight}, Converter={shared:StringToImageConverter}}" />
+                            </Border>
+                            <TextBlock
+                                Grid.Column="1"
+                                Width="600"
+                                Margin="5"
+                                Text="{Binding}"
+                                TextWrapping="Wrap"
+                                ToolTip="{Binding}" />
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <pc:FLDReportControl
-            Grid.Column="1"
-            DataContext="{Binding ReportViewModel}"
-            Visibility="{Binding DataContext.IsFLDReportViewModel, Converter={shared:BoolToVisibilityConverter}, ElementName=Root}" />
-        <pc:MTOReportControl
-            Grid.Column="1"
-            DataContext="{Binding ReportViewModel}"
-            Visibility="{Binding DataContext.IsFLDReportViewModel, Converter={shared:BoolToVisibilityConverter IsInverse=True}, ElementName=Root}" />
-
-        <UniformGrid
+        <Button
             Grid.Row="1"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
             Height="24"
-            Margin="0,10,0,0"
-            Columns="2">
-            <Button
-                Margin="0,0,5,0"
-                Command="{Binding ValidateDataCommand}"
-                Content="Validate Data" />
-            <Button
-                Margin="0,0,5,0"
-                Command="{Binding SwitchReportCommand}"
-                Content="Switch Report" />
-        </UniformGrid>
+            Margin="0,5"
+            Content="Validate Data" />
 
     </Grid>
 </Window>

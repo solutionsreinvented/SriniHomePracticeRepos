@@ -1,0 +1,61 @@
+﻿<Window
+    x:Class="DevDrive.Views.StagedNavigation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:DevDrive.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="StagedNavigation"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <Window.Resources>
+
+        <SolidColorBrush x:Key="StageButtonBackground">#FFB0C4DE</SolidColorBrush>
+        <SolidColorBrush x:Key="StageButtonForeground">#FF000000</SolidColorBrush>
+
+        <!--  Style for stage buttons  -->
+        <Style x:Key="StageButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Polygon
+                                Fill="{DynamicResource StageButtonBackground}"
+                                Points="0,0 120,0 140,20 120,40 0,40"
+                                Stroke="Black"
+                                StrokeThickness="1" />
+                            <ContentPresenter
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                TextElement.Foreground="{DynamicResource StageButtonForeground}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Padding" Value="15,0" />
+            <Setter Property="Margin" Value="0,0,-20,0" />
+        </Style>
+    </Window.Resources>
+
+    <StackPanel
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Orientation="Horizontal">
+        <Button
+            Panel.ZIndex="3"
+            Command="{Binding SupportStructureCommand}"
+            Content="Support Structure"
+            Style="{StaticResource StageButtonStyle}" />
+        <Button
+            Panel.ZIndex="2"
+            Command="{Binding ProjectSettingsCommand}"
+            Content="Project Settings"
+            Style="{StaticResource StageButtonStyle}" />
+        <Button
+            Command="{Binding TankCommand}"
+            Content="Tank"
+            Style="{StaticResource StageButtonStyle}" />
+        <!--  Add more buttons as needed  -->
+    </StackPanel>
+</Window>

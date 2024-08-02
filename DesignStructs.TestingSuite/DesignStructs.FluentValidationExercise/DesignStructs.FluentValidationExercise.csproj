@@ -36,10 +36,24 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FluentValidation, Version=11.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentValidation.11.7.1\lib\netstandard2.0\FluentValidation.dll</HintPath>
+      <HintPath>..\packages\FluentValidation.11.9.2\lib\netstandard2.0\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.OpenSTAADUI">
+      <HintPath>..\SPro2023ConsoleApp\SPro2023ConsoleApp\obj\Debug\Interop.OpenSTAADUI.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.BridgeStructure.Geometry">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.BridgeStructure.Geometry.dll</HintPath>
+    </Reference>
+    <Reference Include="ReInvented.CustomControls.Library">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.CustomControls.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="ReInvented.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.DataAccess\bin\Debug\ReInvented.DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.Domain.ProjectSetup">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Domain.ProjectSetup.dll</HintPath>
@@ -53,6 +67,9 @@
     <Reference Include="ReInvented.Domain.Tass.Common">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Domain.Tass.Common.dll</HintPath>
     </Reference>
+    <Reference Include="ReInvented.Domain.Tass.FluentValidation">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Domain.Tass.FluentValidation\bin\Debug\ReInvented.Domain.Tass.FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="ReInvented.Domain.Tass.Validation">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Domain.Tass.Validation.exe</HintPath>
     </Reference>
@@ -60,17 +77,23 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="ReInvented.StaadPro.Interactivity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="ReInvented.StaadPro.Interactivity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Domain.Tass.FluentValidation\bin\Debug\ReInvented.StaadPro.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="ReInvented.StaadTools.StaadInteractionVB">
+      <HintPath>..\SPro2023ConsoleApp\SPro2023ConsoleApp\bin\Debug\ReInvented.StaadTools.StaadInteractionVB.dll</HintPath>
+    </Reference>
     <Reference Include="ReInvented.ThickenerModelGenerator.UI">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.ThickenerModelGenerator.UI.exe</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -90,10 +113,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Extensions\IRuleBuilderExtensions.cs" />
-    <Compile Include="Validators\ContingenciesValidator.cs" />
-    <Compile Include="Validators\ProjectDataValidator.cs" />
-    <Compile Include="Validators\ThickenerInputValidator.cs" />
+    <Compile Include="AttachedProperties\CommandProperties.cs" />
+    <Compile Include="Extensions\OSGeometryExtensionsAsync.cs" />
+    <Compile Include="Models\Configuration.cs" />
+    <Compile Include="Models\IResult.cs" />
+    <Compile Include="Models\ProcessResult.cs" />
+    <Compile Include="Services\MultipleInstanceOpenStaadProvider.cs" />
+    <Compile Include="Services\ApplicationServices.cs" />
+    <Compile Include="Services\RotHelpers.cs" />
+    <Compile Include="Services\RotObjectInfo.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

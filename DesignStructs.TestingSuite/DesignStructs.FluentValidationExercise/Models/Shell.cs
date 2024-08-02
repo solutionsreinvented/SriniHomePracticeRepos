@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-using ReInvented.FluentValidationExercise.Validators;
 using ReInvented.Shared.Stores;
 
 namespace ReInvented.FluentValidationExercise.Models

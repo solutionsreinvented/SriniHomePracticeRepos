@@ -1,5 +1,4 @@
-﻿using ReInvented.FluentValidationExercise.Validators;
-using ReInvented.Shared.Stores;
+﻿using ReInvented.Shared.Stores;
 
 namespace ReInvented.FluentValidationExercise.Models
 {
@@ -15,6 +14,5 @@ namespace ReInvented.FluentValidationExercise.Models
 
         public FeedWell FeedWell { get => Get<FeedWell>(); set => Set(value); }
 
-        public ThickenerInputValidator Validator { get; private set; }
     }
 }
