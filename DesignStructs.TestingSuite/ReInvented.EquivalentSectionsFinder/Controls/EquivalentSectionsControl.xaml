@@ -1,0 +1,277 @@
+﻿<UserControl
+    x:Class="ReInvented.EquivalentSectionsFinder.Controls.EquivalentSectionsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:vm="clr-namespace:ReInvented.EquivalentSectionsFinder.ViewModels"
+    x:Name="Root"
+    d:DesignHeight="600"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <UserControl.DataContext>
+        <vm:EquivalentSectionsViewModel />
+    </UserControl.DataContext>
+
+    <Grid Margin="5">
+
+        <!--#region Grid Definitions-->
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <!--#endregion-->
+
+        <!--#region Current Section-->
+
+        <GroupBox
+            Grid.Row="1"
+            Grid.Column="0"
+            Padding="5"
+            VerticalAlignment="Stretch"
+            Header="Current Section">
+
+            <StackPanel>
+                <TextBlock
+                    Margin="5,5,5,0"
+                    VerticalAlignment="Center"
+                    Text="Database:" />
+                <ComboBox
+                    Height="24"
+                    Margin="5"
+                    DisplayMemberPath="Name"
+                    ItemsSource="{Binding Databases}"
+                    SelectedItem="{Binding SelectedDatabase}" />
+                <TextBlock
+                    Margin="5,5,5,0"
+                    VerticalAlignment="Center"
+                    Text="Shape:" />
+                <ComboBox
+                    Height="24"
+                    Margin="5"
+                    DisplayMemberPath="Shape"
+                    ItemsSource="{Binding SelectedDatabase.SectionShapes}"
+                    SelectedItem="{Binding SelectedShape}" />
+                <TextBlock
+                    Margin="5,5,5,0"
+                    VerticalAlignment="Center"
+                    Text="Classification:" />
+                <ComboBox
+                    Height="24"
+                    Margin="5"
+                    DisplayMemberPath="Category"
+                    ItemsSource="{Binding SelectedShape.Classifications}"
+                    SelectedItem="{Binding SelectedClassification}" />
+                <TextBlock
+                    Margin="5,5,5,0"
+                    VerticalAlignment="Center"
+                    Text="Section:" />
+                <ComboBox
+                    Height="24"
+                    Margin="5"
+                    DisplayMemberPath="Designation"
+                    ItemsSource="{Binding SelectedClassification.Sections}"
+                    SelectedItem="{Binding SelectedSection}" />
+                <TextBlock
+                    Margin="5,5,5,0"
+                    VerticalAlignment="Center"
+                    Text="Allowed percent difference:" />
+                <TextBox
+                    Height="24"
+                    Margin="5"
+                    Padding="2,0"
+                    VerticalContentAlignment="Center"
+                    shared:TextBoxProperties.SelectAll="True"
+                    Text="{Binding PercentDifference, StringFormat={}{0:P2}}" />
+                <TextBlock
+                    Margin="5,5,5,0"
+                    VerticalAlignment="Center"
+                    Text="Match probability percent:" />
+                <TextBox
+                    Height="24"
+                    Margin="5"
+                    Padding="2,0"
+                    VerticalContentAlignment="Center"
+                    shared:TextBoxProperties.SelectAll="True"
+                    Text="{Binding MatchProbabilityPercent, StringFormat={}{0:P2}}" />
+
+                <!--#region Submit Button-->
+
+                <Button
+                    Height="24"
+                    Margin="5,10,5,5"
+                    Command="{Binding CheckForEquivalentSectionsCommand}"
+                    Content="Check for Equivalent Sections"
+                    IsDefault="True"
+                    IsEnabled="{Binding HasValidLookInDatabases}" />
+
+                <!--#endregion-->
+
+            </StackPanel>
+        </GroupBox>
+
+        <!--#endregion-->
+
+        <!--#region Look In Databases-->
+
+        <GroupBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Padding="5"
+            Header="Search in Databases">
+
+            <StackPanel>
+                <ListView
+                    Margin="5"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ItemsSource="{Binding Databases}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox
+                                VerticalAlignment="Center"
+                                Command="{Binding DataContext.ToggleDatabaseCommand, ElementName=Root}"
+                                CommandParameter="{Binding}"
+                                IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <TextBlock
+                                    Margin="3,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Name}" />
+                            </CheckBox>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+
+        </GroupBox>
+
+        <!--#endregion-->
+
+        <!--#region Equivalent Sections-->
+
+        <GroupBox
+            Grid.Row="1"
+            Grid.Column="2"
+            Header="Equivalent Sections">
+            <ListBox
+                Margin="5"
+                Background="Transparent"
+                BorderThickness="0"
+                ItemsSource="{Binding ComparisonResults}"
+                SelectedItem="{Binding SelectedComparisonResult}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Target.Designation}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+
+        <!--#endregion-->
+
+        <!--#region Sections Data Comparison-->
+
+        <GroupBox
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            VerticalAlignment="Stretch"
+            Header="Sections Comparison"
+            IsEnabled="False"
+            Visibility="{Binding DataContext.HasASelectedResult, ElementName=Root, Converter={shared:BoolToVisibilityConverter}}">
+            <StackPanel Margin="5">
+
+                <Grid Margin="5,0">
+
+                    <!--#region Grid Definitions-->
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <!--#endregion-->
+
+                    <TextBlock
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        Text="Property" />
+                    <TextBlock
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        Text="Property" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        Text="{Binding SelectedComparisonResult.Source.Designation}" />
+                    <TextBlock
+                        Grid.Column="2"
+                        VerticalAlignment="Center"
+                        Text="{Binding SelectedComparisonResult.Target.Designation}" />
+                    <TextBlock
+                        Grid.Column="3"
+                        VerticalAlignment="Center"
+                        Text="Percent Difference" />
+                </Grid>
+
+                <ListBox
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ItemsSource="{Binding SelectedComparisonResult.ProjectedProperties}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+
+                                <!--#region Grid Definitions-->
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <!--#endregion-->
+
+                                <TextBlock
+                                    Grid.Column="0"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding PropertyName}" />
+                                <TextBlock
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding SourceValue, StringFormat={}{0:N2}}" />
+                                <TextBlock
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding TargetValue, StringFormat={}{0:N2}}" />
+                                <TextBlock
+                                    Grid.Column="3"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding PercentDifference, StringFormat={}{0:P1}}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </GroupBox>
+
+        <!--#endregion-->
+
+    </Grid>
+
+</UserControl>

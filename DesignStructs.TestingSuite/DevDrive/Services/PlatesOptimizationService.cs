@@ -10,6 +10,7 @@ using ReInvented.StaadPro.Interactivity.Models;
 
 namespace DevDrive.Services
 {
+
     public sealed class PlateGroupDesignResult
     {
         public PlateGroupDesignResult()
