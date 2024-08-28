@@ -3,11 +3,11 @@
 namespace Continuum.EquivalentSectionsFinder.Controls
 {
     /// <summary>
-    /// Interaction logic for EquivalentSectionsControl.xaml
+    /// Interaction logic for ComparisonResultControl.xaml
     /// </summary>
-    public partial class EquivalentSectionsControl : UserControl
+    public partial class ComparisonResultControl : UserControl
     {
-        public EquivalentSectionsControl()
+        public ComparisonResultControl()
         {
             InitializeComponent();
         }

@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 
-using ReInvented.EquivalentSectionsFinder.Views;
+using Continuum.EquivalentSectionsFinder.Views;
 
-namespace ReInvented.EquivalentSectionsFinder
+namespace Continuum.EquivalentSectionsFinder
 {
     /// <summary>
     /// Interaction logic for App.xaml

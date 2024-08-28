@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 using ReInvented.Sections.Domain.Models;
 
-namespace ReInvented.EquivalentSectionsFinder.Models
+namespace Continuum.EquivalentSectionsFinder.Models
 {
     public class SelectableDatabase : Database, INotifyPropertyChanged
     {

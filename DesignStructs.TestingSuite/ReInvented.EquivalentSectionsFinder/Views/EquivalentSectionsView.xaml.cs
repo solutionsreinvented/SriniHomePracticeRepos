@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace ReInvented.EquivalentSectionsFinder.Views
+namespace Continuum.EquivalentSectionsFinder.Views
 {
     /// <summary>
     /// Interaction logic for EquivalentSectionsView.xaml

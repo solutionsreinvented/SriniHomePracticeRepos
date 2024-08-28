@@ -1,4 +1,4 @@
-﻿namespace ReInvented.EquivalentSectionsFinder.Models
+﻿namespace Continuum.EquivalentSectionsFinder.Models
 {
     public sealed class PropertyData
     {
@@ -6,11 +6,11 @@
 
         public string PropertyName { get; set; }
 
-        public double SourceValue { get; set; }
+        public string SourceValue { get; set; }
 
-        public double TargetValue { get; set; }
+        public string TargetValue { get; set; }
 
-        public double PercentDifference { get; set; }
+        public string PercentDifference { get; set; }
 
         #endregion
     }

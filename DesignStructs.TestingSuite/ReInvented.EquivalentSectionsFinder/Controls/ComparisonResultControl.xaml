@@ -1,0 +1,104 @@
+﻿<UserControl
+    x:Class="Continuum.EquivalentSectionsFinder.Controls.ComparisonResultControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="Root"
+    d:DesignHeight="380"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <!--#region Sections Data Comparison-->
+
+    <GroupBox
+        Grid.Row="2"
+        Grid.Column="0"
+        Grid.ColumnSpan="3"
+        Margin="5,0,5,5"
+        VerticalAlignment="Stretch"
+        Header="Sections Comparison"
+        IsEnabled="False">
+        <StackPanel Margin="5">
+
+            <TextBlock Margin="5" Text="Compared Properties" />
+
+            <Grid Margin="5,0">
+
+                <!--#region Grid Definitions-->
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <!--#endregion-->
+
+                <TextBlock
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Property" />
+                <TextBlock
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Text="{Binding SelectedComparisonResult.Source.Designation}" />
+                <TextBlock
+                    Grid.Column="2"
+                    VerticalAlignment="Center"
+                    Text="{Binding SelectedComparisonResult.Target.Designation}" />
+                <TextBlock
+                    Grid.Column="3"
+                    VerticalAlignment="Center"
+                    Text="Difference" />
+            </Grid>
+
+            <ListBox
+                HorizontalContentAlignment="Stretch"
+                Background="Transparent"
+                BorderThickness="0"
+                ItemsSource="{Binding SelectedComparisonResult.ProjectedProperties}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+
+                            <!--#region Grid Definitions-->
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <!--#endregion-->
+
+                            <TextBlock
+                                Grid.Column="0"
+                                VerticalAlignment="Center"
+                                Text="{Binding PropertyName}" />
+                            <TextBlock
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Text="{Binding SourceValue, StringFormat={}{0:N2}}" />
+                            <TextBlock
+                                Grid.Column="2"
+                                VerticalAlignment="Center"
+                                Text="{Binding TargetValue, StringFormat={}{0:N2}}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                VerticalAlignment="Center"
+                                Text="{Binding PercentDifference, StringFormat={}{0:P1}}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <!--<TextBlock Margin="5" Text="Other Properties" />-->
+
+        </StackPanel>
+    </GroupBox>
+
+    <!--#endregion-->
+
+</UserControl>

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
-using ReInvented.EquivalentSectionsFinder.Models;
+using Continuum.EquivalentSectionsFinder.Models;
 using ReInvented.Sections.Domain.Interfaces;
 using ReInvented.Sections.Domain.Models;
 using ReInvented.Sections.Domain.Repositories;
 
-namespace ReInvented.EquivalentSectionsFinder.Services
+namespace Continuum.EquivalentSectionsFinder.Services
 {
     public sealed class EquivalentSectionsService
     {
@@ -21,6 +22,8 @@ namespace ReInvented.EquivalentSectionsFinder.Services
             List<IRolledSection> allSections = databases.SelectMany(db => db.SectionShapes.Where(sh => sh.Shape == currentShape.Shape).SelectMany(sh => sh.Classifications).SelectMany(c => c.Sections)).ToList();
 
             IEnumerable<SectionPropertyComparisonResult> results = allSections.Select(s => new SectionPropertyComparisonResult(currentSection, s)).Where(r => r.IsEquivalent(percentDeviation, matchProbabilityPercent));
+
+            results.Select(r => r.SectionEquivalency).ToList().ForEach(se => Debug.Print($"Source: {se.SourceName}, Target: {se.TargetName}, Valid Values: {se.ValidValues}, Matched Values: {se.MatchedValues}, Matched Percent: {se.MatchPercent:P2}"));
 
             return results;
         }

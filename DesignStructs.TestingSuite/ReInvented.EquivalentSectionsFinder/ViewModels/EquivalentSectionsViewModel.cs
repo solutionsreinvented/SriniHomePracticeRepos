@@ -5,8 +5,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
-using ReInvented.EquivalentSectionsFinder.Models;
-using ReInvented.EquivalentSectionsFinder.Services;
+using Continuum.EquivalentSectionsFinder.Models;
+using Continuum.EquivalentSectionsFinder.Services;
 using ReInvented.Sections.Domain.Interfaces;
 using ReInvented.Sections.Domain.Models;
 using ReInvented.Sections.Domain.Repositories;
@@ -14,7 +14,7 @@ using ReInvented.Shared;
 using ReInvented.Shared.Commands;
 using ReInvented.Shared.Stores;
 
-namespace ReInvented.EquivalentSectionsFinder.ViewModels
+namespace Continuum.EquivalentSectionsFinder.ViewModels
 {
     public class EquivalentSectionsViewModel : ValidatablePropertyStore
     {
@@ -41,7 +41,15 @@ namespace ReInvented.EquivalentSectionsFinder.ViewModels
 
         public IRolledSection SelectedSection { get => Get<IRolledSection>(); set => Set(value); }
 
-        public SectionPropertyComparisonResult SelectedComparisonResult { get => Get<SectionPropertyComparisonResult>(); set { Set(value); RaisePropertyChanged(nameof(HasASelectedResult)); } }
+        public SectionPropertyComparisonResult SelectedComparisonResult
+        {
+            get => Get<SectionPropertyComparisonResult>();
+            set
+            {
+                Set(value);
+                RaisePropertyChanged(nameof(HasASelectedResult));
+            }
+        }
 
         public double PercentDifference { get => Get<double>(); set => Set(value.InPercentage()); }
 

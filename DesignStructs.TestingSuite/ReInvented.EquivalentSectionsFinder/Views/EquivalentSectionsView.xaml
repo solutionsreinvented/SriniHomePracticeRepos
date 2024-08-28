@@ -1,18 +1,34 @@
 ﻿<Window
-    x:Class="ReInvented.EquivalentSectionsFinder.Views.EquivalentSectionsView"
+    x:Class="Continuum.EquivalentSectionsFinder.Views.EquivalentSectionsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:ReInvented.EquivalentSectionsFinder.Controls"
+    xmlns:controls="clr-namespace:Continuum.EquivalentSectionsFinder.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:vm="clr-namespace:Continuum.EquivalentSectionsFinder.ViewModels"
+    x:Name="Root"
     Title="Equivalent Sections Finder"
-    Width="800"
-    Height="700"
+    Width="900"
     ResizeMode="NoResize"
+    SizeToContent="Height"
     WindowStartupLocation="CenterScreen"
     WindowStyle="ToolWindow"
     mc:Ignorable="d">
+
+    <Window.DataContext>
+        <vm:EquivalentSectionsViewModel />
+    </Window.DataContext>
+
     <Grid>
-        <controls:EquivalentSectionsControl />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="410" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <controls:EquivalentSectionsControl Grid.Row="0" DataContext="{Binding}" />
+        <controls:ComparisonResultControl
+            Grid.Row="1"
+            DataContext="{Binding}"
+            Visibility="{Binding HasASelectedResult, Converter={shared:BoolToVisibilityConverter}}" />
     </Grid>
 </Window>
