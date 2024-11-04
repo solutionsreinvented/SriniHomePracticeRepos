@@ -18,15 +18,22 @@ namespace DevDrive.Services
 
         }
 
-        public PlateGroupDesignResult(PlateGroupStressSummary stressSummary, double designThickness)
+        public PlateGroupDesignResult(string groupName, PlateGroupStressSummary stressSummary, double currentThickness, double designThickness)
         {
+            GroupName = groupName;
             StressSummary = stressSummary;
-            Thickness = designThickness;
+            CurrentThickness = currentThickness;
+            DesignThickness = designThickness;
         }
+
+        public string GroupName { get; set; }
 
         public PlateGroupStressSummary StressSummary { get; set; }
 
-        public double Thickness { get; set; }
+        public double DesignThickness { get; set; }
+        public double CurrentThickness { get; set; }
+        public double CorrosionAllowance { get; set; }
+        public double MinimumThickness { get; set; }
     }
 
 
@@ -68,12 +75,12 @@ namespace DevDrive.Services
             IEnumerable<PlateCenterResults> results = Wrapper.GetPlateCenterResultsForGroup(groupName, loadCases);
             PlateGroupStressSummary governingResult = results.GetGoverningPlateGroupStressSummary(PlateLimitingStress);
 
-            PlateGroupDesignResult designResult = new PlateGroupDesignResult(governingResult, currentThickness);
+            PlateGroupDesignResult designResult = new PlateGroupDesignResult(groupName, governingResult, currentThickness, currentThickness);
 
             if (governingResult.PercentPlatesExceeding <= allowedPercentPlatesToExceed)
             {
-                designResult.Thickness *= governingResult.GoverningResults.VonMises.AbsoluteMaximum / 1000 / PlateLimitingStress;
-                designResult.Thickness = CommonThicknesses.Where(t => t >= designResult.Thickness).OrderBy(t => t).FirstOrDefault();
+                designResult.DesignThickness *= governingResult.GoverningResults.VonMises.AbsoluteMaximum / 1000 / PlateLimitingStress;
+                designResult.DesignThickness = CommonThicknesses.Where(t => t >= designResult.DesignThickness).OrderBy(t => t).FirstOrDefault();
             }
 
             return designResult;
@@ -92,13 +99,16 @@ namespace DevDrive.Services
         public PlateGroupDesignResult OptimizePlateGroup(string groupName, double minimumThickness, double corrosionAllowance, IEnumerable<LoadCase> loadCases, double allowedPercentPlatesToExceed = 15.0)
         {
             PlateGroupDesignResult result = OptimizePlateGroup(groupName, loadCases, allowedPercentPlatesToExceed);
-            double designThickness = Math.Max(result.Thickness + corrosionAllowance, minimumThickness);
-            result.Thickness = CommonThicknesses.Where(t => t >= designThickness).OrderBy(t => t).FirstOrDefault();
+            double designThickness = Math.Max(result.DesignThickness + corrosionAllowance, minimumThickness);
+            result.DesignThickness = CommonThicknesses.Where(t => t >= designThickness).OrderBy(t => t).FirstOrDefault();
+
+            result.CorrosionAllowance = corrosionAllowance;
+            result.MinimumThickness = minimumThickness;
 
             return result;
         }
 
-        public Dictionary<string, PlateGroupDesignResult> OptimizePlateGroups(IEnumerable<string> groupNames, IEnumerable<LoadCase> loadCases, double allowedPercentPlatesToExceed = 15.0)
+        public List<PlateGroupDesignResult> OptimizePlateGroups(IEnumerable<string> groupNames, IEnumerable<LoadCase> loadCases, double allowedPercentPlatesToExceed = 15.0)
         {
             //Dictionary<string, PlateGroupDesignResult> groupDesignResults = new Dictionary<string, PlateGroupDesignResult>();
 
@@ -112,7 +122,7 @@ namespace DevDrive.Services
             return OptimizePlateGroups(groupNames, 0.0, 0.0, loadCases, allowedPercentPlatesToExceed);
         }
 
-        public Dictionary<string, PlateGroupDesignResult> OptimizePlateGroups(IEnumerable<string> groupNames, double minimumThickness, IEnumerable<LoadCase> loadCases, double allowedPercentPlatesToExceed = 15.0)
+        public List<PlateGroupDesignResult> OptimizePlateGroups(IEnumerable<string> groupNames, double minimumThickness, IEnumerable<LoadCase> loadCases, double allowedPercentPlatesToExceed = 15.0)
         {
             //Dictionary<string, PlateGroupDesignResult> groupDesignResults = new Dictionary<string, PlateGroupDesignResult>();
 
@@ -126,15 +136,15 @@ namespace DevDrive.Services
             return OptimizePlateGroups(groupNames, minimumThickness, 0.0, loadCases, allowedPercentPlatesToExceed);
         }
 
-        public Dictionary<string, PlateGroupDesignResult> OptimizePlateGroups(IEnumerable<string> groupNames, double minimumThickness, double corrosionAllowance,
+        public List<PlateGroupDesignResult> OptimizePlateGroups(IEnumerable<string> groupNames, double minimumThickness, double corrosionAllowance,
                                                                               IEnumerable<LoadCase> loadCases, double allowedPercentPlatesToExceed = 15.0)
         {
-            Dictionary<string, PlateGroupDesignResult> groupDesignResults = new Dictionary<string, PlateGroupDesignResult>();
+            List<PlateGroupDesignResult> groupDesignResults = new List<PlateGroupDesignResult>();
 
             foreach (string groupName in groupNames.ToHashSet())
             {
                 PlateGroupDesignResult designResult = OptimizePlateGroup(groupName, minimumThickness, corrosionAllowance, loadCases, allowedPercentPlatesToExceed);
-                groupDesignResults.Add(groupName, designResult);
+                groupDesignResults.Add(designResult);
             }
 
             return groupDesignResults;

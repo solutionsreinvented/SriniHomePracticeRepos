@@ -116,10 +116,7 @@
     <Compile Include="AttachedProperties\CommandProperties.cs" />
     <Compile Include="Extensions\OSGeometryExtensionsAsync.cs" />
     <Compile Include="Models\Configuration.cs" />
-    <Compile Include="Models\IResult.cs" />
-    <Compile Include="Models\ProcessResult.cs" />
     <Compile Include="Services\MultipleInstanceOpenStaadProvider.cs" />
-    <Compile Include="Services\ApplicationServices.cs" />
     <Compile Include="Services\RotHelpers.cs" />
     <Compile Include="Services\RotObjectInfo.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

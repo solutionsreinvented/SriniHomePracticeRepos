@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Export to Excel</title>
+    <link rel="stylesheet" type="text/css"
+        href="file:///E:/SolutionsReInvented/BranchReorganization/MainProjects/SRi.XamlUIThickenerApp/ApplicationData/Reports/Templates/Styles/common.css">
+    <link rel="stylesheet" type="text/css"
+        href="file:///E:/SolutionsReInvented/BranchReorganization/MainProjects/SRi.XamlUIThickenerApp/ApplicationData/Reports/Templates/Styles/fld.css">
+    <!-- Add this in your HTML to include ExcelJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
+</head>
+
+<body>
+    <table id="document-header">
+        <thead>
+            <tr>
+                <th>
+                    <table class="data-table">
+                        <tbody>
+                            <tr>
+                                <td class="align-left header-caption">Project</td>
+                                <td class="align-center header-delimiter">:</td>
+                                <td id="project-name" class="align-left header-detail">Moly Decant (Sierrita)</td>
+                                <td id="header-logo" class="align-right" style="background-color: transparent"
+                                    rowspan="5">
+                                    <img src="file:///E:/SolutionsReInvented/BranchReorganization/MainProjects/SRi.XamlUIThickenerApp/ApplicationData/Reports/Images/DELKOR_Logo.jpg"
+                                        alt="Logo missing...">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-left header-caption">Document Title</td>
+                                <td class="align-center header-delimiter">:</td>
+                                <td id="doc-title" class="align-left header-detail">Foundation Load Data</td>
+                            </tr>
+                            <tr>
+                                <td class="align-left header-caption">Structure</td>
+                                <td class="align-center header-delimiter">:</td>
+                                <td id="structure" class="align-left header-detail">2.44m Diameter Thickener Bridge</td>
+                            </tr>
+                            <tr>
+                                <td class="align-left header-caption">Document Number</td>
+                                <td class="align-center header-delimiter">:</td>
+                                <td class="align-left header-detail">
+                                    <div id="document-number" class="document-number-column">D2451A0TR002CV001</div>
+                                    <div class="align-center revision-label-column">Revision:</div>
+                                    <div id="revision" class="align-center revision-value-column">B</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-left header-caption">Client</td>
+                                <td class="align-center header-delimiter">:</td>
+                                <td id="client" class="align-left header-detail">Freeport-McMoran</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="4" style="background-color: transparent">
+                    <section id="front-page-title" class="align-center">Foundation Load Data for 2.44m Diameter
+                        Thickener
+                        Bridge</section>
+                    <section id="front-page-logo" class="align-center"><img
+                            src="file:///E:/SolutionsReInvented/BranchReorganization/MainProjects/SRi.XamlUIThickenerApp/ApplicationData/Reports/Images/DELKOR_Logo.jpg"
+                            alt="Logo missing..."></section>
+                    <section id="notes">
+                        <section class="notes-section">
+                            <div class="caption-item first">
+                                <h4>Important Notes:</h4>
+                            </div>
+                            <div class="detail-item first">
+                                <ul>
+                                    <li>The data provided in this document are the reactions at the supports. Hence,
+                                        these
+                                        values shall be multiplied by (-1) to obtain the forces for foundations' design.
+                                    </li>
+                                    <li>The local axes shown in the sketches do not correspond to the axes of the
+                                        pedestals
+                                        and hence the loads must be re-calculated or transformed to suit to the
+                                        pedestals'
+                                        design.</li>
+                                    <li>The circular section pedestal (for center column) is modelled as a circle of
+                                        simple
+                                        supports corresponding tothe circle of anchor bolts.</li>
+                                    <li>Load cases 604, 606 provides the difference of loads for sanded condition from
+                                        their
+                                        respective operating load cases.</li>
+                                    <li>Hence the same can be combined with 603, 605 respectively to obtain worst case
+                                        scenarios while formulating the load combinations.</li>
+                                    <li>Mutual combination of load cases 607 through 615 and their combination with
+                                        other
+                                        load cases shall be in accordance with the applicable codes/standards.</li>
+                                    <li>Special loads such as EQ/WL shall be combined only with the operating condition
+                                        loads e.g., 603.</li>
+                                    <li>No differential settlements are considered (both in radial and circumferential
+                                        directions) in the analysis of the structure. Hence, any differential
+                                        settlements
+                                        encountered shall be resolved by considering suitable foundation type.</li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                    <section id="submission-info">
+                        <div class="align-center vertically-oriented-table submission-info-grid">
+                            <div class="caption-item first align-left">Project Number:</div>
+                            <div class="detail-item first align-left">D2451</div>
+                            <div class="caption-item align-left">Document Number:</div>
+                            <div class="detail-item align-left">D2451A0TR002CV001</div>
+                            <div class="caption-item align-left">Submission Status:</div>
+                            <div class="detail-item align-left">For Review &amp; Approval</div>
+                            <div class="caption-item align-left">IP Security:</div>
+                            <div class="detail-item align-left">Company Confidential</div>
+                        </div>
+                    </section>
+                    <section id="revision-history" class="break-page-start">
+                        <h3>Revision History</h3>
+                        <div class="data-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="align-center">Revision</th>
+                                        <th class="align-left">Date</th>
+                                        <th class="align-left">Submission Status</th>
+                                        <th>Originator</th>
+                                        <th>Checker</th>
+                                        <th>Approver</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="revision-history-table-body">
+                                    <tr>
+                                        <td class="align-center">A</td>
+                                        <td class="align-left">02 Sept 2024</td>
+                                        <td class="align-left">For Review &amp; Approval</td>
+                                        <td class="align-center">MSR</td>
+                                        <td class="align-center">MSR</td>
+                                        <td class="align-center">NRM</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-center">B</td>
+                                        <td class="align-left">04 Nov 2024</td>
+                                        <td class="align-left">For Review &amp; Approval</td>
+                                        <td class="align-center">MSR</td>
+                                        <td class="align-center">MSR</td>
+                                        <td class="align-center">NRM</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                    <section id="revision-descriptions">
+                        <h3>Revision Description</h3>
+                        <div class="data-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="align-center">Revision</th>
+                                        <th class="align-left">Section</th>
+                                        <th class="align-left">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="revision-descriptions-table-body">
+                                    <tr>
+                                        <td class="align-center" rowspan="1">A</td>
+                                        <td class="align-left">-</td>
+                                        <td class="align-left">Issued for Approval</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-center" rowspan="1">B</td>
+                                        <td class="align-left">-</td>
+                                        <td class="align-left">Generally revised. All forces are updated based on
+                                            Imperial
+                                            unit system. Additionally, the seismic forces in Y-direction are updated.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                    <section id="report-content" class="break-page-start">
+                        <h3 class="break-page-start">Summary of Loads from All Supports (Statics Check):</h3>
+                        <div class="data-table">
+                            <table class="overall-summary-table">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" class="align-left">Load Case Description</th>
+                                        <th rowspan="2">F<sub>x</sub><br>(kip)</th>
+                                        <th rowspan="2">F<sub>y</sub><br>(kip)</th>
+                                        <th rowspan="2">F<sub>z</sub><br>(kip)</th>
+                                        <th rowspan="2">M<sub>x</sub><br>(kip-ft)</th>
+                                        <th rowspan="2">M<sub>y</sub><br>(kip-ft)</th>
+                                        <th rowspan="2">M<sub>z</sub><br>(kip-ft)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>601: DEAD LOAD</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">5.7</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.1</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>602: LIVE LOAD - BRIDGE WALKWAY</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">1.6</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>603: FLUID LOADS - OPERATING CONDITION</td>
+                                        <td class="align-center">-0.0</td>
+                                        <td class="align-center">1.6</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.2</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.7</td>
+                                    </tr>
+                                    <tr>
+                                        <td>604: ADDITIONAL FLUID LOADS - SANDED CONDITION</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>605: LIVE LOAD - TORQUE AND LIFTING - NORMAL OPERATING</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">1.8</td>
+                                        <td class="align-center">0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>606: ADDITIONAL LIVE LOAD - TORQUE AND LIFTING - MAXIMUM</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">2.3</td>
+                                        <td class="align-center">0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>607: WIND LOAD - Z DIRECTION</td>
+                                        <td class="align-center">-0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">-1.3</td>
+                                        <td class="align-center">-3.1</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>608: WIND LOAD - X DIRECTION</td>
+                                        <td class="align-center">-1.5</td>
+                                        <td class="align-center">-0.0</td>
+                                        <td class="align-center">-0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">-0.0</td>
+                                        <td class="align-center">3.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>609: SEISMIC LOAD - Z POSITIVE DIRECTION</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">-1.5</td>
+                                        <td class="align-center">-5.1</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>610: SEISMIC LOAD - Z NEGATIVE DIRECTION</td>
+                                        <td class="align-center">-0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">1.5</td>
+                                        <td class="align-center">5.1</td>
+                                        <td class="align-center">-0.0</td>
+                                        <td class="align-center">0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>611: SEISMIC LOAD - X POSITIVE DIRECTION</td>
+                                        <td class="align-center">-1.5</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">-0.0</td>
+                                        <td class="align-center">5.1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>612: SEISMIC LOAD - X NEGATIVE DIRECTION</td>
+                                        <td class="align-center">1.5</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">-5.1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>613: SEISMIC LOAD - Y DIRECTION</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">-1.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">-0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>614: POSITIVE THERMAL GRADIENT</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>615: NEGATIVE THERMAL GRADIENT</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                        <td class="align-center">0.0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="pcd1-supports" class="break-page-start">
+                            <h3>ALL Columns' Supports:</h3>
+                            <h4>Supports Information:</h4>
+
+                            <div class="vertically-oriented-table supports-info-table">
+                                <div class="caption-item first">Support group C.G.:</div>
+                                <div class="detail-item first">(X: 1.672, Y: 0.000, Z: 0.500)</div>
+                                <div class="caption-item">Diameter from thickener center:</div>
+                                <div class="detail-item">3.665m</div>
+                                <div class="caption-item">Number of supports:</div>
+                                <div class="detail-item">4</div>
+                                <div class="caption-item align-middle">Support constraints:</div>
+                                <div class="detail-item align-middle">
+                                    <div class="data-table">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>T<sub>x</sub></th>
+                                                    <th>T<sub>y</sub></th>
+                                                    <th>T<sub>z</sub></th>
+                                                    <th>R<sub>x</sub></th>
+                                                    <th>R<sub>y</sub></th>
+                                                    <th>R<sub>z</sub></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="align-center">Fixed</td>
+                                                    <td class="align-center">Fixed</td>
+                                                    <td class="align-center">Fixed</td>
+                                                    <td class="align-center">Released</td>
+                                                    <td class="align-center">Released</td>
+                                                    <td class="align-center">Released</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="align-center">
+                                <svg id="supportLayoutPCD1" xmlns="http://www.w3.org/2000/svg" width="620" height="620">
+                                    <rect x="5" y="5" stroke="black" stroke-width="1" opacity="1" width="610"
+                                        height="610" rx="10" ry="10" fill="transparent"></rect>
+                                    <polygon points="30,30 30,30.5 66,30.5 66,32 70,30 66,28 66,29.5 30,29.5"
+                                        fill="#EDAA25" stroke="transparent" stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 30, 30)">
+                                    </polygon>
+                                    <polygon points="30,30 30,30.5 66,30.5 66,32 70,30 66,28 66,29.5 30,29.5"
+                                        fill="#C43302" stroke="transparent" stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 30, 30)">
+                                    </polygon><text x="70" y="30.25" fill="black" font-size="10" text-anchor="left"
+                                        dominant-baseline="middle" font-family="Aptos" font-weight="normal" opacity="1"
+                                        transform=" rotate(0, 70, 30.25) translate(8, 0)">X</text><text x="29.75" y="70"
+                                        fill="black" font-size="10" text-anchor="left" dominant-baseline="middle"
+                                        font-family="Aptos" font-weight="normal" opacity="1"
+                                        transform=" rotate(0, 29.75, 70) translate(0, 8)">Z</text><text x="30" y="30"
+                                        fill="black" font-size="10" text-anchor="left" dominant-baseline="middle"
+                                        font-family="Aptos" font-weight="normal" opacity="1"
+                                        transform=" rotate(45, 30, 30) translate(16, 0)">Y +ve Upwards</text>
+                                    <circle cx="30" cy="30" r="2.5" fill="black" stroke="black" stroke-width="undefined"
+                                        opacity="1"></circle><text x="70.49212194255014" y="202.56524608667024"
+                                        fill="black" font-size="12" text-anchor="middle" dominant-baseline="middle"
+                                        font-family="Aptos" font-weight="normal" opacity="1"
+                                        transform=" rotate(-45, 70.49212194255014, 202.56524608667024) translate(0, -10)">1</text><text
+                                        x="70.49212194255014" y="202.56524608667024" fill="black" font-size="10"
+                                        text-anchor="middle" dominant-baseline="middle" font-family="Aptos"
+                                        font-weight="normal" opacity="1"
+                                        transform=" rotate(-45, 70.49212194255014, 202.56524608667024) translate(0, 25)">(204.2°)</text>
+                                    <line x1="70.49212194255014" y1="202.56524608667024" x2="78.49212194255014"
+                                        y2="202.56524608667024" stroke-dasharray="undefined" stroke="#EDAA25"
+                                        stroke-width="1" opacity="1"
+                                        transform="rotate(0, 70.49212194255014, 202.56524608667024)"></line>
+                                    <polygon
+                                        points="78.49212194255014,202.56524608667024 83.49212194255014,197.56524608667024 83.49212194255014,207.56524608667024"
+                                        fill="#EDAA25" stroke="#EDAA25" stroke-width="1" opacity="1"
+                                        transform="rotate(0, 70.49212194255014, 202.56524608667024)"></polygon>
+                                    <line x1="84.49212194255014" y1="196.56524608667024" x2="84.49212194255014"
+                                        y2="208.56524608667024" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="1" opacity="1"
+                                        transform="rotate(0, 70.49212194255014, 202.56524608667024)"></line>
+                                    <line x1="84.49212194255014" y1="197.56524608667024" x2="88.49212194255014"
+                                        y2="197.56524608667024" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 70.49212194255014, 202.56524608667024) rotate(25, 84.49212194255014, 197.56524608667024)">
+                                    </line>
+                                    <line x1="84.49212194255014" y1="199.56524608667024" x2="88.49212194255014"
+                                        y2="199.56524608667024" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 70.49212194255014, 202.56524608667024) rotate(25, 84.49212194255014, 199.56524608667024)">
+                                    </line>
+                                    <line x1="84.49212194255014" y1="201.56524608667024" x2="88.49212194255014"
+                                        y2="201.56524608667024" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 70.49212194255014, 202.56524608667024) rotate(25, 84.49212194255014, 201.56524608667024)">
+                                    </line>
+                                    <line x1="84.49212194255014" y1="203.56524608667024" x2="88.49212194255014"
+                                        y2="203.56524608667024" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 70.49212194255014, 202.56524608667024) rotate(25, 84.49212194255014, 203.56524608667024)">
+                                    </line>
+                                    <line x1="84.49212194255014" y1="205.56524608667024" x2="88.49212194255014"
+                                        y2="205.56524608667024" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 70.49212194255014, 202.56524608667024) rotate(25, 84.49212194255014, 205.56524608667024)">
+                                    </line>
+                                    <line x1="84.49212194255014" y1="207.56524608667024" x2="88.49212194255014"
+                                        y2="207.56524608667024" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 70.49212194255014, 202.56524608667024) rotate(25, 84.49212194255014, 207.56524608667024)">
+                                    </line>
+                                    <line x1="70.49212194255014" y1="202.56524608667024" x2="78.49212194255014"
+                                        y2="202.56524608667024" stroke-dasharray="undefined" stroke="#C43302"
+                                        stroke-width="1" opacity="1"
+                                        transform="rotate(90, 70.49212194255014, 202.56524608667024)"></line>
+                                    <polygon
+                                        points="78.49212194255014,202.56524608667024 83.49212194255014,197.56524608667024 83.49212194255014,207.56524608667024"
+                                        fill="#C43302" stroke="#C43302" stroke-width="1" opacity="1"
+                                        transform="rotate(90, 70.49212194255014, 202.56524608667024)"></polygon>
+                                    <line x1="84.49212194255014" y1="196.56524608667024" x2="84.49212194255014"
+                                        y2="208.56524608667024" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="1" opacity="1"
+                                        transform="rotate(90, 70.49212194255014, 202.56524608667024)"></line>
+                                    <line x1="84.49212194255014" y1="197.56524608667024" x2="88.49212194255014"
+                                        y2="197.56524608667024" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 70.49212194255014, 202.56524608667024) rotate(25, 84.49212194255014, 197.56524608667024)">
+                                    </line>
+                                    <line x1="84.49212194255014" y1="199.56524608667024" x2="88.49212194255014"
+                                        y2="199.56524608667024" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 70.49212194255014, 202.56524608667024) rotate(25, 84.49212194255014, 199.56524608667024)">
+                                    </line>
+                                    <line x1="84.49212194255014" y1="201.56524608667024" x2="88.49212194255014"
+                                        y2="201.56524608667024" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 70.49212194255014, 202.56524608667024) rotate(25, 84.49212194255014, 201.56524608667024)">
+                                    </line>
+                                    <line x1="84.49212194255014" y1="203.56524608667024" x2="88.49212194255014"
+                                        y2="203.56524608667024" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 70.49212194255014, 202.56524608667024) rotate(25, 84.49212194255014, 203.56524608667024)">
+                                    </line>
+                                    <line x1="84.49212194255014" y1="205.56524608667024" x2="88.49212194255014"
+                                        y2="205.56524608667024" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 70.49212194255014, 202.56524608667024) rotate(25, 84.49212194255014, 205.56524608667024)">
+                                    </line>
+                                    <line x1="84.49212194255014" y1="207.56524608667024" x2="88.49212194255014"
+                                        y2="207.56524608667024" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 70.49212194255014, 202.56524608667024) rotate(25, 84.49212194255014, 207.56524608667024)">
+                                    </line>
+                                    <circle cx="70.49212194255014" cy="202.56524608667024" r="1.5" fill="black"
+                                        stroke="black" stroke-width="undefined" opacity="1"></circle><text
+                                        x="70.49212194255017" y="417.4347539133298" fill="black" font-size="12"
+                                        text-anchor="middle" dominant-baseline="middle" font-family="Aptos"
+                                        font-weight="normal" opacity="1"
+                                        transform=" rotate(-45, 70.49212194255017, 417.4347539133298) translate(0, -10)">2</text><text
+                                        x="70.49212194255017" y="417.4347539133298" fill="black" font-size="10"
+                                        text-anchor="middle" dominant-baseline="middle" font-family="Aptos"
+                                        font-weight="normal" opacity="1"
+                                        transform=" rotate(-45, 70.49212194255017, 417.4347539133298) translate(0, 25)">(155.8°)</text>
+                                    <line x1="70.49212194255017" y1="417.4347539133298" x2="78.49212194255017"
+                                        y2="417.4347539133298" stroke-dasharray="undefined" stroke="#EDAA25"
+                                        stroke-width="1" opacity="1"
+                                        transform="rotate(0, 70.49212194255017, 417.4347539133298)"></line>
+                                    <polygon
+                                        points="78.49212194255017,417.4347539133298 83.49212194255017,412.4347539133298 83.49212194255017,422.4347539133298"
+                                        fill="#EDAA25" stroke="#EDAA25" stroke-width="1" opacity="1"
+                                        transform="rotate(0, 70.49212194255017, 417.4347539133298)"></polygon>
+                                    <line x1="84.49212194255017" y1="411.4347539133298" x2="84.49212194255017"
+                                        y2="423.4347539133298" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="1" opacity="1"
+                                        transform="rotate(0, 70.49212194255017, 417.4347539133298)"></line>
+                                    <line x1="84.49212194255017" y1="412.4347539133298" x2="88.49212194255017"
+                                        y2="412.4347539133298" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 70.49212194255017, 417.4347539133298) rotate(25, 84.49212194255017, 412.4347539133298)">
+                                    </line>
+                                    <line x1="84.49212194255017" y1="414.4347539133298" x2="88.49212194255017"
+                                        y2="414.4347539133298" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 70.49212194255017, 417.4347539133298) rotate(25, 84.49212194255017, 414.4347539133298)">
+                                    </line>
+                                    <line x1="84.49212194255017" y1="416.4347539133298" x2="88.49212194255017"
+                                        y2="416.4347539133298" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 70.49212194255017, 417.4347539133298) rotate(25, 84.49212194255017, 416.4347539133298)">
+                                    </line>
+                                    <line x1="84.49212194255017" y1="418.4347539133298" x2="88.49212194255017"
+                                        y2="418.4347539133298" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 70.49212194255017, 417.4347539133298) rotate(25, 84.49212194255017, 418.4347539133298)">
+                                    </line>
+                                    <line x1="84.49212194255017" y1="420.4347539133298" x2="88.49212194255017"
+                                        y2="420.4347539133298" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 70.49212194255017, 417.4347539133298) rotate(25, 84.49212194255017, 420.4347539133298)">
+                                    </line>
+                                    <line x1="84.49212194255017" y1="422.4347539133298" x2="88.49212194255017"
+                                        y2="422.4347539133298" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 70.49212194255017, 417.4347539133298) rotate(25, 84.49212194255017, 422.4347539133298)">
+                                    </line>
+                                    <line x1="70.49212194255017" y1="417.4347539133298" x2="78.49212194255017"
+                                        y2="417.4347539133298" stroke-dasharray="undefined" stroke="#C43302"
+                                        stroke-width="1" opacity="1"
+                                        transform="rotate(90, 70.49212194255017, 417.4347539133298)"></line>
+                                    <polygon
+                                        points="78.49212194255017,417.4347539133298 83.49212194255017,412.4347539133298 83.49212194255017,422.4347539133298"
+                                        fill="#C43302" stroke="#C43302" stroke-width="1" opacity="1"
+                                        transform="rotate(90, 70.49212194255017, 417.4347539133298)"></polygon>
+                                    <line x1="84.49212194255017" y1="411.4347539133298" x2="84.49212194255017"
+                                        y2="423.4347539133298" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="1" opacity="1"
+                                        transform="rotate(90, 70.49212194255017, 417.4347539133298)"></line>
+                                    <line x1="84.49212194255017" y1="412.4347539133298" x2="88.49212194255017"
+                                        y2="412.4347539133298" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 70.49212194255017, 417.4347539133298) rotate(25, 84.49212194255017, 412.4347539133298)">
+                                    </line>
+                                    <line x1="84.49212194255017" y1="414.4347539133298" x2="88.49212194255017"
+                                        y2="414.4347539133298" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 70.49212194255017, 417.4347539133298) rotate(25, 84.49212194255017, 414.4347539133298)">
+                                    </line>
+                                    <line x1="84.49212194255017" y1="416.4347539133298" x2="88.49212194255017"
+                                        y2="416.4347539133298" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 70.49212194255017, 417.4347539133298) rotate(25, 84.49212194255017, 416.4347539133298)">
+                                    </line>
+                                    <line x1="84.49212194255017" y1="418.4347539133298" x2="88.49212194255017"
+                                        y2="418.4347539133298" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 70.49212194255017, 417.4347539133298) rotate(25, 84.49212194255017, 418.4347539133298)">
+                                    </line>
+                                    <line x1="84.49212194255017" y1="420.4347539133298" x2="88.49212194255017"
+                                        y2="420.4347539133298" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 70.49212194255017, 417.4347539133298) rotate(25, 84.49212194255017, 420.4347539133298)">
+                                    </line>
+                                    <line x1="84.49212194255017" y1="422.4347539133298" x2="88.49212194255017"
+                                        y2="422.4347539133298" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 70.49212194255017, 417.4347539133298) rotate(25, 84.49212194255017, 422.4347539133298)">
+                                    </line>
+                                    <circle cx="70.49212194255017" cy="417.4347539133298" r="1.5" fill="black"
+                                        stroke="black" stroke-width="undefined" opacity="1"></circle><text
+                                        x="549.5318548027492" y="202.61871422470915" fill="black" font-size="12"
+                                        text-anchor="middle" dominant-baseline="middle" font-family="Aptos"
+                                        font-weight="normal" opacity="1"
+                                        transform=" rotate(-45, 549.5318548027492, 202.61871422470915) translate(0, -10)">5</text><text
+                                        x="549.5318548027492" y="202.61871422470915" fill="black" font-size="10"
+                                        text-anchor="middle" dominant-baseline="middle" font-family="Aptos"
+                                        font-weight="normal" opacity="1"
+                                        transform=" rotate(-45, 549.5318548027492, 202.61871422470915) translate(0, 25)">(335.9°)</text>
+                                    <line x1="549.5318548027492" y1="202.61871422470915" x2="557.5318548027492"
+                                        y2="202.61871422470915" stroke-dasharray="undefined" stroke="#EDAA25"
+                                        stroke-width="1" opacity="1"
+                                        transform="rotate(0, 549.5318548027492, 202.61871422470915)"></line>
+                                    <polygon
+                                        points="557.5318548027492,202.61871422470915 562.5318548027492,197.61871422470915 562.5318548027492,207.61871422470915"
+                                        fill="#EDAA25" stroke="#EDAA25" stroke-width="1" opacity="1"
+                                        transform="rotate(0, 549.5318548027492, 202.61871422470915)"></polygon>
+                                    <line x1="563.5318548027492" y1="196.61871422470915" x2="563.5318548027492"
+                                        y2="208.61871422470915" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="1" opacity="1"
+                                        transform="rotate(0, 549.5318548027492, 202.61871422470915)"></line>
+                                    <line x1="563.5318548027492" y1="197.61871422470915" x2="567.5318548027492"
+                                        y2="197.61871422470915" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 549.5318548027492, 202.61871422470915) rotate(25, 563.5318548027492, 197.61871422470915)">
+                                    </line>
+                                    <line x1="563.5318548027492" y1="199.61871422470915" x2="567.5318548027492"
+                                        y2="199.61871422470915" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 549.5318548027492, 202.61871422470915) rotate(25, 563.5318548027492, 199.61871422470915)">
+                                    </line>
+                                    <line x1="563.5318548027492" y1="201.61871422470915" x2="567.5318548027492"
+                                        y2="201.61871422470915" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 549.5318548027492, 202.61871422470915) rotate(25, 563.5318548027492, 201.61871422470915)">
+                                    </line>
+                                    <line x1="563.5318548027492" y1="203.61871422470915" x2="567.5318548027492"
+                                        y2="203.61871422470915" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 549.5318548027492, 202.61871422470915) rotate(25, 563.5318548027492, 203.61871422470915)">
+                                    </line>
+                                    <line x1="563.5318548027492" y1="205.61871422470915" x2="567.5318548027492"
+                                        y2="205.61871422470915" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 549.5318548027492, 202.61871422470915) rotate(25, 563.5318548027492, 205.61871422470915)">
+                                    </line>
+                                    <line x1="563.5318548027492" y1="207.61871422470915" x2="567.5318548027492"
+                                        y2="207.61871422470915" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 549.5318548027492, 202.61871422470915) rotate(25, 563.5318548027492, 207.61871422470915)">
+                                    </line>
+                                    <line x1="549.5318548027492" y1="202.61871422470915" x2="557.5318548027492"
+                                        y2="202.61871422470915" stroke-dasharray="undefined" stroke="#C43302"
+                                        stroke-width="1" opacity="1"
+                                        transform="rotate(90, 549.5318548027492, 202.61871422470915)"></line>
+                                    <polygon
+                                        points="557.5318548027492,202.61871422470915 562.5318548027492,197.61871422470915 562.5318548027492,207.61871422470915"
+                                        fill="#C43302" stroke="#C43302" stroke-width="1" opacity="1"
+                                        transform="rotate(90, 549.5318548027492, 202.61871422470915)"></polygon>
+                                    <line x1="563.5318548027492" y1="196.61871422470915" x2="563.5318548027492"
+                                        y2="208.61871422470915" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="1" opacity="1"
+                                        transform="rotate(90, 549.5318548027492, 202.61871422470915)"></line>
+                                    <line x1="563.5318548027492" y1="197.61871422470915" x2="567.5318548027492"
+                                        y2="197.61871422470915" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 549.5318548027492, 202.61871422470915) rotate(25, 563.5318548027492, 197.61871422470915)">
+                                    </line>
+                                    <line x1="563.5318548027492" y1="199.61871422470915" x2="567.5318548027492"
+                                        y2="199.61871422470915" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 549.5318548027492, 202.61871422470915) rotate(25, 563.5318548027492, 199.61871422470915)">
+                                    </line>
+                                    <line x1="563.5318548027492" y1="201.61871422470915" x2="567.5318548027492"
+                                        y2="201.61871422470915" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 549.5318548027492, 202.61871422470915) rotate(25, 563.5318548027492, 201.61871422470915)">
+                                    </line>
+                                    <line x1="563.5318548027492" y1="203.61871422470915" x2="567.5318548027492"
+                                        y2="203.61871422470915" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 549.5318548027492, 202.61871422470915) rotate(25, 563.5318548027492, 203.61871422470915)">
+                                    </line>
+                                    <line x1="563.5318548027492" y1="205.61871422470915" x2="567.5318548027492"
+                                        y2="205.61871422470915" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 549.5318548027492, 202.61871422470915) rotate(25, 563.5318548027492, 205.61871422470915)">
+                                    </line>
+                                    <line x1="563.5318548027492" y1="207.61871422470915" x2="567.5318548027492"
+                                        y2="207.61871422470915" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 549.5318548027492, 202.61871422470915) rotate(25, 563.5318548027492, 207.61871422470915)">
+                                    </line>
+                                    <circle cx="549.5318548027492" cy="202.61871422470915" r="1.5" fill="black"
+                                        stroke="black" stroke-width="undefined" opacity="1"></circle><text
+                                        x="549.5318548027491" y="417.3812857752911" fill="black" font-size="12"
+                                        text-anchor="middle" dominant-baseline="middle" font-family="Aptos"
+                                        font-weight="normal" opacity="1"
+                                        transform=" rotate(-45, 549.5318548027491, 417.3812857752911) translate(0, -10)">6</text><text
+                                        x="549.5318548027491" y="417.3812857752911" fill="black" font-size="10"
+                                        text-anchor="middle" dominant-baseline="middle" font-family="Aptos"
+                                        font-weight="normal" opacity="1"
+                                        transform=" rotate(-45, 549.5318548027491, 417.3812857752911) translate(0, 25)">(24.1°)</text>
+                                    <line x1="549.5318548027491" y1="417.3812857752911" x2="557.5318548027491"
+                                        y2="417.3812857752911" stroke-dasharray="undefined" stroke="#EDAA25"
+                                        stroke-width="1" opacity="1"
+                                        transform="rotate(0, 549.5318548027491, 417.3812857752911)"></line>
+                                    <polygon
+                                        points="557.5318548027491,417.3812857752911 562.5318548027491,412.3812857752911 562.5318548027491,422.3812857752911"
+                                        fill="#EDAA25" stroke="#EDAA25" stroke-width="1" opacity="1"
+                                        transform="rotate(0, 549.5318548027491, 417.3812857752911)"></polygon>
+                                    <line x1="563.5318548027491" y1="411.3812857752911" x2="563.5318548027491"
+                                        y2="423.3812857752911" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="1" opacity="1"
+                                        transform="rotate(0, 549.5318548027491, 417.3812857752911)"></line>
+                                    <line x1="563.5318548027491" y1="412.3812857752911" x2="567.5318548027491"
+                                        y2="412.3812857752911" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 549.5318548027491, 417.3812857752911) rotate(25, 563.5318548027491, 412.3812857752911)">
+                                    </line>
+                                    <line x1="563.5318548027491" y1="414.3812857752911" x2="567.5318548027491"
+                                        y2="414.3812857752911" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 549.5318548027491, 417.3812857752911) rotate(25, 563.5318548027491, 414.3812857752911)">
+                                    </line>
+                                    <line x1="563.5318548027491" y1="416.3812857752911" x2="567.5318548027491"
+                                        y2="416.3812857752911" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 549.5318548027491, 417.3812857752911) rotate(25, 563.5318548027491, 416.3812857752911)">
+                                    </line>
+                                    <line x1="563.5318548027491" y1="418.3812857752911" x2="567.5318548027491"
+                                        y2="418.3812857752911" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 549.5318548027491, 417.3812857752911) rotate(25, 563.5318548027491, 418.3812857752911)">
+                                    </line>
+                                    <line x1="563.5318548027491" y1="420.3812857752911" x2="567.5318548027491"
+                                        y2="420.3812857752911" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 549.5318548027491, 417.3812857752911) rotate(25, 563.5318548027491, 420.3812857752911)">
+                                    </line>
+                                    <line x1="563.5318548027491" y1="422.3812857752911" x2="567.5318548027491"
+                                        y2="422.3812857752911" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(0, 549.5318548027491, 417.3812857752911) rotate(25, 563.5318548027491, 422.3812857752911)">
+                                    </line>
+                                    <line x1="549.5318548027491" y1="417.3812857752911" x2="557.5318548027491"
+                                        y2="417.3812857752911" stroke-dasharray="undefined" stroke="#C43302"
+                                        stroke-width="1" opacity="1"
+                                        transform="rotate(90, 549.5318548027491, 417.3812857752911)"></line>
+                                    <polygon
+                                        points="557.5318548027491,417.3812857752911 562.5318548027491,412.3812857752911 562.5318548027491,422.3812857752911"
+                                        fill="#C43302" stroke="#C43302" stroke-width="1" opacity="1"
+                                        transform="rotate(90, 549.5318548027491, 417.3812857752911)"></polygon>
+                                    <line x1="563.5318548027491" y1="411.3812857752911" x2="563.5318548027491"
+                                        y2="423.3812857752911" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="1" opacity="1"
+                                        transform="rotate(90, 549.5318548027491, 417.3812857752911)"></line>
+                                    <line x1="563.5318548027491" y1="412.3812857752911" x2="567.5318548027491"
+                                        y2="412.3812857752911" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 549.5318548027491, 417.3812857752911) rotate(25, 563.5318548027491, 412.3812857752911)">
+                                    </line>
+                                    <line x1="563.5318548027491" y1="414.3812857752911" x2="567.5318548027491"
+                                        y2="414.3812857752911" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 549.5318548027491, 417.3812857752911) rotate(25, 563.5318548027491, 414.3812857752911)">
+                                    </line>
+                                    <line x1="563.5318548027491" y1="416.3812857752911" x2="567.5318548027491"
+                                        y2="416.3812857752911" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 549.5318548027491, 417.3812857752911) rotate(25, 563.5318548027491, 416.3812857752911)">
+                                    </line>
+                                    <line x1="563.5318548027491" y1="418.3812857752911" x2="567.5318548027491"
+                                        y2="418.3812857752911" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 549.5318548027491, 417.3812857752911) rotate(25, 563.5318548027491, 418.3812857752911)">
+                                    </line>
+                                    <line x1="563.5318548027491" y1="420.3812857752911" x2="567.5318548027491"
+                                        y2="420.3812857752911" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 549.5318548027491, 417.3812857752911) rotate(25, 563.5318548027491, 420.3812857752911)">
+                                    </line>
+                                    <line x1="563.5318548027491" y1="422.3812857752911" x2="567.5318548027491"
+                                        y2="422.3812857752911" stroke-dasharray="undefined" stroke="black"
+                                        stroke-width="0.5" opacity="1"
+                                        transform="rotate(90, 549.5318548027491, 417.3812857752911) rotate(25, 563.5318548027491, 422.3812857752911)">
+                                    </line>
+                                    <circle cx="549.5318548027491" cy="417.3812857752911" r="1.5" fill="black"
+                                        stroke="black" stroke-width="undefined" opacity="1"></circle>
+                                    <line x1="558" y1="558" x2="573" y2="558" stroke-dasharray="undefined"
+                                        stroke="#EDAA25" stroke-width="1" opacity="0.7"
+                                        transform="rotate(-50, 558, 558)"></line>
+                                    <polygon points="573,558 578,553 578,563" fill="#EDAA25" stroke="#EDAA25"
+                                        stroke-width="1" opacity="0.7" transform="rotate(-50, 558, 558)"></polygon>
+                                    <line x1="579" y1="552" x2="579" y2="564" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="1" opacity="0.7" transform="rotate(-50, 558, 558)">
+                                    </line>
+                                    <line x1="579" y1="553" x2="583" y2="553" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="0.5" opacity="0.7"
+                                        transform="rotate(-50, 558, 558) rotate(25, 579, 553)"></line>
+                                    <line x1="579" y1="555" x2="583" y2="555" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="0.5" opacity="0.7"
+                                        transform="rotate(-50, 558, 558) rotate(25, 579, 555)"></line>
+                                    <line x1="579" y1="557" x2="583" y2="557" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="0.5" opacity="0.7"
+                                        transform="rotate(-50, 558, 558) rotate(25, 579, 557)"></line>
+                                    <line x1="579" y1="559" x2="583" y2="559" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="0.5" opacity="0.7"
+                                        transform="rotate(-50, 558, 558) rotate(25, 579, 559)"></line>
+                                    <line x1="579" y1="561" x2="583" y2="561" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="0.5" opacity="0.7"
+                                        transform="rotate(-50, 558, 558) rotate(25, 579, 561)"></line>
+                                    <line x1="579" y1="563" x2="583" y2="563" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="0.5" opacity="0.7"
+                                        transform="rotate(-50, 558, 558) rotate(25, 579, 563)"></line>
+                                    <line x1="558" y1="558" x2="573" y2="558" stroke-dasharray="undefined"
+                                        stroke="#010221" stroke-width="1" opacity="0.7"
+                                        transform="rotate(90, 558, 558)"></line>
+                                    <polygon points="573,558 578,553 578,563" fill="#010221" stroke="#010221"
+                                        stroke-width="1" opacity="0.7" transform="rotate(90, 558, 558)"></polygon>
+                                    <line x1="579" y1="552" x2="579" y2="564" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="1" opacity="0.7" transform="rotate(90, 558, 558)">
+                                    </line>
+                                    <line x1="579" y1="553" x2="583" y2="553" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="0.5" opacity="0.7"
+                                        transform="rotate(90, 558, 558) rotate(25, 579, 553)"></line>
+                                    <line x1="579" y1="555" x2="583" y2="555" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="0.5" opacity="0.7"
+                                        transform="rotate(90, 558, 558) rotate(25, 579, 555)"></line>
+                                    <line x1="579" y1="557" x2="583" y2="557" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="0.5" opacity="0.7"
+                                        transform="rotate(90, 558, 558) rotate(25, 579, 557)"></line>
+                                    <line x1="579" y1="559" x2="583" y2="559" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="0.5" opacity="0.7"
+                                        transform="rotate(90, 558, 558) rotate(25, 579, 559)"></line>
+                                    <line x1="579" y1="561" x2="583" y2="561" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="0.5" opacity="0.7"
+                                        transform="rotate(90, 558, 558) rotate(25, 579, 561)"></line>
+                                    <line x1="579" y1="563" x2="583" y2="563" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="0.5" opacity="0.7"
+                                        transform="rotate(90, 558, 558) rotate(25, 579, 563)"></line>
+                                    <line x1="558" y1="558" x2="573" y2="558" stroke-dasharray="undefined"
+                                        stroke="#C43302" stroke-width="1" opacity="0.7"
+                                        transform="rotate(20, 558, 558)"></line>
+                                    <polygon points="573,558 578,553 578,563" fill="#C43302" stroke="#C43302"
+                                        stroke-width="1" opacity="0.7" transform="rotate(20, 558, 558)"></polygon>
+                                    <line x1="579" y1="552" x2="579" y2="564" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="1" opacity="0.7" transform="rotate(20, 558, 558)">
+                                    </line>
+                                    <line x1="579" y1="553" x2="583" y2="553" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="0.5" opacity="0.7"
+                                        transform="rotate(20, 558, 558) rotate(25, 579, 553)"></line>
+                                    <line x1="579" y1="555" x2="583" y2="555" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="0.5" opacity="0.7"
+                                        transform="rotate(20, 558, 558) rotate(25, 579, 555)"></line>
+                                    <line x1="579" y1="557" x2="583" y2="557" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="0.5" opacity="0.7"
+                                        transform="rotate(20, 558, 558) rotate(25, 579, 557)"></line>
+                                    <line x1="579" y1="559" x2="583" y2="559" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="0.5" opacity="0.7"
+                                        transform="rotate(20, 558, 558) rotate(25, 579, 559)"></line>
+                                    <line x1="579" y1="561" x2="583" y2="561" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="0.5" opacity="0.7"
+                                        transform="rotate(20, 558, 558) rotate(25, 579, 561)"></line>
+                                    <line x1="579" y1="563" x2="583" y2="563" stroke-dasharray="undefined"
+                                        stroke="black" stroke-width="0.5" opacity="0.7"
+                                        transform="rotate(20, 558, 558) rotate(25, 579, 563)"></line><text x="587.25"
+                                        y="558" fill="#EDAA25" font-size="10" text-anchor="middle"
+                                        dominant-baseline="middle" font-family="Aptos" font-weight="normal"
+                                        opacity="0.7"
+                                        transform=" rotate(-50, 587.25, 558) rotate(50, 616.5, 558)">X</text><text
+                                        x="587.25" y="558" fill="#010221" font-size="10" text-anchor="middle"
+                                        dominant-baseline="middle" font-family="Aptos" font-weight="normal"
+                                        opacity="0.7"
+                                        transform=" rotate(90, 587.25, 558) rotate(-90, 616.5, 558)">Y</text><text
+                                        x="587.25" y="558" fill="#C43302" font-size="10" text-anchor="middle"
+                                        dominant-baseline="middle" font-family="Aptos" font-weight="normal"
+                                        opacity="0.7"
+                                        transform=" rotate(20, 587.25, 558) rotate(-20, 616.5, 558)">Z</text>
+                                    <circle cx="558" cy="558" r="2" fill="black" stroke="black" stroke-width="undefined"
+                                        opacity="0.7"></circle><text x="305" y="305" fill="black" font-size="10"
+                                        text-anchor="middle" dominant-baseline="middle" font-family="Aptos"
+                                        font-weight="normal" opacity="1"
+                                        transform=" rotate(-45, 305, 305) translate(131.25, 0)">Radius:
+                                        1.833m</text><text x="310" y="310" fill="black" font-size="10"
+                                        text-anchor="middle" dominant-baseline="middle" font-family="Aptos"
+                                        font-weight="normal" opacity="1"
+                                        transform=" rotate(45, 310, 310) translate(-15, 0)">C.G</text>
+                                    <polygon
+                                        points="310,310 310,310.5 567.25,310.5 567.25,311.5 572.5,310 567.25,308.5 567.25,309.5 310,309.5"
+                                        fill="black" stroke="black" stroke-width="0" opacity="1"
+                                        transform="rotate(-45, 310, 310)"></polygon>
+                                    <circle cx="310" cy="310" r="2.5" fill="black" stroke="black" stroke-width="1"
+                                        opacity="1"></circle>
+                                    <circle cx="310" cy="310" r="262.5" fill="transparent" stroke="black"
+                                        stroke-width="1" opacity="0.2"></circle>
+                                    <line x1="30" y1="310" x2="590" y2="310" stroke-dasharray="0.15" stroke="black"
+                                        stroke-width="0.8" opacity="1"></line>
+                                    <line x1="310" y1="30" x2="310" y2="590" stroke-dasharray="0.15" stroke="black"
+                                        stroke-width="0.8" opacity="1"></line>
+                                </svg>
+                                <h4 style="text-decoration: underline;">Supports Layout</h4>
+                            </div>
+
+                            <h4 class="break-page-start">Summary of Forces at Supports Group C.G.:</h4>
+                            <div class="data-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="1" class="align-left">Load Case Description</th>
+                                            <th rowspan="1">F<sub>x</sub><br>(kip)</th>
+                                            <th rowspan="1">F<sub>y</sub><br>(kip)</th>
+                                            <th rowspan="1">F<sub>z</sub><br>(kip)</th>
+                                            <th rowspan="1">M<sub>x</sub><br>(kip-ft)</th>
+                                            <th rowspan="1">M<sub>y</sub><br>(kip-ft)</th>
+                                            <th rowspan="1">M<sub>z</sub><br>(kip-ft)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>601: DEAD LOAD</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">5.7</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.1</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>602: LIVE LOAD - BRIDGE WALKWAY</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">1.6</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>603: FLUID LOADS - OPERATING CONDITION</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">1.6</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.2</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.7</td>
+                                        </tr>
+                                        <tr>
+                                            <td>604: ADDITIONAL FLUID LOADS - SANDED CONDITION</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>605: LIVE LOAD - TORQUE AND LIFTING - NORMAL OPERATING</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">1.8</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>606: ADDITIONAL LIVE LOAD - TORQUE AND LIFTING - MAXIMUM</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">2.3</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>607: WIND LOAD - Z DIRECTION</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">-1.3</td>
+                                            <td class="align-center">-3.1</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>608: WIND LOAD - X DIRECTION</td>
+                                            <td class="align-center">-1.5</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">3.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>609: SEISMIC LOAD - Z POSITIVE DIRECTION</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">-1.5</td>
+                                            <td class="align-center">-5.1</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>610: SEISMIC LOAD - Z NEGATIVE DIRECTION</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">1.5</td>
+                                            <td class="align-center">5.1</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>611: SEISMIC LOAD - X POSITIVE DIRECTION</td>
+                                            <td class="align-center">-1.5</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">5.1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>612: SEISMIC LOAD - X NEGATIVE DIRECTION</td>
+                                            <td class="align-center">1.5</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">-5.1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>613: SEISMIC LOAD - Y DIRECTION</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">-1.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">-0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>614: POSITIVE THERMAL GRADIENT</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>615: NEGATIVE THERMAL GRADIENT</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h4>Loads at Each Support Location:</h4>
+
+                            <div class="data-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Node</th>
+                                            <th class="align-left">Load Case Description</th>
+                                            <th class="align-center">F<sub>x</sub><br>(kip)</th>
+                                            <th class="align-center">F<sub>y</sub><br>(kip)</th>
+                                            <th class="align-center">F<sub>z</sub><br>(kip)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td rowspan="15" class="align-center">1</td>
+                                            <td>601: DEAD LOAD</td>
+                                            <td class="align-center">0.1</td>
+                                            <td class="align-center">1.4</td>
+                                            <td class="align-center">0.1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>602: LIVE LOAD - BRIDGE WALKWAY</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.4</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>603: FLUID LOADS - OPERATING CONDITION</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.3</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>604: ADDITIONAL FLUID LOADS - SANDED CONDITION</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>605: LIVE LOAD - TORQUE AND LIFTING - NORMAL OPERATING</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">1.2</td>
+                                            <td class="align-center">0.3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>606: ADDITIONAL LIVE LOAD - TORQUE AND LIFTING - MAXIMUM</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">1.6</td>
+                                            <td class="align-center">0.3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>607: WIND LOAD - Z DIRECTION</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">-1.0</td>
+                                            <td class="align-center">-0.3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>608: WIND LOAD - X DIRECTION</td>
+                                            <td class="align-center">-0.4</td>
+                                            <td class="align-center">-0.4</td>
+                                            <td class="align-center">-0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>609: SEISMIC LOAD - Z POSITIVE DIRECTION</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">-1.7</td>
+                                            <td class="align-center">-0.4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>610: SEISMIC LOAD - Z NEGATIVE DIRECTION</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">1.7</td>
+                                            <td class="align-center">0.4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>611: SEISMIC LOAD - X POSITIVE DIRECTION</td>
+                                            <td class="align-center">-0.4</td>
+                                            <td class="align-center">-0.8</td>
+                                            <td class="align-center">-0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>612: SEISMIC LOAD - X NEGATIVE DIRECTION</td>
+                                            <td class="align-center">0.4</td>
+                                            <td class="align-center">0.8</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>613: SEISMIC LOAD - Y DIRECTION</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">-0.3</td>
+                                            <td class="align-center">-0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>614: POSITIVE THERMAL GRADIENT</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>615: NEGATIVE THERMAL GRADIENT</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="15" class="align-center">2</td>
+                                            <td>601: DEAD LOAD</td>
+                                            <td class="align-center">0.1</td>
+                                            <td class="align-center">1.4</td>
+                                            <td class="align-center">-0.1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>602: LIVE LOAD - BRIDGE WALKWAY</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.4</td>
+                                            <td class="align-center">-0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>603: FLUID LOADS - OPERATING CONDITION</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.3</td>
+                                            <td class="align-center">-0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>604: ADDITIONAL FLUID LOADS - SANDED CONDITION</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>605: LIVE LOAD - TORQUE AND LIFTING - NORMAL OPERATING</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">-1.2</td>
+                                            <td class="align-center">0.3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>606: ADDITIONAL LIVE LOAD - TORQUE AND LIFTING - MAXIMUM</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">-1.6</td>
+                                            <td class="align-center">0.3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>607: WIND LOAD - Z DIRECTION</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">1.0</td>
+                                            <td class="align-center">-0.3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>608: WIND LOAD - X DIRECTION</td>
+                                            <td class="align-center">-0.4</td>
+                                            <td class="align-center">-0.5</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>609: SEISMIC LOAD - Z POSITIVE DIRECTION</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">1.7</td>
+                                            <td class="align-center">-0.4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>610: SEISMIC LOAD - Z NEGATIVE DIRECTION</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">-1.7</td>
+                                            <td class="align-center">0.4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>611: SEISMIC LOAD - X POSITIVE DIRECTION</td>
+                                            <td class="align-center">-0.4</td>
+                                            <td class="align-center">-0.8</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>612: SEISMIC LOAD - X NEGATIVE DIRECTION</td>
+                                            <td class="align-center">0.4</td>
+                                            <td class="align-center">0.8</td>
+                                            <td class="align-center">-0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>613: SEISMIC LOAD - Y DIRECTION</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">-0.3</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>614: POSITIVE THERMAL GRADIENT</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>615: NEGATIVE THERMAL GRADIENT</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="15" class="align-center">5</td>
+                                            <td>601: DEAD LOAD</td>
+                                            <td class="align-center">-0.1</td>
+                                            <td class="align-center">1.5</td>
+                                            <td class="align-center">0.1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>602: LIVE LOAD - BRIDGE WALKWAY</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">0.4</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>603: FLUID LOADS - OPERATING CONDITION</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">0.6</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>604: ADDITIONAL FLUID LOADS - SANDED CONDITION</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>605: LIVE LOAD - TORQUE AND LIFTING - NORMAL OPERATING</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">-1.2</td>
+                                            <td class="align-center">-0.3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>606: ADDITIONAL LIVE LOAD - TORQUE AND LIFTING - MAXIMUM</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">-1.6</td>
+                                            <td class="align-center">-0.3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>607: WIND LOAD - Z DIRECTION</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">-1.0</td>
+                                            <td class="align-center">-0.3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>608: WIND LOAD - X DIRECTION</td>
+                                            <td class="align-center">-0.3</td>
+                                            <td class="align-center">0.4</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>609: SEISMIC LOAD - Z POSITIVE DIRECTION</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">-1.7</td>
+                                            <td class="align-center">-0.4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>610: SEISMIC LOAD - Z NEGATIVE DIRECTION</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">1.7</td>
+                                            <td class="align-center">0.4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>611: SEISMIC LOAD - X POSITIVE DIRECTION</td>
+                                            <td class="align-center">-0.4</td>
+                                            <td class="align-center">0.8</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>612: SEISMIC LOAD - X NEGATIVE DIRECTION</td>
+                                            <td class="align-center">0.4</td>
+                                            <td class="align-center">-0.8</td>
+                                            <td class="align-center">-0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>613: SEISMIC LOAD - Y DIRECTION</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">-0.3</td>
+                                            <td class="align-center">-0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>614: POSITIVE THERMAL GRADIENT</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>615: NEGATIVE THERMAL GRADIENT</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="15" class="align-center">6</td>
+                                            <td>601: DEAD LOAD</td>
+                                            <td class="align-center">-0.1</td>
+                                            <td class="align-center">1.4</td>
+                                            <td class="align-center">-0.1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>602: LIVE LOAD - BRIDGE WALKWAY</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">0.4</td>
+                                            <td class="align-center">-0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>603: FLUID LOADS - OPERATING CONDITION</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">0.4</td>
+                                            <td class="align-center">-0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>604: ADDITIONAL FLUID LOADS - SANDED CONDITION</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>605: LIVE LOAD - TORQUE AND LIFTING - NORMAL OPERATING</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">1.2</td>
+                                            <td class="align-center">-0.3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>606: ADDITIONAL LIVE LOAD - TORQUE AND LIFTING - MAXIMUM</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">1.6</td>
+                                            <td class="align-center">-0.3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>607: WIND LOAD - Z DIRECTION</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">1.0</td>
+                                            <td class="align-center">-0.3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>608: WIND LOAD - X DIRECTION</td>
+                                            <td class="align-center">-0.3</td>
+                                            <td class="align-center">0.5</td>
+                                            <td class="align-center">-0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>609: SEISMIC LOAD - Z POSITIVE DIRECTION</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">1.7</td>
+                                            <td class="align-center">-0.4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>610: SEISMIC LOAD - Z NEGATIVE DIRECTION</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">-1.7</td>
+                                            <td class="align-center">0.4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>611: SEISMIC LOAD - X POSITIVE DIRECTION</td>
+                                            <td class="align-center">-0.4</td>
+                                            <td class="align-center">0.8</td>
+                                            <td class="align-center">-0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>612: SEISMIC LOAD - X NEGATIVE DIRECTION</td>
+                                            <td class="align-center">0.4</td>
+                                            <td class="align-center">-0.8</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>613: SEISMIC LOAD - Y DIRECTION</td>
+                                            <td class="align-center">-0.0</td>
+                                            <td class="align-center">-0.3</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>614: POSITIVE THERMAL GRADIENT</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>615: NEGATIVE THERMAL GRADIENT</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                            <td class="align-center">0.0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="data-source">
+                        <h3>Data Source:</h3>
+                        <div class="vertically-oriented-table data-source-grid">
+                            <div class="caption-item first">Staad Filename:</div>
+                            <div class="detail-item first">2.44m Dia Thickener Bridge_1.5m Wide_Indian Sections.std
+                            </div>
+                            <div class="caption-item">Project Code:</div>
+                            <div class="detail-item">D2451</div>
+                            <div class="caption-item">Project Name:</div>
+                            <div class="detail-item">Moly Decant (Sierrita)</div>
+                            <div class="caption-item">Name of the Engineer:</div>
+                            <div class="detail-item">Masanam Srinivasarao</div>
+                            <div class="caption-item">Prepared On:</div>
+                            <div class="detail-item" id="prepared-on">04 November 2024 14:39:21</div>
+                        </div>
+                    </section>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button id="exportButton">Export to Excel</button>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

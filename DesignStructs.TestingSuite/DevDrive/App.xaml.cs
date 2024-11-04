@@ -2,19 +2,26 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 
 using DevDrive.Services;
 
 using OpenSTAADUI;
 
+using ReInvented.DataAccess;
 using ReInvented.DataAccess.Models;
 using ReInvented.DataAccess.Services;
+using ReInvented.Domain.Reporting.Models;
+using ReInvented.Domain.Tass.Common.Interfaces;
+using ReInvented.Sections.Domain.Models;
+using ReInvented.Sections.Domain.Repositories;
 using ReInvented.Shared;
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Enums;
 using ReInvented.StaadPro.Interactivity.Extensions;
 using ReInvented.StaadPro.Interactivity.Models;
+using ReInvented.StaadPro.Interactivity.Services;
 
 namespace DevDrive
 {
@@ -25,47 +32,64 @@ namespace DevDrive
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            OptimizePlates();
+            //var result = ApplicationServices.StartApplication(ApplicationEdition.Connect.GetDescription(), "Staad", 60);
+
+
+            MaterialsLibrary matLib = MaterialsRepository.Instance.GetMaterialsLibrary();
+
+            var allGrades = matLib.Tables.SelectMany(t => t.Grades);
+            var matched = allGrades.Where(g => g.Designation.Contains("A36"));
+
+            var grade = matched.FirstOrDefault(g => g.StaadName == "A36");
+
+            OptimizePlates(grade.Fy);
         }
 
         #region Future Use Functions
-        private static void OptimizePlates()
+        private static void OptimizePlates(double fy)
         {
             string filePath = FileServiceProvider.GetFilePathUsingOpenFileDialog(new FileFilter("Staad Models", "*.std"));
             string directory = Path.GetDirectoryName(filePath);
             string fileName = Path.GetFileName(filePath);
-            string outputFilePath = Path.Combine(directory, $"{Path.GetFileNameWithoutExtension(fileName)}_DesignThicknesses.res");
+            string outputFilePath = Path.Combine(directory, $"{Path.GetFileNameWithoutExtension(fileName)}_PlatesOptimization.res");
+            string outputJsonFilePath = Path.Combine(directory, $"{Path.GetFileNameWithoutExtension(fileName)}_PlatesOptimization.js");
 
             OpenStaadWrapper wrapper = OSGlobalExtensions.GetOpenStaadWrapper(filePath);
 
             List<string> groupNames = (wrapper.Geometry as OSGeometryUI)
                                       .GetEntityGroupsOfType<Plate>()
+                                      .Where(eg => eg.Entities.Count() > 0)
                                       .OrderByDescending(eg => Plate.MaxYCoordinate(eg.Entities.OrderByDescending(e => Plate.MaxYCoordinate(e)).First()))
                                       .Where(eg => !InExclusionList(eg.GroupName))
                                       .Select(eg => eg.GroupName).ToList();
 
-            double limitingStress = 315.0;
+            double limitingStress = 0.9 * fy;
 
             int sLcId = 101;
             int eLcId = 200;
 
             double minimumThickness = 6.0;
-            double corrosionAllowance = 0.0;
+            double corrosionAllowance = 6.0;
 
-            IEnumerable<LoadCase> loadCases = (wrapper.Load as OSLoadUI).GetLoadCasesFromIds(Enumerable.Range(sLcId, eLcId - sLcId + 1), LoadCaseType.LoadCombination);
+            //IEnumerable<LoadCase> loadCases = (wrapper.Load as OSLoadUI).GetLoadCasesFromIds(Enumerable.Range(sLcId, eLcId - sLcId + 1), LoadCaseType.LoadCombination);
+            IEnumerable<LoadCase> loadCases = (wrapper.Load as OSLoadUI).GetLoadCasesFromIds(Enumerable.Range(sLcId, eLcId - sLcId + 1), LoadCaseType.PrimaryLoad);
             PlatesOptimizationService pos = new PlatesOptimizationService(wrapper, limitingStress);
 
-            Dictionary<string, PlateGroupDesignResult> designResults = pos.OptimizePlateGroups(groupNames, minimumThickness, corrosionAllowance, loadCases, 10.0);
+            List<PlateGroupDesignResult> designResults = pos.OptimizePlateGroups(groupNames, minimumThickness, corrosionAllowance, loadCases, 10.0);
 
+            JsonDataSerializer<List<PlateGroupDesignResult>> serializer = new JsonDataSerializer<List<PlateGroupDesignResult>>();
+            var serialized = "const content = " + serializer.Serialize(designResults, JsonSerializerSettingsProvider.Minified);
 
-            List<string> resultContent = new List<string>() { $"{Pad(Header, MaxLength)} {Header} {Pad(Header, MaxLength)}" };
-            string separator = $"  |  ";
-            resultContent.Add($"{separator}{"Group Name",-15}{separator}{"Design Thickness",-20}{separator}{"Max Von Mises",-20}{separator}{"L/C",-10}{separator}{"% Plates Exceeding",20}{separator}");
-            resultContent.AddRange(designResults.Select(dt => TransformResult(separator, dt)));
-            resultContent.Add($"{Pad(Footer, MaxLength)} {Footer} {Pad(Footer, MaxLength)}");
-            resultContent.Add(Environment.NewLine);
+            File.WriteAllText(outputJsonFilePath, serialized);
 
-            File.AppendAllLines(outputFilePath, resultContent);
+            //List<string> resultContent = new List<string>() { $"{Pad(Header, MaxLength)} {Header} {Pad(Header, MaxLength)}" };
+            //string separator = $"  |  ";
+            //resultContent.Add($"{separator}{"Group Id",-15}{separator}{"Design Thickness",-20}{separator}{"Max Von Mises",-20}{separator}{"L/C",-10}{separator}{"% Plates Exceeding",20}{separator}");
+            //resultContent.AddRange(designResults.Select(dt => TransformResult(separator, dt)));
+            //resultContent.Add($"{Pad(Footer, MaxLength)} {Footer} {Pad(Footer, MaxLength)}");
+            //resultContent.Add(Environment.NewLine);
+
+            //File.AppendAllLines(outputFilePath, resultContent);
         }
 
         private static bool InExclusionList(string groupName)
@@ -75,7 +99,7 @@ namespace DevDrive
 
         private static string TransformResult(string separator, KeyValuePair<string, PlateGroupDesignResult> dt)
         {
-            return $"{separator}{dt.Key,-15}{separator}{dt.Value.Thickness,-20:N2}{separator}" +
+            return $"{separator}{dt.Key,-15}{separator}{dt.Value.DesignThickness,-20:N2}{separator}" +
                    $"{dt.Value.StressSummary.GoverningResults.VonMises.AbsoluteMaximum / 1000,-20:N2}{separator}" +
                    $"{dt.Value.StressSummary.GoverningResults.LoadCase.Id,-10}{separator}" +
                    $"{dt.Value.StressSummary.PercentPlatesExceeding,20:N2}%{separator}";

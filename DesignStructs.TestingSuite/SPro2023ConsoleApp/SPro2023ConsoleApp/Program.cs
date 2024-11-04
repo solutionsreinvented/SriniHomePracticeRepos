@@ -1,19 +1,14 @@
 ﻿using Newtonsoft.Json;
 
-using SPro2023ConsoleApp.Services;
-
 using System;
 using System.IO;
-using ReInvented.Domain.Tass.Services;
-using SPro2023ConsoleApp.Models;
-using ReInvented.DataAccess;
 using ReInvented.DataAccess.Services;
-using ReInvented.Domain.EarthquakeLoading.Models;
-using System.Timers;
-using System.Windows;
-using System.Diagnostics;
-using System.Reflection;
 using ReInvented.Sections.Domain.Models;
+using ReInvented.StaadPro.Interactivity.Entities;
+using System.Collections.Generic;
+using ReInvented.StaadPro.Interactivity.Enums;
+using ReInvented.StaadPro.Interactivity.Models;
+using ReInvented.DataAccess;
 
 namespace SPro2023ConsoleApp
 {
@@ -22,6 +17,48 @@ namespace SPro2023ConsoleApp
     {
         static void Main(string[] args)
         {
+            var other = @"C:\Users\masanams\OneDrive - TAKRAF\Desktop";
+            var titlesName = "Titles.json";
+            var factorsName = "Factors.json";
+
+
+            var titles = File.ReadAllLines(Path.Combine(other, titlesName));
+            var factors = File.ReadAllLines(Path.Combine(other, factorsName));
+
+            var sId = 225;
+
+            var combinations = new List<string>();
+
+            for (int i = 0; i < titles.Length; i++)
+            {
+                combinations.Add("{");
+                combinations.Add($"\"Id\":{sId+i},");
+                combinations.Add($"\"Title\":\"{titles[i]}\",");
+                combinations.Add($"\"CombinationText\":\"{factors[i]}\"");
+                combinations.Add("},");
+            }
+
+            File.WriteAllLines(Path.Combine(other, "Combinations.json"), combinations);
+
+
+
+
+            var directory = @"C:\Users\masanams\OneDrive - TAKRAF\Desktop\Demo-Old\Delete\03. STAAD\01. Working";
+            var staadFileName = @"ASCE7-16.std";
+            var jsonFileName = @"ASCE7-16.json";
+
+            var lcd = LoadCombinationsDefinition.Parse(Path.Combine(directory, staadFileName), "ASCE7", 2016, "HRT", "Standard", new HashSet<Envelop>()
+            {
+                new Envelop(EnvelopGroup.JointMass, 100, 100),
+                new Envelop(EnvelopGroup.Strength, 101, 250),
+                new Envelop(EnvelopGroup.Serviceability, 1001, 1170),
+            });
+
+            JsonDataSerializer<LoadCombinationsDefinition> serializer = new JsonDataSerializer<LoadCombinationsDefinition>();
+            File.WriteAllText(Path.Combine(directory, jsonFileName), serializer.Serialize(lcd, JsonSerializerSettingsProvider.Minified));
+
+
+
             FileContentConversionService<SectionTables<RolledSectionOShape>> conversionService = new FileContentConversionService<SectionTables<RolledSectionOShape>>(ReInvented.DataAccess.Enums.ConversionMode.XmlToJson);
             conversionService.Convert(@"D:\02. Due\00. Projects\03. Prodactivity\01. Templates\03. Final Excel Database Files\Pipes.srix", @"D:\02. Due\00. Projects\03. Prodactivity\01. Templates\03. Final Excel Database Files\CHS.json", JsonSerializerSettingsProvider.Minified);
 

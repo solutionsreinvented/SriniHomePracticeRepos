@@ -82,6 +82,9 @@
     <Reference Include="ReInvented.DataAccess">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Shared\bin\Debug\ReInvented.DataAccess.dll</HintPath>
     </Reference>
+    <Reference Include="ReInvented.Domain.Reporting">
+      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Domain.Reporting.exe</HintPath>
+    </Reference>
     <Reference Include="ReInvented.Domain.Tass">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Domain.Tass.dll</HintPath>
     </Reference>
@@ -156,8 +159,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\ProcessResult.cs" />
     <Compile Include="Models\TestClasses.cs" />
     <Compile Include="Models\WoodArmer.cs" />
+    <Compile Include="Services\ApplicationServices.cs" />
     <Compile Include="Services\PlatesOptimizationService.cs" />
     <Compile Include="StaadExtensions\TestExtensions.cs" />
     <Compile Include="VideoPlayer.xaml.cs">
