@@ -34,7 +34,6 @@ namespace DevDrive
         {
             //var result = ApplicationServices.StartApplication(ApplicationEdition.Connect.GetDescription(), "Staad", 60);
 
-
             MaterialsLibrary matLib = MaterialsRepository.Instance.GetMaterialsLibrary();
 
             var allGrades = matLib.Tables.SelectMany(t => t.Grades);
