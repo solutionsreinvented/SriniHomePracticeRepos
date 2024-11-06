@@ -102,30 +102,41 @@ namespace ReInvented.ExcelInterop.Services
             Dictionary<string, string> rangeCaptionPairs = new Dictionary<string, string>()
             {
                 { "A1", "Document No."}, { "A2", "Title"}, { "A3", "Project"}, { "A4", "Client"},
-                { "S1", "Originator"}, { "S2", "Checker"}, { "S3", "Approver"},{ "S4", "<Template Name>"},
-                { "Z1", "Life Cycle Status"},
-                { "Z2", "Code"}, { "Z3", "Revision"}, { "Z4", "Date"}
+                { "U1", "Originator"}, { "U2", "Checker"}, { "U3", "Approver"},{ "U4", "<Template Name>"},
+                { "AC1", "Life Cycle Status"},
+                { "AC2", "Code"}, { "AC3", "Revision"}, { "AC4", "Date"}
             };
 
             Dictionary<string, string> rangeValuePairs = new Dictionary<string, string>()
             {
                 { "G1", "<Document No.>"}, { "G2", "<Title>"}, { "G3", "<Project>"}, { "G4", "<Client>"},
-                { "W1", "<Originator>"}, { "W2", "<Checker>"}, { "W3", "<Approver>"},
-                { "AD2", "<Code>"}, { "AD3", "<Revision>"}, { "AD4", DateTime.Now.ToString("dd-MMM-yyyy")}
+                { "Z1", "<Originator>"}, { "Z2", "<Checker>"}, { "Z3", "<Approver>"},
+                { "AG2", "<Code>"}, { "AG3", "<Revision>"}, { "AG4", DateTime.Now.ToString("dd-MMM-yyyy")}
             };
 
-            _ = worksheet.Merge(new HashSet<string>() { "A1:E1", "A2:E2", "A3:E3", "A4:E4", "G1:R1", "G2:R2", "G3:R3", "G4:R4", "S1:U1", "S2:U2", "S3:U3" })
-                         .Merge(new HashSet<string>() { "W1:Y1", "W2:Y2", "W3:Y3", "Z2:AB2", "Z3:AB3", "Z4:AB4", "AD2:AG2", "AD3:AG3", "AD4:AG4", "S4:Y4", "Z1:AG1" })
+            HashSet<string> colonsRanges = new HashSet<string>() { "F1", "F2", "F3", "F4", "Y1", "Y2", "Y3", "AF2", "AF3", "AF4" };
+
+            _ = worksheet.Merge(new HashSet<string>() { "A1:E1", "A2:E2", "A3:E3", "A4:E4", "G1:T1", "G2:T2", "G3:T3", "G4:T4", "U1:X1", "U2:X2", "U3:X3" })
+                         .Merge(new HashSet<string>() { "Z1:AB1", "Z2:AB2", "Z3:AB3", "U4:AB4", "AC1:AJ1", "AC2:AE2", "AC3:AE3", "AC4:AE4", "AG2:AJ2", "AG3:AJ3", "AG4:AJ4" })
                          .Fill(rangeCaptionPairs)
                          .Fill(rangeValuePairs)
-                         .Fill(new HashSet<string>() { "F1", "F2", "F3", "F4", "V1", "V2", "V3", "AC2", "AC3", "AC4" }, ":")
-                         .AlignLeftIndented(new HashSet<string>() { "A1", "A2", "A3", "A4", "S1", "S2", "S3", "Z2", "Z3", "Z4" }, 1)
-                         .AlignCenter(new HashSet<string>() { "F1", "F2", "F3", "F4", "V1", "V2", "V3", "AC2", "AC3", "AC4" })
-                         .AlignCenter(new HashSet<string>() { "W1", "W2", "W3", "S4", "Z1", "AD2", "AD3", "AD4" })
-                         .BordersAroundAndInsideHorizontal(new HashSet<string>() { "A1:R4", "S1:Y3", "S4:Y4", "Z1:AG1", "Z2:AG4" })
-                         .SetNumberFormat("AD4", "dd-MM-yyyy")
-                         .SetBackgroundColor(new HashSet<string>() { "S4:Y4", "Z1:AG1" }, _highlight);
+                         .Fill(colonsRanges, ":").AlignCenter(colonsRanges)
+                         .AlignLeftIndented(new HashSet<string>() { "A1", "A2", "A3", "A4", "U1", "U2", "U3", "AC2", "AC3", "AC4" }, 1)
+                         .AlignCenter(new HashSet<string>() { "Z1", "Z2", "Z3", "U4", "AC1", "AG2", "AG3", "AG4" })
+                         .BordersAroundAndInsideHorizontal(new HashSet<string>() { "A1:T4", "U1:AB4", "AC1:AJ4" })
+                         .SetNumberFormat("AG4", "dd-MM-yyyy")
+                         .SetBackgroundColor(new HashSet<string>() { "U4:AB4", "AC1:AJ1" }, _highlight);
 
+        }
+
+        private static HashSet<string> ToHashSet(params string[] items)
+        {
+            HashSet<string> hashSet = new HashSet<string>();
+            foreach (var item in items)
+            {
+                hashSet.Add(item);
+            }
+            return hashSet;
         }
     }
 }
