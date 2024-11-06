@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows;
 
 using DevDrive.Services;
@@ -12,16 +12,12 @@ using OpenSTAADUI;
 using ReInvented.DataAccess;
 using ReInvented.DataAccess.Models;
 using ReInvented.DataAccess.Services;
-using ReInvented.Domain.Reporting.Models;
-using ReInvented.Domain.Tass.Common.Interfaces;
 using ReInvented.Sections.Domain.Models;
 using ReInvented.Sections.Domain.Repositories;
-using ReInvented.Shared;
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Enums;
 using ReInvented.StaadPro.Interactivity.Extensions;
 using ReInvented.StaadPro.Interactivity.Models;
-using ReInvented.StaadPro.Interactivity.Services;
 
 namespace DevDrive
 {
@@ -55,6 +51,23 @@ namespace DevDrive
 
             OpenStaadWrapper wrapper = OSGlobalExtensions.GetOpenStaadWrapper(filePath);
 
+            //Testing Region
+
+            var output = wrapper.Output as OSOutputUI;
+            var geometry = wrapper.Geometry as OSGeometryUI;
+            var load = wrapper.Load as OSLoadUI;
+
+            var allPlates = geometry.GetAllPlates();
+            var plc = load.GetAllPrimaryLoadCases();
+
+            Stopwatch swInd = new Stopwatch();
+            swInd.Start();
+            var plateCenterResults = output.GetPlateCenterResults(plc, allPlates, 5);
+            swInd.Stop();
+            var elapsed = TimeSpan.FromMilliseconds(swInd.ElapsedMilliseconds);
+
+            //End Region
+
             List<string> groupNames = (wrapper.Geometry as OSGeometryUI)
                                       .GetEntityGroupsOfType<Plate>()
                                       .Where(eg => eg.Entities.Count() > 0)
@@ -70,7 +83,6 @@ namespace DevDrive
             double minimumThickness = 6.0;
             double corrosionAllowance = 6.0;
 
-            //IEnumerable<LoadCase> loadCases = (wrapper.Load as OSLoadUI).GetLoadCasesFromIds(Enumerable.Range(sLcId, eLcId - sLcId + 1), LoadCaseType.LoadCombination);
             IEnumerable<LoadCase> loadCases = (wrapper.Load as OSLoadUI).GetLoadCasesFromIds(Enumerable.Range(sLcId, eLcId - sLcId + 1), LoadCaseType.PrimaryLoad);
             PlatesOptimizationService pos = new PlatesOptimizationService(wrapper, limitingStress);
 
@@ -80,15 +92,6 @@ namespace DevDrive
             var serialized = "const content = " + serializer.Serialize(designResults, JsonSerializerSettingsProvider.Minified);
 
             File.WriteAllText(outputJsonFilePath, serialized);
-
-            //List<string> resultContent = new List<string>() { $"{Pad(Header, MaxLength)} {Header} {Pad(Header, MaxLength)}" };
-            //string separator = $"  |  ";
-            //resultContent.Add($"{separator}{"Group Id",-15}{separator}{"Design Thickness",-20}{separator}{"Max Von Mises",-20}{separator}{"L/C",-10}{separator}{"% Plates Exceeding",20}{separator}");
-            //resultContent.AddRange(designResults.Select(dt => TransformResult(separator, dt)));
-            //resultContent.Add($"{Pad(Footer, MaxLength)} {Footer} {Pad(Footer, MaxLength)}");
-            //resultContent.Add(Environment.NewLine);
-
-            //File.AppendAllLines(outputFilePath, resultContent);
         }
 
         private static bool InExclusionList(string groupName)
@@ -96,22 +99,6 @@ namespace DevDrive
             return groupName.Contains("TANK") || groupName.Contains("COMP") || groupName.Contains("CENTRE") || groupName.Contains("LAUNDER");
         }
 
-        private static string TransformResult(string separator, KeyValuePair<string, PlateGroupDesignResult> dt)
-        {
-            return $"{separator}{dt.Key,-15}{separator}{dt.Value.DesignThickness,-20:N2}{separator}" +
-                   $"{dt.Value.StressSummary.GoverningResults.VonMises.AbsoluteMaximum / 1000,-20:N2}{separator}" +
-                   $"{dt.Value.StressSummary.GoverningResults.LoadCase.Id,-10}{separator}" +
-                   $"{dt.Value.StressSummary.PercentPlatesExceeding,20:N2}%{separator}";
-        }
-
-        private static int MaxLength => 85;
-
-        private static string Header => "Summary of Results";
-        private static string Footer => "End of Results";
-
-        private static string Pad(string content, int maxLength) => string.Join("", Enumerable.Repeat("-", Padding(content, maxLength)));
-
-        private static int Padding(string content, int maxLength) => ((maxLength - content.Length) / 2).Ceiling(1);
 
         #endregion
 
