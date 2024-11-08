@@ -10,6 +10,8 @@ using ReInvented.Domain.Reporting.Models;
 using ReInvented.ExcelInterop.Extensions;
 using ReInvented.StaadPro.Interactivity.Entities;
 using System.Linq;
+using ReInvented.Domain.Tass.Common.Interfaces;
+using ReInvented.Domain.ProjectSetup.Interfaces;
 
 namespace ReInvented.ExcelInterop.Services
 {
@@ -111,6 +113,26 @@ namespace ReInvented.ExcelInterop.Services
 
         #endregion
 
+        private static void FillDocumentData(Worksheet worksheet, IProjectData projectData, IDocument document)
+        {
+            worksheet.Range(_valueRangesLeftIndented["Document No."]).Fill(document.Number);
+            worksheet.Range(_valueRangesLeftIndented["Title"]).Fill(document.Title);
+            worksheet.Range(_valueRangesLeftIndented["Project"]).Fill(projectData.Name);
+            worksheet.Range(_valueRangesLeftIndented["Client"]).Fill(projectData.Client);
+
+            IRevision lastRev = document.Revisions.LastOrDefault();
+            IScrutinyHistory scrutiny = lastRev.ScrutinyHistory;
+
+            worksheet.Range(_valueRangesCenter["Originator"]).Fill(scrutiny.Originator.ShortName);
+            worksheet.Range(_valueRangesCenter["Checker"]).Fill(scrutiny.Reviewer.ShortName);
+            worksheet.Range(_valueRangesCenter["Approver"]).Fill(scrutiny.Approver.ShortName);
+
+            worksheet.Range(_valueRangesCenter["Code"]).Fill(lastRev.SubmissionCategory.GetReleaseCode());
+            worksheet.Range(_valueRangesCenter["Revision"]).Fill(lastRev.Code.ToString());
+            worksheet.Range(_valueRangesCenter["Date"]).Fill(DateTime.Today.ToString()).SetNumberFormat("dd-MM-yyyy");
+
+        }
+
         public static Workbook Create(string savePath, string fileName, FLDReport fldReport = null)
         {
             Application excelApp = new Application { Visible = true };
@@ -133,11 +155,11 @@ namespace ReInvented.ExcelInterop.Services
                 FoundationLoadData fld = fldReport.Content as FoundationLoadData;
                 HashSet<LoadCaseForces> overallSummary = fld.OverallSummary;
 
+                FillDocumentData(worksheet, fldReport.ProjectData, fldReport.Document);
                 worksheet.Range($"A{currentRow}").AlignLeftIndented(1).FontStyle("Tahoma", 9, true, false).Fill("Summary of Loads from All Supports (Statics Check):");
-
                 foreach (LoadCaseForces sItem in overallSummary)
                 {
-
+                    worksheet.Application.ActiveWindow.DisplayGridlines = false;
                 }
             }
 
@@ -169,42 +191,18 @@ namespace ReInvented.ExcelInterop.Services
 
         public static void CreateHeader(Worksheet worksheet)
         {
-            //Dictionary<string, string> rangeCaptionPairs = new Dictionary<string, string>()
-            //{
-            //    { "A1", "Document No."}, { "A2", "Title"}, { "A3", "Project"}, { "A4", "Client"},
-            //    { "U1", "Originator"}, { "U2", "Checker"}, { "U3", "Approver"},{ "U4", "<Template Name>"},
-            //    { "AC1", "Life Cycle Status"},
-            //    { "AC2", "Code"}, { "AC3", "Revision"}, { "AC4", "Date"}
-            //};
-
-            //Dictionary<string, string> rangeValuePairs = new Dictionary<string, string>()
-            //{
-            //    { "G1", "<Document No.>"}, { "G2", "<Title>"}, { "G3", "<Project>"}, { "G4", "<Client>"},
-            //    { "Z1", "<Originator>"}, { "Z2", "<Checker>"}, { "Z3", "<Approver>"},
-            //    { "AG2", "<Code>"}, { "AG3", "<Revision>"}, { "AG4", DateTime.Now.ToString("dd-MMM-yyyy")}
-            //};
-
-            //HashSet<string> colonsRanges = new HashSet<string>() { "F1", "F2", "F3", "F4", "Y1", "Y2", "Y3", "AF2", "AF3", "AF4" };
-
-            _ = worksheet
-                         //.Merge(new HashSet<string>() { "Z1:AB1", "Z2:AB2", "Z3:AB3", "U4:AB4", "AC1:AJ1", "AC2:AE2", "AC3:AE3", "AC4:AE4", "AG2:AJ2", "AG3:AJ3", "AG4:AJ4" })
-                         //.Merge(new HashSet<string>() { "A1:E1", "A2:E2", "A3:E3", "A4:E4", "G1:T1", "G2:T2", "G3:T3", "G4:T4", "U1:X1", "U2:X2", "U3:X3" })
-                         //.Fill(rangeCaptionPairs)
-                         //.Fill(rangeValuePairs)
-                         //.Fill(colonsRanges, ":").AlignCenter(colonsRanges)
-                         //.AlignLeftIndented(new HashSet<string>() { "A1", "A2", "A3", "A4", "U1", "U2", "U3", "AC2", "AC3", "AC4" }, 1)
-                         //.AlignCenter(new HashSet<string>() { "Z1", "Z2", "Z3", "U4", "AC1", "AG2", "AG3", "AG4" })
-                         //.BordersAroundAndInsideHorizontal(new HashSet<string>() { "A1:T4", "U1:AB4", "AC1:AJ4" })
-                         .SetNumberFormat("AG4", "dd-MM-yyyy");
-            //.SetBackgroundColor(new HashSet<string>() { "U4:AB4", "AC1:AJ1" }, _highlight);
-
             _captionRanges.ToList().ForEach(kvp => worksheet.Range(kvp.Value).Fill(kvp.Key).MergeEx().AlignLeftIndented(1));
-            _valueRangesLeftIndented.ToList().ForEach(kvp => worksheet.Range(kvp.Value).Fill($"<{kvp.Key}>").MergeEx().AlignLeftIndented(0));
+            _valueRangesLeftIndented.ToList().ForEach(kvp => worksheet.Range(kvp.Value).MergeEx().AlignLeftIndented(0));
             _valueRangesCenter.ToList().ForEach(kvp => worksheet.Range(kvp.Value).Fill($"<{kvp.Key}>").MergeEx().AlignCenter());
             _colonsRanges.ToList().ForEach(r => worksheet.Range(r).Fill(":").AlignCenter());
             _uniqueRanges.ToList().ForEach(kvp => worksheet.Range(kvp.Value).MergeEx().AlignCenter().Fill(kvp.Key).SetBackgroundColor(_highlight).FontStyle(isBold: true));
             _headerBorderRanges.ToList().ForEach(kvp => worksheet.Range(kvp.Value).BordersAroundAndInsideHorizontal());
+        }
 
+        public static void FillHeaderValues(Worksheet worksheet)
+        {
+            _ = worksheet.Range("AG4").Fill(DateTime.Today.ToString()).SetNumberFormat("dd-MM-yyyy");
+            _ = worksheet.Range("AG4").Fill(DateTime.Today.ToString()).SetNumberFormat("dd-MM-yyyy");
         }
 
         private static HashSet<string> ToHashSet(params string[] items)
