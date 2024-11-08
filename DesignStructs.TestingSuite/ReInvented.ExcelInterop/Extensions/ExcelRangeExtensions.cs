@@ -1,52 +1,129 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
-using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Interop.Excel;
 
+using ReInvented.Shared;
 
 namespace ReInvented.ExcelInterop.Extensions
 {
     public static class ExcelRangeExtensions
     {
-        public static void AlignCenter(this Excel.Range range)
+        #region Private Helpers
+
+        private static double GetAdjustedRowHeight(Range range, int rowStandardHeight, double avgCharWidthRatio)
         {
-            range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            string rangeValue;
+            double fontSize = range.Font.Size;
+            double avgCharWidth = fontSize * avgCharWidthRatio;
+            double maxCharsInRow = ((double)range.Width / avgCharWidth).Ceiling(1);
+
+            if (range.Value is object[,] array)
+            {
+                rangeValue = array[1, 1]?.ToString() ?? string.Empty;
+            }
+            else
+            {
+                rangeValue = range.Value.ToString();
+            }
+
+            int nContentRows = (rangeValue.Length / maxCharsInRow).Ceiling(1);
+            int nRangeRows = range.Rows.Count;
+
+            return nContentRows * rowStandardHeight / nRangeRows;
         }
 
-        public static void AlignLeftIndented(this Excel.Range range, int indentLevel)
+        #endregion
+
+        public static Range FontStyle(this Range range, string name = "Tahoma", int size = 8, bool isBold = false, bool isItalic = false,
+                                      XlUnderlineStyle xlUnderlineStyle = XlUnderlineStyle.xlUnderlineStyleNone)
         {
-            range.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
+            range.Font.Name = name;
+            range.Font.Size = size;
+            range.Font.Bold = isBold;
+            range.Font.Italic = isItalic;
+            range.Font.Underline = xlUnderlineStyle;
+
+            return range;
+        }
+
+        public static Range MergeEx(this Range range)
+        {
+            range.Merge();
+            return range;
+        }
+
+        public static Range Fill(this Range range, string content)
+        {
+            range.Cells[1, 1] = content;
+
+            //range.Value = content;
+            return range;
+        }
+        public static Range Wrap(this Range range, int rowStandardHeight, double avgCharWidthRatio = 0.4)
+        {
+            range.WrapText = true;
+
+            if (range.Columns.Count > 1)
+            {
+                double rangeRowHeight = GetAdjustedRowHeight(range, rowStandardHeight, avgCharWidthRatio);
+                range.Rows.RowHeight = Math.Min(rangeRowHeight, 409);
+            }
+            else
+            {
+                range.Rows.AutoFit();
+            }
+
+            return range;
+        }
+
+        public static Range AlignCenter(this Range range)
+        {
+            range.HorizontalAlignment = XlHAlign.xlHAlignCenter;
+            return range;
+        }
+
+        public static Range AlignLeftIndented(this Range range, int indentLevel)
+        {
+            range.HorizontalAlignment = XlHAlign.xlHAlignLeft;
             range.IndentLevel = indentLevel;
+            return range;
         }
 
-        public static void AlignRightIndented(this Excel.Range range, int indentLevel)
+        public static Range AlignRightIndented(this Range range, int indentLevel)
         {
-            range.HorizontalAlignment = Excel.XlHAlign.xlHAlignRight;
+            range.HorizontalAlignment = XlHAlign.xlHAlignRight;
             range.IndentLevel = indentLevel;
+            return range;
         }
 
-        public static void BordersAroundAndInsideHorizontal(this Excel.Range range)
+        public static Range BordersAroundAndInsideHorizontal(this Range range)
         {
-            range.Borders[Excel.XlBordersIndex.xlEdgeTop].LineStyle = Excel.XlLineStyle.xlContinuous;
-            range.Borders[Excel.XlBordersIndex.xlEdgeBottom].LineStyle = Excel.XlLineStyle.xlContinuous;
-            range.Borders[Excel.XlBordersIndex.xlEdgeLeft].LineStyle = Excel.XlLineStyle.xlContinuous;
-            range.Borders[Excel.XlBordersIndex.xlEdgeRight].LineStyle = Excel.XlLineStyle.xlContinuous;
+            range.Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
+            range.Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+            range.Borders[XlBordersIndex.xlEdgeLeft].LineStyle = XlLineStyle.xlContinuous;
+            range.Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
 
-            range.Borders[Excel.XlBordersIndex.xlInsideHorizontal].LineStyle = Excel.XlLineStyle.xlContinuous;
+            range.Borders[XlBordersIndex.xlInsideHorizontal].LineStyle = XlLineStyle.xlContinuous;
+            return range;
         }
 
-        public static void SetBackgroundColor(this Excel.Range range, string hexCode)
+        public static Range SetBackgroundColor(this Range range, string hexCode)
         {
             range.Interior.Color = ColorTranslator.ToOle(ColorTranslator.FromHtml(hexCode));
+            return range;
         }
 
-        public static void SetBackgroundColor(this Excel.Range range, Color color)
+        public static Range SetBackgroundColor(this Range range, Color color)
         {
             range.Interior.Color = ColorTranslator.ToOle(color);
+            return range;
         }
 
-        public static void SetNumberFormat(this Excel.Range range, string format)
+        public static Range SetNumberFormat(this Range range, string format)
         {
             range.NumberFormat = format;
+            return range;
         }
     }
 }

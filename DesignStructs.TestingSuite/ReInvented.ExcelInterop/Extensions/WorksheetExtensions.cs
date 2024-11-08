@@ -8,7 +8,10 @@ namespace ReInvented.ExcelInterop.Extensions
 {
     public static class WorksheetExtensions
     {
-
+        public static Range Range(this Worksheet worksheet, string range)
+        {
+            return worksheet.Range[range];
+        }
         public static Worksheet SetTemplateDefaults(this Worksheet worksheet, int rowHeight, int colWidth, string fontName, int fontSize)
         {
             worksheet.Rows.RowHeight = rowHeight;
@@ -27,22 +30,37 @@ namespace ReInvented.ExcelInterop.Extensions
 
         public static Worksheet Merge(this Worksheet worksheet, HashSet<string> ranges)
         {
-            ranges.ToList().ForEach(rng => worksheet.Range[rng].Merge());
+            ranges.ToList().ForEach(rng => Merge(worksheet, rng));
             return worksheet;
         }
 
-        public static Worksheet Fill(this Worksheet worksheet, HashSet<string> ranges, string content)
+        public static Worksheet Merge(this Worksheet worksheet, string range)
         {
-            ranges.ToList().ForEach(rng => worksheet.Range[rng].Value = content);
+            worksheet.Range[range].Merge();
             return worksheet;
         }
 
         public static Worksheet Fill(this Worksheet worksheet, Dictionary<string, string> rangeContentPairs)
         {
-            foreach (KeyValuePair<string, string> rcp in rangeContentPairs)
-            {
-                worksheet.Range[rcp.Key].Value = rcp.Value;
-            }
+            rangeContentPairs.ToList().ForEach(rcp => Fill(worksheet, rcp.Key, rcp.Value));
+            return worksheet;
+        }
+
+        public static Worksheet Fill(this Worksheet worksheet, HashSet<string> ranges, string content)
+        {
+            ranges.ToList().ForEach(rng => Fill(worksheet, rng, content));
+            return worksheet;
+        }
+
+        public static Worksheet Fill(this Worksheet worksheet, string range, string content)
+        {
+            worksheet.Range[range].Value = content;
+            return worksheet;
+        }
+
+        public static Worksheet Wrap(this Worksheet worksheet, string range, int rowStandardHeight, double avgCharWidthRatio = 0.4)
+        {
+            worksheet.Range[range].Wrap(rowStandardHeight, avgCharWidthRatio);
             return worksheet;
         }
 

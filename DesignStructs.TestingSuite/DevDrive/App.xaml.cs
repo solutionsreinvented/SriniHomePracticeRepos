@@ -32,10 +32,10 @@ namespace DevDrive
 
             MaterialsLibrary matLib = MaterialsRepository.Instance.GetMaterialsLibrary();
 
-            var allGrades = matLib.Tables.SelectMany(t => t.Grades);
-            var matched = allGrades.Where(g => g.Designation.Contains("A36"));
+            IEnumerable<MaterialGrade> allGrades = matLib.Tables.SelectMany(t => t.Grades);
+            IEnumerable<MaterialGrade> matched = allGrades.Where(g => g.Designation.Contains("A36"));
 
-            var grade = matched.FirstOrDefault(g => g.StaadName == "A36");
+            MaterialGrade grade = matched.FirstOrDefault(g => g.StaadName == "A36");
 
             OptimizePlates(grade.Fy);
         }
@@ -53,18 +53,18 @@ namespace DevDrive
 
             //Testing Region
 
-            var output = wrapper.Output as OSOutputUI;
-            var geometry = wrapper.Geometry as OSGeometryUI;
-            var load = wrapper.Load as OSLoadUI;
+            OSOutputUI output = wrapper.Output as OSOutputUI;
+            OSGeometryUI geometry = wrapper.Geometry as OSGeometryUI;
+            OSLoadUI load = wrapper.Load as OSLoadUI;
 
-            var allPlates = geometry.GetAllPlates();
-            var plc = load.GetAllPrimaryLoadCases();
+            HashSet<Plate> allPlates = geometry.GetAllPlates();
+            HashSet<LoadCase> plc = load.GetAllPrimaryLoadCases();
 
             Stopwatch swInd = new Stopwatch();
             swInd.Start();
-            var plateCenterResults = output.GetPlateCenterResults(plc, allPlates, 5);
+            //var plateCenterResults = output.GetPlateCenterResults(plc, allPlates, 5);
             swInd.Stop();
-            var elapsed = TimeSpan.FromMilliseconds(swInd.ElapsedMilliseconds);
+            TimeSpan elapsed = TimeSpan.FromMilliseconds(swInd.ElapsedMilliseconds);
 
             //End Region
 
