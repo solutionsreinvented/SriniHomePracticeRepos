@@ -12,6 +12,7 @@ using ReInvented.StaadPro.Interactivity.Entities;
 using System.Linq;
 using ReInvented.Domain.Tass.Common.Interfaces;
 using ReInvented.Domain.ProjectSetup.Interfaces;
+using ReInvented.StaadPro.Interactivity.Models;
 
 namespace ReInvented.ExcelInterop.Services
 {
@@ -129,7 +130,7 @@ namespace ReInvented.ExcelInterop.Services
 
             worksheet.Range(_valueRangesCenter["Code"]).Fill(lastRev.SubmissionCategory.GetReleaseCode());
             worksheet.Range(_valueRangesCenter["Revision"]).Fill(lastRev.Code.ToString());
-            worksheet.Range(_valueRangesCenter["Date"]).Fill(DateTime.Today.ToString()).SetNumberFormat("dd-MM-yyyy");
+            worksheet.Range(_valueRangesCenter["Date"]).Fill(DateTime.Today.ToShortDateString());
 
         }
 
@@ -151,20 +152,38 @@ namespace ReInvented.ExcelInterop.Services
             if (fldReport != null)
             {
                 int currentRow = 6;
+                int sectionId = 1;
+                int nRowsHeader = 2;
 
                 FoundationLoadData fld = fldReport.Content as FoundationLoadData;
                 HashSet<LoadCaseForces> overallSummary = fld.OverallSummary;
 
                 FillDocumentData(worksheet, fldReport.ProjectData, fldReport.Document);
-                worksheet.Range($"A{currentRow}").AlignLeftIndented(1).FontStyle("Tahoma", 9, true, false).Fill("Summary of Loads from All Supports (Statics Check):");
-                foreach (LoadCaseForces sItem in overallSummary)
+                worksheet.Range($"B{currentRow}").AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}. Summary of Loads from All Supports (Statics Check):");
+
+                worksheet.Application.ActiveWindow.DisplayGridlines = false;
+
+                currentRow += 2;
+
+                int tableStartRow = currentRow;
+
+                currentRow = GenerateOverallSummaryTableHeadersWithoutCgs(worksheet, currentRow, nRowsHeader);
+
+                foreach (LoadCaseForces lcForces in overallSummary)
                 {
-                    worksheet.Application.ActiveWindow.DisplayGridlines = false;
+                    string lcTitle = fld.LoadCases.FirstOrDefault(kvp => kvp.Key == lcForces.Id).Value;
+                    currentRow++;
+                    GenerateOverallSummaryContentRowWithoutCgs(worksheet, currentRow, lcForces.Id, lcTitle, lcForces.Forces);
                 }
+
+                int tableEndRow = currentRow;
+
+                worksheet.Range($"B{tableStartRow}:AJ{tableEndRow}").BordersAround().BordersInsideAll();
+
             }
 
-            string rngTarget = "A10";
-            worksheet.Range(rngTarget).MergeEx().Fill("This is a sample text that will be wrapped and the row height will adjust automatically to fit the content. This is a sample text that will be wrapped and the row height will adjust automatically to fit the content. This is a sample text that will be wrapped and the row height will adjust automatically to fit the content. This is a sample text that will be wrapped and the row height will adjust automatically to fit the content.").Wrap(15);
+            //string rngTarget = "A10";
+            //worksheet.Range(rngTarget).MergeEx().Fill("This is a sample text that will be wrapped and the row height will adjust automatically to fit the content. This is a sample text that will be wrapped and the row height will adjust automatically to fit the content. This is a sample text that will be wrapped and the row height will adjust automatically to fit the content. This is a sample text that will be wrapped and the row height will adjust automatically to fit the content.").Wrap(15);
 
 
 
@@ -186,7 +205,58 @@ namespace ReInvented.ExcelInterop.Services
             return workbook;
         }
 
+        public static int GenerateOverallSummaryTableHeadersWithoutCgs(Worksheet worksheet, int sRowHeader, int nRowsHeader)
+        {
+            int eRowHeader = sRowHeader + (nRowsHeader - 1);
+            const double charSpacing = 0.8;
 
+            worksheet.Range($"B{sRowHeader}:R{eRowHeader}").Fill($"Load Case/Combination").FontStyle(isBold: true).MergeEx().Wrap(15, charSpacing).AlignLeftIndented(1);
+            worksheet.Range($"S{sRowHeader}:U{eRowHeader}").Fill($"Fx (kN)").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(15, charSpacing).AlignCenter();
+            worksheet.Range($"V{sRowHeader}:X{eRowHeader}").Fill($"Fy (kN)").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(15, charSpacing).AlignCenter();
+            worksheet.Range($"Y{sRowHeader}:AA{eRowHeader}").Fill($"Fz (kN)").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(15, charSpacing).AlignCenter();
+            worksheet.Range($"AB{sRowHeader}:AD{eRowHeader}").Fill($"Mx (kNm)").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(15, charSpacing).AlignCenter();
+            worksheet.Range($"AE{sRowHeader}:AG{eRowHeader}").Fill($"My (kNm)").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(15, charSpacing).AlignCenter();
+            worksheet.Range($"AH{sRowHeader}:AJ{eRowHeader}").Fill($"Mz (kNm)").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(15, charSpacing).AlignCenter();
+
+            return eRowHeader;
+        }
+
+        public static int GenerateOverallSummaryTableHeadersWithCgs(Worksheet worksheet, int sRowHeader, int nRowsHeader)
+        {
+            int eRowHeader = sRowHeader + (nRowsHeader - 1);
+
+            //worksheet.Range($"B{sRowHeader}:R{eRowHeader}").Fill($"Load Case/Combination").FontStyle(isBold: true).MergeEx().Wrap(15, 0.8).AlignLeftIndented(1);
+            //worksheet.Range($"S{sRowHeader}:U{eRowHeader}").Fill($"Fx (kN)").FontStyle(isBold: true).MergeEx().Wrap(15, 0.8).AlignCenter();
+            //worksheet.Range($"V{sRowHeader}:X{eRowHeader}").Fill($"Fy (kN)").FontStyle(isBold: true).MergeEx().Wrap(15, 0.8).AlignCenter();
+            //worksheet.Range($"Y{sRowHeader}:AA{eRowHeader}").Fill($"Fz (kN)").FontStyle(isBold: true).MergeEx().Wrap(15, 0.8).AlignCenter();
+            //worksheet.Range($"AB{sRowHeader}:AD{eRowHeader}").Fill($"Mx (kNm)").FontStyle(isBold: true).MergeEx().Wrap(15, 0.8).AlignCenter();
+            //worksheet.Range($"AE{sRowHeader}:AG{eRowHeader}").Fill($"My (kNm)").FontStyle(isBold: true).MergeEx().Wrap(15, 0.8).AlignCenter();
+            //worksheet.Range($"AH{sRowHeader}:AJ{eRowHeader}").Fill($"Mz (kNm)").FontStyle(isBold: true).MergeEx().Wrap(15, 0.8).AlignCenter();
+
+            return eRowHeader;
+        }
+
+        public static void GenerateOverallSummaryContentRowWithoutCgs(Worksheet worksheet, int rowIndex, int lcId, string lcTitle, Forces forces)
+        {
+            worksheet.Range($"B{rowIndex}:R{rowIndex}").Fill($"{lcId} : {lcTitle}").MergeEx().Wrap(15).AlignLeftIndented(1);
+            worksheet.Range($"S{rowIndex}:U{rowIndex}").Fill($"{Math.Round(forces.Fx, 1)}").MergeEx().Wrap(15).AlignCenter();
+            worksheet.Range($"V{rowIndex}:X{rowIndex}").Fill($"{Math.Round(forces.Fy, 1)}").MergeEx().Wrap(15).AlignCenter();
+            worksheet.Range($"Y{rowIndex}:AA{rowIndex}").Fill($"{Math.Round(forces.Fz, 1)}").MergeEx().Wrap(15).AlignCenter();
+            worksheet.Range($"AB{rowIndex}:AD{rowIndex}").Fill($"{Math.Round(forces.Mx, 1)}").MergeEx().Wrap(15).AlignCenter();
+            worksheet.Range($"AE{rowIndex}:AG{rowIndex}").Fill($"{Math.Round(forces.My, 1)}").MergeEx().Wrap(15).AlignCenter();
+            worksheet.Range($"AH{rowIndex}:AJ{rowIndex}").Fill($"{Math.Round(forces.Mz, 1)}").MergeEx().Wrap(15).AlignCenter();
+        }
+
+        public static void GenerateOverallSummaryContentRowWithCgs(Worksheet worksheet, int rowIndex, int lcId, string lcTitle, Forces forces)
+        {
+            //worksheet.Range($"B{rowIndex}:R{rowIndex}").Fill($"{lcId} : {lcTitle}").MergeEx().Wrap(15).AlignLeftIndented(1);
+            //worksheet.Range($"S{rowIndex}:U{rowIndex}").Fill($"{Math.Round(forces.Fx, 1)}").MergeEx().Wrap(15).AlignCenter();
+            //worksheet.Range($"V{rowIndex}:X{rowIndex}").Fill($"{Math.Round(forces.Fy, 1)}").MergeEx().Wrap(15).AlignCenter();
+            //worksheet.Range($"Y{rowIndex}:AA{rowIndex}").Fill($"{Math.Round(forces.Fz, 1)}").MergeEx().Wrap(15).AlignCenter();
+            //worksheet.Range($"AB{rowIndex}:AD{rowIndex}").Fill($"{Math.Round(forces.Mx, 1)}").MergeEx().Wrap(15).AlignCenter();
+            //worksheet.Range($"AE{rowIndex}:AG{rowIndex}").Fill($"{Math.Round(forces.My, 1)}").MergeEx().Wrap(15).AlignCenter();
+            //worksheet.Range($"AH{rowIndex}:AJ{rowIndex}").Fill($"{Math.Round(forces.Mz, 1)}").MergeEx().Wrap(15).AlignCenter();
+        }
 
 
         public static void CreateHeader(Worksheet worksheet)

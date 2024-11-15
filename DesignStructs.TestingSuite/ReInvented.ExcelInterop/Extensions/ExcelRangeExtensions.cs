@@ -27,7 +27,7 @@ namespace ReInvented.ExcelInterop.Extensions
                 rangeValue = range.Value.ToString();
             }
 
-            int nContentRows = (rangeValue.Length / maxCharsInRow).Ceiling(1);
+            int nContentRows = Math.Max(1, (rangeValue.Length / maxCharsInRow).Ceiling(1));
             int nRangeRows = range.Rows.Count;
 
             return nContentRows * rowStandardHeight / nRangeRows;
@@ -60,6 +60,13 @@ namespace ReInvented.ExcelInterop.Extensions
             //range.Value = content;
             return range;
         }
+
+        public static Range Subscript(this Range range, int sIndex, int length)
+        {
+            range.Characters[sIndex, length].Font.Subscript = true;
+            return range;
+        }
+
         public static Range Wrap(this Range range, int rowStandardHeight, double avgCharWidthRatio = 0.4)
         {
             range.WrapText = true;
@@ -94,6 +101,36 @@ namespace ReInvented.ExcelInterop.Extensions
         {
             range.HorizontalAlignment = XlHAlign.xlHAlignRight;
             range.IndentLevel = indentLevel;
+            return range;
+        }
+
+        public static Range BordersAround(this Range range)
+        {
+            range.Borders[XlBordersIndex.xlEdgeTop].LineStyle = XlLineStyle.xlContinuous;
+            range.Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlContinuous;
+            range.Borders[XlBordersIndex.xlEdgeLeft].LineStyle = XlLineStyle.xlContinuous;
+            range.Borders[XlBordersIndex.xlEdgeRight].LineStyle = XlLineStyle.xlContinuous;
+
+            range.Borders[XlBordersIndex.xlInsideHorizontal].LineStyle = XlLineStyle.xlContinuous;
+            return range;
+        }
+
+        public static Range BordersInsideHorizontal(this Range range)
+        {
+            range.Borders[XlBordersIndex.xlInsideHorizontal].LineStyle = XlLineStyle.xlContinuous;
+            return range;
+        }
+
+        public static Range BordersInsideVertical(this Range range)
+        {
+            range.Borders[XlBordersIndex.xlInsideVertical].LineStyle = XlLineStyle.xlContinuous;
+            return range;
+        }
+
+        public static Range BordersInsideAll(this Range range)
+        {
+            range.Borders[XlBordersIndex.xlInsideHorizontal].LineStyle = XlLineStyle.xlContinuous;
+            range.Borders[XlBordersIndex.xlInsideVertical].LineStyle = XlLineStyle.xlContinuous;
             return range;
         }
 
