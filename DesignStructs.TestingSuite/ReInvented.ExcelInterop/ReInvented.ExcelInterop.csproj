@@ -85,7 +85,9 @@
     <Compile Include="Extensions\ExcelRangeExtensions.cs" />
     <Compile Include="Extensions\WorkbookExtensions.cs" />
     <Compile Include="Extensions\WorksheetExtensions.cs" />
-    <Compile Include="Services\OverallSummaryService.cs" />
+    <Compile Include="Services\DocumentHeaderService.cs" />
+    <Compile Include="Services\SummaryTableService.cs" />
+    <Compile Include="Services\PcdLoadsService.cs" />
     <Compile Include="Services\WorkbookService.cs" />
     <Compile Include="Services\WorksheetService.cs" />
     <Page Include="MainWindow.xaml">
