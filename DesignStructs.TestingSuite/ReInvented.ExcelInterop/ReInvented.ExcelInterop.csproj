@@ -83,6 +83,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Extensions\ExcelRangeExtensions.cs" />
+    <Compile Include="Extensions\ReleasesExtensions.cs" />
     <Compile Include="Extensions\WorkbookExtensions.cs" />
     <Compile Include="Extensions\WorksheetExtensions.cs" />
     <Compile Include="Services\DocumentHeaderService.cs" />

@@ -12,6 +12,12 @@ namespace ReInvented.ExcelInterop.Extensions
         {
             return worksheet.Range[range];
         }
+
+        public static Range Range(this Worksheet worksheet, int sRow, int eRow, int sCol, int eCol)
+        {
+            return worksheet.Range[worksheet.Cells[sRow, sCol], worksheet.Cells[eRow, eCol]];
+        }
+
         public static Worksheet SetTemplateDefaults(this Worksheet worksheet, int rowHeight, int colWidth, string fontName, int fontSize)
         {
             worksheet.Rows.RowHeight = rowHeight;

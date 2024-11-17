@@ -111,46 +111,23 @@ namespace ReInvented.ExcelInterop.Services
 
                 currentRow = SummaryTableService.Generate(worksheet, currentRow, nRowsHeader, overallSummary, fld.LoadCases);
 
-                //currentRow += 2;
-                //int tableStartRow = currentRow;
-
-                //currentRow = SummaryTableService.GenerateHeaders(worksheet, currentRow, nRowsHeader);
-
-                //foreach (LoadCaseForces lcForces in overallSummary)
-                //{
-                //    string lcTitle = fld.LoadCases.FirstOrDefault(kvp => kvp.Key == lcForces.Id).Value;
-                //    currentRow++;
-                //    SummaryTableService.GenerateContentRow(worksheet, currentRow, lcForces.Id, lcTitle, lcForces.Forces);
-                //}
-
-                //int tableEndRow = currentRow;
-
-                //worksheet.Range($"B{tableStartRow}:AJ{tableEndRow}").BordersAround().BordersInsideAll();
-
                 foreach (PCDLoads pcdForces in pcdForcesCollection)
                 {
                     currentRow += 2;
 
                     sectionId++;
                     string pcdDesc = pcdForces.PCD == "CC" ? "Center Column" : pcdForces.PCD;
-                    worksheet.Range($"B{currentRow}").AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.1 Support Reactions at {pcdDesc}:");
+                    worksheet.Range($"B{currentRow}").AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.1 Summary of Reactions at Support Group C.G.{pcdDesc}:");
 
-                    //currentRow += 2;
-                    //tableStartRow = currentRow;
-
-                    //HashSet<LoadCaseForces> pcdForcesSummary = pcdForces.SupportLoadsSummary;
-                    //currentRow = SummaryTableService.GenerateHeaders(worksheet, currentRow, 2);
-
-                    //foreach (LoadCaseForces lcForces in pcdForcesSummary)
-                    //{
-                    //    string lcTitle = fld.LoadCases.FirstOrDefault(kvp => kvp.Key == lcForces.Id).Value;
-                    //    currentRow++;
-                    //    SummaryTableService.GenerateContentRow(worksheet, currentRow, lcForces.Id, lcTitle, lcForces.Forces);
-                    //}
-
-                    //tableEndRow = currentRow;
-                    //worksheet.Range($"B{tableStartRow}:AJ{tableEndRow}").BordersAround().BordersInsideAll();
                     currentRow = SummaryTableService.Generate(worksheet, currentRow, nRowsHeader, pcdForces.SupportLoadsSummary, fld.LoadCases);
+
+                    currentRow += 2;
+                    worksheet.Range($"B{currentRow}").AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.2 Reactions at Each Support:");
+
+                    currentRow += 2;
+                    currentRow = PcdLoadsTableService.GenerateHeaders(worksheet, currentRow, pcdForces.SupportsInformation.SupportReleases);
+
+                    //pcdForces.SupportsInformation.
                 }
 
             }

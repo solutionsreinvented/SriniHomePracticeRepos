@@ -67,13 +67,13 @@ namespace ReInvented.ExcelInterop.Extensions
             return range;
         }
 
-        public static Range Wrap(this Range range, int rowStandardHeight, double avgCharWidthRatio = 0.4)
+        public static Range Wrap(this Range range, int rowStandardHeight, bool adjustRowHeight, double avgCharWidthRatio = 0.4)
         {
             range.WrapText = true;
 
             if (range.Columns.Count > 1)
             {
-                double rangeRowHeight = GetAdjustedRowHeight(range, rowStandardHeight, avgCharWidthRatio);
+                double rangeRowHeight = adjustRowHeight ? GetAdjustedRowHeight(range, rowStandardHeight, avgCharWidthRatio) : rowStandardHeight;
                 range.Rows.RowHeight = Math.Min(rangeRowHeight, 409);
             }
             else
@@ -82,6 +82,11 @@ namespace ReInvented.ExcelInterop.Extensions
             }
 
             return range;
+        }
+
+        public static Range Wrap(this Range range, int rowStandardHeight, double avgCharWidthRatio = 0.4)
+        {
+            return Wrap(range, rowStandardHeight, true, avgCharWidthRatio);
         }
 
         public static Range AlignCenter(this Range range)
