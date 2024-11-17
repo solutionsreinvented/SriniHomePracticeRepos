@@ -1,14 +1,37 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Office.Interop.Excel;
 
 using ReInvented.ExcelInterop.Extensions;
+using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Models;
 
 namespace ReInvented.ExcelInterop.Services
 {
     public class SummaryTableService
     {
+
+        public static int Generate(Worksheet worksheet, int currentRow, int nRowsHeader, HashSet<LoadCaseForces> forcesSummary, IDictionary<int, string> lcIdTitlePairs)
+        {
+            currentRow += 2;
+            int tableStartRow = currentRow;
+
+            currentRow = GenerateHeaders(worksheet, currentRow, nRowsHeader);
+
+            foreach (LoadCaseForces lcForces in forcesSummary)
+            {
+                string lcTitle = lcIdTitlePairs.FirstOrDefault(kvp => kvp.Key == lcForces.Id).Value;
+                currentRow++;
+                GenerateContentRow(worksheet, currentRow, lcForces.Id, lcTitle, lcForces.Forces);
+            }
+
+            int tableEndRow = currentRow;
+            worksheet.Range($"B{tableStartRow}:AJ{tableEndRow}").BordersAround().BordersInsideAll();
+
+            return currentRow;
+        }
+
         public static int GenerateHeaders(Worksheet worksheet, int sRowHeader, int nRowsHeader)
         {
             int eRowHeader = sRowHeader + (nRowsHeader - 1);

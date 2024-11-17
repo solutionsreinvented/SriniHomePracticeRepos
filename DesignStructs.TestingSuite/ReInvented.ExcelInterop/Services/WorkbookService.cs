@@ -109,21 +109,23 @@ namespace ReInvented.ExcelInterop.Services
 
                 worksheet.Application.ActiveWindow.DisplayGridlines = false;
 
-                currentRow += 2;
-                int tableStartRow = currentRow;
+                currentRow = SummaryTableService.Generate(worksheet, currentRow, nRowsHeader, overallSummary, fld.LoadCases);
 
-                currentRow = SummaryTableService.GenerateHeaders(worksheet, currentRow, nRowsHeader);
+                //currentRow += 2;
+                //int tableStartRow = currentRow;
 
-                foreach (LoadCaseForces lcForces in overallSummary)
-                {
-                    string lcTitle = fld.LoadCases.FirstOrDefault(kvp => kvp.Key == lcForces.Id).Value;
-                    currentRow++;
-                    SummaryTableService.GenerateContentRow(worksheet, currentRow, lcForces.Id, lcTitle, lcForces.Forces);
-                }
+                //currentRow = SummaryTableService.GenerateHeaders(worksheet, currentRow, nRowsHeader);
 
-                int tableEndRow = currentRow;
+                //foreach (LoadCaseForces lcForces in overallSummary)
+                //{
+                //    string lcTitle = fld.LoadCases.FirstOrDefault(kvp => kvp.Key == lcForces.Id).Value;
+                //    currentRow++;
+                //    SummaryTableService.GenerateContentRow(worksheet, currentRow, lcForces.Id, lcTitle, lcForces.Forces);
+                //}
 
-                worksheet.Range($"B{tableStartRow}:AJ{tableEndRow}").BordersAround().BordersInsideAll();
+                //int tableEndRow = currentRow;
+
+                //worksheet.Range($"B{tableStartRow}:AJ{tableEndRow}").BordersAround().BordersInsideAll();
 
                 foreach (PCDLoads pcdForces in pcdForcesCollection)
                 {
@@ -133,22 +135,22 @@ namespace ReInvented.ExcelInterop.Services
                     string pcdDesc = pcdForces.PCD == "CC" ? "Center Column" : pcdForces.PCD;
                     worksheet.Range($"B{currentRow}").AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.1 Support Reactions at {pcdDesc}:");
 
-                    currentRow += 2;
-                    tableStartRow = currentRow;
+                    //currentRow += 2;
+                    //tableStartRow = currentRow;
 
-                    HashSet<LoadCaseForces> pcdForcesSummary = pcdForces.SupportLoadsSummary;
-                    currentRow = SummaryTableService.GenerateHeaders(worksheet, currentRow, 2);
+                    //HashSet<LoadCaseForces> pcdForcesSummary = pcdForces.SupportLoadsSummary;
+                    //currentRow = SummaryTableService.GenerateHeaders(worksheet, currentRow, 2);
 
-                    foreach (LoadCaseForces lcForces in pcdForcesSummary)
-                    {
-                        string lcTitle = fld.LoadCases.FirstOrDefault(kvp => kvp.Key == lcForces.Id).Value;
-                        currentRow++;
-                        SummaryTableService.GenerateContentRow(worksheet, currentRow, lcForces.Id, lcTitle, lcForces.Forces);
-                    }
+                    //foreach (LoadCaseForces lcForces in pcdForcesSummary)
+                    //{
+                    //    string lcTitle = fld.LoadCases.FirstOrDefault(kvp => kvp.Key == lcForces.Id).Value;
+                    //    currentRow++;
+                    //    SummaryTableService.GenerateContentRow(worksheet, currentRow, lcForces.Id, lcTitle, lcForces.Forces);
+                    //}
 
-                    tableEndRow = currentRow;
-                    worksheet.Range($"B{tableStartRow}:AJ{tableEndRow}").BordersAround().BordersInsideAll();
-
+                    //tableEndRow = currentRow;
+                    //worksheet.Range($"B{tableStartRow}:AJ{tableEndRow}").BordersAround().BordersInsideAll();
+                    currentRow = SummaryTableService.Generate(worksheet, currentRow, nRowsHeader, pcdForces.SupportLoadsSummary, fld.LoadCases);
                 }
 
             }
