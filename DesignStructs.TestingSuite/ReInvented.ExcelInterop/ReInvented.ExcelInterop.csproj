@@ -86,6 +86,7 @@
     <Compile Include="Extensions\ReleasesExtensions.cs" />
     <Compile Include="Extensions\WorkbookExtensions.cs" />
     <Compile Include="Extensions\WorksheetExtensions.cs" />
+    <Compile Include="Models\CharSpacing.cs" />
     <Compile Include="Models\FontSettings.cs" />
     <Compile Include="Services\DocumentHeaderService.cs" />
     <Compile Include="Models\XlSettings.cs" />

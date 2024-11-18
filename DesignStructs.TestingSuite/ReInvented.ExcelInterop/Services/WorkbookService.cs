@@ -106,8 +106,6 @@ namespace ReInvented.ExcelInterop.Services
                 HashSet<PCDLoads> pcdForcesCollection = fld.PCDLoadsCollection;
 
                 DocumentHeaderService.FillDocumentHeaderData(worksheet, fldReport.ProjectData, fldReport.Document);
-                //worksheet.Range($"B{currentRow}").AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}. All Supports");
-                //worksheet.Range($"B{++currentRow}").AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.1 Summary of Loads from All Supports (Statics Check)");
                 worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}. All Supports");
                 worksheet.Range(++currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.1 Summary of Loads from All Supports (Statics Check)");
 
@@ -121,19 +119,16 @@ namespace ReInvented.ExcelInterop.Services
 
                     sectionId++;
                     string pcdDesc = pcdForces.PCD == "CC" ? "Center Column" : pcdForces.PCD;
-                    //worksheet.Range($"B{currentRow}").AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}. {pcdDesc} Supports");
                     worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}. {pcdDesc} Supports");
 
                     worksheet.Range(++currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.1 Supports Information");
                     currentRow = SupportInformationTableService.Generate(worksheet, ++currentRow, pcdForces.SupportsInformation);
 
                     currentRow += XlSettings.HeadersOffset;
-                    //worksheet.Range($"B{++currentRow}").AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.2 Summary of Reactions at Support Group C.G. ({pcdDesc})");
                     worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.2 Summary of Reactions at Support Group C.G. ({pcdDesc})");
                     currentRow = SummaryTableService.Generate(worksheet, currentRow, nRowsHeader, pcdForces.SupportLoadsSummary, fld.LoadCases);
 
                     currentRow += XlSettings.HeadersOffset;
-                    //worksheet.Range($"B{currentRow}").AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.3 Reactions at Each Support");
                     worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.3 Reactions at Each Support");
 
 
@@ -147,7 +142,6 @@ namespace ReInvented.ExcelInterop.Services
 
 
 
-                    //pcdForces.SupportsInformation.
                 }
 
             }
