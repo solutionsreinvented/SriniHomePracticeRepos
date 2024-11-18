@@ -86,9 +86,12 @@
     <Compile Include="Extensions\ReleasesExtensions.cs" />
     <Compile Include="Extensions\WorkbookExtensions.cs" />
     <Compile Include="Extensions\WorksheetExtensions.cs" />
+    <Compile Include="Models\FontSettings.cs" />
     <Compile Include="Services\DocumentHeaderService.cs" />
+    <Compile Include="Models\XlSettings.cs" />
     <Compile Include="Services\SummaryTableService.cs" />
     <Compile Include="Services\PcdLoadsTableService.cs" />
+    <Compile Include="Services\SupportInformationTableService.cs" />
     <Compile Include="Services\WorkbookService.cs" />
     <Compile Include="Services\WorksheetService.cs" />
     <Page Include="MainWindow.xaml">

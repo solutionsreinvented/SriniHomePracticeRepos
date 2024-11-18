@@ -13,6 +13,11 @@ namespace ReInvented.ExcelInterop.Extensions
             return worksheet.Range[range];
         }
 
+        public static Range Range(this Worksheet worksheet, int sRow, int sCol)
+        {
+            return worksheet.Cells[sRow, sCol];
+        }
+
         public static Range Range(this Worksheet worksheet, int sRow, int eRow, int sCol, int eCol)
         {
             return worksheet.Range[worksheet.Cells[sRow, sCol], worksheet.Cells[eRow, eCol]];

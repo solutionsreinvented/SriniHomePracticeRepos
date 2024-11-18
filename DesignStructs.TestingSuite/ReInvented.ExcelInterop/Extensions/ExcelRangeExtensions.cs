@@ -3,6 +3,7 @@ using System.Drawing;
 
 using Microsoft.Office.Interop.Excel;
 
+using ReInvented.ExcelInterop.Models;
 using ReInvented.Shared;
 
 namespace ReInvented.ExcelInterop.Extensions
@@ -35,7 +36,7 @@ namespace ReInvented.ExcelInterop.Extensions
 
         #endregion
 
-        public static Range FontStyle(this Range range, string name = "Tahoma", int size = 8, bool isBold = false, bool isItalic = false,
+        public static Range FontStyle(this Range range, string name = XlSettings.FontName, int size = XlSettings.FontSize, bool isBold = false, bool isItalic = false,
                                       XlUnderlineStyle xlUnderlineStyle = XlUnderlineStyle.xlUnderlineStyleNone)
         {
             range.Font.Name = name;
@@ -43,6 +44,17 @@ namespace ReInvented.ExcelInterop.Extensions
             range.Font.Bold = isBold;
             range.Font.Italic = isItalic;
             range.Font.Underline = xlUnderlineStyle;
+
+            return range;
+        }
+
+        public static Range FontStyle(this Range range, FontSettings fontSettings)
+        {
+            range.Font.Name = fontSettings.Name;
+            range.Font.Size = fontSettings.Size;
+            range.Font.Bold = fontSettings.IsBold;
+            range.Font.Italic = fontSettings.IsItalic;
+            range.Font.Underline = fontSettings.UnderlineStyle;
 
             return range;
         }
@@ -84,7 +96,7 @@ namespace ReInvented.ExcelInterop.Extensions
             return range;
         }
 
-        public static Range Wrap(this Range range, int rowStandardHeight, double avgCharWidthRatio = 0.4)
+        public static Range Wrap(this Range range, int rowStandardHeight, double avgCharWidthRatio = XlSettings.AvgCharSpacingNormal)
         {
             return Wrap(range, rowStandardHeight, true, avgCharWidthRatio);
         }

@@ -25,5 +25,9 @@ namespace ReInvented.ExcelInterop.Extensions
 
             return nRestrainedRotations;
         }
+        public static string ConstraintText(this Releases releases, bool isReleased)
+        {
+            return isReleased ? "Released" : "Fixed";
+        }
     }
 }
