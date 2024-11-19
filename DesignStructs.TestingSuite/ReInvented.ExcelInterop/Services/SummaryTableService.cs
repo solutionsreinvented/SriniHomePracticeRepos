@@ -61,15 +61,17 @@ namespace ReInvented.ExcelInterop.Services
             int eColTable = XlSettings.EndColTable;
 
 
+
+
             worksheet.Range(sRowHeader, sRowHeader, eColTable - (3 * colSpan - 1), eColTable - 0 * colSpan)
                      .Fill($"Moments (kNm)").FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
-            worksheet.Range(sRowHeader, sRowHeader, eColTable - (6 * colSpan - 1), eColTable - 3 * colSpan)
-                     .Fill($"Forces (kN)").FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
-
-
             worksheet.Range(eRowHeader, eRowHeader, eColTable - (1 * colSpan - 1), eColTable - 0 * colSpan).Fill($"Mz").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
             worksheet.Range(eRowHeader, eRowHeader, eColTable - (2 * colSpan - 1), eColTable - 1 * colSpan).Fill($"My").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
             worksheet.Range(eRowHeader, eRowHeader, eColTable - (3 * colSpan - 1), eColTable - 2 * colSpan).Fill($"Mx").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+
+
+            worksheet.Range(sRowHeader, sRowHeader, eColTable - (6 * colSpan - 1), eColTable - 3 * colSpan)
+                     .Fill($"Forces (kN)").FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
             worksheet.Range(eRowHeader, eRowHeader, eColTable - (4 * colSpan - 1), eColTable - 3 * colSpan).Fill($"Fz").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
             worksheet.Range(eRowHeader, eRowHeader, eColTable - (5 * colSpan - 1), eColTable - 4 * colSpan).Fill($"Fy").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
             worksheet.Range(eRowHeader, eRowHeader, eColTable - (6 * colSpan - 1), eColTable - 5 * colSpan).Fill($"Fx").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();

@@ -27,9 +27,6 @@ namespace ReInvented.ExcelInterop
 
 
 
-
-
-
             base.OnStartup(e);
         }
     }

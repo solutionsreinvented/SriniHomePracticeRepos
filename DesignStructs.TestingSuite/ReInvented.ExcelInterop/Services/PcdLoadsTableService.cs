@@ -13,34 +13,6 @@ namespace ReInvented.ExcelInterop.Services
 {
     public class PcdLoadsTableService
     {
-        #region Private Static Helpers
-        private static int FillLoadColumn(Worksheet worksheet, bool dofReleased, int row, int eColCurrent, int colSpan, double loadValue)
-        {
-            if (!dofReleased)
-            {
-                worksheet.Range(row, row, eColCurrent - (colSpan - 1), eColCurrent)
-                         .Fill($"{Math.Round(loadValue, 1)}").MergeEx().Wrap(XlSettings.RowHeightStandard).AlignCenter();
-                eColCurrent -= colSpan;
-            }
-            return eColCurrent;
-        }
-
-        private static int FillLoadHeaderColumn(Worksheet worksheet, bool dofReleased, int nRelatedRestraints, int sRowHeader, int eRowHeader,
-                                                int eColCurrent, int colSpan, double charSpacing, string headerText, string headerTextUnit)
-        {
-            if (!dofReleased)
-            {
-                string content = nRelatedRestraints > 1 ? $"{headerText}" : $"{headerText} ({headerTextUnit})";
-                int sRow = nRelatedRestraints > 1 ? eRowHeader : sRowHeader;
-                worksheet.Range(sRow, eRowHeader, eColCurrent - (colSpan - 1), eColCurrent)
-                         .Fill(content).Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
-                eColCurrent -= colSpan;
-            }
-
-            return eColCurrent;
-        } 
-        #endregion
-
         public static int GenerateSupportLoadsRow(Worksheet worksheet, int currentRow, Releases releases, SupportLoads sLoads, IDictionary<int, string> loadCases)
         {
             int sColTable = XlSettings.StartColTable;
@@ -156,34 +128,6 @@ namespace ReInvented.ExcelInterop.Services
             eColCurrent = FillLoadHeaderColumn(worksheet, releases.My, nRestrainedRotations, sRowHeader, eRowHeader, eColCurrent, colSpanMoments, charSpacing, "My", "kNm");
             eColCurrent = FillLoadHeaderColumn(worksheet, releases.Mx, nRestrainedRotations, sRowHeader, eRowHeader, eColCurrent, colSpanMoments, charSpacing, "Mx", "kNm");
 
-            //if (!releases.Mz)
-            //{
-            //    string content = nRestrainedRotations > 1 ? "Mz" : "Mz (kNm)";
-            //    int sRow = nRestrainedRotations > 1 ? eRowHeader : sRowHeader;
-            //    worksheet.Range(sRow, eRowHeader, eColCurrent - (colSpanMoments - 1), eColCurrent)
-            //             .Fill(content).Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
-            //    eColCurrent -= colSpanMoments;
-            //}
-
-            //if (!releases.My)
-            //{
-            //    string content = nRestrainedRotations > 1 ? "My" : "My (kNm)";
-            //    int sRow = nRestrainedRotations > 1 ? eRowHeader : sRowHeader;
-            //    worksheet.Range(sRow, eRowHeader, eColCurrent - (colSpanMoments - 1), eColCurrent)
-            //             .Fill(content).Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
-            //    eColCurrent -= colSpanMoments;
-            //}
-
-            //if (!releases.Mx)
-            //{
-            //    string content = nRestrainedRotations > 1 ? "Mx" : "Mx (kNm)";
-            //    int sRow = nRestrainedRotations > 1 ? eRowHeader : sRowHeader;
-            //    worksheet.Range(sRow, eRowHeader, eColCurrent - (colSpanMoments - 1), eColCurrent)
-            //             .Fill(content).Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
-            //    eColCurrent -= colSpanMoments;
-            //}
-
-
             /* Forces */
 
             int totalColSpanForcesHeader = nRestrainedTranslations * colSpanForces;
@@ -198,36 +142,6 @@ namespace ReInvented.ExcelInterop.Services
             eColCurrent = FillLoadHeaderColumn(worksheet, releases.Fy, nRestrainedTranslations, sRowHeader, eRowHeader, eColCurrent, colSpanForces, charSpacing, "Fy", "kN");
             eColCurrent = FillLoadHeaderColumn(worksheet, releases.Fx, nRestrainedTranslations, sRowHeader, eRowHeader, eColCurrent, colSpanForces, charSpacing, "Fx", "kN");
 
-            //if (!releases.Fz)
-            //{
-            //    string content = nRestrainedTranslations > 1 ? "Fz" : "Fz (kN)";
-            //    int sRow = nRestrainedTranslations > 1 ? eRowHeader : sRowHeader;
-
-            //    worksheet.Range(sRow, eRowHeader, eColCurrent - (colSpanForces - 1), eColCurrent)
-            //             .Fill(content).Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
-            //    eColCurrent -= colSpanForces;
-            //}
-
-            //if (!releases.Fy)
-            //{
-            //    string content = nRestrainedTranslations > 1 ? "Fy" : "Fy (kN)";
-            //    int sRow = nRestrainedTranslations > 1 ? eRowHeader : sRowHeader;
-
-            //    worksheet.Range(sRow, eRowHeader, eColCurrent - (colSpanForces - 1), eColCurrent)
-            //             .Fill(content).Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
-            //    eColCurrent -= colSpanForces;
-            //}
-
-            //if (!releases.Fx)
-            //{
-            //    string content = nRestrainedTranslations > 1 ? "Fx" : "Fx (kN)";
-            //    int sRow = nRestrainedTranslations > 1 ? eRowHeader : sRowHeader;
-
-            //    worksheet.Range(sRow, eRowHeader, eColCurrent - (colSpanForces - 1), eColCurrent)
-            //             .Fill(content).Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
-            //    eColCurrent -= colSpanForces;
-            //}
-
 
             worksheet.Range(sRowHeader, eRowHeader, sColTable + XlSettings.ColSpanNormal, eColCurrent)
                      .Fill($"Load Case/Combination").FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, false, charSpacing).AlignLeftIndented(1);
@@ -237,6 +151,36 @@ namespace ReInvented.ExcelInterop.Services
 
             return eRowHeader;
         }
+
+        #region Private Static Helpers
+
+        private static int FillLoadHeaderColumn(Worksheet worksheet, bool dofReleased, int nRelatedRestraints, int sRowHeader, int eRowHeader,
+                                        int eColCurrent, int colSpan, double charSpacing, string headerText, string headerTextUnit)
+        {
+            if (!dofReleased)
+            {
+                string content = nRelatedRestraints > 1 ? $"{headerText}" : $"{headerText} ({headerTextUnit})";
+                int sRow = nRelatedRestraints > 1 ? eRowHeader : sRowHeader;
+                worksheet.Range(sRow, eRowHeader, eColCurrent - (colSpan - 1), eColCurrent)
+                         .Fill(content).Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+                eColCurrent -= colSpan;
+            }
+
+            return eColCurrent;
+        }
+
+        private static int FillLoadColumn(Worksheet worksheet, bool dofReleased, int row, int eColCurrent, int colSpan, double loadValue)
+        {
+            if (!dofReleased)
+            {
+                worksheet.Range(row, row, eColCurrent - (colSpan - 1), eColCurrent)
+                         .Fill($"{Math.Round(loadValue, 1):N1}").MergeEx().Wrap(XlSettings.RowHeightStandard).AlignCenter();
+                eColCurrent -= colSpan;
+            }
+            return eColCurrent;
+        }
+
+        #endregion
 
     }
 }
