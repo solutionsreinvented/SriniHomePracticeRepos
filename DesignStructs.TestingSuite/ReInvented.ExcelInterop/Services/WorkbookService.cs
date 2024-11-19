@@ -23,7 +23,7 @@ namespace ReInvented.ExcelInterop.Services
 
         #region Parameterized Constructor
 
-        public WorkbookService(string savePath, string fileName, FoundationLoadData foundationLoadData)
+        public WorkbookService(string savePath, string fileName, FLDReport fldReport)
         {
             if (string.IsNullOrWhiteSpace(savePath) || string.IsNullOrWhiteSpace(fileName))
             {
@@ -35,7 +35,7 @@ namespace ReInvented.ExcelInterop.Services
                 _ = Directory.CreateDirectory(savePath);
             }
 
-            FoundationLoadData = foundationLoadData;
+            FldReport = fldReport;
             SavePath = savePath;
             FileName = fileName;
         }
@@ -44,129 +44,109 @@ namespace ReInvented.ExcelInterop.Services
 
         #region Public Properties
 
-        public FoundationLoadData FoundationLoadData { get; private set; }
+        public FLDReport FldReport { get; private set; }
 
         public string SavePath { get; private set; }
 
         public string FileName { get; private set; }
 
-        //public Application Application { get; set; }
+        public Application App { get; set; }
 
         public Workbook Workbook { get; private set; }
 
-        //public Worksheet Worksheet { get; set; }
+        public Worksheet Worksheet { get; set; }
 
         #endregion
 
         #region Instance Methods
 
-        public Workbook Create()
-        {
-            Workbook = Create(SavePath, FileName);
-            return Workbook;
-        }
-
         public void Dispose()
         {
-            Workbook.Close(false);
-            //Application.Quit();
+            if (Workbook != null) Workbook.Close(false);
+            if (App != null) App.Quit();
 
-            //_ = Marshal.ReleaseComObject(Worksheet);
+            _ = Marshal.ReleaseComObject(Worksheet);
             _ = Marshal.ReleaseComObject(Workbook);
-            //_ = Marshal.ReleaseComObject(Application);
+            _ = Marshal.ReleaseComObject(App);
         }
 
         #endregion
 
 
 
-        public static Workbook Create(string savePath, string fileName, FLDReport fldReport = null)
+        public void Create()
         {
-            Application excelApp = new Application { Visible = true };
-
-            Workbook workbook = excelApp.Workbooks.Add();
-            workbook.SaveAs(Path.Combine(savePath, fileName), XlFileFormat.xlOpenXMLWorkbookMacroEnabled);
-
-            Worksheet worksheet = (Worksheet)workbook.Sheets[1];
-            worksheet.Name = "Exported Data";
-
-            DocumentHeaderService.CreateDocumentHeader(worksheet.SetTemplateDefaults(), _highlight);
-
-
-            /* Generate foundation load data tables from fldReport */
-
-            if (fldReport != null)
+            try
             {
-                int currentRow = XlSettings.ContentStartRow;
-                int sectionId = 1;
-                int nRowsHeader = 2;
+                App = new Application { Visible = true };
 
-                FoundationLoadData fld = fldReport.Content as FoundationLoadData;
-                HashSet<LoadCaseForces> overallSummary = fld.OverallSummary;
-                HashSet<PCDLoads> pcdForcesCollection = fld.PCDLoadsCollection;
+                Workbook = App.Workbooks.Add();
+                Workbook.SaveAs(Path.Combine(SavePath, FileName), XlFileFormat.xlOpenXMLWorkbookMacroEnabled);
 
-                DocumentHeaderService.FillDocumentHeaderData(worksheet, fldReport.ProjectData, fldReport.Document);
-                worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}. All Supports");
-                worksheet.Range(++currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.1 Summary of Loads from All Supports (Statics Check)");
+                Worksheet = (Worksheet)Workbook.Sheets[1];
+                Worksheet.Name = "Exported Data";
 
-                worksheet.Application.ActiveWindow.DisplayGridlines = false;
+                DocumentHeaderService.CreateDocumentHeader(Worksheet.SetTemplateDefaults(), _highlight);
 
-                currentRow = SummaryTableService.Generate(worksheet, currentRow, nRowsHeader, overallSummary, fld.LoadCases);
 
-                foreach (PCDLoads pcdForces in pcdForcesCollection)
+                /* Generate foundation load data tables from fldReport */
+
+                if (FldReport != null)
                 {
-                    currentRow += XlSettings.HeadersOffset;
+                    int currentRow = XlSettings.ContentStartRow;
+                    int sectionId = 1;
+                    int nRowsHeader = 2;
 
-                    sectionId++;
-                    string pcdDesc = pcdForces.PCD == "CC" ? "Center Column" : pcdForces.PCD;
-                    worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}. {pcdDesc} Supports");
+                    FoundationLoadData fld = FldReport.Content as FoundationLoadData;
+                    HashSet<LoadCaseForces> overallSummary = fld.OverallSummary;
+                    HashSet<PCDLoads> pcdForcesCollection = fld.PCDLoadsCollection;
 
-                    worksheet.Range(++currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.1 Supports Information");
-                    currentRow = SupportInformationTableService.Generate(worksheet, ++currentRow, pcdForces.SupportsInformation);
+                    DocumentHeaderService.FillDocumentHeaderData(Worksheet, FldReport.ProjectData, FldReport.Document);
+                    Worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}. All Supports");
+                    Worksheet.Range(++currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.1 Summary of Loads from All Supports (Statics Check)");
 
-                    currentRow += XlSettings.HeadersOffset;
-                    worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.2 Summary of Reactions at Support Group C.G. ({pcdDesc})");
-                    currentRow = SummaryTableService.Generate(worksheet, currentRow, nRowsHeader, pcdForces.SupportLoadsSummary, fld.LoadCases);
+                    Worksheet.Application.ActiveWindow.DisplayGridlines = false;
 
-                    currentRow += XlSettings.HeadersOffset;
-                    worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.3 Reactions at Each Support");
+                    currentRow = SummaryTableService.Generate(Worksheet, currentRow, nRowsHeader, overallSummary, fld.LoadCases);
 
-
-                    currentRow += XlSettings.HeadersOffset;
-                    currentRow = PcdLoadsTableService.GenerateHeaders(worksheet, currentRow, pcdForces.SupportsInformation.SupportReleases);
-
-                    foreach (SupportLoads sLoads in pcdForces.SupportLoadsCollection)
+                    foreach (PCDLoads pcdForces in pcdForcesCollection)
                     {
-                        currentRow = PcdLoadsTableService.GenerateSupportLoadsRow(worksheet, currentRow, pcdForces.SupportsInformation.SupportReleases, sLoads, fld.LoadCases);
+                        currentRow += XlSettings.HeadersOffset;
+
+                        sectionId++;
+                        string pcdDesc = pcdForces.PCD == "CC" ? "Center Column" : pcdForces.PCD;
+                        Worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}. {pcdDesc} Supports");
+
+                        Worksheet.Range(++currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.1 Supports Information");
+                        currentRow = SupportInformationTableService.Generate(Worksheet, ++currentRow, pcdForces.SupportsInformation);
+
+                        currentRow += XlSettings.HeadersOffset;
+                        Worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.2 Summary of Reactions at Support Group C.G. ({pcdDesc})");
+                        currentRow = SummaryTableService.Generate(Worksheet, currentRow, nRowsHeader, pcdForces.SupportLoadsSummary, fld.LoadCases);
+
+                        currentRow += XlSettings.HeadersOffset;
+                        Worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.3 Reactions at Each Support");
+
+
+                        currentRow += XlSettings.HeadersOffset;
+                        currentRow = PcdLoadsTableService.GenerateHeaders(Worksheet, currentRow, pcdForces.SupportsInformation.SupportReleases);
+
+                        foreach (SupportLoads sLoads in pcdForces.SupportLoadsCollection)
+                        {
+                            currentRow = PcdLoadsTableService.GenerateSupportLoadsRow(Worksheet, currentRow, pcdForces.SupportsInformation.SupportReleases, sLoads, fld.LoadCases);
+                        }
+
                     }
-
-
 
                 }
 
+                Workbook.Save();
+            }
+            finally
+            {
+                Dispose();
             }
 
-            //string rngTarget = "A10";
-            //worksheet.Range(rngTarget).MergeEx().Fill("This is a sample text that will be wrapped and the row height will adjust automatically to fit the content. This is a sample text that will be wrapped and the row height will adjust automatically to fit the content. This is a sample text that will be wrapped and the row height will adjust automatically to fit the content. This is a sample text that will be wrapped and the row height will adjust automatically to fit the content.").Wrap(15);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            workbook.Save();
-
-            return workbook;
         }
     }
 }

@@ -15,9 +15,12 @@ namespace ReInvented.ExcelInterop
         protected override void OnStartup(StartupEventArgs e)
         {
             JsonDataSerializer<FLDReport> serializer = new JsonDataSerializer<FLDReport>();
-            FLDReport fldReport = serializer.Deserialize(@"C:\Users\srini\source\repos\DesignStructs.TestingSuite\ReInvented.ExcelInterop\Data\FLD.json");
+            FLDReport fldReport = serializer.Deserialize(@"C:\Users\masanams\Desktop\FLD.json");
 
-            Excel.Workbook workbook = WorkbookService.Create(@"C:\Users\srini\Desktop", "Exported Data1.xlsm", fldReport);
+            WorkbookService workbookService = new WorkbookService(@"C:\Users\masanams\Desktop", "Exported Data1.xlsm", fldReport);
+            workbookService.Create();
+
+            //Excel.Workbook workbook = WorkbookService.Create(@"C:\Users\masanams\Desktop", "Exported Data1.xlsm", fldReport);
 
 
 

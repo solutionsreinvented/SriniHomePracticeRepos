@@ -37,7 +37,7 @@ namespace ReInvented.ExcelInterop.Services
             foreach (LoadCaseForces lc in sLoads.Loads)
             {
                 int eColCurrent = eColTable;
-
+                
                 if (!releases.Mz)
                 {
                     worksheet.Range(currentRow, currentRow, eColCurrent - (colSpanMoments - 1), eColCurrent)
