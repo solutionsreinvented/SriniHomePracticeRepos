@@ -37,46 +37,93 @@ namespace ReInvented.ExcelInterop.Services
             return currentRow;
         }
 
-        public static int GenerateHeaders(Worksheet worksheet, int sRowHeader, int nRowsHeader)
+        private static Range FillHeaderColumn(Worksheet worksheet, int row, string content, double charSpacing, int eColCurrent, int colSpan, int sCounter, int eCounter)
         {
-            //int eRowHeader = sRowHeader + (nRowsHeader - 1);
-            //const double charSpacing = CharSpacing.L;
+            return worksheet.Range(row, row, eColCurrent - (sCounter * colSpan - 1), eColCurrent - eCounter * colSpan).Fill(content)
+                            .FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+        }
 
-            //worksheet.Range($"B{sRowHeader}:R{eRowHeader}").Fill($"Load Case/Combination").FontStyle(isBold: true).MergeEx().Wrap(15, charSpacing).AlignLeftIndented(1);
+        private static int CreateHeadersForLoadCgColumns(Worksheet worksheet, int sRowHeader, int eRowHeader, int eColCurrent, int colSpan, double charSpacing)
+        {
+            FillHeaderColumn(worksheet, sRowHeader, "Load C.G", charSpacing, eColCurrent, colSpan, 3, 0);
+            FillHeaderColumn(worksheet, eRowHeader, "X", charSpacing, eColCurrent, colSpan, 3, 2).Subscript(2, 1);
+            FillHeaderColumn(worksheet, eRowHeader, "Y", charSpacing, eColCurrent, colSpan, 2, 1).Subscript(2, 1);
+            FillHeaderColumn(worksheet, eRowHeader, "Z", charSpacing, eColCurrent, colSpan, 1, 0).Subscript(2, 1);
 
-            //worksheet.Range($"S{sRowHeader}:AA{sRowHeader}").Fill($"Forces (kN)").FontStyle(isBold: true).MergeEx().Wrap(15, charSpacing).AlignCenter();
-            //worksheet.Range($"AB{sRowHeader}:AJ{sRowHeader}").Fill($"Moments (kNm)").FontStyle(isBold: true).MergeEx().Wrap(15, charSpacing).AlignCenter();
+            //worksheet.Range(sRowHeader, sRowHeader, eColCurrent - (3 * colSpan - 1), eColCurrent - 0 * colSpan)
+            //         .Fill($"Load C.G.").FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+            //worksheet.Range(eRowHeader, eRowHeader, eColCurrent - (1 * colSpan - 1), eColCurrent - 0 * colSpan).Fill($"Z").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+            //worksheet.Range(eRowHeader, eRowHeader, eColCurrent - (2 * colSpan - 1), eColCurrent - 1 * colSpan).Fill($"Y").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+            //worksheet.Range(eRowHeader, eRowHeader, eColCurrent - (3 * colSpan - 1), eColCurrent - 2 * colSpan).Fill($"X").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
 
-            //worksheet.Range($"S{eRowHeader}:U{eRowHeader}").Fill($"Fx").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(15, charSpacing).AlignCenter();
-            //worksheet.Range($"V{eRowHeader}:X{eRowHeader}").Fill($"Fy").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(15, charSpacing).AlignCenter();
-            //worksheet.Range($"Y{eRowHeader}:AA{eRowHeader}").Fill($"Fz").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(15, charSpacing).AlignCenter();
-            //worksheet.Range($"AB{eRowHeader}:AD{eRowHeader}").Fill($"Mx").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(15, charSpacing).AlignCenter();
-            //worksheet.Range($"AE{eRowHeader}:AG{eRowHeader}").Fill($"My").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(15, charSpacing).AlignCenter();
-            //worksheet.Range($"AH{eRowHeader}:AJ{eRowHeader}").Fill($"Mz").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(15, charSpacing).AlignCenter();
+            eColCurrent -= 3 * colSpan;
 
+            return eColCurrent;
+        }
+
+        private static int CreateHeadersForMomentsColumns(Worksheet worksheet, int sRowHeader, int eRowHeader, int eColCurrent, int colSpan, double charSpacing)
+        {
+            FillHeaderColumn(worksheet, sRowHeader, "Moments (kNm)", charSpacing, eColCurrent, colSpan, 3, 0);
+            FillHeaderColumn(worksheet, eRowHeader, "Mx", charSpacing, eColCurrent, colSpan, 3, 2).Subscript(2, 1);
+            FillHeaderColumn(worksheet, eRowHeader, "My", charSpacing, eColCurrent, colSpan, 2, 1).Subscript(2, 1);
+            FillHeaderColumn(worksheet, eRowHeader, "Mz", charSpacing, eColCurrent, colSpan, 1, 0).Subscript(2, 1);
+
+
+            worksheet.Range(sRowHeader, sRowHeader, eColCurrent - (3 * colSpan - 1), eColCurrent - 0 * colSpan)
+                     .Fill($"Moments (kNm)").FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+            worksheet.Range(eRowHeader, eRowHeader, eColCurrent - (1 * colSpan - 1), eColCurrent - 0 * colSpan).Fill($"Mz").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+            worksheet.Range(eRowHeader, eRowHeader, eColCurrent - (2 * colSpan - 1), eColCurrent - 1 * colSpan).Fill($"My").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+            worksheet.Range(eRowHeader, eRowHeader, eColCurrent - (3 * colSpan - 1), eColCurrent - 2 * colSpan).Fill($"Mx").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+            //worksheet.Range(sRowHeader, sRowHeader, eColCurrent - (3 * colSpan - 1), eColCurrent - 0 * colSpan)
+            //         .Fill($"Moments (kNm)").FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+            //worksheet.Range(eRowHeader, eRowHeader, eColCurrent - (1 * colSpan - 1), eColCurrent - 0 * colSpan).Fill($"Mz").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+            //worksheet.Range(eRowHeader, eRowHeader, eColCurrent - (2 * colSpan - 1), eColCurrent - 1 * colSpan).Fill($"My").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+            //worksheet.Range(eRowHeader, eRowHeader, eColCurrent - (3 * colSpan - 1), eColCurrent - 2 * colSpan).Fill($"Mx").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+
+            eColCurrent -= 3 * colSpan;
+
+            return eColCurrent;
+        }
+
+        private static int CreateHeadersForForcesColumns(Worksheet worksheet, int sRowHeader, int eRowHeader, int eColCurrent, int colSpan, double charSpacing)
+        {
+            FillHeaderColumn(worksheet, sRowHeader, "Forces (kN)", charSpacing, eColCurrent, colSpan, 3, 0);
+            FillHeaderColumn(worksheet, eRowHeader, "Fx", charSpacing, eColCurrent, colSpan, 3, 2).Subscript(2, 1);
+            FillHeaderColumn(worksheet, eRowHeader, "Fy", charSpacing, eColCurrent, colSpan, 2, 1).Subscript(2, 1);
+            FillHeaderColumn(worksheet, eRowHeader, "Fz", charSpacing, eColCurrent, colSpan, 1, 0).Subscript(2, 1);
+
+
+            //worksheet.Range(sRowHeader, sRowHeader, eColCurrent - (3 * colSpan - 1), eColCurrent - 0 * colSpan)
+            //         .Fill($"Forces (kN)").FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+            //worksheet.Range(eRowHeader, eRowHeader, eColCurrent - (1 * colSpan - 1), eColCurrent - 0 * colSpan).Fill($"Fz").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+            //worksheet.Range(eRowHeader, eRowHeader, eColCurrent - (2 * colSpan - 1), eColCurrent - 1 * colSpan).Fill($"Fy").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+            //worksheet.Range(eRowHeader, eRowHeader, eColCurrent - (3 * colSpan - 1), eColCurrent - 2 * colSpan).Fill($"Fx").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+
+            eColCurrent -= 3 * colSpan;
+
+            return eColCurrent;
+        }
+
+
+        public static int GenerateHeaders(Worksheet worksheet, int sRowHeader, int nRowsHeader, bool includeCgs = false)
+        {
             const double charSpacing = CharSpacing.L;
             int eRowHeader = sRowHeader + (nRowsHeader - 1);
             int colSpan = XlSettings.ColSpanNormal;
             int sColTable = XlSettings.StartColTable;
             int eColTable = XlSettings.EndColTable;
 
+            int eColCurrent = eColTable;
 
+            if (includeCgs)
+            {
+                eColCurrent = CreateHeadersForLoadCgColumns(worksheet, sRowHeader, eRowHeader, eColCurrent, colSpan, charSpacing);
+            }
 
+            eColCurrent = CreateHeadersForMomentsColumns(worksheet, sRowHeader, eRowHeader, eColCurrent, colSpan, charSpacing);
+            eColCurrent = CreateHeadersForForcesColumns(worksheet, sRowHeader, eRowHeader, eColCurrent, colSpan, charSpacing);
 
-            worksheet.Range(sRowHeader, sRowHeader, eColTable - (3 * colSpan - 1), eColTable - 0 * colSpan)
-                     .Fill($"Moments (kNm)").FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
-            worksheet.Range(eRowHeader, eRowHeader, eColTable - (1 * colSpan - 1), eColTable - 0 * colSpan).Fill($"Mz").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
-            worksheet.Range(eRowHeader, eRowHeader, eColTable - (2 * colSpan - 1), eColTable - 1 * colSpan).Fill($"My").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
-            worksheet.Range(eRowHeader, eRowHeader, eColTable - (3 * colSpan - 1), eColTable - 2 * colSpan).Fill($"Mx").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
-
-
-            worksheet.Range(sRowHeader, sRowHeader, eColTable - (6 * colSpan - 1), eColTable - 3 * colSpan)
-                     .Fill($"Forces (kN)").FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
-            worksheet.Range(eRowHeader, eRowHeader, eColTable - (4 * colSpan - 1), eColTable - 3 * colSpan).Fill($"Fz").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
-            worksheet.Range(eRowHeader, eRowHeader, eColTable - (5 * colSpan - 1), eColTable - 4 * colSpan).Fill($"Fy").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
-            worksheet.Range(eRowHeader, eRowHeader, eColTable - (6 * colSpan - 1), eColTable - 5 * colSpan).Fill($"Fx").Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
-
-            worksheet.Range(sRowHeader, eRowHeader, sColTable, eColTable - 6 * colSpan)
+            worksheet.Range(sRowHeader, eRowHeader, sColTable, eColCurrent)
                      .Fill($"Load Case/Combination").FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, false, charSpacing).AlignLeftIndented(1);
 
             return eRowHeader;

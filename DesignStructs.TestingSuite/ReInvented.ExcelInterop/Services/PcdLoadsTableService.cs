@@ -46,43 +46,6 @@ namespace ReInvented.ExcelInterop.Services
                 eColCurrent = FillLoadColumn(worksheet, releases.Fy, currentRow, eColCurrent, colSpanForces, lc.Forces.Fy);
                 eColCurrent = FillLoadColumn(worksheet, releases.Fx, currentRow, eColCurrent, colSpanForces, lc.Forces.Fx);
 
-                //if (!releases.Mz)
-                //{
-                //    worksheet.Range(currentRow, currentRow, eColCurrent - (colSpanMoments - 1), eColCurrent)
-                //             .Fill($"{Math.Round(lc.Forces.Mz, 1)}").MergeEx().Wrap(XlSettings.RowHeightStandard).AlignCenter();
-                //    eColCurrent -= colSpanMoments;
-                //}
-                //if (!releases.My)
-                //{
-                //    worksheet.Range(currentRow, currentRow, eColCurrent - (colSpanMoments - 1), eColCurrent)
-                //             .Fill($"{Math.Round(lc.Forces.My, 1)}").MergeEx().Wrap(XlSettings.RowHeightStandard).AlignCenter();
-                //    eColCurrent -= colSpanMoments;
-                //}
-                //if (!releases.Mx)
-                //{
-                //    worksheet.Range(currentRow, currentRow, eColCurrent - (colSpanMoments - 1), eColCurrent)
-                //             .Fill($"{Math.Round(lc.Forces.Mx, 1)}").MergeEx().Wrap(XlSettings.RowHeightStandard).AlignCenter();
-                //    eColCurrent -= colSpanMoments;
-                //}
-                //if (!releases.Fz)
-                //{
-                //    worksheet.Range(currentRow, currentRow, eColCurrent - (colSpanForces - 1), eColCurrent)
-                //             .Fill($"{Math.Round(lc.Forces.Fz, 1)}").MergeEx().Wrap(XlSettings.RowHeightStandard).AlignCenter();
-                //    eColCurrent -= colSpanForces;
-                //}
-                //if (!releases.Fy)
-                //{
-                //    worksheet.Range(currentRow, currentRow, eColCurrent - (colSpanForces - 1), eColCurrent)
-                //             .Fill($"{Math.Round(lc.Forces.Fy, 1)}").MergeEx().Wrap(XlSettings.RowHeightStandard).AlignCenter();
-                //    eColCurrent -= colSpanForces;
-                //}
-                //if (!releases.Fx)
-                //{
-                //    worksheet.Range(currentRow, currentRow, eColCurrent - (colSpanForces - 1), eColCurrent)
-                //             .Fill($"{Math.Round(lc.Forces.Fx, 1)}").MergeEx().Wrap(XlSettings.RowHeightStandard).AlignCenter();
-                //    eColCurrent -= colSpanForces;
-                //}
-
                 worksheet.Range(currentRow, currentRow, sColTable + 3, eColCurrent)
                          .Fill($"{lc.Id}: {loadCases.FirstOrDefault(c => c.Key == lc.Id).Value}").MergeEx().Wrap(XlSettings.RowHeightStandard, true, CharSpacing.N).AlignLeftIndented(1);
 
@@ -94,8 +57,6 @@ namespace ReInvented.ExcelInterop.Services
 
             return eRow;
         }
-
-
 
         public static int GenerateHeaders(Worksheet worksheet, int sRowHeader, Releases releases)
         {
