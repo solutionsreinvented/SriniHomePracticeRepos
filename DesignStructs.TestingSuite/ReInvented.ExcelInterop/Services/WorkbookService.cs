@@ -9,6 +9,8 @@ using ReInvented.ExcelInterop.Extensions;
 using ReInvented.StaadPro.Interactivity.Entities;
 using System.Linq;
 using ReInvented.ExcelInterop.Models;
+using System.Diagnostics;
+//using System.Windows;
 
 namespace ReInvented.ExcelInterop.Services
 {
@@ -93,6 +95,7 @@ namespace ReInvented.ExcelInterop.Services
 
                 if (FldReport != null)
                 {
+                    FontSettings headerFont = XlSettings.HeaderDefaultFont;
                     int currentRow = XlSettings.ContentStartRow;
                     int sectionId = 1;
                     int nRowsHeader = 2;
@@ -102,8 +105,8 @@ namespace ReInvented.ExcelInterop.Services
                     HashSet<PCDLoads> pcdForcesCollection = fld.PCDLoadsCollection;
 
                     DocumentHeaderService.FillDocumentHeaderData(Worksheet, FldReport.ProjectData, FldReport.Document);
-                    Worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}. All Supports");
-                    Worksheet.Range(++currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.1 Summary of Loads from All Supports (Statics Check)");
+                    Worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle(headerFont).Fill($"{sectionId}. All Supports");
+                    Worksheet.Range(++currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle(headerFont).Fill($"{sectionId}.1 Summary of Loads from All Supports (Statics Check)");
 
                     Worksheet.Application.ActiveWindow.DisplayGridlines = false;
 
@@ -115,17 +118,17 @@ namespace ReInvented.ExcelInterop.Services
 
                         sectionId++;
                         string pcdDesc = pcdForces.PCD == "CC" ? "Center Column" : pcdForces.PCD;
-                        Worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}. {pcdDesc} Supports");
+                        Worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle(headerFont).Fill($"{sectionId}. {pcdDesc} Supports");
 
-                        Worksheet.Range(++currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.1 Supports Information");
+                        Worksheet.Range(++currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle(headerFont).Fill($"{sectionId}.1 Supports Information");
                         currentRow = SupportInformationTableService.Generate(Worksheet, ++currentRow, pcdForces.SupportsInformation);
 
                         currentRow += XlSettings.HeadersOffset;
-                        Worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.2 Summary of Reactions at Support Group C.G. ({pcdDesc})");
+                        Worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle(headerFont).Fill($"{sectionId}.2 Summary of Reactions at Support Group C.G. ({pcdDesc})");
                         currentRow = SummaryTableService.Generate(Worksheet, currentRow, nRowsHeader, pcdForces.SupportLoadsSummary, fld.LoadCases);
 
                         currentRow += XlSettings.HeadersOffset;
-                        Worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle("Tahoma", 8, true, false).Fill($"{sectionId}.3 Reactions at Each Support");
+                        Worksheet.Range(currentRow, XlSettings.StartColTable).AlignLeftIndented(0).FontStyle(headerFont).Fill($"{sectionId}.3 Reactions at Each Support");
 
 
                         currentRow += XlSettings.HeadersOffset;
@@ -141,6 +144,11 @@ namespace ReInvented.ExcelInterop.Services
                 }
 
                 Workbook.Save();
+            }
+            catch(Exception ex)
+            {
+                ///TODO: Replace this with a log file
+                Debug.Print(ex.Message);
             }
             finally
             {

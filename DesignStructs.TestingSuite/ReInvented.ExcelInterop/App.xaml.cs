@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using Excel = Microsoft.Office.Interop.Excel;
 
 using ReInvented.ExcelInterop.Services;
 using ReInvented.Domain.Reporting.Models;
