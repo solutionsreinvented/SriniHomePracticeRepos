@@ -5,13 +5,12 @@ using System.Runtime.InteropServices;
 
 using Microsoft.Office.Interop.Excel;
 using ReInvented.Domain.Reporting.Models;
-using ReInvented.ExcelInterop.Extensions;
+using ReInvented.Reporting.ExcelInterop.Extensions;
 using ReInvented.StaadPro.Interactivity.Entities;
 using System.Diagnostics;
-using ReInvented.ExcelInterop.Services;
-//using System.Windows;
+using ReInvented.Reporting.ExcelInterop.Services;
 
-namespace ReInvented.ExcelInterop.Models
+namespace ReInvented.Reporting.ExcelInterop.Models
 {
     public class FldWorkbook : IDisposable
     {
@@ -65,7 +64,9 @@ namespace ReInvented.ExcelInterop.Models
         {
             try
             {
-                App = new Application { Visible = true };
+                ApplicationExtensions.KillIfOpen(Path.Combine(SavePath, FileName));
+
+                App = new Application { Visible = true, DisplayAlerts = false };
 
                 Workbook = App.Workbooks.Add();
                 Workbook.SaveAs(Path.Combine(SavePath, FileName), XlFileFormat.xlOpenXMLWorkbookMacroEnabled);
@@ -75,8 +76,7 @@ namespace ReInvented.ExcelInterop.Models
 
                 DocumentHeaderService.CreateDocumentHeader(Worksheet.SetTemplateDefaults(), _highlight);
 
-
-                /* Generate foundation load data tables from fldReport */
+                /* Generate foundation load data tables from FldReport */
 
                 if (FldReport != null)
                 {
@@ -139,8 +139,7 @@ namespace ReInvented.ExcelInterop.Models
             {
                 Dispose();
             }
-
-        } 
+        }
 
         #endregion
 
@@ -148,12 +147,30 @@ namespace ReInvented.ExcelInterop.Models
 
         public void Dispose()
         {
-            if (Workbook != null) Workbook.Close(false);
-            if (App != null) App.Quit();
+            // Cleanup resources
+            if (Workbook != null)
+            {
+                Workbook.Close(false);
+                Marshal.ReleaseComObject(Workbook);
+                Workbook = null;
+            }
 
-            _ = Marshal.ReleaseComObject(Worksheet);
-            _ = Marshal.ReleaseComObject(Workbook);
-            _ = Marshal.ReleaseComObject(App);
+            if (Worksheet != null)
+            {
+                Marshal.ReleaseComObject(Worksheet);
+                Worksheet = null;
+            }
+
+            if (App != null)
+            {
+                App.Quit();
+                Marshal.ReleaseComObject(App);
+                App = null;
+            }
+
+            // Force garbage collection
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         #endregion

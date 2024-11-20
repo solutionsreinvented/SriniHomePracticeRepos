@@ -1,6 +1,6 @@
 ﻿using Microsoft.Office.Interop.Excel;
 
-namespace ReInvented.ExcelInterop.Models
+namespace ReInvented.Reporting.ExcelInterop.Models
 {
     public class XlSettings
     {

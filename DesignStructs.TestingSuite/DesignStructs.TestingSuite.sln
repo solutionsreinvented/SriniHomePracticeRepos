@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axiom.Financials", "Axiom.F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Continuum.EquivalentSectionsFinder", "ReInvented.EquivalentSectionsFinder\Continuum.EquivalentSectionsFinder.csproj", "{66D27380-A967-4B3C-A54A-2AE311DC32F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.ExcelInterop", "ReInvented.ExcelInterop\ReInvented.ExcelInterop.csproj", "{C7389681-D463-4ACD-BCF3-78765E3FF70C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.Reporting.ExcelInterop", "ReInvented.Reporting.ExcelInterop\ReInvented.Reporting.ExcelInterop.csproj", "{C7389681-D463-4ACD-BCF3-78765E3FF70C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

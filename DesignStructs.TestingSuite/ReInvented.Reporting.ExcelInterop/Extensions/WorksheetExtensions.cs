@@ -4,7 +4,7 @@ using System.Linq;
 
 using Microsoft.Office.Interop.Excel;
 
-namespace ReInvented.ExcelInterop.Extensions
+namespace ReInvented.Reporting.ExcelInterop.Extensions
 {
     public static class WorksheetExtensions
     {

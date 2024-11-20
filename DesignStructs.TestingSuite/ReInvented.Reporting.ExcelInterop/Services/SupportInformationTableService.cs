@@ -3,11 +3,11 @@
 using Microsoft.Office.Interop.Excel;
 
 using ReInvented.Domain.Reporting.Models;
-using ReInvented.ExcelInterop.Extensions;
-using ReInvented.ExcelInterop.Models;
+using ReInvented.Reporting.ExcelInterop.Extensions;
+using ReInvented.Reporting.ExcelInterop.Models;
 using ReInvented.StaadPro.Interactivity.Entities;
 
-namespace ReInvented.ExcelInterop.Services
+namespace ReInvented.Reporting.ExcelInterop.Services
 {
     public class SupportInformationTableService
     {

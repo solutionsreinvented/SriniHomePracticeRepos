@@ -1,13 +1,13 @@
 ﻿using Microsoft.Office.Interop.Excel;
 using ReInvented.Domain.ProjectSetup.Interfaces;
 using ReInvented.Domain.Tass.Common.Interfaces;
-using ReInvented.ExcelInterop.Extensions;
+using ReInvented.Reporting.ExcelInterop.Extensions;
 using ReInvented.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ReInvented.ExcelInterop.Services
+namespace ReInvented.Reporting.ExcelInterop.Services
 {
     public class DocumentHeaderService
     {

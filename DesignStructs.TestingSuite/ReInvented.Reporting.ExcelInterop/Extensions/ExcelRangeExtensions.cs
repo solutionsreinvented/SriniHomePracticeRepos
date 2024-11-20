@@ -3,10 +3,10 @@ using System.Drawing;
 
 using Microsoft.Office.Interop.Excel;
 
-using ReInvented.ExcelInterop.Models;
+using ReInvented.Reporting.ExcelInterop.Models;
 using ReInvented.Shared;
 
-namespace ReInvented.ExcelInterop.Extensions
+namespace ReInvented.Reporting.ExcelInterop.Extensions
 {
     public static class ExcelRangeExtensions
     {

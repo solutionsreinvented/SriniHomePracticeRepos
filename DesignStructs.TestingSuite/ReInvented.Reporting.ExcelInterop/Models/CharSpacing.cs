@@ -1,4 +1,4 @@
-﻿namespace ReInvented.ExcelInterop.Models
+﻿namespace ReInvented.Reporting.ExcelInterop.Models
 {
     public class CharSpacing
     {

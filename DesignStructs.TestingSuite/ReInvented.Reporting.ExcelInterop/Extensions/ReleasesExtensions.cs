@@ -1,6 +1,6 @@
 ﻿using ReInvented.StaadPro.Interactivity.Entities;
 
-namespace ReInvented.ExcelInterop.Extensions
+namespace ReInvented.Reporting.ExcelInterop.Extensions
 {
     public static class ReleasesExtensions
     {

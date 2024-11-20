@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 using Excel = Microsoft.Office.Interop.Excel;
 
-namespace ReInvented.ExcelInterop.Extensions
+namespace ReInvented.Reporting.ExcelInterop.Extensions
 {
     public static class WorkbookExtensions
     {

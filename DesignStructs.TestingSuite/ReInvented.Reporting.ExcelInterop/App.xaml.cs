@@ -1,11 +1,9 @@
 ﻿using System.Windows;
-
-using ReInvented.ExcelInterop.Services;
 using ReInvented.Domain.Reporting.Models;
 using ReInvented.DataAccess;
-using ReInvented.ExcelInterop.Models;
+using ReInvented.Reporting.ExcelInterop.Models;
 
-namespace ReInvented.ExcelInterop
+namespace ReInvented.Reporting.ExcelInterop
 {
     /// <summary>
     /// Interaction logic for App.xaml
