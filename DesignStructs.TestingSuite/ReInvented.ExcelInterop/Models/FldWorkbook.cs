@@ -7,14 +7,13 @@ using Microsoft.Office.Interop.Excel;
 using ReInvented.Domain.Reporting.Models;
 using ReInvented.ExcelInterop.Extensions;
 using ReInvented.StaadPro.Interactivity.Entities;
-using System.Linq;
-using ReInvented.ExcelInterop.Models;
 using System.Diagnostics;
+using ReInvented.ExcelInterop.Services;
 //using System.Windows;
 
-namespace ReInvented.ExcelInterop.Services
+namespace ReInvented.ExcelInterop.Models
 {
-    public class WorkbookService
+    public class FldWorkbook : IDisposable
     {
         #region Private Static Fields
 
@@ -25,7 +24,7 @@ namespace ReInvented.ExcelInterop.Services
 
         #region Parameterized Constructor
 
-        public WorkbookService(string savePath, string fileName, FLDReport fldReport)
+        public FldWorkbook(string savePath, string fileName, FLDReport fldReport)
         {
             if (string.IsNullOrWhiteSpace(savePath) || string.IsNullOrWhiteSpace(fileName))
             {
@@ -61,20 +60,6 @@ namespace ReInvented.ExcelInterop.Services
         #endregion
 
         #region Instance Methods
-
-        public void Dispose()
-        {
-            if (Workbook != null) Workbook.Close(false);
-            if (App != null) App.Quit();
-
-            _ = Marshal.ReleaseComObject(Worksheet);
-            _ = Marshal.ReleaseComObject(Workbook);
-            _ = Marshal.ReleaseComObject(App);
-        }
-
-        #endregion
-
-
 
         public void Create()
         {
@@ -145,7 +130,7 @@ namespace ReInvented.ExcelInterop.Services
 
                 Workbook.Save();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ///TODO: Replace this with a log file
                 Debug.Print(ex.Message);
@@ -155,6 +140,23 @@ namespace ReInvented.ExcelInterop.Services
                 Dispose();
             }
 
+        } 
+
+        #endregion
+
+        #region IDisposable Implementation
+
+        public void Dispose()
+        {
+            if (Workbook != null) Workbook.Close(false);
+            if (App != null) App.Quit();
+
+            _ = Marshal.ReleaseComObject(Worksheet);
+            _ = Marshal.ReleaseComObject(Workbook);
+            _ = Marshal.ReleaseComObject(App);
         }
+
+        #endregion
+
     }
 }

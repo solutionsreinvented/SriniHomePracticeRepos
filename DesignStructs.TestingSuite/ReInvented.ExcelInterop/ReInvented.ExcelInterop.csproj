@@ -108,7 +108,7 @@
     <Compile Include="Services\SummaryTableService.cs" />
     <Compile Include="Services\PcdLoadsTableService.cs" />
     <Compile Include="Services\SupportInformationTableService.cs" />
-    <Compile Include="Services\WorkbookService.cs" />
+    <Compile Include="Models\FldWorkbook.cs" />
     <Compile Include="Services\WorksheetService.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

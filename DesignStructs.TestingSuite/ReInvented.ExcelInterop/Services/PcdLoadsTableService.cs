@@ -123,7 +123,7 @@ namespace ReInvented.ExcelInterop.Services
                 string content = nRelatedRestraints > 1 ? $"{headerText}" : $"{headerText} ({headerTextUnit})";
                 int sRow = nRelatedRestraints > 1 ? eRowHeader : sRowHeader;
                 worksheet.Range(sRow, eRowHeader, eColCurrent - (colSpan - 1), eColCurrent)
-                         .Fill(content).Subscript(2, 1).FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+                         .FontStyle(isBold: true).MergeEx().Fill(content).Subscript(2, 1).Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
                 eColCurrent -= colSpan;
             }
 
@@ -135,7 +135,7 @@ namespace ReInvented.ExcelInterop.Services
             if (!dofReleased)
             {
                 worksheet.Range(row, row, eColCurrent - (colSpan - 1), eColCurrent)
-                         .Fill($"{Math.Round(loadValue, 1):N1}").MergeEx().Wrap(XlSettings.RowHeightStandard).AlignCenter();
+                         .MergeEx().Fill($"{Math.Round(loadValue, 1):N1}").Wrap(XlSettings.RowHeightStandard).AlignCenter().SetNumberFormat("0.0");
                 eColCurrent -= colSpan;
             }
             return eColCurrent;

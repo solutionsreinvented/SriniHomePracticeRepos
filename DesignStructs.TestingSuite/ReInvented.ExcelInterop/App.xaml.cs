@@ -3,6 +3,7 @@
 using ReInvented.ExcelInterop.Services;
 using ReInvented.Domain.Reporting.Models;
 using ReInvented.DataAccess;
+using ReInvented.ExcelInterop.Models;
 
 namespace ReInvented.ExcelInterop
 {
@@ -16,7 +17,7 @@ namespace ReInvented.ExcelInterop
             JsonDataSerializer<FLDReport> serializer = new JsonDataSerializer<FLDReport>();
             FLDReport fldReport = serializer.Deserialize(@"C:\Users\masanams\Desktop\FLD.json");
 
-            WorkbookService workbookService = new WorkbookService(@"C:\Users\masanams\Desktop", "Exported Data1.xlsm", fldReport);
+            FldWorkbook workbookService = new FldWorkbook(@"C:\Users\masanams\Desktop", "Exported Data1.xlsm", fldReport);
             workbookService.Create();
 
             //Excel.Workbook workbook = WorkbookService.Create(@"C:\Users\masanams\Desktop", "Exported Data1.xlsm", fldReport);
