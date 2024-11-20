@@ -9,6 +9,8 @@ using ReInvented.Reporting.ExcelInterop.Extensions;
 using ReInvented.StaadPro.Interactivity.Entities;
 using System.Diagnostics;
 using ReInvented.Reporting.ExcelInterop.Services;
+using Microsoft.Web.WebView2.Wpf;
+using System.Threading.Tasks;
 
 namespace ReInvented.Reporting.ExcelInterop.Models
 {
@@ -64,6 +66,7 @@ namespace ReInvented.Reporting.ExcelInterop.Models
         {
             try
             {
+                ///DoRequiredWithWebView();
                 ApplicationExtensions.KillIfOpen(Path.Combine(SavePath, FileName));
 
                 App = new Application { Visible = true, DisplayAlerts = false };
@@ -148,17 +151,17 @@ namespace ReInvented.Reporting.ExcelInterop.Models
         public void Dispose()
         {
             // Cleanup resources
-            if (Workbook != null)
-            {
-                Workbook.Close(false);
-                Marshal.ReleaseComObject(Workbook);
-                Workbook = null;
-            }
 
             if (Worksheet != null)
             {
                 Marshal.ReleaseComObject(Worksheet);
                 Worksheet = null;
+            }
+            if (Workbook != null)
+            {
+                //Workbook.Close(false);
+                Marshal.ReleaseComObject(Workbook);
+                Workbook = null;
             }
 
             if (App != null)
