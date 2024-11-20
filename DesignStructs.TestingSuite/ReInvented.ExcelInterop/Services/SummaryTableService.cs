@@ -82,10 +82,10 @@ namespace ReInvented.ExcelInterop.Services
 
         private static int CreateHeadersForLoadCgColumns(Worksheet worksheet, int sRowHeader, int eRowHeader, int eColCurrent, int colSpan, double charSpacing)
         {
-            FillHeaderColumn(worksheet, sRowHeader, "Load C.G", charSpacing, eColCurrent, colSpan, 3, 0);
-            FillHeaderColumn(worksheet, eRowHeader, "X", charSpacing, eColCurrent, colSpan, 3, 2).Subscript(2, 1);
-            FillHeaderColumn(worksheet, eRowHeader, "Y", charSpacing, eColCurrent, colSpan, 2, 1).Subscript(2, 1);
-            FillHeaderColumn(worksheet, eRowHeader, "Z", charSpacing, eColCurrent, colSpan, 1, 0).Subscript(2, 1);
+            FillColumnText(worksheet, sRowHeader, "Load C.G", charSpacing, eColCurrent, colSpan, 3, 0);
+            FillColumnText(worksheet, eRowHeader, "X", charSpacing, eColCurrent, colSpan, 3, 2).Subscript(2, 1);
+            FillColumnText(worksheet, eRowHeader, "Y", charSpacing, eColCurrent, colSpan, 2, 1).Subscript(2, 1);
+            FillColumnText(worksheet, eRowHeader, "Z", charSpacing, eColCurrent, colSpan, 1, 0).Subscript(2, 1);
 
             eColCurrent -= 3 * colSpan;
             return eColCurrent;
@@ -93,10 +93,10 @@ namespace ReInvented.ExcelInterop.Services
 
         private static int CreateHeadersForMomentsColumns(Worksheet worksheet, int sRowHeader, int eRowHeader, int eColCurrent, int colSpan, double charSpacing)
         {
-            FillHeaderColumn(worksheet, sRowHeader, "Moments (kNm)", charSpacing, eColCurrent, colSpan, 3, 0);
-            FillHeaderColumn(worksheet, eRowHeader, "Mx", charSpacing, eColCurrent, colSpan, 3, 2).Subscript(2, 1);
-            FillHeaderColumn(worksheet, eRowHeader, "My", charSpacing, eColCurrent, colSpan, 2, 1).Subscript(2, 1);
-            FillHeaderColumn(worksheet, eRowHeader, "Mz", charSpacing, eColCurrent, colSpan, 1, 0).Subscript(2, 1);
+            FillColumnText(worksheet, sRowHeader, "Moments (kNm)", charSpacing, eColCurrent, colSpan, 3, 0);
+            FillColumnText(worksheet, eRowHeader, "Mx", charSpacing, eColCurrent, colSpan, 3, 2).Subscript(2, 1);
+            FillColumnText(worksheet, eRowHeader, "My", charSpacing, eColCurrent, colSpan, 2, 1).Subscript(2, 1);
+            FillColumnText(worksheet, eRowHeader, "Mz", charSpacing, eColCurrent, colSpan, 1, 0).Subscript(2, 1);
 
             eColCurrent -= 3 * colSpan;
             return eColCurrent;
@@ -104,19 +104,19 @@ namespace ReInvented.ExcelInterop.Services
 
         private static int CreateHeadersForForcesColumns(Worksheet worksheet, int sRowHeader, int eRowHeader, int eColCurrent, int colSpan, double charSpacing)
         {
-            FillHeaderColumn(worksheet, sRowHeader, "Forces (kN)", charSpacing, eColCurrent, colSpan, 3, 0);
-            FillHeaderColumn(worksheet, eRowHeader, "Fx", charSpacing, eColCurrent, colSpan, 3, 2).Subscript(2, 1);
-            FillHeaderColumn(worksheet, eRowHeader, "Fy", charSpacing, eColCurrent, colSpan, 2, 1).Subscript(2, 1);
-            FillHeaderColumn(worksheet, eRowHeader, "Fz", charSpacing, eColCurrent, colSpan, 1, 0).Subscript(2, 1);
+            FillColumnText(worksheet, sRowHeader, "Forces (kN)", charSpacing, eColCurrent, colSpan, 3, 0);
+            FillColumnText(worksheet, eRowHeader, "Fx", charSpacing, eColCurrent, colSpan, 3, 2).Subscript(2, 1);
+            FillColumnText(worksheet, eRowHeader, "Fy", charSpacing, eColCurrent, colSpan, 2, 1).Subscript(2, 1);
+            FillColumnText(worksheet, eRowHeader, "Fz", charSpacing, eColCurrent, colSpan, 1, 0).Subscript(2, 1);
 
             eColCurrent -= 3 * colSpan;
             return eColCurrent;
         }
 
-        private static Range FillHeaderColumn(Worksheet worksheet, int row, string content, double charSpacing, int eColCurrent, int colSpan, int sCounter, int eCounter)
+        private static Range FillColumnText(Worksheet worksheet, int row, string content, double charSpacing, int eColCurrent, int colSpan, int sCounter, int eCounter, bool isHeader = true)
         {
             return worksheet.Range(row, row, eColCurrent - (sCounter * colSpan - 1), eColCurrent - eCounter * colSpan).Fill(content)
-                            .FontStyle(isBold: true).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
+                            .FontStyle(isBold: isHeader).MergeEx().Wrap(XlSettings.RowHeightStandard, charSpacing).AlignCenter();
         }
 
         #endregion
