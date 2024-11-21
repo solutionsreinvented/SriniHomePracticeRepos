@@ -1,22 +1,33 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
+using HtmlAgilityPack;
+
+using Microsoft.Office.Interop.Excel;
 using Microsoft.Web.WebView2.Wpf;
+
+using ReInvented.Reporting.ExcelInterop.Extensions;
+using ReInvented.Reporting.ExcelInterop.Models;
 
 namespace ReInvented.Reporting.ExcelInterop
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : System.Windows.Window
     {
-        public MainWindow()
+        public MainWindow(FldWorkbook fldWorkbook)
         {
+            FldWorkbook = fldWorkbook;
+
             InitializeComponent();
             _ = InitializeAsync();
         }
+
+        private FldWorkbook FldWorkbook { get; set; }
 
         private async Task InitializeAsync()
         {
@@ -25,63 +36,47 @@ namespace ReInvented.Reporting.ExcelInterop
 
         private async Task LoadAndExtractHtmlContentAsync()
         {
-            // Create a WebView2 instance
+            string htmlFilePath = @"C:\Users\masanams\OneDrive - TAKRAF\Desktop\Demo\SvgToPng\03. Reports\3913A0TR036CV101r4.html";
+            string directory = Path.GetDirectoryName(htmlFilePath);
+            string fileName = Path.GetFileNameWithoutExtension(htmlFilePath);
+
             WebView2 webView = new WebView2();
             AddChild(webView);
-            // Initialize the WebView2 environment
             await webView.EnsureCoreWebView2Async();
-
-            // Path to the HTML file
-            string htmlFilePath = @"C:\Users\masanams\OneDrive - TAKRAF\Desktop\Demo\36m\03. STAAD\03. Reports\3913A0TR036CV105r4.html";
 
             if (!File.Exists(htmlFilePath))
             {
-                MessageBox.Show("HTML file not found!");
+                _ = MessageBox.Show("HTML file not found!");
                 return;
             }
 
-            // Load the HTML file into WebView2
             webView.Source = new Uri(htmlFilePath);
 
-            // Wait until the content is fully loaded
             webView.NavigationCompleted += async (sender, args) =>
             {
                 if (args.IsSuccess)
                 {
-                    string svgContent = await ConvertSvgToPngAsync("supportLayoutPCD1", webView, "");
-                    SvgToPngConverter.ConvertSvgToPng(svgContent, @"C:\Users\masanams\OneDrive - TAKRAF\Desktop\Demo\36m\03. STAAD\03. Reports\3913A0TR036CV105r4.png", 600, 600);
+                    //FldWorkbook.InstantiateObjects();
+                    FldWorkbook.Create();
+                    Worksheet worksheet = FldWorkbook.Worksheet;
+                    string[] svgs = await webView.GetAllSvgElementsAsync();
+
+                    worksheet.EmbedPngToExcelFromMemory(SvgToPngConverter.ConvertSvgToPng(svgs.First(), 600, 600), worksheet.Range(1,1), worksheet.Range(35, 35));
+
+
+                    HtmlNodeCollection svgElems = await webView.GetElementsByTagNameAsync("table");
+                    //svgs.ToList().ForEach()
+
+
+                    string svgContent = await webView.GetSvgElementByIdAsync("supportLayoutPCD1"); ///await ConvertSvgToPngAsync("supportLayoutPCD1", webView, "");
+                    SvgToPngConverter.ConvertSvgToPng(svgContent, Path.Combine(directory, $"{fileName}.png"), 600, 600);
                 }
                 else
                 {
-                    MessageBox.Show("Failed to load HTML file.");
+                    _ = MessageBox.Show("Failed to load HTML file.");
                 }
             };
         }
-
-        private async Task<string> ConvertSvgToPngAsync(string svgId, WebView2 webView, string pngFilePath)
-        {
-            string script = $@"
-            (function() {{
-                var svgElement = document.getElementById('{svgId}');
-                if (!svgElement) {{
-                    return null;
-                }}
-                return svgElement.outerHTML;
-            }})();";
-
-            string svgContent = await webView.ExecuteScriptAsync(script);
-
-            if (string.IsNullOrWhiteSpace(svgContent) || svgContent == "null")
-            {
-                throw new InvalidOperationException($"SVG element with ID '{svgId}' not found.");
-            }
-
-            //svgContent = svgContent.Trim('"').Replace("\\n", "").Replace("\\\"", "\"");
-
-            //byte[] pngData = SvgToPngConverterLibrary.ConvertSvgToPng(svgContent);
-            //File.WriteAllBytes(pngFilePath, pngData);
-
-            return svgContent;
-        }
+       
     }
 }

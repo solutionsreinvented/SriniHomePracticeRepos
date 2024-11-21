@@ -9,8 +9,6 @@ using ReInvented.Reporting.ExcelInterop.Extensions;
 using ReInvented.StaadPro.Interactivity.Entities;
 using System.Diagnostics;
 using ReInvented.Reporting.ExcelInterop.Services;
-using Microsoft.Web.WebView2.Wpf;
-using System.Threading.Tasks;
 
 namespace ReInvented.Reporting.ExcelInterop.Models
 {
@@ -62,20 +60,33 @@ namespace ReInvented.Reporting.ExcelInterop.Models
 
         #region Instance Methods
 
+        public void InstantiateObjects()
+        {
+            ///DoRequiredWithWebView();
+            ApplicationExtensions.KillIfOpen(Path.Combine(SavePath, FileName));
+            if (App == null)
+            {
+                App = new Application { Visible = true, DisplayAlerts = false };
+            }
+            if (Workbook == null)
+            {
+                Workbook = App.Workbooks.Add();
+            }
+            if (Worksheet == null)
+            {
+                Worksheet = (Worksheet)Workbook.Sheets[1];
+            }
+        }
+
         public void Create()
         {
             try
             {
-                ///DoRequiredWithWebView();
-                ApplicationExtensions.KillIfOpen(Path.Combine(SavePath, FileName));
+                InstantiateObjects();
 
-                App = new Application { Visible = true, DisplayAlerts = false };
-
-                Workbook = App.Workbooks.Add();
+                Worksheet.Name = "Exported Data";
                 Workbook.SaveAs(Path.Combine(SavePath, FileName), XlFileFormat.xlOpenXMLWorkbookMacroEnabled);
 
-                Worksheet = (Worksheet)Workbook.Sheets[1];
-                Worksheet.Name = "Exported Data";
 
                 DocumentHeaderService.CreateDocumentHeader(Worksheet.SetTemplateDefaults(), _highlight);
 

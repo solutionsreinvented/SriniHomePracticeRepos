@@ -1,13 +1,13 @@
 ﻿using System.IO;
 using System.Runtime.InteropServices;
 
-using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Interop.Excel;
 
 namespace ReInvented.Reporting.ExcelInterop.Extensions
 {
     public static class WorkbookExtensions
     {
-        public static void SaveWorkbookWithOverride(this Excel.Workbook workbook, string savePath, string fileName)
+        public static void SaveWorkbookWithOverride(this Workbook workbook, string savePath, string fileName)
         {
             string fullPath = Path.Combine(savePath, fileName);
 
@@ -27,7 +27,7 @@ namespace ReInvented.Reporting.ExcelInterop.Extensions
                 }
             }
 
-            workbook.SaveAs(fullPath, Excel.XlFileFormat.xlOpenXMLWorkbookMacroEnabled);
+            workbook.SaveAs(fullPath, XlFileFormat.xlOpenXMLWorkbookMacroEnabled);
         }
     }
 }

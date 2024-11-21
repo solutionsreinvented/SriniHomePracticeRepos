@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 
+using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
 namespace ReInvented.Reporting.ExcelInterop.Extensions
@@ -29,7 +32,7 @@ namespace ReInvented.Reporting.ExcelInterop.Extensions
             worksheet.Columns.ColumnWidth = colWidth;
             worksheet.Cells.Font.Name = fontName;
             worksheet.Cells.Font.Size = fontSize;
-            worksheet.Cells.VerticalAlignment = XlVAlign.xlVAlignCenter;
+            worksheet.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
             return worksheet;
         }
@@ -148,6 +151,34 @@ namespace ReInvented.Reporting.ExcelInterop.Extensions
             worksheet.Range[range].BordersAroundAndInsideHorizontal();
             return worksheet;
 
+        }
+
+        public static Worksheet EmbedPngToExcelFromMemory(this Worksheet worksheet, byte[] imageBytes, Range sCell, Range eCell)
+        {
+            using (MemoryStream memoryStream = new MemoryStream(imageBytes))
+            {
+                string tempImagePath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".png");
+                File.WriteAllBytes(tempImagePath, imageBytes);
+
+                Microsoft.Office.Interop.Excel.Shape picture = worksheet.Shapes.AddPicture(tempImagePath, MsoTriState.msoFalse, MsoTriState.msoCTrue, 0, 0, 0, 0);
+
+                float top = (float)sCell.Top;
+                float left = (float)sCell.Left;
+                float bottom = (float)eCell.Top + (float)eCell.Height;
+                float right = (float)eCell.Left + (float)eCell.Width;
+
+                float imageWidth = right - left;
+                float imageHeight = bottom - top;
+
+                picture.Left = left;
+                picture.Top = top;
+                picture.Width = imageWidth;
+                picture.Height = imageHeight;
+
+                File.Delete(tempImagePath);
+            }
+
+            return worksheet;
         }
 
     }
