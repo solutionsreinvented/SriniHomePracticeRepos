@@ -5,9 +5,11 @@ using System.Linq;
 using Microsoft.Office.Interop.Excel;
 
 using ReInvented.Domain.Reporting.Models;
-using ReInvented.Reporting.ExcelInterop.Extensions;
+using ReInvented.ExcelInterop.Extensions;
+using ReInvented.ExcelInterop.Models;
 using ReInvented.Reporting.ExcelInterop.Models;
 using ReInvented.StaadPro.Interactivity.Entities;
+using ReInvented.StaadPro.Interactivity.Extensions;
 
 namespace ReInvented.Reporting.ExcelInterop.Services
 {

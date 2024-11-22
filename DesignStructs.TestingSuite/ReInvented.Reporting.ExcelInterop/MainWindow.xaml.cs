@@ -9,8 +9,10 @@ using HtmlAgilityPack;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.Web.WebView2.Wpf;
 
-using ReInvented.Reporting.ExcelInterop.Extensions;
+using ReInvented.ExcelInterop.Extensions;
 using ReInvented.Reporting.ExcelInterop.Models;
+using ReInvented.Shared.Extensions;
+using ReInvented.Shared.Services;
 
 namespace ReInvented.Reporting.ExcelInterop
 {
@@ -61,7 +63,7 @@ namespace ReInvented.Reporting.ExcelInterop
                     Worksheet worksheet = FldWorkbook.Worksheet;
                     string[] svgs = await webView.GetAllSvgElementsAsync();
 
-                    worksheet.EmbedPngToExcelFromMemory(SvgToPngConverter.ConvertSvgToPng(svgs.First(), 600, 600), worksheet.Range(1,1), worksheet.Range(35, 35));
+                    worksheet.EmbedPngToExcelFromMemory(SvgToPngConversionService.ConvertSvgToPng(svgs.First(), 600, 600), worksheet.Range(1,1), worksheet.Range(35, 35));
 
 
                     HtmlNodeCollection svgElems = await webView.GetElementsByTagNameAsync("table");
@@ -69,7 +71,7 @@ namespace ReInvented.Reporting.ExcelInterop
 
 
                     string svgContent = await webView.GetSvgElementByIdAsync("supportLayoutPCD1"); ///await ConvertSvgToPngAsync("supportLayoutPCD1", webView, "");
-                    SvgToPngConverter.ConvertSvgToPng(svgContent, Path.Combine(directory, $"{fileName}.png"), 600, 600);
+                    SvgToPngConversionService.ConvertSvgToPng(svgContent, Path.Combine(directory, $"{fileName}.png"), 600, 600);
                 }
                 else
                 {

@@ -1,5 +1,7 @@
 ﻿using Microsoft.Office.Interop.Excel;
 
+using ReInvented.ExcelInterop.Models;
+
 namespace ReInvented.Reporting.ExcelInterop.Models
 {
     public class XlSettings
@@ -17,6 +19,11 @@ namespace ReInvented.Reporting.ExcelInterop.Models
         public const int EndColTable = 35;
         public const int ColSpanNormal = 3;
         public const int ColSpanWide = 4;
+
+        public const int PngWidth = 600;
+        public const int PngHeight = 600;
+
+
         public const double AvgCharSpacingHeaders = CharSpacing.L;
         public const double AvgCharSpacingNormal = CharSpacing.XS;
 

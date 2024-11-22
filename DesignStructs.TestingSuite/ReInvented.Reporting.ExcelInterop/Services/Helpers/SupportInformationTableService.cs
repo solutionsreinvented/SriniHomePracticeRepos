@@ -1,11 +1,11 @@
-﻿using System;
-
+﻿
 using Microsoft.Office.Interop.Excel;
 
 using ReInvented.Domain.Reporting.Models;
-using ReInvented.Reporting.ExcelInterop.Extensions;
+using ReInvented.ExcelInterop.Extensions;
 using ReInvented.Reporting.ExcelInterop.Models;
 using ReInvented.StaadPro.Interactivity.Entities;
+using ReInvented.StaadPro.Interactivity.Extensions;
 
 namespace ReInvented.Reporting.ExcelInterop.Services
 {
@@ -79,19 +79,6 @@ namespace ReInvented.Reporting.ExcelInterop.Services
             FillSupportConstraintCell(worksheet, captionsRow, eColTable, "Tz", 4, true);
             FillSupportConstraintCell(worksheet, captionsRow, eColTable, "Ty", 5, true);
             FillSupportConstraintCell(worksheet, captionsRow, eColTable, "Tx", 6, true);
-
-            //worksheet.Range(captionsRow, captionsRow, eColTable - (1 * XlSettings.ColSpanNormal - 1), eColTable - 0 * XlSettings.ColSpanNormal)
-            //         .Fill("Rz").Subscript(2, 1).MergeEx().Wrap(XlSettings.RowHeightStandard, false).AlignCenter();
-            //worksheet.Range(captionsRow, captionsRow, eColTable - (2 * XlSettings.ColSpanNormal - 1), eColTable - 1 * XlSettings.ColSpanNormal)
-            //         .Fill("Ry").Subscript(2, 1).MergeEx().Wrap(XlSettings.RowHeightStandard, false).AlignCenter();
-            //worksheet.Range(captionsRow, captionsRow, eColTable - (3 * XlSettings.ColSpanNormal - 1), eColTable - 2 * XlSettings.ColSpanNormal)
-            //         .Fill("Rx").Subscript(2, 1).MergeEx().Wrap(XlSettings.RowHeightStandard, false).AlignCenter();
-            //worksheet.Range(captionsRow, captionsRow, eColTable - (4 * XlSettings.ColSpanNormal - 1), eColTable - 3 * XlSettings.ColSpanNormal)
-            //         .Fill("Tz").Subscript(2, 1).MergeEx().Wrap(XlSettings.RowHeightStandard, false).AlignCenter();
-            //worksheet.Range(captionsRow, captionsRow, eColTable - (5 * XlSettings.ColSpanNormal - 1), eColTable - 4 * XlSettings.ColSpanNormal)
-            //         .Fill("Ty").Subscript(2, 1).MergeEx().Wrap(XlSettings.RowHeightStandard, false).AlignCenter();
-            //worksheet.Range(captionsRow, captionsRow, eColTable - (6 * XlSettings.ColSpanNormal - 1), eColTable - 5 * XlSettings.ColSpanNormal)
-            //         .Fill("Tx").Subscript(2, 1).MergeEx().Wrap(XlSettings.RowHeightStandard, false).AlignCenter();
         }
 
         private static void FillSupportConstraintsValues(Worksheet worksheet, int eColTable, Releases releases, int valuesRow)
@@ -102,19 +89,6 @@ namespace ReInvented.Reporting.ExcelInterop.Services
             FillSupportConstraintCell(worksheet, valuesRow, eColTable, releases.ConstraintText(releases.Fz), 4);
             FillSupportConstraintCell(worksheet, valuesRow, eColTable, releases.ConstraintText(releases.Fy), 5);
             FillSupportConstraintCell(worksheet, valuesRow, eColTable, releases.ConstraintText(releases.Fx), 6);
-
-            //worksheet.Range(valuesRow, valuesRow, eColTable - (1 * XlSettings.ColSpanNormal - 1), eColTable - 0 * XlSettings.ColSpanNormal)
-            //         .Fill(releases.ConstraintText(releases.Mz)).MergeEx().Wrap(XlSettings.RowHeightStandard, false).AlignCenter();
-            //worksheet.Range(valuesRow, valuesRow, eColTable - (2 * XlSettings.ColSpanNormal - 1), eColTable - 1 * XlSettings.ColSpanNormal)
-            //         .Fill(releases.ConstraintText(releases.My)).MergeEx().Wrap(XlSettings.RowHeightStandard, false).AlignCenter();
-            //worksheet.Range(valuesRow, valuesRow, eColTable - (3 * XlSettings.ColSpanNormal - 1), eColTable - 2 * XlSettings.ColSpanNormal)
-            //         .Fill(releases.ConstraintText(releases.Mx)).MergeEx().Wrap(XlSettings.RowHeightStandard, false).AlignCenter();
-            //worksheet.Range(valuesRow, valuesRow, eColTable - (4 * XlSettings.ColSpanNormal - 1), eColTable - 3 * XlSettings.ColSpanNormal)
-            //         .Fill(releases.ConstraintText(releases.Fz)).MergeEx().Wrap(XlSettings.RowHeightStandard, false).AlignCenter();
-            //worksheet.Range(valuesRow, valuesRow, eColTable - (5 * XlSettings.ColSpanNormal - 1), eColTable - 4 * XlSettings.ColSpanNormal)
-            //         .Fill(releases.ConstraintText(releases.Fy)).MergeEx().Wrap(XlSettings.RowHeightStandard, false).AlignCenter();
-            //worksheet.Range(valuesRow, valuesRow, eColTable - (6 * XlSettings.ColSpanNormal - 1), eColTable - 5 * XlSettings.ColSpanNormal)
-            //         .Fill(releases.ConstraintText(releases.Fx)).MergeEx().Wrap(XlSettings.RowHeightStandard, false).AlignCenter();
         }
 
         #endregion

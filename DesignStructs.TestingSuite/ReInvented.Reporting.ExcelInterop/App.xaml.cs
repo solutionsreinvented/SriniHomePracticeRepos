@@ -1,12 +1,5 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using System.Windows;
-using HtmlAgilityPack;
-using Microsoft.Playwright;
-using ReInvented.DataAccess;
-using ReInvented.Domain.Reporting.Models;
-using ReInvented.Reporting.ExcelInterop.Models;
+﻿using System.Windows;
+
 using ReInvented.Reporting.ExcelInterop.Services;
 
 namespace ReInvented.Reporting.ExcelInterop
@@ -18,9 +11,9 @@ namespace ReInvented.Reporting.ExcelInterop
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            var htmlFilePath = @"F:\06. ReInvented\BranchReorganization\MainProjects\Resume Templates\Web\Pages\first.html";
+            string htmlFilePath = @"C:\Users\masanams\OneDrive - TAKRAF\Desktop\Demo\SvgToPng\03. Reports\3913A0TR036CV101r4.html";
 
-            _ = GenerateExcelDocument(htmlFilePath);
+            var result = FldWorkbookGenerationService.GenerateExcelDocumentAsync(htmlFilePath, null);
 
             //MainWindow = new MainWindow(fldWorkbook);/// { DataContext = new WebViewViewModel(@"C:\Users\masanams\OneDrive - TAKRAF\Desktop\Demo\36m\03. STAAD\03. Reports\3913A0TR036CV105r4.html") };
 
@@ -28,18 +21,6 @@ namespace ReInvented.Reporting.ExcelInterop
 
 
             //base.OnStartup(e);
-        }
-
-        private static async Task GenerateExcelDocument(string htmlFilePath)
-        {
-            HtmlRenderer htmlRenderer = new HtmlRenderer();
-            HtmlDocument htmlDocument = await htmlRenderer.RenderHtmlAsync(htmlFilePath);
-
-            JsonDataSerializer<FLDReport> serializer = new JsonDataSerializer<FLDReport>();
-            FLDReport fldReport = serializer.Deserialize(@"C:\Users\srini\source\repos\DesignStructs.TestingSuite\ReInvented.Reporting.ExcelInterop\Data\FLD.json");
-
-            FldWorkbook fldWorkbook = new FldWorkbook(@"C:\Users\srini\Desktop", "Exported Data1.xlsm", fldReport);
-            //fldWorkbook.Create();
         }
 
     }
