@@ -9,10 +9,10 @@ namespace ReInvented.Reporting.ExcelInterop.Services
 {
     public class HtmlRenderer
     {
-        public static async Task LoadHtml()
+        public static async Task LoadHtml(string htmlFilePath)
         {
             HtmlRenderer renderer = new HtmlRenderer();
-            string filePath = Path.Combine(@"F:\06. ReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ApplicationData\Reports\Templates\Pages\testing.html");
+            string filePath = Path.Combine(htmlFilePath);
 
             HtmlDocument htmlDocument = await renderer.RenderHtmlAsync(filePath);
 
