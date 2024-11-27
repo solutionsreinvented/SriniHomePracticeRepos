@@ -2,13 +2,13 @@
 
 using System;
 using System.IO;
-using ReInvented.DataAccess.Services;
-using ReInvented.Sections.Domain.Models;
-using ReInvented.StaadPro.Interactivity.Entities;
 using System.Collections.Generic;
+using ReInvented.StaadPro.Interactivity.Entities;
+using ReInvented.DataAccess;
 using ReInvented.StaadPro.Interactivity.Enums;
 using ReInvented.StaadPro.Interactivity.Models;
-using ReInvented.DataAccess;
+using ReInvented.Sections.Domain.Models;
+using ReInvented.DataAccess.Services;
 
 namespace SPro2023ConsoleApp
 {

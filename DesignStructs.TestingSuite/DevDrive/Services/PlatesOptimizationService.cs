@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 using OpenSTAADUI;
 
+using ReInvented.Sections.Domain.Models;
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Extensions;
 using ReInvented.StaadPro.Interactivity.Models;
@@ -41,12 +44,19 @@ namespace DevDrive.Services
     {
         #region Parameterized Constructor
 
-        public PlatesOptimizationService(OpenStaadWrapper wrapper, double limitingPlateStress)
+        public PlatesOptimizationService(OpenStaadWrapper wrapper, MaterialGrade materialGrade, int threadCount)
         {
             Wrapper = wrapper;
             Geometry = wrapper.Geometry as OSGeometryUI;
             Property = wrapper.Property as OSPropertyUI;
-            PlateLimitingStress = limitingPlateStress;
+            MaterialGrade = materialGrade;
+            PlateLimitingStress = materialGrade.Fy;
+            ThreadCount = threadCount;
+        }
+
+        public PlatesOptimizationService(OpenStaadWrapper wrapper, MaterialGrade materialGrade) : this(wrapper, materialGrade, 1)
+        {
+
         }
 
         #endregion
@@ -63,16 +73,24 @@ namespace DevDrive.Services
 
         public OSPropertyUI Property { get; private set; }
 
+        public int ThreadCount { get; private set; }
+
+        public MaterialGrade MaterialGrade { get; private set; }
+
         #endregion
 
         #region Public Functions
 
         public PlateGroupDesignResult OptimizePlateGroup(string groupName, IEnumerable<LoadCase> loadCases, double allowedPercentPlatesToExceed = 15.0)
         {
-            IEnumerable<Plate> plates = Geometry.GetPlatesFromPlateGroup(groupName);
+            IEnumerable<Plate> plates = Geometry.GetEntitiesInGroup<Plate>(groupName, 1);
             double currentThickness = Property.GetPlateThickness(plates.First().Id).A * 1000;
 
-            IEnumerable<PlateCenterResults> results = Wrapper.GetPlateCenterResultsForGroup(groupName, loadCases);
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            IEnumerable<PlateCenterResults> results = Wrapper.GetPlateCenterResultsForGroup(groupName, loadCases, ThreadCount);
+            stopwatch.Stop();
+            var elapsed = TimeSpan.FromMilliseconds(stopwatch.ElapsedMilliseconds);
             PlateGroupStressSummary governingResult = results.GetGoverningPlateGroupStressSummary(PlateLimitingStress);
 
             PlateGroupDesignResult designResult = new PlateGroupDesignResult(groupName, governingResult, currentThickness, currentThickness);
@@ -88,11 +106,6 @@ namespace DevDrive.Services
 
         public PlateGroupDesignResult OptimizePlateGroup(string groupName, double minimumThickness, IEnumerable<LoadCase> loadCases, double allowedPercentPlatesToExceed = 15.0)
         {
-            //PlateGroupDesignResult result = OptimizePlateGroup(groupName, loadCases, allowedPercentPlatesToExceed);
-            //double designThickness = Math.Max(result.Thickness, minimumThickness);
-            //result.Thickness = CommonThicknesses.Where(t => t >= designThickness).OrderBy(t => t).FirstOrDefault();
-
-            //return result;
             return OptimizePlateGroup(groupName, minimumThickness, 0.0, loadCases, allowedPercentPlatesToExceed);
         }
 
@@ -110,45 +123,35 @@ namespace DevDrive.Services
 
         public List<PlateGroupDesignResult> OptimizePlateGroups(IEnumerable<string> groupNames, IEnumerable<LoadCase> loadCases, double allowedPercentPlatesToExceed = 15.0)
         {
-            //Dictionary<string, PlateGroupDesignResult> groupDesignResults = new Dictionary<string, PlateGroupDesignResult>();
-
-            //foreach (string groupName in groupNames.ToHashSet())
-            //{
-            //    PlateGroupDesignResult designResult = OptimizePlateGroup(groupName, loadCases, allowedPercentPlatesToExceed);
-            //    groupDesignResults.Add(groupName, designResult);
-            //}
-
-            //return groupDesignResults;
             return OptimizePlateGroups(groupNames, 0.0, 0.0, loadCases, allowedPercentPlatesToExceed);
         }
 
         public List<PlateGroupDesignResult> OptimizePlateGroups(IEnumerable<string> groupNames, double minimumThickness, IEnumerable<LoadCase> loadCases, double allowedPercentPlatesToExceed = 15.0)
         {
-            //Dictionary<string, PlateGroupDesignResult> groupDesignResults = new Dictionary<string, PlateGroupDesignResult>();
-
-            //foreach (string groupName in groupNames.ToHashSet())
-            //{
-            //    PlateGroupDesignResult designResult = OptimizePlateGroup(groupName, minimumThickness, loadCases, allowedPercentPlatesToExceed);
-            //    groupDesignResults.Add(groupName, designResult);
-            //}
-
-            //return groupDesignResults;
             return OptimizePlateGroups(groupNames, minimumThickness, 0.0, loadCases, allowedPercentPlatesToExceed);
         }
 
         public List<PlateGroupDesignResult> OptimizePlateGroups(IEnumerable<string> groupNames, double minimumThickness, double corrosionAllowance,
-                                                                              IEnumerable<LoadCase> loadCases, double allowedPercentPlatesToExceed = 15.0)
+                                                                      IEnumerable<LoadCase> loadCases, double allowedPercentPlatesToExceed = 15.0)
         {
-            List<PlateGroupDesignResult> groupDesignResults = new List<PlateGroupDesignResult>();
+            ConcurrentBag<PlateGroupDesignResult> groupDesignResults = new ConcurrentBag<PlateGroupDesignResult>();
 
-            foreach (string groupName in groupNames.ToHashSet())
+            groupNames.AsParallel().WithDegreeOfParallelism(ThreadCount).ForAll(gn =>
             {
-                PlateGroupDesignResult designResult = OptimizePlateGroup(groupName, minimumThickness, corrosionAllowance, loadCases, allowedPercentPlatesToExceed);
-                groupDesignResults.Add(designResult);
-            }
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
 
-            return groupDesignResults;
+                PlateGroupDesignResult designResult = OptimizePlateGroup(gn, minimumThickness, corrosionAllowance, loadCases, allowedPercentPlatesToExceed);
+
+                stopwatch.Stop();
+                Console.WriteLine($"Plate group {gn} optimization is processed in {TimeSpan.FromMilliseconds(stopwatch.ElapsedMilliseconds)}");
+
+                groupDesignResults.Add(designResult);
+            });
+
+            return groupDesignResults.ToList();
         }
+
 
         #endregion
     }

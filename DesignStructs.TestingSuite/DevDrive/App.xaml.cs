@@ -37,12 +37,14 @@ namespace DevDrive
 
             MaterialGrade grade = matched.FirstOrDefault(g => g.StaadName == "A36");
 
-            OptimizePlates(grade.Fy);
+            OptimizePlates(grade);
         }
 
         #region Future Use Functions
-        private static void OptimizePlates(double fy)
+        private static void OptimizePlates(MaterialGrade materialGrade)
         {
+            var nThreads = 30;
+
             string filePath = FileServiceProvider.GetFilePathUsingOpenFileDialog(new FileFilter("Staad Models", "*.std"));
             string directory = Path.GetDirectoryName(filePath);
             string fileName = Path.GetFileName(filePath);
@@ -57,36 +59,40 @@ namespace DevDrive
             OSGeometryUI geometry = wrapper.Geometry as OSGeometryUI;
             OSLoadUI load = wrapper.Load as OSLoadUI;
 
-            HashSet<Plate> allPlates = geometry.GetAllPlates();
+            IEnumerable<Plate> allPlates = geometry.GetAllEntities<Plate>(nThreads);
             HashSet<LoadCase> plc = load.GetAllPrimaryLoadCases();
 
-            Stopwatch swInd = new Stopwatch();
-            swInd.Start();
             //var plateCenterResults = output.GetPlateCenterResults(plc, allPlates, 5);
-            swInd.Stop();
-            TimeSpan elapsed = TimeSpan.FromMilliseconds(swInd.ElapsedMilliseconds);
 
             //End Region
 
             List<string> groupNames = (wrapper.Geometry as OSGeometryUI)
-                                      .GetEntityGroupsOfType<Plate>()
+                                      .GetEntityGroups<Plate>(nThreads)
                                       .Where(eg => eg.Entities.Count() > 0)
                                       .OrderByDescending(eg => Plate.MaxYCoordinate(eg.Entities.OrderByDescending(e => Plate.MaxYCoordinate(e)).First()))
                                       .Where(eg => !InExclusionList(eg.GroupName))
                                       .Select(eg => eg.GroupName).ToList();
 
-            double limitingStress = 0.9 * fy;
+            double limitingStress = 0.9 * materialGrade.Fy;
 
             int sLcId = 101;
             int eLcId = 200;
 
             double minimumThickness = 6.0;
-            double corrosionAllowance = 6.0;
+            double corrosionAllowance = 2.0;
 
-            IEnumerable<LoadCase> loadCases = (wrapper.Load as OSLoadUI).GetLoadCasesFromIds(Enumerable.Range(sLcId, eLcId - sLcId + 1), LoadCaseType.PrimaryLoad);
-            PlatesOptimizationService pos = new PlatesOptimizationService(wrapper, limitingStress);
+            IEnumerable<LoadCase> loadCases = (wrapper.Load as OSLoadUI).GetLoadCasesFromIds(Enumerable.Range(sLcId, eLcId - sLcId + 1), LoadCaseType.LoadCombination);
+            PlatesOptimizationService pos = new PlatesOptimizationService(wrapper, materialGrade);
 
-            List<PlateGroupDesignResult> designResults = pos.OptimizePlateGroups(groupNames, minimumThickness, corrosionAllowance, loadCases, 10.0);
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            List<PlateGroupDesignResult> designResults = pos.OptimizePlateGroups(groupNames, minimumThickness, corrosionAllowance, loadCases, 10.0 );
+
+            stopwatch.Stop();
+            var elapsed = TimeSpan.FromMilliseconds(stopwatch.ElapsedMilliseconds);
+
+            Console.WriteLine($"Total time consumed for optimizing the plates is {elapsed.Minutes} minutes, {elapsed.Seconds} seconds and {elapsed.Milliseconds}");
 
             JsonDataSerializer<List<PlateGroupDesignResult>> serializer = new JsonDataSerializer<List<PlateGroupDesignResult>>();
             var serialized = "const content = " + serializer.Serialize(designResults, JsonSerializerSettingsProvider.Minified);
