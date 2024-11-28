@@ -42,6 +42,49 @@ namespace DevDrive
         }
 
         #region Future Use Functions
+
+        private static OpenStaadWrapper GetStaadWrapper()
+        {
+            string filePath = FileServiceProvider.GetFilePathUsingOpenFileDialog(new FileFilter("Staad Models", "*.std"));
+            return OSGlobalExtensions.GetOpenStaadWrapper(filePath);
+        }
+
+
+        private static void Optimize()
+        {
+            IEnumerable<Plate> allPlates = Geometry.GetAllEntities<Plate>(Critiera.ThreadCount);
+            HashSet<LoadCase> plc = Load.GetAllPrimaryLoadCases();
+
+            List<string> groupNames = Geometry.GetEntityGroups<Plate>(Criteria.ThreadCount)
+                                      .Where(eg => eg.Entities.Count() > 0)
+                                      .OrderByDescending(eg => Plate.MaxYCoordinate(eg.Entities.OrderByDescending(e => Plate.MaxYCoordinate(e)).First()))
+                                      .Where(eg => !InExclusionList(eg.GroupName))
+                                      .Select(eg => eg.GroupName).ToList();
+
+            int sLcId = 101;
+            int eLcId = 200;
+
+
+            IEnumerable<LoadCase> loadCases = Load.GetLoadCasesFromIds(Enumerable.Range(sLcId, eLcId - sLcId + 1), LoadCaseType.LoadCombination);
+            var criteria = new PlateOptimizationCriteria() { MinimumThickness = 6.0, CorrosionAllowance = 2.0, MaterialGrade = materialGrade, ThreadCount = nThreads, AllowedPercentPlatesExceedance = 15.0 };
+
+            PlatesOptimizationService pos = new PlatesOptimizationService(wrapper, criteria);
+            List<PlateGroupDesignResult> designResults = pos.OptimizePlateGroups(groupNames, loadCases);
+
+
+            pos.WriteResultsToFile(designResults);
+        }
+
+
+        private static bool InExclusionList(string groupName)
+        {
+            return groupName.Contains("TANK") || groupName.Contains("COMP") || groupName.Contains("CENTRE") || groupName.Contains("LAUNDER");
+        }
+
+        #endregion
+
+        #region Previous - Successful
+
         private static void OptimizePlates(MaterialGrade materialGrade, int nThreads)
         {
 
@@ -89,12 +132,6 @@ namespace DevDrive
 
             pos.WriteResultsToFile(designResults);
         }
-
-        private static bool InExclusionList(string groupName)
-        {
-            return groupName.Contains("TANK") || groupName.Contains("COMP") || groupName.Contains("CENTRE") || groupName.Contains("LAUNDER");
-        }
-
 
         #endregion
 

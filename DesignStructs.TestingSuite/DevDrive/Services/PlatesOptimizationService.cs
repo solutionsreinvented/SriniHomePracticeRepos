@@ -12,6 +12,7 @@ using ReInvented.DataAccess.Services;
 using ReInvented.Domain.Optimization.Models;
 using ReInvented.StaadPro.Interactivity.Entities;
 using ReInvented.StaadPro.Interactivity.Extensions;
+using ReInvented.StaadPro.Interactivity.Interfaces;
 using ReInvented.StaadPro.Interactivity.Models;
 
 namespace DevDrive.Services
@@ -25,6 +26,8 @@ namespace DevDrive.Services
             Wrapper = wrapper;
             Geometry = wrapper.Geometry as OSGeometryUI;
             Property = wrapper.Property as OSPropertyUI;
+            Load = wrapper.Load as OSLoadUI;
+            Output = wrapper.Output as OSOutputUI;
             Criteria = optimizationCriteria;
             OutputFiles = new OutputFiles(wrapper.StaadInstance.GetStaadFileFullPath());
         }
@@ -37,14 +40,39 @@ namespace DevDrive.Services
         public OpenStaadWrapper Wrapper { get; private set; }
         public OSGeometryUI Geometry { get; private set; }
         public OSPropertyUI Property { get; private set; }
+        public OSLoadUI Load { get; private set; }
+        public OSOutputUI Output { get; private set; }
         public PlateOptimizationCriteria Criteria { get; set; }
         public OutputFiles OutputFiles { get; private set; }
+
+        public HashSet<ILoadCase> LoadCases { get; private set; }
+
 
         #endregion
 
         #region Public Functions
 
-        public PlateGroupDesignResult OptimizePlateGroup(string groupName, IEnumerable<LoadCase> loadCases)
+        public List<PlateGroupDesignResult> OptimizePlateGroups(IEnumerable<string> groupNames, IEnumerable<LoadCase> loadCases)
+        {
+            ConcurrentBag<PlateGroupDesignResult> groupDesignResults = new ConcurrentBag<PlateGroupDesignResult>();
+
+            groupNames.AsParallel().WithDegreeOfParallelism(Criteria.ThreadCount).ForAll(gn =>
+            {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
+                PlateGroupDesignResult designResult = OptimizePlateGroup(gn, loadCases); ///OptimizePlateGroup(gn, Criteria.MinimumThickness, Criteria.CorrosionAllowance, loadCases, Criteria.AllowedPercentPlatesExceedance);
+
+                stopwatch.Stop();
+                Console.WriteLine($"Plate group {gn} optimization is processed in {TimeSpan.FromMilliseconds(stopwatch.ElapsedMilliseconds)}");
+
+                groupDesignResults.Add(designResult);
+            });
+
+            return groupDesignResults.ToList();
+        }
+
+        public PlateGroupDesignResult OptimizePlateGroup(string groupName, IEnumerable<ILoadCase> loadCases)
         {
             IEnumerable<Plate> plates = Geometry.GetEntitiesInGroup<Plate>(groupName, 1);
             double currentThickness = Property.GetPlateThickness(plates.First().Id).A * 1000;
@@ -70,28 +98,6 @@ namespace DevDrive.Services
             return designResult;
         }
 
-        public List<PlateGroupDesignResult> OptimizePlateGroups(IEnumerable<string> groupNames, IEnumerable<LoadCase> loadCases)
-        {
-            ConcurrentBag<PlateGroupDesignResult> groupDesignResults = new ConcurrentBag<PlateGroupDesignResult>();
-
-            groupNames.AsParallel().WithDegreeOfParallelism(Criteria.ThreadCount).ForAll(gn =>
-            {
-                Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Start();
-
-                PlateGroupDesignResult designResult = OptimizePlateGroup(gn, loadCases); ///OptimizePlateGroup(gn, Criteria.MinimumThickness, Criteria.CorrosionAllowance, loadCases, Criteria.AllowedPercentPlatesExceedance);
-
-                stopwatch.Stop();
-                Console.WriteLine($"Plate group {gn} optimization is processed in {TimeSpan.FromMilliseconds(stopwatch.ElapsedMilliseconds)}");
-
-                groupDesignResults.Add(designResult);
-            });
-
-            return groupDesignResults.ToList();
-        }
-
-        #endregion
-
         public void WriteResultsToFile(List<PlateGroupDesignResult> designResults)
         {
             JsonDataSerializer<List<PlateGroupDesignResult>> serializer = new JsonDataSerializer<List<PlateGroupDesignResult>>();
@@ -99,6 +105,8 @@ namespace DevDrive.Services
 
             File.WriteAllText(OutputFiles.JsonOutputFileFullPath, serialized);
         }
+
+        #endregion
 
     }
 }
