@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axiom.Financials", "Axiom.F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Continuum.EquivalentSectionsFinder", "ReInvented.EquivalentSectionsFinder\Continuum.EquivalentSectionsFinder.csproj", "{66D27380-A967-4B3C-A54A-2AE311DC32F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.Reporting.ExcelInterop", "ReInvented.Reporting.ExcelInterop\ReInvented.Reporting.ExcelInterop.csproj", "{C7389681-D463-4ACD-BCF3-78765E3FF70C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.Domain.Optimization", "ReInvented.Domain.Optimization\ReInvented.Domain.Optimization.csproj", "{19F42E79-A6E8-4685-8C5D-54D36AA32D10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,10 +89,10 @@ Global
 		{66D27380-A967-4B3C-A54A-2AE311DC32F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66D27380-A967-4B3C-A54A-2AE311DC32F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66D27380-A967-4B3C-A54A-2AE311DC32F5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C7389681-D463-4ACD-BCF3-78765E3FF70C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C7389681-D463-4ACD-BCF3-78765E3FF70C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C7389681-D463-4ACD-BCF3-78765E3FF70C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C7389681-D463-4ACD-BCF3-78765E3FF70C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19F42E79-A6E8-4685-8C5D-54D36AA32D10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19F42E79-A6E8-4685-8C5D-54D36AA32D10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19F42E79-A6E8-4685-8C5D-54D36AA32D10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19F42E79-A6E8-4685-8C5D-54D36AA32D10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,7 +6,7 @@ using System;
 
 namespace ActivityTracker.Domain.Base
 {
-    public class Measure : ErrorsEnabledPropertyStore
+    public class Measure : ValidatablePropertyStore
     {
         public Measure()
         {

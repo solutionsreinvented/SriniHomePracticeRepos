@@ -163,7 +163,6 @@
     <Compile Include="Models\WoodArmer.cs" />
     <Compile Include="Services\ApplicationServices.cs" />
     <Compile Include="Services\PlatesOptimizationService.cs" />
-    <Compile Include="StaadExtensions\TestExtensions.cs" />
     <Compile Include="VideoPlayer.xaml.cs">
       <DependentUpon>VideoPlayer.xaml</DependentUpon>
     </Compile>
@@ -228,6 +227,12 @@
   <ItemGroup>
     <Folder Include="Controls\" />
     <Folder Include="ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReInvented.Domain.Optimization\ReInvented.Domain.Optimization.csproj">
+      <Project>{19f42e79-a6e8-4685-8c5d-54d36aa32d10}</Project>
+      <Name>ReInvented.Domain.Optimization</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Web.WebView2.1.0.2277.86\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.2277.86\build\Microsoft.Web.WebView2.targets')" />
