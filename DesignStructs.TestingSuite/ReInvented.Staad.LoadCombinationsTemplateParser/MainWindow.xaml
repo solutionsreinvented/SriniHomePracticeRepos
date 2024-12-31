@@ -1,0 +1,41 @@
+﻿<Window
+    x:Class="ReInvented.Staad.LoadCombinationsTemplateParser.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:ReInvented.StaadPro.Interactivity.Controls;assembly=ReInvented.StaadPro.Interactivity"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    BorderThickness="0"
+    MouseDown="OnMouseDown"
+    ResizeMode="NoResize"
+    SizeToContent="WidthAndHeight"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Border
+        BorderBrush="Gray"
+        BorderThickness="0.6"
+        CornerRadius="3">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid Height="32">
+                <TextBlock
+                    Grid.Row="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Text="Staad Editor to Load Combinations Template Converter" />
+                <Button
+                    Margin="0,0,5,0"
+                    Padding="5,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Click="OnClose"
+                    Content="x" />
+            </Grid>
+            <controls:LoadCombinationsDefinitionParserControl Grid.Row="1" Margin="10,20" />
+        </Grid>
+    </Border>
+</Window>

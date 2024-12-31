@@ -24,12 +24,12 @@ namespace DevDrive.Services
         public PlatesOptimizationService(OpenStaadWrapper wrapper, PlateOptimizationCriteria optimizationCriteria)
         {
             Wrapper = wrapper;
-            Geometry = wrapper.Geometry as OSGeometryUI;
-            Property = wrapper.Property as OSPropertyUI;
-            Load = wrapper.Load as OSLoadUI;
-            Output = wrapper.Output as OSOutputUI;
+            Geometry = wrapper.Geometry;
+            Property = wrapper.Property;
+            Load = wrapper.Load;
+            Output = wrapper.Output;
             Criteria = optimizationCriteria;
-            OutputFiles = new OutputFiles(wrapper.StaadInstance.GetStaadFileFullPath());
+            OutputFiles = new OutputFiles(wrapper.OpenStaad.GetStaadFileFullPath());
         }
 
         #endregion
@@ -44,35 +44,42 @@ namespace DevDrive.Services
         public OSOutputUI Output { get; private set; }
         public PlateOptimizationCriteria Criteria { get; set; }
         public OutputFiles OutputFiles { get; private set; }
-
         public HashSet<ILoadCase> LoadCases { get; private set; }
-
 
         #endregion
 
         #region Public Functions
 
-        public List<PlateGroupDesignResult> OptimizePlateGroups(IEnumerable<string> groupNames, IEnumerable<LoadCase> loadCases)
+        public HashSet<PlateGroupDesignResult> OptimizeAll(IEnumerable<ILoadCase> loadCases)
+        {
+            IEnumerable<Plate> allPlates = Geometry.GetAllEntities<Plate>(Criteria.ThreadCount);
+            HashSet<LoadCase> plc = Load.GetAllPrimaryLoadCases();
+
+            IEnumerable<string> groupNames = Geometry.GetEntityGroups<Plate>(Criteria.ThreadCount)
+                                                     .Where(eg => eg.Entities.Count() > 0)
+                                                     .OrderByDescending(eg => Plate.MaxYCoordinate(eg.Entities.OrderByDescending(e => Plate.MaxYCoordinate(e)).First()))
+                                                     .Where(eg => !InExclusionList(eg.GroupName))
+                                                     .Select(eg => eg.GroupName).ToHashSet();
+
+            HashSet<PlateGroupDesignResult> designResults = OptimizeGroups(groupNames, loadCases);
+
+            return designResults;
+        }
+
+        public HashSet<PlateGroupDesignResult> OptimizeGroups(IEnumerable<string> groupNames, IEnumerable<ILoadCase> loadCases)
         {
             ConcurrentBag<PlateGroupDesignResult> groupDesignResults = new ConcurrentBag<PlateGroupDesignResult>();
 
             groupNames.AsParallel().WithDegreeOfParallelism(Criteria.ThreadCount).ForAll(gn =>
             {
-                Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Start();
-
-                PlateGroupDesignResult designResult = OptimizePlateGroup(gn, loadCases); ///OptimizePlateGroup(gn, Criteria.MinimumThickness, Criteria.CorrosionAllowance, loadCases, Criteria.AllowedPercentPlatesExceedance);
-
-                stopwatch.Stop();
-                Console.WriteLine($"Plate group {gn} optimization is processed in {TimeSpan.FromMilliseconds(stopwatch.ElapsedMilliseconds)}");
-
+                PlateGroupDesignResult designResult = OptimizeGroup(gn, loadCases);
                 groupDesignResults.Add(designResult);
             });
 
-            return groupDesignResults.ToList();
+            return groupDesignResults.ToHashSet();
         }
 
-        public PlateGroupDesignResult OptimizePlateGroup(string groupName, IEnumerable<ILoadCase> loadCases)
+        public PlateGroupDesignResult OptimizeGroup(string groupName, IEnumerable<ILoadCase> loadCases)
         {
             IEnumerable<Plate> plates = Geometry.GetEntitiesInGroup<Plate>(groupName, 1);
             double currentThickness = Property.GetPlateThickness(plates.First().Id).A * 1000;
@@ -98,15 +105,33 @@ namespace DevDrive.Services
             return designResult;
         }
 
-        public void WriteResultsToFile(List<PlateGroupDesignResult> designResults)
+        public void WriteResultsToFile(HashSet<PlateGroupDesignResult> designResults)
         {
-            JsonDataSerializer<List<PlateGroupDesignResult>> serializer = new JsonDataSerializer<List<PlateGroupDesignResult>>();
-            string serialized = "const content = " + serializer.Serialize(designResults, JsonSerializerSettingsProvider.Minified);
-
-            File.WriteAllText(OutputFiles.JsonOutputFileFullPath, serialized);
+            WriteResultsToFile(designResults, OutputFiles.JsonOutputFileFullPath);
         }
 
         #endregion
 
+        #region Public Static Functions
+
+        public static void WriteResultsToFile(HashSet<PlateGroupDesignResult> designResults, string outputFileFullPath)
+        {
+            JsonDataSerializer<HashSet<PlateGroupDesignResult>> serializer = new JsonDataSerializer<HashSet<PlateGroupDesignResult>>();
+            string serialized = "const content = " + serializer.Serialize(designResults, JsonSerializerSettingsProvider.Minified);
+
+            File.WriteAllText(outputFileFullPath, serialized);
+        }
+
+        #endregion
+
+        #region Private Helpers
+
+        private bool InExclusionList(string groupName)
+        {
+            return Criteria.ExcludedGroupNames.Any(eg => groupName.Contains(eg));
+            /* groupName.Contains("TANK") || groupName.Contains("COMP") || groupName.Contains("CENTRE") || groupName.Contains("LAUNDER"); */
+        }
+
+        #endregion
     }
 }

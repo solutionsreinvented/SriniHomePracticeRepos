@@ -13,14 +13,12 @@ namespace DesignStructs.FluentValidationExercise.Extensions
 {
     public static class OSGeometryExtensionsAsync
     {
-        public static async Task<OSGeometryUI> CreateMultipleNodesAsync(this OSGeometryUI geometry, HashSet<Node> nodes)
+        public static async Task<OSGeometryUI> CreateMultipleNodesAsync(this OSGeometryUI geometry, HashSet<Node> nodes, int maxNodesPerBatch = 20000)
         {
-            double maxNodesPerBatch = 20000.0;
-
             int nTasks = (nodes.Count() / maxNodesPerBatch).Ceiling(1);
             for (int i = 0; i < nTasks; i++)
             {
-                IEnumerable<Node> taskNodes = nodes.Skip(i * 20000).Take(20000);
+                IEnumerable<Node> taskNodes = nodes.Skip(i * maxNodesPerBatch).Take(maxNodesPerBatch);
                 await Task.Run(() => CreateMultipleNodes(geometry, taskNodes.ToHashSet()));
             }
 

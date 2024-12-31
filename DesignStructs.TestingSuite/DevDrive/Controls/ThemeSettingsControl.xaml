@@ -1,0 +1,125 @@
+﻿<UserControl
+    x:Class="DevDrive.Controls.ThemeSettingsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type xctk:ColorPicker}">
+            <Setter Property="Width" Value="24" />
+            <Setter Property="Height" Value="24" />
+            <Setter Property="ShowDropDownButton" Value="False" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid Visibility="Hidden">
+            <StackPanel Margin="10">
+                <TextBlock
+                    Margin="0,0,0,10"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Text="Theme Settings" />
+
+                <StackPanel Margin="0,5" Orientation="Horizontal">
+                    <TextBlock
+                        Width="200"
+                        VerticalAlignment="Center"
+                        Text="Foreground color" />
+                    <xctk:ColorPicker SelectedColor="{Binding StaticForegroundBrush, Mode=TwoWay}" />
+                </StackPanel>
+                <StackPanel Margin="0,5" Orientation="Horizontal">
+                    <TextBlock
+                        Width="200"
+                        VerticalAlignment="Center"
+                        Text="Mouseover foreground color" />
+                    <xctk:ColorPicker SelectedColor="{Binding MouseOverForegroundBrush, Mode=TwoWay}" />
+                </StackPanel>
+                <StackPanel Margin="0,5" Orientation="Horizontal">
+                    <TextBlock
+                        Width="200"
+                        VerticalAlignment="Center"
+                        Text="Pressed foreground color" />
+                    <xctk:ColorPicker SelectedColor="{Binding PressedForegroundBrush, Mode=TwoWay}" />
+                </StackPanel>
+
+
+                <!--  Buttons  -->
+                <StackPanel
+                    Margin="0,20"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Button
+                        Margin="5,0"
+                        Command="{Binding ApplyCommand}"
+                        Content="Apply" />
+                    <Button
+                        Margin="5,0"
+                        Command="{Binding ResetCommand}"
+                        Content="Reset to Default" />
+                </StackPanel>
+            </StackPanel>
+
+
+
+            <xctk:ColorPicker SelectedColor="{Binding DisabledForegroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding DefaultedControlBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding DefaultedControlBorderBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding StaticBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding MouseOverBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding PressedBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding DisabledBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding StaticBorderBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding MouseOverBorderBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding PressedBorderBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding DisabledBorderBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding StaticGlyphBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding MouseOverGlyphBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding PressedGlyphBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding DisabledGlyphBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding StaticEditableBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding MouseOverEditableBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding PressedEditableBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding DisabledEditableBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding StaticEditableBorderBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding MouseOverEditableBorderBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding PressedEditableBorderBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding DisabledEditableBorderBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding StaticEditableButtonBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding DisabledEditableButtonBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding StaticEditableButtonBorderBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding MouseOverEditableButtonBorderBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding PressedEditableButtonBorderBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding DisabledEditableButtonBorderBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding SelectedItemActiveBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding SelectedItemInactiveBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding SelectedItemActiveBorderBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding SelectedItemInactiveBorderBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding StaticThumbBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding MouseOverThumbBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding PressedThumbBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding MenuStaticForegroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding MenuDisabledForegroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding MenuItemSelectedBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding MenuItemSelectedBorderBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding MenuItemHighlightBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding MenuItemHighlightDisabledBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding MenuItemHighlightBorderBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding MenuItemHighlightDisabledBorderBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding CalendarDayTodayBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding CalendarDaySelectedBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding CalendarDayHighlightBackgroundBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding StaticBackgroundGradientBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding MouseOverBackgroundGradientBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding PressedBackgroundGradientBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding MouseOverEditableButtonBackgroundGradientBrush}" />
+            <xctk:ColorPicker SelectedColor="{Binding PressedEditableButtonBackgroundGradientBrush}" />
+        </Grid>
+
+    </Grid>
+</UserControl>

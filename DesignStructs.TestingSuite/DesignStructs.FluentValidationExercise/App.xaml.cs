@@ -66,7 +66,7 @@ namespace ReInvented.FluentValidationExercise
                 new Beam(3, nodes[2], nodes[3])
             };
 
-            geometry.CreateMultipleNodes(nodes.ToHashSet());
+            //geometry.CreateMultipleNodes(nodes.ToHashSet());
 
             var (IdArray, IncidenceArray) = Transform(beams);
 
