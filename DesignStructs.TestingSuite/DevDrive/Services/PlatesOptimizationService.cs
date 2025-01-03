@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -10,10 +9,10 @@ using OpenSTAADUI;
 using ReInvented.DataAccess;
 using ReInvented.DataAccess.Services;
 using ReInvented.Domain.Optimization.Models;
-using ReInvented.StaadPro.Interactivity.Entities;
-using ReInvented.StaadPro.Interactivity.Extensions;
-using ReInvented.StaadPro.Interactivity.Interfaces;
-using ReInvented.StaadPro.Interactivity.Models;
+using ReInvented.StaadPro.Interop.Entities;
+using ReInvented.StaadPro.Interop.Extensions;
+using ReInvented.StaadPro.Interop.Interfaces;
+using ReInvented.StaadPro.Interop.Models;
 
 namespace DevDrive.Services
 {

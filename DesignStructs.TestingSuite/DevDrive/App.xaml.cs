@@ -6,7 +6,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
 
+using DevDrive.Extensions;
 using DevDrive.LogWorks;
+using DevDrive.Models;
 using DevDrive.Services;
 
 using Microsoft.Extensions.Logging;
@@ -17,10 +19,10 @@ using ReInvented.Domain.Optimization.Models;
 using ReInvented.Sections.Domain.Models;
 using ReInvented.Sections.Domain.Repositories;
 using ReInvented.Shared.Interfaces;
-using ReInvented.StaadPro.Interactivity.Entities;
-using ReInvented.StaadPro.Interactivity.Enums;
-using ReInvented.StaadPro.Interactivity.Extensions;
-using ReInvented.StaadPro.Interactivity.Models;
+using ReInvented.StaadPro.Interop.Entities;
+using ReInvented.StaadPro.Interop.Enums;
+using ReInvented.StaadPro.Interop.Extensions;
+using ReInvented.StaadPro.Interop.Models;
 
 namespace DevDrive
 {
@@ -31,10 +33,18 @@ namespace DevDrive
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            string fullPath = @"C:\Users\masanams\OneDrive - TAKRAF\Desktop\Demo\Steady State\03. STAAD\01. Working\D46.0H3.00S09.00OC1.129SC1.247IMP0.155CON0.0053MOT1033.STD";
+            string fullPath = @"C:\Users\masanams\OneDrive - TAKRAF\Desktop\Demo\46m\03. STAAD\01. Working\D46.0H3.00S09.00OC1.129SC1.247IMP0.155CON0.0053MOT1000.std";
             StaadModel model = new StaadModel(fullPath);
             OpenStaadWrapper wrapper = model.OpenStaadWrapper;
-            Marshal.ReleaseComObject(wrapper.Design);
+            OSPropertyUI property = wrapper.Property;
+            OSGeometryUI geometry = wrapper.Geometry;
+            HashSet<Plate> allPlates = geometry.GetAllEntities<Plate>(10);
+            int[] pProperties = property.GetThicknessPropertyList();
+
+            HashSet<PlateMtoRow> pMtoRows = property.GetAllPlateMtoRows(geometry);
+
+            Console.WriteLine(pMtoRows.Sum(r => r.TotalWeight));
+
 
             //IResult<string> result = ApplicationServices.StartApplication(@"C:\Program Files\Bentley\Engineering\STAAD.Pro 2023\STAAD\Bentley.Staad.exe", "STAAD.Pro", 60);
 

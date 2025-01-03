@@ -109,8 +109,8 @@
     <Reference Include="ReInvented.Shared">
       <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="ReInvented.StaadPro.Interactivity">
-      <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.StaadPro.Interactivity.dll</HintPath>
+    <Reference Include="ReInvented.StaadPro.Interop">
+      <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.StaadPro.Interop.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.ThickenerModelGenerator.UI">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.ThickenerModelGenerator.UI.exe</HintPath>
@@ -214,13 +214,16 @@
     <Compile Include="Controls\ThemeSettingsControl.xaml.cs">
       <DependentUpon>ThemeSettingsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Enums\FileCreationStatus.cs" />
+    <Compile Include="Enums\PropertyType.cs" />
+    <Compile Include="Extensions\OSPropertyExtensions.cs" />
+    <Compile Include="Interfaces\MtoTableRow.cs" />
     <Compile Include="LogWorks\ExampleService.cs" />
+    <Compile Include="Models\MtoTableRow.cs" />
     <Compile Include="Models\ProcessResult.cs" />
     <Compile Include="Models\ThemeSettings.cs" />
     <Compile Include="Services\AnimationManager.cs" />
-    <Compile Include="Services\OpenStaadWrapperHelpers.cs" />
     <Compile Include="Services\PlatesOptimizationService.cs" />
+    <Compile Include="Services\SectionPropertyValuesService.cs" />
     <Compile Include="VideoPlayer.xaml.cs">
       <DependentUpon>VideoPlayer.xaml</DependentUpon>
     </Compile>
@@ -287,7 +290,6 @@
     </COMFileReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Extensions\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>

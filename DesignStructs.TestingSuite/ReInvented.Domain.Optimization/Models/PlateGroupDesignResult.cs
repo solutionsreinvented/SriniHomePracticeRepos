@@ -1,4 +1,4 @@
-﻿using ReInvented.StaadPro.Interactivity.Models;
+﻿using ReInvented.StaadPro.Interop.Models;
 
 namespace ReInvented.Domain.Optimization.Models
 {
