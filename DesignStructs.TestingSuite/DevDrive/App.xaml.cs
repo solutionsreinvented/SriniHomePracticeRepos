@@ -23,6 +23,7 @@ using ReInvented.StaadPro.Interop.Entities;
 using ReInvented.StaadPro.Interop.Enums;
 using ReInvented.StaadPro.Interop.Extensions;
 using ReInvented.StaadPro.Interop.Models;
+using ReInvented.StaadPro.Interop.Services;
 
 namespace DevDrive
 {
@@ -33,34 +34,37 @@ namespace DevDrive
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            string fullPath = @"C:\Users\masanams\OneDrive - TAKRAF\Desktop\Demo\46m\03. STAAD\01. Working\D46.0H3.00S09.00OC1.129SC1.247IMP0.155CON0.0053MOT1000.std";
+            string fullPath = @"D:\02. Due\00. Projects\01. Pre-Order\73. GYOW - Oko West (46m)\03. STAAD\01. Working\D46.0H3.00S09.00OC1.129SC1.247IMP0.155CON0.0053MOT1000_CA.std";
             StaadModel model = new StaadModel(fullPath);
             OpenStaadWrapper wrapper = model.OpenStaadWrapper;
             OSPropertyUI property = wrapper.Property;
             OSGeometryUI geometry = wrapper.Geometry;
-            HashSet<Plate> allPlates = geometry.GetAllEntities<Plate>(10);
-            int[] pProperties = property.GetThicknessPropertyList();
 
-            HashSet<PlateMtoRow> pMtoRows = property.GetAllPlateMtoRows(geometry);
+
+            MaterialsRepository matRepo = MaterialsRepository.Instance;
+
+            HashSet<PlateMtoRow> pMtoRows = property.GetAllPlateMtoRows(geometry, matRepo);
+            HashSet<SectionMtoRow> sMtoRows = property.GetAllSectionMtoRows(geometry, matRepo);
 
             Console.WriteLine(pMtoRows.Sum(r => r.TotalWeight));
+            Console.WriteLine(sMtoRows.Sum(r => r.TotalWeight));
 
 
-            //IResult<string> result = ApplicationServices.StartApplication(@"C:\Program Files\Bentley\Engineering\STAAD.Pro 2023\STAAD\Bentley.Staad.exe", "STAAD.Pro", 60);
+            ////IResult<string> result = ApplicationServices.StartApplication(@"C:\Program Files\Bentley\Engineering\STAAD.Pro 2023\STAAD\Bentley.Staad.exe", "STAAD.Pro", 60);
 
-            MainWindow = new MainWindow();
-            MainWindow.Show();
+            //MainWindow = new MainWindow();
+            //MainWindow.Show();
 
-            //string inputFile = @"D:\02. Due\00. Projects\01. Pre-Order\72. E24080555 (90m JSW)\07. References\Load Combinations\IS800-2007LSD.std";
-            //HashSet<Envelop> envelops = new HashSet<Envelop>()
-            //{
-            //    new Envelop(EnvelopGroup.JointMass, 100, 100),
-            //    new Envelop(EnvelopGroup.Strength, 101, 204),
-            //    new Envelop(EnvelopGroup.Serviceability, 1001, 1040)
-            //};
+            //string inputFile = @"D:\02. Due\00. Projects\01. Pre-Order\73. GYOW - Oko West (46m)\03. STAAD\01. Working\D46.0H3.00S09.00OC1.129SC1.247IMP0.155CON0.0053MOT1000.std";
+            ////HashSet<Envelop> envelops = new HashSet<Envelop>()
+            ////{
+            ////    new Envelop(EnvelopGroup.JointMass, 100, 100),
+            ////    new Envelop(EnvelopGroup.Strength, 101, 204),
+            ////    new Envelop(EnvelopGroup.Serviceability, 1001, 1040)
+            ////};
 
-            //var combs = LoadCombinationsDefinition.Parse(inputFile, "IS800", 2007, "HRT", "Standard", envelops);
-            //LoadCombinationsDefinition.PersistAsTemplate(combs, Path.GetDirectoryName(inputFile));
+            ////var combs = LoadCombinationsDefinition.Parse(inputFile, "IS800", 2007, "HRT", "Standard", envelops);
+            ////LoadCombinationsDefinition.PersistAsTemplate(combs, Path.GetDirectoryName(inputFile));
 
             //Stopwatch stopwatch = new Stopwatch();
             //MaterialGrade grade = MaterialsRepository.Instance
@@ -69,10 +73,10 @@ namespace DevDrive
             //                                         .Where(g => g.Designation.Contains("A36"))
             //                                         .FirstOrDefault(g => g.StaadName == "A36");
 
-            //OpenStaadWrapper wrapper = OpenStaadWrapper.GetStaadWrapper();
-            //IEnumerable<LoadCase> loadCases = (wrapper.Load as OSLoadUI).GetLoadCases(101, 200, LoadCaseType.LoadCombination);
+            //OpenStaadWrapper wrapper = OpenStaadWrapperProvider.Get(inputFile);
+            //IEnumerable<LoadCase> loadCases = wrapper.Load.GetLoadCases(101, 200, LoadCaseType.LoadCombination);
             //var criteria = new PlateOptimizationCriteria()
-            //{ MinimumThickness = 6.0, CorrosionAllowance = 2.0, MaterialGrade = grade, ThreadCount = 30, AllowedPercentPlatesExceedance = 15.0 };
+            //{ MinimumThickness = 6.0, CorrosionAllowance = 3.0, MaterialGrade = grade, ThreadCount = 10, AllowedPercentPlatesExceedance = 15.0 };
 
             //stopwatch.Start();
 

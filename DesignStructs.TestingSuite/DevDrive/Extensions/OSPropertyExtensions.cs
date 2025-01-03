@@ -88,17 +88,17 @@ namespace DevDrive.Extensions
             return (string)propertyName;
         }
 
-        public static double[] GetPlateThickness(this OSPropertyUI property, int propertyId)
+        public static double[] GetPlateThickness(this OSPropertyUI property, int plateId)
         {
             object plateThickness = new double[4];
-            property.GetPlateThickness(propertyId, ref plateThickness);
+            property.GetPlateThickness(plateId, ref plateThickness);
 
             return (double[])plateThickness;
         }
 
-        public static double GetAveragePlateThickness(this OSPropertyUI property, int propertyId)
+        public static double GetAveragePlateThickness(this OSPropertyUI property, int plateId)
         {
-            return Math.Round(GetPlateThickness(property, propertyId).Average(), 5);
+            return Math.Round(property.GetPlateThickness(plateId).Average(), 5);
         }
 
         public static double[] GetSectionPropertyValues(this OSPropertyUI property, int propertyId)
@@ -116,7 +116,7 @@ namespace DevDrive.Extensions
             return property.GetSectionPropertyValues(propertyId)[0];
         }
 
-        public static PlateMtoRow GetPlateMtoRow(this OSPropertyUI property, HashSet<Plate> allPlates, int propertyId)
+        public static PlateMtoRow GetPlateMtoRow(this OSPropertyUI property, HashSet<Plate> allPlates, MaterialsRepository materialsRepository, int propertyId)
         {
             List<Plate> plates = property.GetThicknessPropertyAssignedPlates(allPlates, propertyId).ToList();
 
@@ -124,8 +124,8 @@ namespace DevDrive.Extensions
             {
                 PlateMtoRow mtoRow = new PlateMtoRow(propertyId)
                 {
-                    Thickness = GetAveragePlateThickness(property, propertyId),
-                    MaterialGrade = MaterialsRepository.Instance.GetMaterialGradeFrom(property.GetPlateMaterialName(plates.FirstOrDefault().Id))
+                    Thickness = property.GetAveragePlateThickness(plates.FirstOrDefault().Id),
+                    MaterialGrade = materialsRepository.GetMaterialGradeFrom(property.GetPlateMaterialName(plates.FirstOrDefault().Id))
                 };
 
                 plates.ForEach(p => mtoRow.Plates.Add(p));
@@ -137,7 +137,7 @@ namespace DevDrive.Extensions
             return null;
         }
 
-        public static SectionMtoRow GetSectionMtoRow(this OSPropertyUI property, HashSet<Beam> allBeams, int propertyId)
+        public static SectionMtoRow GetSectionMtoRow(this OSPropertyUI property, HashSet<Beam> allBeams, MaterialsRepository materialsRepository, int propertyId)
         {
             HashSet<Beam> beams = property.GetSectionPropertyAssignedBeams(allBeams, propertyId);
 
@@ -145,7 +145,7 @@ namespace DevDrive.Extensions
             {
                 SectionMtoRow mtoRow = new SectionMtoRow(propertyId)
                 {
-                    MaterialGrade = MaterialsRepository.Instance.GetMaterialGradeFrom(property.GetBeamMaterialName(beams.FirstOrDefault().Id)),
+                    MaterialGrade = materialsRepository.GetMaterialGradeFrom(property.GetBeamMaterialName(beams.FirstOrDefault().Id)),
                     PropertyName = property.GetSectionPropertyName(propertyId),
                     ///TODO: Retrieval of SectionalArea may depend on the property type. Implementation may need to be changed.
                     SectionalArea = property.GetSectionalArea(propertyId)
@@ -160,13 +160,13 @@ namespace DevDrive.Extensions
             return null;
         }
 
-        public static HashSet<SectionMtoRow> GetAllSectionMtoRows(this OSPropertyUI property, OSGeometryUI geometry)
+        public static HashSet<SectionMtoRow> GetAllSectionMtoRows(this OSPropertyUI property, OSGeometryUI geometry, MaterialsRepository materialsRepository)
         {
             HashSet<Beam> allBeams = geometry.GetAllEntities<Beam>(1);
-            return property.GetAllSectionMtoRows(allBeams);
+            return property.GetAllSectionMtoRows(allBeams, materialsRepository);
         }
 
-        public static HashSet<SectionMtoRow> GetAllSectionMtoRows(this OSPropertyUI property, HashSet<Beam> allBeams)
+        public static HashSet<SectionMtoRow> GetAllSectionMtoRows(this OSPropertyUI property, HashSet<Beam> allBeams, MaterialsRepository materialsRepository)
         {
             int[] pPropIds = property.GetSectionPropertyList();
 
@@ -176,7 +176,7 @@ namespace DevDrive.Extensions
 
                 foreach (int pPropId in pPropIds)
                 {
-                    _ = sectionMtoRows.Add(property.GetSectionMtoRow(allBeams, pPropId));
+                    _ = sectionMtoRows.Add(property.GetSectionMtoRow(allBeams, materialsRepository, pPropId));
                 }
 
                 return sectionMtoRows.ToHashSet();
@@ -185,13 +185,13 @@ namespace DevDrive.Extensions
             return null;
         }
 
-        public static HashSet<PlateMtoRow> GetAllPlateMtoRows(this OSPropertyUI property, OSGeometryUI geometry)
+        public static HashSet<PlateMtoRow> GetAllPlateMtoRows(this OSPropertyUI property, OSGeometryUI geometry, MaterialsRepository materialsRepository)
         {
             HashSet<Plate> allPlates = geometry.GetAllEntities<Plate>(1);
-            return property.GetAllPlateMtoRows(allPlates);
+            return property.GetAllPlateMtoRows(allPlates, materialsRepository);
         }
 
-        public static HashSet<PlateMtoRow> GetAllPlateMtoRows(this OSPropertyUI property, HashSet<Plate> allPlates)
+        public static HashSet<PlateMtoRow> GetAllPlateMtoRows(this OSPropertyUI property, HashSet<Plate> allPlates, MaterialsRepository materialsRepository)
         {
             int[] pPropIds = property.GetThicknessPropertyList();
 
@@ -201,7 +201,7 @@ namespace DevDrive.Extensions
 
                 foreach (int pPropId in pPropIds)
                 {
-                    _ = plateMtoRows.Add(property.GetPlateMtoRow(allPlates, pPropId));
+                    _ = plateMtoRows.Add(property.GetPlateMtoRow(allPlates, materialsRepository, pPropId));
                 }
 
                 return plateMtoRows.ToHashSet();
