@@ -40,11 +40,32 @@ namespace DevDrive
             OSPropertyUI property = wrapper.Property;
             OSGeometryUI geometry = wrapper.Geometry;
 
+            /// 1. Check if any beam/plate is not assigned a group or a property. Then do not proceed.
+
+            var allPlateEntityGroups = geometry.GetEntityGroups<Plate>(10);
 
             MaterialsRepository matRepo = MaterialsRepository.Instance;
 
             HashSet<PlateMtoRow> pMtoRows = property.GetAllPlateMtoRows(geometry, matRepo);
             HashSet<SectionMtoRow> sMtoRows = property.GetAllSectionMtoRows(geometry, matRepo);
+
+            Dictionary<string, Beam> groupWiseBeams = new Dictionary<string, Beam>();
+
+            foreach (Beam beam in sMtoRows.SelectMany(s => s.Beams))
+            {
+                int propertyId = property.GetBeamSectionPropertyRefNo(beam.Id);
+
+                if (!propertiesTable.TryGetValue(propertyId, out SectionMtoRow row))
+                {
+                    row = new SectionMtoRow();
+                    propertiesTable.Add(propertyId, row);
+                }
+
+                _ = row.Beams.Add(beam);
+            }
+
+
+
 
             Console.WriteLine(pMtoRows.Sum(r => r.TotalWeight));
             Console.WriteLine(sMtoRows.Sum(r => r.TotalWeight));
