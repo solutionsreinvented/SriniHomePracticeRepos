@@ -13,6 +13,7 @@ using ReInvented.DataAccess.NameProviders;
 using System.Linq;
 using System.Text;
 using ReInvented.Shared.Services;
+using KellermanSoftware.CompareNetObjects;
 
 namespace SPro2023ConsoleApp
 {
@@ -41,12 +42,12 @@ namespace SPro2023ConsoleApp
 
             #region Static Functions
 
-            public static List<Person> GetFamily()
+            public static List<Person> GetFamilyMembers()
             {
                 return new List<Person>()
                 {
-                    new Person("Jamalaiah Masanam", new DateTime(1956, 06, 17)),
-                    new Person("Jamalamma Masanam", new DateTime(1966, 03, 11)),
+                    new Person("Jamalaiah Masanam", new DateTime(1956, 03, 17)),
+                    new Person("Jamalamma Masanam", new DateTime(1966, 06, 11)),
                     new Person("Srinivasa Rao Masanam", new DateTime(1985, 08, 17)),
                     new Person("Lakshmi Bhavani Masanam", new DateTime(1991, 02, 08)),
                     new Person("Vihan Masanam", new DateTime(2015, 06, 15)),
@@ -65,14 +66,10 @@ namespace SPro2023ConsoleApp
 
         static void Main(string[] args)
         {
-            var watcher = new FileSystemWatcher(DirectoryPaths.Recent) { EnableRaisingEvents = true };
+            var family = Person.GetFamilyMembers();
 
-            var uid = UniqueIdentifierGenerator.GenerateUniqueId(watcher, 2);
+            var uid = UniqueIdentifierGenerator.GenerateUniqueId(family, 2);
             Console.WriteLine(uid);
-
-
-            watcher.Changed -= OnContentsChanged;
-            watcher.Changed += OnContentsChanged;
 
             //var other = @"C:\Users\masanams\OneDrive - TAKRAF\Desktop";
             //var titlesName = "Titles.json";
