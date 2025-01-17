@@ -10,12 +10,53 @@ using ReInvented.StaadPro.Interactivity.Models;
 using ReInvented.Sections.Domain.Models;
 using ReInvented.DataAccess.Services;
 using ReInvented.DataAccess.NameProviders;
+using System.Linq;
+using System.Text;
+using ReInvented.Shared.Services;
 
 namespace SPro2023ConsoleApp
 {
 
     class Program
     {
+        public class Person
+        {
+            #region Parameterized Constructor
+
+            public Person(string name, DateTime birthDay)
+            {
+                Name = name;
+                BirthDay = birthDay;
+            }
+
+            #endregion
+
+            #region ReadOnly Properties
+
+            public string Name { get; private set; }
+
+            public DateTime BirthDay { get; private set; }
+
+            #endregion
+
+            #region Static Functions
+
+            public static List<Person> GetFamily()
+            {
+                return new List<Person>()
+                {
+                    new Person("Jamalaiah Masanam", new DateTime(1956, 06, 17)),
+                    new Person("Jamalamma Masanam", new DateTime(1966, 03, 11)),
+                    new Person("Srinivasa Rao Masanam", new DateTime(1985, 08, 17)),
+                    new Person("Lakshmi Bhavani Masanam", new DateTime(1991, 02, 08)),
+                    new Person("Vihan Masanam", new DateTime(2015, 06, 15)),
+                    new Person("Likhita Masanam", new DateTime(2019, 03, 11))
+                };
+            }
+
+            #endregion
+        }
+
         private static void OnContentsChanged(object sender, FileSystemEventArgs e)
         {
             throw new NotImplementedException();
@@ -24,7 +65,11 @@ namespace SPro2023ConsoleApp
 
         static void Main(string[] args)
         {
-            var watcher = new FileSystemWatcher(DirectoryPaths.Root.FullName) { EnableRaisingEvents = true };
+            var watcher = new FileSystemWatcher(DirectoryPaths.Recent) { EnableRaisingEvents = true };
+
+            var uid = UniqueIdentifierGenerator.GenerateUniqueId(watcher, 2);
+            Console.WriteLine(uid);
+
 
             watcher.Changed -= OnContentsChanged;
             watcher.Changed += OnContentsChanged;

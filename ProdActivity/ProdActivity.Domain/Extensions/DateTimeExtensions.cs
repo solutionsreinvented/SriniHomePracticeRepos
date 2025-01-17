@@ -20,8 +20,8 @@ namespace ProdActivity.Domain.Extensions
         /// <returns>A <see cref="DateTime"/> object representing the next business/working day.</returns>
         public static DateTime NextBusinessDay(this DateTime fromDate)
         {
-            int daysToAdd = fromDate.DayOfWeek == DayOfWeek.Friday ? 3 :
-                            fromDate.DayOfWeek == DayOfWeek.Saturday ? 2 : 1;
+            int daysToAdd =
+                fromDate.DayOfWeek == DayOfWeek.Friday ? 3 : fromDate.DayOfWeek == DayOfWeek.Saturday ? 2 : 1;
 
             return fromDate.AddDays(daysToAdd);
         }
@@ -112,7 +112,7 @@ namespace ProdActivity.Domain.Extensions
                 }
                 else
                 {
-                    nextBusinessDay = nextBusinessDay.NextBusinessDay().AddHours(fractionalHoursLeft-timeSpanRemainingOnTheGivenDate.TotalHours);
+                    nextBusinessDay = nextBusinessDay.NextBusinessDay().AddHours(fractionalHoursLeft - timeSpanRemainingOnTheGivenDate.TotalHours);
                 }
             }
             else

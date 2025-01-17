@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:enums="clr-namespace:ProdActivity.Domain.Enums;assembly=ActivityTracker.Domain"
+    xmlns:enums="clr-namespace:ProdActivity.Domain.Enums;assembly=ProdActivity.Domain"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="http://schemas.reinvented.com/shared"
     xmlns:theme="http://schemas.reinvented.com/ui/themes"

@@ -88,7 +88,7 @@
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Sections.Core\bin\Debug\ReInvented.Sections.Domain.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.Shared">
-      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.Shared\bin\Debug\ReInvented.Shared.dll</HintPath>
+      <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Shared.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.StaadPro.Interactivity">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.StaadPro.Interactivity\bin\Debug\ReInvented.StaadPro.Interactivity.dll</HintPath>

@@ -1,10 +1,10 @@
 {
   "$id": "1",
-  "$type": "ActivityTracker.Domain.Models.ProjectMaster, ActivityTracker.Domain",
+  "$type": "ProdActivity.Domain.Models.ProjectMaster, ProdActivity.Domain",
   "Projects": [
     {
       "$id": "2",
-      "$type": "ActivityTracker.Domain.Models.Development, ActivityTracker.Domain",
+      "$type": "ProdActivity.Domain.Models.Development, ProdActivity.Domain",
       "Type": 2,
       "Code": "DTIPR 20.13",
       "Name": "Thickener Design Automation",
@@ -12,7 +12,7 @@
     },
     {
       "$id": "3",
-      "$type": "ActivityTracker.Domain.Models.Development, ActivityTracker.Domain",
+      "$type": "ProdActivity.Domain.Models.Development, ProdActivity.Domain",
       "Type": 2,
       "Code": "DTIPR 20.15",
       "Name": "Connection Templates Library - Russian Codes",
@@ -20,18 +20,18 @@
     },
     {
       "$id": "4",
-      "$type": "ActivityTracker.Domain.Models.Order, ActivityTracker.Domain",
+      "$type": "ProdActivity.Domain.Models.Order, ProdActivity.Domain",
       "Type": 1,
       "Code": "23-4104",
       "Name": "NMDC 25m 30m and 32m Thickeners",
       "Activities": [
         {
           "$id": "5",
-          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "$type": "ProdActivity.Domain.Models.DesignActivity, ProdActivity.Domain",
           "Discipline": 11,
           "Category": {
             "$id": "6",
-            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "$type": "ProdActivity.Domain.Models.Category, ProdActivity.Domain",
             "Name": "Structural",
             "SubCategories": [
               "Staad Modeling",
@@ -62,11 +62,11 @@
         },
         {
           "$id": "7",
-          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "$type": "ProdActivity.Domain.Models.DesignActivity, ProdActivity.Domain",
           "Discipline": 11,
           "Category": {
             "$id": "8",
-            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "$type": "ProdActivity.Domain.Models.Category, ProdActivity.Domain",
             "Name": "Structural",
             "SubCategories": [
               "Staad Modeling",
@@ -97,11 +97,11 @@
         },
         {
           "$id": "9",
-          "$type": "ActivityTracker.Domain.Models.DesignActivity, ActivityTracker.Domain",
+          "$type": "ProdActivity.Domain.Models.DesignActivity, ProdActivity.Domain",
           "Discipline": 11,
           "Category": {
             "$id": "10",
-            "$type": "ActivityTracker.Domain.Models.Category, ActivityTracker.Domain",
+            "$type": "ProdActivity.Domain.Models.Category, ProdActivity.Domain",
             "Name": "Structural",
             "SubCategories": [
               "Staad Modeling",
