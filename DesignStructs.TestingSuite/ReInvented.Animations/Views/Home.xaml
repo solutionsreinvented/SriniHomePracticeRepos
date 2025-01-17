@@ -9,6 +9,7 @@
     Title="Home"
     Width="1000"
     Height="600"
+    ap:AnimationManager.LoadWidthAnimation="True"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">

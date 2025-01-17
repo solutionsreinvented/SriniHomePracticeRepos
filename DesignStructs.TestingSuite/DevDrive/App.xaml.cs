@@ -1,29 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows;
 
-using DevDrive.Extensions;
-using DevDrive.LogWorks;
-using DevDrive.Models;
-using DevDrive.Services;
-
-using Microsoft.Extensions.Logging;
-
-using OpenSTAADUI;
-
-using ReInvented.Domain.Optimization.Models;
+using ReInvented.Domain.Reporting.Models;
+using ReInvented.Domain.Reporting.Services;
 using ReInvented.Sections.Domain.Models;
-using ReInvented.Sections.Domain.Repositories;
-using ReInvented.Shared.Interfaces;
-using ReInvented.StaadPro.Interop.Entities;
-using ReInvented.StaadPro.Interop.Enums;
-using ReInvented.StaadPro.Interop.Extensions;
 using ReInvented.StaadPro.Interop.Models;
-using ReInvented.StaadPro.Interop.Services;
 
 namespace DevDrive
 {
@@ -34,42 +17,23 @@ namespace DevDrive
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            string fullPath = @"D:\02. Due\00. Projects\01. Pre-Order\73. GYOW - Oko West (46m)\03. STAAD\01. Working\D46.0H3.00S09.00OC1.129SC1.247IMP0.155CON0.0053MOT1000_CA.std";
+            string fullPath = @"D:\02. Due\00. Projects\01. Pre-Order\73. GYOW - Oko West (46m)\03. STAAD\01. Working\D46.0H3.00S09.00OC1.129SC1.247IMP0.155CON0.0053MOT1000.std";
             StaadModel model = new StaadModel(fullPath);
             OpenStaadWrapper wrapper = model.OpenStaadWrapper;
-            OSPropertyUI property = wrapper.Property;
-            OSGeometryUI geometry = wrapper.Geometry;
 
-            /// 1. Check if any beam/plate is not assigned a group or a property. Then do not proceed.
+            Contingencies disc = new Contingencies() { BoltedFlanges = 0, Connections = 0, Plates = 0, Sections = 0 };
+            Contingencies undisc = new Contingencies() { BoltedFlanges = 0, Connections = 0, Plates = 0, Sections = 0 };
 
-            var allPlateEntityGroups = geometry.GetEntityGroups<Plate>(10);
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
 
-            MaterialsRepository matRepo = MaterialsRepository.Instance;
+            MaterialTakeOff mto = MaterialTakeOffService.Generate(wrapper, disc, undisc, 6);
 
-            HashSet<PlateMtoRow> pMtoRows = property.GetAllPlateMtoRows(geometry, matRepo);
-            HashSet<SectionMtoRow> sMtoRows = property.GetAllSectionMtoRows(geometry, matRepo);
+            watch.Stop();
+            TimeSpan time = TimeSpan.FromMilliseconds(watch.ElapsedMilliseconds);
+            Console.WriteLine($"{time}");
 
-            Dictionary<string, Beam> groupWiseBeams = new Dictionary<string, Beam>();
-
-            foreach (Beam beam in sMtoRows.SelectMany(s => s.Beams))
-            {
-                int propertyId = property.GetBeamSectionPropertyRefNo(beam.Id);
-
-                if (!propertiesTable.TryGetValue(propertyId, out SectionMtoRow row))
-                {
-                    row = new SectionMtoRow();
-                    propertiesTable.Add(propertyId, row);
-                }
-
-                _ = row.Beams.Add(beam);
-            }
-
-
-
-
-            Console.WriteLine(pMtoRows.Sum(r => r.TotalWeight));
-            Console.WriteLine(sMtoRows.Sum(r => r.TotalWeight));
-
+            mto.PropertyWiseSummary.PlatesItems.ToList().ForEach(i => Console.WriteLine(i.AssemblyGroup));
 
             ////IResult<string> result = ApplicationServices.StartApplication(@"C:\Program Files\Bentley\Engineering\STAAD.Pro 2023\STAAD\Bentley.Staad.exe", "STAAD.Pro", 60);
 

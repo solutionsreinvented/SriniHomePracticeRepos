@@ -95,7 +95,7 @@
       <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.Domain.Reporting">
-      <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Domain.Reporting.exe</HintPath>
+      <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Domain.Reporting.exe</HintPath>
     </Reference>
     <Reference Include="ReInvented.Domain.Tass">
       <HintPath>E:\SolutionsReInvented\BranchReorganization\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Domain.Tass.dll</HintPath>
@@ -215,11 +215,8 @@
       <DependentUpon>ThemeSettingsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Enums\PropertyType.cs" />
-    <Compile Include="Extensions\OSGeometryExtensions.cs" />
-    <Compile Include="Extensions\OSPropertyExtensions.cs" />
-    <Compile Include="Interfaces\MtoTableRow.cs" />
+    <Compile Include="Interfaces\ISectionProperties.cs" />
     <Compile Include="LogWorks\ExampleService.cs" />
-    <Compile Include="Models\MtoTableRow.cs" />
     <Compile Include="Models\ProcessResult.cs" />
     <Compile Include="Models\ThemeSettings.cs" />
     <Compile Include="Services\AnimationManager.cs" />
@@ -291,6 +288,7 @@
     </COMFileReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Extensions\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>

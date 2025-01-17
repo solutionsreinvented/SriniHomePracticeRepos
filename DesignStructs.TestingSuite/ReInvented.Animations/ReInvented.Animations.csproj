@@ -64,6 +64,7 @@
     <Compile Include="Controls\RecentItemsControl.xaml.cs">
       <DependentUpon>RecentItemsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AttachedProperties\AnimationManager.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
@@ -120,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

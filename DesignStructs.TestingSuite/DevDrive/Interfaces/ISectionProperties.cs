@@ -1,6 +1,4 @@
-﻿using ReInvented.Sections.Domain.Models;
-
-namespace DevDrive.Interfaces
+﻿namespace DevDrive.Interfaces
 {
     public interface ISectionProperties
     {
@@ -13,12 +11,5 @@ namespace DevDrive.Interfaces
         double Iy { get; set; }
         double Iz { get; set; }
     }
-    public interface IMtoTableRow
-    {
-        int PropertyId { get; }
 
-        MaterialGrade MaterialGrade { get; set; }
-
-        double TotalWeight { get; set; }
-    }
 }

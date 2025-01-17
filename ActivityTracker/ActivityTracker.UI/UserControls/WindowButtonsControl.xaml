@@ -38,7 +38,7 @@
             Background="Transparent"
             BorderThickness="0"
             Click="OnMaximizeOrRestoreButtonClick">
-            <Image Source="/Assets/Images/maximize-light.png" />
+            <Image Width="12" Source="/Assets/Images/maximize-light.png" />
         </Button>
 
         <Button
@@ -47,7 +47,7 @@
             Background="Transparent"
             BorderThickness="0"
             Click="OnCloseButtonClick">
-            <Image Source="/Assets/Images/close-light.png" />
+            <Image Width="14" Source="/Assets/Images/close-light.png" />
         </Button>
 
     </StackPanel>
