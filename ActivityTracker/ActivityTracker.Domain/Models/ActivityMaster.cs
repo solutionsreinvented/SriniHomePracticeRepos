@@ -1,8 +1,8 @@
-﻿using ActivityTracker.Domain.Stores;
+﻿using ProdActivity.Domain.Stores;
 
 using System.Collections.Generic;
 
-namespace ActivityTracker.Domain.Models
+namespace ProdActivity.Domain.Models
 {
     public class ActivityMaster : PropertyStore
     {

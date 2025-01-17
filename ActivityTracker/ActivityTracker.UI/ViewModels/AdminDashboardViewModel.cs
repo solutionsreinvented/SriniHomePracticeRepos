@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 
-using ActivityTracker.Domain.Interfaces;
-using ActivityTracker.Domain.Models;
-using ActivityTracker.Domain.Repositories;
-using ActivityTracker.UI.Base;
-using ActivityTracker.UI.Commands;
-using ActivityTracker.UI.Stores;
+using ProdActivity.Domain.Interfaces;
+using ProdActivity.Domain.Models;
+using ProdActivity.Domain.Repositories;
+using ProdActivity.UI.Base;
+using ProdActivity.UI.Commands;
+using ProdActivity.UI.Stores;
 
-namespace ActivityTracker.UI.ViewModels
+namespace ProdActivity.UI.ViewModels
 {
     public class AdminDashboardViewModel : DashboardViewModel
     {

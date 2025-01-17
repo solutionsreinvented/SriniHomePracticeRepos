@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-namespace ActivityTracker.Domain.Base
+namespace ProdActivity.Domain.Base
 {
     public class NotifyPropertyChanged : INotifyPropertyChanged
     {

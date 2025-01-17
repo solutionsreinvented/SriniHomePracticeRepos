@@ -1,4 +1,4 @@
-﻿namespace ActivityTracker.Domain.Interfaces
+﻿namespace ProdActivity.Domain.Interfaces
 {
     public interface IActivityReschedule
     {

@@ -1,4 +1,4 @@
-﻿namespace ActivityTracker.Domain.Enums
+﻿namespace ProdActivity.Domain.Enums
 {
     public enum ResourceRole
     {

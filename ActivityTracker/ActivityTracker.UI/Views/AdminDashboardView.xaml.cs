@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace ActivityTracker.UI.Views
+namespace ProdActivity.UI.Views
 {
     /// <summary>
     /// Interaction logic for AdminDashboardView.xaml

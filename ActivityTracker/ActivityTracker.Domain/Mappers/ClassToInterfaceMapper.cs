@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace ActivityTracker.Domain.Mappers
+namespace ProdActivity.Domain.Mappers
 {
     public static class ClassToInterfaceMapper<TClass, TInterface> where TClass : TInterface
     {

@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 ///using ProdActivity.Domain.Extensions;
 
-namespace ActivityTracker.UI
+namespace ProdActivity.UI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

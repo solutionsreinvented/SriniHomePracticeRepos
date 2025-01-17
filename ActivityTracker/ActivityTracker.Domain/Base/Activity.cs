@@ -4,16 +4,16 @@ using System.Linq;
 
 using Newtonsoft.Json;
 
-using ActivityTracker.Domain.Enums;
-using ActivityTracker.Domain.Extensions;
-using ActivityTracker.Domain.Interfaces;
-using ActivityTracker.Domain.Models;
-using ActivityTracker.Domain.Services;
-using ActivityTracker.Domain.Stores;
+using ProdActivity.Domain.Enums;
+using ProdActivity.Domain.Extensions;
+using ProdActivity.Domain.Interfaces;
+using ProdActivity.Domain.Models;
+using ProdActivity.Domain.Services;
+using ProdActivity.Domain.Stores;
 
 using ReInvented.Shared;
 
-namespace ActivityTracker.Domain.Base
+namespace ProdActivity.Domain.Base
 {
     public abstract class Activity : PropertyStore, IActivity
     {

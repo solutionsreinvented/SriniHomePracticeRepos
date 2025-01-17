@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Markup;
 
-namespace ActivityTracker.UI.Extensions
+namespace ProdActivity.UI.Extensions
 {
     public class EnumBindingSourceExtension : MarkupExtension
     {

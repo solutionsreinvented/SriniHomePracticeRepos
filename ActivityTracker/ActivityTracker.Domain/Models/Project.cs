@@ -1,13 +1,13 @@
 ﻿using Newtonsoft.Json;
 
-using ActivityTracker.Domain.Enums;
-using ActivityTracker.Domain.Interfaces;
-using ActivityTracker.Domain.Stores;
+using ProdActivity.Domain.Enums;
+using ProdActivity.Domain.Interfaces;
+using ProdActivity.Domain.Stores;
 
 using System.Collections.ObjectModel;
 using System;
 
-namespace ActivityTracker.Domain.Models
+namespace ProdActivity.Domain.Models
 {
     public abstract class Project : PropertyStore, IProject
     {

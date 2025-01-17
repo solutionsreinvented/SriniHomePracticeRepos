@@ -1,8 +1,8 @@
 ﻿using System;
 
-using static ActivityTracker.Domain.Enums.PerformanceRating;
+using static ProdActivity.Domain.Enums.PerformanceRating;
 
-namespace ActivityTracker.Domain.Services
+namespace ProdActivity.Domain.Services
 {
     public class PerformanceCalculationService
     {

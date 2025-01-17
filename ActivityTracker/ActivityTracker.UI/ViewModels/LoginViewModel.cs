@@ -1,11 +1,11 @@
 ﻿using System.Windows.Input;
 
-using ActivityTracker.Domain.Enums;
-using ActivityTracker.UI.Base;
-using ActivityTracker.UI.Commands;
-using ActivityTracker.UI.Stores;
+using ProdActivity.Domain.Enums;
+using ProdActivity.UI.Base;
+using ProdActivity.UI.Commands;
+using ProdActivity.UI.Stores;
 
-namespace ActivityTracker.UI.ViewModels
+namespace ProdActivity.UI.ViewModels
 {
     public class LoginViewModel : ManageUserViewModel
     {

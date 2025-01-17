@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-using ActivityTracker.Domain.Base;
+using ProdActivity.Domain.Base;
 
-namespace ActivityTracker.Domain.Stores
+namespace ProdActivity.Domain.Stores
 {
     public class PropertyStore : NotifyPropertyChanged
     {

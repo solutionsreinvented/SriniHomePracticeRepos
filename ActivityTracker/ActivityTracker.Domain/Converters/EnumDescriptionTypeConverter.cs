@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
 
-namespace ActivityTracker.Domain.Converters
+namespace ProdActivity.Domain.Converters
 {
     public class EnumDescriptionTypeConverter : EnumConverter
     {

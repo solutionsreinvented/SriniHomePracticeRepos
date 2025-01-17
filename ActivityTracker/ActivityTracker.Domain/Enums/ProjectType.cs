@@ -1,7 +1,7 @@
-﻿using ActivityTracker.Domain.Converters;
+﻿using ProdActivity.Domain.Converters;
 using System.ComponentModel;
 
-namespace ActivityTracker.Domain.Enums
+namespace ProdActivity.Domain.Enums
 {
     [TypeConverter(typeof(EnumDescriptionTypeConverter))]
     public enum ProjectType

@@ -1,4 +1,4 @@
-﻿namespace ActivityTracker.Domain.Validators
+﻿namespace ProdActivity.Domain.Validators
 {
     public class UsernameValidator
     {

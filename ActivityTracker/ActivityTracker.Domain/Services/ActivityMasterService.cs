@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 
-using ActivityTracker.Domain.Models;
+using ProdActivity.Domain.Models;
 
 using System.IO;
 
-namespace ActivityTracker.Domain.Services
+namespace ProdActivity.Domain.Services
 {
     public static class ActivityMasterService
     {

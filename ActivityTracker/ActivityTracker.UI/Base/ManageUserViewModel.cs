@@ -1,8 +1,8 @@
-﻿using ActivityTracker.Domain.Interfaces;
-using ActivityTracker.Domain.Repositories;
-using ActivityTracker.UI.Stores;
+﻿using ProdActivity.Domain.Interfaces;
+using ProdActivity.Domain.Repositories;
+using ProdActivity.UI.Stores;
 
-namespace ActivityTracker.UI.Base
+namespace ProdActivity.UI.Base
 {
     public abstract class ManageUserViewModel : ViewModelBase
     {

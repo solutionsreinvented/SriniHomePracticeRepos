@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 using ReInvented.Shared.Interfaces;
 
-namespace ActivityTracker.UI.Dialogs
+namespace ProdActivity.UI.Dialogs
 {
     /// <summary>
     /// Interaction logic for CreateProjectView.xaml

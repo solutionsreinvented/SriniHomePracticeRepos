@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace ActivityTracker.Domain.Services
+namespace ProdActivity.Domain.Services
 {
     public static class ControlDigitService
     {

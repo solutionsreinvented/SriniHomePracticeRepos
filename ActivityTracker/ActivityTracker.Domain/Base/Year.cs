@@ -1,11 +1,11 @@
-﻿using ActivityTracker.Domain.Interfaces;
-using ActivityTracker.Domain.Repositories;
+﻿using ProdActivity.Domain.Interfaces;
+using ProdActivity.Domain.Repositories;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ActivityTracker.Domain.Base
+namespace ProdActivity.Domain.Base
 {
     public abstract class Year : IYear
     {

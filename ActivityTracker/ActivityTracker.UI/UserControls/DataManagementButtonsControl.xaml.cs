@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ActivityTracker.UI.UserControls
+namespace ProdActivity.UI.UserControls
 {
     /// <summary>
     /// Interaction logic for DataManagementButtonsControl.xaml

@@ -1,8 +1,8 @@
-﻿using ActivityTracker.Domain.Base;
-using ActivityTracker.Domain.Enums;
-using ActivityTracker.Domain.Interfaces;
+﻿using ProdActivity.Domain.Base;
+using ProdActivity.Domain.Enums;
+using ProdActivity.Domain.Interfaces;
 
-namespace ActivityTracker.Domain.Models
+namespace ProdActivity.Domain.Models
 {
     public class AdminUser : User, IUser
     {

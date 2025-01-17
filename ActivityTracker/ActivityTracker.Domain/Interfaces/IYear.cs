@@ -1,8 +1,8 @@
-﻿using ActivityTracker.Domain.Base;
+﻿using ProdActivity.Domain.Base;
 
 using System;
 
-namespace ActivityTracker.Domain.Interfaces
+namespace ProdActivity.Domain.Interfaces
 {
     public interface IYear
     {

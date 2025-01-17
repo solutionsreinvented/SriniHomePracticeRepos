@@ -3,15 +3,15 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
-using ActivityTracker.Domain.Enums;
-using ActivityTracker.Domain.Interfaces;
-using ActivityTracker.Domain.Models;
-using ActivityTracker.Domain.Services;
-using ActivityTracker.UI.Commands;
-using ActivityTracker.UI.Stores;
-using ActivityTracker.UI.ViewModels;
+using ProdActivity.Domain.Enums;
+using ProdActivity.Domain.Interfaces;
+using ProdActivity.Domain.Models;
+using ProdActivity.Domain.Services;
+using ProdActivity.UI.Commands;
+using ProdActivity.UI.Stores;
+using ProdActivity.UI.ViewModels;
 
-namespace ActivityTracker.UI.Base
+namespace ProdActivity.UI.Base
 {
     public abstract class DashboardViewModel : ViewModelBase
     {

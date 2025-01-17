@@ -1,7 +1,7 @@
 ﻿
-using ActivityTracker.Domain.Enums;
+using ProdActivity.Domain.Enums;
 
-namespace ActivityTracker.Domain.Models
+namespace ProdActivity.Domain.Models
 {
     public class Development : Project
     {

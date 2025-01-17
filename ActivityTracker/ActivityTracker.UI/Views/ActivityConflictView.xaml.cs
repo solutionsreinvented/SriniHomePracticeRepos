@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ActivityTracker.UI.Views
+namespace ProdActivity.UI.Views
 {
     /// <summary>
     /// Interaction logic for ActivityConflictView.xaml

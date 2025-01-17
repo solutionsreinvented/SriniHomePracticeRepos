@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel;
 
-using ActivityTracker.UI.Base;
+using ProdActivity.UI.Base;
 
 using ReInvented.Shared.Interfaces;
 
-namespace ActivityTracker.UI.Stores
+namespace ProdActivity.UI.Stores
 {
     public class NavigationStore
     {

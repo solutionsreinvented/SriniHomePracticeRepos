@@ -1,9 +1,9 @@
-﻿using ActivityTracker.Domain.Enums;
-using ActivityTracker.Domain.Factories;
-using ActivityTracker.Domain.Interfaces;
-using ActivityTracker.Domain.Stores;
+﻿using ProdActivity.Domain.Enums;
+using ProdActivity.Domain.Factories;
+using ProdActivity.Domain.Interfaces;
+using ProdActivity.Domain.Stores;
 
-namespace ActivityTracker.Domain.Models
+namespace ProdActivity.Domain.Models
 {
     public class ActivityDefinition : PropertyStore
     {

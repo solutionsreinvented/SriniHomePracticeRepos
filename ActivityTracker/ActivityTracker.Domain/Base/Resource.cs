@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 
-using ActivityTracker.Domain.Enums;
-using ActivityTracker.Domain.Interfaces;
-using ActivityTracker.Domain.Stores;
+using ProdActivity.Domain.Enums;
+using ProdActivity.Domain.Interfaces;
+using ProdActivity.Domain.Stores;
 
-namespace ActivityTracker.Domain.Base
+namespace ProdActivity.Domain.Base
 {
     public class Resource : PropertyStore, IResource
     {

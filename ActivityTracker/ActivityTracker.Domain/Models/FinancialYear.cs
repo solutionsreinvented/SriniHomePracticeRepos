@@ -1,9 +1,9 @@
-﻿using ActivityTracker.Domain.Base;
-using ActivityTracker.Domain.Interfaces;
+﻿using ProdActivity.Domain.Base;
+using ProdActivity.Domain.Interfaces;
 
 using System;
 
-namespace ActivityTracker.Domain.Models
+namespace ProdActivity.Domain.Models
 {
     public class FinancialYear : Year, IYear
     {

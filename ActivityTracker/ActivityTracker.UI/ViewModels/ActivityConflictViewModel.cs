@@ -1,7 +1,7 @@
-﻿using ActivityTracker.UI.Base;
-using ActivityTracker.UI.Stores;
+﻿using ProdActivity.UI.Base;
+using ProdActivity.UI.Stores;
 
-namespace ActivityTracker.UI.ViewModels
+namespace ProdActivity.UI.ViewModels
 {
     public class ActivityConflictViewModel : ViewModelBase
     {

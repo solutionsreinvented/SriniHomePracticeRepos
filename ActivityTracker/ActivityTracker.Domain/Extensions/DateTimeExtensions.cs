@@ -4,7 +4,7 @@ using System.Linq;
 
 using ReInvented.Shared;
 
-namespace ActivityTracker.Domain.Extensions
+namespace ProdActivity.Domain.Extensions
 {
     /// <summary>
     /// Provides extension methods for the System.DateTime class.

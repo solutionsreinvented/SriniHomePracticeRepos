@@ -1,10 +1,10 @@
-﻿using ActivityTracker.Domain.Enums;
-using ActivityTracker.Domain.Interfaces;
-using ActivityTracker.Domain.Models;
+﻿using ProdActivity.Domain.Enums;
+using ProdActivity.Domain.Interfaces;
+using ProdActivity.Domain.Models;
 
 using System;
 
-namespace ActivityTracker.Domain.Factories
+namespace ProdActivity.Domain.Factories
 {
     public static class ActivityFactory
     {

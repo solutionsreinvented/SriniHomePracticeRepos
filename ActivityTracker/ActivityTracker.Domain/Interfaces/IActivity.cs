@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using ActivityTracker.Domain.Enums;
-using ActivityTracker.Domain.Models;
+using ProdActivity.Domain.Enums;
+using ProdActivity.Domain.Models;
 
-namespace ActivityTracker.Domain.Interfaces
+namespace ProdActivity.Domain.Interfaces
 {
     public interface IActivity
     {

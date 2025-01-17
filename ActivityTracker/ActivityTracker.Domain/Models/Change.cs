@@ -1,8 +1,8 @@
-﻿using ActivityTracker.Domain.Enums;
-using ActivityTracker.Domain.Interfaces;
-using ActivityTracker.Domain.Stores;
+﻿using ProdActivity.Domain.Enums;
+using ProdActivity.Domain.Interfaces;
+using ProdActivity.Domain.Stores;
 
-namespace ActivityTracker.Domain.Models
+namespace ProdActivity.Domain.Models
 {
     public class Change : PropertyStore
     {

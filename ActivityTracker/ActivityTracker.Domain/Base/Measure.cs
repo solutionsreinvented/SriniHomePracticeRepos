@@ -1,10 +1,10 @@
-﻿using ActivityTracker.Domain.Models;
+﻿using ProdActivity.Domain.Models;
 
 using ReInvented.Shared.Stores;
 
 using System;
 
-namespace ActivityTracker.Domain.Base
+namespace ProdActivity.Domain.Base
 {
     public class Measure : ValidatablePropertyStore
     {

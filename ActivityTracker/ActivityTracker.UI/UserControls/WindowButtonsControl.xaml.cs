@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace ActivityTracker.UI.UserControls
+namespace ProdActivity.UI.UserControls
 {
     /// <summary>
     /// Interaction logic for WindowButtonsControl.xaml

@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 
-using ActivityTracker.Domain.Interfaces;
-using ActivityTracker.Domain.Stores;
+using ProdActivity.Domain.Interfaces;
+using ProdActivity.Domain.Stores;
 
 using System.Collections.ObjectModel;
 
-namespace ActivityTracker.Domain.Models
+namespace ProdActivity.Domain.Models
 {
     public class ProjectMaster : PropertyStore
     {

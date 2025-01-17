@@ -1,10 +1,10 @@
 ﻿
-using ActivityTracker.Domain.Stores;
-using ActivityTracker.UI.Stores;
+using ProdActivity.Domain.Stores;
+using ProdActivity.UI.Stores;
 
 using ReInvented.Shared.Interfaces;
 
-namespace ActivityTracker.UI.Base
+namespace ProdActivity.UI.Base
 {
     public abstract class ViewModelBase : PropertyStore
     {

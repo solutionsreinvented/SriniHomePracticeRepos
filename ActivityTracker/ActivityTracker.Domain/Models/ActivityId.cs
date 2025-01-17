@@ -1,13 +1,13 @@
 ﻿
-using ActivityTracker.Domain.Enums;
-using ActivityTracker.Domain.Interfaces;
-using ActivityTracker.Domain.Models;
-using ActivityTracker.Domain.Services;
-using ActivityTracker.Domain.Stores;
+using ProdActivity.Domain.Enums;
+using ProdActivity.Domain.Interfaces;
+using ProdActivity.Domain.Models;
+using ProdActivity.Domain.Services;
+using ProdActivity.Domain.Stores;
 
 using ReInvented.Shared;
 
-namespace ActivityTracker.Domain.Models
+namespace ProdActivity.Domain.Models
 {
     public class ActivityId : PropertyStore
     {

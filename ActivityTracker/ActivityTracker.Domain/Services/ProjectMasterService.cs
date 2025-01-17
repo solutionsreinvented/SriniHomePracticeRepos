@@ -1,12 +1,12 @@
 ﻿using System.IO;
 
-using ActivityTracker.Domain.Interfaces;
-using ActivityTracker.Domain.Models;
+using ProdActivity.Domain.Interfaces;
+using ProdActivity.Domain.Models;
 
 using ReInvented.DataAccess;
 using ReInvented.DataAccess.Interfaces;
 
-namespace ActivityTracker.Domain.Services
+namespace ProdActivity.Domain.Services
 {
     public static class ProjectMasterService
     {

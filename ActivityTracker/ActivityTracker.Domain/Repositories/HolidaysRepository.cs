@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 
-using ActivityTracker.Domain.Services;
+using ProdActivity.Domain.Services;
 
 using ReInvented.DataAccess;
 
-namespace ActivityTracker.Domain.Repositories
+namespace ProdActivity.Domain.Repositories
 {
     public class HolidaysRepository
     {

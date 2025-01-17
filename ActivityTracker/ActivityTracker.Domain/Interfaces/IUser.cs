@@ -1,6 +1,6 @@
-﻿using ActivityTracker.Domain.Enums;
+﻿using ProdActivity.Domain.Enums;
 
-namespace ActivityTracker.Domain.Interfaces
+namespace ProdActivity.Domain.Interfaces
 {
     public interface IUser
     {

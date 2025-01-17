@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ActivityTracker.Domain.Enums
+namespace ProdActivity.Domain.Enums
 {
     public enum ScheduleChangeReason
     {

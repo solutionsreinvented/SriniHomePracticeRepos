@@ -1,9 +1,9 @@
-﻿using ActivityTracker.Domain.Enums;
+﻿using ProdActivity.Domain.Enums;
 
 using System;
 using System.Collections.ObjectModel;
 
-namespace ActivityTracker.Domain.Interfaces
+namespace ProdActivity.Domain.Interfaces
 {
     public interface IProject
     {

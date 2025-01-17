@@ -2,16 +2,16 @@
 using System.IO;
 using System.Windows;
 
-using ActivityTracker.UI.Commands;
-using ActivityTracker.UI.Dialogs;
-using ActivityTracker.UI.Stores;
-using ActivityTracker.UI.ViewModels;
+using ProdActivity.UI.Commands;
+using ProdActivity.UI.Dialogs;
+using ProdActivity.UI.Stores;
+using ProdActivity.UI.ViewModels;
 
 using ReInvented.DataAccess.Factories;
 using ReInvented.Shared.Interfaces;
 using ReInvented.Shared.Services;
 
-namespace ActivityTracker.UI
+namespace ProdActivity.UI
 {
     /// <summary>
     /// Interaction logic for App.xaml

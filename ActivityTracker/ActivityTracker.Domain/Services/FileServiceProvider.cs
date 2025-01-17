@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace ActivityTracker.Domain.Services
+namespace ProdActivity.Domain.Services
 {
     public static class FileServiceProvider
     {

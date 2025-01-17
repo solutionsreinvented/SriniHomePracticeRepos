@@ -2,7 +2,7 @@
 
 using ReInvented.Shared.TypeConverters;
 
-namespace ActivityTracker.Domain.Enums
+namespace ProdActivity.Domain.Enums
 {
     [TypeConverter(typeof(EnumToDescriptionTypeConverter))]
     public enum CompletionStatus

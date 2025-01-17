@@ -2,14 +2,14 @@
 using System.IO;
 using System.Linq;
 
-using ActivityTracker.Domain.Base;
-using ActivityTracker.Domain.Interfaces;
-using ActivityTracker.Domain.Mappers;
-using ActivityTracker.Domain.Services;
+using ProdActivity.Domain.Base;
+using ProdActivity.Domain.Interfaces;
+using ProdActivity.Domain.Mappers;
+using ProdActivity.Domain.Services;
 
 using ReInvented.DataAccess;
 
-namespace ActivityTracker.Domain.Repositories
+namespace ProdActivity.Domain.Repositories
 {
     public class UserRepository
     {

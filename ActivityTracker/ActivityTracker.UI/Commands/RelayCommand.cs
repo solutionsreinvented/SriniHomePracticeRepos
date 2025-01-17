@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace ActivityTracker.UI.Commands
+namespace ProdActivity.UI.Commands
 {
     public class RelayCommand : ICommand
     {
