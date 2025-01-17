@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32413.511
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityTracker.Domain", "ActivityTracker.Domain\ActivityTracker.Domain.csproj", "{AA96E4AE-B461-4417-BAAA-C44C7DB88375}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProdActivity.Domain", "ProdActivity.Domain\ProdActivity.Domain.csproj", "{AA96E4AE-B461-4417-BAAA-C44C7DB88375}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityTracker.UI", "ActivityTracker.UI\ActivityTracker.UI.csproj", "{85F5BA39-B601-486F-985B-FA7F9E6955F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProdActivity.UI", "ProdActivity.UI\ProdActivity.UI.csproj", "{85F5BA39-B601-486F-985B-FA7F9E6955F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
