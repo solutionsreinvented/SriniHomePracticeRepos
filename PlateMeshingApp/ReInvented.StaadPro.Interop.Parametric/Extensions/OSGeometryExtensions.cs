@@ -42,12 +42,23 @@ namespace ReInvented.StaadPro.Interop.Extensions
         }
 
         public static int DefineParametricSurfaceExt(this OSGeometryUI geometry, string surfaceName, ParametericSurfaceType type,
-            Node origin, Node xVertex, Node yVertex, IEnumerable<Node> vertices, AutoGenerate autoGenerate = AutoGenerate.No)
+            IEnumerable<Node> vertices, AutoGenerate autoGenerate = AutoGenerate.No)
+        {
+            List<Node> verticesList = vertices.ToList();
+            Node startsAt = verticesList[0];
+            Node xVertex = verticesList[1];
+            Node yVertex = verticesList[2];
+            return geometry.DefineParametricSurfaceExt(surfaceName, type, startsAt, xVertex, yVertex, vertices, autoGenerate);
+        }
+
+
+        public static int DefineParametricSurfaceExt(this OSGeometryUI geometry, string surfaceName, ParametericSurfaceType type,
+            Node startsAt, Node xVertex, Node yVertex, IEnumerable<Node> vertices, AutoGenerate autoGenerate = AutoGenerate.No)
         {
             int nVertices = vertices.Count();
             int[] verticesIds = vertices.Select(v => v.Id).ToArray();
 
-            return geometry.DefineParametricSurface(surfaceName, type, origin.Id, xVertex.Id, yVertex.Id, nVertices, verticesIds, autoGenerate);
+            return geometry.DefineParametricSurface(surfaceName, type, startsAt.Id, xVertex.Id, yVertex.Id, nVertices, verticesIds, autoGenerate);
         }
 
         public static OSGeometryUI AddDensityLineToSurfaceExt(this OSGeometryUI geometry,
