@@ -1,9 +1,7 @@
-﻿
-using PlateMeshing.Base;
+﻿using ReInvented.Shared.Interfaces;
+using ReInvented.StaadPro.Interop.Parametric.Base;
 
-using ReInvented.Shared.Interfaces;
-
-namespace PlateMeshing.Models
+namespace ReInvented.StaadPro.Interop.Parametric.Models
 {
     public class ParametricSurfaceMeshInfo : ParametricSurfaceMesh, IEntity
     {

@@ -1,4 +1,4 @@
-﻿namespace PlateMeshing.Enums
+﻿namespace ReInvented.StaadPro.Interop.Parametric.Enums
 {
     public enum ParametericSurfaceType
     {

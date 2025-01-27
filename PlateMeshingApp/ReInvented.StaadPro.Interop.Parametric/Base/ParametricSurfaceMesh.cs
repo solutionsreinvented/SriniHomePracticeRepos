@@ -1,7 +1,7 @@
 ﻿
 using ReInvented.Shared.Interfaces;
 
-namespace PlateMeshing.Base
+namespace ReInvented.StaadPro.Interop.Parametric.Base
 {
     public abstract class ParametricSurfaceMesh : IEntity
     {

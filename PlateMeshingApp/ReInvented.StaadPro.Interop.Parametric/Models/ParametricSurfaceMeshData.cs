@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using PlateMeshing.Base;
-
 using ReInvented.Shared.Interfaces;
 using ReInvented.StaadPro.Interop.Entities;
+using ReInvented.StaadPro.Interop.Parametric.Base;
 
-namespace PlateMeshing.Models
+namespace ReInvented.StaadPro.Interop.Parametric.Models
 {
     public class ParametricSurfaceMeshData : ParametricSurfaceMesh, IEntity
     {

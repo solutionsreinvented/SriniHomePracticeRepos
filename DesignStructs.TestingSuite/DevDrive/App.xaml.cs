@@ -1,12 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 
-using ReInvented.Domain.Reporting.Models;
-using ReInvented.Domain.Reporting.Services;
+using DevDrive.Services;
+
+using ReInvented.Domain.Optimization.Models;
 using ReInvented.Sections.Domain.Models;
+using ReInvented.Sections.Domain.Repositories;
+using ReInvented.StaadPro.Interop.Entities;
+using ReInvented.StaadPro.Interop.Enums;
+using ReInvented.StaadPro.Interop.Extensions;
 using ReInvented.StaadPro.Interop.Models;
+using ReInvented.StaadPro.Interop.Services;
 
 namespace DevDrive
 {
@@ -17,61 +24,61 @@ namespace DevDrive
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            string fullPath = @"D:\02. Due\00. Projects\01. Pre-Order\73. GYOW - Oko West (46m)\03. STAAD\01. Working\D46.0H3.00S09.00OC1.129SC1.247IMP0.155CON0.0053MOT1000.std";
-            StaadModel model = new StaadModel(fullPath);
-            OpenStaadWrapper wrapper = model.OpenStaadWrapper;
+            //string fullPath = @"D:\02. Due\00. Projects\01. Pre-Order\74. E25010019 (24m & 72m Zafranal)\03. STAAD\01. Working\D24.0H2.00S09.00OC1.167SC1.396IMP0.282CON0.0290MOT0400.std";
+            //StaadModel model = new StaadModel(fullPath);
+            //OpenStaadWrapper wrapper = model.OpenStaadWrapper;
 
-            Contingencies disc = new Contingencies() { BoltedFlanges = 0, Connections = 0, Plates = 0, Sections = 0 };
-            Contingencies undisc = new Contingencies() { BoltedFlanges = 0, Connections = 0, Plates = 0, Sections = 0 };
+            //Contingencies disc = new Contingencies() { BoltedFlanges = 0, Connections = 0, Plates = 0, Sections = 0 };
+            //Contingencies undisc = new Contingencies() { BoltedFlanges = 0, Connections = 0, Plates = 0, Sections = 0 };
 
-            Stopwatch watch = new Stopwatch();
-            watch.Start();
+            //Stopwatch watch = new Stopwatch();
+            //watch.Start();
 
-            MaterialTakeOff mto = MaterialTakeOffService.Generate(wrapper, disc, undisc, 6);
+            //MaterialTakeOff mto = MaterialTakeOffService.Generate(wrapper, disc, undisc, 6);
 
-            watch.Stop();
-            TimeSpan time = TimeSpan.FromMilliseconds(watch.ElapsedMilliseconds);
-            Console.WriteLine($"{time}");
+            //watch.Stop();
+            //TimeSpan time = TimeSpan.FromMilliseconds(watch.ElapsedMilliseconds);
+            //Console.WriteLine($"{time}");
 
-            mto.PropertyWiseSummary.PlatesItems.ToList().ForEach(i => Console.WriteLine(i.AssemblyGroup));
+            //mto.PropertyWiseSummary.PlatesItems.ToList().ForEach(i => Console.WriteLine(i.AssemblyGroup));
 
             ////IResult<string> result = ApplicationServices.StartApplication(@"C:\Program Files\Bentley\Engineering\STAAD.Pro 2023\STAAD\Bentley.Staad.exe", "STAAD.Pro", 60);
 
             //MainWindow = new MainWindow();
             //MainWindow.Show();
 
-            //string inputFile = @"D:\02. Due\00. Projects\01. Pre-Order\73. GYOW - Oko West (46m)\03. STAAD\01. Working\D46.0H3.00S09.00OC1.129SC1.247IMP0.155CON0.0053MOT1000.std";
-            ////HashSet<Envelop> envelops = new HashSet<Envelop>()
-            ////{
-            ////    new Envelop(EnvelopGroup.JointMass, 100, 100),
-            ////    new Envelop(EnvelopGroup.Strength, 101, 204),
-            ////    new Envelop(EnvelopGroup.Serviceability, 1001, 1040)
-            ////};
+            string inputFile = @"D:\02. Due\00. Projects\01. Pre-Order\74. E25010019 (24m & 72m Zafranal)\03. STAAD\01. Working\D24.0H2.00S09.00OC1.167SC1.396IMP0.282CON0.0290MOT0400.std";
+            //HashSet<Envelop> envelops = new HashSet<Envelop>()
+            //{
+            //    new Envelop(EnvelopGroup.JointMass, 100, 100),
+            //    new Envelop(EnvelopGroup.Strength, 101, 204),
+            //    new Envelop(EnvelopGroup.Serviceability, 1001, 1040)
+            //};
 
-            ////var combs = LoadCombinationsDefinition.Parse(inputFile, "IS800", 2007, "HRT", "Standard", envelops);
-            ////LoadCombinationsDefinition.PersistAsTemplate(combs, Path.GetDirectoryName(inputFile));
+            //var combs = LoadCombinationsDefinition.Parse(inputFile, "IS800", 2007, "HRT", "Standard", envelops);
+            //LoadCombinationsDefinition.PersistAsTemplate(combs, Path.GetDirectoryName(inputFile));
 
-            //Stopwatch stopwatch = new Stopwatch();
-            //MaterialGrade grade = MaterialsRepository.Instance
-            //                                         .GetMaterialsLibrary().Tables
-            //                                         .SelectMany(t => t.Grades)
-            //                                         .Where(g => g.Designation.Contains("A36"))
-            //                                         .FirstOrDefault(g => g.StaadName == "A36");
+            Stopwatch stopwatch = new Stopwatch();
+            MaterialGrade grade = MaterialsRepository.Instance
+                                                     .GetMaterialsLibrary().Tables
+                                                     .SelectMany(t => t.Grades)
+                                                     .Where(g => g.Designation.Contains("A36"))
+                                                     .FirstOrDefault(g => g.StaadName == "A36");
 
-            //OpenStaadWrapper wrapper = OpenStaadWrapperProvider.Get(inputFile);
-            //IEnumerable<LoadCase> loadCases = wrapper.Load.GetLoadCases(101, 200, LoadCaseType.LoadCombination);
-            //var criteria = new PlateOptimizationCriteria()
-            //{ MinimumThickness = 6.0, CorrosionAllowance = 3.0, MaterialGrade = grade, ThreadCount = 10, AllowedPercentPlatesExceedance = 15.0 };
+            OpenStaadWrapper wrapper = OpenStaadWrapperProvider.Get(inputFile);
+            IEnumerable<LoadCase> loadCases = wrapper.Load.GetLoadCases(101, 200, LoadCaseType.LoadCombination);
+            PlateOptimizationCriteria criteria = new PlateOptimizationCriteria()
+            { MinimumThickness = 6.0, CorrosionAllowance = 2.0, MaterialGrade = grade, ThreadCount = 10, AllowedPercentPlatesExceedance = 15.0 };
 
-            //stopwatch.Start();
+            stopwatch.Start();
 
-            //PlatesOptimizationService pos = new PlatesOptimizationService(wrapper, criteria);
-            //HashSet<PlateGroupDesignResult> results = pos.OptimizeAll(loadCases);
+            PlatesOptimizationService pos = new PlatesOptimizationService(wrapper, criteria);
+            HashSet<PlateGroupDesignResult> results = pos.OptimizeAll(loadCases);
 
-            //stopwatch.Stop();
-            //Console.WriteLine($"Total time consumed for plates optimization is {TimeSpan.FromMilliseconds(stopwatch.ElapsedMilliseconds)}");
+            stopwatch.Stop();
+            Console.WriteLine($"Total time consumed for plates optimization is {TimeSpan.FromMilliseconds(stopwatch.ElapsedMilliseconds)}");
 
-            //pos.WriteResultsToFile(results);
+            pos.WriteResultsToFile(results);
         }
 
         #region Previous - Successful

@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 
 using OpenSTAADUI;
 
-using PlateMeshing.Enums;
-using PlateMeshing.Extensions;
-
-using ReInvented.Shared;
-using ReInvented.Shared.Extensions;
 using ReInvented.StaadPro.Interop.Entities;
 using ReInvented.StaadPro.Interop.Extensions;
 using ReInvented.StaadPro.Interop.Models;
 using ReInvented.StaadPro.Interop.Services;
 
-namespace PlateMeshing
+namespace ReInvented.StaadPro.Interop.Parametric
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -26,12 +18,12 @@ namespace PlateMeshing
         {
             base.OnStartup(e);
             string staadPath = @"C:\Users\masanams\OneDrive - TAKRAF\Desktop\Delete\ParamSurfaces\Param.std";
-            double rBP = 1.05;
-            int divsBP = 64;
-            int nBolts = 10;
-            double rBoltHole = 0.015;
+            double rBP = 2.1;
+            int divsBP = 96;
+            int nBolts = 20;
+            double rBoltHole = 0.030;
             int divsBoltHole = 24;
-            double pcdBolts = 2 * 0.975;
+            double pcdBolts = 4 * 0.975;
 
             string surfaceName = "Base Plate";
 
@@ -47,9 +39,7 @@ namespace PlateMeshing
             Node center = new Node(lastNodeId, 0.0, 0.0, 0.0);
 
             int surfaceId = geometry.GenerateCircularBasePlateWithEccentricHole(surfaceName, center, rBP, divsBP, nBolts, rBoltHole,
-                pcdBolts, divsBoltHole, 15.0, 0.3, 0, 0.0, 0.4, 32, lastNodeId);
-            geometry.AddCircularRegionToSurfaceExt(surfaceId, center, 0.9, 25, 1, RegionType.Opening);
-            geometry.CommitParametricSurfaceMesh(surfaceId);
+                pcdBolts, divsBoltHole, 15.0, 0.5, 40.0, 0.45, 0.4, 32, lastNodeId);
 
             //geometry.CreateSolidCircularPlate(surfaceName, densityPoint, 1.8, nPoints, lastNodeId, AutoGenerate.No);
 

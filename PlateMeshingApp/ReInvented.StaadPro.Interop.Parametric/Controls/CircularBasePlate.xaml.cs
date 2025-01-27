@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PlateMeshing
+namespace ReInvented.StaadPro.Interop.Parametric.Controls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CircularBasePlate.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CircularBasePlate : UserControl
     {
-        public MainWindow()
+        public CircularBasePlate()
         {
             InitializeComponent();
         }

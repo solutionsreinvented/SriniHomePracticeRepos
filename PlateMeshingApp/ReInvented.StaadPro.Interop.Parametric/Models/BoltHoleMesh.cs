@@ -5,7 +5,7 @@ using ReInvented.Shared;
 using ReInvented.Shared.Extensions;
 using ReInvented.StaadPro.Interop.Entities;
 
-namespace PlateMeshing.Models
+namespace ReInvented.StaadPro.Interop.Parametric.Models
 {
     public class CircularBasePlateConfiguration
     {

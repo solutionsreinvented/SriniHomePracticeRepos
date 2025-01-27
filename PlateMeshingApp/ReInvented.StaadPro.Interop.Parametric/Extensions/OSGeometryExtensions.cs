@@ -4,15 +4,14 @@ using System.Linq;
 
 using OpenSTAADUI;
 
-using PlateMeshing.Enums;
-using PlateMeshing.Models;
-
 using ReInvented.Shared;
 using ReInvented.Shared.Extensions;
 using ReInvented.StaadPro.Interop.Entities;
 using ReInvented.StaadPro.Interop.Extensions;
+using ReInvented.StaadPro.Interop.Parametric.Enums;
+using ReInvented.StaadPro.Interop.Parametric.Models;
 
-namespace PlateMeshing.Extensions
+namespace ReInvented.StaadPro.Interop.Extensions
 {
     public static class OSGeometryExtensions
     {
