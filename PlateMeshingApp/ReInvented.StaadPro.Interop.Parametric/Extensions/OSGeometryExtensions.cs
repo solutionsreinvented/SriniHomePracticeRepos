@@ -15,6 +15,15 @@ namespace ReInvented.StaadPro.Interop.Extensions
 {
     public static class OSGeometryExtensions
     {
+
+        public static void AddAndCommitParametricSurfaceToModel(this OSGeometryUI geometry,  int surfaceId)
+        {
+            geometry.AddParametricSurfaceToModel(surfaceId);
+            geometry.CommitParametricSurfaceMesh(surfaceId);
+        }
+
+
+
         public static int CreateSolidCircularPlate(this OSGeometryUI geometry, string surfaceName, Node center,
             double radius, int divisions, int lastUsedNodeId = 0, AutoGenerate autoGenerate = AutoGenerate.No)
         {
@@ -32,7 +41,7 @@ namespace ReInvented.StaadPro.Interop.Extensions
 
             OSGeometryExtensionsParallel.CreateMultipleNodes(geometry, vertices.ToHashSet(), 1);
 
-            int surfaceId = geometry.DefineParametricSurfaceExt(surfaceName, ParametericSurfaceType.None, sVertex, xVertex, yVertex, vertices, autoGenerate);
+            int surfaceId = geometry.DefineParametricSurfaceExt(surfaceName, sVertex, xVertex, yVertex, vertices, SurfaceType.None, autoGenerate);
 
             geometry.AddDensityPointToSurfaceExt(surfaceId, center, 1);
             geometry.AddParametricSurfaceToModel(surfaceId);
@@ -41,19 +50,60 @@ namespace ReInvented.StaadPro.Interop.Extensions
             return surfaceId;
         }
 
-        public static int DefineParametricSurfaceExt(this OSGeometryUI geometry, string surfaceName, ParametericSurfaceType type,
-            IEnumerable<Node> vertices, AutoGenerate autoGenerate = AutoGenerate.No)
+        /// <summary>
+        /// Defines an annular parametric surface using the outer and inner polygon points (vertices) provided.
+        /// </summary>
+        /// <param name="geometry"><see cref="OSGeometryUI"/> COM object to carry out geometry operations in Staad.</param>
+        /// <param name="surfaceName">Name of the parametric surface to be created.</param>
+        /// <param name="outerVertices">Polygon points on the outer boundary. These nodes must exist in the model already.</param>
+        /// <param name="innerVertices">Polygon points on the inner boundary. These nodes must exist in the model already.</param>
+        /// <param name="type">Type of the surface being created. Refer <see cref="SurfaceType"/>.</param>
+        /// <param name="autoGenerate"></param>
+        /// <returns>An integer id of the created surface. A value of -1 indicates the surface is not created.</returns>
+        public static int DefineAnnularParametricSurfaceExt(this OSGeometryUI geometry, string surfaceName,
+            IEnumerable<Node> outerVertices, IEnumerable<Node> innerVertices,
+            SurfaceType type = SurfaceType.None, AutoGenerate autoGenerate = AutoGenerate.No)
+        {
+            int surfaceId = geometry.DefineParametricSurfaceExt(surfaceName, outerVertices, type, autoGenerate);
+            geometry.AddPolygonalRegionToSurfaceExt(surfaceId, innerVertices, RegionType.Opening);
+
+            return surfaceId;
+        }
+
+        /// <summary>
+        /// Defines a parametric surface using the polygon points (vertices) provided.
+        /// </summary>
+        /// <param name="geometry"><see cref="OSGeometryUI"/> COM object to carry out geometry operations in Staad.</param>
+        /// <param name="surfaceName">Name of the parametric surface to be created.</param>
+        /// <param name="vertices">All vertices on the polygon. These nodes must exist in the model already.</param>
+        /// <param name="type">Type of the surface being created. Refer <see cref="SurfaceType"/>.</param>
+        /// <param name="autoGenerate"></param>
+        /// <returns>An integer id of the created surface. A value of -1 indicates the surface is not created.</returns>
+        public static int DefineParametricSurfaceExt(this OSGeometryUI geometry, string surfaceName, IEnumerable<Node> vertices,
+            SurfaceType type = SurfaceType.None, AutoGenerate autoGenerate = AutoGenerate.No)
         {
             List<Node> verticesList = vertices.ToList();
             Node startsAt = verticesList[0];
             Node xVertex = verticesList[1];
             Node yVertex = verticesList[2];
-            return geometry.DefineParametricSurfaceExt(surfaceName, type, startsAt, xVertex, yVertex, vertices, autoGenerate);
+            return geometry.DefineParametricSurfaceExt(surfaceName, startsAt, xVertex, yVertex, vertices, type, autoGenerate);
         }
 
-
-        public static int DefineParametricSurfaceExt(this OSGeometryUI geometry, string surfaceName, ParametericSurfaceType type,
-            Node startsAt, Node xVertex, Node yVertex, IEnumerable<Node> vertices, AutoGenerate autoGenerate = AutoGenerate.No)
+        /// <summary>
+        /// Defines a parametric surface using the polygon points (vertices) provided.
+        /// </summary>
+        /// <param name="geometry"><see cref="OSGeometryUI"/> COM object to carry out geometry operations in Staad.</param>
+        /// <param name="surfaceName">Name of the parametric surface to be created.</param>
+        /// <param name="startsAt">Start <see cref="Node"/> of the boundary polygon of the surface.</param>
+        /// <param name="xVertex">Vertex on the x-axis of the surface. Typically the second <see cref="Node"/> on the polygon.</param>
+        /// <param name="yVertex">Vertex on the y-axis of the surface. Typically the third <see cref="Node"/> on the polygon.</param>
+        /// <param name="vertices">All vertices on the polygon. These nodes must exist in the model already.</param>
+        /// <param name="type">Type of the surface being created. Refer <see cref="SurfaceType"/>.</param>
+        /// <param name="autoGenerate"></param>
+        /// <returns>An integer id of the created surface. A value of -1 indicates the surface is not created.</returns>
+        public static int DefineParametricSurfaceExt(this OSGeometryUI geometry, string surfaceName, Node startsAt, Node xVertex,
+            Node yVertex, IEnumerable<Node> vertices,
+            SurfaceType type = SurfaceType.None, AutoGenerate autoGenerate = AutoGenerate.No)
         {
             int nVertices = vertices.Count();
             int[] verticesIds = vertices.Select(v => v.Id).ToArray();
@@ -119,7 +169,7 @@ namespace ReInvented.StaadPro.Interop.Extensions
 
             List<Node> nodesList = nodes.ToList();
 
-            int bpSurfaceId = geometry.DefineParametricSurfaceExt(surfaceName, ParametericSurfaceType.None, nodesList[0], nodesList[1], nodesList[2], nodes);
+            int bpSurfaceId = geometry.DefineParametricSurfaceExt(surfaceName, nodesList[0], nodesList[1], nodesList[2], nodes);
             geometry.AddDensityPointToSurfaceExt(bpSurfaceId, center, 1);
 
 
@@ -148,7 +198,7 @@ namespace ReInvented.StaadPro.Interop.Extensions
 
             List<Node> nodesList = nodes.ToList();
 
-            int bpSurfaceId = geometry.DefineParametricSurfaceExt(surfaceName, ParametericSurfaceType.None, nodesList[0], nodesList[1], nodesList[2], nodes);
+            int bpSurfaceId = geometry.DefineParametricSurfaceExt(surfaceName, nodesList[0], nodesList[1], nodesList[2], nodes);
 
             lastNodeId = nodes.LastId();
 

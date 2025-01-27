@@ -33,20 +33,37 @@ namespace ReInvented.StaadPro.Interop.Parametric
             HashSet<Node> inner = Node.GenerateNodesOnCircularPath(center, 1.5, 40, lastUsedId: opening.LastId());
             HashSet<Node> innermost = Node.GenerateNodesOnCircularPath(center, 0.5, 20, lastUsedId: inner.LastId());
 
-
-            int surfaceId = geometry.DefineParametricSurfaceExt("Circular Base Plate", ParametericSurfaceType.None, periphery);
-            geometry.AddPolygonalRegionToSurfaceExt(surfaceId, opening, RegionType.Opening);
-            geometry.AddPolygonalRegionToSurfaceExt(surfaceId, inner, RegionType.Region);
-            geometry.AddPolygonalRegionToSurfaceExt(surfaceId, innermost, RegionType.Opening);
-
-
             OSGeometryExtensionsParallel.CreateMultipleNodes(geometry, periphery, 1);
             OSGeometryExtensionsParallel.CreateMultipleNodes(geometry, opening, 1);
             OSGeometryExtensionsParallel.CreateMultipleNodes(geometry, inner, 1);
             OSGeometryExtensionsParallel.CreateMultipleNodes(geometry, innermost, 1);
 
-            geometry.AddParametricSurfaceToModel(surfaceId);
-            geometry.CommitParametricSurfaceMesh(surfaceId);
+            int outer = geometry.DefineAnnularParametricSurfaceExt("Outer", periphery, opening);
+            int inner1 = geometry.DefineAnnularParametricSurfaceExt("Inner 1", opening, inner);
+            int inner2 = geometry.DefineAnnularParametricSurfaceExt("Inner 2", inner, innermost);
+
+            //int outer = geometry.DefineParametricSurfaceExt("BP Outer", ParametericSurfaceType.None, periphery);
+            //geometry.AddPolygonalRegionToSurfaceExt(outer, opening, RegionType.Opening);
+
+            //int inner1 = geometry.DefineParametricSurfaceExt("BP Inner First", opening);
+            //geometry.AddPolygonalRegionToSurfaceExt(inner1, inner, RegionType.Opening);
+
+            //int inner2 = geometry.DefineParametricSurfaceExt("BP Inner Second", inner);
+            //geometry.AddPolygonalRegionToSurfaceExt(inner2, innermost, RegionType.Opening);
+
+            geometry.AddAndCommitParametricSurfaceToModel(outer);
+            geometry.AddAndCommitParametricSurfaceToModel(inner1);
+            geometry.AddAndCommitParametricSurfaceToModel(inner2);
+
+            //geometry.AddParametricSurfaceToModel(outer);
+            //geometry.AddParametricSurfaceToModel(inner1);
+            //geometry.AddParametricSurfaceToModel(inner2);
+
+
+            //geometry.CommitParametricSurfaceMesh(outer);
+            //geometry.CommitParametricSurfaceMesh(inner1);
+            //geometry.CommitParametricSurfaceMesh(inner2);
+
 
             //CircularBasePlateWithBoltHoles();
 

@@ -73,7 +73,7 @@
     <Compile Include="Controls\CircularBasePlate.xaml.cs">
       <DependentUpon>CircularBasePlate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Enums\ParametericSurfaceType.cs" />
+    <Compile Include="Enums\SurfaceType.cs" />
     <Compile Include="Extensions\OSGeometryExtensions.cs" />
     <Compile Include="Base\ParametricSurfaceMesh.cs" />
     <Compile Include="Models\BoltHoleMesh.cs" />

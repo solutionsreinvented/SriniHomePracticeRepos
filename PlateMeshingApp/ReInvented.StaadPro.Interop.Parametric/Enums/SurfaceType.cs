@@ -1,6 +1,6 @@
 ﻿namespace ReInvented.StaadPro.Interop.Parametric.Enums
 {
-    public enum ParametericSurfaceType
+    public enum SurfaceType
     {
         None = 0,
         Wall = 1,
