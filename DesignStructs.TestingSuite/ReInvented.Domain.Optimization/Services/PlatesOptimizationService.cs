@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 using OpenSTAADUI;
 
-using ReInvented.DataAccess;
-using ReInvented.DataAccess.Services;
 using ReInvented.Domain.Optimization.Models;
 using ReInvented.StaadPro.Interop.Entities;
 using ReInvented.StaadPro.Interop.Extensions;
 using ReInvented.StaadPro.Interop.Interfaces;
 using ReInvented.StaadPro.Interop.Models;
 
-namespace DevDrive.Services
+namespace ReInvented.Domain.Optimization.Services
 {
     public class PlatesOptimizationService
     {
@@ -28,7 +25,6 @@ namespace DevDrive.Services
             Load = wrapper.Load;
             Output = wrapper.Output;
             Criteria = optimizationCriteria;
-            OutputFiles = new OutputFiles(wrapper.OpenStaad.GetStaadFileFullPath());
         }
 
         #endregion
@@ -36,18 +32,29 @@ namespace DevDrive.Services
         #region Readonly Properties
 
         public HashSet<double> CommonThicknesses => new HashSet<double>() { 5, 6, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 20, 22, 25, 28, 30, 32, 35, 38, 40, 45, 50, 55, 60, 65, 70, 75, 80, 90, 100, 110, 120, 125, 130, 140, 150, 160, 170, 180, 190, 200 };
+
         public OpenStaadWrapper Wrapper { get; private set; }
+
         public OSGeometryUI Geometry { get; private set; }
+
         public OSPropertyUI Property { get; private set; }
+
         public OSLoadUI Load { get; private set; }
+
         public OSOutputUI Output { get; private set; }
+
         public PlateOptimizationCriteria Criteria { get; set; }
-        public OutputFiles OutputFiles { get; private set; }
+
         public HashSet<ILoadCase> LoadCases { get; private set; }
 
         #endregion
 
         #region Public Functions
+
+        public PlatesOptimizationReport GenerateReport(IEnumerable<ILoadCase> loadCases)
+        {
+            return new PlatesOptimizationReport { Criteria = Criteria, Results = OptimizeAll(loadCases) };
+        }
 
         public HashSet<PlateGroupDesignResult> OptimizeAll(IEnumerable<ILoadCase> loadCases)
         {
@@ -90,7 +97,7 @@ namespace DevDrive.Services
 
             double maxAbsVonMises = governingResult.GoverningResults.VonMises.AbsoluteMaximum / 1000;
 
-            if (maxAbsVonMises <= Criteria.LimitingStress || governingResult.PercentPlatesExceeding > Criteria.AllowedPercentPlatesExceedance)
+            if (maxAbsVonMises <= Criteria.LimitingStress && governingResult.PercentPlatesExceeding > Criteria.AllowedPercentPlatesExceedance)
             {
                 designResult.DesignThickness *= maxAbsVonMises / Criteria.LimitingStress;
             }
@@ -104,22 +111,6 @@ namespace DevDrive.Services
             return designResult;
         }
 
-        public void WriteResultsToFile(HashSet<PlateGroupDesignResult> designResults)
-        {
-            WriteResultsToFile(designResults, OutputFiles.JsonOutputFileFullPath);
-        }
-
-        #endregion
-
-        #region Public Static Functions
-
-        public static void WriteResultsToFile(HashSet<PlateGroupDesignResult> designResults, string outputFileFullPath)
-        {
-            JsonDataSerializer<HashSet<PlateGroupDesignResult>> serializer = new JsonDataSerializer<HashSet<PlateGroupDesignResult>>();
-            string serialized = "const content = " + serializer.Serialize(designResults, JsonSerializerSettingsProvider.Minified);
-
-            File.WriteAllText(outputFileFullPath, serialized);
-        }
 
         #endregion
 

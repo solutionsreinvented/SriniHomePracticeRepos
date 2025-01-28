@@ -220,7 +220,6 @@
     <Compile Include="Models\ProcessResult.cs" />
     <Compile Include="Models\ThemeSettings.cs" />
     <Compile Include="Services\AnimationManager.cs" />
-    <Compile Include="Services\PlatesOptimizationService.cs" />
     <Compile Include="Services\SectionPropertyValuesService.cs" />
     <Compile Include="VideoPlayer.xaml.cs">
       <DependentUpon>VideoPlayer.xaml</DependentUpon>

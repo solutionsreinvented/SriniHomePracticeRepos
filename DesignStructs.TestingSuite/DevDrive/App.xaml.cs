@@ -7,6 +7,7 @@ using System.Windows;
 using DevDrive.Services;
 
 using ReInvented.Domain.Optimization.Models;
+using ReInvented.Domain.Optimization.Services;
 using ReInvented.Sections.Domain.Models;
 using ReInvented.Sections.Domain.Repositories;
 using ReInvented.StaadPro.Interop.Entities;
@@ -47,7 +48,7 @@ namespace DevDrive
             //MainWindow = new MainWindow();
             //MainWindow.Show();
 
-            string inputFile = @"D:\02. Due\00. Projects\01. Pre-Order\74. E25010019 (24m & 72m Zafranal)\03. STAAD\01. Working\D24.0H2.00S09.00OC1.167SC1.396IMP0.282CON0.0290MOT0400.std";
+            string inputFile = @"D:\02. Due\00. Projects\01. Pre-Order\74. E25010019 (24m & 72m Zafranal)\03. STAAD\01. Working\D72.0H3.50S15.00OC1.228SC1.424IMP0.282CON0.0058MOT6000_Bridge_Optimization.std";
             //HashSet<Envelop> envelops = new HashSet<Envelop>()
             //{
             //    new Envelop(EnvelopGroup.JointMass, 100, 100),
@@ -68,17 +69,19 @@ namespace DevDrive
             OpenStaadWrapper wrapper = OpenStaadWrapperProvider.Get(inputFile);
             IEnumerable<LoadCase> loadCases = wrapper.Load.GetLoadCases(101, 200, LoadCaseType.LoadCombination);
             PlateOptimizationCriteria criteria = new PlateOptimizationCriteria()
-            { MinimumThickness = 6.0, CorrosionAllowance = 2.0, MaterialGrade = grade, ThreadCount = 10, AllowedPercentPlatesExceedance = 15.0 };
+            { MinimumThickness = 6.0, CorrosionAllowance = 2.0, Grade = grade, ThreadCount = 10, AllowedPercentPlatesExceedance = 15.0 };
 
             stopwatch.Start();
 
             PlatesOptimizationService pos = new PlatesOptimizationService(wrapper, criteria);
-            HashSet<PlateGroupDesignResult> results = pos.OptimizeAll(loadCases);
+            PlatesOptimizationReport report = new PlatesOptimizationReport() { Criteria = criteria };
+
+            report.Results = pos.OptimizeAll(loadCases);
 
             stopwatch.Stop();
             Console.WriteLine($"Total time consumed for plates optimization is {TimeSpan.FromMilliseconds(stopwatch.ElapsedMilliseconds)}");
 
-            pos.WriteResultsToFile(results);
+            report.Save();
         }
 
         #region Previous - Successful
