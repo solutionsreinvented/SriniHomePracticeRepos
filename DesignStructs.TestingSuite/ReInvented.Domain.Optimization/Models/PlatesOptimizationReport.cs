@@ -38,7 +38,7 @@ namespace ReInvented.Domain.Optimization.Models
 
         public void Save()
         {
-            Save(this, OutputFiles.JsonOutputFileFullPath);
+            Save(this, OutputFiles.ReportDataFileJson);
         }
 
         #endregion

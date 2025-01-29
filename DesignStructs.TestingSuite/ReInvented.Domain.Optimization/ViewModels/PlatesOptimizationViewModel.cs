@@ -2,15 +2,23 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
+using HtmlAgilityPack;
+
+using ReInvented.DataAccess;
 using ReInvented.DataAccess.Models;
+using ReInvented.DataAccess.NameProviders;
 using ReInvented.DataAccess.Services;
 using ReInvented.Domain.Optimization.Models;
 using ReInvented.Domain.Optimization.Services;
+using ReInvented.Domain.Reporting.Services;
 using ReInvented.Shared.Commands;
+using ReInvented.Shared.Extensions;
+using ReInvented.Shared.Services;
 using ReInvented.Shared.Stores;
 using ReInvented.StaadPro.Interop.Entities;
 using ReInvented.StaadPro.Interop.Enums;
@@ -94,7 +102,19 @@ namespace ReInvented.Domain.Optimization.ViewModels
 
         private void OnSaveReport()
         {
-            throw new NotImplementedException();
+            string outputFileFullPath = Report.OutputFiles.ReportDataFileJson;
+
+            JsonDataSerializer<PlatesOptimizationReport> serializer = new JsonDataSerializer<PlatesOptimizationReport>();
+            string serialized = "const content = " + serializer.Serialize(Report, JsonSerializerSettingsProvider.Minified);
+
+            string sourceHtml = Path.Combine(DirectoryPaths.ReportsPages, $"plates-optimization.{FileExtensions.Html}");
+
+            HtmlDocument htmlDocument = new HtmlDocument();
+
+            htmlDocument.Load(sourceHtml);
+            htmlDocument = LinkCssAndScriptsTo(htmlDocument, true);
+
+            File.WriteAllText(outputFileFullPath, serialized);
         }
 
         #endregion
@@ -167,5 +187,76 @@ namespace ReInvented.Domain.Optimization.ViewModels
         }
 
         #endregion
+
+        private HtmlDocument LinkCssAndScriptsTo(HtmlDocument htmlDocument, bool useAbsolutePaths)
+        {
+            if (htmlDocument is null)
+            {
+                throw new ArgumentNullException($"{nameof(htmlDocument)} cannot be null or empty.");
+            }
+
+            htmlDocument = htmlDocument.RemoveAllExistingCssLinkTagsFromHeadElement().RemoveAllExistingScriptTagsFromBodyElement();
+            htmlDocument = AppendCssLinkTagsToHeadElement(htmlDocument, useAbsolutePaths);
+            htmlDocument = AppendScriptTagsToBodyElement(htmlDocument, useAbsolutePaths);
+
+            return htmlDocument;
+        }
+
+        private HtmlDocument AppendCssLinkTagsToHeadElement(HtmlDocument htmlDocument, bool useAbsolutePaths)
+        {
+            HtmlNode head = htmlDocument.GetHeadElementNode();
+
+            if (head != null)
+            {
+                _ = head.AppendChild(HtmlNodeServices.CreateStylesheetNodeWithAttributes(ReportFileNames.CssCommon, useAbsolutePaths));
+                _ = head.AppendChild(HtmlNodeServices.CreateStylesheetNodeWithAttributes(ReportFileNames.CssPlatesOptimization, useAbsolutePaths));
+            }
+
+            return htmlDocument;
+        }
+
+        private HtmlDocument AppendScriptTagsToBodyElement(HtmlDocument htmlDocument, bool useAbsolutePaths)
+        {
+            HtmlNode body = htmlDocument.GetBodyElementNode();
+
+            if (body != null)
+            {
+                _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes($"{DirectoryNames.StaadReportsData}/{ReportSpecificContentsFileName}"));
+                _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes(ReportFileNames.JavaScriptShared, useAbsolutePaths));
+                _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes(SourceJavaScriptFileName, useAbsolutePaths));
+            }
+
+            return htmlDocument;
+        }
+
+
+        protected virtual bool CreateReportHtmlFile()
+        {
+            string htmlSourceFileFullPath = Path.Combine(DirectoryPaths.ReportsPages, SourceHtmlFileName);
+            string htmlDestinationFileFullPath = Path.Combine(ProjectReportsDirectory.FullName, DestinationHtmlFileName);
+
+
+
+            if (File.Exists(htmlDestinationFileFullPath))
+            {
+                MessageBoxResult result = MessageService.ShowMessage(DialogService, "The specified report file already exists! Do you want to override the file?", "Create reports", MessageBoxButton.YesNo);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    htmlDocument.Save(htmlDestinationFileFullPath);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                htmlDocument.Save(htmlDestinationFileFullPath);
+                return true;
+            }
+        }
+
     }
 }

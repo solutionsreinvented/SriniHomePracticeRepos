@@ -1,5 +1,7 @@
 ﻿using System.IO;
 
+using ReInvented.DataAccess.Services;
+
 namespace ReInvented.Domain.Optimization.Models
 {
     public sealed class OutputFiles
@@ -30,7 +32,9 @@ namespace ReInvented.Domain.Optimization.Models
 
         public string StaadFileName => Path.GetFileNameWithoutExtension(StaadFileFullPath);
 
-        public string JsonOutputFileFullPath => Path.Combine(TargetDirectory, $"{StaadFileName}_POReport.js");
+        public string ReportDataFileJson => Path.Combine(TargetDirectory, $"{StaadFileName}_POReportData.{FileExtensions.Json}");
+
+        public string ReportHtmlFile => Path.Combine(TargetDirectory, $"{StaadFileName}_POReport.{FileExtensions.Html}");
 
         #endregion
     }
