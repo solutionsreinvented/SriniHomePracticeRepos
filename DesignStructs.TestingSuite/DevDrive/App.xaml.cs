@@ -68,8 +68,8 @@ namespace DevDrive
 
             OpenStaadWrapper wrapper = OpenStaadWrapperProvider.Get(inputFile);
             IEnumerable<LoadCase> loadCases = wrapper.Load.GetLoadCases(101, 200, LoadCaseType.LoadCombination);
-            PlateOptimizationCriteria criteria = new PlateOptimizationCriteria()
-            { MinimumThickness = 6.0, CorrosionAllowance = 2.0, Grade = grade, ThreadCount = 10, AllowedPercentPlatesExceedance = 15.0 };
+            PlatesOptimizationCriteria criteria = new PlatesOptimizationCriteria()
+            { MinimumThickness = 6.0, CorrosionAllowance = 2.0, Grade = grade, ThreadCount = 10, AllowedOverstressedPlatesFraction = 15.0 };
 
             stopwatch.Start();
 

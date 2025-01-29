@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+
+using Newtonsoft.Json;
 
 using ReInvented.DataAccess;
 using ReInvented.DataAccess.Services;
@@ -14,7 +17,7 @@ namespace ReInvented.Domain.Optimization.Models
 
         public PlatesOptimizationReport()
         {
-            Criteria = new PlateOptimizationCriteria();
+            Criteria = new PlatesOptimizationCriteria();
         }
 
         #endregion
@@ -23,11 +26,11 @@ namespace ReInvented.Domain.Optimization.Models
 
         public string SourceStaadFile { get => Get<string>(); set { Set(value); UpdateOutputFiles(); } }
 
-        public PlateOptimizationCriteria Criteria { get => Get<PlateOptimizationCriteria>(); set => Set(value); }
+        public PlatesOptimizationCriteria Criteria { get => Get<PlatesOptimizationCriteria>(); set => Set(value); }
 
-        public OutputFiles OutputFiles { get; private set; }
+        public OutputFiles OutputFiles { get => Get<OutputFiles>(); private set => Set(value); }
 
-        public HashSet<PlateGroupDesignResult> Results { get; set; }
+        public HashSet<PlateGroupDesignResult> Results { get => Get<HashSet<PlateGroupDesignResult>>(); set => Set(value); }
 
         #endregion
 

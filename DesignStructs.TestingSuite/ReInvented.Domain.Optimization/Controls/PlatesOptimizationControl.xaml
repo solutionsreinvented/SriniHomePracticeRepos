@@ -5,10 +5,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:staad="http://schemas.reinvented/staadpro/interop"
     xmlns:vm="clr-namespace:ReInvented.Domain.Optimization.ViewModels"
     x:Name="Root"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="850"
+    d:DesignWidth="1300"
     mc:Ignorable="d">
     <UserControl.DataContext>
         <vm:PlatesOptimizationViewModel />
@@ -17,7 +18,7 @@
     <GroupBox
         Margin="5"
         DataContext="{Binding Report.Criteria}"
-        Header="Criteria">
+        Header="Optimize">
 
         <Grid Margin="5">
 
@@ -30,8 +31,9 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition />
-                <!--<RowDefinition />-->
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <!--#endregion-->
@@ -42,8 +44,8 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                Margin="5"
-                DataContext="{Binding DataContext.Report, ElementName=Root}">
+                Margin="5,5,0,5"
+                DataContext="{Binding DataContext, ElementName=Root}">
 
                 <!--#region Grid Definitions-->
 
@@ -60,14 +62,18 @@
                     Text="Source Staad File:" />
                 <Grid Grid.Column="1" Height="24">
                     <TextBox
+                        Padding="2,0,0,0"
                         HorizontalAlignment="Stretch"
+                        VerticalContentAlignment="Center"
                         IsEnabled="False"
-                        Text="{Binding SourceStaadFile}" />
+                        Text="{Binding Report.SourceStaadFile}"
+                        ToolTip="{Binding Report.SourceStaadFile}"
+                        ToolTipService.ShowOnDisabled="True" />
                     <Button
                         Width="24"
                         Margin="1"
                         HorizontalAlignment="Right"
-                        Command="{Binding BrowseStaadFileCommand}"
+                        Command="{Binding BrowseSourceStaadFileCommand}"
                         Content="..."
                         ToolTip="Browse" />
                 </Grid>
@@ -76,69 +82,28 @@
 
             <!--#endregion-->
 
+            <!--#region Optimization Criteria-->
+
             <GroupBox
                 Grid.Row="1"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Padding="5,0"
-                Header="Material">
+                Header="Criteria"
+                IsEnabled="{Binding DataContext.IsModelSelected, ElementName=Root}">
 
                 <Grid>
 
                     <!--#region Grid Definitions-->
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-
-                    <!--#endregion-->
-
-                    <TextBlock
-                        Grid.Column="0"
-                        VerticalAlignment="Center"
-                        Text="Table:" />
-                    <ComboBox
-                        Grid.Column="1"
-                        Height="24"
-                        DisplayMemberPath="Name"
-                        ItemsSource="{Binding MaterialsLibrary.Tables}"
-                        SelectedItem="{Binding SelectedTable}" />
-                    <TextBlock
-                        Grid.Column="2"
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Text="Material Grade:" />
-                    <ComboBox
-                        Grid.Column="3"
-                        Height="24"
-                        Margin="0,5"
-                        DisplayMemberPath="Designation"
-                        ItemsSource="{Binding SelectedTable.Grades}"
-                        SelectedItem="{Binding Grade}" />
-
-                </Grid>
-
-            </GroupBox>
-
-            <GroupBox
-                Grid.Row="2"
-                Grid.Column="0"
-                Padding="5"
-                Header="Other">
-
-                <Grid>
-
-                    <!--#region Grid Definitions-->
-
-                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*" />
                         <ColumnDefinition Width="2*" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
+
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -147,18 +112,51 @@
 
                     <!--#endregion-->
 
+                    <!--#region Material-->
+
                     <TextBlock
-                        Grid.Row="0"
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        Text="Table:" />
+                    <ComboBox
+                        Grid.Column="1"
+                        Height="24"
+                        Margin="0,2"
+                        HorizontalContentAlignment="Right"
+                        DisplayMemberPath="Name"
+                        ItemsSource="{Binding MaterialsLibrary.Tables}"
+                        SelectedItem="{Binding SelectedTable}" />
+
+                    <TextBlock
+                        Grid.Column="2"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="Material Grade:" />
+                    <ComboBox
+                        Grid.Column="3"
+                        Height="24"
+                        Margin="0,2"
+                        HorizontalContentAlignment="Right"
+                        DisplayMemberPath="Designation"
+                        ItemsSource="{Binding SelectedTable.Grades}"
+                        SelectedItem="{Binding Grade}" />
+
+                    <!--#endregion-->
+
+                    <!--#region Other-->
+
+                    <TextBlock
+                        Grid.Row="1"
                         Grid.Column="0"
                         VerticalAlignment="Center"
                         Text="Minimum Thickness:" />
 
                     <TextBox
-                        Grid.Row="0"
+                        Grid.Row="1"
                         Grid.Column="1"
                         Height="24"
                         Margin="0,2"
-                        Padding="3,0,0,0"
+                        Padding="3,0,10,0"
                         HorizontalContentAlignment="Right"
                         VerticalContentAlignment="Center"
                         shared:TextBoxProperties.SelectAll="True"
@@ -166,16 +164,17 @@
 
                     <TextBlock
                         Grid.Row="1"
-                        Grid.Column="0"
+                        Grid.Column="2"
+                        Margin="10,0,0,0"
                         VerticalAlignment="Center"
                         Text="Corrosion Allowance:" />
 
                     <TextBox
                         Grid.Row="1"
-                        Grid.Column="1"
+                        Grid.Column="3"
                         Height="24"
                         Margin="0,2"
-                        Padding="3,0,0,0"
+                        Padding="3,0,10,0"
                         HorizontalContentAlignment="Right"
                         VerticalContentAlignment="Center"
                         shared:TextBoxProperties.SelectAll="True"
@@ -192,50 +191,294 @@
                         Grid.Column="1"
                         Height="24"
                         Margin="0,2"
-                        Padding="3,0,0,0"
+                        Padding="3,0,10,0"
                         HorizontalContentAlignment="Right"
                         VerticalContentAlignment="Center"
                         shared:TextBoxProperties.SelectAll="True"
-                        Text="{Binding AllowedPercentPlatesExceedance, StringFormat={}{0:P1}}"
+                        Text="{Binding AllowedOverstressedPlatesFraction, StringFormat={}{0:P1}}"
                         ToolTip="How many plates in a group can exceed the permissible stress. Expressed in percentage." />
 
                     <TextBlock
-                        Grid.Row="3"
-                        Grid.Column="0"
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        Margin="10,0,0,0"
                         VerticalAlignment="Center"
                         Text="Material Partial Safety Factor:" />
 
                     <TextBox
-                        Grid.Row="3"
-                        Grid.Column="1"
+                        Grid.Row="2"
+                        Grid.Column="3"
                         Height="24"
                         Margin="0,2"
-                        Padding="3,0,0,0"
+                        Padding="3,0,10,0"
                         HorizontalContentAlignment="Right"
                         VerticalContentAlignment="Center"
                         shared:TextBoxProperties.SelectAll="True"
                         Text="{Binding PartialFactor, StringFormat={}{0:N2}}" />
 
                     <TextBlock
-                        Grid.Row="4"
+                        Grid.Row="3"
                         Grid.Column="0"
                         VerticalAlignment="Center"
                         Text="Permissible Stress:" />
 
                     <TextBox
-                        Grid.Row="4"
+                        Grid.Row="3"
                         Grid.Column="1"
                         Height="24"
                         Margin="0,2"
-                        Padding="3,0,0,0"
+                        Padding="3,0,10,0"
                         HorizontalContentAlignment="Right"
                         VerticalContentAlignment="Center"
                         shared:TextBoxProperties.SelectAll="True"
                         IsEnabled="False"
-                        Text="{Binding LimitingStress, Mode=OneWay, StringFormat={}{0:N2} N/mm2}" />
+                        Text="{Binding LimitingStress, Mode=OneWay, StringFormat={}{0:N2} N/mm²}" />
+
+                    <!--#endregion-->
+
                 </Grid>
 
             </GroupBox>
+
+            <!--#endregion-->
+
+            <!--#region Load Cases Criteria-->
+
+            <GroupBox
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Padding="5"
+                DataContext="{Binding DataContext, ElementName=Root}"
+                Header="Load Cases/Combinations"
+                IsEnabled="{Binding DataContext.IsModelSelected, ElementName=Root}">
+
+                <Grid>
+
+                    <!--#region Grid Definitions-->
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!--#endregion-->
+
+                    <!--#region Load Case Type-->
+
+                    <TextBlock
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        VerticalAlignment="Center"
+                        Text="Load Case Type:" />
+
+                    <ComboBox
+                        Grid.Column="2"
+                        Grid.ColumnSpan="2"
+                        Height="24"
+                        Margin="10,2,0,2"
+                        HorizontalContentAlignment="Right"
+                        ItemsSource="{shared:EnumBindingResource staad:LoadCaseType}"
+                        SelectedItem="{Binding Report.Criteria.LoadCaseType, Mode=TwoWay}">
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="IsEnabled" Value="True" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding}" Value="RepeatLoad">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ComboBox.ItemContainerStyle>
+                    </ComboBox>
+
+                    <!--#endregion-->
+
+                    <!--#region Start LC-->
+
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        Text="Start Load Case/Combination:" />
+
+                    <ComboBox
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Height="24"
+                        Margin="0,2"
+                        HorizontalContentAlignment="Right"
+                        DisplayMemberPath="Id"
+                        ItemsSource="{Binding Report.Criteria.LoadCasesRange}"
+                        SelectedItem="{Binding Report.Criteria.StartLoadCase}" />
+
+                    <!--#endregion-->
+
+                    <!--#region End LC-->
+
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="End Load Case/Combination:" />
+
+                    <ComboBox
+                        Grid.Row="1"
+                        Grid.Column="3"
+                        Height="24"
+                        HorizontalContentAlignment="Right"
+                        DisplayMemberPath="Id"
+                        ItemsSource="{Binding Report.Criteria.LoadCasesRange}"
+                        SelectedItem="{Binding Report.Criteria.EndLoadCase}" />
+
+                    <!--#endregion-->
+
+                </Grid>
+
+            </GroupBox>
+
+            <!--#endregion-->
+
+            <GroupBox
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Padding="5"
+                Header="Results">
+
+                <DataGrid
+                    AutoGenerateColumns="False"
+                    DataContext="{Binding DataContext.Report, ElementName=Root}"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding Results}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Width="*" Header="Group Name">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock Margin="5,0,0,0" Text="{Binding GroupName}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Width="1.5*" Header="Abs. Max. Von Mises (N/mm²)">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding StressSummary.GoverningResults.VonMises.AbsoluteMaximum, StringFormat={}{0:N1}}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Width="*" Header="% Plates Exceeding">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock
+                                            Width="100"
+                                            HorizontalAlignment="Center"
+                                            Text="{Binding StressSummary.PercentPlatesExceeding, StringFormat={}{0:P1}}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn
+                            Width="Auto"
+                            MinWidth="80"
+                            Header="LC">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding StressSummary.GoverningResults.LoadCase.Id}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Width="*" Header="Current Thickness">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock
+                                            Width="100"
+                                            HorizontalAlignment="Center"
+                                            Text="{Binding CurrentThickness, StringFormat={}{0:N1} mm}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Width="*" Header="Corrosion Allowance">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding CorrosionAllowance, StringFormat={}{0:N1} mm}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Width="*" Header="Minimum Thickness">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding MinimumThickness, StringFormat={}{0:N1} mm}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Width="*" Header="Design Thickness">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding DesignThickness, StringFormat={}{0:N1} mm}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <!--<ListView
+                    BorderThickness="0.3"
+                    DataContext="{Binding DataContext.Report, ElementName=Root}"
+                    ItemsSource="{Binding Results}" />-->
+
+            </GroupBox>
+
+            <StackPanel
+                Grid.Row="4"
+                Grid.ColumnSpan="2"
+                Height="24"
+                Margin="0,5"
+                HorizontalAlignment="Right"
+                DataContext="{Binding DataContext, ElementName=Root}"
+                Orientation="Horizontal">
+                <Button
+                    Width="150"
+                    Command="{Binding GenerateResultsCommand}"
+                    Content="Generate Results"
+                    IsEnabled="{Binding CanGenerateResults}" />
+                <Button
+                    Width="150"
+                    Margin="10,0,0,0"
+                    Command="{Binding SaveReportCommand}"
+                    Content="Save Report"
+                    IsEnabled="{Binding CanSaveReport}" />
+            </StackPanel>
         </Grid>
 
     </GroupBox>

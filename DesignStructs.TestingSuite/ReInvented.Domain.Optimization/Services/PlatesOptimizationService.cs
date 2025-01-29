@@ -10,6 +10,7 @@ using ReInvented.StaadPro.Interop.Entities;
 using ReInvented.StaadPro.Interop.Extensions;
 using ReInvented.StaadPro.Interop.Interfaces;
 using ReInvented.StaadPro.Interop.Models;
+using ReInvented.Units.Models;
 
 namespace ReInvented.Domain.Optimization.Services
 {
@@ -17,14 +18,22 @@ namespace ReInvented.Domain.Optimization.Services
     {
         #region Parameterized Constructor
 
-        public PlatesOptimizationService(OpenStaadWrapper wrapper, PlateOptimizationCriteria optimizationCriteria)
+        public PlatesOptimizationService(OpenStaadWrapper wrapper, PlatesOptimizationCriteria optimizationCriteria)
         {
             Wrapper = wrapper;
-            Geometry = wrapper.Geometry;
-            Property = wrapper.Property;
-            Load = wrapper.Load;
-            Output = wrapper.Output;
+            //Geometry = wrapper.Geometry;
+            //Property = wrapper.Property;
+            //Load = wrapper.Load;
+            //Output = wrapper.Output;
             Criteria = optimizationCriteria;
+
+            UnitsConverter = new UnitsConverter()
+            {
+                FromLength = Units.Enums.LengthUnit.m,
+                ToLength = Units.Enums.LengthUnit.mm,
+                FromForce = Units.Enums.ForceUnit.kN,
+                ToForce = Units.Enums.ForceUnit.N
+            };
         }
 
         #endregion
@@ -35,17 +44,19 @@ namespace ReInvented.Domain.Optimization.Services
 
         public OpenStaadWrapper Wrapper { get; private set; }
 
-        public OSGeometryUI Geometry { get; private set; }
+        //public OSGeometryUI Geometry { get; private set; }
 
-        public OSPropertyUI Property { get; private set; }
+        //public OSPropertyUI Property { get; private set; }
 
-        public OSLoadUI Load { get; private set; }
+        //public OSLoadUI Load { get; private set; }
 
-        public OSOutputUI Output { get; private set; }
+        //public OSOutputUI Output { get; private set; }
 
-        public PlateOptimizationCriteria Criteria { get; set; }
+        public PlatesOptimizationCriteria Criteria { get; set; }
 
         public HashSet<ILoadCase> LoadCases { get; private set; }
+
+        public UnitsConverter UnitsConverter { get; private set; }
 
         #endregion
 
@@ -58,10 +69,10 @@ namespace ReInvented.Domain.Optimization.Services
 
         public HashSet<PlateGroupDesignResult> OptimizeAll(IEnumerable<ILoadCase> loadCases)
         {
-            IEnumerable<Plate> allPlates = Geometry.GetAllEntities<Plate>(Criteria.ThreadCount);
-            HashSet<LoadCase> plc = Load.GetAllPrimaryLoadCases();
+            IEnumerable<Plate> allPlates = Wrapper.Geometry.GetAllEntities<Plate>(Criteria.ThreadCount);
+            HashSet<LoadCase> plc = Wrapper.Load.GetAllPrimaryLoadCases();
 
-            IEnumerable<string> groupNames = Geometry.GetEntityGroups<Plate>(Criteria.ThreadCount)
+            IEnumerable<string> groupNames = Wrapper.Geometry.GetEntityGroups<Plate>(Criteria.ThreadCount)
                                                      .Where(eg => eg.Entities.Count() > 0)
                                                      .OrderByDescending(eg => Plate.MaxYCoordinate(eg.Entities.OrderByDescending(e => Plate.MaxYCoordinate(e)).First()))
                                                      .Where(eg => !InExclusionList(eg.GroupName))
@@ -87,17 +98,25 @@ namespace ReInvented.Domain.Optimization.Services
 
         public PlateGroupDesignResult OptimizeGroup(string groupName, IEnumerable<ILoadCase> loadCases)
         {
-            IEnumerable<Plate> plates = Geometry.GetEntitiesInGroup<Plate>(groupName, 1);
-            double currentThickness = Property.GetPlateThickness(plates.First().Id).A * 1000;
+            IEnumerable<Plate> plates = Wrapper.Geometry.GetEntitiesInGroup<Plate>(groupName, 1);
+            double currentThickness = Wrapper.Property.GetPlateThickness(plates.First().Id).A * 1000;
 
             IEnumerable<PlateCenterResults> results = Wrapper.GetPlateCenterResultsForGroup(groupName, loadCases, Criteria.ThreadCount);
+
+            results.ToList().ForEach(r => r.ConvertUsing(UnitsConverter));
+
             PlateGroupStressSummary governingResult = results.GetGoverningPlateGroupStressSummary(Criteria.LimitingStress);
 
             PlateGroupDesignResult designResult = new PlateGroupDesignResult(groupName, governingResult, currentThickness);
 
-            double maxAbsVonMises = governingResult.GoverningResults.VonMises.AbsoluteMaximum / 1000;
+            double maxAbsVonMises = governingResult.GoverningResults.VonMises.AbsoluteMaximum;
 
-            if (maxAbsVonMises <= Criteria.LimitingStress && governingResult.PercentPlatesExceeding > Criteria.AllowedPercentPlatesExceedance)
+            //if (maxAbsVonMises <= Criteria.LimitingStress && governingResult.OverstressedPlatesFraction > Criteria.AllowedOverstressedPlatesFraction)
+            //{
+            //    designResult.DesignThickness *= maxAbsVonMises / Criteria.LimitingStress;
+            //}
+
+            if (governingResult.OverstressedPlatesFraction > Criteria.AllowedOverstressedPlatesFraction)
             {
                 designResult.DesignThickness *= maxAbsVonMises / Criteria.LimitingStress;
             }
