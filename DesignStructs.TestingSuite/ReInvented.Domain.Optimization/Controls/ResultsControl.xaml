@@ -67,7 +67,7 @@
             <DataGridTemplateColumn
                 Width="Auto"
                 MinWidth="80"
-                Header="LC">
+                Header="Load Case">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <Grid>
