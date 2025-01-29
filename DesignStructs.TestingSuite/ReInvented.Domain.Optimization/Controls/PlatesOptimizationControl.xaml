@@ -160,7 +160,8 @@
                         HorizontalContentAlignment="Right"
                         VerticalContentAlignment="Center"
                         shared:TextBoxProperties.SelectAll="True"
-                        Text="{Binding MinimumThickness, StringFormat={}{0:N1} mm}" />
+                        Text="{Binding MinimumThickness, StringFormat={}{0:N1} mm}"
+                        ToolTip="The absolute minimum design thickness to be used" />
 
                     <TextBlock
                         Grid.Row="1"
@@ -233,6 +234,22 @@
                         shared:TextBoxProperties.SelectAll="True"
                         IsEnabled="False"
                         Text="{Binding LimitingStress, Mode=OneWay, StringFormat={}{0:N2} N/mm²}" />
+
+                    <TextBlock
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="Number of Processor Threads:" />
+
+                    <ComboBox
+                        Grid.Row="3"
+                        Grid.Column="3"
+                        Height="24"
+                        Margin="0,2"
+                        HorizontalContentAlignment="Right"
+                        ItemsSource="{Binding PossibleThreadCount}"
+                        SelectedItem="{Binding ThreadCount}" />
 
                     <!--#endregion-->
 
@@ -389,7 +406,7 @@
                                         <TextBlock
                                             Width="100"
                                             HorizontalAlignment="Center"
-                                            Text="{Binding StressSummary.PercentPlatesExceeding, StringFormat={}{0:P1}}" />
+                                            Text="{Binding StressSummary.OverstressedPlatesFraction, StringFormat={}{0:P1}}" />
                                     </Grid>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

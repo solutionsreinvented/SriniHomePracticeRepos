@@ -72,7 +72,7 @@ namespace ReInvented.Domain.Optimization.Models
             LoadCaseType = LoadCaseType.LoadCombination;
             MaterialsLibrary = MaterialsRepository.Instance.GetMaterialsLibrary();
             SelectedTable = MaterialsLibrary.Tables.FirstOrDefault();
-            ThreadCount = 1;
+            ThreadCount = 5;
             AllowedOverstressedPlatesFraction = 0.10;
             PartialFactor = 0.90;
         }

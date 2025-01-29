@@ -111,12 +111,7 @@ namespace ReInvented.Domain.Optimization.Services
 
             double maxAbsVonMises = governingResult.GoverningResults.VonMises.AbsoluteMaximum;
 
-            //if (maxAbsVonMises <= Criteria.LimitingStress && governingResult.OverstressedPlatesFraction > Criteria.AllowedOverstressedPlatesFraction)
-            //{
-            //    designResult.DesignThickness *= maxAbsVonMises / Criteria.LimitingStress;
-            //}
-
-            if (governingResult.OverstressedPlatesFraction > Criteria.AllowedOverstressedPlatesFraction)
+            if (maxAbsVonMises <= Criteria.LimitingStress || governingResult.OverstressedPlatesFraction > Criteria.AllowedOverstressedPlatesFraction)
             {
                 designResult.DesignThickness *= maxAbsVonMises / Criteria.LimitingStress;
             }
