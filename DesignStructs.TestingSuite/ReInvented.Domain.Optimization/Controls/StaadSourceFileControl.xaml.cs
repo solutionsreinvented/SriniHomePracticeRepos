@@ -3,11 +3,11 @@
 namespace ReInvented.Domain.Optimization.Controls
 {
     /// <summary>
-    /// Interaction logic for PlatesOptimizationControl.xaml
+    /// Interaction logic for StaadSourceFileControl.xaml
     /// </summary>
-    public partial class PlatesOptimizationControl : UserControl
+    public partial class StaadSourceFileControl : UserControl
     {
-        public PlatesOptimizationControl()
+        public StaadSourceFileControl()
         {
             InitializeComponent();
         }

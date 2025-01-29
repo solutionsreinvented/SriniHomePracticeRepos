@@ -1,0 +1,103 @@
+﻿<UserControl
+    x:Class="ReInvented.Domain.Optimization.Controls.LoadCasesInputControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:staad="http://schemas.reinvented/staadpro/interop"
+    d:DesignHeight="200"
+    d:DesignWidth="400"
+    mc:Ignorable="d">
+
+    <GroupBox Padding="5" Header="Load Cases/Combinations">
+
+        <Grid>
+
+            <!--#region Grid Definitions-->
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!--#endregion-->
+
+            <!--#region Load Cases Range-->
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="10,0,0,0"
+                VerticalAlignment="Center"
+                Text="Load Case Type:" />
+
+            <ComboBox
+                Grid.Row="0"
+                Grid.Column="1"
+                Height="24"
+                Margin="0,2"
+                HorizontalContentAlignment="Right"
+                ItemsSource="{shared:EnumBindingResource staad:LoadCaseType}"
+                SelectedItem="{Binding LoadCaseType, Mode=TwoWay}">
+                <ComboBox.ItemContainerStyle>
+                    <Style TargetType="ComboBoxItem">
+                        <Setter Property="IsEnabled" Value="True" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding}" Value="RepeatLoad">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.ItemContainerStyle>
+            </ComboBox>
+            <!--#endregion-->
+
+            <!--#region Start Load Case-->
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="10,0,0,0"
+                VerticalAlignment="Center"
+                Text="Start Load Case/Combination:" />
+
+            <ComboBox
+                Grid.Row="1"
+                Grid.Column="1"
+                Height="24"
+                Margin="0,2"
+                HorizontalContentAlignment="Right"
+                DisplayMemberPath="Id"
+                ItemsSource="{Binding LoadCasesRange}"
+                SelectedItem="{Binding StartLoadCase}" />
+            <!--#endregion-->
+
+            <!--#region End Load Case-->
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="10,0,0,0"
+                VerticalAlignment="Center"
+                Text="End Load Case/Combination:" />
+
+            <ComboBox
+                Grid.Row="2"
+                Grid.Column="1"
+                Height="24"
+                HorizontalContentAlignment="Right"
+                DisplayMemberPath="Id"
+                ItemsSource="{Binding LoadCasesRange}"
+                SelectedItem="{Binding EndLoadCase}" />
+            <!--#endregion-->
+
+        </Grid>
+
+    </GroupBox>
+
+</UserControl>

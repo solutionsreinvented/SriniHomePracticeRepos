@@ -112,16 +112,9 @@ namespace ReInvented.Domain.Optimization.ViewModels
 
             if (e.PropertyName == nameof(Report.Criteria.LoadCaseType))
             {
-                if (criteria.LoadCaseType == LoadCaseType.RepeatLoad)
-                {
-                    _ = MessageBox.Show("This load case type is not supported!", "Retrieve load cases", MessageBoxButton.OK);
-                }
-                else
-                {
-                    criteria.LoadCasesRange = Wrapper.Load.GetAllLoadCasesOfType(criteria.LoadCaseType);
-                    criteria.StartLoadCase = criteria.LoadCasesRange.FirstOrDefault();
-                    criteria.EndLoadCase = criteria.LoadCasesRange.LastOrDefault();
-                }
+                criteria.LoadCasesRange = Wrapper.Load.GetAllLoadCasesOfType(criteria.LoadCaseType);
+                criteria.StartLoadCase = criteria.LoadCasesRange.FirstOrDefault();
+                criteria.EndLoadCase = criteria.LoadCasesRange.LastOrDefault();
             }
 
             RaiseMultiplePropertiesChanged(nameof(CanGenerateResults), nameof(CanSaveReport));
@@ -174,6 +167,5 @@ namespace ReInvented.Domain.Optimization.ViewModels
         }
 
         #endregion
-
     }
 }

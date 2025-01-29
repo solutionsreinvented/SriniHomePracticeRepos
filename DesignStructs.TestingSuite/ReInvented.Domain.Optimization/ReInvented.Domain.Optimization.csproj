@@ -78,15 +78,57 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\LoadCasesInputControl.xaml.cs">
+      <DependentUpon>LoadCasesInputControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MaterialInputControl.xaml.cs">
+      <DependentUpon>MaterialInputControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OtherInputControl.xaml.cs">
+      <DependentUpon>OtherInputControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PlatesOptimizationControl.xaml.cs">
       <DependentUpon>PlatesOptimizationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ReportButtonsControl.xaml.cs">
+      <DependentUpon>ReportButtonsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ResultsControl.xaml.cs">
+      <DependentUpon>ResultsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StaadSourceFileControl.xaml.cs">
+      <DependentUpon>StaadSourceFileControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\PlatesOptimizationService.cs" />
     <Compile Include="ViewModels\PlatesOptimizationViewModel.cs" />
     <Compile Include="Views\PlatesOptimizationView.xaml.cs">
       <DependentUpon>PlatesOptimizationView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\LoadCasesInputControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MaterialInputControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OtherInputControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\PlatesOptimizationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ReportButtonsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ResultsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StaadSourceFileControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

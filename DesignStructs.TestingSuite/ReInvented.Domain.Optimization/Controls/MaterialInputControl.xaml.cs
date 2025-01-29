@@ -3,11 +3,11 @@
 namespace ReInvented.Domain.Optimization.Controls
 {
     /// <summary>
-    /// Interaction logic for PlatesOptimizationControl.xaml
+    /// Interaction logic for MaterialInputControl.xaml
     /// </summary>
-    public partial class PlatesOptimizationControl : UserControl
+    public partial class MaterialInputControl : UserControl
     {
-        public PlatesOptimizationControl()
+        public MaterialInputControl()
         {
             InitializeComponent();
         }

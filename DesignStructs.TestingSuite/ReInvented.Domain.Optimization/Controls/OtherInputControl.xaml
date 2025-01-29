@@ -1,0 +1,124 @@
+﻿<UserControl
+    x:Class="ReInvented.Domain.Optimization.Controls.OtherInputControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    d:DesignHeight="200"
+    d:DesignWidth="400"
+    mc:Ignorable="d">
+
+    <GroupBox Padding="5" Header="Other">
+
+        <Grid>
+
+            <!--#region Grid Definitions-->
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!--#endregion-->
+
+            <!--#region Minimum Thickness-->
+
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="10,0,0,0"
+                VerticalAlignment="Center"
+                Text="Minimum Thickness:" />
+
+            <TextBox
+                Grid.Row="0"
+                Grid.Column="1"
+                Height="24"
+                Margin="0,2"
+                Padding="3,0,10,0"
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Center"
+                shared:TextBoxProperties.SelectAll="True"
+                Text="{Binding MinimumThickness, StringFormat={}{0:N1} mm}"
+                ToolTip="The absolute minimum design thickness to be used" />
+
+            <!--#endregion-->
+
+            <!--#region Corrosion Allowance-->
+
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="10,0,0,0"
+                VerticalAlignment="Center"
+                Text="Corrosion Allowance:" />
+
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="1"
+                Height="24"
+                Margin="0,2"
+                Padding="3,0,10,0"
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Center"
+                shared:TextBoxProperties.SelectAll="True"
+                Text="{Binding CorrosionAllowance, StringFormat={}{0:N1} mm}" />
+
+            <!--#endregion-->
+
+            <!--#region Overstressed Plates Fraction-->
+
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="10,0,0,0"
+                VerticalAlignment="Center"
+                Text="Allowable Overstressed Plates in the Group:" />
+
+            <TextBox
+                Grid.Row="2"
+                Grid.Column="1"
+                Height="24"
+                Margin="0,2"
+                Padding="3,0,10,0"
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Center"
+                shared:TextBoxProperties.SelectAll="True"
+                Text="{Binding AllowedOverstressedPlatesFraction, StringFormat={}{0:P1}}"
+                ToolTip="How many plates in a group can exceed the permissible stress. Expressed in percentage." />
+
+            <!--#endregion-->
+
+            <!--#region Number of Threads-->
+
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="10,0,0,0"
+                VerticalAlignment="Center"
+                Text="Number of Processor Threads:" />
+
+            <ComboBox
+                Grid.Row="3"
+                Grid.Column="1"
+                Height="24"
+                Margin="0,2"
+                HorizontalContentAlignment="Right"
+                ItemsSource="{Binding PossibleThreadCount}"
+                SelectedItem="{Binding ThreadCount}" />
+
+            <!--#endregion-->
+
+        </Grid>
+
+    </GroupBox>
+
+</UserControl>

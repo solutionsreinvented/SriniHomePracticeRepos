@@ -1,0 +1,145 @@
+﻿<UserControl
+    x:Class="ReInvented.Domain.Optimization.Controls.ResultsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="Root"
+    d:DesignHeight="600"
+    d:DesignWidth="1300"
+    mc:Ignorable="d">
+
+    <DataGrid
+        AutoGenerateColumns="False"
+        DataContext="{Binding DataContext.Report, ElementName=Root}"
+        IsReadOnly="True"
+        ItemsSource="{Binding Results}">
+
+        <DataGrid.Columns>
+
+            <!--#region Group Name-->
+
+            <DataGridTemplateColumn Width="*" Header="Group Name">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Margin="5,0,0,0" Text="{Binding GroupName}" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <!--#endregion-->
+
+            <!--#region Absolute Max. Von Mises-->
+
+            <DataGridTemplateColumn Width="1.5*" Header="Abs. Max. Von Mises (N/mm²)">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding StressSummary.GoverningResults.VonMises.AbsoluteMaximum, StringFormat={}{0:N1}}" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <!--#endregion-->
+
+            <!--#region Percentage Overstressed Plates-->
+
+            <DataGridTemplateColumn Width="*" Header="% Overstressed Plates">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock
+                                Width="100"
+                                HorizontalAlignment="Center"
+                                Text="{Binding StressSummary.OverstressedPlatesFraction, StringFormat={}{0:P1}}" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <!--#endregion-->
+
+            <!--#region Load Case/Combination-->
+
+            <DataGridTemplateColumn
+                Width="Auto"
+                MinWidth="80"
+                Header="LC">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding StressSummary.GoverningResults.LoadCase.Id}" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <!--#endregion-->
+
+            <!--#region Current Thickness-->
+
+            <DataGridTemplateColumn Width="*" Header="Current Thickness">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock
+                                Width="100"
+                                HorizontalAlignment="Center"
+                                Text="{Binding CurrentThickness, StringFormat={}{0:N1} mm}" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <!--#endregion-->
+
+            <!--#region Corrosion Allowance-->
+
+            <DataGridTemplateColumn Width="*" Header="Corrosion Allowance">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding CorrosionAllowance, StringFormat={}{0:N1} mm}" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <!--#endregion-->
+
+            <!--#region Minimum Thickness-->
+
+            <DataGridTemplateColumn Width="*" Header="Minimum Thickness">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding MinimumThickness, StringFormat={}{0:N1} mm}" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <!--#endregion-->
+
+            <!--#region Design Thickness-->
+
+            <DataGridTemplateColumn Width="*" Header="Design Thickness">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding DesignThickness, StringFormat={}{0:N1} mm}" />
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <!--#endregion-->
+
+        </DataGrid.Columns>
+
+    </DataGrid>
+
+</UserControl>

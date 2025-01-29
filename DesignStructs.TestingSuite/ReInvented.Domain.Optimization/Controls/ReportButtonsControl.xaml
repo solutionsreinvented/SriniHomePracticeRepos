@@ -1,0 +1,29 @@
+﻿<UserControl
+    x:Class="ReInvented.Domain.Optimization.Controls.ReportButtonsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="Root"
+    d:DesignHeight="50"
+    d:DesignWidth="400"
+    mc:Ignorable="d">
+
+    <StackPanel
+        Height="24"
+        Margin="0,5"
+        HorizontalAlignment="Right"
+        Orientation="Horizontal">
+        <Button
+            Width="150"
+            Command="{Binding GenerateResultsCommand}"
+            Content="Generate Results"
+            IsEnabled="{Binding CanGenerateResults}" />
+        <Button
+            Width="150"
+            Margin="10,0,0,0"
+            Command="{Binding SaveReportCommand}"
+            Content="Save Report"
+            IsEnabled="{Binding CanSaveReport}" />
+    </StackPanel>
+</UserControl>
