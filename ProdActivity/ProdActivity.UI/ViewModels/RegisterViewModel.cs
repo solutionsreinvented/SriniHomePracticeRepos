@@ -2,9 +2,9 @@
 using System.IO;
 using System.Windows.Input;
 
-using ProdActivity.Domain.Stores;
 using ProdActivity.UI.Base;
 using ProdActivity.UI.Commands;
+using ProdActivity.UI.Models;
 using ProdActivity.UI.Stores;
 
 using ReInvented.DataAccess.Factories;
@@ -12,22 +12,6 @@ using ReInvented.DataAccess.Interfaces;
 
 namespace ProdActivity.UI.ViewModels
 {
-    public class Registration : PropertyStore
-    {
-        public Registration()
-        {
-
-        }
-
-        public string UserId { get => Get<string>(); set => Set(value); }
-
-        public string Password { get => Get<string>(); set => Set(value); }
-
-        public string LicenseFilePath { get => Get<string>(); set => Set(value); }
-
-        public string RegistrationKey { get => Get<string>(); set => Set(value); }
-    }
-
     public class RegisterViewModel : ManageUserViewModel
     {
         #region Parameterized Constructor

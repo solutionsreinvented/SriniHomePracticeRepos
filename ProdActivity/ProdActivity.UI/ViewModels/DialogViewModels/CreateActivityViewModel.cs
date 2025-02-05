@@ -13,7 +13,13 @@ namespace ProdActivity.UI.ViewModels
 {
     public class CreateActivityViewModel : PropertyStore, IDialogRequestClose
     {
+        #region Events
+
         public event EventHandler<DialogCloseRequestedEventArgs> CloseRequested;
+
+        #endregion
+
+        #region Parameterized Constructor
 
         public CreateActivityViewModel(IProject selectedProject)
         {
@@ -23,12 +29,22 @@ namespace ProdActivity.UI.ViewModels
             DiscardCommand = new RelayCommand(() => CloseRequested?.Invoke(this, new DialogCloseRequestedEventArgs(false)), true);
         }
 
+        #endregion
+
+        #region Public Properties
+
         public ActivityDefinition ActivityDefinition { get => Get<ActivityDefinition>(); private set => Set(value); }
 
         public bool MyProperty { get; set; }
 
+        #endregion
+
+        #region Commands
+
         public ICommand SaveCommand { get => Get<ICommand>(); private set => Set(value); }
 
         public ICommand DiscardCommand { get => Get<ICommand>(); private set => Set(value); }
+
+        #endregion
     }
 }

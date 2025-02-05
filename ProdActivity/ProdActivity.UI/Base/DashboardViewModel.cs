@@ -16,10 +16,12 @@ namespace ProdActivity.UI.Base
     public abstract class DashboardViewModel : ViewModelBase
     {
         #region Parameterized Constructor
+
         public DashboardViewModel(NavigationStore navigationStore) : base(navigationStore)
         {
 
-        } 
+        }
+
         #endregion
 
         #region Data Masters
@@ -29,9 +31,6 @@ namespace ProdActivity.UI.Base
         public ActivityMaster ActivityMaster { get => Get<ActivityMaster>(); protected set => Set(value); }
 
         #endregion
-
-
-        public IResource Resource { get; set; }
 
         #region DataGrid Source Providers
 
@@ -46,6 +45,9 @@ namespace ProdActivity.UI.Base
         #endregion
 
         #region Public Properties
+
+        public IResource Resource { get; set; }
+
         public IProject SelectedProject
         {
             get => Get<IProject>();
@@ -59,9 +61,11 @@ namespace ProdActivity.UI.Base
         }
 
         public IActivity SelectedActivity { get => Get<IActivity>(); set { Set(value); ActivityIsSelected = value != null; } }
+        
         #endregion
 
         #region Readonly Properties
+
         public string Title { get => Get<string>(); protected set => Set(value); }
 
         public bool UserIsAdmin { get => Get<bool>(); protected set => Set(value); }
@@ -75,6 +79,7 @@ namespace ProdActivity.UI.Base
         #endregion
 
         #region Commands
+
         public ICommand LoadProjectsMasterCommand { get => Get<ICommand>(); private set => Set(value); }
 
         public ICommand SaveProjectsMasterCommand { get => Get<ICommand>(); private set => Set(value); }
@@ -84,6 +89,7 @@ namespace ProdActivity.UI.Base
         #endregion
 
         #region Command Handlers
+
         private void OnSaveProjectsMaster()
         {
             ProjectMasterService.SaveToFile(ProjectMaster);
@@ -111,6 +117,7 @@ namespace ProdActivity.UI.Base
                 }
             }
         }
+
         #endregion
 
         #region Private Helpers
@@ -125,8 +132,6 @@ namespace ProdActivity.UI.Base
             CreateActivityCommand = new RelayCommand(OnCreateActivity, true);
         }
 
-
         #endregion
-
     }
 }

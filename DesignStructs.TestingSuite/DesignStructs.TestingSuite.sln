@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.BackwardCompatib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.ThickenerModelGenerator.Core", "ReInvented.ThickenerModelGenerator.Core\ReInvented.ThickenerModelGenerator.Core.csproj", "{F6EA760B-9A2F-4B8D-B5DA-1C23B52A7240}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.Shared.Geometry", "ReInvented.Shared.Geometry\ReInvented.Shared.Geometry.csproj", "{446B843D-5091-47F8-81C1-DE185DBC3D0B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,10 @@ Global
 		{F6EA760B-9A2F-4B8D-B5DA-1C23B52A7240}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6EA760B-9A2F-4B8D-B5DA-1C23B52A7240}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6EA760B-9A2F-4B8D-B5DA-1C23B52A7240}.Release|Any CPU.Build.0 = Release|Any CPU
+		{446B843D-5091-47F8-81C1-DE185DBC3D0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{446B843D-5091-47F8-81C1-DE185DBC3D0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{446B843D-5091-47F8-81C1-DE185DBC3D0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{446B843D-5091-47F8-81C1-DE185DBC3D0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

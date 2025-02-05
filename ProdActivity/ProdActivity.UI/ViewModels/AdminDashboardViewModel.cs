@@ -21,8 +21,6 @@ namespace ProdActivity.UI.ViewModels
         }
         #endregion
 
-
-
         #region Public Properties
 
         public ResourceRepository ResourceRepository { get => Get<ResourceRepository>(); private set => Set(value); }
@@ -50,7 +48,6 @@ namespace ProdActivity.UI.ViewModels
         public ICommand DeleteSelectedActivityCommand { get => Get<ICommand>(); private set => Set(value); }
 
         #endregion
-
 
         #region Command Handlers
 
@@ -110,6 +107,5 @@ namespace ProdActivity.UI.ViewModels
         }
 
         #endregion
-
     }
 }
