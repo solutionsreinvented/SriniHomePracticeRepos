@@ -103,8 +103,8 @@ namespace ReInvented.Domain.Optimization.Services
 
             if (body != null)
             {
-                _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes($"{Report.OutputFiles.ReportDataFileJson}"));
-                _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes(ReportFileNames.JavaScriptShared, useAbsolutePaths));
+                _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes($"{Report.OutputFiles.ReportDataFileJson}", useAbsolutePaths));
+                //_ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes(ReportFileNames.JavaScriptShared, useAbsolutePaths));
                 _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes(ReportFileNames.JavaScriptPlatesOptimization, useAbsolutePaths));
             }
 
