@@ -50,6 +50,7 @@ namespace ReInvented.Domain.Optimization.Services
         public void SaveReport()
         {
             string outputFileFullPath = Report.OutputFiles.ReportDataFileJson;
+            string outputHtmlFullPath = Report.OutputFiles.ReportHtmlFile;
 
             JsonDataSerializer<PlatesOptimizationReport> serializer = new JsonDataSerializer<PlatesOptimizationReport>();
             string serialized = "const content = " + serializer.Serialize(Report, JsonSerializerSettingsProvider.Minified);
@@ -62,7 +63,7 @@ namespace ReInvented.Domain.Optimization.Services
             htmlDocument = LinkCssAndScriptsTo(htmlDocument, true);
 
             File.WriteAllText(outputFileFullPath, serialized);
-            _ = CreateReportHtmlFile(htmlDocument, outputFileFullPath);
+            _ = CreateReportHtmlFile(htmlDocument, outputHtmlFullPath);
         }
 
         #endregion
