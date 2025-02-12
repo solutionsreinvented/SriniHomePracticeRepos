@@ -43,7 +43,6 @@ namespace ReInvented.Domain.Optimization.Models
 
         #endregion
 
-
         #region Public Static Functions
 
         public static void Save(PlatesOptimizationReport report, string outputFileFullPath)

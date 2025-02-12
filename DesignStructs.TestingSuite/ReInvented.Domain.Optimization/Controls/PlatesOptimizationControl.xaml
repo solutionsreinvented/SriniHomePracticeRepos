@@ -11,9 +11,9 @@
     d:DesignWidth="1300"
     mc:Ignorable="d">
 
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <vm:PlatesOptimizationViewModel />
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
 
     <GroupBox
         Margin="5"
@@ -93,4 +93,5 @@
         </Grid>
 
     </GroupBox>
+
 </UserControl>

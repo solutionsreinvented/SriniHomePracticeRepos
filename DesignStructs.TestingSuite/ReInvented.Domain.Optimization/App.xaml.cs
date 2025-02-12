@@ -1,6 +1,9 @@
 ﻿using System.Windows;
 
+using ReInvented.Domain.Optimization.ViewModels;
 using ReInvented.Domain.Optimization.Views;
+using ReInvented.Shared.Interfaces;
+using ReInvented.Shared.Services;
 
 namespace ReInvented.Domain.Optimization
 {
@@ -12,8 +15,15 @@ namespace ReInvented.Domain.Optimization
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            MainWindow = new PlatesOptimizationView();
+            IDialogService dialogService = new DialogService();
+            PlatesOptimizationViewModel poViewModel = new PlatesOptimizationViewModel(dialogService);
+            PlatesOptimizationView home = new PlatesOptimizationView() { DataContext = poViewModel};
+
+
+            MainWindow = home;
             MainWindow.Show();
+
+            dialogService.SetOrChangeOwner(home);
         }
     }
 }

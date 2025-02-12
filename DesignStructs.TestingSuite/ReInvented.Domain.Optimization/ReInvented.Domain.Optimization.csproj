@@ -59,6 +59,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Shared.dll</HintPath>
     </Reference>
+    <Reference Include="ReInvented.Shared.Web">
+      <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Shared.Web.dll</HintPath>
+    </Reference>
     <Reference Include="ReInvented.StaadPro.Interop">
       <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.StaadPro.Interop.dll</HintPath>
     </Reference>
@@ -107,6 +110,7 @@
       <DependentUpon>StaadSourceFileControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\PlatesOptimizationService.cs" />
+    <Compile Include="Services\POReportDocumentsGenerationService.cs" />
     <Compile Include="ViewModels\PlatesOptimizationViewModel.cs" />
     <Compile Include="Views\PlatesOptimizationView.xaml.cs">
       <DependentUpon>PlatesOptimizationView.xaml</DependentUpon>
