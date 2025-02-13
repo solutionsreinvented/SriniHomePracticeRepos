@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
 using ReInvented.Domain.Optimization.ViewModels;
 using ReInvented.Domain.Optimization.Views;
