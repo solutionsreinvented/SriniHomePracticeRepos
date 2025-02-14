@@ -109,6 +109,7 @@
     <Compile Include="Controls\StaadSourceFileControl.xaml.cs">
       <DependentUpon>StaadSourceFileControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\OSLoadExtensions.cs" />
     <Compile Include="Services\PlatesOptimizationService.cs" />
     <Compile Include="Services\POReportDocumentsGenerationService.cs" />
     <Compile Include="ViewModels\PlatesOptimizationViewModel.cs" />

@@ -56,7 +56,7 @@ namespace ReInvented.Domain.Optimization.Services
         public HashSet<PlateGroupDesignResult> OptimizeAll(IEnumerable<ILoadCase> loadCases)
         {
             IEnumerable<Plate> allPlates = Wrapper.Geometry.GetAllEntities<Plate>(Criteria.ThreadCount);
-            HashSet<LoadCase> plc = Wrapper.Load.GetAllPrimaryLoadCases();
+            HashSet<ILoadCase> plc = Wrapper.Load.GetAllPrimaryLoadCases();
 
             IEnumerable<string> groupNames = Wrapper.Geometry.GetEntityGroups<Plate>(Criteria.ThreadCount)
                                                      .Where(eg => eg.Entities.Count() > 0)

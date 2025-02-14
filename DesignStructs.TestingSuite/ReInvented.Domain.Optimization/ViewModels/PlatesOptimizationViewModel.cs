@@ -8,6 +8,7 @@ using System.Windows.Input;
 
 using ReInvented.DataAccess.Models;
 using ReInvented.DataAccess.Services;
+using ReInvented.Domain.Optimization.Extensions;
 using ReInvented.Domain.Optimization.Models;
 using ReInvented.Domain.Optimization.Services;
 using ReInvented.Shared.Commands;
@@ -79,7 +80,7 @@ namespace ReInvented.Domain.Optimization.ViewModels
         private void OnGenerateResults()
         {
             Stopwatch sw = new Stopwatch();
-
+            StaadLoadCombination comb = Wrapper.Load.GetLoadCombination(101);
             PlatesOptimizationCriteria criteria = Report.Criteria;
             IEnumerable<ILoadCase> loadCases = criteria.LoadCasesRange.Where(lc => lc.Id >= criteria.StartLoadCase.Id && lc.Id <= criteria.EndLoadCase.Id);
 
@@ -144,7 +145,7 @@ namespace ReInvented.Domain.Optimization.ViewModels
         {
             if (Report != null && Report.Criteria != null)
             {
-                IEnumerable<LoadCase> loadCasesRange = Wrapper.Load.GetAllLoadCasesOfType(Report.Criteria.LoadCaseType);
+                IEnumerable<ILoadCase> loadCasesRange = Wrapper.Load.GetAllLoadCasesOfType(Report.Criteria.LoadCaseType);
 
                 if (loadCasesRange != null && loadCasesRange.Count() >= 1)
                 {
