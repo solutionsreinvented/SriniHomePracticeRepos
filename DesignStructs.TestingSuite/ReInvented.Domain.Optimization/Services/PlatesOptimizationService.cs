@@ -2,7 +2,8 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
+using ReInvented.Domain.Optimization.Extensions;
 using ReInvented.Domain.Optimization.Models;
 using ReInvented.StaadPro.Interop.Entities;
 using ReInvented.StaadPro.Interop.Extensions;
@@ -53,10 +54,24 @@ namespace ReInvented.Domain.Optimization.Services
             return new PlatesOptimizationReport { Criteria = Criteria, Results = OptimizeAll(loadCases) };
         }
 
+        public async Task<HashSet<PlateGroupDesignResult>> OptimizeAllAsync(IEnumerable<ILoadCase> loadCases)
+        {
+            IEnumerable<Plate> allPlates = await Wrapper.Geometry.GetAllEntitiesAsync<Plate>(Criteria.ThreadCount);
+            var entityGroups = await Wrapper.Geometry.GetEntityGroupsAsync<Plate>(Criteria.ThreadCount);
+            IEnumerable<string> groupNames = entityGroups.Where(eg => eg.Entities.Count() > 0)
+                                                         .OrderByDescending(eg => Plate.MaxYCoordinate(eg.Entities.OrderByDescending(e => Plate.MaxYCoordinate(e)).First()))
+                                                         .Where(eg => !InExclusionList(eg.GroupName))
+                                                         .Select(eg => eg.GroupName).ToHashSet();
+
+            HashSet<PlateGroupDesignResult> designResults = await Task.Run(() => OptimizeGroups(groupNames, loadCases));
+
+            return designResults;
+        }
+
         public HashSet<PlateGroupDesignResult> OptimizeAll(IEnumerable<ILoadCase> loadCases)
         {
             IEnumerable<Plate> allPlates = Wrapper.Geometry.GetAllEntities<Plate>(Criteria.ThreadCount);
-            HashSet<ILoadCase> plc = Wrapper.Load.GetAllPrimaryLoadCases();
+            //HashSet<ILoadCase> plc = Wrapper.Load.GetAllPrimaryLoadCases();
 
             IEnumerable<string> groupNames = Wrapper.Geometry.GetEntityGroups<Plate>(Criteria.ThreadCount)
                                                      .Where(eg => eg.Entities.Count() > 0)
