@@ -46,10 +46,10 @@
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.DataAccess">
-      <HintPath>F:\06. ReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.DataAccess.dll</HintPath>
+      <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.Domain.Reporting">
-      <HintPath>F:\06. ReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Domain.Reporting.dll</HintPath>
+      <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Domain.Reporting.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.Sections.Domain">
       <HintPath>F:\06. ReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Sections.Domain.dll</HintPath>

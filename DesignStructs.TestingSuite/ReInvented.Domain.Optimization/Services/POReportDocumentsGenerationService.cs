@@ -105,6 +105,7 @@ namespace ReInvented.Domain.Optimization.Services
             {
                 _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes($"{Report.OutputFiles.ReportDataFileJson}", useAbsolutePaths));
                 _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes(ReportFileNames.JavaScriptMath, useAbsolutePaths));
+                _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes(ReportFileNames.JavaScriptResponsive, useAbsolutePaths));
                 _ = body.AppendChild(HtmlNodeServices.CreateScriptNodeWithAttributes(ReportFileNames.JavaScriptPlatesOptimization, useAbsolutePaths));
             }
 

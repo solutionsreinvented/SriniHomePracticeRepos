@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -77,17 +78,17 @@ namespace ReInvented.Domain.Optimization.ViewModels
             Wrapper = OpenStaadWrapperProvider.Get(filePath);
         }
 
-        private void OnGenerateResults()
+        private async void OnGenerateResults()
         {
             Stopwatch sw = new Stopwatch();
-            StaadLoadCombination comb = Wrapper.Load.GetLoadCombination(101);
+
             PlatesOptimizationCriteria criteria = Report.Criteria;
             IEnumerable<ILoadCase> loadCases = criteria.LoadCasesRange.Where(lc => lc.Id >= criteria.StartLoadCase.Id && lc.Id <= criteria.EndLoadCase.Id);
 
             PlatesOptimizationService pos = new PlatesOptimizationService(Wrapper, criteria);
 
             sw.Start();
-            Report.Results = pos.OptimizeAll(loadCases);
+            Report.Results = await pos.OptimizeAllAsync(loadCases); ///pos.OptimizeAll(loadCases);
             sw.Stop();
 
             _ = MessageBox.Show($"Completed optimization of plates in {TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)}");
