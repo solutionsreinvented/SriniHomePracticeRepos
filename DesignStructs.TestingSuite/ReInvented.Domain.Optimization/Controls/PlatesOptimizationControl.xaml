@@ -5,7 +5,7 @@
     xmlns:controls="clr-namespace:ReInvented.Domain.Optimization.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="clr-namespace:ReInvented.Domain.Optimization.ViewModels"
+    xmlns:shared="http://schemas.reinvented.com/shared"
     x:Name="Root"
     d:DesignHeight="850"
     d:DesignWidth="1300"
@@ -47,7 +47,7 @@
                 Header="Design Criteria"
                 IsEnabled="{Binding DataContext.IsModelSelected, ElementName=Root}">
 
-                <Grid>
+                <Grid IsEnabled="{Binding DataContext.ShowProgress, ElementName=Root, Converter={shared:InvertBooleanConverter}}">
 
                     <!--#region Grid Definitions-->
 
@@ -86,7 +86,10 @@
 
             <!--#region Buttons-->
 
-            <controls:ReportButtonsControl Grid.Row="3" DataContext="{Binding DataContext, ElementName=Root}" />
+            <Grid Grid.Row="3" DataContext="{Binding DataContext, ElementName=Root}">
+                <controls:ProgressStatusControl HorizontalAlignment="Left" Visibility="{Binding ShowProgress, Converter={shared:BoolToVisibilityConverter}}" />
+                <controls:ReportButtonsControl HorizontalAlignment="Right" />
+            </Grid>
 
             <!--#endregion-->
 

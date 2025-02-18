@@ -13,6 +13,7 @@ using ReInvented.Sections.Domain.Repositories;
 using ReInvented.StaadPro.Interop.Entities;
 using ReInvented.StaadPro.Interop.Enums;
 using ReInvented.StaadPro.Interop.Extensions;
+using ReInvented.StaadPro.Interop.Interfaces;
 using ReInvented.StaadPro.Interop.Models;
 using ReInvented.StaadPro.Interop.Services;
 
@@ -67,7 +68,7 @@ namespace DevDrive
                                                      .FirstOrDefault(g => g.StaadName == "A36");
 
             OpenStaadWrapper wrapper = OpenStaadWrapperProvider.Get(inputFile);
-            IEnumerable<LoadCase> loadCases = wrapper.Load.GetLoadCases(101, 200, LoadCaseType.LoadCombination);
+            IEnumerable<ILoadCase> loadCases = wrapper.Load.GetLoadCases(101, 200, LoadCaseType.LoadCombination);
             PlatesOptimizationCriteria criteria = new PlatesOptimizationCriteria()
             { MinimumThickness = 6.0, CorrosionAllowance = 2.0, Grade = grade, ThreadCount = 10, AllowedOverstressedPlatesFraction = 15.0 };
 

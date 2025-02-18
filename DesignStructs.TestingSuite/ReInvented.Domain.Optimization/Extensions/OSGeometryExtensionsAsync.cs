@@ -1,7 +1,8 @@
 ﻿namespace ReInvented.Domain.Optimization.Extensions
 {
-    public static class OSOutputExtensionsAsync
+    public static class OSGeometryExtensionsAsync
     {
+        
 
     }
 }

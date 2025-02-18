@@ -49,21 +49,31 @@ namespace ReInvented.Domain.Optimization.Services
 
         public void SaveReport()
         {
-            string outputFileFullPath = Report.OutputFiles.ReportDataFileJson;
-            string outputHtmlFullPath = Report.OutputFiles.ReportHtmlFile;
+            try
+            {
+                string outputFileFullPath = Report.OutputFiles.ReportDataFileJson;
+                string outputHtmlFullPath = Report.OutputFiles.ReportHtmlFile;
 
-            JsonDataSerializer<PlatesOptimizationReport> serializer = new JsonDataSerializer<PlatesOptimizationReport>();
-            string serialized = "const content = " + serializer.Serialize(Report, JsonSerializerSettingsProvider.Minified);
+                JsonDataSerializer<PlatesOptimizationReport> serializer = new JsonDataSerializer<PlatesOptimizationReport>();
+                string serialized = "const content = " + serializer.Serialize(Report, JsonSerializerSettingsProvider.Minified);
 
-            string sourceHtml = Path.Combine(DirectoryPaths.ReportsPages, $"plates-optimization.{FileExtensions.Html}");
+                string sourceHtml = Path.Combine(DirectoryPaths.ReportsPages, $"plates-optimization.{FileExtensions.Html}");
 
-            HtmlDocument htmlDocument = new HtmlDocument();
+                HtmlDocument htmlDocument = new HtmlDocument();
 
-            htmlDocument.Load(sourceHtml);
-            htmlDocument = LinkCssAndScriptsTo(htmlDocument, true);
+                htmlDocument.Load(sourceHtml);
+                htmlDocument = LinkCssAndScriptsTo(htmlDocument, true);
 
-            File.WriteAllText(outputFileFullPath, serialized);
-            _ = CreateReportHtmlFile(htmlDocument, outputHtmlFullPath);
+                File.WriteAllText(outputFileFullPath, serialized);
+                _ = CreateReportHtmlFile(htmlDocument, outputHtmlFullPath);
+
+                MessageService.ShowMessage(DialogService, "Report is successfully generated!", "Save Report");
+            }
+            catch (Exception ex)
+            {
+                MessageService.ShowMessage(DialogService, $"An issue is encountered while generating the report. For more details, refer to below details.{Environment.NewLine}{ex.Message}", "Save Report");
+            }
+
         }
 
         #endregion

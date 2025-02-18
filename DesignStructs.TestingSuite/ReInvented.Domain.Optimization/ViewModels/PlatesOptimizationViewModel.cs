@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 using ReInvented.DataAccess.Models;
 using ReInvented.DataAccess.Services;
-using ReInvented.Domain.Optimization.Extensions;
 using ReInvented.Domain.Optimization.Models;
 using ReInvented.Domain.Optimization.Services;
 using ReInvented.Shared.Commands;
 using ReInvented.Shared.Interfaces;
+using ReInvented.Shared.Services;
 using ReInvented.Shared.Stores;
-using ReInvented.StaadPro.Interop.Entities;
 using ReInvented.StaadPro.Interop.Extensions;
 using ReInvented.StaadPro.Interop.Interfaces;
 using ReInvented.StaadPro.Interop.Models;
@@ -57,6 +55,10 @@ namespace ReInvented.Domain.Optimization.ViewModels
 
         public bool CanSaveReport => AreResultsAvailable();
 
+        public bool ShowProgress { get => Get<bool>(); private set => Set(value); }
+
+        public string ProgressMessage { get => Get<string>(); private set => Set(value); }
+
         #endregion
 
         #region Commands
@@ -88,12 +90,23 @@ namespace ReInvented.Domain.Optimization.ViewModels
             PlatesOptimizationService pos = new PlatesOptimizationService(Wrapper, criteria);
 
             sw.Start();
-            Report.Results = await pos.OptimizeAllAsync(loadCases); ///pos.OptimizeAll(loadCases);
+
+            try
+            {
+                ShowProgress = true;
+                ProgressMessage = "Optimizing the plates....";
+                Report.Results = await pos.OptimizeAllAsync(loadCases); ///pos.OptimizeAll(loadCases);
+
+                MessageService.ShowMessage(DialogService, $"Completed optimization of plates in {TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)}", "Optimize Plates");
+                RaisePropertyChanged(nameof(CanSaveReport));
+            }
+            catch (Exception ex)
+            {
+                ShowProgress = false;
+                MessageService.ShowMessage(DialogService, $"Failed optimizing the plates. Check the message below for further details.{Environment.NewLine}{ex.Message}", "Optimize Plates");
+            }
+
             sw.Stop();
-
-            _ = MessageBox.Show($"Completed optimization of plates in {TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)}");
-
-            RaisePropertyChanged(nameof(CanSaveReport));
         }
 
         private void OnSaveReport()
@@ -131,6 +144,7 @@ namespace ReInvented.Domain.Optimization.ViewModels
 
         private void Initialize(IDialogService dialogService)
         {
+            ShowProgress = false;
             Report = new PlatesOptimizationReport();
             DialogService = dialogService;
 
