@@ -89,24 +89,33 @@ namespace ReInvented.Domain.Optimization.ViewModels
 
             PlatesOptimizationService pos = new PlatesOptimizationService(Wrapper, criteria);
 
-            sw.Start();
-
-            try
+            if (ShowProgress)
             {
-                ShowProgress = true;
-                ProgressMessage = "Optimizing the plates....";
-                Report.Results = await pos.OptimizeAllAsync(loadCases); ///pos.OptimizeAll(loadCases);
-
-                MessageService.ShowMessage(DialogService, $"Completed optimization of plates in {TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)}", "Optimize Plates");
-                RaisePropertyChanged(nameof(CanSaveReport));
+                MessageService.ShowMessage(DialogService, $"Another process is in progress. Please wait until it is completed.", "Optimize Plates");
             }
-            catch (Exception ex)
+            else
             {
-                ShowProgress = false;
-                MessageService.ShowMessage(DialogService, $"Failed optimizing the plates. Check the message below for further details.{Environment.NewLine}{ex.Message}", "Optimize Plates");
+                try
+                {
+                    ShowProgress = true;
+                    ProgressMessage = "Optimizing the plates....";
+
+                    sw.Start();
+                    Report.Results = await pos.OptimizeAllAsync(loadCases); ///pos.OptimizeAll(loadCases);
+                    sw.Stop();
+
+                    MessageService.ShowMessage(DialogService, $"Completed optimization of plates in {TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)}", "Optimize Plates");
+                    RaisePropertyChanged(nameof(CanSaveReport));
+                    ShowProgress = false;
+                }
+                catch (Exception ex)
+                {
+                    ShowProgress = false;
+                    MessageService.ShowMessage(DialogService, $"Failed optimizing the plates. Check the message below for further details.{Environment.NewLine}{ex.Message}", "Optimize Plates");
+                }
+
             }
 
-            sw.Stop();
         }
 
         private void OnSaveReport()
