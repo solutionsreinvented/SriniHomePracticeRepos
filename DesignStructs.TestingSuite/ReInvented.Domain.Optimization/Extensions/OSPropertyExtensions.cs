@@ -18,7 +18,7 @@ namespace ReInvented.Domain.Optimization.Extensions
     {
 
     }
-    public interface IITCSection : IConventionalSection, IGenericSection
+    public interface ITCISection : IConventionalSection, IGenericSection
     {
         double Bf { get; set; }
         double Tf { get; set; }
@@ -28,7 +28,52 @@ namespace ReInvented.Domain.Optimization.Extensions
     {
 
     }
-    public class GenericSection : IGenericSection
+
+    public class TCISection : ConventionalSection, ITCISection, IConventionalSection, IGenericSection
+    {
+        #region Parameterized Constructor
+
+        public TCISection(ProfileType profileType) : base(profileType)
+        {
+
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public double Bf { get; set; }
+
+        public double Tf { get; set; }
+
+        public double Tw { get; set; }
+
+        #endregion
+    }
+
+    public abstract class ConventionalSection : GenericSection, IConventionalSection, IGenericSection
+    {
+        #region Parameterized Constructor
+
+        public ConventionalSection(ProfileType profileType) : base(profileType)
+        {
+
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public double Ax { get; set; }
+        public double D { get; set; }
+        public double Ix { get; set; }
+        public double Iy { get; set; }
+        public double Iz { get; set; }
+
+        #endregion
+    }
+
+    public abstract class GenericSection : IGenericSection
     {
         #region Parameterized Constructor
 
@@ -46,6 +91,7 @@ namespace ReInvented.Domain.Optimization.Extensions
         #endregion
 
     }
+
     public static class OSPropertyExtensions
     {
         public static double[] GetSectionPropertyValues(this OSPropertyUI property, int propertyId)
