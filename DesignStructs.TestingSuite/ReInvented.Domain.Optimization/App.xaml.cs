@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 using ReInvented.Domain.Optimization.ViewModels;
 using ReInvented.Domain.Optimization.Views;
@@ -16,6 +17,7 @@ namespace ReInvented.Domain.Optimization
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            var guid = Guid.NewGuid();
             base.OnStartup(e);
             IDialogService dialogService = new DialogService();
             ConfigureDiloags(dialogService);
