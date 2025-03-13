@@ -112,11 +112,7 @@
     </Compile>
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\OSGeometryExtensions.cs" />
-    <Compile Include="Extensions\OSGeometryExtensionsAsync.cs" />
-    <Compile Include="Extensions\OSGlobalExtensionsAsync.cs" />
     <Compile Include="Extensions\OSLoadExtensions.cs" />
-    <Compile Include="Extensions\OSOutputExtensionsAsync.cs" />
-    <Compile Include="Extensions\OSPropertyExtensions.cs" />
     <Compile Include="Services\PlatesOptimizationService.cs" />
     <Compile Include="Services\POReportDocumentsGenerationService.cs" />
     <Compile Include="ViewModels\PlatesOptimizationViewModel.cs" />
