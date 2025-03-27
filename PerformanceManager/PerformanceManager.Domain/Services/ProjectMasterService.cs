@@ -39,8 +39,8 @@ namespace PerformanceManager.Domain.Services
         public static ProjectMaster ReadFromFile(string fileFullPath = null)
         {
             string filePath = fileFullPath ?? FileServiceProvider.ProjectMasterFilePath;
-
-            return _serializer.Deserialize(filePath);
+            var content = File.ReadAllText(filePath);
+            return _serializer.DeserializeText(content);
         }
 
         public static void SaveToFile(ProjectMaster projectMaster, string fileFullPath = null)

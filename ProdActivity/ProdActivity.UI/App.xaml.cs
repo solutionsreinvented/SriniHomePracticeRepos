@@ -64,6 +64,8 @@ namespace ProdActivity.UI
 
             };
 
+            dialogService.SetOrChangeOwner(MainWindow);
+
             MainWindow.Show();
 
         }

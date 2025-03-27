@@ -15,7 +15,7 @@ using ReInvented.Shared.Stores;
 
 namespace PerformanceManager.Domain.Base
 {
-    public abstract class Activity : ErrorsEnabledPropertyStore, IActivity
+    public abstract class Activity : ValidatablePropertyStore, IActivity
     {
         #region Private Constants
 
