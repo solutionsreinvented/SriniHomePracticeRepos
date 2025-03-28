@@ -1,9 +1,11 @@
-﻿using ReInvented.DroopModifier.Interfaces;
+﻿using System;
+
+using ReInvented.DroopModifier.Interfaces;
 using ReInvented.Shared.Stores;
 
 namespace ReInvented.DroopModifier.Models
 {
-    public class Reading : ValidatablePropertyStore, IReading
+    public class Reading : ValidatablePropertyStore, IReading, IEquatable<Reading>
     {
         #region Default Constructor
 
@@ -37,33 +39,20 @@ namespace ReInvented.DroopModifier.Models
 
         #region Equality
 
-        //public override int GetHashCode() => this.GetHashCode();
+        public override int GetHashCode() => Tuple.Create(Angle, Radius, DroopDelta).GetHashCode();
 
-        public bool Equals(Reading reading)
+        public bool Equals(Reading other)
         {
-            if (reading == null)
+            if (other == null)
             {
                 return false;
             }
 
-            return Angle == reading.Angle && Radius == reading.Radius && DroopDelta == reading.DroopDelta;
+            return Angle == other.Angle && Radius == other.Radius && DroopDelta == other.DroopDelta;
         }
 
 
-        public override bool Equals(object obj)
-        {
-            if (obj is null)
-            {
-                return false;
-            }
-
-            if (!(obj is Reading reading))
-            {
-                return false;
-            }
-
-            return Angle == reading.Angle && Radius == reading.Radius && DroopDelta == reading.DroopDelta;
-        }
+        public override bool Equals(object obj) => obj is Reading other && Equals(other);
 
         public static bool operator ==(Reading left, Reading right)
         {
