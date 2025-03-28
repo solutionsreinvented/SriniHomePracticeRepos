@@ -97,7 +97,7 @@ namespace ReInvented.DroopModifier.ViewModels
         private void Initialize()
         {
             Origin = new Node(0.0, 0.0, 0.0);
-            UpdateAtRadialBeamsLocationsAlso = false;
+            UpdateAtRadialBeamsLocationsAlso = true;
             BrowseStaadModelCommand = new RelayCommand(OnBrowseStaadModel, true);
             BrowseExcelFileCommand = new RelayCommand(OnBrowseExcelFile, true);
             UpdateStaadModelCommand = new RelayCommand(OnUpdateStaadModel, true);
@@ -212,26 +212,24 @@ namespace ReInvented.DroopModifier.ViewModels
                 IEnumerable<EntityGroup<Plate>> selectedEntityGroups = PlateEntityGroups.Where(eg => SelectedGroups.Any(sg => sg.Name == eg.GroupName));
                 HashSet<Node> uniqueNodes = selectedEntityGroups.SelectMany(eg => eg.Entities).SelectMany(p => p.GetNodes()).ToHashSet();
 
+
+                IEnumerable<Node> targetNodes = UpdateAtRadialBeamsLocationsAlso ?
+                                                uniqueNodes :
+                                                uniqueNodes.TakeWhile(n => !Feed.NodeFallsOnRadialBeam(n, Origin));
+
                 HashSet<Node> modifiedNodes = new HashSet<Node>();
 
-                if (UpdateAtRadialBeamsLocationsAlso)
-                {
-                    var unmodNodes = uniqueNodes;
-                }
-                else
-                {
-                    var modNodes = uniqueNodes.TakeWhile(n => !Feed.RadialBeamsLocations.Any(rbAngle => Math.Abs(rbAngle - Node.PlanAngleIn360DegreesOf(n, Origin)) <= _tolerance));
-                }
+                targetNodes.ToList().ForEach(n => modifiedNodes.Add(Feed.Readings.ModifyNode(Origin, n)));
 
-                foreach (Node node in uniqueNodes)
-                {
-                    double nodeAngle = Node.PlanAngleIn360DegreesOf(node, Origin);
+                //foreach (Node node in uniqueNodes)
+                //{
+                //    double nodeAngle = Node.PlanAngleIn360DegreesOf(node, Origin);
 
-                    if (!Feed.RadialBeamsLocations.Any(rbAngle => Math.Abs(rbAngle - nodeAngle) <= _tolerance))
-                    {
-                        _ = modifiedNodes.Add(Feed.Readings.ModifyNode(Origin, node));
-                    }
-                }
+                //    if (!Feed.RadialBeamsLocations.Any(rbAngle => Math.Abs(rbAngle - nodeAngle) <= _tolerance))
+                //    {
+                //        _ = modifiedNodes.Add(Feed.Readings.ModifyNode(Origin, node));
+                //    }
+                //}
 
                 if (modifiedNodes.Count > 0)
                 {

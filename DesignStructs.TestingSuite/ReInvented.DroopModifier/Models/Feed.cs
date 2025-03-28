@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using ReInvented.DroopModifier.Interfaces;
 using ReInvented.Shared;
 using ReInvented.Shared.Stores;
+using ReInvented.StaadPro.Interop.Entities;
 
 namespace ReInvented.DroopModifier.Models
 {
@@ -34,6 +36,11 @@ namespace ReInvented.DroopModifier.Models
 
         #endregion
 
+        public bool NodeFallsOnRadialBeam(Node node, Node origin)
+        {
+            return RadialBeamsLocations.Any(rbAngle => Math.Abs(rbAngle - Node.PlanAngleIn360DegreesOf(node, origin)) <= Constants.Tolerance);
+        }
+
         #region Private Helpers
 
         private void UpdateRadialBeamsLocations()
@@ -43,7 +50,7 @@ namespace ReInvented.DroopModifier.Models
 
             for (int i = 0; i < RadialSegmentsCount; i++)
             {
-                double rbAngle = AlphaStart + (1 / 2 * SegmentIncludedAngle) + (i * SegmentIncludedAngle);
+                double rbAngle = AlphaStart + (1.0 / 2.0 * SegmentIncludedAngle) + (i * SegmentIncludedAngle);
                 _ = RadialBeamsLocations.Add(rbAngle == Constants.WholeCircleAngleInDegrees ? 0.0 : rbAngle);
             }
         }

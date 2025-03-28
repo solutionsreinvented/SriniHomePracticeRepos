@@ -137,7 +137,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <COMFileReference Include="C:\Program Files\Bentley\Engineering\STAAD.Pro 2023\STAAD\StaadPro.dll">
+    <COMFileReference Include="C:\Program Files\Bentley\Engineering\STAAD.Pro 2024\STAAD\StaadPro.dll">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMFileReference>
   </ItemGroup>

@@ -44,7 +44,7 @@ namespace DevDrive
 
             //mto.PropertyWiseSummary.PlatesItems.ToList().ForEach(i => Console.WriteLine(i.AssemblyGroup));
 
-            ////IResult<string> result = ApplicationServices.StartApplication(@"C:\Program Files\Bentley\Engineering\STAAD.Pro 2023\STAAD\Bentley.Staad.exe", "STAAD.Pro", 60);
+            ////IResult<string> result = ApplicationServices.StartApplication(@"C:\Program Files\Bentley\Engineering\STAAD.Pro 2024\STAAD\Bentley.Staad.exe", "STAAD.Pro", 60);
 
             //MainWindow = new MainWindow();
             //MainWindow.Show();
