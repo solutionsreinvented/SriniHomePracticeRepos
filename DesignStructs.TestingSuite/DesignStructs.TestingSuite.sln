@@ -39,9 +39,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.ThickenerModelGe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.Shared.Geometry", "ReInvented.Shared.Geometry\ReInvented.Shared.Geometry.csproj", "{446B843D-5091-47F8-81C1-DE185DBC3D0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.DroopModifier", "ReInvented.DroopModifier\ReInvented.DroopModifier.csproj", "{635AFD6C-8FD3-4BFA-BD75-80757B622FEE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.ConnX", "ReInvented.ConnX\ReInvented.ConnX.csproj", "{C26B730A-2ACC-4F3F-88BC-C31B6358A594}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.UniformMesher", "ReInvented.UniformMesher\ReInvented.UniformMesher.csproj", "{A6605FBB-CE5A-4930-8B10-845C02AF9617}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,14 +121,14 @@ Global
 		{446B843D-5091-47F8-81C1-DE185DBC3D0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{446B843D-5091-47F8-81C1-DE185DBC3D0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{446B843D-5091-47F8-81C1-DE185DBC3D0B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{635AFD6C-8FD3-4BFA-BD75-80757B622FEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{635AFD6C-8FD3-4BFA-BD75-80757B622FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{635AFD6C-8FD3-4BFA-BD75-80757B622FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{635AFD6C-8FD3-4BFA-BD75-80757B622FEE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C26B730A-2ACC-4F3F-88BC-C31B6358A594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C26B730A-2ACC-4F3F-88BC-C31B6358A594}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C26B730A-2ACC-4F3F-88BC-C31B6358A594}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C26B730A-2ACC-4F3F-88BC-C31B6358A594}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6605FBB-CE5A-4930-8B10-845C02AF9617}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6605FBB-CE5A-4930-8B10-845C02AF9617}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6605FBB-CE5A-4930-8B10-845C02AF9617}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6605FBB-CE5A-4930-8B10-845C02AF9617}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

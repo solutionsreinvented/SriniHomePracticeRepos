@@ -1,0 +1,54 @@
+﻿<UserControl
+    x:Class="ReInvented.UniformMesher.Controls.StaadSourceFileControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="Root"
+    d:DesignHeight="50"
+    d:DesignWidth="1300"
+    mc:Ignorable="d">
+
+    <Grid Margin="5,5,0,5">
+
+        <!--#region Grid Definitions-->
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="5*" />
+        </Grid.ColumnDefinitions>
+
+        <!--#endregion-->
+
+        <!--#region Content-->
+
+        <TextBlock
+            Grid.Column="0"
+            VerticalAlignment="Center"
+            Text="Source Staad File:" />
+
+        <Grid Grid.Column="1" Height="24">
+
+            <TextBox
+                Padding="2,0,0,0"
+                HorizontalAlignment="Stretch"
+                VerticalContentAlignment="Center"
+                IsEnabled="False"
+                Text="{Binding StaadModelPath, Mode=OneWay}"
+                ToolTip="{Binding StaadModelPath}"
+                ToolTipService.ShowOnDisabled="True" />
+            <Button
+                Width="24"
+                Margin="1"
+                HorizontalAlignment="Right"
+                Command="{Binding BrowseSourceStaadFileCommand}"
+                Content="..."
+                ToolTip="Browse" />
+
+        </Grid>
+
+        <!--#endregion-->
+
+    </Grid>
+
+</UserControl>

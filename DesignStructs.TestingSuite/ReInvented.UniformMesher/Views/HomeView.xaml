@@ -1,0 +1,144 @@
+﻿<Window
+    x:Class="ReInvented.UniformMesher.Views.HomeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:ReInvented.UniformMesher.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:enums="clr-namespace:ReInvented.UniformMesher.Enums"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    Title="Rectangular Plate Mesh Generator"
+    Width="800"
+    Height="450"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <GroupBox
+        Margin="5"
+        Padding="5"
+        Header="Input">
+        <Grid>
+
+            <!--#region Grid Definitions-->
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <!--#endregion-->
+
+            <controls:StaadSourceFileControl
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="4" />
+
+            <CheckBox
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                Height="24"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Content="Close the Mesh if it is in circular path"
+                IsChecked="{Binding ClosedMesh}" />
+
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="0,5"
+                VerticalAlignment="Center"
+                Text="Progression direction: " />
+
+            <ComboBox
+                x:Name="ProgressionDirection"
+                Grid.Row="2"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Height="24"
+                Margin="0,5"
+                Padding="5,0"
+                VerticalAlignment="Center"
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Center"
+                ItemsSource="{Binding Source={shared:EnumBindingResource enums:Direction}}"
+                SelectedItem="{Binding ProgressionDirection}" />
+
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="0,5"
+                VerticalAlignment="Center"
+                Text="Formation direction: " />
+
+            <ComboBox
+                Grid.Row="3"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Height="24"
+                Margin="0,5"
+                Padding="5,0"
+                VerticalAlignment="Center"
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Center"
+                ItemsSource="{Binding Source={shared:EnumBindingResource enums:Direction}}"
+                SelectedItem="{Binding FormationDirection}" />
+
+            <!--<Button
+                Grid.Row="4"
+                Grid.Column="0"
+                Height="24"
+                Margin="5"
+                Command="{Binding GetTopNodesCommand}"
+                Content="Get Top Nodes" />
+
+            <Button
+                Grid.Row="4"
+                Grid.Column="1"
+                Height="24"
+                Margin="5"
+                Command="{Binding GetBottomNodesCommand}"
+                Content="Get Bottom Nodes" />-->
+
+            <UniformGrid
+                Grid.Row="5"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                HorizontalAlignment="Right"
+                Columns="2">
+                <Button
+                    Width="150"
+                    Height="24"
+                    Margin="5"
+                    Command="{Binding FormPlateMeshCommand}"
+                    Content="Form Plate Mesh" />
+
+                <Button
+                    Grid.Row="5"
+                    Grid.Column="3"
+                    Height="24"
+                    Margin="5,5,0,5"
+                    Command="{Binding CreatePlatesInStaadCommand}"
+                    Content="Create Plates in Staad" />
+            </UniformGrid>
+
+
+        </Grid>
+
+    </GroupBox>
+
+</Window>
