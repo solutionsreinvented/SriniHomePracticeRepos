@@ -1,0 +1,154 @@
+﻿<Window
+    x:Class="ReInvented.ConnX.Views.HomeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:HelixToolkit="http://helix-toolkit.org/wpf"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="http://schemas.reinvented.com/shared"
+    xmlns:vm="clr-namespace:ReInvented.ConnX.ViewModels"
+    Title="Connection Modeler"
+    Width="1000"
+    Height="600"
+    FontSize="11"
+    ResizeMode="CanMinimize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <!--<Window.DataContext>
+        <vm:HomeViewModel />
+    </Window.DataContext>-->
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="7*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel>
+
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="5*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Database: " />
+                <ComboBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Height="24"
+                    Margin="0,5"
+                    Padding="5,0"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    DisplayMemberPath="Name"
+                    ItemsSource="{Binding Library.Databases}"
+                    SelectedItem="{Binding ColumnDatabase}" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Shape: " />
+                <ComboBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Height="24"
+                    Margin="0,5"
+                    Padding="5,0"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    DisplayMemberPath="Shape"
+                    ItemsSource="{Binding ColumnDatabase.SectionShapes}"
+                    SelectedItem="{Binding ColumnShape}" />
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Classification: " />
+                <ComboBox
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Height="24"
+                    Margin="0,5"
+                    Padding="5,0"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    DisplayMemberPath="Category"
+                    ItemsSource="{Binding ColumnShape.Classifications}"
+                    SelectedItem="{Binding ColumnClassification}" />
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Classification: " />
+                <ComboBox
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Height="24"
+                    Margin="0,5"
+                    Padding="5,0"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    DisplayMemberPath="Designation"
+                    ItemsSource="{Binding ColumnClassification.Sections}"
+                    SelectedItem="{Binding Column}" />
+                <TextBlock
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Column Length: " />
+                <TextBox
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Height="24"
+                    Margin="0,5"
+                    Padding="5,0"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    shared:TextBoxProperties.SelectAll="True"
+                    Text="{Binding ColumnLength, StringFormat={}{0:N3} m}" />
+            </Grid>
+
+        </StackPanel>
+
+        <!--  Right Side: 3D View  -->
+        <Grid Grid.Column="1" Background="LightGray">
+            <HelixToolkit:HelixViewport3D
+                Name="ViewPort"
+                Title="3D Model"
+                CameraMode="Inspect"
+                IsHeadLightEnabled="True"
+                ShowCoordinateSystem="True"
+                ZoomExtentsWhenLoaded="True">
+
+                <HelixToolkit:HelixViewport3D.Camera>
+                    <PerspectiveCamera
+                        FarPlaneDistance="10000"
+                        FieldOfView="60"
+                        LookDirection="-5,-5,-10"
+                        NearPlaneDistance="0.1"
+                        Position="5,5,10"
+                        UpDirection="0,0,1" />
+                </HelixToolkit:HelixViewport3D.Camera>
+
+                <!--  Add Lighting  -->
+                <HelixToolkit:SunLight />
+
+                <!--  The 3D Model  -->
+                <ModelVisual3D x:Name="ModelContainer" Content="{Binding ColumnModel, UpdateSourceTrigger=PropertyChanged}" />
+            </HelixToolkit:HelixViewport3D>
+        </Grid>
+    </Grid>
+</Window>

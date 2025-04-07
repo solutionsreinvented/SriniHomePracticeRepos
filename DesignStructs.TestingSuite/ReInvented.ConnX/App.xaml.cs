@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ReInvented.ConnX.ViewModels;
+using ReInvented.ConnX.Views;
 using System.Windows;
 
 namespace ReInvented.ConnX
@@ -13,5 +9,11 @@ namespace ReInvented.ConnX
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            MainWindow = new HomeView() { DataContext = new HomeViewModel() };
+            MainWindow.Show();
+        }
     }
 }
