@@ -17,7 +17,7 @@ namespace ReInvented.Domain.Optimization.Extensions
 
         public static List<(int NodeId, double Fx, double Fz)> DistributeTorque(this IEnumerable<Node> nodes, Node centre, double torqueToBeDistributed)
         {
-            double radius = Math.Sqrt((nodes.First().X - centre.X).Squared() + (nodes.First().Z - centre.Z).Squared());
+            double radius = Math.Sqrt((nodes.First().X - centre.X).Square() + (nodes.First().Z - centre.Z).Square());
             double resultantForceAtEachNode = torqueToBeDistributed / (nodes.Count() * radius);
 
             List<(int NodeId, double Fx, double Fz)> torqueNodeDatas = new List<(int NodeId, double Fx, double Fz)>();

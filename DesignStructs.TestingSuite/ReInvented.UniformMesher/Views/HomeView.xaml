@@ -10,7 +10,7 @@
     Title="Rectangular Plate Mesh Generator"
     Width="800"
     Height="450"
-    ResizeMode="NoResize"
+    ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
@@ -23,6 +23,7 @@
             <!--#region Grid Definitions-->
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -45,18 +46,8 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="4" />
 
-            <CheckBox
-                Grid.Row="1"
-                Grid.Column="0"
-                Grid.ColumnSpan="4"
-                Height="24"
-                VerticalAlignment="Center"
-                VerticalContentAlignment="Center"
-                Content="Close the Mesh if it is in circular path"
-                IsChecked="{Binding ClosedMesh}" />
-
             <TextBlock
-                Grid.Row="2"
+                Grid.Row="1"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Margin="0,5"
@@ -64,7 +55,28 @@
                 Text="Progression direction: " />
 
             <ComboBox
-                x:Name="ProgressionDirection"
+                x:Name="ProgDirectionComboBox"
+                Grid.Row="1"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Height="24"
+                Margin="0,5"
+                Padding="5,0"
+                VerticalAlignment="Center"
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Center"
+                ItemsSource="{Binding Source={shared:EnumBindingResource enums:Direction}}"
+                SelectedItem="{Binding ProgressionDirection, Mode=TwoWay}" />
+
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="0,5"
+                VerticalAlignment="Center"
+                Text="Formation direction: " />
+
+            <ComboBox
                 Grid.Row="2"
                 Grid.Column="2"
                 Grid.ColumnSpan="2"
@@ -74,8 +86,8 @@
                 VerticalAlignment="Center"
                 HorizontalContentAlignment="Right"
                 VerticalContentAlignment="Center"
-                ItemsSource="{Binding Source={shared:EnumBindingResource enums:Direction}}"
-                SelectedItem="{Binding ProgressionDirection}" />
+                ItemsSource="{Binding FormationDirectionValues}"
+                SelectedItem="{Binding SelectedFormationDirection, Mode=TwoWay}" />
 
             <TextBlock
                 Grid.Row="3"
@@ -83,9 +95,9 @@
                 Grid.ColumnSpan="2"
                 Margin="0,5"
                 VerticalAlignment="Center"
-                Text="Formation direction: " />
+                Text="Tolerance for grouping the nodes: " />
 
-            <ComboBox
+            <TextBox
                 Grid.Row="3"
                 Grid.Column="2"
                 Grid.ColumnSpan="2"
@@ -95,8 +107,20 @@
                 VerticalAlignment="Center"
                 HorizontalContentAlignment="Right"
                 VerticalContentAlignment="Center"
-                ItemsSource="{Binding Source={shared:EnumBindingResource enums:Direction}}"
-                SelectedItem="{Binding FormationDirection}" />
+                shared:TextBoxProperties.SelectAll="True"
+                Text="{Binding Tolerance, StringFormat={}{0:N3} m}" />
+
+            <CheckBox
+                Grid.Row="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                Height="24"
+                Margin="0,5"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Content="Close the Mesh if it is in circular path"
+                IsChecked="{Binding ClosedMesh}"
+                Visibility="{Binding ProgressionDirection, Converter={shared:EnumToVisibilityConverter}, ConverterParameter={x:Static enums:Direction.Circumferential}}" />
 
             <!--<Button
                 Grid.Row="4"
@@ -115,17 +139,26 @@
                 Content="Get Bottom Nodes" />-->
 
             <UniformGrid
-                Grid.Row="5"
+                Grid.Row="6"
                 Grid.Column="0"
                 Grid.ColumnSpan="4"
                 HorizontalAlignment="Right"
-                Columns="2">
+                Columns="3">
+
+                <Button
+                    Width="150"
+                    Height="24"
+                    Margin="5"
+                    Command="{Binding GetAllSelectedNodesCommand}"
+                    Content="Get Selected Nodes"
+                    IsEnabled="{Binding ValidModelIsSelected}" />
                 <Button
                     Width="150"
                     Height="24"
                     Margin="5"
                     Command="{Binding FormPlateMeshCommand}"
-                    Content="Form Plate Mesh" />
+                    Content="Form Plate Mesh"
+                    IsEnabled="{Binding NodesAreSelected}" />
 
                 <Button
                     Grid.Row="5"
@@ -133,7 +166,8 @@
                     Height="24"
                     Margin="5,5,0,5"
                     Command="{Binding CreatePlatesInStaadCommand}"
-                    Content="Create Plates in Staad" />
+                    Content="Create Plates in Staad"
+                    IsEnabled="{Binding PlatesFormationCompleted}" />
             </UniformGrid>
 
 
