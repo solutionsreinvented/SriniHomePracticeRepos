@@ -52,6 +52,7 @@
                 Grid.ColumnSpan="2"
                 Margin="0,5"
                 VerticalAlignment="Center"
+                IsEnabled="False"
                 Text="Progression direction: " />
 
             <ComboBox
@@ -65,6 +66,7 @@
                 VerticalAlignment="Center"
                 HorizontalContentAlignment="Right"
                 VerticalContentAlignment="Center"
+                IsEnabled="False"
                 ItemsSource="{Binding Source={shared:EnumBindingResource enums:Direction}}"
                 SelectedItem="{Binding ProgressionDirection, Mode=TwoWay}" />
 
@@ -74,6 +76,7 @@
                 Grid.ColumnSpan="2"
                 Margin="0,5"
                 VerticalAlignment="Center"
+                IsEnabled="False"
                 Text="Formation direction: " />
 
             <ComboBox
@@ -86,6 +89,7 @@
                 VerticalAlignment="Center"
                 HorizontalContentAlignment="Right"
                 VerticalContentAlignment="Center"
+                IsEnabled="False"
                 ItemsSource="{Binding FormationDirectionValues}"
                 SelectedItem="{Binding SelectedFormationDirection, Mode=TwoWay}" />
 
@@ -122,43 +126,52 @@
                 IsChecked="{Binding ClosedMesh}"
                 Visibility="{Binding ProgressionDirection, Converter={shared:EnumToVisibilityConverter}, ConverterParameter={x:Static enums:Direction.Circumferential}}" />
 
-            <!--<Button
-                Grid.Row="4"
-                Grid.Column="0"
-                Height="24"
-                Margin="5"
-                Command="{Binding GetTopNodesCommand}"
-                Content="Get Top Nodes" />
-
-            <Button
-                Grid.Row="4"
-                Grid.Column="1"
-                Height="24"
-                Margin="5"
-                Command="{Binding GetBottomNodesCommand}"
-                Content="Get Bottom Nodes" />-->
-
             <UniformGrid
                 Grid.Row="6"
                 Grid.Column="0"
                 Grid.ColumnSpan="4"
                 HorizontalAlignment="Right"
-                Columns="3">
+                Columns="4">
 
                 <Button
                     Width="150"
                     Height="24"
                     Margin="5"
+                    Command="{Binding GetFirstNodeSetCommand}"
+                    Content="Get First Nodes Set"
+                    IsEnabled="{Binding ValidModelIsSelected}"
+                    ToolTip="Select a valid Staad model first to retrieve the nodes."
+                    ToolTipService.ShowOnDisabled="True" />
+
+                <Button
+                    Width="150"
+                    Height="24"
+                    Margin="5"
+                    Command="{Binding GetSecondNodeSetCommand}"
+                    Content="Get Second Nodes Set"
+                    IsEnabled="{Binding ValidModelIsSelected}"
+                    ToolTip="Select a valid Staad model first to retrieve the nodes."
+                    ToolTipService.ShowOnDisabled="True" />
+
+                <!--<Button
+                    Width="150"
+                    Height="24"
+                    Margin="5"
                     Command="{Binding GetAllSelectedNodesCommand}"
                     Content="Get Selected Nodes"
-                    IsEnabled="{Binding ValidModelIsSelected}" />
+                    IsEnabled="{Binding ValidModelIsSelected}"
+                    ToolTip="Select a valid Staad model first to retrieve the nodes."
+                    ToolTipService.ShowOnDisabled="True" />-->
+
                 <Button
                     Width="150"
                     Height="24"
                     Margin="5"
                     Command="{Binding FormPlateMeshCommand}"
                     Content="Form Plate Mesh"
-                    IsEnabled="{Binding NodesAreSelected}" />
+                    IsEnabled="{Binding NodesAreSelected}"
+                    ToolTip="Retrieve selected nodes first to form mesh."
+                    ToolTipService.ShowOnDisabled="True" />
 
                 <Button
                     Grid.Row="5"
@@ -167,7 +180,9 @@
                     Margin="5,5,0,5"
                     Command="{Binding CreatePlatesInStaadCommand}"
                     Content="Create Plates in Staad"
-                    IsEnabled="{Binding PlatesFormationCompleted}" />
+                    IsEnabled="{Binding PlatesFormationCompleted}"
+                    ToolTip="Form mesh first to create the plates in Staad."
+                    ToolTipService.ShowOnDisabled="True" />
             </UniformGrid>
 
 
