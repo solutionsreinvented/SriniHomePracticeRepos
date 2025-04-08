@@ -155,7 +155,7 @@ namespace ReInvented.UniformMesher.ViewModels
             {
                 _ = MessageBox.Show("An issue is encountered. No plate mesh is formed.", "Form plate mesh.", MessageBoxButton.OK);
             }
-            else if (FirstNodeSet.Count == SecondNodeSet.Count)
+            else if (FirstNodeSet == SecondNodeSet)
             {
                 _ = MessageBox.Show("The number of nodes in the top nodes and bottom nodes set is different. No plate mesh is formed.", "Form plate mesh.", MessageBoxButton.OK);
             }

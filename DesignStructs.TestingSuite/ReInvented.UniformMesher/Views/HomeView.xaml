@@ -7,7 +7,7 @@
     xmlns:enums="clr-namespace:ReInvented.UniformMesher.Enums"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="http://schemas.reinvented.com/shared"
-    Title="Rectangular Plate Mesh Generator"
+    Title="Uniform Plate Mesh Generator"
     Width="800"
     Height="450"
     ResizeMode="CanMinimize"
