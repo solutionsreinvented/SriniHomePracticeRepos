@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using ReInvented.Shared;
-using ReInvented.StaadPro.Interactivity.Entities;
+using ReInvented.StaadPro.Interop.Entities;
 
 namespace SPro2023ConsoleApp.Models
 {

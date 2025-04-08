@@ -41,7 +41,7 @@ namespace SPro2023ConsoleApp.Models
 
             AngleC = Math.Asin(SideB * Math.Sin(AngleA.Radians()) / SideA).Degrees() - angleA;
             AngleB = 180 - AngleA - AngleC;
-            SideC = Math.Sqrt(SideA.Squared() + SideB.Squared() - 2 * SideA * SideB * Math.Cos(AngleC.Radians()));
+            SideC = Math.Sqrt(SideA.Square() + SideB.Square() - 2 * SideA * SideB * Math.Cos(AngleC.Radians()));
         }
 
         #endregion

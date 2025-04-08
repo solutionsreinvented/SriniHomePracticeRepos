@@ -3,10 +3,10 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
-using ReInvented.StaadPro.Interactivity.Entities;
+using ReInvented.StaadPro.Interop.Entities;
 using ReInvented.DataAccess;
-using ReInvented.StaadPro.Interactivity.Enums;
-using ReInvented.StaadPro.Interactivity.Models;
+using ReInvented.StaadPro.Interop.Enums;
+using ReInvented.StaadPro.Interop.Models;
 using ReInvented.Sections.Domain.Models;
 using ReInvented.DataAccess.Services;
 using ReInvented.DataAccess.NameProviders;

@@ -43,6 +43,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.ConnX", "ReInven
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.UniformMesher", "ReInvented.UniformMesher\ReInvented.UniformMesher.csproj", "{A6605FBB-CE5A-4930-8B10-845C02AF9617}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.StaadPro.InteropAdapter", "ReInvented.StaadPro.InteropAdapter\ReInvented.StaadPro.InteropAdapter.csproj", "{7935DF54-BDFD-46F8-B68A-A59F6072561D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.CoreTester", "ReInvented.CoreTester\ReInvented.CoreTester.csproj", "{FE2764C8-673C-4854-A55C-662820A30749}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +133,14 @@ Global
 		{A6605FBB-CE5A-4930-8B10-845C02AF9617}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6605FBB-CE5A-4930-8B10-845C02AF9617}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6605FBB-CE5A-4930-8B10-845C02AF9617}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7935DF54-BDFD-46F8-B68A-A59F6072561D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7935DF54-BDFD-46F8-B68A-A59F6072561D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7935DF54-BDFD-46F8-B68A-A59F6072561D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7935DF54-BDFD-46F8-B68A-A59F6072561D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE2764C8-673C-4854-A55C-662820A30749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE2764C8-673C-4854-A55C-662820A30749}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE2764C8-673C-4854-A55C-662820A30749}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE2764C8-673C-4854-A55C-662820A30749}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

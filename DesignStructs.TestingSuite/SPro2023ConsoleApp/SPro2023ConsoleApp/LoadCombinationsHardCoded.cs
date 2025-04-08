@@ -2,8 +2,8 @@
 
 using ReInvented.DataAccess;
 using ReInvented.DataAccess.Services;
-using ReInvented.StaadPro.Interactivity.Entities;
-using ReInvented.StaadPro.Interactivity.Enums;
+using ReInvented.StaadPro.Interop.Entities;
+using ReInvented.StaadPro.Interop.Enums;
 
 namespace SPro2023ConsoleApp
 {
