@@ -23,25 +23,13 @@ namespace ReInvented.ConnX.Extensions
                 new Point(bf - ((bf - tf) / 2), tf),
                 new Point(bf - ((bf - tf) / 2), h - tf),
                 new Point(bf, h - tf),
-                new Point(bf, h),
-                new Point(0, h),
-                new Point(0, h - tf),
-                new Point((bf - tf) / 2, h - tf),
-                new Point((bf - tf) / 2, tf),
-                new Point(0, tf),
-                new Point(0, 0)
-                //new Point(-bf / 2, (h / 2)- cy),        // Top Left Flange
-                //new Point(bf / 2, (h / 2) - cy),        // Top Right Flange
-                //new Point(bf / 2, (h / 2) - tf - cy),   // Inner Right Flange
-                //new Point(tw / 2, (h / 2) - tf - cy),   // Web Right
-                //new Point(tw / 2, (-h / 2) + tf - cy),  // Web Right Bottom
-                //new Point(bf / 2, (-h / 2) + tf - cy),  // Inner Right Bottom Flange
-                //new Point(bf / 2, (-h / 2) - cy),       // Bottom Right Flange
-                //new Point(-bf / 2, (-h / 2) - cy),      // Bottom Left Flange
-                //new Point(-bf / 2, (-h / 2) + tf - cy), // Inner Left Bottom Flange
-                //new Point(-tw / 2, (-h / 2) + tf - cy), // Web Left Bottom
-                //new Point(-tw / 2, (h / 2) - tf - cy),  // Web Left Top
-                //new Point(-bf / 2, (h / 2) - tf - cy)   // Inner Left Flange
+                //new Point(bf, h),
+                //new Point(0, h),
+                //new Point(0, h - tf),
+                //new Point((bf - tf) / 2, h - tf),
+                //new Point((bf - tf) / 2, tf),
+                //new Point(0, tf),
+                //new Point(0, 0)
             };
 
             return profile.Select(p => new Point(p.X, p.Y)).ToList();

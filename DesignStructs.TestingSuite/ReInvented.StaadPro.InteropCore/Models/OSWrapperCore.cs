@@ -30,11 +30,14 @@ namespace ReInvented.StaadPro.InteropCore.Models
         public OSWrapperCore(OpenStaadWrapper wrapper)
         {
             Wrapper = wrapper;
+            IsDedicated = wrapper != null && wrapper.IsDedicated;
             OSRootCore = new OSRootCore(Wrapper.OpenStaad);
         }
 
         public OpenStaadWrapper Wrapper { get; private set; }
 
         public IOSRootCore OSRootCore { get; private set; }
+
+        public bool IsDedicated { get; private set; }
     }
 }

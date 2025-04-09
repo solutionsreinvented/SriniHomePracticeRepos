@@ -1,22 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net5.0-windows</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ReInvented.StaadPro.InteropAdapter\ReInvented.StaadPro.InteropAdapter.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="ReInvented.DataAccess">
-      <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.StaadPro.Interop\bin\Debug\ReInvented.DataAccess.dll</HintPath>
-    </Reference>
-    <Reference Include="ReInvented.StaadPro.Interop">
-      <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.StaadPro.Interop.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
+	<ItemGroup>
+		<Reference Include="ReInvented.DataAccess">
+			<HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.StaadPro.Interop\bin\Debug\ReInvented.DataAccess.dll</HintPath>
+		</Reference>
+		<Reference Include="ReInvented.StaadPro.Interop">
+		  <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.StaadPro.Interop.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\ReInvented.StaadPro.InteropCore\ReInvented.StaadPro.InteropCore.csproj" />
+	</ItemGroup>
 </Project>

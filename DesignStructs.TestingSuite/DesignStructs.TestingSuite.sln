@@ -43,9 +43,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.ConnX", "ReInven
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.UniformMesher", "ReInvented.UniformMesher\ReInvented.UniformMesher.csproj", "{A6605FBB-CE5A-4930-8B10-845C02AF9617}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.StaadPro.InteropAdapter", "ReInvented.StaadPro.InteropAdapter\ReInvented.StaadPro.InteropAdapter.csproj", "{7935DF54-BDFD-46F8-B68A-A59F6072561D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.StaadPro.InteropCore", "ReInvented.StaadPro.InteropCore\ReInvented.StaadPro.InteropCore.csproj", "{7935DF54-BDFD-46F8-B68A-A59F6072561D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.CoreTester", "ReInvented.CoreTester\ReInvented.CoreTester.csproj", "{FE2764C8-673C-4854-A55C-662820A30749}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReInvented.CoreTester", "ReInvented.CoreTester\ReInvented.CoreTester.csproj", "{FE2764C8-673C-4854-A55C-662820A30749}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

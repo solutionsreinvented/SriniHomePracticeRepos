@@ -1,8 +1,11 @@
 ﻿using HelixToolkit.Wpf;
+
 using ReInvented.ConnX.Extensions;
 using ReInvented.Sections.Domain.Models;
 using ReInvented.Sections.Domain.Repositories;
 using ReInvented.Shared.Stores;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -17,7 +20,7 @@ namespace ReInvented.ConnX.ViewModels
         {
             Library = SectionsRepository.Instance.GetSectionsLibrary();
             ColumnDatabase = Library.Databases.FirstOrDefault();
-            ColumnLength = 1.0;
+            ColumnLength = 1000.0;
         }
 
         public SectionsLibrary Library { get => Get<SectionsLibrary>(); private set => Set(value); }
@@ -55,26 +58,66 @@ namespace ReInvented.ConnX.ViewModels
                 // Retrieve profile outline using the service
                 List<Point> profile = Column.GetSectionProfile();
 
+                // Create the 3D mesh by extrusion
+                MeshGeometry3D mesh = ExtrudeProfile(profile.Take(profile.Count).ToList(), ColumnLength);
 
-                Vector3D extrVector = new Vector3D(0, 0, ColumnLength);
-                Point3D sP = new Point3D(0, 0, 0);
-                Point3D eP = new Point3D(0, 0, ColumnLength);
-
-                // Extrude the profile along the column's length
-                //builder.AddExtrudedGeometry(profile, extrVector, sP, eP);
-                //builder.AddBox(new Point3D(0, 0, 0), 100, 200, 300);
-                builder.AddCone(sP, extrVector, 150, 250, 300, false, false, 28);
-                builder.AddNode(new Point3D(0, 0, 0), extrVector, new Point(0, 0));
-                // Apply material
                 DiffuseMaterial material = new DiffuseMaterial(new SolidColorBrush(Colors.SteelBlue));
-                GeometryModel3D geometry = new GeometryModel3D(builder.ToMesh(), material);
+
+                GeometryModel3D geometry = new GeometryModel3D(mesh, material) { BackMaterial = material };
 
                 modelGroup.Children.Add(geometry);
-
 
                 ColumnModel = modelGroup;
             }
         }
 
+        private MeshGeometry3D ExtrudeProfile(List<Point> profile, double depth)
+        {
+            MeshGeometry3D mesh = new MeshGeometry3D();
+            int n = profile.Count;
+
+            // Top and bottom polygons
+            for (int i = 0; i < n; i++)
+            {
+                Point pt = profile[i];
+                mesh.Positions.Add(new Point3D(pt.X, pt.Y, 0));       // bottom
+                mesh.Positions.Add(new Point3D(pt.X, pt.Y, depth));   // top
+            }
+
+            //// Add side quads
+            //for (int i = 0; i < n; i++)
+            //{
+            //    int i1 = i * 2;
+            //    int i2 = (i + 1) % n * 2;
+                
+            //    mesh.TriangleIndices.Add(i1);
+            //    mesh.TriangleIndices.Add(i2);
+            //    mesh.TriangleIndices.Add(i2 + 1);
+
+            //    mesh.TriangleIndices.Add(i1);
+            //    mesh.TriangleIndices.Add(i2 + 1);
+            //    mesh.TriangleIndices.Add(i1 + 1);
+            //}
+
+            //// Cap bottom face
+            //for (int i = 0; i < n; i++)
+            //{
+            //    mesh.TriangleIndices.Add(0);
+            //    mesh.TriangleIndices.Add(i * 2);
+            //    mesh.TriangleIndices.Add((i + 1) * 2);
+            //}
+
+
+
+            //// Cap top face
+            //for (int i = 1; i < n - 1; i++)
+            //{
+            //    mesh.TriangleIndices.Add(1);
+            //    mesh.TriangleIndices.Add((i + 1) * 2 + 1);
+            //    mesh.TriangleIndices.Add(i * 2 + 1);
+            //}
+
+            return mesh;
+        }
     }
 }
