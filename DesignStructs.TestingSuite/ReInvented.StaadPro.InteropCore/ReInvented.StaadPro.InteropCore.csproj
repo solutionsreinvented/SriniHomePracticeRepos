@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Helpers\OpenStaadHelpers.cs" />
     <Compile Include="Helpers\OpenStaadWrapperHelpers.cs" />
+    <Compile Include="Helpers\RotHelpersEx.cs" />
     <Compile Include="Services\OSWrapperCoreProvider.cs" />
     <Compile Include="Interfaces\IOSRootCore.cs" />
   </ItemGroup>

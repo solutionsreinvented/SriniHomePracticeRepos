@@ -18,7 +18,7 @@ namespace ReInvented.CoreTester
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            string staadModelPath = FileServiceProvider.GetFilePathUsingOpenFileDialog(new FileFilter("Staad model files", "std"));
+            string staadModelPath = ""; ///FileServiceProvider.GetFilePathUsingOpenFileDialog(new FileFilter("Staad model files", "std"));
             OSWrapperCore wrapperCore = OSWrapperCoreProvider.Get(staadModelPath);
             IOSRootCore osRoot = wrapperCore.OSRootCore;
 

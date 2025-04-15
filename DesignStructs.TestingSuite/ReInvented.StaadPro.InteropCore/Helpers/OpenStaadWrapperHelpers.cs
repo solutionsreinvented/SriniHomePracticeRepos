@@ -49,8 +49,8 @@ namespace ReInvented.StaadPro.InteropCore.Helpers
 
             if (string.IsNullOrWhiteSpace(fileFullPath))
             {
-                ///openStaad = Marshal.GetActiveObject("StaadPro.OpenSTAAD") as OpenSTAAD;
-                openStaad = OpenStaadHelpers.GetOpenStaadFrom(fileFullPath);
+                //openStaad = Marshal.GetActiveObject("StaadPro.OpenSTAAD") as OpenSTAAD;
+                openStaad = RotHelpersEx.GetActiveObject("StaadPro.OpenSTAAD") as OpenSTAAD;
 
                 string staadFilename = openStaad.GetStaadFileFullPath();
                 dedicated = string.IsNullOrWhiteSpace(staadFilename);
