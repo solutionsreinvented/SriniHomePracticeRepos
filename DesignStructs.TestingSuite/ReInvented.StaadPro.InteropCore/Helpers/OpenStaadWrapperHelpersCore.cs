@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Windows;
 
 using OpenSTAADUI;
@@ -10,7 +9,7 @@ using ReInvented.StaadPro.Interop.Models;
 
 namespace ReInvented.StaadPro.InteropCore.Helpers
 {
-    public class OpenStaadWrapperHelpers
+    public class OpenStaadWrapperHelpersCore
     {
         public static OpenStaadWrapper GetWhenNoRunningInstancesExists(string fileFullPath)
         {
@@ -49,8 +48,7 @@ namespace ReInvented.StaadPro.InteropCore.Helpers
 
             if (string.IsNullOrWhiteSpace(fileFullPath))
             {
-                //openStaad = Marshal.GetActiveObject("StaadPro.OpenSTAAD") as OpenSTAAD;
-                openStaad = RotHelpersEx.GetActiveObject("StaadPro.OpenSTAAD") as OpenSTAAD;
+                openStaad = MarshalHelpers.GetActiveObject("StaadPro.OpenSTAAD") as OpenSTAAD;
 
                 string staadFilename = openStaad.GetStaadFileFullPath();
                 dedicated = string.IsNullOrWhiteSpace(staadFilename);

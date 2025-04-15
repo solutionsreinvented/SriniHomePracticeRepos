@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 using OpenSTAADUI;
@@ -62,7 +58,7 @@ namespace ReInvented.StaadPro.InteropCore.Helpers
             string applicationPath = @"C:\Program Files\Bentley\Engineering\STAAD.Pro 2024\STAAD\Bentley.Staad.exe";
             IResult<string> processResult = ProcessesService.StartApplication(applicationPath, RegexPatterns.StaadWindowTitle, waitSeconds);
 
-            return processResult.Success ? Marshal.GetActiveObject("StaadPro.OpenSTAAD") as OpenSTAAD : null;
+            return processResult.Success ? MarshalHelpers.GetActiveObject("StaadPro.OpenSTAAD") as OpenSTAAD : null;
         }
 
         public static OpenSTAAD GetByOpeningExistingStaadModel(string withStaadFileFullPath, int waitSeconds = 600)

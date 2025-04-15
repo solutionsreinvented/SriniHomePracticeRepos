@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace ReInvented.StaadPro.InteropCore.Helpers
 {
-    public class RotHelpersEx
+    public class MarshalHelpers
     {
         #region DLL Imports
 
@@ -20,22 +20,22 @@ namespace ReInvented.StaadPro.InteropCore.Helpers
             if (progId == null)
                 throw new ArgumentNullException(nameof(progId));
 
-            int hr = CLSIDFromProgIDEx(progId, out var clsid);
+            int hResult = CLSIDFromProgIDEx(progId, out var clsid);
 
-            if (hr < 0)
+            if (hResult < 0)
             {
                 if (throwOnError)
-                    Marshal.ThrowExceptionForHR(hr);
+                    Marshal.ThrowExceptionForHR(hResult);
 
                 return null;
             }
 
-            hr = GetActiveObject(clsid, IntPtr.Zero, out var obj);
+            hResult = GetActiveObject(clsid, IntPtr.Zero, out var obj);
 
-            if (hr < 0)
+            if (hResult < 0)
             {
                 if (throwOnError)
-                    Marshal.ThrowExceptionForHR(hr);
+                    Marshal.ThrowExceptionForHR(hResult);
 
                 return null;
             }

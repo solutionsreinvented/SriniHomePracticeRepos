@@ -23,16 +23,9 @@ namespace ReInvented.StaadPro.InteropCore.Services
             {
                 IList<RotItem<OpenSTAAD>> runningInstances = RotHelpers.GetAllRunningInstances<OpenSTAAD>();
 
-                OpenStaadWrapper osWrapper;
-
-                if (runningInstances.Count <= 0)
-                {
-                    osWrapper = OpenStaadWrapperHelpers.GetWhenNoRunningInstancesExists(fileFullPath);
-                }
-                else
-                {
-                    osWrapper = OpenStaadWrapperHelpers.GetWhenRunningInstancesExists(fileFullPath);
-                }
+                OpenStaadWrapper osWrapper = runningInstances.Count <= 0
+                    ? OpenStaadWrapperHelpersCore.GetWhenNoRunningInstancesExists(fileFullPath)
+                    : OpenStaadWrapperHelpersCore.GetWhenRunningInstancesExists(fileFullPath);
 
                 return new OSWrapperCore(osWrapper);
             }
@@ -44,20 +37,6 @@ namespace ReInvented.StaadPro.InteropCore.Services
             }
 
             return new OSWrapperCore(null);
-
-
-            //try
-            //{
-            //    OpenStaadWrapper osWrapper = OpenStaadWrapperProvider.Get(fileFullPath);
-            //    return new OSWrapperCore(osWrapper);
-            //}
-            //catch (Exception ex)
-            //{
-            //    _ = MessageBox.Show($"Could not acquire an OpenStaad object. Possible reason could be that a running instance of Staad.Pro is not found!" +
-            //        $"In order to create the OpenStaad object, please ensure that the Staad.Pro application is running. {Environment.NewLine}{ex.Message}", "Get OpenStaad Objects", MessageBoxButton.OK);
-            //}
-
-            //return new OSWrapperCore(null);
         }
 
         #endregion
