@@ -4,11 +4,12 @@ using System.Windows;
 
 using OpenSTAADUI;
 
-using ReInvented.Shared.Helpers;
 using ReInvented.Shared.Models;
 using ReInvented.StaadPro.Interop.Models;
-using ReInvented.StaadPro.Interop.Helpers;
+//using ReInvented.StaadPro.Interop.Helpers;
 using ReInvented.StaadPro.InteropCore.Models;
+using ReInvented.StaadPro.InteropCore.Helpers;
+using ReInvented.Shared.Helpers;
 
 namespace ReInvented.StaadPro.InteropCore.Services
 {
@@ -22,9 +23,17 @@ namespace ReInvented.StaadPro.InteropCore.Services
             {
                 IList<RotItem<OpenSTAAD>> runningInstances = RotHelpers.GetAllRunningInstances<OpenSTAAD>();
 
-                OpenStaadWrapper osWrapper = runningInstances.Count <= 0
-                    ? OpenStaadWrapperHelpers.GetWhenNoRunningInstancesExists(fileFullPath)
-                    : OpenStaadWrapperHelpers.GetWhenRunningInstancesExists(fileFullPath);
+                OpenStaadWrapper osWrapper;
+
+                if (runningInstances.Count <= 0)
+                {
+                    osWrapper = OpenStaadWrapperHelpers.GetWhenNoRunningInstancesExists(fileFullPath);
+                }
+                else
+                {
+                    osWrapper = OpenStaadWrapperHelpers.GetWhenRunningInstancesExists(fileFullPath);
+                }
+
                 return new OSWrapperCore(osWrapper);
             }
             catch (Exception ex)
