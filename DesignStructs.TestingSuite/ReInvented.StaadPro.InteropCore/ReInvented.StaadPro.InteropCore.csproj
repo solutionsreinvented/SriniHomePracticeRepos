@@ -64,11 +64,14 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\OpenStaadHelpers.cs" />
+    <Compile Include="Extensions\OpenStaadCoreExtensions.cs" />
+    <Compile Include="Extensions\OSGeometryCoreExtensions.cs" />
+    <Compile Include="Extensions\OSGeometryCoreExtensionsAsync.cs" />
+    <Compile Include="Helpers\OpenStaadHelpersCore.cs" />
     <Compile Include="Helpers\OpenStaadWrapperHelpersCore.cs" />
-    <Compile Include="Helpers\MarshalHelpers.cs" />
+    <Compile Include="Models\OpenStaadCore.cs" />
+    <Compile Include="Models\OSGeometryCore.cs" />
     <Compile Include="Services\OSWrapperCoreProvider.cs" />
-    <Compile Include="Interfaces\IOSRootCore.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\OSWrapperCore.cs" />

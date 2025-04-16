@@ -1,42 +1,27 @@
 ﻿using System.Collections.Generic;
 
-using OpenSTAADUI;
-
 using ReInvented.StaadPro.Interop.Entities;
 using ReInvented.StaadPro.Interop.Extensions;
 using ReInvented.StaadPro.Interop.Models;
-using ReInvented.StaadPro.InteropCore.Interfaces;
 
 namespace ReInvented.StaadPro.InteropCore.Models
 {
-    public class OSRootCore : IOSRootCore
-    {
-        public OSRootCore(OpenSTAAD openStaad)
-        {
-            OpenStaad = openStaad;
-        }
-
-        private OpenSTAAD OpenStaad { get; set; }
-
-        public HashSet<MemberForces> RetrieveMemberForces(IEnumerable<int> beams, IEnumerable<int> loadCases)
-        {
-            return OpenStaad.RetrieveMemberForces(beams, loadCases);
-        }
-
-    }
-
     public class OSWrapperCore
     {
         public OSWrapperCore(OpenStaadWrapper wrapper)
         {
             Wrapper = wrapper;
             IsDedicated = wrapper != null && wrapper.IsDedicated;
-            OSRootCore = new OSRootCore(Wrapper.OpenStaad);
+
+            OpenStaad = new OpenStaadCore(wrapper.OpenStaad);
+            Geometry = new OSGeometryCore(wrapper.Geometry);
         }
 
         public OpenStaadWrapper Wrapper { get; private set; }
 
-        public IOSRootCore OSRootCore { get; private set; }
+        public OpenStaadCore OpenStaad { get; private set; }
+
+        public OSGeometryCore Geometry { get; private set; }
 
         public bool IsDedicated { get; private set; }
     }

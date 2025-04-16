@@ -4,50 +4,22 @@ using System.Windows;
 
 using OpenSTAADUI;
 
+using ReInvented.Shared.Helpers;
+using ReInvented.StaadPro.Interop.Base;
 using ReInvented.StaadPro.Interop.Extensions;
 using ReInvented.StaadPro.Interop.Models;
 
 namespace ReInvented.StaadPro.InteropCore.Helpers
 {
-    public class OpenStaadWrapperHelpersCore
+    public class OpenStaadWrapperHelpersCore : OpenStaadWrapperHelpersBase
     {
-        public static OpenStaadWrapper GetWhenNoRunningInstancesExists(string fileFullPath)
-        {
-            OpenSTAAD openStaad = null;
-            bool dedicated = false;
-
-            if (string.IsNullOrWhiteSpace(fileFullPath))
-            {
-                openStaad = OpenStaadHelpers.GetByStartingStaadApplication();
-                dedicated = true;
-            }
-            else
-            {
-                if (!(Path.GetDirectoryName(fileFullPath) == null))
-                {
-                    if (File.Exists(fileFullPath))
-                    {
-                        openStaad = OpenStaadHelpers.GetByOpeningExistingStaadModel(fileFullPath);
-                        dedicated = true;
-                    }
-                    else
-                    {
-                        openStaad = OpenStaadHelpers.GetByCreatingBlankStaadModel(fileFullPath);
-                        dedicated = true;
-                    }
-                }
-            }
-
-            return new OpenStaadWrapper(openStaad, dedicated);
-        }
-
         public static OpenStaadWrapper GetWhenRunningInstancesExists(string fileFullPath)
         {
-            OpenSTAAD openStaad;
-            bool dedicated = false;
+            OpenSTAAD openStaad; bool dedicated = false;
 
             if (string.IsNullOrWhiteSpace(fileFullPath))
             {
+                ///TODO: This line is the only difference between .NET Framework and .NET Core versions
                 openStaad = MarshalHelpers.GetActiveObject("StaadPro.OpenSTAAD") as OpenSTAAD;
 
                 string staadFilename = openStaad.GetStaadFileFullPath();
@@ -55,20 +27,20 @@ namespace ReInvented.StaadPro.InteropCore.Helpers
             }
             else
             {
-                openStaad = OpenStaadHelpers.GetOpenStaadFrom(fileFullPath);
+                openStaad = OpenStaadHelpersBase.GetOpenStaadFrom(fileFullPath);
 
                 if (openStaad == null)
                 {
                     if (File.Exists(fileFullPath))
                     {
-                        openStaad = OpenStaadHelpers.GetByOpeningExistingStaadModel(fileFullPath);
+                        openStaad = OpenStaadHelpersBase.GetByOpeningExistingStaadModel(fileFullPath);
                         dedicated = true;
                     }
                     else
                     {
                         try
                         {
-                            openStaad = OpenStaadHelpers.GetByCreatingBlankStaadModel(fileFullPath);
+                            openStaad = OpenStaadHelpersBase.GetByCreatingBlankStaadModel(fileFullPath);
                             dedicated = true;
                         }
                         catch (Exception ex)
@@ -85,8 +57,8 @@ namespace ReInvented.StaadPro.InteropCore.Helpers
             }
 
             // Below code is for testing. May not be working correctly!
-            //OpenStaadWrapper wrapper = new OpenStaadWrapper(openStaad, dedicated);
-            //return wrapper.StaadEdition != Enums.ApplicationEdition.Connect ? GetWhenNoRunningInstancesExists(fileFullPath) : wrapper;
+            // OpenStaadWrapper wrapper = new OpenStaadWrapper(openStaad, dedicated);
+            // return wrapper.StaadEdition != Enums.ApplicationEdition.Connect ? GetWhenNoRunningInstancesExists(fileFullPath) : wrapper;
 
             return new OpenStaadWrapper(openStaad, dedicated);
         }
