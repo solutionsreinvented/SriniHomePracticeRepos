@@ -1,6 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using ReInvented.Shared.Interfaces;
@@ -102,7 +100,6 @@ namespace ReInvented.StaadPro.InteropCore.Extensions
         {
             return await geometry.ComObject.GetEntityGroupsAsync<T>(groupNameContaining, nThreads);
         }
-
 
         public static async Task<HashSet<EntityGroup<T>>> GetEntityGroupsAsync<T>(this OSGeometryCore geometry, HashSet<T> allEntities, int nThreads) where T : IEntity
         {
