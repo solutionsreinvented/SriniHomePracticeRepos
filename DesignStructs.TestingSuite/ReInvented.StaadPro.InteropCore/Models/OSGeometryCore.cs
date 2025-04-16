@@ -1,19 +1,18 @@
 ﻿
-using System.Collections.Generic;
-
 using OpenSTAADUI;
-
-using ReInvented.Shared.Interfaces;
-using ReInvented.StaadPro.Interop.Entities;
 
 namespace ReInvented.StaadPro.InteropCore.Models
 {
     public class OSGeometryCore
     {
+        #region Parameterized Constructor
+
         public OSGeometryCore(OSGeometryUI geometry)
         {
             ComObject = geometry;
         }
+
+        #endregion
 
         #region Private Properties
 
@@ -21,7 +20,10 @@ namespace ReInvented.StaadPro.InteropCore.Models
 
         #endregion
 
-        public int GetSolidCount() => ComObject.GetSolidCount();
+        #region Public Functions
 
+        public int GetSolidCount() => ComObject.GetSolidCount(); 
+
+        #endregion
     }
 }

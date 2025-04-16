@@ -23,6 +23,9 @@ namespace ReInvented.StaadPro.InteropCore.Models
 
         public OSGeometryCore Geometry { get; private set; }
 
+        public OSOutputCore Output { get; private set; }
+
+
         public bool IsDedicated { get; private set; }
     }
 }
