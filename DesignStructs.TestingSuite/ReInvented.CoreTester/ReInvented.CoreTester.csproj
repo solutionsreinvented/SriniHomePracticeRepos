@@ -11,6 +11,9 @@
 		<Reference Include="ReInvented.DataAccess">
 			<HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.StaadPro.Interop\bin\Debug\ReInvented.DataAccess.dll</HintPath>
 		</Reference>
+		<Reference Include="ReInvented.Shared">
+		  <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Shared.dll</HintPath>
+		</Reference>
 		<Reference Include="ReInvented.StaadPro.Interop">
 		  <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.StaadPro.Interop.dll</HintPath>
 		</Reference>

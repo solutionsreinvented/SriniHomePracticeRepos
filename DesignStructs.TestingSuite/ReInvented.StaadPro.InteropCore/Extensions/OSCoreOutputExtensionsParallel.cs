@@ -8,14 +8,15 @@ using ReInvented.StaadPro.InteropCore.Models;
 
 namespace ReInvented.StaadPro.InteropCore.Extensions
 {
-    public static class OSOutputCoreExtensionsParallel
+    public static class OSCoreOutputExtensionsParallel
     {
         //[Obsolete("Thorough testing is not done. Do not use until released for use", true)]
-        public static IEnumerable<PlateCenterResults> GetPlateCenterResults(this OSOutputCore output, IEnumerable<ILoadCase> loadCases, IEnumerable<Plate> plates, int nThreads)
+        public static IEnumerable<PlateCenterResults> GetPlateCenterResults(this OSCoreOutput output, IEnumerable<ILoadCase> loadCases, IEnumerable<Plate> plates, int nThreads)
         {
             return output.ComObject.GetPlateCenterResults(loadCases, plates, nThreads);
         }
-        public static HashSet<StaticCheckResult> GetStaticCheckResults(this OSOutputCore output, IEnumerable<int> loadCaseIds, int nThreads)
+
+        public static HashSet<StaticCheckResult> GetStaticCheckResults(this OSCoreOutput output, IEnumerable<int> loadCaseIds, int nThreads)
         {
             return output.ComObject.GetStaticCheckResults(loadCaseIds, nThreads);
         }

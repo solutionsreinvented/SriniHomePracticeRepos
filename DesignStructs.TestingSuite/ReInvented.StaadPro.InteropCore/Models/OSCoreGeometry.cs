@@ -1,13 +1,12 @@
-﻿
-using OpenSTAADUI;
+﻿using OpenSTAADUI;
 
 namespace ReInvented.StaadPro.InteropCore.Models
 {
-    public class OSGeometryCore
+    public class OSCoreGeometry
     {
         #region Parameterized Constructor
 
-        public OSGeometryCore(OSGeometryUI geometry)
+        public OSCoreGeometry(OSGeometryUI geometry)
         {
             ComObject = geometry;
         }

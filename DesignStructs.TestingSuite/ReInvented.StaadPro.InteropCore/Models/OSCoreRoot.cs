@@ -1,13 +1,12 @@
-﻿
-using OpenSTAADUI;
+﻿using OpenSTAADUI;
 
 namespace ReInvented.StaadPro.InteropCore.Models
 {
-    public class OpenStaadCore
+    public class OSCoreRoot
     {
         #region Parameterized Constructor
 
-        public OpenStaadCore(OpenSTAAD openStaad)
+        public OSCoreRoot(OpenSTAAD openStaad)
         {
             ComObject = openStaad;
         }

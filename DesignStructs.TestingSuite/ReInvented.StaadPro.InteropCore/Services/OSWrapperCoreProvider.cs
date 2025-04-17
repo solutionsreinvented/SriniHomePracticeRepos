@@ -17,7 +17,7 @@ namespace ReInvented.StaadPro.InteropCore.Services
     {
         #region Main Functions
 
-        public static OSWrapperCore Get(string fileFullPath = null)
+        public static OpenStaadCoreWrapper Get(string fileFullPath = null)
         {
             try
             {
@@ -27,7 +27,7 @@ namespace ReInvented.StaadPro.InteropCore.Services
                     ? OpenStaadWrapperHelpersCore.GetWhenNoRunningInstancesExists(fileFullPath)
                     : OpenStaadWrapperHelpersCore.GetWhenRunningInstancesExists(fileFullPath);
 
-                return new OSWrapperCore(osWrapper);
+                return new OpenStaadCoreWrapper(osWrapper);
             }
             catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace ReInvented.StaadPro.InteropCore.Services
                     "Get OpenStaad Objects", MessageBoxButton.OK);
             }
 
-            return new OSWrapperCore(null);
+            return new OpenStaadCoreWrapper(null);
         }
 
         #endregion

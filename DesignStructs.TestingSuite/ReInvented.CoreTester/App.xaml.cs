@@ -20,18 +20,18 @@ namespace ReInvented.CoreTester
         {
             base.OnStartup(e);
             string staadModelPath = FileServiceProvider.GetFilePathUsingOpenFileDialog(new FileFilter("Staad model files", "std"));
-            OSWrapperCore wrapper = OSWrapperCoreProvider.Get(staadModelPath);
-            OpenStaadCore openStaad = wrapper.OpenStaad;
-            OSGeometryCore geometry = wrapper.Geometry;
-
-            var allPlates = geometry.GetAllPlatesList();
-
+            OpenStaadCoreWrapper coreWrapper = OSWrapperCoreProvider.Get(staadModelPath);
+            OSCoreRoot root = coreWrapper.Root;
+            OSCoreGeometry geometry = coreWrapper.Geometry;
+            
+            HashSet<Plate> allPlates = geometry.GetAllEntities<Plate>(10);
+            //geometry.DeleteExistingGeometry(5);
             IEnumerable<string> dontKnow = geometry.GetAllGroupNames();
 
             List<int> beams = new() { 15440, 15441 };
             List<int> loadCases = new() { 61, 62 };
 
-            HashSet<MemberForces> memForces = openStaad.RetrieveMemberForces(beams, loadCases);
+            HashSet<MemberForces> memForces = root.RetrieveMemberForces(beams, loadCases);
         }
     }
 }

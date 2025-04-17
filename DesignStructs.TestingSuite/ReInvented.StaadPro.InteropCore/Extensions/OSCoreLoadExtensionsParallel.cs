@@ -5,9 +5,9 @@ using ReInvented.StaadPro.InteropCore.Models;
 
 namespace ReInvented.StaadPro.InteropCore.Extensions
 {
-    public static class OSLoadCoreExtensionsParallel
+    public static class OSCoreLoadExtensionsParallel
     {
-        public static OSLoadCore AddSelfweightInXYZTo(this OSLoadCore load, int loadCaseId, IEnumerable<int> entities, int nThreads, SelftWeightDirection loadDirection = SelftWeightDirection.GlobalY, double factor = -1.0)
+        public static OSCoreLoad AddSelfweightInXYZTo(this OSCoreLoad load, int loadCaseId, IEnumerable<int> entities, int nThreads, SelftWeightDirection loadDirection = SelftWeightDirection.GlobalY, double factor = -1.0)
         {
             load.AddSelfweightInXYZTo(loadCaseId, entities, nThreads, loadDirection, factor);
             return load;

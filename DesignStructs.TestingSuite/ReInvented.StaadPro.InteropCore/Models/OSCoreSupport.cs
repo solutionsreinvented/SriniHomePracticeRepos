@@ -1,22 +1,21 @@
-﻿
-using OpenSTAADUI;
+﻿using OpenSTAADUI;
 
 namespace ReInvented.StaadPro.InteropCore.Models
 {
-    public class OSOutputCore
+    public class OSCoreSupport
     {
         #region Parameterized Constructor
 
-        public OSOutputCore(OSOutputUI output)
+        public OSCoreSupport(OSSupportUI support)
         {
-            ComObject = output;
+            ComObject = support;
         }
 
         #endregion
 
         #region Private Properties
 
-        public OSOutputUI ComObject { get; private set; }
+        public OSSupportUI ComObject { get; private set; }
 
         #endregion
     }

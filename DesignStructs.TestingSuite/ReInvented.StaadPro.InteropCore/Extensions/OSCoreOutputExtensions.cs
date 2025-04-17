@@ -9,21 +9,21 @@ using ReInvented.StaadPro.InteropCore.Models;
 
 namespace ReInvented.StaadPro.InteropCore.Extensions
 {
-    public static class OSOutputCoreExtensions
+    public static class OSCoreOutputExtensions
     {
         #region Supports' Results
 
-        public static LoadCaseForces GetSupportForces(this OSOutputCore output, int supportId, int loadCaseId)
+        public static LoadCaseForces GetSupportForces(this OSCoreOutput output, int supportId, int loadCaseId)
         {
             return output.ComObject.GetSupportForces(supportId, loadCaseId);
         }
 
-        public static LoadCaseForces GetSupportReactions(this OSOutputCore output, int supportId, int loadCaseId)
+        public static LoadCaseForces GetSupportReactions(this OSCoreOutput output, int supportId, int loadCaseId)
         {
             return output.ComObject.GetSupportReactions(supportId, loadCaseId);
         }
 
-        public static HashSet<StaticCheckResult> GetStaticCheckResults(this OSOutputCore output, IEnumerable<int> loadCaseIds)
+        public static HashSet<StaticCheckResult> GetStaticCheckResults(this OSCoreOutput output, IEnumerable<int> loadCaseIds)
         {
             return output.ComObject.GetStaticCheckResults(loadCaseIds);
         }
@@ -32,12 +32,12 @@ namespace ReInvented.StaadPro.InteropCore.Extensions
 
         #region Member Results
 
-        public static Dictionary<Beam, double> GetMemberSteelUtilizationRatios(this OSOutputCore output, HashSet<Beam> beams)
+        public static Dictionary<Beam, double> GetMemberSteelUtilizationRatios(this OSCoreOutput output, HashSet<Beam> beams)
         {
             return output.ComObject.GetMemberSteelUtilizationRatios(beams);
         }
 
-        public static MemberForces GetMemberEndForces(this OSOutputCore output, string lcTitle, int beamId, int loadCaseId, MemberEnd memberEnd)
+        public static MemberForces GetMemberEndForces(this OSCoreOutput output, string lcTitle, int beamId, int loadCaseId, MemberEnd memberEnd)
         {
             return output.GetMemberEndForces(lcTitle, beamId, loadCaseId, memberEnd);
         }
@@ -46,27 +46,27 @@ namespace ReInvented.StaadPro.InteropCore.Extensions
 
         #region Plate Results
 
-        public static PlateCenterForces GetPlateCenterForces(this OSOutputCore output, ILoadCase loadCase, Plate plate)
+        public static PlateCenterForces GetPlateCenterForces(this OSCoreOutput output, ILoadCase loadCase, Plate plate)
         {
             return output.ComObject.GetPlateCenterForces(loadCase, plate);
         }
 
-        public static PlateCenterMoments GetPlateCenterMoments(this OSOutputCore output, ILoadCase loadCase, Plate plate)
+        public static PlateCenterMoments GetPlateCenterMoments(this OSCoreOutput output, ILoadCase loadCase, Plate plate)
         {
             return output.ComObject.GetPlateCenterMoments(loadCase, plate);
         }
 
-        public static PlateCenterVonMises GetPlateCenterVonMises(this OSOutputCore output, ILoadCase loadCase, Plate plate)
+        public static PlateCenterVonMises GetPlateCenterVonMises(this OSCoreOutput output, ILoadCase loadCase, Plate plate)
         {
             return output.ComObject.GetPlateCenterVonMises(loadCase, plate);
         }
 
-        public static PlatePrincipalStresses GetPlatePrincipalStresses(this OSOutputCore output, ILoadCase loadCase, Plate plate)
+        public static PlatePrincipalStresses GetPlatePrincipalStresses(this OSCoreOutput output, ILoadCase loadCase, Plate plate)
         {
             return output.ComObject.GetPlatePrincipalStresses(loadCase, plate);
         }
 
-        public static PlateCenterResults GetPlateCenterResults(this OSOutputCore output, ILoadCase loadCase, Plate plate)
+        public static PlateCenterResults GetPlateCenterResults(this OSCoreOutput output, ILoadCase loadCase, Plate plate)
         {
             //PlateCenterForces pdForces = GetPlateCenterForces(output, loadCase, plate);
             //PlateCenterMoments pdMoments = GetPlateCenterMoments(output, loadCase, plate);
@@ -78,7 +78,7 @@ namespace ReInvented.StaadPro.InteropCore.Extensions
             return output.GetPlateCenterResults(loadCase, plate);
         }
 
-        public static IEnumerable<PlateCenterResults> GetPlateCenterResults(this OSOutputCore output, IEnumerable<ILoadCase> loadCases, IEnumerable<Plate> plates)
+        public static IEnumerable<PlateCenterResults> GetPlateCenterResults(this OSCoreOutput output, IEnumerable<ILoadCase> loadCases, IEnumerable<Plate> plates)
         {
             return output.ComObject.GetPlateCenterResults(loadCases, plates);
         }

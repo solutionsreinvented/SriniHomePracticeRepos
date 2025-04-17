@@ -1,24 +1,22 @@
-﻿
-using OpenSTAADUI;
+﻿using OpenSTAADUI;
 
 namespace ReInvented.StaadPro.InteropCore.Models
 {
-    public class OSLoadCore
+    public class OSCoreTable
     {
         #region Parameterized Constructor
 
-        public OSLoadCore(OSLoadUI load)
+        public OSCoreTable(OSTableUI table)
         {
-            ComObject = load;
+            ComObject = table;
         }
 
         #endregion
 
         #region Private Properties
 
-        public OSLoadUI ComObject { get; private set; }
+        public OSTableUI ComObject { get; private set; }
 
         #endregion
-
     }
 }
