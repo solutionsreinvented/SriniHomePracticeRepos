@@ -81,6 +81,7 @@ namespace ReInvented.StaadPro.InteropCore.Models
             Geometry = new OSCoreGeometry(wrapper.Geometry);
             Load = new OSCoreLoad(wrapper.Load);
             Output = new OSCoreOutput(wrapper.Output);
+            Property = new OSCoreProperty(wrapper.Property);
             Support = new OSCoreSupport(wrapper.Support);
             Design = new OSCoreDesign(wrapper.Design);
             Commands = new OSCoreCommands(wrapper.Commands);

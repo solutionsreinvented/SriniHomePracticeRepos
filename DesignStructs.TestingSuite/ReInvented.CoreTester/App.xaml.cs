@@ -8,6 +8,10 @@ using ReInvented.StaadPro.InteropCore.Extensions;
 using ReInvented.DataAccess.Models;
 using ReInvented.DataAccess.Services;
 using System.Threading.Tasks;
+using System.Linq;
+using ReInvented.StaadPro.Interop.Enums;
+using ReInvented.StaadPro.Interop.Interfaces;
+using ReInvented.StaadPro.Interop.Models;
 
 namespace ReInvented.CoreTester
 {
@@ -21,17 +25,36 @@ namespace ReInvented.CoreTester
             base.OnStartup(e);
             string staadModelPath = FileServiceProvider.GetFilePathUsingOpenFileDialog(new FileFilter("Staad model files", "std"));
             OpenStaadCoreWrapper coreWrapper = OSWrapperCoreProvider.Get(staadModelPath);
+
+            KeepLoopingHelper(coreWrapper);
+        }
+
+        private void KeepLoopingHelper(OpenStaadCoreWrapper coreWrapper)
+        {
+
             OSCoreRoot root = coreWrapper.Root;
             OSCoreGeometry geometry = coreWrapper.Geometry;
-            
+            OSCoreOutput output = coreWrapper.Output;
+            OSCoreLoad load = coreWrapper.Load;
+            OSCoreProperty property = coreWrapper.Property;
+            OSCoreSupport support = coreWrapper.Support;
+
+
             HashSet<Plate> allPlates = geometry.GetAllEntities<Plate>(10);
-            //geometry.DeleteExistingGeometry(5);
-            IEnumerable<string> dontKnow = geometry.GetAllGroupNames();
+            //IEnumerable<string> grpNames = geometry.GetAllGroupNames();
+            //IEnumerable<int> allBeams = geometry.GetAllBeamsList();
 
-            List<int> beams = new() { 15440, 15441 };
-            List<int> loadCases = new() { 61, 62 };
+            IGenericSection section = property.GetSectionFrom(11);
+            TCISection actSection = section as TCISection;
+            IEnumerable<ILoadCase> pLoadCases = load.GetAllLoadCasesOfType(LoadCaseType.PrimaryLoad);
+            //PlateCenterResults result = output.GetPlateCenterResults(pLoadCases.First(), allPlates.First());
+            HashSet<Node> unknown = support.GetAllSupportNodes(geometry, 10);
 
-            HashSet<MemberForces> memForces = root.RetrieveMemberForces(beams, loadCases);
+            //Throwing Methods
+            //HashSet<MemberForces> memForces = root.RetrieveMemberForces(beams, loadCases);
+
+            KeepLoopingHelper(coreWrapper);
         }
+
     }
 }

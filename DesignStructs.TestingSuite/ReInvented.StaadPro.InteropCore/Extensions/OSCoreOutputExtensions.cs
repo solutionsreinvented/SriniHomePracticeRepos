@@ -75,7 +75,7 @@ namespace ReInvented.StaadPro.InteropCore.Extensions
 
             //return PlateCenterResults.Create(pdForces, pdMoments, pdVonMises, pdPrincipal);
 
-            return output.GetPlateCenterResults(loadCase, plate);
+            return output.ComObject.GetPlateCenterResults(loadCase, plate);
         }
 
         public static IEnumerable<PlateCenterResults> GetPlateCenterResults(this OSCoreOutput output, IEnumerable<ILoadCase> loadCases, IEnumerable<Plate> plates)
