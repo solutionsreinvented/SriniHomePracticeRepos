@@ -47,7 +47,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.StaadPro.Interop
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReInvented.CoreTester", "ReInvented.CoreTester\ReInvented.CoreTester.csproj", "{FE2764C8-673C-4854-A55C-662820A30749}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.ConnXtream", "ReInvented.ConnXtream\ReInvented.ConnXtream.csproj", "{34EA9299-2957-4800-AD5E-651E5566F2B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReInvented.ConnXtream", "ReInvented.ConnXtream\ReInvented.ConnXtream.csproj", "{34EA9299-2957-4800-AD5E-651E5566F2B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.Thickener.MLModel", "ReInvented.Thickener.MLModel\ReInvented.Thickener.MLModel.csproj", "{F1F7F998-F3CB-4FCA-A434-19594A700D24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -147,6 +149,10 @@ Global
 		{34EA9299-2957-4800-AD5E-651E5566F2B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34EA9299-2957-4800-AD5E-651E5566F2B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34EA9299-2957-4800-AD5E-651E5566F2B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1F7F998-F3CB-4FCA-A434-19594A700D24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1F7F998-F3CB-4FCA-A434-19594A700D24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1F7F998-F3CB-4FCA-A434-19594A700D24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1F7F998-F3CB-4FCA-A434-19594A700D24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
