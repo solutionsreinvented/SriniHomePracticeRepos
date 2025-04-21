@@ -2,16 +2,14 @@
 using System.Windows;
 
 using ReInvented.StaadPro.Interop.Entities;
-using ReInvented.StaadPro.InteropCore.Models;
-using ReInvented.StaadPro.InteropCore.Services;
-using ReInvented.StaadPro.InteropCore.Extensions;
 using ReInvented.DataAccess.Models;
 using ReInvented.DataAccess.Services;
-using System.Threading.Tasks;
-using System.Linq;
 using ReInvented.StaadPro.Interop.Enums;
 using ReInvented.StaadPro.Interop.Interfaces;
 using ReInvented.StaadPro.Interop.Models;
+using ReInvented.StaadPro.Interop.Core.Models;
+using ReInvented.StaadPro.Interop.Core.Services;
+using ReInvented.StaadPro.Interop.Core.Extensions;
 
 namespace ReInvented.CoreTester
 {
