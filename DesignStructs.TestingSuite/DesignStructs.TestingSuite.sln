@@ -43,13 +43,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.ConnX", "ReInven
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.UniformMesher", "ReInvented.UniformMesher\ReInvented.UniformMesher.csproj", "{A6605FBB-CE5A-4930-8B10-845C02AF9617}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.StaadPro.InteropCore", "ReInvented.StaadPro.InteropCore\ReInvented.StaadPro.InteropCore.csproj", "{7935DF54-BDFD-46F8-B68A-A59F6072561D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.StaadPro.Interop.Core", "ReInvented.StaadPro.Interop.Core\ReInvented.StaadPro.Interop.Core.csproj", "{7935DF54-BDFD-46F8-B68A-A59F6072561D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReInvented.CoreTester", "ReInvented.CoreTester\ReInvented.CoreTester.csproj", "{FE2764C8-673C-4854-A55C-662820A30749}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReInvented.ConnXtream", "ReInvented.ConnXtream\ReInvented.ConnXtream.csproj", "{34EA9299-2957-4800-AD5E-651E5566F2B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReInvented.Thickener.MLModel", "ReInvented.Thickener.MLModel\ReInvented.Thickener.MLModel.csproj", "{F1F7F998-F3CB-4FCA-A434-19594A700D24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReInvented.Thickener.MLModel", "ReInvented.Thickener.MLModel\ReInvented.Thickener.MLModel.csproj", "{F1F7F998-F3CB-4FCA-A434-19594A700D24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

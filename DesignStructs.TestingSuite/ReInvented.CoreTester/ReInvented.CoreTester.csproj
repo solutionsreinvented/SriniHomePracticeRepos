@@ -19,6 +19,6 @@
 		</Reference>
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\ReInvented.StaadPro.InteropCore\ReInvented.StaadPro.InteropCore.csproj" />
+	  <ProjectReference Include="..\ReInvented.StaadPro.InteropCore\ReInvented.StaadPro.Interop.Core.csproj" />
 	</ItemGroup>
 </Project>
