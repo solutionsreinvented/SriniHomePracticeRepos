@@ -11,6 +11,13 @@
     <title>Linguist Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Custom polished styling inspired by modern UI patterns */
+        .modal-overlay { background: rgba(15, 23, 42, 0.6); }
+        .modal-card { border-radius: 14px; box-shadow: 0 10px 30px rgba(2,6,23,0.25); }
+        .card { border-radius: 12px; }
+        .btn-primary { background: #4f46e5; color: white; }
+        .btn-danger { background: #ef4444; color: white; }
+        .conj-highlight { color: #6d28d9; font-style: italic; }
         body {
             font-size: 14px;
         }
@@ -79,6 +86,7 @@
                 {
                     <form method="post" asp-page-handler="AddVocabulary"
                           class="bg-white p-4 border rounded mb-4 space-y-2">
+                        @Html.AntiForgeryToken()
 
                         <div class="flex gap-2">
                             <input name="ManualTerm" placeholder="Word"
@@ -104,18 +112,61 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                         @foreach (var v in Model.Vocabulary)
                         {
-                            <div class="bg-white border p-3 card">
+                            <div class="bg-white border p-3 card relative" data-vocab-id="@v.Id" data-vocab-term="@v.Term" data-vocab-meaning="@v.Meaning" data-vocab-usage="@v.UsageExample">
                                 <div class="font-semibold">@v.Term</div>
                                 <div class="text-slate-500 italic text-sm">@v.Meaning</div>
                                 <div class="text-sm mt-1">@v.UsageExample</div>
+
+                                <div class="absolute top-2 right-2 flex gap-2">
+                                    <button type="button" class="text-indigo-600 text-sm" onclick="openEditVocabFromBtn(event, this)">Edit</button>
+                                    <form method="post" asp-page-handler="DeleteVocabulary" class="inline" onsubmit="return confirm('Delete vocabulary item?')">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="EditVocabId" value="@v.Id" />
+                                        <button type="submit" class="text-red-600 text-sm">Delete</button>
+                                    </form>
+                                </div>
                             </div>
                         }
+                    </div>
+
+                    <!-- Vocab Edit Modal -->
+                    <div id="vocabModal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-40">
+                        <div class="bg-white rounded-lg w-11/12 md:w-1/2 p-6 relative">
+                            <button onclick="closeVocabModal()" class="absolute top-3 right-3 text-slate-500">✕</button>
+                            <h2 class="text-2xl font-bold mb-4">Vocabulary</h2>
+
+                            <form method="post" asp-page-handler="EditVocabulary" class="space-y-2">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" id="editVocabId" name="EditVocabId" />
+                                <div>
+                                    <label class="text-sm">Term</label>
+                                    <input id="editVocabTerm" name="EditVocabTerm" class="w-full border px-2 py-1 rounded" />
+                                </div>
+                                <div>
+                                    <label class="text-sm">Meaning</label>
+                                    <input id="editVocabMeaning" name="EditVocabMeaning" class="w-full border px-2 py-1 rounded" />
+                                </div>
+                                <div>
+                                    <label class="text-sm">Usage</label>
+                                    <textarea id="editVocabUsage" name="EditVocabUsage" class="w-full border px-2 py-1 rounded"></textarea>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button class="bg-indigo-600 text-white px-4 py-1 rounded text-sm">Save</button>
+                                    <button type="button" class="bg-red-600 text-white px-4 py-1 rounded text-sm" onclick="if(confirm('Delete vocabulary item?')) submitDelVocab()">Delete</button>
+                                </div>
+                            </form>
+                            <form id="delVocabForm" method="post" asp-page-handler="DeleteVocabulary" class="hidden">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" id="delVocabIdHidden" name="EditVocabId" />
+                            </form>
+                        </div>
                     </div>
                 }
                 else
                 {
                     <form method="post" asp-page-handler="AddVerb"
                           class="bg-white p-4 border rounded mb-4 space-y-2">
+                        @Html.AntiForgeryToken()
 
                         <input asp-for="ManualVerb.Infinitive"
                                placeholder="Infinitive"
@@ -142,27 +193,269 @@
                         </button>
                     </form>
 
-                    <table class="w-full bg-white border rounded text-sm">
+                    <div class="bg-white border rounded text-sm">
                         @foreach (var verb in Model.VerbList)
                         {
-                            <tr class="border-b">
-                                <td class="p-2 font-semibold">@verb.Infinitive</td>
-                                <td class="p-2 italic text-slate-500">@verb.Meaning</td>
-                            </tr>
-                            <tr class="bg-slate-50">
-                                <td colspan="2" class="p-2">
-                                    <div class="grid grid-cols-3 gap-2">
-                                        <div><span class="pronoun">ich</span>@verb.S1</div>
-                                        <div><span class="pronoun">du</span>@verb.S2Inf</div>
-                                        <div><span class="pronoun">er/sie/es</span>@verb.S3</div>
-                                        <div><span class="pronoun">wir</span>@verb.P1</div>
-                                        <div><span class="pronoun">ihr</span>@verb.P2Inf</div>
-                                        <div><span class="pronoun">sie</span>@verb.P3</div>
-                                    </div>
-                                </td>
-                            </tr>
+                            <div class="p-3 border-b hover:bg-slate-50 cursor-pointer flex items-center justify-between" 
+                                 onclick="openVerbModal(this)"
+                                 data-infinitive="@verb.Infinitive"
+                                 data-meaning="@verb.Meaning"
+                                 data-s1="@verb.S1"
+                                 data-s2inf="@verb.S2Inf"
+                                 data-s2form="@verb.S2Form"
+                                 data-s3="@verb.S3"
+                                 data-p1="@verb.P1"
+                                 data-p2inf="@verb.P2Inf"
+                                 data-p2form="@verb.P2Form"
+                                 data-p3="@verb.P3">
+                                <div>
+                                    <div class="font-semibold">@verb.Infinitive</div>
+                                    <div class="text-slate-500 italic text-sm">@verb.Meaning</div>
+                                </div>
+
+                                <div class="flex gap-2">
+                                    <button class="text-indigo-600 text-sm" onclick="openEditVerb(event, @verb.Id, '@(verb.Infinitive.Replace("'", "\'"))','@(verb.Meaning.Replace("'","\'"))','@(verb.S1.Replace("'","\'"))','@(verb.S2Inf.Replace("'","\'"))','@(verb.S2Form.Replace("'","\'"))','@(verb.S3.Replace("'","\'"))','@(verb.P1.Replace("'","\'"))','@(verb.P2Inf.Replace("'","\'"))','@(verb.P2Form.Replace("'","\'"))','@(verb.P3.Replace("'","\'"))')">Edit</button>
+                                    <form method="post" asp-page-handler="DeleteVerb" class="inline" onsubmit="return confirm('Delete verb?')">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="EditVerbId" value="@verb.Id" />
+                                        <button type="submit" class="text-red-600 text-sm">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
                         }
-                    </table>
+                    </div>
+
+                    <!-- Modal for verb details -->
+                    <div id="verbModal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-40">
+                        <div class="bg-white rounded-lg w-11/12 md:w-3/4 lg:w-2/3 p-6 relative">
+                            <button onclick="closeVerbModal()" class="absolute top-3 right-3 text-slate-500">✕</button>
+                            <h2 id="modalTitle" class="text-2xl font-bold mb-4">Analysis: <span id="modalInfinitive" class="text-indigo-600"></span></h2>
+
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <table class="w-full text-sm border rounded">
+                                        <thead>
+                                            <tr class="bg-slate-50 text-slate-600">
+                                                <th class="p-3 text-left">Person</th>
+                                                <th class="p-3">Singular</th>
+                                                <th class="p-3">Plural</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="border-t">
+                                                <td class="p-3">First</td>
+                                                <td class="p-3 text-indigo-600 italic" id="c_s1"></td>
+                                                <td class="p-3" id="c_p1"></td>
+                                            </tr>
+                                            <tr class="border-t">
+                                                <td class="p-3">Second (Informal)</td>
+                                                <td class="p-3 text-indigo-600 italic" id="c_s2inf"></td>
+                                                <td class="p-3" id="c_p2inf"></td>
+                                            </tr>
+                                            <tr class="border-t">
+                                                <td class="p-3">Second (Formal)</td>
+                                                <td class="p-3 text-indigo-600 italic" id="c_s2form"></td>
+                                                <td class="p-3" id="c_p2form"></td>
+                                            </tr>
+                                            <tr class="border-t">
+                                                <td class="p-3">Third</td>
+                                                <td class="p-3 text-indigo-600 italic" id="c_s3"></td>
+                                                <td class="p-3" id="c_p3"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div>
+                                    <div id="vocabCard" class="bg-slate-50 p-4 rounded">
+                                        <div class="font-semibold" id="v_term"></div>
+                                        <div class="italic text-slate-500" id="v_meaning"></div>
+                                        <div class="mt-2 text-sm" id="v_usage"></div>
+                                    </div>
+                                    
+                                    <!-- Verb edit form (hidden) -->
+                                    <form id="verbEditForm" method="post" asp-page-handler="EditVerb" class="hidden">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="EditVerbId" />
+                                        <input type="hidden" name="EditVerbInfinitive" />
+                                        <input type="hidden" name="EditVerbMeaning" />
+                                        <input type="hidden" name="EditS1" />
+                                        <input type="hidden" name="EditS2Inf" />
+                                        <input type="hidden" name="EditS2Form" />
+                                        <input type="hidden" name="EditS3" />
+                                        <input type="hidden" name="EditP1" />
+                                        <input type="hidden" name="EditP2Inf" />
+                                        <input type="hidden" name="EditP2Form" />
+                                        <input type="hidden" name="EditP3" />
+                                    </form>
+
+                                    <div class="mt-4 flex gap-2 justify-end">
+                                        <button type="button" onclick="submitEditVerb()" class="btn-primary px-4 py-2 rounded">Save Verb</button>
+                                        <button type="button" onclick="if(confirm('Delete verb?')) submitDelVerb()" class="btn-danger px-4 py-2 rounded">Delete Verb</button>
+                                    </div>
+
+                                    <form id="delVerbForm" method="post" asp-page-handler="DeleteVerb" class="hidden">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" id="delVerbIdHidden" name="EditVerbId" />
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        function openVerbModal(el) {
+                            var d = el.dataset;
+                            document.getElementById('modalInfinitive').textContent = d.infinitive || '';
+                            document.getElementById('c_s1').textContent = d.s1 || '';
+                            document.getElementById('c_s2inf').textContent = d.s2inf || '';
+                            document.getElementById('c_s2form').textContent = d.s2form || '';
+                            document.getElementById('c_s3').textContent = d.s3 || '';
+                            document.getElementById('c_p1').textContent = d.p1 || '';
+                            document.getElementById('c_p2inf').textContent = d.p2inf || '';
+                            document.getElementById('c_p2form').textContent = d.p2form || '';
+                            document.getElementById('c_p3').textContent = d.p3 || '';
+
+                            // vocab info: try to populate with a matching vocabulary item if present on the element
+                            // We didn't attach vocab data attributes by default; try to find a matching card in the page
+                            var vTerm = d.infinitive || '';
+                            var vocab = null;
+                            // search Model.Vocabulary for a match embedded as elements with data-term
+                            var nodes = document.querySelectorAll('[data-vocab-term]');
+                            for (var i = 0; i < nodes.length; i++) {
+                                if (nodes[i].dataset.vocabTerm === vTerm) { vocab = nodes[i]; break; }
+                            }
+
+                            if (vocab) {
+                                document.getElementById('v_term').textContent = vocab.dataset.vocabTerm || '';
+                                document.getElementById('v_meaning').textContent = vocab.dataset.vocabMeaning || '';
+                                document.getElementById('v_usage').textContent = vocab.dataset.vocabUsage || '';
+                                document.getElementById('vocabCard').style.display = 'block';
+                            } else {
+                                // fallback: use verb meaning
+                                document.getElementById('v_term').textContent = d.infinitive || '';
+                                document.getElementById('v_meaning').textContent = d.meaning || '';
+                                document.getElementById('v_usage').textContent = '';
+                                document.getElementById('vocabCard').style.display = 'block';
+                            }
+
+                            var modal = document.getElementById('verbModal');
+                            modal.classList.remove('hidden');
+                            modal.classList.add('flex');
+                        }
+
+                        function closeVerbModal() {
+                            var modal = document.getElementById('verbModal');
+                            modal.classList.remove('flex');
+                            modal.classList.add('hidden');
+                        }
+
+                        // Vocabulary edit modal helpers
+                        function openEditVocab(ev, id, term, meaning, usage) {
+                            ev.stopPropagation();
+                            document.getElementById('editVocabId').value = id;
+                            var delHidden = document.getElementById('delVocabIdHidden');
+                            if (delHidden) delHidden.value = id;
+                            document.getElementById('editVocabTerm').value = term || '';
+                            document.getElementById('editVocabMeaning').value = meaning || '';
+                            document.getElementById('editVocabUsage').value = usage || '';
+                            var m = document.getElementById('vocabModal');
+                            m.classList.remove('hidden'); m.classList.add('flex');
+                        }
+
+                        function openEditVocabFromBtn(ev, btn) {
+                            ev.stopPropagation();
+                            var card = btn.closest('[data-vocab-id]');
+                            if (!card) return;
+                            var id = card.dataset.vocabId;
+                            var term = card.dataset.vocabTerm;
+                            var meaning = card.dataset.vocabMeaning;
+                            var usage = card.dataset.vocabUsage;
+                            openEditVocab(ev, id, term, meaning, usage);
+                        }
+
+                        function closeVocabModal() {
+                            var m = document.getElementById('vocabModal');
+                            m.classList.remove('flex'); m.classList.add('hidden');
+                        }
+
+                        // Verb edit modal helpers
+                        function openEditVerb(ev, id, infinitive, meaning, s1, s2inf, s2form, s3, p1, p2inf, p2form, p3) {
+                            ev.stopPropagation();
+                            // populate global modal fields for editing - reuse vocab modal (quick) or create a separate one
+                            // We'll reuse the verb modal for editing by pre-filling fields and showing action buttons
+                            document.getElementById('modalInfinitive').textContent = infinitive || '';
+                            document.getElementById('c_s1').textContent = s1 || '';
+                            document.getElementById('c_s2inf').textContent = s2inf || '';
+                            document.getElementById('c_s2form').textContent = s2form || '';
+                            document.getElementById('c_s3').textContent = s3 || '';
+                            document.getElementById('c_p1').textContent = p1 || '';
+                            document.getElementById('c_p2inf').textContent = p2inf || '';
+                            document.getElementById('c_p2form').textContent = p2form || '';
+                            document.getElementById('c_p3').textContent = p3 || '';
+
+                            // set hidden edit id input for postback
+                            var form = document.getElementById('verbEditForm');
+                            if (form) {
+                                var set = function(name, value) {
+                                    var inp = form.querySelector('input[name="' + name + '"]');
+                                    if (inp) inp.value = value || '';
+                                };
+                                set('EditVerbId', id);
+                                set('EditVerbInfinitive', infinitive);
+                                set('EditVerbMeaning', meaning);
+                                set('EditS1', s1);
+                                set('EditS2Inf', s2inf);
+                                set('EditS2Form', s2form);
+                                set('EditS3', s3);
+                                set('EditP1', p1);
+                                set('EditP2Inf', p2inf);
+                                set('EditP2Form', p2form);
+                                set('EditP3', p3);
+                            }
+
+                            var modal = document.getElementById('verbModal');
+                            modal.classList.remove('hidden');
+                            modal.classList.add('flex');
+                        }
+
+                        function submitDelVocab() {
+                            var id = document.getElementById('editVocabId').value;
+                            document.getElementById('delVocabIdHidden').value = id;
+                            document.getElementById('delVocabForm').submit();
+                        }
+
+                        function submitEditVerb() {
+                            var form = document.getElementById('verbEditForm');
+                            if (!form) return;
+                            // ensure hidden inputs are present on the form element as properties for convenience
+                            // Create a real form submission
+                            var post = document.createElement('form');
+                            post.method = 'post';
+                            post.action = '';
+                            var inputs = form.querySelectorAll('input[name]');
+                            for (var i = 0; i < inputs.length; i++) {
+                                var old = inputs[i];
+                                var el = document.createElement('input');
+                                el.type = 'hidden';
+                                el.name = old.name;
+                                el.value = old.value || '';
+                                post.appendChild(el);
+                            }
+                            // anti-forgery token
+                            var token = document.querySelector('input[name="__RequestVerificationToken"]');
+                            if (token) { var t = document.createElement('input'); t.type = 'hidden'; t.name = '__RequestVerificationToken'; t.value = token.value; post.appendChild(t); }
+                            document.body.appendChild(post);
+                            post.submit();
+                        }
+
+                        function submitDelVerb() {
+                            var idInput = document.querySelector('#verbEditForm input[name="EditVerbId"]');
+                            var id = idInput ? idInput.value : '';
+                            document.getElementById('delVerbIdHidden').value = id;
+                            document.getElementById('delVerbForm').submit();
+                        }
+                    </script>
                 }
 
             </div>
