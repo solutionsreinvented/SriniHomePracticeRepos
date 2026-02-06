@@ -304,17 +304,58 @@
                     </div>
 
                     <script>
+                        // expose selected language to client
+                        var selectedLanguage = '@Model.SelectedLanguage';
+
+                        // pronoun mappings per language (extendable)
+                        var pronounsByLang = {
+                            de: {
+                                singular: { first: 'ich', secondInf: 'du', secondForm: 'Sie', third: 'er/sie/es' },
+                                plural: { first: 'wir', secondInf: 'ihr', secondForm: 'Sie', third: 'sie' }
+                            },
+                            fr: {
+                                singular: { first: 'je', secondInf: 'tu', secondForm: 'vous', third: 'il/elle/on' },
+                                plural: { first: 'nous', secondInf: 'vous', secondForm: 'vous', third: 'ils/elles' }
+                            },
+                            es: {
+                                singular: { first: 'yo', secondInf: 'tú', secondForm: 'usted', third: 'él/ella' },
+                                plural: { first: 'nosotros', secondInf: 'vosotros', secondForm: 'ustedes', third: 'ellos/ellas' }
+                            }
+                        };
+
                         function openVerbModal(el) {
                             var d = el.dataset;
                             document.getElementById('modalInfinitive').textContent = d.infinitive || '';
-                            document.getElementById('c_s1').textContent = d.s1 || '';
-                            document.getElementById('c_s2inf').textContent = d.s2inf || '';
-                            document.getElementById('c_s2form').textContent = d.s2form || '';
-                            document.getElementById('c_s3').textContent = d.s3 || '';
-                            document.getElementById('c_p1').textContent = d.p1 || '';
-                            document.getElementById('c_p2inf').textContent = d.p2inf || '';
-                            document.getElementById('c_p2form').textContent = d.p2form || '';
-                            document.getElementById('c_p3').textContent = d.p3 || '';
+                            // fill conjugations accompanied by pronouns for the selected language
+                            var lang = (selectedLanguage || 'de').toLowerCase();
+                            var pmap = pronounsByLang[lang] || pronounsByLang['de'];
+
+                            function setCell(cellId, pron, conj) {
+                                var cell = document.getElementById(cellId);
+                                if (!cell) return;
+                                var conjText = conj || '';
+                                cell.innerHTML = '';
+                                if (pron) {
+                                    var spanP = document.createElement('span');
+                                    spanP.className = 'pronoun text-slate-500';
+                                    spanP.style.opacity = '0.55';
+                                    spanP.textContent = pron + ' ';
+                                    cell.appendChild(spanP);
+                                }
+                                var spanC = document.createElement('span');
+                                spanC.className = 'conj-highlight';
+                                spanC.textContent = conjText;
+                                cell.appendChild(spanC);
+                            }
+
+                            setCell('c_s1', pmap.singular.first, d.s1 || '');
+                            setCell('c_s2inf', pmap.singular.secondInf, d.s2inf || '');
+                            setCell('c_s2form', pmap.singular.secondForm, d.s2form || '');
+                            setCell('c_s3', pmap.singular.third, d.s3 || '');
+                            setCell('c_p1', pmap.plural.first, d.p1 || '');
+                            setCell('c_p2inf', pmap.plural.secondInf, d.p2inf || '');
+                            setCell('c_p2form', pmap.plural.secondForm, d.p2form || '');
+                            setCell('c_p3', pmap.plural.third, d.p3 || '');
 
                             // vocab info: try to populate with a matching vocabulary item if present on the element
                             // We didn't attach vocab data attributes by default; try to find a matching card in the page
@@ -342,13 +383,28 @@
                             var modal = document.getElementById('verbModal');
                             modal.classList.remove('hidden');
                             modal.classList.add('flex');
+                            // focus management: move focus to close button
+                            var closeBtn = modal.querySelector('button[onclick^="closeVerbModal"]');
+                            if (closeBtn) closeBtn.focus();
                         }
 
                         function closeVerbModal() {
                             var modal = document.getElementById('verbModal');
                             modal.classList.remove('flex');
                             modal.classList.add('hidden');
+                            // return focus to main document
+                            document.activeElement.blur();
                         }
+
+                        // close modals with Escape
+                        document.addEventListener('keydown', function (e) {
+                            if (e.key === 'Escape') {
+                                var vm = document.getElementById('verbModal');
+                                var vcm = document.getElementById('vocabModal');
+                                if (vm && vm.classList.contains('flex')) closeVerbModal();
+                                if (vcm && vcm.classList.contains('flex')) closeVocabModal();
+                            }
+                        });
 
                         // Vocabulary edit modal helpers
                         function openEditVocab(ev, id, term, meaning, usage) {
