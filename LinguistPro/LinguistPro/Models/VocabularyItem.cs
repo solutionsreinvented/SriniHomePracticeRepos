@@ -4,12 +4,17 @@ namespace LinguistPro.Models
 {
     public class VocabularyItem
     {
-        [Key] public int Id { get; set; }
-        public required string SourceWord { get; set; }
-        public required string TargetMeaning { get; set; }
-        public required string Definition { get; set; }
-        public required string UsageExample { get; set; }
-        public int MasteryPoints { get; set; }
-        public DateTime LastInteraction { get; set; } = DateTime.Now;
+        [Key]
+        public int Id { get; set; }
+
+        public required string Language { get; set; }
+        public required string Term { get; set; }
+
+        public string Meaning { get; set; } = string.Empty;
+        public string Definition { get; set; } = string.Empty;
+        public string UsageExample { get; set; } = string.Empty;
+
+        public int Mastery { get; set; } = 0;
+        public DateTime LastReviewed { get; set; } = DateTime.UtcNow;
     }
 }

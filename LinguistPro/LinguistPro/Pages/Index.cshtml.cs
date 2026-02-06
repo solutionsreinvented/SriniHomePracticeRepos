@@ -1,4 +1,5 @@
 using LinguistPro.Models;
+using LinguistPro.Services;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -8,66 +9,115 @@ namespace LinguistPro.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly AppDbContext _context;
-        public IndexModel(AppDbContext context)
+        private readonly AppDbContext _db;
+        private readonly DictionaryService _dictionary;
+        private readonly WiktionaryVerbService _verbs;
+
+        public IndexModel(AppDbContext db, DictionaryService dictionary, WiktionaryVerbService verbs)
         {
-            _context = context;
+            _db = db;
+            _dictionary = dictionary;
+            _verbs = verbs;
         }
 
         [BindProperty(SupportsGet = true)]
         public string Mode { get; set; } = "Vocab";
 
-        public List<VocabularyItem> Vocabulary { get; set; }
-        public List<VerbEntity> Verbs { get; set; }
-        public double GlobalMastery { get; set; }
+        public int GlobalMastery { get; private set; }
+
+        public List<VocabularyItem> Vocabulary { get; private set; } = [];
+        public List<VerbEntry> VerbList { get; private set; } = [];
+
+        [BindProperty]
+        public string NewWord { get; set; } = string.Empty;
+
+        [BindProperty]
+        public string NewVerb { get; set; } = string.Empty;
+
+
+        [BindProperty(SupportsGet = true)]
+        public string SelectedLanguage { get; set; } = "de";
+
+        [BindProperty]
+        public bool FetchVocabularyOnline { get; set; }
+
+        [BindProperty]
+        public bool FetchVerbOnline { get; set; }
+
+        /* Manual Vocabulary */
+        [BindProperty]
+        public string ManualTerm { get; set; } = string.Empty;
+
+        [BindProperty]
+        public string ManualMeaning { get; set; } = string.Empty;
+
+        [BindProperty]
+        public string ManualUsage { get; set; } = string.Empty;
+
+        /* Manual Verb */
+        [BindProperty]
+        public VerbEntry ManualVerb { get; set; } = new() { Language = "de", Infinitive = string.Empty };
 
         public async Task OnGetAsync()
         {
-            await SeedGermanData(); // Initialize with German content
-            Vocabulary = await _context.Vocabulary.ToListAsync();
-            Verbs = await _context.Verbs.ToListAsync();
-            GlobalMastery = Vocabulary.Any() ? Vocabulary.Average(v => v.MasteryPoints) : 0;
+            Vocabulary = await _db.Vocabulary.OrderBy(v => v.Term).ToListAsync();
+
+            VerbList = await _db.Verbs.ToListAsync();
+
+            GlobalMastery = Vocabulary.Count == 0 ? 0 : (int)Vocabulary.Average(v => v.Mastery);
         }
 
-        public async Task<IActionResult> OnPostLogProgressAsync(int id)
+        public async Task<IActionResult> OnPostAddVocabularyAsync()
         {
-            var item = await _context.Vocabulary.FindAsync(id);
+            VocabularyItem? item;
+
+            if (FetchVocabularyOnline)
+            {
+                item = await _dictionary.FetchAsync(ManualTerm, SelectedLanguage);
+            }
+            else
+            {
+                item = new VocabularyItem
+                {
+                    Language = SelectedLanguage,
+                    Term = ManualTerm,
+                    Meaning = ManualMeaning,
+                    Definition = ManualMeaning,
+                    UsageExample = ManualUsage
+                };
+            }
+
             if (item != null)
             {
-                item.MasteryPoints = Math.Min(item.MasteryPoints + 15, 100);
-                item.LastInteraction = DateTime.Now;
-                await _context.SaveChangesAsync();
+                _db.Vocabulary.Add(item);
+                await _db.SaveChangesAsync();
             }
-            return RedirectToPage(new { Mode = "Vocab" });
+
+            return RedirectToPage(new { Mode = "Vocab", SelectedLanguage });
         }
 
-        private async Task SeedGermanData()
+        public async Task<IActionResult> OnPostAddVerbAsync()
         {
-            if (!await _context.Vocabulary.AnyAsync())
+            VerbEntry? verb;
+
+            if (FetchVerbOnline)
             {
-                _context.Vocabulary.Add(new VocabularyItem
-                {
-                    SourceWord = "Zeit",
-                    TargetMeaning = "Time",
-                    Definition = "Indefinite continued progress of existence.",
-                    UsageExample = "Die Zeit vergeht wie im Flug.",
-                    MasteryPoints = 10
-                });
-                _context.Verbs.Add(new VerbEntity
-                {
-                    Infinitive = "haben",
-                    Meaning = "to have",
-                    S1 = "habe",
-                    P1 = "haben",
-                    S2 = "hast",
-                    P2 = "habt",
-                    S2F = "haben",
-                    P2F = "haben",
-                    S3 = "hat",
-                    P3 = "haben"
-                });
-                await _context.SaveChangesAsync();
+                verb = await _verbs.FetchGermanPresentAsync(ManualVerb.Infinitive);
             }
+            else
+            {
+                verb = ManualVerb;
+                verb.Language = SelectedLanguage;
+            }
+
+            if (verb != null)
+            {
+                _db.Verbs.Add(verb);
+                await _db.SaveChangesAsync();
+            }
+
+            return RedirectToPage(new { Mode = "Verbs", SelectedLanguage });
         }
+
     }
 }

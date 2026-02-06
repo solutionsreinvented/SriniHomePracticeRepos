@@ -2,9 +2,11 @@
 
 namespace LinguistPro.Models
 {
-    public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
+    public class AppDbContext : DbContext
     {
-        public DbSet<VocabularyItem> Vocabulary { get; set; }
-        public DbSet<VerbEntity> Verbs { get; set; }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+        public DbSet<VocabularyItem> Vocabulary => Set<VocabularyItem>();
+        public DbSet<VerbEntry> Verbs => Set<VerbEntry>();
     }
 }
