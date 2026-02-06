@@ -23,13 +23,16 @@
 
   <ItemGroup>
     <Reference Include="ReInvented.DataAccess">
-      <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.DataAccess.dll</HintPath>
+      <HintPath>F:\06. ReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\x64\Debug\ReInvented.DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.Shared">
-      <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Shared.dll</HintPath>
+      <HintPath>F:\06. ReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\x64\Debug\ReInvented.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="ReInvented.Shared.Web">
+      <HintPath>F:\06. ReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\x64\Debug\ReInvented.Shared.Web.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.UI.Themes">
-      <HintPath>E:\SolutionsReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.UI.Themes.dll</HintPath>
+      <HintPath>F:\06. ReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\x64\Debug\ReInvented.UI.Themes.dll</HintPath>
     </Reference>
   </ItemGroup>
 

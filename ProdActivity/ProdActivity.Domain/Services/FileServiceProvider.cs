@@ -5,7 +5,9 @@ namespace ProdActivity.Domain.Services
 {
     public static class FileServiceProvider
     {
-        private static readonly string _dataDirectoryPath = @"C:\Users\masanams\source\SriniHomePracticeRepos\ProdActivity\ProdActivity.Domain\Data\";
+        //private static readonly string _dataDirectoryPath = @"C:\Users\masanams\source\SriniHomePracticeRepos\ProdActivity\ProdActivity.Domain\Data\";
+        private static readonly string _dataDirectoryPath = @"C:\Users\srini\source\repos\ProdActivity\ProdActivity.Domain\Data\";
+
         private static readonly string _projectMasterFileName = "ProjectMaster";
         private static readonly string _extension = "json";
 
