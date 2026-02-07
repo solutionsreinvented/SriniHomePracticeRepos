@@ -27,6 +27,9 @@ namespace LinguistPro.Pages
 
         public List<VocabularyItem> Vocabulary { get; private set; } = new List<VocabularyItem>();
         public List<VerbEntry> VerbList { get; private set; } = new List<VerbEntry>();
+        public List<LanguageItem> Numbers { get; private set; } = new List<LanguageItem>();
+        public List<LanguageItem> Months { get; private set; } = new List<LanguageItem>();
+        public List<LanguageItem> Days { get; private set; } = new List<LanguageItem>();
 
         [BindProperty]
         public string NewWord { get; set; } = string.Empty;
@@ -57,6 +60,22 @@ namespace LinguistPro.Pages
         [BindProperty]
         public string ManualUsageMeaning { get; set; } = string.Empty;
 
+        /* Manual Language Item (Numbers, Months, Days) */
+        [BindProperty]
+        public string ManualItemType { get; set; } = "Number";
+
+        [BindProperty]
+        public string ManualItemTerm { get; set; } = string.Empty;
+
+        [BindProperty]
+        public string ManualItemMeaning { get; set; } = string.Empty;
+
+        [BindProperty]
+        public string ManualItemUsage { get; set; } = string.Empty;
+
+        [BindProperty]
+        public string ManualItemUsageMeaning { get; set; } = string.Empty;
+
         /* Manual Verb */
         [BindProperty]
         public VerbEntry ManualVerb { get; set; } = new() { Language = "de", Infinitive = string.Empty };
@@ -76,6 +95,25 @@ namespace LinguistPro.Pages
 
         [BindProperty]
         public string EditVocabUsageMeaning { get; set; } = string.Empty;
+
+        /* Edit / Delete bindings for Language Items */
+        [BindProperty]
+        public int? EditItemId { get; set; }
+
+        [BindProperty]
+        public string EditItemType { get; set; } = string.Empty;
+
+        [BindProperty]
+        public string EditItemTerm { get; set; } = string.Empty;
+
+        [BindProperty]
+        public string EditItemMeaning { get; set; } = string.Empty;
+
+        [BindProperty]
+        public string EditItemUsage { get; set; } = string.Empty;
+
+        [BindProperty]
+        public string EditItemUsageMeaning { get; set; } = string.Empty;
 
         /* Edit / Delete bindings for Verb */
         [BindProperty]
@@ -109,6 +147,21 @@ namespace LinguistPro.Pages
             Vocabulary = await _db.Vocabulary.OrderBy(v => v.Term).ToListAsync();
 
             VerbList = await _db.Verbs.ToListAsync();
+
+            Numbers = await _db.LanguageItems
+                .Where(x => x.ItemType == "Number")
+                .OrderBy(x => x.Term)
+                .ToListAsync();
+
+            Months = await _db.LanguageItems
+                .Where(x => x.ItemType == "Month")
+                .OrderBy(x => x.Term)
+                .ToListAsync();
+
+            Days = await _db.LanguageItems
+                .Where(x => x.ItemType == "Day")
+                .OrderBy(x => x.Term)
+                .ToListAsync();
 
             GlobalMastery = Vocabulary.Count == 0 ? 0 : (int)Vocabulary.Average(v => v.Mastery);
         }
@@ -196,15 +249,17 @@ namespace LinguistPro.Pages
                 {
                     Language = SelectedLanguage,
                     Term = ManualTerm,
-                    Meaning = ManualMeaning,
-                    Definition = ManualMeaning,
-                    UsageExample = ManualUsage,
-                    UsageExampleMeaning = ManualUsageMeaning
+                    Meaning = ManualMeaning ?? string.Empty,
+                    Definition = ManualMeaning ?? string.Empty,
+                    UsageExample = ManualUsage ?? string.Empty,
+                    UsageExampleMeaning = ManualUsageMeaning ?? string.Empty
                 };
             }
 
             if (item != null)
             {
+                item.UsageExample = item.UsageExample ?? string.Empty;
+                item.UsageExampleMeaning = item.UsageExampleMeaning ?? string.Empty;
                 _db.Vocabulary.Add(item);
                 await _db.SaveChangesAsync();
             }
@@ -233,6 +288,55 @@ namespace LinguistPro.Pages
             }
 
             return RedirectToPage(new { Mode = "Verbs", SelectedLanguage });
+        }
+
+        public async Task<IActionResult> OnPostAddLanguageItemAsync()
+        {
+            var item = new LanguageItem
+            {
+                Language = SelectedLanguage,
+                ItemType = ManualItemType,
+                Term = ManualItemTerm,
+                Meaning = ManualItemMeaning ?? string.Empty,
+                UsageExample = ManualItemUsage ?? string.Empty,
+                UsageExampleMeaning = ManualItemUsageMeaning ?? string.Empty
+            };
+
+            _db.LanguageItems.Add(item);
+            await _db.SaveChangesAsync();
+
+            return RedirectToPage(new { Mode = ManualItemType, SelectedLanguage });
+        }
+
+        public async Task<IActionResult> OnPostEditLanguageItemAsync()
+        {
+            if (EditItemId == null) return RedirectToPage(new { Mode = EditItemType, SelectedLanguage });
+
+            var item = await _db.LanguageItems.FindAsync(EditItemId.Value);
+            if (item != null)
+            {
+                item.Term = EditItemTerm;
+                item.Meaning = EditItemMeaning ?? string.Empty;
+                item.UsageExample = EditItemUsage ?? string.Empty;
+                item.UsageExampleMeaning = EditItemUsageMeaning ?? string.Empty;
+                await _db.SaveChangesAsync();
+            }
+
+            return RedirectToPage(new { Mode = EditItemType, SelectedLanguage });
+        }
+
+        public async Task<IActionResult> OnPostDeleteLanguageItemAsync()
+        {
+            if (EditItemId == null) return RedirectToPage(new { Mode = EditItemType, SelectedLanguage });
+
+            var item = await _db.LanguageItems.FindAsync(EditItemId.Value);
+            if (item != null)
+            {
+                _db.LanguageItems.Remove(item);
+                await _db.SaveChangesAsync();
+            }
+
+            return RedirectToPage(new { Mode = EditItemType, SelectedLanguage });
         }
 
     }

@@ -8,5 +8,6 @@ namespace LinguistPro.Models
 
         public DbSet<VocabularyItem> Vocabulary => Set<VocabularyItem>();
         public DbSet<VerbEntry> Verbs => Set<VerbEntry>();
+        public DbSet<LanguageItem> LanguageItems => Set<LanguageItem>();
     }
 }

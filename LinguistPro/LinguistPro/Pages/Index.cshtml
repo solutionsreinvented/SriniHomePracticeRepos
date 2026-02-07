@@ -1,5 +1,6 @@
 ﻿@page
 @model LinguistPro.Pages.IndexModel
+@using LinguistPro.Models
 @{
     Layout = null;
 }
@@ -59,7 +60,7 @@
             color: white;
         }
 
-        @(Model.Mode == "Vocab" ? "aside nav a:nth-child(1)" : "aside nav a:nth-child(2)") {
+        aside nav a.active {
             background: rgba(255, 255, 255, 0.25);
             color: white;
             font-weight: 600;
@@ -307,12 +308,24 @@
 
             <nav class="p-3 text-sm space-y-1">
                 <a asp-route-Mode="Vocab"
-                   class="block px-4 py-3 rounded transition-all duration-300 @(Model.Mode == "Vocab" ? "bg-white bg-opacity-25 font-semibold" : "hover:bg-white hover:bg-opacity-15")">
+                   class="block px-4 py-3 rounded transition-all duration-300 @(Model.Mode == "Vocab" ? "active" : "hover:bg-white hover:bg-opacity-15")">
                     📚 Vocabulary
                 </a>
                 <a asp-route-Mode="Verbs"
-                   class="block px-4 py-3 rounded transition-all duration-300 @(Model.Mode == "Verbs" ? "bg-white bg-opacity-25 font-semibold" : "hover:bg-white hover:bg-opacity-15")">
+                   class="block px-4 py-3 rounded transition-all duration-300 @(Model.Mode == "Verbs" ? "active" : "hover:bg-white hover:bg-opacity-15")">
                     ⚡ Verbs
+                </a>
+                <a asp-route-Mode="Number"
+                   class="block px-4 py-3 rounded transition-all duration-300 @(Model.Mode == "Number" ? "active" : "hover:bg-white hover:bg-opacity-15")">
+                    🔢 Numbers
+                </a>
+                <a asp-route-Mode="Month"
+                   class="block px-4 py-3 rounded transition-all duration-300 @(Model.Mode == "Month" ? "active" : "hover:bg-white hover:bg-opacity-15")">
+                    📅 Months
+                </a>
+                <a asp-route-Mode="Day"
+                   class="block px-4 py-3 rounded transition-all duration-300 @(Model.Mode == "Day" ? "active" : "hover:bg-white hover:bg-opacity-15")">
+                    📆 Days
                 </a>
             </nav>
         </aside>
@@ -470,7 +483,7 @@
                         </div>
                     </div>
                 }
-                else
+                else if (Model.Mode == "Verbs")
                 {
                     <form method="post" asp-page-handler="AddVerb"
                           class="bg-white p-4 border rounded mb-4 space-y-2">
@@ -886,6 +899,182 @@
                             var id = idInput ? idInput.value : '';
                             document.getElementById('delVerbIdHidden').value = id;
                             document.getElementById('delVerbForm').submit();
+                        }
+                    </script>
+                }
+                else if (Model.Mode == "Number" || Model.Mode == "Month" || Model.Mode == "Day")
+                {
+                    <form method="post" asp-page-handler="AddLanguageItem"
+                          class="bg-white p-4 border rounded mb-4 space-y-2">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="ManualItemType" value="@Model.Mode" />
+
+                        <div class="flex gap-2">
+                            <input name="ManualItemTerm" placeholder="Term"
+                                   class="border px-2 py-1 rounded w-40" />
+                            <input name="ManualItemMeaning" placeholder="Meaning"
+                                   class="border px-2 py-1 rounded flex-1" />
+                        </div>
+
+                        <div class="flex gap-2">
+                            <textarea name="ManualItemUsage"
+                                  placeholder="Usage example (target language)"
+                                  class="border px-2 py-1 rounded flex-1 h-16"></textarea>
+                            <textarea name="ManualItemUsageMeaning"
+                                  placeholder="Usage example meaning (English)"
+                                  class="border px-2 py-1 rounded flex-1 h-16"></textarea>
+                        </div>
+
+                        <button class="bg-indigo-600 text-white px-4 py-1 rounded text-sm">
+                            Add @Model.Mode
+                        </button>
+                    </form>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        @{
+                            var itemsList = Model.Mode switch
+                            {
+                                "Number" => Model.Numbers,
+                                "Month" => Model.Months,
+                                "Day" => Model.Days,
+                                _ => new List<LanguageItem>()
+                            };
+                        }
+                        @foreach (var item in itemsList)
+                        {
+                            <div class="vocab-card" data-item-id="@item.Id" data-item-term="@item.Term" data-item-meaning="@item.Meaning" data-item-usage="@item.UsageExample" data-item-usage-meaning="@item.UsageExampleMeaning" data-item-type="@item.ItemType">
+                                <div class="pl-3">
+                                    <div class="term">@item.Term</div>
+                                    <div class="meaning">@item.Meaning</div>
+                                    <div class="usage">@item.UsageExample</div>
+                                    <div class="text-xs text-gray-500 mt-2">@item.UsageExampleMeaning</div>
+                                </div>
+
+                                <div class="absolute top-3 right-3 flex gap-2 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                    <button type="button" class="text-indigo-600 text-sm font-semibold hover:text-indigo-700" onclick="openEditItemFromBtn(event, this)">
+                                        ✏️
+                                    </button>
+                                    <button type="button" class="text-red-600 text-sm font-semibold hover:text-red-700" onclick="openDeleteItemModal(event, this)">
+                                        🗑️
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Item Edit Modal -->
+                    <div id="itemModal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-40 z-50">
+                        <div class="vocab-modal w-11/12 md:w-1/2 p-8 relative">
+                            <button onclick="closeItemModal()" class="absolute top-4 right-4 close-btn">✕</button>
+                            <h2 class="text-3xl font-bold mb-6" style="color: #667eea;"><span id="itemModalTitle">Item</span></h2>
+
+                            <form method="post" asp-page-handler="EditLanguageItem" class="space-y-4">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" id="editItemId" name="EditItemId" />
+                                <input type="hidden" id="editItemType" name="EditItemType" />
+                                <div>
+                                    <label class="text-sm font-semibold text-gray-700 block mb-2">Term</label>
+                                    <input id="editItemTerm" name="EditItemTerm" class="w-full border-2 border-gray-200 px-3 py-2 rounded-lg focus:outline-none focus:border-indigo-500 transition" />
+                                </div>
+                                <div>
+                                    <label class="text-sm font-semibold text-gray-700 block mb-2">Meaning</label>
+                                    <input id="editItemMeaning" name="EditItemMeaning" class="w-full border-2 border-gray-200 px-3 py-2 rounded-lg focus:outline-none focus:border-indigo-500 transition" />
+                                </div>
+                                <div>
+                                    <label class="text-sm font-semibold text-gray-700 block mb-2">Usage Example (Target Language)</label>
+                                    <textarea id="editItemUsage" name="EditItemUsage" class="w-full border-2 border-gray-200 px-3 py-2 rounded-lg focus:outline-none focus:border-indigo-500 transition" rows="3"></textarea>
+                                </div>
+                                <div>
+                                    <label class="text-sm font-semibold text-gray-700 block mb-2">Usage Example Meaning (English)</label>
+                                    <textarea id="editItemUsageMeaning" name="EditItemUsageMeaning" class="w-full border-2 border-gray-200 px-3 py-2 rounded-lg focus:outline-none focus:border-indigo-500 transition" rows="3"></textarea>
+                                </div>
+                                <div class="flex gap-3 pt-4">
+                                    <button type="submit" class="flex-1 bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition">Save</button>
+                                    <button type="button" class="flex-1 bg-red-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-700 transition" onclick="openDeleteItemModalFromForm(event)">Delete</button>
+                                </div>
+                            </form>
+                            <form id="delItemForm" method="post" asp-page-handler="DeleteLanguageItem" class="hidden">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" id="delItemIdHidden" name="EditItemId" />
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Delete Confirmation Modal for Item -->
+                    <div id="deleteItemConfirmModal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-40 z-50">
+                        <div class="delete-modal w-11/12 md:w-96 p-6 relative">
+                            <h2 class="title">Delete Item?</h2>
+                            <p class="message">This action cannot be undone.</p>
+                            <div class="btn-group">
+                                <button type="button" class="btn-cancel" onclick="closeDeleteItemModal()">Cancel</button>
+                                <button type="button" class="btn-delete" onclick="submitDelItem()">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        // Item modal helpers
+                        function openEditItemFromBtn(ev, btn) {
+                            ev.stopPropagation();
+                            var card = btn.closest('[data-item-id]');
+                            if (!card) return;
+                            var id = card.dataset.itemId;
+                            var type = card.dataset.itemType;
+                            var term = card.dataset.itemTerm;
+                            var meaning = card.dataset.itemMeaning;
+                            var usage = card.dataset.itemUsage;
+                            var usageMeaning = card.dataset.itemUsageMeaning;
+                            openEditItem(id, type, term, meaning, usage, usageMeaning);
+                        }
+
+                        function openEditItem(id, type, term, meaning, usage, usageMeaning) {
+                            document.getElementById('editItemId').value = id;
+                            document.getElementById('editItemType').value = type;
+                            document.getElementById('editItemTerm').value = term || '';
+                            document.getElementById('editItemMeaning').value = meaning || '';
+                            document.getElementById('editItemUsage').value = usage || '';
+                            document.getElementById('editItemUsageMeaning').value = usageMeaning || '';
+                            document.getElementById('itemModalTitle').textContent = type;
+                            document.getElementById('delItemIdHidden').value = id;
+                            var m = document.getElementById('itemModal');
+                            m.classList.remove('hidden');
+                            m.classList.add('flex');
+                        }
+
+                        function closeItemModal() {
+                            var m = document.getElementById('itemModal');
+                            m.classList.remove('flex');
+                            m.classList.add('hidden');
+                        }
+
+                        function openDeleteItemModal(ev, btn) {
+                            ev.stopPropagation();
+                            var card = btn.closest('[data-item-id]');
+                            if (!card) return;
+                            var id = card.dataset.itemId;
+                            document.getElementById('delItemIdHidden').value = id;
+                            var m = document.getElementById('deleteItemConfirmModal');
+                            m.classList.remove('hidden');
+                            m.classList.add('flex');
+                        }
+
+                        function openDeleteItemModalFromForm(ev) {
+                            ev.preventDefault();
+                            var m = document.getElementById('deleteItemConfirmModal');
+                            m.classList.remove('hidden');
+                            m.classList.add('flex');
+                        }
+
+                        function closeDeleteItemModal() {
+                            var m = document.getElementById('deleteItemConfirmModal');
+                            m.classList.remove('flex');
+                            m.classList.add('hidden');
+                        }
+
+                        function submitDelItem() {
+                            var id = document.getElementById('editItemId').value;
+                            document.getElementById('delItemIdHidden').value = id;
+                            document.getElementById('delItemForm').submit();
                         }
                     </script>
                 }
