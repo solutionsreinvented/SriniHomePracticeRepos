@@ -96,6 +96,17 @@
                             CLOUD SYNC ACTIVE ✓
                         </span>
                     </div>
+
+                    <div class="flex items-center gap-4">
+                        <div class="text-sm text-gray-600">
+                            👤 <span class="font-semibold">@User.Identity?.Name</span>
+                        </div>
+                        <form method="post" action="/Account/Logout" class="inline">
+                            <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded font-semibold text-sm hover:bg-red-700 transition">
+                                Logout
+                            </button>
+                        </form>
+                    </div>
                 </header>
 
             <!-- CONTENT -->
@@ -106,6 +117,7 @@
                     <form method="post" asp-page-handler="AddVocabulary"
                           class="bg-white p-4 border rounded mb-4 space-y-2">
                         @Html.AntiForgeryToken()
+                        <input type="hidden" name="SelectedLanguage" value="@Model.SelectedLanguage" />
 
                         <div class="flex gap-2">
                             <div class="relative flex-1">
@@ -176,6 +188,7 @@
 
                             <form method="post" asp-page-handler="EditVocabulary" class="space-y-4">
                                 @Html.AntiForgeryToken()
+                                <input type="hidden" name="SelectedLanguage" value="@Model.SelectedLanguage" />
                                 <input type="hidden" id="editVocabId" name="EditVocabId" />
                                 <div>
                                     <label class="text-sm font-semibold text-gray-700 block mb-2">Term</label>
@@ -200,6 +213,7 @@
                             </form>
                             <form id="delVocabForm" method="post" asp-page-handler="DeleteVocabulary" class="hidden">
                                 @Html.AntiForgeryToken()
+                                <input type="hidden" name="SelectedLanguage" value="@Model.SelectedLanguage" />
                                 <input type="hidden" id="delVocabIdHidden" name="EditVocabId" />
                             </form>
                         </div>
@@ -222,6 +236,7 @@
                     <form method="post" asp-page-handler="AddVerb"
                           class="bg-white p-4 border rounded mb-4 space-y-2">
                         @Html.AntiForgeryToken()
+                        <input type="hidden" name="SelectedLanguage" value="@Model.SelectedLanguage" />
 
                         <input asp-for="ManualVerb.Infinitive"
                                placeholder="Infinitive"
@@ -356,6 +371,7 @@
                                     <!-- Verb edit form (hidden) -->
                                     <form id="verbEditForm" method="post" asp-page-handler="EditVerb" class="hidden">
                                         @Html.AntiForgeryToken()
+                                        <input type="hidden" name="SelectedLanguage" value="@Model.SelectedLanguage" />
                                         <input type="hidden" name="EditVerbId" />
                                         <input type="hidden" name="EditVerbInfinitive" />
                                         <input type="hidden" name="EditVerbMeaning" />
@@ -376,6 +392,7 @@
 
                                     <form id="delVerbForm" method="post" asp-page-handler="DeleteVerb" class="hidden">
                                         @Html.AntiForgeryToken()
+                                        <input type="hidden" name="SelectedLanguage" value="@Model.SelectedLanguage" />
                                         <input type="hidden" id="delVerbIdHidden" name="EditVerbId" />
                                     </form>
                                 </div>
@@ -543,9 +560,6 @@
                         }
 
                         function submitDelVerb() {
-                            var idInput = document.querySelector('#delVerbIdHidden');
-                            var id = idInput ? idInput.value : '';
-                            document.getElementById('delVerbIdHidden').value = id;
                             document.getElementById('delVerbForm').submit();
                         }
                     </script>
@@ -555,6 +569,7 @@
                     <form method="post" asp-page-handler="AddLanguageItem"
                           class="bg-white p-4 border rounded mb-4 space-y-2">
                         @Html.AntiForgeryToken()
+                        <input type="hidden" name="SelectedLanguage" value="@Model.SelectedLanguage" />
                         <input type="hidden" name="ManualItemType" value="@Model.Mode" />
 
                         <div class="flex gap-2">
@@ -634,6 +649,7 @@
 
                             <form method="post" asp-page-handler="EditLanguageItem" class="space-y-4">
                                 @Html.AntiForgeryToken()
+                                <input type="hidden" name="SelectedLanguage" value="@Model.SelectedLanguage" />
                                 <input type="hidden" id="editItemId" name="EditItemId" />
                                 <input type="hidden" id="editItemType" name="EditItemType" />
                                 <div>
@@ -659,6 +675,7 @@
                             </form>
                             <form id="delItemForm" method="post" asp-page-handler="DeleteLanguageItem" class="hidden">
                                 @Html.AntiForgeryToken()
+                                <input type="hidden" name="SelectedLanguage" value="@Model.SelectedLanguage" />
                                 <input type="hidden" id="delItemIdHidden" name="EditItemId" />
                             </form>
                         </div>
@@ -755,8 +772,6 @@
         }
 
         function submitDelVocab() {
-            var id = document.getElementById('editVocabId').value;
-            document.getElementById('delVocabIdHidden').value = id;
             document.getElementById('delVocabForm').submit();
         }
 
@@ -912,10 +927,11 @@
         }
 
         function submitDelVerb() {
-            var idInput = document.querySelector('#delVerbIdHidden');
-            var id = idInput ? idInput.value : '';
-            document.getElementById('delVerbIdHidden').value = id;
             document.getElementById('delVerbForm').submit();
+        }
+
+        function submitDelItem() {
+            document.getElementById('delItemForm').submit();
         }
 
         // Close modals with Escape key
