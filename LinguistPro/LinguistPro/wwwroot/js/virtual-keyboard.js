@@ -407,12 +407,19 @@ function renderKeyboard() {
 }
 
 function getDisplayKey(keyObj) {
+    var baseKey = keyObj.key;
+
+    // If shift is active and there's no shift property (letter key), show uppercase
+    if (shiftKeyActive && baseKey && baseKey.length === 1 && baseKey.toLowerCase() !== baseKey.toUpperCase()) {
+        return baseKey.toUpperCase();
+    }
+
+    // If shift is active and there IS a shift property, show the shift character
     if (shiftKeyActive && keyObj.shift) {
         return keyObj.shift;
     }
 
-    var baseKey = keyObj.key;
-    // treat letters in a Unicode-aware manner: if lowercase/uppercase differ it's a letter
+    // If caps is active and it's a letter, show uppercase
     if (capsLockActive && baseKey && baseKey.length === 1 && baseKey.toLowerCase() !== baseKey.toUpperCase()) {
         return baseKey.toUpperCase();
     }
@@ -431,15 +438,16 @@ function toggleShift() {
     renderKeyboard();
 }
 
-function insertCharacter(keyObj) {
+function insertCharacter(keyObj, isPhysicalShift) {
     if (!currentInputField) return;
 
     var charToInsert = keyObj.key;
-    
+    var effectiveShift = shiftKeyActive || isPhysicalShift;
+
     // Handle shift + special characters
-    if (shiftKeyActive && keyObj.shift) {
+    if (effectiveShift && keyObj.shift) {
         charToInsert = keyObj.shift;
-    } else if ((capsLockActive || shiftKeyActive) && keyObj.key && keyObj.key.length === 1 && keyObj.key.toLowerCase() !== keyObj.key.toUpperCase()) {
+    } else if ((capsLockActive || effectiveShift) && keyObj.key && keyObj.key.length === 1 && keyObj.key.toLowerCase() !== keyObj.key.toUpperCase()) {
         // Unicode-aware letter detection
         charToInsert = keyObj.key.toUpperCase();
     }
@@ -561,7 +569,7 @@ document.addEventListener('keydown', function(e) {
     // Handle special keys
     if (key === ' ') {
         e.preventDefault();
-        insertCharacter({ key: ' ' });
+        insertCharacter({ key: ' ' }, false);
         highlightVirtualKey('space');
         return;
     }
@@ -597,7 +605,7 @@ document.addEventListener('keydown', function(e) {
         var keyObj = findKeyInLayout(layout, key);
         
         if (keyObj) {
-            insertCharacter(keyObj);
+            insertCharacter(keyObj, e.shiftKey);
             highlightVirtualKey(keyObj.key);
         }
     }
