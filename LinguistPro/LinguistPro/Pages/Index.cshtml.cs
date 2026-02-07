@@ -54,6 +54,15 @@ namespace LinguistPro.Pages
 
         public string CurrentUserFullName { get; set; } = string.Empty;
 
+        // Available languages - easily extensible for future additions
+        public static readonly Dictionary<string, string> AvailableLanguages = new()
+        {
+            { "de", "German" },
+            { "fr", "French" },
+            { "es", "Spanish" },
+            { "ru", "Russian" }
+        };
+
         public int GlobalMastery { get; private set; }
 
         public List<VocabularyItem> Vocabulary { get; private set; } = new List<VocabularyItem>();

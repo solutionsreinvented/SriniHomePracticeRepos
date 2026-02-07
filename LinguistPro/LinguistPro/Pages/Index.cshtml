@@ -57,43 +57,22 @@
 
             <!-- HEADER -->
                 <header class="h-16 bg-white border-b flex items-center justify-between px-6" style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);">
-                    <div class="text-sm font-semibold text-gray-700">
-                        <span style="color: #667eea;">TARGET LANGUAGE:</span>
-                        <form method="get" class="inline-block ml-3">
+                    <div class="text-sm font-semibold text-gray-700 flex items-center gap-3">
+                        <span style="color: #667eea;">🌐 TARGET LANGUAGE:</span>
+                        <form method="get" class="inline-block">
                             <select name="SelectedLanguage"
                                     onchange="this.form.submit()"
-                                    class="border-0 px-3 py-2 rounded font-semibold">
-                                @if (Model.SelectedLanguage == "de")
+                                    class="px-4 py-2 rounded-lg font-semibold border-2 border-indigo-200 bg-white text-gray-800 hover:border-indigo-400 focus:border-indigo-600 focus:outline-none transition-colors cursor-pointer shadow-sm">
+                                @foreach (var lang in LinguistPro.Pages.IndexModel.AvailableLanguages)
                                 {
-                                    <option value="de" selected>German</option>
-                                }
-                                else
-                                {
-                                    <option value="de">German</option>
-                                }
-                                @if (Model.SelectedLanguage == "fr")
-                                {
-                                    <option value="fr" selected>French</option>
-                                }
-                                else
-                                {
-                                    <option value="fr">French</option>
-                                }
-                                @if (Model.SelectedLanguage == "es")
-                                {
-                                    <option value="es" selected>Spanish</option>
-                                }
-                                else
-                                {
-                                    <option value="es">Spanish</option>
-                                }
-                                @if (Model.SelectedLanguage == "ru")
-                                {
-                                    <option value="ru" selected>Russian</option>
-                                }
-                                else
-                                {
-                                    <option value="ru">Russian</option>
+                                    @if (Model.SelectedLanguage == lang.Key)
+                                    {
+                                        <option value="@lang.Key" selected>@lang.Value</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@lang.Key">@lang.Value</option>
+                                    }
                                 }
                             </select>
                         </form>
@@ -295,10 +274,10 @@
                         </button>
                     </form>
 
-                    <div class="space-y-2">
+                    <div class="flex flex-wrap gap-4 w-full">
                         @foreach (var verb in Model.VerbList)
                         {
-                            <div class="verb-item" 
+                            <div class="vocab-card"
                                  onclick="openVerbModal(this)"
                                  data-infinitive="@verb.Infinitive"
                                  data-meaning="@verb.Meaning"
@@ -311,17 +290,17 @@
                                  data-p2inf="@verb.P2Inf"
                                  data-p2form="@verb.P2Form"
                                  data-p3="@verb.P3">
-                                <div>
+                                <div class="pl-3">
                                     <div class="infinitive">@verb.Infinitive</div>
                                     <div class="verb-meaning">@verb.Meaning</div>
                                 </div>
 
-                                <div class="flex gap-3">
-                                    <button type="button" class="text-indigo-600 font-semibold hover:text-indigo-700 text-sm" onclick="openEditVerb(event, @verb.Id, '@(verb.Infinitive.Replace("'", "\'"))','@(verb.Meaning.Replace("'","\'"))','@(verb.S1.Replace("'","\'"))','@(verb.S2Inf.Replace("'","\'"))','@(verb.S2Form.Replace("'","\'"))','@(verb.S3.Replace("'","\'"))','@(verb.P1.Replace("'","\'"))','@(verb.P2Inf.Replace("'","\'"))','@(verb.P2Form.Replace("'","\'"))','@(verb.P3.Replace("'","\'"))')">
-                                        ✏️ Edit
+                                <div class="absolute top-3 right-3 flex gap-2 edit-delete-buttons">
+                                    <button type="button" class="text-indigo-600 text-sm font-semibold hover:text-indigo-700" onclick="openEditVerb(event, @verb.Id, '@(verb.Infinitive.Replace("'", "\'"))','@(verb.Meaning.Replace("'","\'"))','@(verb.S1.Replace("'","\'"))','@(verb.S2Inf.Replace("'","\'"))','@(verb.S2Form.Replace("'","\'"))','@(verb.S3.Replace("'","\'"))','@(verb.P1.Replace("'","\'"))','@(verb.P2Inf.Replace("'","\'"))','@(verb.P2Form.Replace("'","\'"))','@(verb.P3.Replace("'","\'"))')">
+                                        ✏️
                                     </button>
-                                    <button type="button" class="text-red-600 font-semibold hover:text-red-700 text-sm" onclick="openDeleteVerbModal(event, @verb.Id)">
-                                        🗑️ Delete
+                                    <button type="button" class="text-red-600 text-sm font-semibold hover:text-red-700" onclick="openDeleteVerbModal(event, @verb.Id)">
+                                        🗑️
                                     </button>
                                 </div>
                             </div>
