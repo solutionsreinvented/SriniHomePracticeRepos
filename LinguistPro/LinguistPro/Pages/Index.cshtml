@@ -144,10 +144,10 @@
                         </button>
                     </form>
 
-                    <div class="flex flex-wrap gap-4">
+                    <div class="flex flex-wrap gap-4 w-full">
                         @foreach (var v in Model.Vocabulary)
                         {
-                            <div class="vocab-card w-full sm:w-80 md:w-80 lg:w-80" data-vocab-id="@v.Id" data-vocab-term="@v.Term" data-vocab-meaning="@v.Meaning" data-vocab-usage="@v.UsageExample" data-vocab-usage-meaning="@v.UsageExampleMeaning">
+                            <div class="vocab-card" data-vocab-id="@v.Id" data-vocab-term="@v.Term" data-vocab-meaning="@v.Meaning" data-vocab-usage="@v.UsageExample" data-vocab-usage-meaning="@v.UsageExampleMeaning">
                                 <div class="pl-3">
                                     <div class="term">@v.Term</div>
                                     <div class="meaning">@v.Meaning</div>
@@ -699,7 +699,7 @@
                         </button>
                     </form>
 
-                    <div class="flex flex-wrap gap-4">
+                    <div class="flex flex-wrap gap-4 w-full">
                         @{
                             var itemsList = Model.Mode switch
                             {
@@ -711,7 +711,25 @@
                         }
                         @foreach (var item in itemsList)
                         {
-                            <div class="vocab-card w-full sm:w-80 md:w-80 lg:w-80" data-item-id="@item.Id" data-item-term="@item.Term" data-item-meaning="@item.Meaning" data-item-usage="@item.UsageExample" data-item-usage-meaning="@item.UsageExampleMeaning" data-item-type="@item.ItemType">
+                            <div class="vocab-card" data-item-id="@item.Id" data-item-term="@item.Term" data-item-meaning="@item.Meaning" data-item-usage="@item.UsageExample" data-item-usage-meaning="@item.UsageExampleMeaning" data-item-type="@item.ItemType">
+                                @if (Model.Mode == "Number")
+                                {
+                                    var numberMap = new Dictionary<string, string>
+                                    {
+                                        {"zero", "0"}, {"one", "1"}, {"two", "2"}, {"three", "3"}, {"four", "4"},
+                                        {"five", "5"}, {"six", "6"}, {"seven", "7"}, {"eight", "8"}, {"nine", "9"},
+                                        {"ten", "10"}, {"eleven", "11"}, {"twelve", "12"}, {"thirteen", "13"}, {"fourteen", "14"},
+                                        {"fifteen", "15"}, {"sixteen", "16"}, {"seventeen", "17"}, {"eighteen", "18"}, {"nineteen", "19"},
+                                        {"twenty", "20"}, {"thirty", "30"}, {"forty", "40"}, {"fifty", "50"}, {"sixty", "60"},
+                                        {"seventy", "70"}, {"eighty", "80"}, {"ninety", "90"}, {"hundred", "100"}, {"thousand", "1000"},
+                                        {"million", "1000000"}
+                                    };
+                                    var numberValue = numberMap.ContainsKey(item.Meaning.ToLower()) ? numberMap[item.Meaning.ToLower()] : "";
+                                    if (!string.IsNullOrEmpty(numberValue))
+                                    {
+                                        <div class="number-badge">@numberValue</div>
+                                    }
+                                }
                                 <div class="pl-3">
                                     <div class="term">@item.Term</div>
                                     <div class="meaning">@item.Meaning</div>
