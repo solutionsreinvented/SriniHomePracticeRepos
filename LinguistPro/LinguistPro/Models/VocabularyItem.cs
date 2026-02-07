@@ -13,6 +13,7 @@ namespace LinguistPro.Models
         public string Meaning { get; set; } = string.Empty;
         public string Definition { get; set; } = string.Empty;
         public string UsageExample { get; set; } = string.Empty;
+        public string UsageExampleMeaning { get; set; } = string.Empty;
 
         public int Mastery { get; set; } = 0;
         public DateTime LastReviewed { get; set; } = DateTime.UtcNow;

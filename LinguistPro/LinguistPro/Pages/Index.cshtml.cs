@@ -54,6 +54,9 @@ namespace LinguistPro.Pages
         [BindProperty]
         public string ManualUsage { get; set; } = string.Empty;
 
+        [BindProperty]
+        public string ManualUsageMeaning { get; set; } = string.Empty;
+
         /* Manual Verb */
         [BindProperty]
         public VerbEntry ManualVerb { get; set; } = new() { Language = "de", Infinitive = string.Empty };
@@ -70,6 +73,9 @@ namespace LinguistPro.Pages
 
         [BindProperty]
         public string EditVocabUsage { get; set; } = string.Empty;
+
+        [BindProperty]
+        public string EditVocabUsageMeaning { get; set; } = string.Empty;
 
         /* Edit / Delete bindings for Verb */
         [BindProperty]
@@ -117,6 +123,7 @@ namespace LinguistPro.Pages
                 item.Term = EditVocabTerm;
                 item.Meaning = EditVocabMeaning;
                 item.UsageExample = EditVocabUsage;
+                item.UsageExampleMeaning = EditVocabUsageMeaning;
                 await _db.SaveChangesAsync();
             }
 
@@ -191,7 +198,8 @@ namespace LinguistPro.Pages
                     Term = ManualTerm,
                     Meaning = ManualMeaning,
                     Definition = ManualMeaning,
-                    UsageExample = ManualUsage
+                    UsageExample = ManualUsage,
+                    UsageExampleMeaning = ManualUsageMeaning
                 };
             }
 

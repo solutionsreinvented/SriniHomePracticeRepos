@@ -67,8 +67,8 @@
 
         /* Language selection styling */
         select {
-            background-color: #4f46e5;
-            color: white;
+            background-color: white;
+            color: #1f2937;
             border: 2px solid #4f46e5;
             border-radius: 8px;
             padding: 8px 12px;
@@ -78,8 +78,14 @@
         }
 
         select:hover {
-            background-color: #4338ca;
-            border-color: #4338ca;
+            background-color: #f3f4f6;
+            border-color: #667eea;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
         select option {
@@ -373,9 +379,14 @@
                                    class="border px-2 py-1 rounded flex-1" />
                         </div>
 
-                        <textarea name="ManualUsage"
-                              placeholder="Usage example"
-                              class="border px-2 py-1 rounded w-full h-16"></textarea>
+                        <div class="flex gap-2">
+                            <textarea name="ManualUsage"
+                                  placeholder="Usage example (target language)"
+                                  class="border px-2 py-1 rounded flex-1 h-16"></textarea>
+                            <textarea name="ManualUsageMeaning"
+                                  placeholder="Usage example meaning (English)"
+                                  class="border px-2 py-1 rounded flex-1 h-16"></textarea>
+                        </div>
 
                         <label class="text-xs flex items-center gap-2">
                             <input type="checkbox" name="FetchVocabularyOnline" />
@@ -390,11 +401,12 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         @foreach (var v in Model.Vocabulary)
                         {
-                            <div class="vocab-card" data-vocab-id="@v.Id" data-vocab-term="@v.Term" data-vocab-meaning="@v.Meaning" data-vocab-usage="@v.UsageExample">
+                            <div class="vocab-card" data-vocab-id="@v.Id" data-vocab-term="@v.Term" data-vocab-meaning="@v.Meaning" data-vocab-usage="@v.UsageExample" data-vocab-usage-meaning="@v.UsageExampleMeaning">
                                 <div class="pl-3">
                                     <div class="term">@v.Term</div>
                                     <div class="meaning">@v.Meaning</div>
                                     <div class="usage">@v.UsageExample</div>
+                                    <div class="text-xs text-gray-500 mt-2">@v.UsageExampleMeaning</div>
                                 </div>
 
                                 <div class="absolute top-3 right-3 flex gap-2 opacity-0 hover:opacity-100 transition-opacity duration-300">
@@ -427,8 +439,12 @@
                                     <input id="editVocabMeaning" name="EditVocabMeaning" class="w-full border-2 border-gray-200 px-3 py-2 rounded-lg focus:outline-none focus:border-indigo-500 transition" />
                                 </div>
                                 <div>
-                                    <label class="text-sm font-semibold text-gray-700 block mb-2">Usage</label>
-                                    <textarea id="editVocabUsage" name="EditVocabUsage" class="w-full border-2 border-gray-200 px-3 py-2 rounded-lg focus:outline-none focus:border-indigo-500 transition" rows="4"></textarea>
+                                    <label class="text-sm font-semibold text-gray-700 block mb-2">Usage Example (Target Language)</label>
+                                    <textarea id="editVocabUsage" name="EditVocabUsage" class="w-full border-2 border-gray-200 px-3 py-2 rounded-lg focus:outline-none focus:border-indigo-500 transition" rows="3"></textarea>
+                                </div>
+                                <div>
+                                    <label class="text-sm font-semibold text-gray-700 block mb-2">Usage Example Meaning (English)</label>
+                                    <textarea id="editVocabUsageMeaning" name="EditVocabUsageMeaning" class="w-full border-2 border-gray-200 px-3 py-2 rounded-lg focus:outline-none focus:border-indigo-500 transition" rows="3"></textarea>
                                 </div>
                                 <div class="flex gap-3 pt-4">
                                     <button type="submit" class="flex-1 bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition">Save</button>
@@ -741,7 +757,7 @@
                         }
 
                         // Vocabulary edit modal helpers
-                        function openEditVocab(ev, id, term, meaning, usage) {
+                        function openEditVocab(ev, id, term, meaning, usage, usageMeaning) {
                             ev.stopPropagation();
                             document.getElementById('editVocabId').value = id;
                             var delHidden = document.getElementById('delVocabIdHidden');
@@ -749,6 +765,7 @@
                             document.getElementById('editVocabTerm').value = term || '';
                             document.getElementById('editVocabMeaning').value = meaning || '';
                             document.getElementById('editVocabUsage').value = usage || '';
+                            document.getElementById('editVocabUsageMeaning').value = usageMeaning || '';
                             var m = document.getElementById('vocabModal');
                             m.classList.remove('hidden'); m.classList.add('flex');
                         }
@@ -761,7 +778,8 @@
                             var term = card.dataset.vocabTerm;
                             var meaning = card.dataset.vocabMeaning;
                             var usage = card.dataset.vocabUsage;
-                            openEditVocab(ev, id, term, meaning, usage);
+                            var usageMeaning = card.dataset.vocabUsageMeaning;
+                            openEditVocab(ev, id, term, meaning, usage, usageMeaning);
                         }
 
                         function closeVocabModal() {
