@@ -165,6 +165,9 @@ namespace LinguistPro.Pages
             var dailyLogs = await _db.DailyLearningLogs
                 .Include(d => d.LanguageProfile)
                 .Where(d => d.LanguageProfile != null && d.LanguageProfile.UserId == userId && d.LearningDate >= thirtyDaysAgo)
+                .ToListAsync(); // Execute query first
+
+            var groupedLogs = dailyLogs
                 .GroupBy(d => d.LearningDate.Date)
                 .Select(g => new DailyLearningDataViewModel
                 {
@@ -173,9 +176,9 @@ namespace LinguistPro.Pages
                     TimeSpentSeconds = g.Sum(d => d.TotalTimeSpentSeconds)
                 })
                 .OrderBy(d => d.Date)
-                .ToListAsync();
+                .ToList();
 
-            DailyLearningData = dailyLogs;
+            DailyLearningData = groupedLogs;
         }
 
         private async Task GetWeeklyStats(int userId)
@@ -190,7 +193,7 @@ namespace LinguistPro.Pages
             if (dailyLogs.Count == 0)
                 return;
 
-            // Group by week
+            // Group by week (using ToList first to execute in memory, not in database)
             var weeklyGroups = dailyLogs
                 .GroupBy(d => new { d.LearningDate.Year, Week = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(d.LearningDate, CalendarWeekRule.FirstDay, DayOfWeek.Monday) })
                 .OrderByDescending(g => g.Key)
