@@ -196,12 +196,34 @@ namespace LinguistPro.Pages
 
             var langProfile = await GetCurrentLanguageProfile();
 
-            // If user has no language profile for selected language, redirect to language selection
+            // If user has no language profile for selected language, create it or fallback to German
             if (langProfile == null)
             {
-                SelectedLanguage = "de"; // Default to German
+                // Check if the selected language is valid
+                if (!AvailableLanguages.ContainsKey(SelectedLanguage))
+                {
+                    SelectedLanguage = "de"; // Default to German if invalid
+                }
+
+                // Try to get or create the language profile
                 langProfile = await _db.LanguageProfiles
-                    .FirstOrDefaultAsync(l => l.UserId == userId && l.LanguageCode == "de");
+                    .FirstOrDefaultAsync(l => l.UserId == userId && l.LanguageCode == SelectedLanguage);
+
+                // If still null, create a new profile for this language
+                if (langProfile == null && AvailableLanguages.ContainsKey(SelectedLanguage))
+                {
+                    langProfile = new LanguageProfile
+                    {
+                        UserId = userId,
+                        LanguageCode = SelectedLanguage,
+                        LanguageName = AvailableLanguages[SelectedLanguage],
+                        IsActive = true,
+                        CreatedDate = DateTime.UtcNow,
+                        MasteryLevel = 0
+                    };
+                    _db.LanguageProfiles.Add(langProfile);
+                    await _db.SaveChangesAsync();
+                }
             }
 
             var langProfileId = langProfile?.LanguageProfileId;
