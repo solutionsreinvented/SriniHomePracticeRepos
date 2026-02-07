@@ -63,18 +63,26 @@ namespace LinguistPro.Pages.Admin
 
             IsAdminAuthenticated = true;
 
-            // Load all admin users
-            var admins = await _context.AdminUsers
-                .ToListAsync();
-
-            AdminUsers = admins.Select(a => new AdminUserViewModel
+            // Load all admin users - with graceful fallback if table doesn't exist
+            try
             {
-                Id = a.AdminUserId.ToString(),
-                Username = a.AdminUserName,
-                FullName = a.FullName,
-                CreatedDate = a.CreatedDate,
-                AdminUserId = a.AdminUserId
-            }).ToList();
+                var admins = await _context.AdminUsers.ToListAsync();
+
+                AdminUsers = admins.Select(a => new AdminUserViewModel
+                {
+                    Id = a.AdminUserId.ToString(),
+                    Username = a.AdminUserName,
+                    FullName = a.FullName,
+                    CreatedDate = a.CreatedDate,
+                    AdminUserId = a.AdminUserId
+                }).ToList();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning($"AdminUsers table may not exist yet: {ex.Message}");
+                AdminUsers = new List<AdminUserViewModel>();
+                ErrorMessage = "⚠️ Admin database table not initialized. Run migrations first: dotnet ef migrations add AddAdminUsers && dotnet ef database update";
+            }
 
             return Page();
         }
@@ -120,14 +128,24 @@ namespace LinguistPro.Pages.Admin
                 }
 
                 // Check if username already exists
-                var existing = await _context.AdminUsers
-                    .FirstOrDefaultAsync(a => a.AdminUserName.ToLower() == CreateAdmin.Username.ToLower());
-
-                if (existing != null)
+                try
                 {
+                    var existing = await _context.AdminUsers
+                        .FirstOrDefaultAsync(a => a.AdminUserName.ToLower() == CreateAdmin.Username.ToLower());
+
+                    if (existing != null)
+                    {
+                        HasError = true;
+                        ErrorMessage = "Username already exists";
+                        await ReloadAdminsList();
+                        return Page();
+                    }
+                }
+                catch (Exception dbEx)
+                {
+                    _logger.LogWarning($"AdminUsers table may not exist: {dbEx.Message}");
                     HasError = true;
-                    ErrorMessage = "Username already exists";
-                    await ReloadAdminsList();
+                    ErrorMessage = "⚠️ Admin database not initialized. Run migrations first.";
                     return Page();
                 }
 
@@ -217,17 +235,24 @@ namespace LinguistPro.Pages.Admin
 
         private async Task ReloadAdminsList()
         {
-            var admins = await _context.AdminUsers
-                .ToListAsync();
-
-            AdminUsers = admins.Select(a => new AdminUserViewModel
+            try
             {
-                Id = a.AdminUserId.ToString(),
-                Username = a.AdminUserName,
-                FullName = a.FullName,
-                CreatedDate = a.CreatedDate,
-                AdminUserId = a.AdminUserId
-            }).ToList();
+                var admins = await _context.AdminUsers.ToListAsync();
+
+                AdminUsers = admins.Select(a => new AdminUserViewModel
+                {
+                    Id = a.AdminUserId.ToString(),
+                    Username = a.AdminUserName,
+                    FullName = a.FullName,
+                    CreatedDate = a.CreatedDate,
+                    AdminUserId = a.AdminUserId
+                }).ToList();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning($"Could not reload admin list: {ex.Message}");
+                AdminUsers = new List<AdminUserViewModel>();
+            }
         }
 
         private string HashPassword(string password)

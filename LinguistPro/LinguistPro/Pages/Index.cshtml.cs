@@ -40,6 +40,14 @@ namespace LinguistPro.Pages
             return _currentUserId.Value;
         }
 
+        /// <summary>
+        /// Check if current user is authenticated as admin
+        /// </summary>
+        private bool IsAdminUser()
+        {
+            return !string.IsNullOrEmpty(HttpContext.Session.GetString("AdminUser"));
+        }
+
         private async Task<LanguageProfile?> GetCurrentLanguageProfile()
         {
             if (_currentLanguageProfile == null)
@@ -588,6 +596,102 @@ namespace LinguistPro.Pages
                 return value;
             }
             return int.MaxValue; // Unknown numbers go to the end
+        }
+
+        /// <summary>
+        /// Bulk delete vocabulary items (admin only)
+        /// </summary>
+        public async Task<IActionResult> OnPostBulkDeleteVocabularyAsync(List<int> selectedIds)
+        {
+            // Security: Only admin can bulk delete
+            if (!IsAdminUser())
+            {
+                return Unauthorized();
+            }
+
+            if (selectedIds == null || selectedIds.Count == 0)
+                return RedirectToPage(new { Mode = "Vocab", SelectedLanguage });
+
+            var userId = await GetCurrentUserId();
+            var langProfile = await _db.LanguageProfiles
+                .FirstOrDefaultAsync(l => l.UserId == userId && l.LanguageCode == SelectedLanguage);
+
+            if (langProfile == null)
+                return RedirectToPage(new { Mode = "Vocab", SelectedLanguage });
+
+            // Delete only items belonging to current user's language profile
+            var itemsToDelete = await _db.Vocabulary
+                .Where(v => selectedIds.Contains(v.Id) && v.LanguageProfileId == langProfile.LanguageProfileId)
+                .ToListAsync();
+
+            _db.Vocabulary.RemoveRange(itemsToDelete);
+            await _db.SaveChangesAsync();
+
+            return RedirectToPage(new { Mode = "Vocab", SelectedLanguage });
+        }
+
+        /// <summary>
+        /// Bulk delete verbs (admin only)
+        /// </summary>
+        public async Task<IActionResult> OnPostBulkDeleteVerbsAsync(List<int> selectedIds)
+        {
+            // Security: Only admin can bulk delete
+            if (!IsAdminUser())
+            {
+                return Unauthorized();
+            }
+
+            if (selectedIds == null || selectedIds.Count == 0)
+                return RedirectToPage(new { Mode = "Verbs", SelectedLanguage });
+
+            var userId = await GetCurrentUserId();
+            var langProfile = await _db.LanguageProfiles
+                .FirstOrDefaultAsync(l => l.UserId == userId && l.LanguageCode == SelectedLanguage);
+
+            if (langProfile == null)
+                return RedirectToPage(new { Mode = "Verbs", SelectedLanguage });
+
+            // Delete only items belonging to current user's language profile
+            var itemsToDelete = await _db.Verbs
+                .Where(v => selectedIds.Contains(v.Id) && v.LanguageProfileId == langProfile.LanguageProfileId)
+                .ToListAsync();
+
+            _db.Verbs.RemoveRange(itemsToDelete);
+            await _db.SaveChangesAsync();
+
+            return RedirectToPage(new { Mode = "Verbs", SelectedLanguage });
+        }
+
+        /// <summary>
+        /// Bulk delete language items - Numbers/Days/Months (admin only)
+        /// </summary>
+        public async Task<IActionResult> OnPostBulkDeleteLanguageItemsAsync(List<int> selectedIds)
+        {
+            // Security: Only admin can bulk delete
+            if (!IsAdminUser())
+            {
+                return Unauthorized();
+            }
+
+            if (selectedIds == null || selectedIds.Count == 0)
+                return RedirectToPage(new { Mode, SelectedLanguage });
+
+            var userId = await GetCurrentUserId();
+            var langProfile = await _db.LanguageProfiles
+                .FirstOrDefaultAsync(l => l.UserId == userId && l.LanguageCode == SelectedLanguage);
+
+            if (langProfile == null)
+                return RedirectToPage(new { Mode, SelectedLanguage });
+
+            // Delete only items belonging to current user's language profile
+            var itemsToDelete = await _db.LanguageItems
+                .Where(i => selectedIds.Contains(i.Id) && i.LanguageProfileId == langProfile.LanguageProfileId)
+                .ToListAsync();
+
+            _db.LanguageItems.RemoveRange(itemsToDelete);
+            await _db.SaveChangesAsync();
+
+            return RedirectToPage(new { Mode, SelectedLanguage });
         }
     }
 }
