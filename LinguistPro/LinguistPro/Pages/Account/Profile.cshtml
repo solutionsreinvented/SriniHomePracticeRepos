@@ -7,13 +7,31 @@
 
 <link rel="stylesheet" href="~/css/account-pages.css">
 
-<div class="account-container">
-    <a href="/Index" class="back-link">← Back</a>
+<div class="account-header">
+    <div class="account-header-content">
+        <nav class="account-nav">
+            <a href="/Dashboard">Dashboard</a>
+            <a href="/Account/Profile" class="active">Profile</a>
+            <a href="/Index">Learning</a>
+        </nav>
+    </div>
+</div>
 
+<!-- Top Section with Back Link & Other Settings -->
+<div class="account-top-section">
+    <a href="/Dashboard" class="back-link">← Back to Dashboard</a>
+    <div class="top-section-links">
+        <a href="/Account/ChangePassword" class="top-section-link">🔐 Change Password</a>
+        <a href="/Account/ManageLanguages" class="top-section-link">🌐 Manage Languages</a>
+    </div>
+</div>
+
+<div class="account-container">
     <div class="account-main">
+        <!-- Page Header -->
         <div class="account-page-header">
-            <h1 class="account-page-title">User Profile</h1>
-            <p class="account-page-subtitle">Manage your personal information</p>
+            <h1 class="account-page-title">👤 User Profile</h1>
+            <p class="account-page-subtitle">Manage your personal information and account settings</p>
         </div>
 
         <!-- Success Message -->
@@ -38,26 +56,13 @@
         <div class="account-card">
             <div class="card-header">
                 <span class="card-header-icon">🔐</span>
-                <h2 class="card-title">Account</h2>
+                <h2 class="card-title">Account Information</h2>
             </div>
 
             <div class="form-group">
                 <label class="form-label">Email Address</label>
-                <input type="email" value="@Model.CurrentUserEmail" disabled class="form-input" style="background: #f5f5f5; cursor: not-allowed;">
-                <div class="form-help">Cannot be changed</div>
-            </div>
-        </div>
-
-        <!-- Other Settings Card -->
-        <div class="account-card">
-            <h2 class="card-title" style="margin-bottom: 16px;">Other Settings</h2>
-            <div style="display: flex; gap: 24px; flex-wrap: wrap;">
-                <a href="/Account/ChangePassword" class="sidebar-link" style="color: #2563eb; font-weight: 500;">
-                    🔐 Change Password
-                </a>
-                <a href="/Account/ManageLanguages" class="sidebar-link" style="color: #2563eb; font-weight: 500;">
-                    🌐 Manage Languages
-                </a>
+                <input type="email" value="@Model.CurrentUserEmail" disabled class="form-input" style="background: #f8f9fa; cursor: not-allowed;">
+                <div class="form-help">Your email address cannot be changed</div>
             </div>
         </div>
 
@@ -69,35 +74,38 @@
             </div>
 
             <form method="post">
-                <div class="form-row form-row-3col">
-                    <div>
+                <!-- First Name & Last Name Row -->
+                <div class="form-row form-row-2col">
+                    <div class="form-group">
                         <label class="form-label required">First Name</label>
-                        <input asp-for="FirstName" class="form-input" placeholder="Enter first name" required>
+                        <input asp-for="FirstName" class="form-input" placeholder="Enter your first name" required>
                     </div>
-                    <div style="grid-column: span 1;">
+                    <div class="form-group">
                         <label class="form-label required">Last Name</label>
-                        <input asp-for="LastName" class="form-input" placeholder="Enter last name" required>
+                        <input asp-for="LastName" class="form-input" placeholder="Enter your last name" required>
                     </div>
                 </div>
 
-                <div class="form-row form-row-3col">
-                    <div>
+                <!-- Date of Birth & Country Row -->
+                <div class="form-row form-row-2col">
+                    <div class="form-group">
                         <label class="form-label">Date of Birth</label>
                         <input asp-for="DateOfBirth" type="date" class="form-input">
                         <div class="form-help">Optional</div>
                     </div>
-                    <div style="grid-column: span 1;">
+                    <div class="form-group">
                         <label class="form-label">Country</label>
                         <input asp-for="Country" class="form-input" placeholder="e.g., India, United States">
                         <div class="form-help">Optional</div>
                     </div>
                 </div>
 
+                <!-- Buttons -->
                 <div class="button-group">
                     <button type="submit" class="btn btn-primary">
                         <span>💾</span> Save Changes
                     </button>
-                    <a href="/Index" class="btn btn-secondary">Cancel</a>
+                    <a href="/Dashboard" class="btn btn-secondary">Cancel</a>
                 </div>
             </form>
         </div>

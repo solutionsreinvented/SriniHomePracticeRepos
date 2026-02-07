@@ -5,109 +5,135 @@
     Layout = "_Layout";
 }
 
-<div class="min-h-screen bg-white">
-    <div class="max-w-6xl mx-auto px-6 py-8">
-        <!-- Back Link -->
-        <a href="/Account/Profile" class="text-blue-600 hover:text-blue-700 font-semibold text-sm mb-6 inline-block">← Back</a>
+<link rel="stylesheet" href="~/css/account-pages.css">
+<link rel="stylesheet" href="~/css/dashboard.css">
 
-        <!-- Page Title -->
-        <h1 class="text-4xl font-bold text-gray-900 mb-2">Manage Languages</h1>
-        <p class="text-gray-600 text-base mb-12">Add, remove, and manage your language profiles</p>
+<div class="account-header">
+    <div class="account-header-content">
+        <nav class="account-nav">
+            <a href="/Dashboard">Dashboard</a>
+            <a href="/Account/Profile">Profile</a>
+            <a href="/Account/ManageLanguages" class="active">Manage Languages</a>
+        </nav>
+    </div>
+</div>
 
-        <!-- Messages -->
+<!-- Top Section with Back Link -->
+<div class="account-top-section">
+    <a href="/Account/Profile" class="back-link">← Back to Profile</a>
+</div>
+
+<div class="account-container">
+    <div class="account-main">
+        <!-- Page Header -->
+        <div class="account-page-header">
+            <h1 class="account-page-title">🌐 Manage Languages</h1>
+            <p class="account-page-subtitle">Add, remove, and manage your language learning profiles</p>
+        </div>
+
+        <!-- Success Message -->
         @if (!string.IsNullOrEmpty(Model.SuccessMessage))
         {
-            <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                <p class="text-green-800 font-semibold">✓ @Model.SuccessMessage</p>
+            <div class="alert alert-success">
+                <span class="alert-icon">✓</span>
+                <div>@Model.SuccessMessage</div>
             </div>
         }
 
+        <!-- Error Message -->
         @if (!string.IsNullOrEmpty(Model.ErrorMessage))
         {
-            <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                <p class="text-red-800 font-semibold">✗ @Model.ErrorMessage</p>
+            <div class="alert alert-error">
+                <span class="alert-icon">✗</span>
+                <div>@Model.ErrorMessage</div>
             </div>
         }
 
         <!-- Add Language Form -->
         @if (Model.AvailableLanguages.Count > 0)
         {
-            <div class="border border-gray-200 rounded-lg p-6 mb-12">
-                <h2 class="text-xl font-bold text-gray-900 mb-4">Add New Language</h2>
-                <form method="post" asp-page-handler="AddLanguage" class="flex gap-3">
-                    <select name="SelectedLanguageCode" 
-                            class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="">-- Select a Language --</option>
-                        @foreach (var lang in Model.AvailableLanguages)
-                        {
-                            <option value="@lang.LanguageCode">@lang.LanguageName</option>
-                        }
-                    </select>
-                    <button type="submit" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 whitespace-nowrap">
-                        Add Language
-                    </button>
+            <div class="account-card">
+                <div class="card-header">
+                    <span class="card-header-icon">➕</span>
+                    <h2 class="card-title">Add New Language</h2>
+                </div>
+                <form method="post" asp-page-handler="AddLanguage" class="form-row form-row-2col">
+                    <div class="form-group">
+                        <label class="form-label required">Select Language</label>
+                        <select name="SelectedLanguageCode" class="form-input">
+                            <option value="">-- Select a Language --</option>
+                            @foreach (var lang in Model.AvailableLanguages)
+                            {
+                                <option value="@lang.LanguageCode">@lang.LanguageName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group" style="display: flex; align-items: flex-end;">
+                        <button type="submit" class="btn btn-primary">
+                            <span>➕</span> Add Language
+                        </button>
+                    </div>
                 </form>
             </div>
         }
 
-        <!-- Your Languages -->
+        <!-- Your Languages Section -->
         @if (Model.UserLanguages.Count == 0)
         {
-            <div class="border border-gray-200 rounded-lg p-12 text-center">
-                <p class="text-gray-600 text-lg mb-4">No languages added yet</p>
-                <a href="/Account/ManageLanguages" class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 inline-block">
-                    Add Your First Language
-                </a>
+            <div class="account-card" style="text-align: center; padding: 60px 40px;">
+                <p style="font-size: 40px; margin-bottom: 20px;">📚</p>
+                <p style="font-size: 18px; font-weight: 600; color: #1a1a1a; margin-bottom: 20px;">No languages added yet</p>
+                <p style="font-size: 14px; color: #666; margin-bottom: 32px;">Start your language learning journey by adding your first language</p>
             </div>
         }
         else
         {
-            <div>
-                <h2 class="text-xl font-bold text-gray-900 mb-6">Your Languages</h2>
-                <div class="space-y-4">
+            <div class="account-main">
+                <h2 style="font-size: 24px; font-weight: 700; color: #1a1a1a; margin-bottom: 28px; display: flex; align-items: center; gap: 12px;">
+                    <span>📖</span> Your Languages
+                </h2>
+                <div class="language-list">
                     @foreach (var lang in Model.UserLanguages)
                     {
-                        <div class="border border-gray-200 rounded-lg p-4">
-                            <div class="flex items-center justify-between">
-                                <!-- Left: Language Info -->
-                                <div class="flex items-center gap-4">
-                                    <span class="text-4xl">
-                                        @if (lang.LanguageCode == "de") { <span>🇩🇪</span> }
-                                        else if (lang.LanguageCode == "fr") { <span>🇫🇷</span> }
-                                        else if (lang.LanguageCode == "es") { <span>🇪🇸</span> }
-                                        else if (lang.LanguageCode == "ru") { <span>🇷🇺</span> }
-                                    </span>
-                                    <div>
-                                        <h3 class="font-bold text-gray-900">@lang.LanguageName</h3>
-                                        <p class="text-sm text-gray-500">Code: @lang.LanguageCode</p>
+                        <div class="language-item">
+                            <!-- Flag -->
+                            <span class="language-flag">
+                                @if (lang.LanguageCode == "de") { <span>🇩🇪</span> }
+                                else if (lang.LanguageCode == "fr") { <span>🇫🇷</span> }
+                                else if (lang.LanguageCode == "es") { <span>🇪🇸</span> }
+                                else if (lang.LanguageCode == "ru") { <span>🇷🇺</span> }
+                                else { <span>🌍</span> }
+                            </span>
+
+                            <!-- Language Info -->
+                            <div class="language-info">
+                                <div class="language-name">@lang.LanguageName</div>
+                                <div class="language-stats">
+                                    <div class="language-stat-item">
+                                        <span class="language-stat-icon">📚</span>
+                                        <span>@lang.ItemCount items</span>
                                     </div>
                                 </div>
-
-                                <!-- Middle: Stats -->
-                                <div class="text-center">
-                                    <p class="text-lg font-bold text-gray-900">@lang.ItemCount</p>
-                                    <p class="text-sm text-gray-500">Items</p>
-                                </div>
-
-                                <!-- Right: Mastery & Action -->
-                                <div class="text-right">
-                                    <p class="text-lg font-bold text-gray-900">@lang.MasteryLevel%</p>
-                                    <p class="text-sm text-gray-500">Mastery</p>
-                                </div>
-
-                                <!-- Remove Button -->
-                                @if (Model.UserLanguages.Count > 1)
-                                {
-                                    <form method="post" asp-page-handler="RemoveLanguage" class="inline-block">
-                                        <input type="hidden" name="languageProfileId" value="@lang.LanguageProfileId" />
-                                        <button type="submit" 
-                                                class="px-4 py-2 text-red-600 font-semibold hover:bg-red-50 rounded-lg border border-red-300 transition"
-                                                onclick="return confirm('Delete all data for this language?')">
-                                            Remove
-                                        </button>
-                                    </form>
-                                }
                             </div>
+
+                            <!-- Mastery Level -->
+                            <div class="language-mastery">
+                                <div class="language-mastery-value">@lang.MasteryLevel%</div>
+                                <div class="language-mastery-label">Mastery</div>
+                            </div>
+
+                            <!-- Remove Button -->
+                            @if (Model.UserLanguages.Count > 1)
+                            {
+                                <form method="post" asp-page-handler="RemoveLanguage" class="inline-block">
+                                    <input type="hidden" name="languageProfileId" value="@lang.LanguageProfileId" />
+                                    <button type="submit" 
+                                            class="btn btn-danger"
+                                            onclick="return confirm('Delete all data for this language?')">
+                                        <span>🗑️</span> Remove
+                                    </button>
+                                </form>
+                            }
                         </div>
                     }
                 </div>

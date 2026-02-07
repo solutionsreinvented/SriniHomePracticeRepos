@@ -21,8 +21,10 @@
     <!-- Page Header -->
     <div class="dashboard-page-header">
         <h1 class="dashboard-title">
-            <span>👋</span> Here's your learning progress at a glance
+            <span class="dashboard-title-emoji">👋</span>
+            Welcome to Your Learning Dashboard
         </h1>
+        <p class="dashboard-subtitle">Track your progress across all languages and learning activities</p>
     </div>
 
     <!-- Stats Grid -->
@@ -34,6 +36,7 @@
             </div>
             <div class="stat-number">@Model.TotalItems</div>
             <div class="stat-label">Total Items Learning</div>
+            <div class="stat-footer">Vocabulary, verbs, and more</div>
         </div>
 
         <!-- Vocabulary & Verbs -->
@@ -41,10 +44,11 @@
             <div class="stat-header">
                 <span class="stat-icon">📝</span>
             </div>
-            <div style="font-size: 16px; font-weight: 600; color: #000; margin-bottom: 8px;">
-                @Model.VocabCount vocab • @Model.VerbCount verbs
+            <div style="font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 12px;">
+                @Model.VocabCount • @Model.VerbCount
             </div>
-            <div class="stat-label">Vocabulary & Verbs</div>
+            <div class="stat-label">Vocabulary Items & Verbs</div>
+            <div class="stat-footer">@Model.VocabCount vocab items, @Model.VerbCount verbs</div>
         </div>
 
         <!-- Other Items -->
@@ -54,7 +58,11 @@
                 <div class="stat-header">
                     <span class="stat-icon">🎯</span>
                 </div>
-                <div style="font-size: 16px; font-weight: 600; color: #000; margin-bottom: 8px;">
+                <div style="font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 12px;">
+                    @(Model.NumberCount + Model.MonthCount + Model.DayCount)
+                </div>
+                <div class="stat-label">Numbers, Months & Days</div>
+                <div class="stat-footer">
                     @if (Model.NumberCount > 0)
                     {
                         <span>@Model.NumberCount numbers</span>
@@ -68,7 +76,6 @@
                         <span>@((Model.NumberCount > 0 || Model.MonthCount > 0) ? ", " : "")@Model.DayCount days</span>
                     }
                 </div>
-                <div class="stat-label">Numbers, Months & Days</div>
             </div>
         }
 
@@ -78,7 +85,8 @@
                 <span class="stat-icon">⭐</span>
             </div>
             <div class="stat-number">@Model.AverageMastery.ToString("F0")%</div>
-            <div class="stat-label">Average Mastery</div>
+            <div class="stat-label">Average Mastery Level</div>
+            <div class="stat-footer">Across all languages</div>
         </div>
     </div>
 
@@ -86,9 +94,9 @@
     <hr class="dashboard-divider">
 
     <!-- Continue Link -->
-    <div style="margin-bottom: 40px;">
-        <a href="/Index" class="continue-link">→ Continue your progress</a>
-    </div>
+    <a href="/Index" class="continue-link">
+        <span>→</span> Continue your learning journey
+    </a>
 
     <!-- Languages Section -->
     @if (Model.LanguageStats.Count > 0)
@@ -149,9 +157,9 @@
     {
         <div class="empty-state">
             <div class="empty-state-icon">📚</div>
-            <div class="empty-state-title">No languages added yet</div>
-            <div class="empty-state-description">Start learning by adding your first language</div>
-            <a href="/Account/ManageLanguages" class="empty-state-btn">Add Language</a>
+            <div class="empty-state-title">Start Your Learning Journey</div>
+            <div class="empty-state-description">You haven't added any languages yet. Add your first language to begin learning!</div>
+            <a href="/Account/ManageLanguages" class="empty-state-btn">Add Your First Language</a>
         </div>
     }
 </div>
