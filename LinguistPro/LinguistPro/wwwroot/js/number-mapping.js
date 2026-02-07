@@ -1,6 +1,6 @@
 // Comprehensive English number to numeric value mapping
 // Ordered by numeric value for proper sorting
-let numberMap = [
+const NUMBER_MAP = [
     { text: "zero", value: 0 },
     { text: "one", value: 1 },
     { text: "two", value: 2 },
@@ -117,12 +117,61 @@ let numberMap = [
     { text: "million", value: 1000000 }
 ];
 
-// Function to get numeric value from English number text
+// Days of week in proper order
+const DAYS_ORDER = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+// Months in proper order
+const MONTHS_ORDER = ["January", "February", "March", "April", "May", "June", 
+                      "July", "August", "September", "October", "November", "December"];
+
+// Function to get numeric value from English number text (supports compound numbers like "one hundred and fifteen")
 function getNumberValue(englishText) {
     if (!englishText) return null;
     const normalizedText = englishText.toLowerCase().trim();
-    const entry = numberMap.find(item => item.text === normalizedText);
-    return entry ? entry.value : null;
+
+    // Check direct match first
+    const entry = NUMBER_MAP.find(item => item.text === normalizedText);
+    if (entry) return entry.value;
+
+    // Handle compound numbers like "one hundred and fifteen", "two thousand five hundred"
+    return parseCompoundNumber(normalizedText);
+}
+
+// Parse compound numbers like "one hundred and fifteen" -> 115
+function parseCompoundNumber(text) {
+    const parts = text.split(/\s+and\s+/);
+    let total = 0;
+    let currentValue = 0;
+
+    for (const part of parts) {
+        const words = part.split(/\s+/);
+
+        for (const word of words) {
+            const entry = NUMBER_MAP.find(item => item.text === word);
+            if (entry) {
+                if (entry.value >= 100) {
+                    currentValue = (currentValue || 1) * entry.value;
+                } else {
+                    currentValue += entry.value;
+                }
+            }
+        }
+    }
+
+    total += currentValue;
+    return total > 0 ? total : null;
+}
+
+// Function to get sort order index for Days
+function getDayOrder(dayName) {
+    const index = DAYS_ORDER.findIndex(day => day.toLowerCase() === (dayName || '').toLowerCase());
+    return index >= 0 ? index : 999;
+}
+
+// Function to get sort order index for Months
+function getMonthOrder(monthName) {
+    const index = MONTHS_ORDER.findIndex(month => month.toLowerCase() === (monthName || '').toLowerCase());
+    return index >= 0 ? index : 999;
 }
 
 // Function to sort number cards by numeric value
@@ -150,6 +199,54 @@ function sortNumberCards() {
 
     // Reorder cards in the DOM
     cardsWithBadges.forEach(card => {
+        container.appendChild(card);
+    });
+}
+
+// Function to sort day cards by day order
+function sortDayCards() {
+    const container = document.querySelector('.flex.flex-wrap.gap-4');
+    if (!container) return;
+
+    const cards = Array.from(container.querySelectorAll('.vocab-card'));
+
+    // Sort cards by day order
+    cards.sort((aCard, bCard) => {
+        const aTerm = aCard.dataset.itemTerm || '';
+        const bTerm = bCard.dataset.itemTerm || '';
+
+        const aOrder = getDayOrder(aTerm);
+        const bOrder = getDayOrder(bTerm);
+
+        return aOrder - bOrder;
+    });
+
+    // Reorder cards in the DOM
+    cards.forEach(card => {
+        container.appendChild(card);
+    });
+}
+
+// Function to sort month cards by month order
+function sortMonthCards() {
+    const container = document.querySelector('.flex.flex-wrap.gap-4');
+    if (!container) return;
+
+    const cards = Array.from(container.querySelectorAll('.vocab-card'));
+
+    // Sort cards by month order
+    cards.sort((aCard, bCard) => {
+        const aTerm = aCard.dataset.itemTerm || '';
+        const bTerm = bCard.dataset.itemTerm || '';
+
+        const aOrder = getMonthOrder(aTerm);
+        const bOrder = getMonthOrder(bTerm);
+
+        return aOrder - bOrder;
+    });
+
+    // Reorder cards in the DOM
+    cards.forEach(card => {
         container.appendChild(card);
     });
 }

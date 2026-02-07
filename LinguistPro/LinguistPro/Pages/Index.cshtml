@@ -92,7 +92,7 @@
                     </div>
 
                     <div class="text-sm font-semibold text-gray-700">
-                        <span style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                        <span style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">
                             CLOUD SYNC ACTIVE ✓
                         </span>
                     </div>
@@ -937,12 +937,26 @@
         });
     </script>
 
-    <script>
+     <script>
         // Set the selected language for the keyboard
         selectedLanguage = '@Model.SelectedLanguage';
+        // Set the current mode
+        var currentMode = '@Model.Mode';
     </script>
+    <script src="~/js/number-mapping.js"></script>
     <script src="~/js/virtual-keyboard.js"></script>
     <script>
+        // Sort all item lists based on the current mode
+        function sortAllItems() {
+            if (currentMode === 'Number') {
+                populateNumberBadges();
+            } else if (currentMode === 'Day') {
+                sortDayCards();
+            } else if (currentMode === 'Month') {
+                sortMonthCards();
+            }
+        }
+
         // Populate number badges with actual numeric values and sort cards
         function populateNumberBadges() {
             var badges = document.querySelectorAll('[data-number-value]');
@@ -956,11 +970,12 @@
             // Sort number cards by numeric value after populating badges
             sortNumberCards();
         }
+
         // Run after DOM is ready and number-mapping.js is loaded
-        document.addEventListener('DOMContentLoaded', populateNumberBadges);
+        document.addEventListener('DOMContentLoaded', sortAllItems);
 
         // Also sort when the page is shown again (after edit/delete/add operations)
-        window.addEventListener('pageshow', populateNumberBadges);
+        window.addEventListener('pageshow', sortAllItems);
     </script>
 
 </body>
