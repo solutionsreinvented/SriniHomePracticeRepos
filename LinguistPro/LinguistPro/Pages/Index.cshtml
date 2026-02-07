@@ -378,6 +378,20 @@
 
         .key.backspace {
             min-width: 60px;
+            padding: 0 12px;
+            font-size: 11px;
+        }
+
+        .key.caps {
+            min-width: 50px;
+            padding: 0 8px;
+            font-size: 11px;
+        }
+
+        .key.caps.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
         }
 
         .key.close {
@@ -1225,6 +1239,7 @@
     <script>
         var currentInputField = null;
         var selectedLanguage = '@Model.SelectedLanguage';
+        var capsLockActive = false;
 
         // Keyboard layouts for different languages
         var keyboardLayouts = {
@@ -1262,6 +1277,16 @@
             }
         };
 
+        // Physical keyboard to virtual key mapping
+        var keyboardMap = {
+            'q': 'q', 'w': 'w', 'e': 'e', 'r': 'r', 't': 't', 'z': 'z', 'u': 'u', 'i': 'i', 'o': 'o', 'p': 'p',
+            'a': 'a', 's': 's', 'd': 'd', 'f': 'f', 'g': 'g', 'h': 'h', 'j': 'j', 'k': 'k', 'l': 'l',
+            'y': 'y', 'x': 'x', 'c': 'c', 'v': 'v', 'b': 'b', 'n': 'n', 'm': 'm',
+            ' ': 'space',
+            'Backspace': 'backspace',
+            'CapsLock': 'caps'
+        };
+
         function openKeyboard(ev, element) {
             ev.stopPropagation();
             // Find the input field associated with this keyboard icon
@@ -1273,11 +1298,13 @@
             // Set default keyboard language
             var selector = document.getElementById('keyboardLangSelector');
             selector.value = 'target';
+            capsLockActive = false;
 
             renderKeyboard();
             var modal = document.getElementById('keyboardModal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
+            currentInputField.focus();
         }
 
         function closeKeyboard() {
@@ -1303,7 +1330,9 @@
                 row.forEach(function(key) {
                     var keyEl = document.createElement('div');
                     keyEl.className = 'key';
-                    keyEl.textContent = key;
+                    keyEl.id = 'vkey_' + key;
+                    var displayKey = capsLockActive ? key.toUpperCase() : key;
+                    keyEl.textContent = displayKey;
                     keyEl.onclick = function() { insertCharacter(key); };
                     container.appendChild(keyEl);
                 });
@@ -1312,13 +1341,23 @@
             // Add space bar
             var spaceKey = document.createElement('div');
             spaceKey.className = 'key space';
+            spaceKey.id = 'vkey_space';
             spaceKey.textContent = 'Space';
             spaceKey.onclick = function() { insertCharacter(' '); };
             container.appendChild(spaceKey);
 
+            // Add caps lock button
+            var capsKey = document.createElement('div');
+            capsKey.className = 'key caps' + (capsLockActive ? ' active' : '');
+            capsKey.id = 'vkey_caps';
+            capsKey.textContent = 'CAPS';
+            capsKey.onclick = function() { toggleCapsLock(); };
+            container.appendChild(capsKey);
+
             // Add backspace
             var backspaceKey = document.createElement('div');
             backspaceKey.className = 'key backspace';
+            backspaceKey.id = 'vkey_backspace';
             backspaceKey.textContent = '← Backspace';
             backspaceKey.onclick = function() { deleteCharacter(); };
             container.appendChild(backspaceKey);
@@ -1331,16 +1370,26 @@
             container.appendChild(closeKey);
         }
 
+        function toggleCapsLock() {
+            capsLockActive = !capsLockActive;
+            renderKeyboard();
+        }
+
         function insertCharacter(char) {
             if (!currentInputField) return;
+
+            var charToInsert = char;
+            if (capsLockActive && /^[a-z]$/.test(char)) {
+                charToInsert = char.toUpperCase();
+            }
 
             var start = currentInputField.selectionStart;
             var end = currentInputField.selectionEnd;
             var text = currentInputField.value;
-            var newText = text.substring(0, start) + char + text.substring(end);
+            var newText = text.substring(0, start) + charToInsert + text.substring(end);
 
             currentInputField.value = newText;
-            currentInputField.selectionStart = currentInputField.selectionEnd = start + char.length;
+            currentInputField.selectionStart = currentInputField.selectionEnd = start + charToInsert.length;
             currentInputField.focus();
 
             // Trigger input event for any listeners
@@ -1380,12 +1429,94 @@
             }
         });
 
-        // Close keyboard with Escape key
+        // Physical keyboard binding
         document.addEventListener('keydown', function(e) {
+            // Handle Escape to close keyboard
             if (e.key === 'Escape') {
                 var modal = document.getElementById('keyboardModal');
                 if (modal && modal.classList.contains('flex')) {
                     closeKeyboard();
+                }
+                return;
+            }
+
+            // Only process keyboard input when keyboard modal is open and an input field is active
+            if (!currentInputField || !document.getElementById('keyboardModal').classList.contains('flex')) {
+                return;
+            }
+
+            e.preventDefault();
+
+            var key = e.key.toLowerCase();
+            var vkey = null;
+
+            // Handle special keys
+            if (e.key === ' ') {
+                insertCharacter(' ');
+                highlightVirtualKey('space');
+                return;
+            }
+
+            if (e.key === 'Backspace') {
+                deleteCharacter();
+                highlightVirtualKey('backspace');
+                return;
+            }
+
+            if (e.key === 'CapsLock') {
+                toggleCapsLock();
+                highlightVirtualKey('caps');
+                return;
+            }
+
+            // Map physical key to virtual key
+            if (keyboardMap[key]) {
+                vkey = keyboardMap[key];
+                highlightVirtualKey(vkey);
+                insertCharacter(key);
+            }
+        });
+
+        // Highlight virtual key when physical key is pressed
+        function highlightVirtualKey(keyId) {
+            var keyEl = document.getElementById('vkey_' + keyId);
+            if (!keyEl) return;
+
+            keyEl.style.background = '#667eea';
+            keyEl.style.color = 'white';
+            keyEl.style.borderColor = '#667eea';
+
+            setTimeout(function() {
+                keyEl.style.background = '';
+                keyEl.style.color = '';
+                keyEl.style.borderColor = '';
+            }, 100);
+        }
+
+        // Auto-focus first input field after form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            // Find all add forms and attach submit handlers
+            var forms = document.querySelectorAll('form[method="post"]');
+            forms.forEach(function(form) {
+                form.addEventListener('submit', function() {
+                    // Focus the first input field after a short delay
+                    setTimeout(function() {
+                        var firstInput = form.querySelector('input:not([type="hidden"]), textarea:not([style*="display: none"])');
+                        if (firstInput) {
+                            firstInput.focus();
+                        }
+                    }, 100);
+                });
+            });
+        });
+
+        // Also handle Enter key in add forms to submit and focus
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                // Ctrl+Enter to submit the form
+                var form = currentInputField ? currentInputField.closest('form') : null;
+                if (form) {
+                    form.submit();
                 }
             }
         });
