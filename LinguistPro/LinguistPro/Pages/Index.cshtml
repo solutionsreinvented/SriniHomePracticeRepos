@@ -144,10 +144,10 @@
                         </button>
                     </form>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="flex flex-wrap gap-4">
                         @foreach (var v in Model.Vocabulary)
                         {
-                            <div class="vocab-card" data-vocab-id="@v.Id" data-vocab-term="@v.Term" data-vocab-meaning="@v.Meaning" data-vocab-usage="@v.UsageExample" data-vocab-usage-meaning="@v.UsageExampleMeaning">
+                            <div class="vocab-card w-full sm:w-80 md:w-80 lg:w-80" data-vocab-id="@v.Id" data-vocab-term="@v.Term" data-vocab-meaning="@v.Meaning" data-vocab-usage="@v.UsageExample" data-vocab-usage-meaning="@v.UsageExampleMeaning">
                                 <div class="pl-3">
                                     <div class="term">@v.Term</div>
                                     <div class="meaning">@v.Meaning</div>
@@ -699,7 +699,7 @@
                         </button>
                     </form>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="flex flex-wrap gap-4">
                         @{
                             var itemsList = Model.Mode switch
                             {
@@ -711,7 +711,7 @@
                         }
                         @foreach (var item in itemsList)
                         {
-                            <div class="vocab-card" data-item-id="@item.Id" data-item-term="@item.Term" data-item-meaning="@item.Meaning" data-item-usage="@item.UsageExample" data-item-usage-meaning="@item.UsageExampleMeaning" data-item-type="@item.ItemType">
+                            <div class="vocab-card w-full sm:w-80 md:w-80 lg:w-80" data-item-id="@item.Id" data-item-term="@item.Term" data-item-meaning="@item.Meaning" data-item-usage="@item.UsageExample" data-item-usage-meaning="@item.UsageExampleMeaning" data-item-type="@item.ItemType">
                                 <div class="pl-3">
                                     <div class="term">@item.Term</div>
                                     <div class="meaning">@item.Meaning</div>

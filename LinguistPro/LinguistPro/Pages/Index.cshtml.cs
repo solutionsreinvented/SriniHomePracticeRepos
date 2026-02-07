@@ -151,12 +151,14 @@ namespace LinguistPro.Pages
             Numbers = await _db.LanguageItems
                 .Where(x => x.ItemType == "Number")
                 .ToListAsync();
-            // Try to sort numerically, fallback to alphabetical
-            Numbers = Numbers.OrderBy(x => 
+            // Sort by English number names order (zero, one, two, etc.)
+            var numberOrder = new[] { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+                                     "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen",
+                                     "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety", "hundred", "thousand", "million" };
+            Numbers = Numbers.OrderBy(n => 
             {
-                if (int.TryParse(x.Term, out int num))
-                    return (int.MaxValue - num, ""); // Reverse for numbers, then alphabetically
-                return (int.MaxValue, x.Term); // Non-numeric items at end
+                var index = Array.FindIndex(numberOrder, num => num.Equals(n.Meaning, StringComparison.OrdinalIgnoreCase));
+                return index >= 0 ? index : int.MaxValue;
             }).ToList();
 
             Days = await _db.LanguageItems
