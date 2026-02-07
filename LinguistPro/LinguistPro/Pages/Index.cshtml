@@ -35,6 +35,255 @@
         input, textarea, select {
             font-size: 13px;
         }
+
+        /* Sidebar styling */
+        aside {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        aside .p-4 {
+            border-bottom-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        aside nav a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 4px 0;
+        }
+
+        aside nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        @(Model.Mode == "Vocab" ? "aside nav a:nth-child(1)" : "aside nav a:nth-child(2)") {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Language selection styling */
+        select {
+            background-color: #4f46e5;
+            color: white;
+            border: 2px solid #4f46e5;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        select:hover {
+            background-color: #4338ca;
+            border-color: #4338ca;
+        }
+
+        select option {
+            background-color: white;
+            color: #1f2937;
+        }
+
+        /* Vocabulary card styling */
+        .vocab-card {
+            background: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vocab-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .vocab-card:hover {
+            box-shadow: 0 12px 16px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .vocab-card .term {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .vocab-card .meaning {
+            font-size: 13px;
+            color: #667eea;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .vocab-card .usage {
+            font-size: 12px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        /* Verb list styling */
+        .verb-item {
+            background: white;
+            border: none;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-left: 4px solid #667eea;
+        }
+
+        .verb-item:hover {
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.12);
+            transform: translateX(4px);
+        }
+
+        .verb-item .infinitive {
+            font-weight: 600;
+            color: #1f2937;
+            font-size: 15px;
+        }
+
+        .verb-item .verb-meaning {
+            font-size: 12px;
+            color: #667eea;
+            font-style: italic;
+            margin-top: 4px;
+        }
+
+        /* Modal styling */
+        .vocab-modal, .delete-modal, .verb-modal {
+            border-radius: 16px;
+            background: white;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-btn {
+            color: #9ca3af;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #1f2937;
+        }
+
+        /* Confirmation modal styling */
+        .delete-modal .title {
+            color: #ef4444;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .delete-modal .message {
+            color: #6b7280;
+            margin: 12px 0;
+        }
+
+        .delete-modal .btn-group {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .delete-modal .btn-cancel {
+            background: #e5e7eb;
+            color: #1f2937;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .delete-modal .btn-cancel:hover {
+            background: #d1d5db;
+        }
+
+        .delete-modal .btn-delete {
+            background: #ef4444;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .delete-modal .btn-delete:hover {
+            background: #dc2626;
+        }
+
+        /* Verb modal conjugation table */
+        .conjugation-table {
+            border-collapse: collapse;
+            width: 100%;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .conjugation-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .conjugation-table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .conjugation-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .conjugation-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .conjugation-table tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .conjugation-table .person-label {
+            font-weight: 600;
+            color: #4b5563;
+            font-size: 14px;
+        }
+
+        .conjugation-table .conjugation {
+            color: #667eea;
+            font-weight: 600;
+            font-style: italic;
+        }
     </style>
 </head>
 
@@ -44,17 +293,20 @@
         <!-- SIDEBAR -->
         <aside class="w-64 bg-white border-r">
             <div class="p-4 border-b text-indigo-600 font-semibold">
+                <svg class="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C6.5 6.253 2 10.998 2 17s4.5 10.747 10 10.747c5.5 0 10-4.998 10-10.747S17.5 6.253 12 6.253z"></path>
+                </svg>
                 Linguist Pro
             </div>
 
             <nav class="p-3 text-sm space-y-1">
                 <a asp-route-Mode="Vocab"
-                   class="block px-3 py-2 rounded @(Model.Mode == "Vocab" ? "bg-indigo-50" : "hover:bg-slate-100")">
-                    Vocabulary
+                   class="block px-4 py-3 rounded transition-all duration-300 @(Model.Mode == "Vocab" ? "bg-white bg-opacity-25 font-semibold" : "hover:bg-white hover:bg-opacity-15")">
+                    📚 Vocabulary
                 </a>
                 <a asp-route-Mode="Verbs"
-                   class="block px-3 py-2 rounded @(Model.Mode == "Verbs" ? "bg-indigo-50" : "hover:bg-slate-100")">
-                    Verbs
+                   class="block px-4 py-3 rounded transition-all duration-300 @(Model.Mode == "Verbs" ? "bg-white bg-opacity-25 font-semibold" : "hover:bg-white hover:bg-opacity-15")">
+                    ⚡ Verbs
                 </a>
             </nav>
         </aside>
@@ -63,21 +315,47 @@
         <main class="flex-1 flex flex-col">
 
             <!-- HEADER -->
-            <header class="h-14 bg-white border-b flex items-center justify-between px-4">
-                <form method="get">
-                    <select name="SelectedLanguage"
-                            onchange="this.form.submit()"
-                            class="border px-2 py-1 rounded">
-                        <option value="de" selected>German</option>
-                        <option value="fr">French</option>
-                        <option value="es">Spanish</option>
-                    </select>
-                </form>
+                <header class="h-16 bg-white border-b flex items-center justify-between px-6" style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);">
+                    <div class="text-sm font-semibold text-gray-700">
+                        <span style="color: #667eea;">TARGET LANGUAGE:</span>
+                        <form method="get" class="inline-block ml-3">
+                            <select name="SelectedLanguage"
+                                    onchange="this.form.submit()"
+                                    class="border-0 px-3 py-2 rounded font-semibold">
+                                @if (Model.SelectedLanguage == "de")
+                                {
+                                    <option value="de" selected>German</option>
+                                }
+                                else
+                                {
+                                    <option value="de">German</option>
+                                }
+                                @if (Model.SelectedLanguage == "fr")
+                                {
+                                    <option value="fr" selected>French</option>
+                                }
+                                else
+                                {
+                                    <option value="fr">French</option>
+                                }
+                                @if (Model.SelectedLanguage == "es")
+                                {
+                                    <option value="es" selected>Spanish</option>
+                                }
+                                else
+                                {
+                                    <option value="es">Spanish</option>
+                                }
+                            </select>
+                        </form>
+                    </div>
 
-                <div class="text-xs text-slate-500">
-                    Mastery @Model.GlobalMastery%
-                </div>
-            </header>
+                    <div class="text-sm font-semibold text-gray-700">
+                        <span style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                            CLOUD SYNC ACTIVE ✓
+                        </span>
+                    </div>
+                </header>
 
             <!-- CONTENT -->
             <div class="flex-1 overflow-y-auto p-4">
@@ -109,56 +387,70 @@
                         </button>
                     </form>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         @foreach (var v in Model.Vocabulary)
                         {
-                            <div class="bg-white border p-3 card relative" data-vocab-id="@v.Id" data-vocab-term="@v.Term" data-vocab-meaning="@v.Meaning" data-vocab-usage="@v.UsageExample">
-                                <div class="font-semibold">@v.Term</div>
-                                <div class="text-slate-500 italic text-sm">@v.Meaning</div>
-                                <div class="text-sm mt-1">@v.UsageExample</div>
+                            <div class="vocab-card" data-vocab-id="@v.Id" data-vocab-term="@v.Term" data-vocab-meaning="@v.Meaning" data-vocab-usage="@v.UsageExample">
+                                <div class="pl-3">
+                                    <div class="term">@v.Term</div>
+                                    <div class="meaning">@v.Meaning</div>
+                                    <div class="usage">@v.UsageExample</div>
+                                </div>
 
-                                <div class="absolute top-2 right-2 flex gap-2">
-                                    <button type="button" class="text-indigo-600 text-sm" onclick="openEditVocabFromBtn(event, this)">Edit</button>
-                                    <form method="post" asp-page-handler="DeleteVocabulary" class="inline" onsubmit="return confirm('Delete vocabulary item?')">
-                                        @Html.AntiForgeryToken()
-                                        <input type="hidden" name="EditVocabId" value="@v.Id" />
-                                        <button type="submit" class="text-red-600 text-sm">Delete</button>
-                                    </form>
+                                <div class="absolute top-3 right-3 flex gap-2 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                    <button type="button" class="text-indigo-600 text-sm font-semibold hover:text-indigo-700" onclick="openEditVocabFromBtn(event, this)">
+                                        ✏️
+                                    </button>
+                                    <button type="button" class="text-red-600 text-sm font-semibold hover:text-red-700" onclick="openDeleteVocabModal(event, this)">
+                                        🗑️
+                                    </button>
                                 </div>
                             </div>
                         }
                     </div>
 
                     <!-- Vocab Edit Modal -->
-                    <div id="vocabModal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-40">
-                        <div class="bg-white rounded-lg w-11/12 md:w-1/2 p-6 relative">
-                            <button onclick="closeVocabModal()" class="absolute top-3 right-3 text-slate-500">✕</button>
-                            <h2 class="text-2xl font-bold mb-4">Vocabulary</h2>
+                    <div id="vocabModal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-40 z-50">
+                        <div class="vocab-modal w-11/12 md:w-1/2 p-8 relative">
+                            <button onclick="closeVocabModal()" class="absolute top-4 right-4 close-btn">✕</button>
+                            <h2 class="text-3xl font-bold mb-6" style="color: #667eea;">Vocabulary</h2>
 
-                            <form method="post" asp-page-handler="EditVocabulary" class="space-y-2">
+                            <form method="post" asp-page-handler="EditVocabulary" class="space-y-4">
                                 @Html.AntiForgeryToken()
                                 <input type="hidden" id="editVocabId" name="EditVocabId" />
                                 <div>
-                                    <label class="text-sm">Term</label>
-                                    <input id="editVocabTerm" name="EditVocabTerm" class="w-full border px-2 py-1 rounded" />
+                                    <label class="text-sm font-semibold text-gray-700 block mb-2">Term</label>
+                                    <input id="editVocabTerm" name="EditVocabTerm" class="w-full border-2 border-gray-200 px-3 py-2 rounded-lg focus:outline-none focus:border-indigo-500 transition" />
                                 </div>
                                 <div>
-                                    <label class="text-sm">Meaning</label>
-                                    <input id="editVocabMeaning" name="EditVocabMeaning" class="w-full border px-2 py-1 rounded" />
+                                    <label class="text-sm font-semibold text-gray-700 block mb-2">Meaning</label>
+                                    <input id="editVocabMeaning" name="EditVocabMeaning" class="w-full border-2 border-gray-200 px-3 py-2 rounded-lg focus:outline-none focus:border-indigo-500 transition" />
                                 </div>
                                 <div>
-                                    <label class="text-sm">Usage</label>
-                                    <textarea id="editVocabUsage" name="EditVocabUsage" class="w-full border px-2 py-1 rounded"></textarea>
+                                    <label class="text-sm font-semibold text-gray-700 block mb-2">Usage</label>
+                                    <textarea id="editVocabUsage" name="EditVocabUsage" class="w-full border-2 border-gray-200 px-3 py-2 rounded-lg focus:outline-none focus:border-indigo-500 transition" rows="4"></textarea>
                                 </div>
-                                <div class="flex gap-2">
-                                    <button class="bg-indigo-600 text-white px-4 py-1 rounded text-sm">Save</button>
-                                    <button type="button" class="bg-red-600 text-white px-4 py-1 rounded text-sm" onclick="if(confirm('Delete vocabulary item?')) submitDelVocab()">Delete</button>
+                                <div class="flex gap-3 pt-4">
+                                    <button type="submit" class="flex-1 bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition">Save</button>
+                                    <button type="button" class="flex-1 bg-red-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-700 transition" onclick="openDeleteVocabModalFromForm(event)">Delete</button>
                                 </div>
                             </form>
                             <form id="delVocabForm" method="post" asp-page-handler="DeleteVocabulary" class="hidden">
                                 @Html.AntiForgeryToken()
                                 <input type="hidden" id="delVocabIdHidden" name="EditVocabId" />
                             </form>
+                        </div>
+                    </div>
+
+                    <!-- Delete Confirmation Modal for Vocabulary -->
+                    <div id="deleteVocabConfirmModal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-40 z-50">
+                        <div class="delete-modal w-11/12 md:w-96 p-6 relative">
+                            <h2 class="title">Delete Vocabulary Item?</h2>
+                            <p class="message">This action cannot be undone.</p>
+                            <div class="btn-group">
+                                <button type="button" class="btn-cancel" onclick="closeDeleteVocabModal()">Cancel</button>
+                                <button type="button" class="btn-delete" onclick="submitDelVocab()">Delete</button>
+                            </div>
                         </div>
                     </div>
                 }
@@ -193,13 +485,14 @@
                         </button>
                     </form>
 
-                    <div class="bg-white border rounded text-sm">
+                    <div class="space-y-2">
                         @foreach (var verb in Model.VerbList)
                         {
-                            <div class="p-3 border-b hover:bg-slate-50 cursor-pointer flex items-center justify-between" 
+                            <div class="verb-item" 
                                  onclick="openVerbModal(this)"
                                  data-infinitive="@verb.Infinitive"
                                  data-meaning="@verb.Meaning"
+                                 data-id="@verb.Id"
                                  data-s1="@verb.S1"
                                  data-s2inf="@verb.S2Inf"
                                  data-s2form="@verb.S2Form"
@@ -209,70 +502,70 @@
                                  data-p2form="@verb.P2Form"
                                  data-p3="@verb.P3">
                                 <div>
-                                    <div class="font-semibold">@verb.Infinitive</div>
-                                    <div class="text-slate-500 italic text-sm">@verb.Meaning</div>
+                                    <div class="infinitive">@verb.Infinitive</div>
+                                    <div class="verb-meaning">@verb.Meaning</div>
                                 </div>
 
-                                <div class="flex gap-2">
-                                    <button class="text-indigo-600 text-sm" onclick="openEditVerb(event, @verb.Id, '@(verb.Infinitive.Replace("'", "\'"))','@(verb.Meaning.Replace("'","\'"))','@(verb.S1.Replace("'","\'"))','@(verb.S2Inf.Replace("'","\'"))','@(verb.S2Form.Replace("'","\'"))','@(verb.S3.Replace("'","\'"))','@(verb.P1.Replace("'","\'"))','@(verb.P2Inf.Replace("'","\'"))','@(verb.P2Form.Replace("'","\'"))','@(verb.P3.Replace("'","\'"))')">Edit</button>
-                                    <form method="post" asp-page-handler="DeleteVerb" class="inline" onsubmit="return confirm('Delete verb?')">
-                                        @Html.AntiForgeryToken()
-                                        <input type="hidden" name="EditVerbId" value="@verb.Id" />
-                                        <button type="submit" class="text-red-600 text-sm">Delete</button>
-                                    </form>
+                                <div class="flex gap-3">
+                                    <button type="button" class="text-indigo-600 font-semibold hover:text-indigo-700 text-sm" onclick="openEditVerb(event, @verb.Id, '@(verb.Infinitive.Replace("'", "\'"))','@(verb.Meaning.Replace("'","\'"))','@(verb.S1.Replace("'","\'"))','@(verb.S2Inf.Replace("'","\'"))','@(verb.S2Form.Replace("'","\'"))','@(verb.S3.Replace("'","\'"))','@(verb.P1.Replace("'","\'"))','@(verb.P2Inf.Replace("'","\'"))','@(verb.P2Form.Replace("'","\'"))','@(verb.P3.Replace("'","\'"))')">
+                                        ✏️ Edit
+                                    </button>
+                                    <button type="button" class="text-red-600 font-semibold hover:text-red-700 text-sm" onclick="openDeleteVerbModal(event, @verb.Id)">
+                                        🗑️ Delete
+                                    </button>
                                 </div>
                             </div>
                         }
                     </div>
 
                     <!-- Modal for verb details -->
-                    <div id="verbModal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-40">
-                        <div class="bg-white rounded-lg w-11/12 md:w-3/4 lg:w-2/3 p-6 relative">
-                            <button onclick="closeVerbModal()" class="absolute top-3 right-3 text-slate-500">✕</button>
-                            <h2 id="modalTitle" class="text-2xl font-bold mb-4">Analysis: <span id="modalInfinitive" class="text-indigo-600"></span></h2>
+                    <div id="verbModal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-40 z-50">
+                        <div class="verb-modal w-11/12 md:w-3/4 lg:w-2/3 p-8 relative">
+                            <button onclick="closeVerbModal()" class="absolute top-4 right-4 close-btn">✕</button>
+                            <h2 class="text-3xl font-bold mb-6" style="color: #667eea;">Analysis: <span id="modalInfinitive" class="text-blue-600"></span></h2>
 
-                            <div class="grid md:grid-cols-2 gap-4">
+                            <div class="grid md:grid-cols-2 gap-6">
                                 <div>
-                                    <table class="w-full text-sm border rounded">
+                                    <table class="conjugation-table">
                                         <thead>
-                                            <tr class="bg-slate-50 text-slate-600">
-                                                <th class="p-3 text-left">Person</th>
-                                                <th class="p-3">Singular</th>
-                                                <th class="p-3">Plural</th>
+                                            <tr>
+                                                <th>Person</th>
+                                                <th>Singular</th>
+                                                <th>Plural</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="border-t">
-                                                <td class="p-3">First</td>
-                                                <td class="p-3 text-indigo-600 italic" id="c_s1"></td>
-                                                <td class="p-3" id="c_p1"></td>
+                                            <tr>
+                                                <td class="person-label">First</td>
+                                                <td class="conjugation" id="c_s1"></td>
+                                                <td class="conjugation" id="c_p1"></td>
                                             </tr>
-                                            <tr class="border-t">
-                                                <td class="p-3">Second (Informal)</td>
-                                                <td class="p-3 text-indigo-600 italic" id="c_s2inf"></td>
-                                                <td class="p-3" id="c_p2inf"></td>
+                                            <tr>
+                                                <td class="person-label">Second (Informal)</td>
+                                                <td class="conjugation" id="c_s2inf"></td>
+                                                <td class="conjugation" id="c_p2inf"></td>
                                             </tr>
-                                            <tr class="border-t">
-                                                <td class="p-3">Second (Formal)</td>
-                                                <td class="p-3 text-indigo-600 italic" id="c_s2form"></td>
-                                                <td class="p-3" id="c_p2form"></td>
+                                            <tr>
+                                                <td class="person-label">Second (Formal)</td>
+                                                <td class="conjugation" id="c_s2form"></td>
+                                                <td class="conjugation" id="c_p2form"></td>
                                             </tr>
-                                            <tr class="border-t">
-                                                <td class="p-3">Third</td>
-                                                <td class="p-3 text-indigo-600 italic" id="c_s3"></td>
-                                                <td class="p-3" id="c_p3"></td>
+                                            <tr>
+                                                <td class="person-label">Third</td>
+                                                <td class="conjugation" id="c_s3"></td>
+                                                <td class="conjugation" id="c_p3"></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
 
                                 <div>
-                                    <div id="vocabCard" class="bg-slate-50 p-4 rounded">
-                                        <div class="font-semibold" id="v_term"></div>
-                                        <div class="italic text-slate-500" id="v_meaning"></div>
-                                        <div class="mt-2 text-sm" id="v_usage"></div>
+                                    <div id="vocabCard" class="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-lg border-l-4 border-indigo-600">
+                                        <div class="font-bold text-lg" id="v_term" style="color: #1f2937;"></div>
+                                        <div class="italic text-indigo-600 font-semibold text-sm mt-2" id="v_meaning"></div>
+                                        <div class="mt-4 text-sm text-gray-700 leading-relaxed" id="v_usage"></div>
                                     </div>
-                                    
+
                                     <!-- Verb edit form (hidden) -->
                                     <form id="verbEditForm" method="post" asp-page-handler="EditVerb" class="hidden">
                                         @Html.AntiForgeryToken()
@@ -289,9 +582,9 @@
                                         <input type="hidden" name="EditP3" />
                                     </form>
 
-                                    <div class="mt-4 flex gap-2 justify-end">
-                                        <button type="button" onclick="submitEditVerb()" class="btn-primary px-4 py-2 rounded">Save Verb</button>
-                                        <button type="button" onclick="if(confirm('Delete verb?')) submitDelVerb()" class="btn-danger px-4 py-2 rounded">Delete Verb</button>
+                                    <div class="mt-6 flex gap-3 justify-end">
+                                        <button type="button" onclick="submitEditVerb()" class="bg-indigo-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition">Save Verb</button>
+                                        <button type="button" onclick="openDeleteVerbModalFromEdit()" class="bg-red-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition">Delete Verb</button>
                                     </div>
 
                                     <form id="delVerbForm" method="post" asp-page-handler="DeleteVerb" class="hidden">
@@ -299,6 +592,18 @@
                                         <input type="hidden" id="delVerbIdHidden" name="EditVerbId" />
                                     </form>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delete Confirmation Modal for Verb -->
+                    <div id="deleteVerbConfirmModal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-40 z-50">
+                        <div class="delete-modal w-11/12 md:w-96 p-6 relative">
+                            <h2 class="title">Delete Verb?</h2>
+                            <p class="message">This action cannot be undone.</p>
+                            <div class="btn-group">
+                                <button type="button" class="btn-cancel" onclick="closeDeleteVerbModal()">Cancel</button>
+                                <button type="button" class="btn-delete" onclick="submitDelVerb()">Delete</button>
                             </div>
                         </div>
                     </div>
@@ -401,10 +706,39 @@
                             if (e.key === 'Escape') {
                                 var vm = document.getElementById('verbModal');
                                 var vcm = document.getElementById('vocabModal');
+                                var dvc = document.getElementById('deleteVocabConfirmModal');
+                                var dvb = document.getElementById('deleteVerbConfirmModal');
                                 if (vm && vm.classList.contains('flex')) closeVerbModal();
                                 if (vcm && vcm.classList.contains('flex')) closeVocabModal();
+                                if (dvc && dvc.classList.contains('flex')) closeDeleteVocabModal();
+                                if (dvb && dvb.classList.contains('flex')) closeDeleteVerbModal();
                             }
                         });
+
+                        // Vocabulary delete modal helpers
+                        function openDeleteVocabModal(ev, btn) {
+                            ev.stopPropagation();
+                            var card = btn.closest('[data-vocab-id]');
+                            if (!card) return;
+                            var id = card.dataset.vocabId;
+                            document.getElementById('delVocabIdHidden').value = id;
+                            var m = document.getElementById('deleteVocabConfirmModal');
+                            m.classList.remove('hidden');
+                            m.classList.add('flex');
+                        }
+
+                        function openDeleteVocabModalFromForm(ev) {
+                            ev.preventDefault();
+                            var m = document.getElementById('deleteVocabConfirmModal');
+                            m.classList.remove('hidden');
+                            m.classList.add('flex');
+                        }
+
+                        function closeDeleteVocabModal() {
+                            var m = document.getElementById('deleteVocabConfirmModal');
+                            m.classList.remove('flex');
+                            m.classList.add('hidden');
+                        }
 
                         // Vocabulary edit modal helpers
                         function openEditVocab(ev, id, term, meaning, usage) {
@@ -481,6 +815,30 @@
                             document.getElementById('delVocabForm').submit();
                         }
 
+                        // Verb delete modal helpers
+                        function openDeleteVerbModal(ev, verbId) {
+                            ev.stopPropagation();
+                            document.getElementById('delVerbIdHidden').value = verbId;
+                            var m = document.getElementById('deleteVerbConfirmModal');
+                            m.classList.remove('hidden');
+                            m.classList.add('flex');
+                        }
+
+                        function openDeleteVerbModalFromEdit() {
+                            var idInput = document.querySelector('#verbEditForm input[name="EditVerbId"]');
+                            var id = idInput ? idInput.value : '';
+                            document.getElementById('delVerbIdHidden').value = id;
+                            var m = document.getElementById('deleteVerbConfirmModal');
+                            m.classList.remove('hidden');
+                            m.classList.add('flex');
+                        }
+
+                        function closeDeleteVerbModal() {
+                            var m = document.getElementById('deleteVerbConfirmModal');
+                            m.classList.remove('flex');
+                            m.classList.add('hidden');
+                        }
+
                         function submitEditVerb() {
                             var form = document.getElementById('verbEditForm');
                             if (!form) return;
@@ -506,7 +864,7 @@
                         }
 
                         function submitDelVerb() {
-                            var idInput = document.querySelector('#verbEditForm input[name="EditVerbId"]');
+                            var idInput = document.querySelector('#delVerbIdHidden');
                             var id = idInput ? idInput.value : '';
                             document.getElementById('delVerbIdHidden').value = id;
                             document.getElementById('delVerbForm').submit();
