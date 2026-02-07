@@ -29,23 +29,23 @@
             </div>
 
             <nav class="p-3 text-sm space-y-1">
-                <a asp-route-Mode="Vocab"
+                <a asp-route-Mode="Vocab" asp-route-SelectedLanguage="@Model.SelectedLanguage"
                    class="block px-4 py-3 rounded transition-all duration-300 @(Model.Mode == "Vocab" ? "active" : "hover:bg-white hover:bg-opacity-15")">
                     📚 Vocabulary
                 </a>
-                <a asp-route-Mode="Verbs"
+                <a asp-route-Mode="Verbs" asp-route-SelectedLanguage="@Model.SelectedLanguage"
                    class="block px-4 py-3 rounded transition-all duration-300 @(Model.Mode == "Verbs" ? "active" : "hover:bg-white hover:bg-opacity-15")">
                     ⚡ Verbs
                 </a>
-                <a asp-route-Mode="Number"
+                <a asp-route-Mode="Number" asp-route-SelectedLanguage="@Model.SelectedLanguage"
                    class="block px-4 py-3 rounded transition-all duration-300 @(Model.Mode == "Number" ? "active" : "hover:bg-white hover:bg-opacity-15")">
                     🔢 Numbers
                 </a>
-                <a asp-route-Mode="Month"
+                <a asp-route-Mode="Month" asp-route-SelectedLanguage="@Model.SelectedLanguage"
                    class="block px-4 py-3 rounded transition-all duration-300 @(Model.Mode == "Month" ? "active" : "hover:bg-white hover:bg-opacity-15")">
                     📅 Months
                 </a>
-                <a asp-route-Mode="Day"
+                <a asp-route-Mode="Day" asp-route-SelectedLanguage="@Model.SelectedLanguage"
                    class="block px-4 py-3 rounded transition-all duration-300 @(Model.Mode == "Day" ? "active" : "hover:bg-white hover:bg-opacity-15")">
                     📆 Days
                 </a>
@@ -87,6 +87,14 @@
                                 {
                                     <option value="es">Spanish</option>
                                 }
+                                @if (Model.SelectedLanguage == "ru")
+                                {
+                                    <option value="ru" selected>Russian</option>
+                                }
+                                else
+                                {
+                                    <option value="ru">Russian</option>
+                                }
                             </select>
                         </form>
                     </div>
@@ -99,9 +107,9 @@
 
                     <div class="flex items-center gap-4">
                         <div class="text-sm text-gray-600">
-                            👤 <span class="font-semibold">@User.Identity?.Name</span>
+                            👤 <span class="font-semibold">@Model.CurrentUserFullName</span>
                         </div>
-                        <form method="post" action="/Account/Logout" class="inline">
+                        <form method="get" action="/Account/Logout" class="inline">
                             <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded font-semibold text-sm hover:bg-red-700 transition">
                                 Logout
                             </button>

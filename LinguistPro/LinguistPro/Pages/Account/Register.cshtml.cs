@@ -71,7 +71,8 @@ namespace LinguistPro.Pages.Account
                     { 
                         new { Code = "de", Name = "German" },
                         new { Code = "fr", Name = "French" },
-                        new { Code = "es", Name = "Spanish" }
+                        new { Code = "es", Name = "Spanish" },
+                        new { Code = "ru", Name = "Russian" }
                     };
 
                     foreach (var lang in defaultLanguages)

@@ -52,6 +52,8 @@ namespace LinguistPro.Pages
         [BindProperty(SupportsGet = true)]
         public string Mode { get; set; } = "Vocab";
 
+        public string CurrentUserFullName { get; set; } = string.Empty;
+
         public int GlobalMastery { get; private set; }
 
         public List<VocabularyItem> Vocabulary { get; private set; } = new List<VocabularyItem>();
@@ -175,6 +177,14 @@ namespace LinguistPro.Pages
         {
             // Get current user and their language profile
             var userId = await GetCurrentUserId();
+
+            // Get and set current user's full name
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                CurrentUserFullName = $"{user.FirstName} {user.LastName}".Trim();
+            }
+
             var langProfile = await GetCurrentLanguageProfile();
 
             // If user has no language profile for selected language, redirect to language selection
@@ -251,10 +261,10 @@ namespace LinguistPro.Pages
 
             if (item != null)
             {
-                item.Term = EditVocabTerm;
-                item.Meaning = EditVocabMeaning;
-                item.UsageExample = EditVocabUsage;
-                item.UsageExampleMeaning = EditVocabUsageMeaning;
+                item.Term = EditVocabTerm ?? string.Empty;
+                item.Meaning = EditVocabMeaning ?? string.Empty;
+                item.UsageExample = EditVocabUsage ?? string.Empty;
+                item.UsageExampleMeaning = EditVocabUsageMeaning ?? string.Empty;
                 await _db.SaveChangesAsync();
             }
 
@@ -465,7 +475,7 @@ namespace LinguistPro.Pages
 
             if (item != null)
             {
-                item.Term = EditItemTerm;
+                item.Term = EditItemTerm ?? string.Empty;
                 item.Meaning = EditItemMeaning ?? string.Empty;
                 item.UsageExample = EditItemUsage ?? string.Empty;
                 item.UsageExampleMeaning = EditItemUsageMeaning ?? string.Empty;
