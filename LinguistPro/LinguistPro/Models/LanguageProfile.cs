@@ -44,6 +44,10 @@ namespace LinguistPro.Models
 
         public ICollection<LanguageItem> LanguageItems { get; set; } = new List<LanguageItem>();
 
+        public LearningStreak? LearningStreak { get; set; }
+
+        public ICollection<DailyLearningLog> DailyLearningLogs { get; set; } = new List<DailyLearningLog>();
+
         public override string ToString()
         {
             return $"{LanguageName} (User: {UserId})";

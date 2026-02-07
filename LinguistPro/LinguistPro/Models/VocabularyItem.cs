@@ -22,8 +22,9 @@ namespace LinguistPro.Models
         public int Mastery { get; set; } = 0;
         public DateTime LastReviewed { get; set; } = DateTime.UtcNow;
 
-        // Navigation property
+        // Navigation properties
         public LanguageProfile? LanguageProfile { get; set; }
+        public ReviewSchedule? ReviewSchedule { get; set; }
 
         public override string ToString()
         {

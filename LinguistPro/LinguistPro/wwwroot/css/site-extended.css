@@ -8,7 +8,7 @@
 .conj-highlight { color: #6d28d9; font-style: italic; }
 body { font-size: 14px; }
 .pronoun { font-size: 0.95rem; opacity: .6; margin-right: 4px; }
-input, textarea, select { font-size: 13px; }
+input, textarea, select:not(.custom-select) { font-size: 13px; }
 
 /* Sidebar styling */
 aside { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
@@ -17,11 +17,11 @@ aside nav a { color: rgba(255, 255, 255, 0.8); transition: all 0.3s ease; border
 aside nav a:hover { background: rgba(255, 255, 255, 0.2); color: white; }
 aside nav a.active { background: rgba(255, 255, 255, 0.25); color: white; font-weight: 600; }
 
-/* Language selection styling */
-select { background-color: white; color: #1f2937; border: 2px solid #4f46e5; border-radius: 8px; padding: 8px 12px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; }
-select:hover { background-color: #f3f4f6; border-color: #667eea; }
-select:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); }
-select option { background-color: white; color: #1f2937; }
+/* Language selection styling - excludes custom dropdowns */
+select:not(.custom-select) { background-color: white; color: #1f2937; border: 2px solid #4f46e5; border-radius: 8px; padding: 8px 12px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; }
+select:not(.custom-select):hover { background-color: #f3f4f6; border-color: #667eea; }
+select:not(.custom-select):focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); }
+select:not(.custom-select) option { background-color: white; color: #1f2937; }
 
 /* Vocabulary card */
 .vocab-card { background: white; border: none; border-radius: 12px; padding: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.07); transition: all 0.3s ease; position: relative; overflow: hidden; min-width: 280px; }

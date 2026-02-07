@@ -16,13 +16,15 @@ namespace LinguistPro.Pages
         private readonly DictionaryService _dictionary;
         private readonly WiktionaryVerbService _verbs;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly LearningStreakService _streakService;
 
-        public IndexModel(AppDbContext db, DictionaryService dictionary, WiktionaryVerbService verbs, UserManager<ApplicationUser> userManager)
+        public IndexModel(AppDbContext db, DictionaryService dictionary, WiktionaryVerbService verbs, UserManager<ApplicationUser> userManager, LearningStreakService streakService)
         {
             _db = db;
             _dictionary = dictionary;
             _verbs = verbs;
             _userManager = userManager;
+            _streakService = streakService;
         }
 
         private int? _currentUserId;
@@ -65,6 +67,9 @@ namespace LinguistPro.Pages
         };
 
         public int GlobalMastery { get; private set; }
+
+        // Learning streak data
+        public StreakStatistics? CurrentStreakStats { get; private set; }
 
         public List<VocabularyItem> Vocabulary { get; private set; } = new List<VocabularyItem>();
         public List<VerbEntry> VerbList { get; private set; } = new List<VerbEntry>();
@@ -228,6 +233,12 @@ namespace LinguistPro.Pages
             }
 
             var langProfileId = langProfile?.LanguageProfileId;
+
+            // Load learning streak for current language
+            if (langProfileId.HasValue)
+            {
+                CurrentStreakStats = await _streakService.GetStreakStatisticsAsync(langProfileId.Value);
+            }
 
             // Load vocabulary for current user's language profile
             Vocabulary = await _db.Vocabulary

@@ -3,6 +3,7 @@ using System;
 using LinguistPro.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LinguistPro.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260207172342_AddLearningStreakAndDailyLogs")]
+    partial class AddLearningStreakAndDailyLogs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
@@ -270,52 +273,6 @@ namespace LinguistPro.Migrations
                         .IsUnique();
 
                     b.ToTable("LearningStreaks");
-                });
-
-            modelBuilder.Entity("LinguistPro.Models.ReviewSchedule", b =>
-                {
-                    b.Property<int>("ScheduleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CorrectCount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("DateAdded")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("IncorrectCount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("LanguageItemId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("LastReviewedDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("LeitnerBox")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("NextReviewDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("VocabularyItemId")
-                        .IsRequired()
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("ScheduleId");
-
-                    b.HasIndex("LanguageItemId")
-                        .IsUnique();
-
-                    b.HasIndex("LeitnerBox");
-
-                    b.HasIndex("NextReviewDate");
-
-                    b.HasIndex("VocabularyItemId")
-                        .IsUnique();
-
-                    b.ToTable("ReviewSchedules");
                 });
 
             modelBuilder.Entity("LinguistPro.Models.UserProfile", b =>
@@ -634,24 +591,6 @@ namespace LinguistPro.Migrations
                     b.Navigation("LanguageProfile");
                 });
 
-            modelBuilder.Entity("LinguistPro.Models.ReviewSchedule", b =>
-                {
-                    b.HasOne("LinguistPro.Models.LanguageItem", "LanguageItem")
-                        .WithOne("ReviewSchedule")
-                        .HasForeignKey("LinguistPro.Models.ReviewSchedule", "LanguageItemId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("LinguistPro.Models.VocabularyItem", "VocabularyItem")
-                        .WithOne("ReviewSchedule")
-                        .HasForeignKey("LinguistPro.Models.ReviewSchedule", "VocabularyItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LanguageItem");
-
-                    b.Navigation("VocabularyItem");
-                });
-
             modelBuilder.Entity("LinguistPro.Models.UserProfile", b =>
                 {
                     b.HasOne("LinguistPro.Models.ApplicationUser", null)
@@ -732,11 +671,6 @@ namespace LinguistPro.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("LinguistPro.Models.LanguageItem", b =>
-                {
-                    b.Navigation("ReviewSchedule");
-                });
-
             modelBuilder.Entity("LinguistPro.Models.LanguageProfile", b =>
                 {
                     b.Navigation("DailyLearningLogs");
@@ -753,11 +687,6 @@ namespace LinguistPro.Migrations
             modelBuilder.Entity("LinguistPro.Models.UserProfile", b =>
                 {
                     b.Navigation("LanguageProfiles");
-                });
-
-            modelBuilder.Entity("LinguistPro.Models.VocabularyItem", b =>
-                {
-                    b.Navigation("ReviewSchedule");
                 });
 #pragma warning restore 612, 618
         }

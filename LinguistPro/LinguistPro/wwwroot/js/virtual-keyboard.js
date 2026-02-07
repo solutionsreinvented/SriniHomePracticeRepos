@@ -3,6 +3,15 @@ var selectedLanguage = 'de';
 var capsLockActive = false;
 var shiftKeyActive = false;
 
+// Language flag mapping
+var languageFlags = {
+    'de': '🇩🇪',
+    'fr': '🇫🇷',
+    'es': '🇪🇸',
+    'ru': '🇷🇺',
+    'ko': '🇰🇷'
+};
+
 // Keyboard layouts for different languages - WITH NUMBERS AND SYMBOLS
 var keyboardLayouts = {
     de: {
@@ -813,4 +822,52 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 100);
         });
     });
+
+    // Initialize keyboard language selector with proper options
+    setTimeout(function() {
+        initializeKeyboardLanguageSelector();
+    }, 500);
 });
+
+function initializeKeyboardLanguageSelector() {
+    var selector = document.getElementById('keyboardLangSelector');
+    if (!selector) return;
+
+    // Clear existing options
+    selector.innerHTML = '';
+
+    // Add "Target Language" option with actual language name and flag
+    var targetOption = document.createElement('option');
+    targetOption.value = 'target';
+    var languageName = keyboardLayouts[selectedLanguage]?.name || 'German';
+    var languageFlag = languageFlags[selectedLanguage] || '🌍';
+    targetOption.textContent = languageFlag + ' ' + languageName;
+    targetOption.dataset.icon = languageFlag;
+    targetOption.selected = true;
+    selector.appendChild(targetOption);
+
+    // Add "English" option
+    var englishOption = document.createElement('option');
+    englishOption.value = 'english';
+    englishOption.textContent = '🇺🇸 English';
+    englishOption.dataset.icon = '🇺🇸';
+    selector.appendChild(englishOption);
+
+    // Reinitialize custom dropdown for the selector if it exists
+    if (window.CustomDropdown && selector.classList.contains('custom-select')) {
+        // Destroy old instance if exists
+        if (selector.dataset.customDropdownInit) {
+            var oldWrapper = selector.closest('.custom-select-wrapper');
+            if (oldWrapper && oldWrapper.querySelector('.custom-select-button')) {
+                oldWrapper.querySelector('.custom-select-button').remove();
+            }
+            if (oldWrapper && oldWrapper.querySelector('.custom-select-dropdown')) {
+                oldWrapper.querySelector('.custom-select-dropdown').remove();
+            }
+            selector.dataset.customDropdownInit = '';
+        }
+        // Create new instance
+        new window.CustomDropdown(selector);
+        selector.dataset.customDropdownInit = '1';
+    }
+}
