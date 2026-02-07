@@ -11,6 +11,7 @@
     <meta charset="utf-8" />
     <title>Linguist Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="~/css/virtual-keyboard.css" />
     <style>
         /* Custom polished styling inspired by modern UI patterns */
         .modal-overlay { background: rgba(15, 23, 42, 0.6); }
@@ -291,120 +292,6 @@
             font-weight: 600;
             font-style: italic;
         }
-
-        /* On-screen keyboard styling */
-        .keyboard-icon {
-            cursor: pointer;
-            color: #667eea;
-            font-size: 18px;
-            transition: color 0.2s;
-            padding: 8px;
-            border-radius: 4px;
-        }
-
-        .keyboard-icon:hover {
-            color: #764ba2;
-            background: rgba(102, 126, 234, 0.1);
-        }
-
-        .keyboard-container {
-            position: absolute;
-            right: 0;
-        }
-
-        .keyboard-modal {
-            background: white;
-            border-radius: 12px;
-            padding: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            max-width: 700px;
-        }
-
-        .keyboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .keyboard-selector {
-            padding: 6px 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 12px;
-            cursor: pointer;
-            background: white;
-        }
-
-        .keyboard-keys {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            justify-content: center;
-        }
-
-        .key {
-            min-width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f3f4f6;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 500;
-            user-select: none;
-            transition: all 0.1s;
-        }
-
-        .key:hover {
-            background: #e5e7eb;
-            transform: scale(1.05);
-        }
-
-        .key:active {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-
-        .key.space {
-            min-width: 200px;
-        }
-
-        .key.backspace {
-            min-width: 60px;
-            padding: 0 12px;
-            font-size: 11px;
-        }
-
-        .key.caps {
-            min-width: 50px;
-            padding: 0 8px;
-            font-size: 11px;
-        }
-
-        .key.caps.active {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-
-        .key.close {
-            background: #ef4444;
-            color: white;
-            border-color: #ef4444;
-            min-width: 50px;
-        }
-
-        .key.close:hover {
-            background: #dc2626;
-            border-color: #dc2626;
-        }
     </style>
 </head>
 
@@ -503,12 +390,12 @@
                             <div class="relative flex-1">
                                 <input name="ManualTerm" placeholder="Word"
                                        class="border px-2 py-1 rounded w-full" />
-                                <span class="keyboard-icon absolute right-2 top-1/2 -translate-y-1/2" onclick="openKeyboard(event, this)" title="Virtual Keyboard">⌨️</span>
+                                <span class="keyboard-icon" data-tooltip="Virtual Keyboard (Alt+K)" onclick="openKeyboard(event, this)" title="Virtual Keyboard">⌨️</span>
                             </div>
                             <div class="relative flex-1">
                                 <input name="ManualMeaning" placeholder="Meaning"
                                        class="border px-2 py-1 rounded w-full" />
-                                <span class="keyboard-icon absolute right-2 top-1/2 -translate-y-1/2" onclick="openKeyboard(event, this)" title="Virtual Keyboard">⌨️</span>
+                                <span class="keyboard-icon" data-tooltip="Virtual Keyboard (Alt+K)" onclick="openKeyboard(event, this)" title="Virtual Keyboard">⌨️</span>
                             </div>
                         </div>
 
@@ -517,13 +404,13 @@
                                 <textarea name="ManualUsage"
                                       placeholder="Usage example (target language)"
                                       class="border px-2 py-1 rounded w-full h-16"></textarea>
-                                <span class="keyboard-icon absolute right-2 top-2" onclick="openKeyboard(event, this)" title="Virtual Keyboard">⌨️</span>
+                                <span class="keyboard-icon" data-tooltip="Virtual Keyboard (Alt+K)" onclick="openKeyboard(event, this)" title="Virtual Keyboard">⌨️</span>
                             </div>
                             <div class="relative flex-1">
                                 <textarea name="ManualUsageMeaning"
                                       placeholder="Usage example meaning (English)"
                                       class="border px-2 py-1 rounded w-full h-16"></textarea>
-                                <span class="keyboard-icon absolute right-2 top-2" onclick="openKeyboard(event, this)" title="Virtual Keyboard">⌨️</span>
+                                <span class="keyboard-icon" data-tooltip="Virtual Keyboard (Alt+K)" onclick="openKeyboard(event, this)" title="Virtual Keyboard">⌨️</span>
                             </div>
                         </div>
 
@@ -1039,12 +926,12 @@
                             <div class="relative flex-1">
                                 <input name="ManualItemTerm" placeholder="Term"
                                        class="border px-2 py-1 rounded w-full" />
-                                <span class="keyboard-icon absolute right-2 top-1/2 -translate-y-1/2" onclick="openKeyboard(event, this)" title="Virtual Keyboard">⌨️</span>
+                                <span class="keyboard-icon" data-tooltip="Virtual Keyboard (Alt+K)" onclick="openKeyboard(event, this)" title="Virtual Keyboard">⌨️</span>
                             </div>
                             <div class="relative flex-1">
                                 <input name="ManualItemMeaning" placeholder="Meaning"
                                        class="border px-2 py-1 rounded w-full" />
-                                <span class="keyboard-icon absolute right-2 top-1/2 -translate-y-1/2" onclick="openKeyboard(event, this)" title="Virtual Keyboard">⌨️</span>
+                                <span class="keyboard-icon" data-tooltip="Virtual Keyboard (Alt+K)" onclick="openKeyboard(event, this)" title="Virtual Keyboard">⌨️</span>
                             </div>
                         </div>
 
@@ -1053,13 +940,13 @@
                                 <textarea name="ManualItemUsage"
                                       placeholder="Usage example (target language)"
                                       class="border px-2 py-1 rounded w-full h-16"></textarea>
-                                <span class="keyboard-icon absolute right-2 top-2" onclick="openKeyboard(event, this)" title="Virtual Keyboard">⌨️</span>
+                                <span class="keyboard-icon" data-tooltip="Virtual Keyboard (Alt+K)" onclick="openKeyboard(event, this)" title="Virtual Keyboard">⌨️</span>
                             </div>
                             <div class="relative flex-1">
                                 <textarea name="ManualItemUsageMeaning"
                                       placeholder="Usage example meaning (English)"
                                       class="border px-2 py-1 rounded w-full h-16"></textarea>
-                                <span class="keyboard-icon absolute right-2 top-2" onclick="openKeyboard(event, this)" title="Virtual Keyboard">⌨️</span>
+                                <span class="keyboard-icon" data-tooltip="Virtual Keyboard (Alt+K)" onclick="openKeyboard(event, this)" title="Virtual Keyboard">⌨️</span>
                             </div>
                         </div>
 
@@ -1237,290 +1124,10 @@
     </div>
 
     <script>
-        var currentInputField = null;
-        var selectedLanguage = '@Model.SelectedLanguage';
-        var capsLockActive = false;
-
-        // Keyboard layouts for different languages
-        var keyboardLayouts = {
-            de: {
-                name: 'German',
-                rows: [
-                    ['q', 'w', 'e', 'r', 't', 'z', 'u', 'i', 'o', 'p', 'ü'],
-                    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ö', 'ä'],
-                    ['y', 'x', 'c', 'v', 'b', 'n', 'm', 'ß']
-                ]
-            },
-            fr: {
-                name: 'French',
-                rows: [
-                    ['a', 'z', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-                    ['q', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm'],
-                    ['w', 'x', 'c', 'v', 'b', 'n', 'à', 'é', 'è', 'ê']
-                ]
-            },
-            es: {
-                name: 'Spanish',
-                rows: [
-                    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-                    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ñ'],
-                    ['z', 'x', 'c', 'v', 'b', 'n', 'm', 'á', 'é', 'í', 'ó', 'ú']
-                ]
-            },
-            english: {
-                name: 'English',
-                rows: [
-                    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-                    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-                    ['z', 'x', 'c', 'v', 'b', 'n', 'm']
-                ]
-            }
-        };
-
-        // Physical keyboard to virtual key mapping
-        var keyboardMap = {
-            'q': 'q', 'w': 'w', 'e': 'e', 'r': 'r', 't': 't', 'z': 'z', 'u': 'u', 'i': 'i', 'o': 'o', 'p': 'p',
-            'a': 'a', 's': 's', 'd': 'd', 'f': 'f', 'g': 'g', 'h': 'h', 'j': 'j', 'k': 'k', 'l': 'l',
-            'y': 'y', 'x': 'x', 'c': 'c', 'v': 'v', 'b': 'b', 'n': 'n', 'm': 'm',
-            ' ': 'space',
-            'Backspace': 'backspace',
-            'CapsLock': 'caps'
-        };
-
-        function openKeyboard(ev, element) {
-            ev.stopPropagation();
-            // Find the input field associated with this keyboard icon
-            var parent = element.closest('div');
-            currentInputField = parent.querySelector('input, textarea');
-
-            if (!currentInputField) return;
-
-            // Set default keyboard language
-            var selector = document.getElementById('keyboardLangSelector');
-            selector.value = 'target';
-            capsLockActive = false;
-
-            renderKeyboard();
-            var modal = document.getElementById('keyboardModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            currentInputField.focus();
-        }
-
-        function closeKeyboard() {
-            var modal = document.getElementById('keyboardModal');
-            modal.classList.remove('flex');
-            modal.classList.add('hidden');
-            currentInputField = null;
-        }
-
-        function renderKeyboard() {
-            var selector = document.getElementById('keyboardLangSelector');
-            var mode = selector.value;
-            var lang = mode === 'target' ? (selectedLanguage || 'de') : 'english';
-            var layout = keyboardLayouts[lang];
-
-            if (!layout) layout = keyboardLayouts['de'];
-
-            var container = document.getElementById('keyboardKeys');
-            container.innerHTML = '';
-
-            // Render each row
-            layout.rows.forEach(function(row) {
-                row.forEach(function(key) {
-                    var keyEl = document.createElement('div');
-                    keyEl.className = 'key';
-                    keyEl.id = 'vkey_' + key;
-                    var displayKey = capsLockActive ? key.toUpperCase() : key;
-                    keyEl.textContent = displayKey;
-                    keyEl.onclick = function() { insertCharacter(key); };
-                    container.appendChild(keyEl);
-                });
-            });
-
-            // Add space bar
-            var spaceKey = document.createElement('div');
-            spaceKey.className = 'key space';
-            spaceKey.id = 'vkey_space';
-            spaceKey.textContent = 'Space';
-            spaceKey.onclick = function() { insertCharacter(' '); };
-            container.appendChild(spaceKey);
-
-            // Add caps lock button
-            var capsKey = document.createElement('div');
-            capsKey.className = 'key caps' + (capsLockActive ? ' active' : '');
-            capsKey.id = 'vkey_caps';
-            capsKey.textContent = 'CAPS';
-            capsKey.onclick = function() { toggleCapsLock(); };
-            container.appendChild(capsKey);
-
-            // Add backspace
-            var backspaceKey = document.createElement('div');
-            backspaceKey.className = 'key backspace';
-            backspaceKey.id = 'vkey_backspace';
-            backspaceKey.textContent = '← Backspace';
-            backspaceKey.onclick = function() { deleteCharacter(); };
-            container.appendChild(backspaceKey);
-
-            // Add close button
-            var closeKey = document.createElement('div');
-            closeKey.className = 'key close';
-            closeKey.textContent = 'Close';
-            closeKey.onclick = function() { closeKeyboard(); };
-            container.appendChild(closeKey);
-        }
-
-        function toggleCapsLock() {
-            capsLockActive = !capsLockActive;
-            renderKeyboard();
-        }
-
-        function insertCharacter(char) {
-            if (!currentInputField) return;
-
-            var charToInsert = char;
-            if (capsLockActive && /^[a-z]$/.test(char)) {
-                charToInsert = char.toUpperCase();
-            }
-
-            var start = currentInputField.selectionStart;
-            var end = currentInputField.selectionEnd;
-            var text = currentInputField.value;
-            var newText = text.substring(0, start) + charToInsert + text.substring(end);
-
-            currentInputField.value = newText;
-            currentInputField.selectionStart = currentInputField.selectionEnd = start + charToInsert.length;
-            currentInputField.focus();
-
-            // Trigger input event for any listeners
-            var event = new Event('input', { bubbles: true });
-            currentInputField.dispatchEvent(event);
-        }
-
-        function deleteCharacter() {
-            if (!currentInputField) return;
-
-            var start = currentInputField.selectionStart;
-            var end = currentInputField.selectionEnd;
-            var text = currentInputField.value;
-
-            if (start === end && start > 0) {
-                var newText = text.substring(0, start - 1) + text.substring(start);
-                currentInputField.value = newText;
-                currentInputField.selectionStart = currentInputField.selectionEnd = start - 1;
-            } else if (start !== end) {
-                var newText = text.substring(0, start) + text.substring(end);
-                currentInputField.value = newText;
-                currentInputField.selectionStart = currentInputField.selectionEnd = start;
-            }
-
-            currentInputField.focus();
-
-            // Trigger input event
-            var event = new Event('input', { bubbles: true });
-            currentInputField.dispatchEvent(event);
-        }
-
-        // Handle keyboard language selector change
-        document.addEventListener('DOMContentLoaded', function() {
-            var selector = document.getElementById('keyboardLangSelector');
-            if (selector) {
-                selector.addEventListener('change', renderKeyboard);
-            }
-        });
-
-        // Physical keyboard binding
-        document.addEventListener('keydown', function(e) {
-            // Handle Escape to close keyboard
-            if (e.key === 'Escape') {
-                var modal = document.getElementById('keyboardModal');
-                if (modal && modal.classList.contains('flex')) {
-                    closeKeyboard();
-                }
-                return;
-            }
-
-            // Only process keyboard input when keyboard modal is open and an input field is active
-            if (!currentInputField || !document.getElementById('keyboardModal').classList.contains('flex')) {
-                return;
-            }
-
-            e.preventDefault();
-
-            var key = e.key.toLowerCase();
-            var vkey = null;
-
-            // Handle special keys
-            if (e.key === ' ') {
-                insertCharacter(' ');
-                highlightVirtualKey('space');
-                return;
-            }
-
-            if (e.key === 'Backspace') {
-                deleteCharacter();
-                highlightVirtualKey('backspace');
-                return;
-            }
-
-            if (e.key === 'CapsLock') {
-                toggleCapsLock();
-                highlightVirtualKey('caps');
-                return;
-            }
-
-            // Map physical key to virtual key
-            if (keyboardMap[key]) {
-                vkey = keyboardMap[key];
-                highlightVirtualKey(vkey);
-                insertCharacter(key);
-            }
-        });
-
-        // Highlight virtual key when physical key is pressed
-        function highlightVirtualKey(keyId) {
-            var keyEl = document.getElementById('vkey_' + keyId);
-            if (!keyEl) return;
-
-            keyEl.style.background = '#667eea';
-            keyEl.style.color = 'white';
-            keyEl.style.borderColor = '#667eea';
-
-            setTimeout(function() {
-                keyEl.style.background = '';
-                keyEl.style.color = '';
-                keyEl.style.borderColor = '';
-            }, 100);
-        }
-
-        // Auto-focus first input field after form submission
-        document.addEventListener('DOMContentLoaded', function() {
-            // Find all add forms and attach submit handlers
-            var forms = document.querySelectorAll('form[method="post"]');
-            forms.forEach(function(form) {
-                form.addEventListener('submit', function() {
-                    // Focus the first input field after a short delay
-                    setTimeout(function() {
-                        var firstInput = form.querySelector('input:not([type="hidden"]), textarea:not([style*="display: none"])');
-                        if (firstInput) {
-                            firstInput.focus();
-                        }
-                    }, 100);
-                });
-            });
-        });
-
-        // Also handle Enter key in add forms to submit and focus
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && e.ctrlKey) {
-                // Ctrl+Enter to submit the form
-                var form = currentInputField ? currentInputField.closest('form') : null;
-                if (form) {
-                    form.submit();
-                }
-            }
-        });
+        // Set the selected language for the keyboard
+        selectedLanguage = '@Model.SelectedLanguage';
     </script>
+    <script src="~/js/virtual-keyboard.js"></script>
 
 </body>
 </html>

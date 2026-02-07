@@ -1,0 +1,234 @@
+/* On-screen keyboard styling */
+.keyboard-icon {
+    cursor: pointer;
+    color: #667eea;
+    font-size: 18px;
+    transition: color 0.2s;
+    padding: 6px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.keyboard-icon:hover {
+    color: #764ba2;
+}
+
+.keyboard-icon::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2937;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+    z-index: 40;
+    pointer-events: none;
+}
+
+.keyboard-icon:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.keyboard-container {
+    position: absolute;
+    right: 0;
+}
+
+.keyboard-modal {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 900px;
+}
+
+.keyboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.keyboard-selector {
+    padding: 6px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    background: white;
+}
+
+.keyboard-tips {
+    background: #f0f4ff;
+    border-left: 3px solid #667eea;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    font-size: 11px;
+    color: #4b5563;
+    max-height: 60px;
+    overflow-y: auto;
+}
+
+.keyboard-tips-title {
+    font-weight: 600;
+    color: #667eea;
+    margin-bottom: 4px;
+}
+
+.keyboard-tips-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+}
+
+.keyboard-tip-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.keyboard-tip-key {
+    background: #e5e7eb;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-weight: 600;
+    font-size: 10px;
+    min-width: 20px;
+    text-align: center;
+}
+
+.keyboard-keys {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+}
+
+.key {
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    user-select: none;
+    transition: all 0.1s;
+}
+
+.key:hover {
+    background: #e5e7eb;
+    transform: scale(1.05);
+}
+
+.key:active {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+.key.space {
+    min-width: 300px;
+}
+
+.key.backspace {
+    min-width: 70px;
+    padding: 0 10px;
+    font-size: 11px;
+}
+
+.key.caps {
+    min-width: 60px;
+    padding: 0 8px;
+    font-size: 11px;
+}
+
+.key.caps.active {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+.key.shift {
+    min-width: 60px;
+    padding: 0 8px;
+    font-size: 11px;
+}
+
+.key.shift.active {
+    background: #764ba2;
+    color: white;
+    border-color: #764ba2;
+}
+
+.key.tab {
+    min-width: 60px;
+    padding: 0 8px;
+    font-size: 11px;
+}
+
+.key.enter {
+    min-width: 60px;
+    padding: 0 8px;
+    font-size: 11px;
+}
+
+.key.close {
+    background: #ef4444;
+    color: white;
+    border-color: #ef4444;
+    min-width: 60px;
+}
+
+.key.close:hover {
+    background: #dc2626;
+    border-color: #dc2626;
+}
+
+.key-small {
+    min-width: 28px;
+    height: 28px;
+    font-size: 11px;
+}
+
+.keyboard-info {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #e5e7eb;
+    font-size: 11px;
+    color: #6b7280;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.keyboard-info-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.keyboard-info-key {
+    background: #e5e7eb;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-weight: 600;
+    font-size: 10px;
+}
