@@ -1,0 +1,104 @@
+<!-- Pronunciation Guide Component -->
+@model LinguistPro.Models.PronunciationData
+
+<link rel="stylesheet" href="~/css/pronunciation-guide.css" />
+
+<div class="pronunciation-guide">
+    <div class="pronunciation-header">
+        <h4 class="pronunciation-word">🎙️ @Model.Word</h4>
+    </div>
+
+    <div class="pronunciation-content">
+        <!-- IPA Section -->
+        <div class="pronunciation-section">
+            <label class="pronunciation-label">IPA Transcription</label>
+            <div class="pronunciation-ipa">
+                <code>@Model.IPA</code>
+                <button class="btn-copy-ipa" onclick="copyToClipboard('@Model.IPA')" title="Copy IPA">
+                    📋
+                </button>
+            </div>
+        </div>
+
+        <!-- Audio Playback -->
+        @if (!string.IsNullOrEmpty(Model.AudioUrl))
+        {
+            <div class="pronunciation-section">
+                <label class="pronunciation-label">Pronunciation Audio</label>
+                <div class="pronunciation-audio">
+                    <audio id="pronunciation-audio-@Model.PronunciationId" 
+                           src="@Model.AudioUrl" 
+                           controls 
+                           preload="none">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <button class="btn-play-audio" onclick="playPronunciation(@Model.PronunciationId)">
+                        ▶️ Play
+                    </button>
+                    <button class="btn-slow-audio" onclick="playPronunciationSlow(@Model.PronunciationId)">
+                        🐢 Slow
+                    </button>
+                    <button class="btn-fast-audio" onclick="playPronunciationFast(@Model.PronunciationId)">
+                        🐇 Fast
+                    </button>
+                </div>
+                <small class="pronunciation-info">Plays: @Model.PlayCount times</small>
+            </div>
+        }
+
+        <!-- Syllable Breakdown -->
+        @if (!string.IsNullOrEmpty(Model.SyllableBreakdown))
+        {
+            <div class="pronunciation-section">
+                <label class="pronunciation-label">Syllable Breakdown</label>
+                <div class="pronunciation-syllables">
+                    @foreach (var syllable in Model.SyllableBreakdown.Split('-'))
+                    {
+                        <span class="syllable-badge">@syllable</span>
+                    }
+                </div>
+            </div>
+        }
+
+        <!-- Pronunciation Tips -->
+        @if (!string.IsNullOrEmpty(Model.PronunciationNotes))
+        {
+            <div class="pronunciation-section">
+                <label class="pronunciation-label">💡 Pronunciation Tips</label>
+                <p class="pronunciation-notes">@Model.PronunciationNotes</p>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert('IPA copied to clipboard!');
+        });
+    }
+
+    function playPronunciation(id) {
+        const audio = document.getElementById('pronunciation-audio-' + id);
+        if (audio) {
+            audio.playbackRate = 1;
+            audio.play();
+        }
+    }
+
+    function playPronunciationSlow(id) {
+        const audio = document.getElementById('pronunciation-audio-' + id);
+        if (audio) {
+            audio.playbackRate = 0.75;
+            audio.play();
+        }
+    }
+
+    function playPronunciationFast(id) {
+        const audio = document.getElementById('pronunciation-audio-' + id);
+        if (audio) {
+            audio.playbackRate = 1.25;
+            audio.play();
+        }
+    }
+</script>

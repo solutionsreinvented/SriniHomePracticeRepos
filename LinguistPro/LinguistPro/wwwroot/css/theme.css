@@ -1,0 +1,239 @@
+/* Theme System - CSS Variables for Dynamic Theming */
+
+:root {
+    /* Light Mode (Default) */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f5;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --text-tertiary: #999999;
+    --border-color: #e8e8e8;
+    --shadow-light: rgba(0, 0, 0, 0.05);
+    --shadow-medium: rgba(0, 0, 0, 0.1);
+    --input-bg: #ffffff;
+    --input-border: #d0d0d0;
+    --accent-primary: #667eea;
+    --accent-secondary: #764ba2;
+}
+
+/* Dark Mode */
+html.theme-dark {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2a2a2a;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --text-tertiary: #999999;
+    --border-color: #404040;
+    --shadow-light: rgba(0, 0, 0, 0.3);
+    --shadow-medium: rgba(0, 0, 0, 0.5);
+    --input-bg: #2a2a2a;
+    --input-border: #404040;
+    --accent-primary: #7c8ff5;
+    --accent-secondary: #9d6bb5;
+}
+
+/* Font Size Classes */
+html.font-size-small {
+    font-size: 14px;
+}
+
+html.font-size-medium {
+    font-size: 16px;
+}
+
+html.font-size-large {
+    font-size: 18px;
+}
+
+/* Apply Theme Colors to Common Elements */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--bg-secondary) !important;
+    border-bottom-color: var(--border-color) !important;
+}
+
+.navbar-brand {
+    color: var(--text-primary) !important;
+}
+
+.nav-link {
+    color: var(--text-primary) !important;
+}
+
+.nav-link:hover {
+    color: var(--accent-primary) !important;
+}
+
+/* Cards and Containers */
+.card,
+.account-card,
+.stat-card,
+.language-item,
+.settings-form {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+/* Forms */
+.form-control,
+.form-input,
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+textarea,
+select {
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    border-color: var(--input-border);
+}
+
+.form-control:focus {
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    border-color: var(--accent-primary);
+}
+
+.form-control::placeholder {
+    color: var(--text-tertiary);
+}
+
+/* Buttons - Primary */
+.btn-primary,
+.btn.btn-primary {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    border-color: var(--accent-primary);
+}
+
+.btn-primary:hover,
+.btn.btn-primary:hover {
+    background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-primary) 100%);
+    border-color: var(--accent-secondary);
+}
+
+/* Text Colors */
+.text-dark {
+    color: var(--text-primary) !important;
+}
+
+.text-muted {
+    color: var(--text-secondary) !important;
+}
+
+.text-hint,
+.form-hint,
+small {
+    color: var(--text-tertiary);
+}
+
+/* Links */
+a {
+    color: var(--accent-primary);
+}
+
+a:hover {
+    color: var(--accent-secondary);
+}
+
+/* Alerts */
+.alert {
+    border-color: var(--border-color);
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.alert-error,
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+}
+
+/* Divider/HR */
+hr {
+    border-color: var(--border-color);
+}
+
+/* Tables */
+table {
+    color: var(--text-primary);
+}
+
+thead {
+    background-color: var(--bg-secondary);
+    border-bottom-color: var(--border-color);
+}
+
+tbody tr {
+    border-color: var(--border-color);
+}
+
+tbody tr:hover {
+    background-color: var(--bg-secondary);
+}
+
+/* Shadow Effects */
+.box-shadow {
+    box-shadow: 0 2px 8px var(--shadow-light) !important;
+}
+
+/* Smooth Transitions */
+body, body * {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Custom Dropdown in Dark Mode */
+html.theme-dark .custom-select-button {
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    border-color: var(--input-border);
+}
+
+html.theme-dark .custom-select-dropdown {
+    background-color: var(--bg-secondary);
+    border-color: var(--input-border);
+}
+
+html.theme-dark .custom-select-option {
+    color: var(--text-primary);
+}
+
+html.theme-dark .custom-select-option:hover {
+    background-color: var(--bg-primary);
+}
+
+html.theme-dark .custom-select-option.selected {
+    background-color: var(--accent-primary);
+    color: white;
+}
+
+/* Badge/Pill Elements */
+.badge {
+    background-color: var(--accent-primary);
+    color: white;
+}
+
+/* Progress Bars */
+.progress {
+    background-color: var(--bg-secondary);
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+}

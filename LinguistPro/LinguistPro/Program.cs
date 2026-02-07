@@ -30,6 +30,8 @@ builder.Services.AddScoped<LearningStreakService>();
 builder.Services.AddScoped<SpacedRepetitionService>();
 builder.Services.AddScoped<AnalyticsService>();
 builder.Services.AddScoped<UserPreferencesService>();
+builder.Services.AddScoped<PronunciationService>();
+builder.Services.AddScoped<SearchFilterService>();
 
 // Configure cookie settings
 builder.Services.ConfigureApplicationCookie(options =>

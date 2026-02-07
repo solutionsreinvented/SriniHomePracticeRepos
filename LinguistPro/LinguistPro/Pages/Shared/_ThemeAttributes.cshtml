@@ -1,0 +1,25 @@
+@using LinguistPro.Models
+@using LinguistPro.Services
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@inject UserPreferencesService PreferencesService
+
+@{
+    // Get current user
+    var user = await UserManager.GetUserAsync(User);
+    var theme = "light";
+    var fontSize = "medium";
+    
+    if (user != null)
+    {
+        try
+        {
+            var prefs = await PreferencesService.GetOrCreatePreferencesAsync(user.Id);
+            theme = prefs.Theme ?? "light";
+            fontSize = prefs.FontSize ?? "medium";
+        }
+        catch { }
+    }
+}
+
+class="theme-@theme font-size-@fontSize"
