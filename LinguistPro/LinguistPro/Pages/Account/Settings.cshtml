@@ -1,0 +1,190 @@
+@page
+@model LinguistPro.Pages.Account.SettingsModel
+@{
+    ViewData["Title"] = "Settings & Preferences";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/css/settings.css">
+
+<div class="settings-container">
+    <!-- Page Header -->
+    <div class="settings-header">
+        <h1 class="settings-title">⚙️ Settings & Preferences</h1>
+        <p class="settings-subtitle">Customize your learning experience</p>
+    </div>
+
+    <form method="post" class="settings-form">
+        <div class="settings-section">
+            <!-- Theme Section -->
+            <div class="settings-group">
+                <h2 class="section-title">🎨 Appearance</h2>
+
+                <div class="form-group">
+                    <label class="label-text">Theme</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="Theme" value="light" @{if (Model.Preferences?.Theme == "light") { @Html.Raw("checked"); }} />
+                            <span class="radio-text">☀️ Light Mode</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="Theme" value="dark" @{if (Model.Preferences?.Theme == "dark") { @Html.Raw("checked"); }} />
+                            <span class="radio-text">🌙 Dark Mode</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="label-text">Font Size</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="FontSize" value="small" @{if (Model.Preferences?.FontSize == "small") { @Html.Raw("checked"); }} />
+                            <span class="radio-text">Small (90%)</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="FontSize" value="medium" @{if (Model.Preferences?.FontSize == "medium") { @Html.Raw("checked"); }} />
+                            <span class="radio-text">Medium (100%)</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="FontSize" value="large" @{if (Model.Preferences?.FontSize == "large") { @Html.Raw("checked"); }} />
+                            <span class="radio-text">Large (110%)</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learning Preferences Section -->
+            <div class="settings-group">
+                <h2 class="section-title">📚 Learning Preferences</h2>
+
+                <div class="form-group">
+                    <label for="DefaultLanguageCode" class="label-text">Default Language on Login</label>
+                    <select id="DefaultLanguageCode" name="DefaultLanguageCode" class="form-control">
+                        <option value="">-- Auto-select last used --</option>
+                        @{
+                            var langOptions = new (string code, string name)[] {
+                                ("de", "🇩🇪 German"),
+                                ("fr", "🇫🇷 French"),
+                                ("es", "🇪🇸 Spanish"),
+                                ("ru", "🇷🇺 Russian"),
+                                ("ko", "🇰🇷 Korean")
+                            };
+                        }
+                        @foreach (var lang in langOptions)
+                        {
+                            if (Model.Preferences?.DefaultLanguageCode == lang.code)
+                            {
+                                <option value="@lang.code" selected>@lang.name</option>
+                            }
+                            else
+                            {
+                                <option value="@lang.code">@lang.name</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ItemsPerPage" class="label-text">Items Per Page</label>
+                    <input type="number" id="ItemsPerPage" name="ItemsPerPage" 
+                           min="5" max="100" step="5" 
+                           value="@(Model.Preferences?.ItemsPerPage ?? 20)"
+                           class="form-control">
+                    <small class="form-hint">Number of items to show in lists (5-100)</small>
+                </div>
+
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="ShowPronunciationGuide" @{if (Model.Preferences?.ShowPronunciationGuide == true) { @Html.Raw("checked"); }} />
+                        <span class="checkbox-text">Show pronunciation guide</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="ShowUsageExamples" @{if (Model.Preferences?.ShowUsageExamples == true) { @Html.Raw("checked"); }} />
+                        <span class="checkbox-text">Show usage examples in vocabulary</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Notifications Section -->
+            <div class="settings-group">
+                <h2 class="section-title">🔔 Notifications</h2>
+
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="EnableEmailNotifications" @{if (Model.Preferences?.EnableEmailNotifications == true) { @Html.Raw("checked"); }} />
+                        <span class="checkbox-text">Email notifications for milestones</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="EnablePushNotifications" @{if (Model.Preferences?.EnablePushNotifications == true) { @Html.Raw("checked"); }} />
+                        <span class="checkbox-text">Push notifications</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="EnableStreakReminders" @{if (Model.Preferences?.EnableStreakReminders == true) { @Html.Raw("checked"); }} />
+                        <span class="checkbox-text">Streak reminders</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="EnableSoundNotifications" @{if (Model.Preferences?.EnableSoundNotifications == true) { @Html.Raw("checked"); }} />
+                        <span class="checkbox-text">Sound notifications</span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="DailyReminderHour" class="label-text">Daily Reminder Time</label>
+                    <select id="DailyReminderHour" name="DailyReminderHour" class="form-control">
+                        @for (int i = 0; i < 24; i++)
+                        {
+                            var ampm = i < 12 ? "AM" : "PM";
+                            var displayHour = i == 0 ? 12 : (i <= 12 ? i : i - 12);
+                            if (Model.Preferences?.DailyReminderHour == i)
+                            {
+                                <option value="@i" selected>@(displayHour):00 @ampm</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@(displayHour):00 @ampm</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <!-- Advanced Section -->
+            <div class="settings-group">
+                <h2 class="section-title">⚡ Advanced</h2>
+
+                <div class="form-group">
+                    <label for="AutoSaveInterval" class="label-text">Auto-save Interval</label>
+                    <input type="number" id="AutoSaveInterval" name="AutoSaveInterval" 
+                           min="10" max="3600" step="10" 
+                           value="@(Model.Preferences?.AutoSaveInterval ?? 30)"
+                           class="form-control">
+                    <small class="form-hint">Seconds between automatic saves (10-3600)</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="settings-actions">
+            <button type="submit" class="btn btn-primary">💾 Save Preferences</button>
+            <button type="button" onclick="resetToDefaults()" class="btn btn-secondary">🔄 Reset to Defaults</button>
+            <a href="/Account/Profile" class="btn btn-cancel">← Back to Profile</a>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+        {
+            <div class="alert alert-success">✅ @Model.SuccessMessage</div>
+        }
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="alert alert-error">❌ @Model.ErrorMessage</div>
+        }
+    </form>
+</div>
+
+<script>
+    function resetToDefaults() {
+        if (confirm('Are you sure you want to reset all preferences to defaults?')) {
+            document.location = '@Url.Page("/Account/Settings", new { handler = "Reset" })';
+        }
+    }
+</script>
