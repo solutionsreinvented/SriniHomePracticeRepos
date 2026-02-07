@@ -85,8 +85,22 @@
                     </div>
 
                     <div class="flex items-center gap-4">
-                        <div class="text-sm text-gray-600">
-                            👤 <span class="font-semibold">@Model.CurrentUserFullName</span>
+                        <div class="relative group">
+                            <button class="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-800 rounded-lg font-semibold text-sm hover:bg-gray-200 transition">
+                                👤 <span>@Model.CurrentUserFullName</span>
+                                <span class="text-gray-500">▼</span>
+                            </button>
+                            <div class="absolute right-0 mt-0 w-48 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
+                                <a href="/Account/Profile" class="block px-4 py-3 text-gray-800 hover:bg-indigo-50 rounded-t-lg border-b">
+                                    👤 My Profile
+                                </a>
+                                <a href="/Account/ChangePassword" class="block px-4 py-3 text-gray-800 hover:bg-indigo-50 border-b">
+                                    🔐 Change Password
+                                </a>
+                                <a href="/Account/ManageLanguages" class="block px-4 py-3 text-gray-800 hover:bg-indigo-50 rounded-b-lg">
+                                    🌐 Manage Languages
+                                </a>
+                            </div>
                         </div>
                         <form method="get" action="/Account/Logout" class="inline">
                             <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded font-semibold text-sm hover:bg-red-700 transition">
@@ -400,9 +414,6 @@
                     </div>
 
                     <script>
-                        // expose selected language to client
-                        var selectedLanguage = '@Model.SelectedLanguage';
-
                         // pronoun mappings per language (extendable)
                         var pronounsByLang = {
                             de: {
@@ -952,6 +963,13 @@
     </script>
     <script src="~/js/number-mapping.js"></script>
     <script src="~/js/virtual-keyboard.js"></script>
+
+    <script>
+        // GLOBAL: Set selected language for virtual keyboard and other components
+        // This must run AFTER virtual-keyboard.js is loaded
+        selectedLanguage = '@Model.SelectedLanguage';
+    </script>
+
     <script>
         // Sort all item lists based on the current mode
         function sortAllItems() {
