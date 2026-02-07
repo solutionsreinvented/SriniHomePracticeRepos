@@ -220,24 +220,24 @@ namespace LinguistPro.Services
         }
 
         /// <summary>
-        /// Fetch numbers, days, and months
+        /// Fetch numbers, days, and months into LanguageItems (NOT Vocabulary)
         /// </summary>
-        public async Task<List<VocabularyItem>> AutoPopulateSpecialCategoriesAsync(
+        public async Task<List<LanguageItem>> AutoPopulateSpecialCategoriesAsync(
             int languageProfileId,
             string languageCode,
             string category,  // "numbers", "days", "months"
             IProgress<ProgressEventArgs>? progress = null)
         {
-            _logger.LogInformation($"Auto-populating {category} for language: {languageCode}");
+            _logger.LogInformation($"Auto-populating {category} for language: {languageCode} into LanguageItems table");
 
-            var vocabularyItems = new List<VocabularyItem>();
+            var languageItems = new List<LanguageItem>();
             var items = GetSpecialCategoryWords(languageCode, category);
 
             var languageProfile = await _context.LanguageProfiles.FindAsync(languageProfileId);
             if (languageProfile == null)
             {
                 _logger.LogError($"Language profile not found: {languageProfileId}");
-                return vocabularyItems;
+                return languageItems;
             }
 
             int processed = 0;
@@ -257,10 +257,11 @@ namespace LinguistPro.Services
 
                     await Task.Delay(200);
 
-                    // Check if already exists
-                    var existing = await _context.Vocabulary
-                        .FirstOrDefaultAsync(v => v.Term.ToLower() == word.ToLower()
-                            && v.LanguageProfileId == languageProfileId);
+                    // Check if already exists in LanguageItems (NOT Vocabulary)
+                    var existing = await _context.LanguageItems
+                        .FirstOrDefaultAsync(l => l.Term.ToLower() == word.ToLower()
+                            && l.LanguageProfileId == languageProfileId
+                            && l.ItemType == category);
 
                     if (existing != null)
                     {
@@ -269,19 +270,20 @@ namespace LinguistPro.Services
                         continue;
                     }
 
-                    var vocabItem = new VocabularyItem
+                    // Create LanguageItem for special categories (Numbers/Days/Months)
+                    var langItem = new LanguageItem
                     {
                         Term = word,
                         Meaning = meaning,
-                        Definition = $"{category.FirstCharToUpper()}: {meaning}",
+                        ItemType = category,  // "numbers", "days", "months"
                         Language = languageCode,
                         LanguageProfileId = languageProfileId,
                         Mastery = 0,
                         LastReviewed = DateTime.UtcNow
                     };
 
-                    _context.Vocabulary.Add(vocabItem);
-                    vocabularyItems.Add(vocabItem);
+                    _context.LanguageItems.Add(langItem);
+                    languageItems.Add(langItem);
                     _logger.LogInformation($"✓ Added {category}: {word}");
                 }
                 catch (Exception ex)
@@ -295,9 +297,9 @@ namespace LinguistPro.Services
             }
 
             await _context.SaveChangesAsync();
-            _logger.LogInformation($"Auto-populated {vocabularyItems.Count} {category}");
+            _logger.LogInformation($"Auto-populated {languageItems.Count} {category} into LanguageItems table");
 
-            return vocabularyItems;
+            return languageItems;
         }
 
         /// <summary>
@@ -387,23 +389,45 @@ namespace LinguistPro.Services
         }
 
         /// <summary>
-        /// Get word details for non-English languages
+        /// Get word details for non-English languages using translation
         /// </summary>
         private async Task<(string meaning, string usageExample, string usageExampleMeaning)> GetLocalizedWordDetailsAsync(string word, string languageCode)
         {
-            // Curated definitions for common words in different languages
-            var definitions = GetWordDefinitionsByLanguage(languageCode);
-
-            var wordLower = word.ToLower();
-            if (definitions.ContainsKey(wordLower))
+            try
             {
-                var def = definitions[wordLower];
-                _logger.LogInformation($"✓ Retrieved localized definition for {word}: {def.meaning}");
-                return (def.meaning, def.example, def.exampleMeaning);
-            }
+                // Translate word to English to get meaning
+                var englishMeaning = await TranslateTextAsync(word, GetLanguageCode(languageCode), "en");
 
-            // If not found, try to fetch from English dictionary by translating word to English
-            return ("Word definition available", $"'{word}' is a {languageCode.ToUpper()} word", $"'{word}' is a {languageCode.ToUpper()} word");
+                if (string.IsNullOrEmpty(englishMeaning))
+                {
+                    _logger.LogWarning($"Failed to translate word: {word}");
+                    return ("", "", "");
+                }
+
+                // Create a simple usage example in the target language
+                string usageExample = $"Das ist {word}.";  // Generic example
+                string usageExampleEnglish = $"This is {englishMeaning}.";
+
+                // Generate better example for German
+                if (languageCode == "de")
+                {
+                    if (word.ToLower().EndsWith("e"))
+                        usageExample = $"Die {word} ist wichtig.";
+                    else if (word.ToLower().EndsWith("er"))
+                        usageExample = $"Der {word} ist hier.";
+                    else
+                        usageExample = $"Das {word} ist da.";
+                    usageExampleEnglish = await TranslateTextAsync(usageExample, "de", "en");
+                }
+
+                _logger.LogInformation($"✓ Translated word: {word} -> {englishMeaning}");
+                return (englishMeaning, usageExample, usageExampleEnglish);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error in GetLocalizedWordDetailsAsync for {word}: {ex.Message}");
+                return ("", "", "");
+            }
         }
 
         /// <summary>
@@ -530,42 +554,6 @@ namespace LinguistPro.Services
                 },
                 _ => new Dictionary<string, (string, string, string)>()
             };
-        }
-
-        /// <summary>
-        /// Translate text using MyMemory Translation API (free)
-        /// </summary>
-        private async Task<string> TranslateTextAsync(string text, string fromLang, string toLang)
-        {
-            try
-            {
-                if (text.Length > 500) // Avoid translating very long texts
-                    return "";
-
-                var url = $"https://api.mymemory.translated.net/get?q={Uri.EscapeDataString(text)}&langpair={fromLang}|{toLang}";
-
-                var response = await _httpClient.GetAsync(url);
-                if (!response.IsSuccessStatusCode)
-                    return "";
-
-                var content = await response.Content.ReadAsStringAsync();
-                using var doc = JsonDocument.Parse(content);
-
-                if (doc.RootElement.TryGetProperty("responseData", out var responseData))
-                {
-                    if (responseData.TryGetProperty("translatedText", out var translatedText))
-                    {
-                        return translatedText.GetString() ?? "";
-                    }
-                }
-
-                return "";
-            }
-            catch (Exception ex)
-            {
-                _logger.LogWarning($"Translation failed: {ex.Message}");
-                return "";
-            }
         }
 
         /// <summary>
@@ -919,6 +907,59 @@ namespace LinguistPro.Services
                     ("сентябрь", "September"), ("октябрь", "October"), ("ноябрь", "November"), ("декабрь", "December")
                 },
                 _ => new List<(string, string)>()
+            };
+        }
+
+        /// <summary>
+        /// Translate text using MyMemory Translated API (free, no key required)
+        /// </summary>
+        private async Task<string> TranslateTextAsync(string text, string sourceLanguage, string targetLanguage)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(text))
+                    return "";
+
+                // MyMemory API - completely free, no authentication required
+                var url = $"https://api.mymemory.translated.net/get?q={Uri.EscapeDataString(text)}&langpair={sourceLanguage}|{targetLanguage}";
+
+                var response = await _httpClient.GetAsync(url);
+                if (!response.IsSuccessStatusCode)
+                    return "";
+
+                var content = await response.Content.ReadAsStringAsync();
+                using var doc = JsonDocument.Parse(content);
+
+                if (doc.RootElement.TryGetProperty("responseData", out var responseData) &&
+                    responseData.TryGetProperty("translatedText", out var translatedText))
+                {
+                    var result = translatedText.GetString() ?? "";
+                    _logger.LogInformation($"✓ Translated '{text}' ({sourceLanguage}->{targetLanguage}): '{result}'");
+                    return result;
+                }
+
+                return "";
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning($"Translation failed for '{text}': {ex.Message}");
+                return "";
+            }
+        }
+
+        /// <summary>
+        /// Map language code to language format for translation
+        /// </summary>
+        private string GetLanguageCode(string code)
+        {
+            return code switch
+            {
+                "de" => "de",
+                "fr" => "fr",
+                "es" => "es",
+                "ru" => "ru",
+                "ko" => "ko",
+                _ => "en"
             };
         }
     }

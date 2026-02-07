@@ -22,6 +22,7 @@ namespace LinguistPro.Models
         public DbSet<QuizAttempt> QuizAttempts => Set<QuizAttempt>();
         public DbSet<QuizQuestion> QuizQuestions => Set<QuizQuestion>();
         public DbSet<QuizStatistics> QuizStatistics => Set<QuizStatistics>();
+        public DbSet<AdminUser> AdminUsers => Set<AdminUser>();
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

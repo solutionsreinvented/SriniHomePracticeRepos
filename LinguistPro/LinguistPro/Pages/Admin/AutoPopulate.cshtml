@@ -181,6 +181,15 @@
                     <li>✅ Each fetch waits between requests to avoid rate limiting</li>
                 </ul>
             </div>
+
+            <div class="admin-actions">
+                <a href="/Admin/ManageAdmins" class="btn btn-secondary">
+                    👥 Manage Admin Users
+                </a>
+                <a href="/Index" class="btn btn-secondary">
+                    ← Back to Home
+                </a>
+            </div>
         </div>
     }
 </div>
@@ -388,6 +397,31 @@
 
     .percentage {
         color: #667eea;
+    }
+
+    .admin-actions {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 2px solid #f0f0f0;
+    }
+
+    .btn-secondary {
+        background: #6c757d;
+        color: white;
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
     .progress {

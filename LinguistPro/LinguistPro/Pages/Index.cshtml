@@ -193,10 +193,37 @@
                         </button>
                     </form>
 
+                    <!-- Bulk Delete Toolbar -->
+                    @if (Model.Vocabulary.Any())
+                    {
+                        <div class="flex items-center gap-2 mb-4 bg-amber-50 p-3 rounded border border-amber-200">
+                            <input type="checkbox" id="selectAllVocab" 
+                                   onchange="toggleAllCheckboxes(document.querySelectorAll('.vocab-checkbox'))" 
+                                   class="w-4 h-4 cursor-pointer"/>
+                            <label for="selectAllVocab" class="text-sm font-semibold text-gray-700 cursor-pointer">
+                                Select All (@Model.Vocabulary.Count)
+                            </label>
+                            <button type="button" 
+                                    onclick="deleteBulkVocabHandler()" 
+                                    class="ml-auto bg-red-600 text-white px-4 py-2 rounded text-sm font-semibold hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    id="bulkDeleteVocabBtn"
+                                    disabled>
+                                🗑️ Delete Selected
+                            </button>
+                            <span id="vocabSelectedCount" class="text-sm text-gray-600">0 selected</span>
+                        </div>
+                    }
+
                     <div class="flex flex-wrap gap-4 w-full">
                         @foreach (var v in Model.Vocabulary)
                         {
-                            <div class="vocab-card" data-vocab-id="@v.Id" data-vocab-term="@v.Term" data-vocab-meaning="@v.Meaning" data-vocab-usage="@v.UsageExample" data-vocab-usage-meaning="@v.UsageExampleMeaning">
+                            <div class="vocab-card relative" data-vocab-id="@v.Id" data-vocab-term="@v.Term" data-vocab-meaning="@v.Meaning" data-vocab-usage="@v.UsageExample" data-vocab-usage-meaning="@v.UsageExampleMeaning">
+                                <!-- Checkbox -->
+                                <div class="absolute top-2 left-2 z-10">
+                                    <input type="checkbox" class="vocab-checkbox w-4 h-4 cursor-pointer" 
+                                           data-id="@v.Id" 
+                                           onchange="updateVocabBulkDeleteState()"/>
+                                </div>
                                 <div class="pl-3">
                                     <div class="term">@v.Term</div>
                                     <div class="meaning">@v.Meaning</div>
