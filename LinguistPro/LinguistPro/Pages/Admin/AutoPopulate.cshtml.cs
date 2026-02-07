@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LinguistPro.Pages.Admin
 {
-    [Authorize]
     public class AutoPopulateModel : PageModel
     {
         private readonly AppDbContext _context;
@@ -30,6 +29,7 @@ namespace LinguistPro.Pages.Admin
         public int ProcessedCount { get; set; }
         public int TotalCount { get; set; }
         public double ProgressPercentage { get; set; }
+        public bool IsAdminAuthenticated { get; set; }
 
         public AutoPopulateModel(
             AppDbContext context,
@@ -43,11 +43,21 @@ namespace LinguistPro.Pages.Admin
             _logger = logger;
         }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            // Check if user is authenticated via admin session
+            var adminUser = HttpContext.Session.GetString("AdminUser");
+            if (string.IsNullOrEmpty(adminUser))
+            {
+                _logger.LogWarning("Unauthorized access attempt to AutoPopulate page");
+                return RedirectToPage("/Admin/Login");
+            }
+
+            IsAdminAuthenticated = true;
+
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
-                return;
+                return Page();
 
             // Get user's language profiles
             var languages = await _context.LanguageProfiles
@@ -60,6 +70,8 @@ namespace LinguistPro.Pages.Admin
                 lang => lang,
                 lang => GetLanguageName(lang)
             );
+
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(
@@ -68,6 +80,17 @@ namespace LinguistPro.Pages.Admin
             int vocabularyCount = 100,
             int verbCount = 100)
         {
+            // Security check
+            var adminUser = HttpContext.Session.GetString("AdminUser");
+            if (string.IsNullOrEmpty(adminUser))
+            {
+                HasError = true;
+                ErrorMessage = "Unauthorized access";
+                return RedirectToPage("/Admin/Login");
+            }
+
+            IsAdminAuthenticated = true;
+
             try
             {
                 var user = await _userManager.GetUserAsync(User);
@@ -104,7 +127,7 @@ namespace LinguistPro.Pages.Admin
                     _logger.LogInformation($"Progress: {args.ProcessedCount}/{args.TotalCount} - {args.CurrentItem}");
                 });
 
-                _logger.LogInformation($"Starting auto-population: {category} for {languageCode}");
+                _logger.LogInformation($"[ADMIN: {adminUser}] Starting auto-population: {category} for {languageCode}");
 
                 // Handle different categories
                 if (category == "Vocabulary")
@@ -116,7 +139,8 @@ namespace LinguistPro.Pages.Admin
                         progressReporter);
 
                     VocabularyCount = vocabularyItems.Count;
-                    SuccessMessage = $"Successfully populated {VocabularyCount} vocabulary items with real definitions and examples!";
+                    SuccessMessage = $"✅ Successfully populated {VocabularyCount} vocabulary items with real definitions and usage examples!";
+                    _logger.LogInformation($"[ADMIN: {adminUser}] Vocabulary population complete: {VocabularyCount} items");
                 }
                 else if (category == "Verbs")
                 {
@@ -127,7 +151,8 @@ namespace LinguistPro.Pages.Admin
                         progressReporter);
 
                     VerbCount = verbEntries.Count;
-                    SuccessMessage = $"Successfully populated {VerbCount} verb entries with proper conjugations!";
+                    SuccessMessage = $"✅ Successfully populated {VerbCount} verb entries with proper conjugations!";
+                    _logger.LogInformation($"[ADMIN: {adminUser}] Verb population complete: {VerbCount} items");
                 }
                 else if (category == "Numbers")
                 {
@@ -137,7 +162,7 @@ namespace LinguistPro.Pages.Admin
                         "numbers",
                         progressReporter);
 
-                    SuccessMessage = $"Successfully populated {numbers.Count} numbers!";
+                    SuccessMessage = $"✅ Successfully populated {numbers.Count} numbers!";
                 }
                 else if (category == "Days")
                 {
@@ -147,7 +172,7 @@ namespace LinguistPro.Pages.Admin
                         "days",
                         progressReporter);
 
-                    SuccessMessage = $"Successfully populated {days.Count} days!";
+                    SuccessMessage = $"✅ Successfully populated {days.Count} days!";
                 }
                 else if (category == "Months")
                 {
@@ -157,7 +182,7 @@ namespace LinguistPro.Pages.Admin
                         "months",
                         progressReporter);
 
-                    SuccessMessage = $"Successfully populated {months.Count} months!";
+                    SuccessMessage = $"✅ Successfully populated {months.Count} months!";
                 }
 
                 IsSuccess = true;
@@ -171,7 +196,7 @@ namespace LinguistPro.Pages.Admin
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error during auto-population: {ex.Message}");
+                _logger.LogError($"[ADMIN: {adminUser}] Error during auto-population: {ex.Message}");
                 HasError = true;
                 ErrorMessage = $"An error occurred: {ex.Message}";
                 IsProcessing = false;

@@ -1,0 +1,264 @@
+@page "/Admin/Login"
+@model LinguistPro.Pages.Admin.LoginModel
+@{
+    ViewData["Title"] = "Admin Login";
+    Layout = "_Layout";
+}
+
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <h1>🔐 Admin Login</h1>
+            <p>Language Learning Platform - Admin Access</p>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="alert alert-danger">
+                <strong>❌ Login Failed</strong>
+                <p>@Model.ErrorMessage</p>
+            </div>
+        }
+
+        <form method="post" class="login-form">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" 
+                       id="username" 
+                       name="username" 
+                       class="form-control" 
+                       placeholder="Enter admin username"
+                       required 
+                       autofocus />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" 
+                       id="password" 
+                       name="password" 
+                       class="form-control" 
+                       placeholder="Enter admin password"
+                       required />
+            </div>
+
+            <button type="submit" class="btn btn-login">
+                🔓 Login as Admin
+            </button>
+        </form>
+
+        <div class="login-info">
+            <h3>📋 Default Credentials (Change in appsettings.json)</h3>
+            <ul>
+                <li>Username: <code>admin</code></li>
+                <li>Password: <code>admin123</code></li>
+            </ul>
+            <p><strong>⚠️ Important:</strong> Change these credentials in production!</p>
+        </div>
+
+        <div class="login-features">
+            <h3>✨ Admin Features Available</h3>
+            <ul>
+                <li>🚀 Auto-Populate Vocabulary</li>
+                <li>⚡ Auto-Populate Verbs</li>
+                <li>🔢 Fetch Numbers, Days, Months</li>
+                <li>📊 Real-time Progress Tracking</li>
+                <li>📈 No Fetch Limits</li>
+                <li>🌐 Support for 5 Languages</li>
+            </ul>
+        </div>
+
+        <a href="/" class="btn-back">← Back to Home</a>
+    </div>
+</div>
+
+<style>
+    .login-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 20px;
+    }
+
+    .login-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        max-width: 500px;
+        width: 100%;
+        padding: 40px;
+    }
+
+    .login-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .login-header h1 {
+        color: #333;
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    .login-header p {
+        color: #666;
+        font-size: 14px;
+    }
+
+    .alert {
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+    }
+
+    .alert-danger {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .login-form {
+        margin-bottom: 30px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #333;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e0e0e0;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-login {
+        width: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    .btn-login:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .btn-back:hover {
+        text-decoration: underline;
+    }
+
+    .login-info {
+        background: #f5f7fa;
+        border-left: 4px solid #667eea;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+    }
+
+    .login-info h3 {
+        margin-top: 0;
+        color: #333;
+        font-size: 14px;
+    }
+
+    .login-info ul {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0;
+    }
+
+    .login-info li {
+        padding: 5px 0;
+        color: #666;
+        font-size: 13px;
+    }
+
+    .login-info code {
+        background: white;
+        padding: 2px 6px;
+        border-radius: 3px;
+        color: #667eea;
+        font-weight: 600;
+    }
+
+    .login-info p {
+        margin-bottom: 0;
+        color: #d9534f;
+        font-size: 12px;
+    }
+
+    .login-features {
+        background: #e8f4f8;
+        border-left: 4px solid #17a2b8;
+        padding: 15px;
+        border-radius: 6px;
+    }
+
+    .login-features h3 {
+        margin-top: 0;
+        color: #333;
+        font-size: 14px;
+    }
+
+    .login-features ul {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0;
+    }
+
+    .login-features li {
+        padding: 5px 0;
+        color: #666;
+        font-size: 13px;
+    }
+</style>
+
+<style>
+    @@media (max-width: 600px) {
+        .login-card {
+            padding: 20px;
+        }
+
+        .login-header h1 {
+            font-size: 24px;
+        }
+    }
+</style>

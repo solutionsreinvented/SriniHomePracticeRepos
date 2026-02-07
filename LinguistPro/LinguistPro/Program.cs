@@ -8,6 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
 
+// Add session support
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 // Add database context
 builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlite("Data Source=linguist.db"));
 
@@ -65,6 +73,10 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseStaticFiles();
+
+// Add session middleware
+app.UseSession();
+
 app.UseRouting();
 
 // Add authentication and authorization

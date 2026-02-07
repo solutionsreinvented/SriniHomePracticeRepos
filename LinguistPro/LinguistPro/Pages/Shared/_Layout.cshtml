@@ -33,6 +33,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
+                        @if (Context.Session.GetString("AdminUser") != null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link admin-link" asp-area="" asp-page="/Admin/AutoPopulate">⚙️ Admin Panel</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link admin-login-link" asp-area="" asp-page="/Admin/Login">🔐 Admin Login</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
