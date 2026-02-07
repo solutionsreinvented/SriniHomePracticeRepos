@@ -150,18 +150,37 @@ namespace LinguistPro.Pages
 
             Numbers = await _db.LanguageItems
                 .Where(x => x.ItemType == "Number")
-                .OrderBy(x => x.Term)
                 .ToListAsync();
-
-            Months = await _db.LanguageItems
-                .Where(x => x.ItemType == "Month")
-                .OrderBy(x => x.Term)
-                .ToListAsync();
+            // Try to sort numerically, fallback to alphabetical
+            Numbers = Numbers.OrderBy(x => 
+            {
+                if (int.TryParse(x.Term, out int num))
+                    return (int.MaxValue - num, ""); // Reverse for numbers, then alphabetically
+                return (int.MaxValue, x.Term); // Non-numeric items at end
+            }).ToList();
 
             Days = await _db.LanguageItems
                 .Where(x => x.ItemType == "Day")
-                .OrderBy(x => x.Term)
                 .ToListAsync();
+            // Sort by day of week order
+            var dayOrder = new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+            Days = Days.OrderBy(d => 
+            {
+                var index = Array.FindIndex(dayOrder, day => day.Equals(d.Term, StringComparison.OrdinalIgnoreCase));
+                return index >= 0 ? index : int.MaxValue;
+            }).ToList();
+
+            Months = await _db.LanguageItems
+                .Where(x => x.ItemType == "Month")
+                .ToListAsync();
+            // Sort by calendar month order
+            var monthOrder = new[] { "January", "February", "March", "April", "May", "June", 
+                                    "July", "August", "September", "October", "November", "December" };
+            Months = Months.OrderBy(m => 
+            {
+                var index = Array.FindIndex(monthOrder, month => month.Equals(m.Term, StringComparison.OrdinalIgnoreCase));
+                return index >= 0 ? index : int.MaxValue;
+            }).ToList();
 
             GlobalMastery = Vocabulary.Count == 0 ? 0 : (int)Vocabulary.Average(v => v.Mastery);
         }
