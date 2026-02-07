@@ -1,0 +1,54 @@
+@page
+@model LinguistPro.Pages.Account.AccessDeniedModel
+@{
+    ViewData["Title"] = "Access Denied";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LinguistPro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-md px-6">
+        <!-- Logo/Header -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-red-600 to-orange-600 rounded-full mb-4">
+                <span style="font-size: 32px;">🔒</span>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900">Access Denied</h1>
+            <p class="text-gray-600 mt-2">You don't have permission to view this resource.</p>
+        </div>
+
+        <!-- Access Denied Card -->
+        <div class="bg-white rounded-lg shadow-lg p-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">403 Forbidden</h2>
+
+            <p class="text-gray-600 mb-6">
+                Sorry, you don't have the necessary permissions to access this page. 
+                Please contact the administrator if you believe this is a mistake.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="space-y-3">
+                <a href="/" class="w-full block text-center bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+                    Go to Home
+                </a>
+
+                <a href="/Account/Login" class="w-full block text-center bg-gray-100 hover:bg-gray-200 text-gray-900 font-semibold py-2 px-4 rounded-lg transition duration-200">
+                    Go to Login
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <p class="text-center text-gray-600 text-sm mt-6">
+            Need help? <a href="mailto:support@linguistpro.com" class="text-indigo-600 hover:underline">Contact Support</a>
+        </p>
+    </div>
+</body>
+</html>

@@ -173,18 +173,41 @@ namespace LinguistPro.Pages
 
         public async Task OnGetAsync()
         {
-            Vocabulary = await _db.Vocabulary.OrderBy(v => v.Term).ToListAsync();
+            // Get current user and their language profile
+            var userId = await GetCurrentUserId();
+            var langProfile = await GetCurrentLanguageProfile();
 
-            VerbList = await _db.Verbs.ToListAsync();
+            // If user has no language profile for selected language, redirect to language selection
+            if (langProfile == null)
+            {
+                SelectedLanguage = "de"; // Default to German
+                langProfile = await _db.LanguageProfiles
+                    .FirstOrDefaultAsync(l => l.UserId == userId && l.LanguageCode == "de");
+            }
 
+            var langProfileId = langProfile?.LanguageProfileId;
+
+            // Load vocabulary for current user's language profile
+            Vocabulary = await _db.Vocabulary
+                .Where(v => v.LanguageProfileId == langProfileId)
+                .OrderBy(v => v.Term)
+                .ToListAsync();
+
+            // Load verbs for current user's language profile
+            VerbList = await _db.Verbs
+                .Where(v => v.LanguageProfileId == langProfileId)
+                .ToListAsync();
+
+            // Load numbers for current user's language profile
             Numbers = await _db.LanguageItems
-                .Where(x => x.ItemType == "Number")
+                .Where(x => x.ItemType == "Number" && x.LanguageProfileId == langProfileId)
                 .ToListAsync();
             // Sort by numeric value - maintain proper ordering
             Numbers = Numbers.OrderBy(n => GetNumericValue(n.Meaning)).ToList();
 
+            // Load days for current user's language profile
             Days = await _db.LanguageItems
-                .Where(x => x.ItemType == "Day")
+                .Where(x => x.ItemType == "Day" && x.LanguageProfileId == langProfileId)
                 .ToListAsync();
             // Sort by day of week order
             var dayOrder = new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
@@ -194,8 +217,9 @@ namespace LinguistPro.Pages
                 return index >= 0 ? index : int.MaxValue;
             }).ToList();
 
+            // Load months for current user's language profile
             Months = await _db.LanguageItems
-                .Where(x => x.ItemType == "Month")
+                .Where(x => x.ItemType == "Month" && x.LanguageProfileId == langProfileId)
                 .ToListAsync();
             // Sort by calendar month order
             var monthOrder = new[] { "January", "February", "March", "April", "May", "June", 
@@ -213,7 +237,18 @@ namespace LinguistPro.Pages
         {
             if (EditVocabId == null) return RedirectToPage(new { Mode = "Vocab", SelectedLanguage });
 
-            var item = await _db.Vocabulary.FindAsync(EditVocabId.Value);
+            // Get current user's language profile
+            var userId = await GetCurrentUserId();
+            var langProfile = await _db.LanguageProfiles
+                .FirstOrDefaultAsync(l => l.UserId == userId && l.LanguageCode == SelectedLanguage);
+
+            if (langProfile == null)
+                return RedirectToPage(new { Mode = "Vocab", SelectedLanguage });
+
+            // Fetch the item with user isolation check
+            var item = await _db.Vocabulary
+                .FirstOrDefaultAsync(v => v.Id == EditVocabId.Value && v.LanguageProfileId == langProfile.LanguageProfileId);
+
             if (item != null)
             {
                 item.Term = EditVocabTerm;
@@ -230,7 +265,18 @@ namespace LinguistPro.Pages
         {
             if (EditVocabId == null) return RedirectToPage(new { Mode = "Vocab", SelectedLanguage });
 
-            var item = await _db.Vocabulary.FindAsync(EditVocabId.Value);
+            // Get current user's language profile
+            var userId = await GetCurrentUserId();
+            var langProfile = await _db.LanguageProfiles
+                .FirstOrDefaultAsync(l => l.UserId == userId && l.LanguageCode == SelectedLanguage);
+
+            if (langProfile == null)
+                return RedirectToPage(new { Mode = "Vocab", SelectedLanguage });
+
+            // Fetch the item with user isolation check
+            var item = await _db.Vocabulary
+                .FirstOrDefaultAsync(v => v.Id == EditVocabId.Value && v.LanguageProfileId == langProfile.LanguageProfileId);
+
             if (item != null)
             {
                 _db.Vocabulary.Remove(item);
@@ -244,7 +290,18 @@ namespace LinguistPro.Pages
         {
             if (EditVerbId == null) return RedirectToPage(new { Mode = "Verbs", SelectedLanguage });
 
-            var v = await _db.Verbs.FindAsync(EditVerbId.Value);
+            // Get current user's language profile
+            var userId = await GetCurrentUserId();
+            var langProfile = await _db.LanguageProfiles
+                .FirstOrDefaultAsync(l => l.UserId == userId && l.LanguageCode == SelectedLanguage);
+
+            if (langProfile == null)
+                return RedirectToPage(new { Mode = "Verbs", SelectedLanguage });
+
+            // Fetch the item with user isolation check
+            var v = await _db.Verbs
+                .FirstOrDefaultAsync(v => v.Id == EditVerbId.Value && v.LanguageProfileId == langProfile.LanguageProfileId);
+
             if (v != null)
             {
                 v.Infinitive = EditVerbInfinitive;
@@ -268,7 +325,18 @@ namespace LinguistPro.Pages
         {
             if (EditVerbId == null) return RedirectToPage(new { Mode = "Verbs", SelectedLanguage });
 
-            var v = await _db.Verbs.FindAsync(EditVerbId.Value);
+            // Get current user's language profile
+            var userId = await GetCurrentUserId();
+            var langProfile = await _db.LanguageProfiles
+                .FirstOrDefaultAsync(l => l.UserId == userId && l.LanguageCode == SelectedLanguage);
+
+            if (langProfile == null)
+                return RedirectToPage(new { Mode = "Verbs", SelectedLanguage });
+
+            // Fetch the item with user isolation check
+            var v = await _db.Verbs
+                .FirstOrDefaultAsync(v => v.Id == EditVerbId.Value && v.LanguageProfileId == langProfile.LanguageProfileId);
+
             if (v != null)
             {
                 _db.Verbs.Remove(v);
@@ -280,6 +348,14 @@ namespace LinguistPro.Pages
 
         public async Task<IActionResult> OnPostAddVocabularyAsync()
         {
+            // Get current user's language profile
+            var userId = await GetCurrentUserId();
+            var langProfile = await _db.LanguageProfiles
+                .FirstOrDefaultAsync(l => l.UserId == userId && l.LanguageCode == SelectedLanguage);
+
+            if (langProfile == null)
+                return RedirectToPage(new { Mode = "Vocab", SelectedLanguage });
+
             VocabularyItem? item;
 
             if (FetchVocabularyOnline)
@@ -295,7 +371,8 @@ namespace LinguistPro.Pages
                     Meaning = ManualMeaning ?? string.Empty,
                     Definition = ManualMeaning ?? string.Empty,
                     UsageExample = ManualUsage ?? string.Empty,
-                    UsageExampleMeaning = ManualUsageMeaning ?? string.Empty
+                    UsageExampleMeaning = ManualUsageMeaning ?? string.Empty,
+                    LanguageProfileId = langProfile.LanguageProfileId
                 };
             }
 
@@ -303,6 +380,7 @@ namespace LinguistPro.Pages
             {
                 item.UsageExample = item.UsageExample ?? string.Empty;
                 item.UsageExampleMeaning = item.UsageExampleMeaning ?? string.Empty;
+                item.LanguageProfileId = langProfile.LanguageProfileId;
                 _db.Vocabulary.Add(item);
                 await _db.SaveChangesAsync();
             }
@@ -312,6 +390,14 @@ namespace LinguistPro.Pages
 
         public async Task<IActionResult> OnPostAddVerbAsync()
         {
+            // Get current user's language profile
+            var userId = await GetCurrentUserId();
+            var langProfile = await _db.LanguageProfiles
+                .FirstOrDefaultAsync(l => l.UserId == userId && l.LanguageCode == SelectedLanguage);
+
+            if (langProfile == null)
+                return RedirectToPage(new { Mode = "Verbs", SelectedLanguage });
+
             VerbEntry? verb;
 
             if (FetchVerbOnline)
@@ -326,6 +412,7 @@ namespace LinguistPro.Pages
 
             if (verb != null)
             {
+                verb.LanguageProfileId = langProfile.LanguageProfileId;
                 _db.Verbs.Add(verb);
                 await _db.SaveChangesAsync();
             }
@@ -335,6 +422,14 @@ namespace LinguistPro.Pages
 
         public async Task<IActionResult> OnPostAddLanguageItemAsync()
         {
+            // Get current user's language profile
+            var userId = await GetCurrentUserId();
+            var langProfile = await _db.LanguageProfiles
+                .FirstOrDefaultAsync(l => l.UserId == userId && l.LanguageCode == SelectedLanguage);
+
+            if (langProfile == null)
+                return RedirectToPage(new { Mode = ManualItemType, SelectedLanguage });
+
             var item = new LanguageItem
             {
                 Language = SelectedLanguage,
@@ -342,7 +437,8 @@ namespace LinguistPro.Pages
                 Term = ManualItemTerm,
                 Meaning = ManualItemMeaning ?? string.Empty,
                 UsageExample = ManualItemUsage ?? string.Empty,
-                UsageExampleMeaning = ManualItemUsageMeaning ?? string.Empty
+                UsageExampleMeaning = ManualItemUsageMeaning ?? string.Empty,
+                LanguageProfileId = langProfile.LanguageProfileId
             };
 
             _db.LanguageItems.Add(item);
@@ -355,7 +451,18 @@ namespace LinguistPro.Pages
         {
             if (EditItemId == null) return RedirectToPage(new { Mode = EditItemType, SelectedLanguage });
 
-            var item = await _db.LanguageItems.FindAsync(EditItemId.Value);
+            // Get current user's language profile
+            var userId = await GetCurrentUserId();
+            var langProfile = await _db.LanguageProfiles
+                .FirstOrDefaultAsync(l => l.UserId == userId && l.LanguageCode == SelectedLanguage);
+
+            if (langProfile == null)
+                return RedirectToPage(new { Mode = EditItemType, SelectedLanguage });
+
+            // Fetch the item with user isolation check
+            var item = await _db.LanguageItems
+                .FirstOrDefaultAsync(i => i.Id == EditItemId.Value && i.LanguageProfileId == langProfile.LanguageProfileId);
+
             if (item != null)
             {
                 item.Term = EditItemTerm;
@@ -372,7 +479,18 @@ namespace LinguistPro.Pages
         {
             if (EditItemId == null) return RedirectToPage(new { Mode = EditItemType, SelectedLanguage });
 
-            var item = await _db.LanguageItems.FindAsync(EditItemId.Value);
+            // Get current user's language profile
+            var userId = await GetCurrentUserId();
+            var langProfile = await _db.LanguageProfiles
+                .FirstOrDefaultAsync(l => l.UserId == userId && l.LanguageCode == SelectedLanguage);
+
+            if (langProfile == null)
+                return RedirectToPage(new { Mode = EditItemType, SelectedLanguage });
+
+            // Fetch the item with user isolation check
+            var item = await _db.LanguageItems
+                .FirstOrDefaultAsync(i => i.Id == EditItemId.Value && i.LanguageProfileId == langProfile.LanguageProfileId);
+
             if (item != null)
             {
                 _db.LanguageItems.Remove(item);

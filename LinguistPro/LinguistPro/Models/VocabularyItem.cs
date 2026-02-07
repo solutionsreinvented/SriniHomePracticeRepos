@@ -9,7 +9,7 @@ namespace LinguistPro.Models
         public int Id { get; set; }
 
         [ForeignKey(nameof(LanguageProfile))]
-        public int LanguageProfileId { get; set; }
+        public int? LanguageProfileId { get; set; }
 
         public required string Language { get; set; }
         public required string Term { get; set; }
