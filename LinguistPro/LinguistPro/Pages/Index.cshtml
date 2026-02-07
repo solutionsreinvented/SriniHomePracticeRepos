@@ -13,6 +13,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="~/css/virtual-keyboard.css" />
     <link rel="stylesheet" href="~/css/site-extended.css" />
+    <script src="~/js/number-mapping.js"></script>
 </head>
 
 <body class="bg-slate-50 text-slate-800 h-screen overflow-hidden">
@@ -501,62 +502,6 @@
                             }
                         });
 
-                        // Vocabulary delete modal helpers
-                        function openDeleteVocabModal(ev, btn) {
-                            ev.stopPropagation();
-                            var card = btn.closest('[data-vocab-id]');
-                            if (!card) return;
-                            var id = card.dataset.vocabId;
-                            document.getElementById('delVocabIdHidden').value = id;
-                            var m = document.getElementById('deleteVocabConfirmModal');
-                            m.classList.remove('hidden');
-                            m.classList.add('flex');
-                        }
-
-                        function openDeleteVocabModalFromForm(ev) {
-                            ev.preventDefault();
-                            var m = document.getElementById('deleteVocabConfirmModal');
-                            m.classList.remove('hidden');
-                            m.classList.add('flex');
-                        }
-
-                        function closeDeleteVocabModal() {
-                            var m = document.getElementById('deleteVocabConfirmModal');
-                            m.classList.remove('flex');
-                            m.classList.add('hidden');
-                        }
-
-                        // Vocabulary edit modal helpers
-                        function openEditVocab(ev, id, term, meaning, usage, usageMeaning) {
-                            ev.stopPropagation();
-                            document.getElementById('editVocabId').value = id;
-                            var delHidden = document.getElementById('delVocabIdHidden');
-                            if (delHidden) delHidden.value = id;
-                            document.getElementById('editVocabTerm').value = term || '';
-                            document.getElementById('editVocabMeaning').value = meaning || '';
-                            document.getElementById('editVocabUsage').value = usage || '';
-                            document.getElementById('editVocabUsageMeaning').value = usageMeaning || '';
-                            var m = document.getElementById('vocabModal');
-                            m.classList.remove('hidden'); m.classList.add('flex');
-                        }
-
-                        function openEditVocabFromBtn(ev, btn) {
-                            ev.stopPropagation();
-                            var card = btn.closest('[data-vocab-id]');
-                            if (!card) return;
-                            var id = card.dataset.vocabId;
-                            var term = card.dataset.vocabTerm;
-                            var meaning = card.dataset.vocabMeaning;
-                            var usage = card.dataset.vocabUsage;
-                            var usageMeaning = card.dataset.vocabUsageMeaning;
-                            openEditVocab(ev, id, term, meaning, usage, usageMeaning);
-                        }
-
-                        function closeVocabModal() {
-                            var m = document.getElementById('vocabModal');
-                            m.classList.remove('flex'); m.classList.add('hidden');
-                        }
-
                         // Verb edit modal helpers
                         function openEditVerb(ev, id, infinitive, meaning, s1, s2inf, s2form, s3, p1, p2inf, p2form, p3) {
                             ev.stopPropagation();
@@ -595,60 +540,6 @@
                             var modal = document.getElementById('verbModal');
                             modal.classList.remove('hidden');
                             modal.classList.add('flex');
-                        }
-
-                        function submitDelVocab() {
-                            var id = document.getElementById('editVocabId').value;
-                            document.getElementById('delVocabIdHidden').value = id;
-                            document.getElementById('delVocabForm').submit();
-                        }
-
-                        // Verb delete modal helpers
-                        function openDeleteVerbModal(ev, verbId) {
-                            ev.stopPropagation();
-                            document.getElementById('delVerbIdHidden').value = verbId;
-                            var m = document.getElementById('deleteVerbConfirmModal');
-                            m.classList.remove('hidden');
-                            m.classList.add('flex');
-                        }
-
-                        function openDeleteVerbModalFromEdit() {
-                            var idInput = document.querySelector('#verbEditForm input[name="EditVerbId"]');
-                            var id = idInput ? idInput.value : '';
-                            document.getElementById('delVerbIdHidden').value = id;
-                            var m = document.getElementById('deleteVerbConfirmModal');
-                            m.classList.remove('hidden');
-                            m.classList.add('flex');
-                        }
-
-                        function closeDeleteVerbModal() {
-                            var m = document.getElementById('deleteVerbConfirmModal');
-                            m.classList.remove('flex');
-                            m.classList.add('hidden');
-                        }
-
-                        function submitEditVerb() {
-                            var form = document.getElementById('verbEditForm');
-                            if (!form) return;
-                            // ensure hidden inputs are present on the form element as properties for convenience
-                            // Create a real form submission
-                            var post = document.createElement('form');
-                            post.method = 'post';
-                            post.action = '';
-                            var inputs = form.querySelectorAll('input[name]');
-                            for (var i = 0; i < inputs.length; i++) {
-                                var old = inputs[i];
-                                var el = document.createElement('input');
-                                el.type = 'hidden';
-                                el.name = old.name;
-                                el.value = old.value || '';
-                                post.appendChild(el);
-                            }
-                            // anti-forgery token
-                            var token = document.querySelector('input[name="__RequestVerificationToken"]');
-                            if (token) { var t = document.createElement('input'); t.type = 'hidden'; t.name = '__RequestVerificationToken'; t.value = token.value; post.appendChild(t); }
-                            document.body.appendChild(post);
-                            post.submit();
                         }
 
                         function submitDelVerb() {
@@ -714,26 +605,7 @@
                             <div class="vocab-card" data-item-id="@item.Id" data-item-term="@item.Term" data-item-meaning="@item.Meaning" data-item-usage="@item.UsageExample" data-item-usage-meaning="@item.UsageExampleMeaning" data-item-type="@item.ItemType">
                                 @if (Model.Mode == "Number")
                                 {
-                                    var numberMap = new Dictionary<string, string>
-                                    {
-                                        {"zero", "0"}, {"one", "1"}, {"two", "2"}, {"three", "3"}, {"four", "4"},
-                                        {"five", "5"}, {"six", "6"}, {"seven", "7"}, {"eight", "8"}, {"nine", "9"},
-                                        {"ten", "10"}, {"eleven", "11"}, {"twelve", "12"}, {"thirteen", "13"}, {"fourteen", "14"},
-                                        {"fifteen", "15"}, {"sixteen", "16"}, {"seventeen", "17"}, {"eighteen", "18"}, {"nineteen", "19"},
-                                        {"twenty", "20"}, {"twenty one", "21"}, {"twenty two", "22"}, {"twenty three", "23"}, {"twenty four", "24"},
-                                        {"twenty five", "25"}, {"twenty six", "26"}, {"twenty seven", "27"}, {"twenty eight", "28"}, {"twenty nine", "29"},
-                                        {"thirty", "30"}, {"thirty one", "31"}, {"thirty two", "32"}, {"thirty three", "33"}, {"thirty four", "34"},
-                                        {"thirty five", "35"}, {"thirty six", "36"}, {"thirty seven", "37"}, {"thirty eight", "38"}, {"thirty nine", "39"},
-                                        {"forty", "40"}, {"forty one", "41"}, {"forty two", "42"}, {"forty three", "43"}, {"forty four", "44"},
-                                        {"forty five", "45"}, {"forty six", "46"}, {"forty seven", "47"}, {"forty eight", "48"}, {"forty nine", "49"},
-                                        {"fifty", "50"}, {"sixty", "60"}, {"seventy", "70"}, {"eighty", "80"}, {"ninety", "90"},
-                                        {"hundred", "100"}, {"thousand", "1000"}, {"million", "1000000"}
-                                    };
-                                    var numberValue = numberMap.ContainsKey(item.Meaning.ToLower()) ? numberMap[item.Meaning.ToLower()] : "";
-                                    if (!string.IsNullOrEmpty(numberValue))
-                                    {
-                                        <div class="number-badge">@numberValue</div>
-                                    }
+                                    <div class="number-badge" data-number-value="@item.Meaning.ToLower()"></div>
                                 }
                                 <div class="pl-3">
                                     <div class="term">@item.Term</div>
@@ -803,72 +675,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <script>
-                        // Item modal helpers
-                        function openEditItemFromBtn(ev, btn) {
-                            ev.stopPropagation();
-                            var card = btn.closest('[data-item-id]');
-                            if (!card) return;
-                            var id = card.dataset.itemId;
-                            var type = card.dataset.itemType;
-                            var term = card.dataset.itemTerm;
-                            var meaning = card.dataset.itemMeaning;
-                            var usage = card.dataset.itemUsage;
-                            var usageMeaning = card.dataset.itemUsageMeaning;
-                            openEditItem(id, type, term, meaning, usage, usageMeaning);
-                        }
-
-                        function openEditItem(id, type, term, meaning, usage, usageMeaning) {
-                            document.getElementById('editItemId').value = id;
-                            document.getElementById('editItemType').value = type;
-                            document.getElementById('editItemTerm').value = term || '';
-                            document.getElementById('editItemMeaning').value = meaning || '';
-                            document.getElementById('editItemUsage').value = usage || '';
-                            document.getElementById('editItemUsageMeaning').value = usageMeaning || '';
-                            document.getElementById('itemModalTitle').textContent = type;
-                            document.getElementById('delItemIdHidden').value = id;
-                            var m = document.getElementById('itemModal');
-                            m.classList.remove('hidden');
-                            m.classList.add('flex');
-                        }
-
-                        function closeItemModal() {
-                            var m = document.getElementById('itemModal');
-                            m.classList.remove('flex');
-                            m.classList.add('hidden');
-                        }
-
-                        function openDeleteItemModal(ev, btn) {
-                            ev.stopPropagation();
-                            var card = btn.closest('[data-item-id]');
-                            if (!card) return;
-                            var id = card.dataset.itemId;
-                            document.getElementById('delItemIdHidden').value = id;
-                            var m = document.getElementById('deleteItemConfirmModal');
-                            m.classList.remove('hidden');
-                            m.classList.add('flex');
-                        }
-
-                        function openDeleteItemModalFromForm(ev) {
-                            ev.preventDefault();
-                            var m = document.getElementById('deleteItemConfirmModal');
-                            m.classList.remove('hidden');
-                            m.classList.add('flex');
-                        }
-
-                        function closeDeleteItemModal() {
-                            var m = document.getElementById('deleteItemConfirmModal');
-                            m.classList.remove('flex');
-                            m.classList.add('hidden');
-                        }
-
-                        function submitDelItem() {
-                            var id = document.getElementById('editItemId').value;
-                            document.getElementById('delItemIdHidden').value = id;
-                            document.getElementById('delItemForm').submit();
-                        }
-                    </script>
                 }
 
             </div>
@@ -890,11 +696,272 @@
         </div>
     </div>
 
+    <!-- Global script for all modal functions -->
+    <script>
+        // Vocabulary delete modal helpers
+        function openDeleteVocabModal(ev, btn) {
+            ev.stopPropagation();
+            var card = btn.closest('[data-vocab-id]');
+            if (!card) return;
+            var id = card.dataset.vocabId;
+            document.getElementById('delVocabIdHidden').value = id;
+            var m = document.getElementById('deleteVocabConfirmModal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+
+        function openDeleteVocabModalFromForm(ev) {
+            ev.preventDefault();
+            var m = document.getElementById('deleteVocabConfirmModal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+
+        function closeDeleteVocabModal() {
+            var m = document.getElementById('deleteVocabConfirmModal');
+            m.classList.remove('flex');
+            m.classList.add('hidden');
+        }
+
+        // Vocabulary edit modal helpers
+        function openEditVocab(ev, id, term, meaning, usage, usageMeaning) {
+            ev.stopPropagation();
+            document.getElementById('editVocabId').value = id;
+            var delHidden = document.getElementById('delVocabIdHidden');
+            if (delHidden) delHidden.value = id;
+            document.getElementById('editVocabTerm').value = term || '';
+            document.getElementById('editVocabMeaning').value = meaning || '';
+            document.getElementById('editVocabUsage').value = usage || '';
+            document.getElementById('editVocabUsageMeaning').value = usageMeaning || '';
+            var m = document.getElementById('vocabModal');
+            m.classList.remove('hidden'); m.classList.add('flex');
+        }
+
+        function openEditVocabFromBtn(ev, btn) {
+            ev.stopPropagation();
+            var card = btn.closest('[data-vocab-id]');
+            if (!card) return;
+            var id = card.dataset.vocabId;
+            var term = card.dataset.vocabTerm;
+            var meaning = card.dataset.vocabMeaning;
+            var usage = card.dataset.vocabUsage;
+            var usageMeaning = card.dataset.vocabUsageMeaning;
+            openEditVocab(ev, id, term, meaning, usage, usageMeaning);
+        }
+
+        function closeVocabModal() {
+            var m = document.getElementById('vocabModal');
+            m.classList.remove('flex'); m.classList.add('hidden');
+        }
+
+        function submitDelVocab() {
+            var id = document.getElementById('editVocabId').value;
+            document.getElementById('delVocabIdHidden').value = id;
+            document.getElementById('delVocabForm').submit();
+        }
+
+        // Item modal helpers
+        function openEditItemFromBtn(ev, btn) {
+            ev.stopPropagation();
+            var card = btn.closest('[data-item-id]');
+            if (!card) return;
+            var id = card.dataset.itemId;
+            var type = card.dataset.itemType;
+            var term = card.dataset.itemTerm;
+            var meaning = card.dataset.itemMeaning;
+            var usage = card.dataset.itemUsage;
+            var usageMeaning = card.dataset.itemUsageMeaning;
+            openEditItem(id, type, term, meaning, usage, usageMeaning);
+        }
+
+        function openEditItem(id, type, term, meaning, usage, usageMeaning) {
+            document.getElementById('editItemId').value = id;
+            document.getElementById('editItemType').value = type;
+            document.getElementById('editItemTerm').value = term || '';
+            document.getElementById('editItemMeaning').value = meaning || '';
+            document.getElementById('editItemUsage').value = usage || '';
+            document.getElementById('editItemUsageMeaning').value = usageMeaning || '';
+            document.getElementById('itemModalTitle').textContent = type;
+            document.getElementById('delItemIdHidden').value = id;
+            var m = document.getElementById('itemModal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+
+        function closeItemModal() {
+            var m = document.getElementById('itemModal');
+            m.classList.remove('flex');
+            m.classList.add('hidden');
+        }
+
+        function openDeleteItemModal(ev, btn) {
+            ev.stopPropagation();
+            var card = btn.closest('[data-item-id]');
+            if (!card) return;
+            var id = card.dataset.itemId;
+            document.getElementById('delItemIdHidden').value = id;
+            var m = document.getElementById('deleteItemConfirmModal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+
+        function openDeleteItemModalFromForm(ev) {
+            ev.preventDefault();
+            var m = document.getElementById('deleteItemConfirmModal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+
+        function closeDeleteItemModal() {
+            var m = document.getElementById('deleteItemConfirmModal');
+            m.classList.remove('flex');
+            m.classList.add('hidden');
+        }
+
+        function submitDelItem() {
+            var id = document.getElementById('editItemId').value;
+            document.getElementById('delItemIdHidden').value = id;
+            document.getElementById('delItemForm').submit();
+        }
+
+        // Verb modal helpers
+        function openEditVerb(ev, id, infinitive, meaning, s1, s2inf, s2form, s3, p1, p2inf, p2form, p3) {
+            ev.stopPropagation();
+            document.getElementById('modalInfinitive').textContent = infinitive || '';
+            document.getElementById('c_s1').textContent = s1 || '';
+            document.getElementById('c_s2inf').textContent = s2inf || '';
+            document.getElementById('c_s2form').textContent = s2form || '';
+            document.getElementById('c_s3').textContent = s3 || '';
+            document.getElementById('c_p1').textContent = p1 || '';
+            document.getElementById('c_p2inf').textContent = p2inf || '';
+            document.getElementById('c_p2form').textContent = p2form || '';
+            document.getElementById('c_p3').textContent = p3 || '';
+
+            var form = document.getElementById('verbEditForm');
+            if (form) {
+                var set = function(name, value) {
+                    var inp = form.querySelector('input[name="' + name + '"]');
+                    if (inp) inp.value = value || '';
+                };
+                set('EditVerbId', id);
+                set('EditVerbInfinitive', infinitive);
+                set('EditVerbMeaning', meaning);
+                set('EditS1', s1);
+                set('EditS2Inf', s2inf);
+                set('EditS2Form', s2form);
+                set('EditS3', s3);
+                set('EditP1', p1);
+                set('EditP2Inf', p2inf);
+                set('EditP2Form', p2form);
+                set('EditP3', p3);
+            }
+
+            var modal = document.getElementById('verbModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeVerbModal() {
+            var modal = document.getElementById('verbModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        function openDeleteVerbModal(ev, verbId) {
+            ev.stopPropagation();
+            document.getElementById('delVerbIdHidden').value = verbId;
+            var m = document.getElementById('deleteVerbConfirmModal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+
+        function openDeleteVerbModalFromEdit() {
+            var idInput = document.querySelector('#verbEditForm input[name="EditVerbId"]');
+            var id = idInput ? idInput.value : '';
+            document.getElementById('delVerbIdHidden').value = id;
+            var m = document.getElementById('deleteVerbConfirmModal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+
+        function closeDeleteVerbModal() {
+            var m = document.getElementById('deleteVerbConfirmModal');
+            m.classList.remove('flex');
+            m.classList.add('hidden');
+        }
+
+        function submitEditVerb() {
+            var form = document.getElementById('verbEditForm');
+            if (!form) return;
+            var post = document.createElement('form');
+            post.method = 'post';
+            post.action = '';
+            var inputs = form.querySelectorAll('input[name]');
+            for (var i = 0; i < inputs.length; i++) {
+                var old = inputs[i];
+                var el = document.createElement('input');
+                el.type = 'hidden';
+                el.name = old.name;
+                el.value = old.value || '';
+                post.appendChild(el);
+            }
+            var token = document.querySelector('input[name="__RequestVerificationToken"]');
+            if (token) { var t = document.createElement('input'); t.type = 'hidden'; t.name = '__RequestVerificationToken'; t.value = token.value; post.appendChild(t); }
+            document.body.appendChild(post);
+            post.submit();
+        }
+
+        function submitDelVerb() {
+            var idInput = document.querySelector('#delVerbIdHidden');
+            var id = idInput ? idInput.value : '';
+            document.getElementById('delVerbIdHidden').value = id;
+            document.getElementById('delVerbForm').submit();
+        }
+
+        // Close modals with Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                var vm = document.getElementById('verbModal');
+                var vcm = document.getElementById('vocabModal');
+                var dvc = document.getElementById('deleteVocabConfirmModal');
+                var dvb = document.getElementById('deleteVerbConfirmModal');
+                var im = document.getElementById('itemModal');
+                var dim = document.getElementById('deleteItemConfirmModal');
+                if (vm && vm.classList.contains('flex')) closeVerbModal();
+                if (vcm && vcm.classList.contains('flex')) closeVocabModal();
+                if (dvc && dvc.classList.contains('flex')) closeDeleteVocabModal();
+                if (dvb && dvb.classList.contains('flex')) closeDeleteVerbModal();
+                if (im && im.classList.contains('flex')) closeItemModal();
+                if (dim && dim.classList.contains('flex')) closeDeleteItemModal();
+            }
+        });
+    </script>
+
     <script>
         // Set the selected language for the keyboard
         selectedLanguage = '@Model.SelectedLanguage';
     </script>
     <script src="~/js/virtual-keyboard.js"></script>
+    <script>
+        // Populate number badges with actual numeric values and sort cards
+        function populateNumberBadges() {
+            var badges = document.querySelectorAll('[data-number-value]');
+            badges.forEach(function(badge) {
+                var englishText = badge.getAttribute('data-number-value');
+                var numericValue = getNumberValue(englishText);
+                if (numericValue !== null) {
+                    badge.textContent = numericValue;
+                }
+            });
+            // Sort number cards by numeric value after populating badges
+            sortNumberCards();
+        }
+        // Run after DOM is ready and number-mapping.js is loaded
+        document.addEventListener('DOMContentLoaded', populateNumberBadges);
+
+        // Also sort when the page is shown again (after edit/delete/add operations)
+        window.addEventListener('pageshow', populateNumberBadges);
+    </script>
 
 </body>
 </html>
