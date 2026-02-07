@@ -6,7 +6,12 @@
     transition: color 0.2s;
     padding: 6px;
     border-radius: 4px;
-    position: relative;
+    /* Positioning is handled relative to the input wrapper (.relative) to pin icon at the right end */
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
 }
 
 .keyboard-icon:hover {
@@ -28,18 +33,47 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s, visibility 0.2s;
-    z-index: 40;
+    z-index: 150;
     pointer-events: none;
-}
-
-.keyboard-icon:hover::after {
-    opacity: 1;
-    visibility: visible;
 }
 
 .keyboard-container {
     position: absolute;
     right: 0;
+}
+
+/* Ensure inputs inside a .relative wrapper have room for the icon */
+.relative input,
+.relative textarea {
+    padding-right: 44px;
+}
+
+/* Split keyboard into columns with updated layout */
+.keyboard-keys {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+}
+
+.keyboard-main {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.keyboard-num {
+    display: flex;
+    gap: 4px;
+    justify-content: flex-start;
+    margin-bottom: 8px;
+}
+
+.keyboard-row {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .keyboard-modal {
@@ -68,47 +102,6 @@
     background: white;
 }
 
-.keyboard-tips {
-    background: #f0f4ff;
-    border-left: 3px solid #667eea;
-    padding: 10px 12px;
-    border-radius: 6px;
-    margin-bottom: 12px;
-    font-size: 11px;
-    color: #4b5563;
-    max-height: 60px;
-    overflow-y: auto;
-}
-
-.keyboard-tips-title {
-    font-weight: 600;
-    color: #667eea;
-    margin-bottom: 4px;
-}
-
-.keyboard-tips-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 8px;
-}
-
-.keyboard-tip-item {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.keyboard-tip-key {
-    background: #e5e7eb;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-family: monospace;
-    font-weight: 600;
-    font-size: 10px;
-    min-width: 20px;
-    text-align: center;
-}
-
 .keyboard-keys {
     display: flex;
     flex-wrap: wrap;
@@ -130,6 +123,7 @@
     font-weight: 500;
     user-select: none;
     transition: all 0.1s;
+    position: relative;
 }
 
 .key:hover {
@@ -144,7 +138,7 @@
 }
 
 .key.space {
-    min-width: 300px;
+    min-width: 250px;
 }
 
 .key.backspace {
@@ -194,6 +188,7 @@
     color: white;
     border-color: #ef4444;
     min-width: 60px;
+    padding: 0 12px;
 }
 
 .key.close:hover {
@@ -205,6 +200,25 @@
     min-width: 28px;
     height: 28px;
     font-size: 11px;
+}
+
+/* Number key with shift symbol display */
+.key-num {
+    position: relative;
+    min-width: 36px;
+    height: 36px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.key-num .shift-symbol {
+    position: absolute;
+    top: 2px;
+    right: 3px;
+    font-size: 9px;
+    font-weight: 600;
+    color: #667eea;
+    line-height: 1;
 }
 
 .keyboard-info {

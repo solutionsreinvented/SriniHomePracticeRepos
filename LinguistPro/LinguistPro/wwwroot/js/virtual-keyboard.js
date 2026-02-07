@@ -252,9 +252,21 @@ var keyboardLayouts = {
 };
 
 function openKeyboard(ev, element) {
-    ev.stopPropagation();
-    var parent = element.closest('div');
-    currentInputField = parent.querySelector('input, textarea');
+    // element can be either the keyboard icon element or a direct input/textarea element
+    if (ev && typeof ev.stopPropagation === 'function') ev.stopPropagation();
+
+    if (!element) {
+        // try to use activeElement
+        var ae = document.activeElement;
+        if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA')) {
+            currentInputField = ae;
+        }
+    } else if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+        currentInputField = element;
+    } else {
+        var parent = element.closest('div');
+        currentInputField = parent ? parent.querySelector('input, textarea') : null;
+    }
 
     if (!currentInputField) return;
 
@@ -289,20 +301,56 @@ function renderKeyboard() {
     var container = document.getElementById('keyboardKeys');
     container.innerHTML = '';
 
-    // Render each row
-    layout.rows.forEach(function(row) {
+    // Create main column for entire keyboard
+    var mainCol = document.createElement('div');
+    mainCol.className = 'keyboard-main';
+
+    // Number row: display numbers with shift symbols in top-right corner
+    if (layout.rows && layout.rows.length > 0) {
+        var numRow = document.createElement('div');
+        numRow.className = 'keyboard-row';
+        layout.rows[0].forEach(function(keyObj) {
+            var keyEl = document.createElement('div');
+            keyEl.className = 'key key-num';
+            keyEl.id = 'vkey_' + keyObj.key;
+
+            // Main number display
+            var numSpan = document.createElement('span');
+            numSpan.textContent = keyObj.key;
+            keyEl.appendChild(numSpan);
+
+            // Shift symbol in top-right corner
+            if (keyObj.shift) {
+                var shiftSpan = document.createElement('span');
+                shiftSpan.className = 'shift-symbol';
+                shiftSpan.textContent = keyObj.shift;
+                keyEl.appendChild(shiftSpan);
+            }
+
+            keyEl.title = keyObj.key + (keyObj.shift ? ' (Shift: ' + keyObj.shift + ')' : '');
+            keyEl.onclick = function() { insertCharacter(keyObj); };
+            numRow.appendChild(keyEl);
+        });
+        mainCol.appendChild(numRow);
+    }
+
+    // Main keyboard: letter rows (skip first row which is numbers)
+    for (var r = 1; r < layout.rows.length; r++) {
+        var row = layout.rows[r];
+        var rowDiv = document.createElement('div');
+        rowDiv.className = 'keyboard-row';
         row.forEach(function(keyObj) {
             var keyEl = document.createElement('div');
             keyEl.className = 'key key-small';
             keyEl.id = 'vkey_' + keyObj.key;
-            
             var displayKey = getDisplayKey(keyObj);
             keyEl.textContent = displayKey;
             keyEl.title = keyObj.key + (keyObj.shift ? ' (Shift: ' + keyObj.shift + ')' : '');
             keyEl.onclick = function() { insertCharacter(keyObj); };
-            container.appendChild(keyEl);
+            rowDiv.appendChild(keyEl);
         });
-    });
+        mainCol.appendChild(rowDiv);
+    }
 
     // Add space bar
     var spaceKey = document.createElement('div');
@@ -310,14 +358,13 @@ function renderKeyboard() {
     spaceKey.id = 'vkey_space';
     spaceKey.textContent = 'Space';
     spaceKey.onclick = function() { insertCharacter({ key: ' ' }); };
-    container.appendChild(spaceKey);
+    mainCol.appendChild(spaceKey);
 
     // Add control buttons row
     var controlsDiv = document.createElement('div');
     controlsDiv.style.display = 'flex';
     controlsDiv.style.gap = '4px';
-    controlsDiv.style.justifyContent = 'center';
-    controlsDiv.style.width = '100%';
+    controlsDiv.style.justifyContent = 'flex-start';
     controlsDiv.style.marginTop = '8px';
 
     // Shift key
@@ -351,25 +398,25 @@ function renderKeyboard() {
     closeKey.onclick = function() { closeKeyboard(); };
     controlsDiv.appendChild(closeKey);
 
-    container.appendChild(controlsDiv);
+    mainCol.appendChild(controlsDiv);
 
-    // Add tips
-    addKeyboardTips(lang);
+    // Add help info at the bottom
+    addKeyboardInfo(mainCol);
 
-    // Add info
-    addKeyboardInfo();
+    container.appendChild(mainCol);
 }
 
 function getDisplayKey(keyObj) {
     if (shiftKeyActive && keyObj.shift) {
         return keyObj.shift;
     }
-    
+
     var baseKey = keyObj.key;
-    if (capsLockActive && /^[a-z]$/.test(baseKey)) {
+    // treat letters in a Unicode-aware manner: if lowercase/uppercase differ it's a letter
+    if (capsLockActive && baseKey && baseKey.length === 1 && baseKey.toLowerCase() !== baseKey.toUpperCase()) {
         return baseKey.toUpperCase();
     }
-    
+
     return baseKey;
 }
 
@@ -392,7 +439,8 @@ function insertCharacter(keyObj) {
     // Handle shift + special characters
     if (shiftKeyActive && keyObj.shift) {
         charToInsert = keyObj.shift;
-    } else if ((capsLockActive || shiftKeyActive) && /^[a-z]$/.test(keyObj.key)) {
+    } else if ((capsLockActive || shiftKeyActive) && keyObj.key && keyObj.key.length === 1 && keyObj.key.toLowerCase() !== keyObj.key.toUpperCase()) {
+        // Unicode-aware letter detection
         charToInsert = keyObj.key.toUpperCase();
     }
 
@@ -438,50 +486,10 @@ function deleteCharacter() {
     currentInputField.dispatchEvent(event);
 }
 
-function addKeyboardTips(lang) {
-    var layout = keyboardLayouts[lang];
-    if (!layout || !layout.symbols) return;
+// Tips removed - symbols are shown inline on number keys now
 
-    var container = document.getElementById('keyboardKeys');
-    var tipsDiv = document.createElement('div');
-    tipsDiv.className = 'keyboard-tips';
-    
-    var titleDiv = document.createElement('div');
-    titleDiv.className = 'keyboard-tips-title';
-    titleDiv.textContent = 'Special Characters (Shift + Number):';
-    tipsDiv.appendChild(titleDiv);
-
-    var contentDiv = document.createElement('div');
-    contentDiv.className = 'keyboard-tips-content';
-    
-    layout.rows[0].forEach(function(keyObj) {
-        if (keyObj.shift) {
-            var item = document.createElement('div');
-            item.className = 'keyboard-tip-item';
-            
-            var keyEl = document.createElement('span');
-            keyEl.className = 'keyboard-tip-key';
-            keyEl.textContent = keyObj.key;
-            
-            var arrEl = document.createElement('span');
-            arrEl.textContent = ' → ';
-            
-            var valEl = document.createElement('span');
-            valEl.textContent = keyObj.shift;
-            
-            item.appendChild(keyEl);
-            item.appendChild(arrEl);
-            item.appendChild(valEl);
-            contentDiv.appendChild(item);
-        }
-    });
-
-    tipsDiv.appendChild(contentDiv);
-    container.insertBefore(tipsDiv, container.firstChild);
-}
-
-function addKeyboardInfo() {
-    var container = document.getElementById('keyboardKeys');
+function addKeyboardInfo(targetContainer) {
+    var container = targetContainer || document.getElementById('keyboardKeys');
     var infoDiv = document.createElement('div');
     infoDiv.className = 'keyboard-info';
     infoDiv.innerHTML = `
@@ -525,8 +533,12 @@ document.addEventListener('keydown', function(e) {
         e.preventDefault();
         if (isKeyboardOpen) {
             closeKeyboard();
-        } else if (currentInputField) {
-            openKeyboard({ stopPropagation: function() {} }, currentInputField.parentElement.querySelector('.keyboard-icon'));
+        } else {
+            // open for current focused input if any
+            var ae = document.activeElement;
+            if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA')) {
+                openKeyboard({ stopPropagation: function() {} }, ae);
+            }
         }
         return;
     }
