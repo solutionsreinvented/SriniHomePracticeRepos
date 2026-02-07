@@ -19,11 +19,15 @@ namespace LinguistPro.Pages
         }
 
         public string UserFullName { get; set; } = string.Empty;
+        public int VocabCount { get; set; }
+        public int VerbCount { get; set; }
+        public int NumberCount { get; set; }
+        public int MonthCount { get; set; }
+        public int DayCount { get; set; }
         public int TotalItems { get; set; }
         public int TotalLanguages { get; set; }
         public double AverageMastery { get; set; }
         public List<LanguageStatsViewModel> LanguageStats { get; set; } = new();
-        public int LongestStreak { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -51,21 +55,39 @@ namespace LinguistPro.Pages
                     .Where(v => v.LanguageProfileId == langProfile.LanguageProfileId)
                     .CountAsync();
 
-                var itemCount = await _db.LanguageItems
-                    .Where(i => i.LanguageProfileId == langProfile.LanguageProfileId)
+                var numberCount = await _db.LanguageItems
+                    .Where(i => i.LanguageProfileId == langProfile.LanguageProfileId && i.ItemType == "Number")
                     .CountAsync();
 
-                int totalForLang = vocabCount + verbCount + itemCount;
+                var monthCount = await _db.LanguageItems
+                    .Where(i => i.LanguageProfileId == langProfile.LanguageProfileId && i.ItemType == "Month")
+                    .CountAsync();
+
+                var dayCount = await _db.LanguageItems
+                    .Where(i => i.LanguageProfileId == langProfile.LanguageProfileId && i.ItemType == "Day")
+                    .CountAsync();
+
+                int totalForLang = vocabCount + verbCount + numberCount + monthCount + dayCount;
 
                 LanguageStats.Add(new LanguageStatsViewModel
                 {
                     LanguageName = langProfile.LanguageName,
                     LanguageCode = langProfile.LanguageCode,
+                    VocabCount = vocabCount,
+                    VerbCount = verbCount,
+                    NumberCount = numberCount,
+                    MonthCount = monthCount,
+                    DayCount = dayCount,
                     ItemCount = totalForLang,
                     MasteryLevel = langProfile.MasteryLevel,
                     IsActive = langProfile.IsActive
                 });
 
+                VocabCount += vocabCount;
+                VerbCount += verbCount;
+                NumberCount += numberCount;
+                MonthCount += monthCount;
+                DayCount += dayCount;
                 TotalItems += totalForLang;
             }
 
@@ -84,6 +106,11 @@ namespace LinguistPro.Pages
     {
         public string LanguageName { get; set; } = string.Empty;
         public string LanguageCode { get; set; } = string.Empty;
+        public int VocabCount { get; set; }
+        public int VerbCount { get; set; }
+        public int NumberCount { get; set; }
+        public int MonthCount { get; set; }
+        public int DayCount { get; set; }
         public int ItemCount { get; set; }
         public int MasteryLevel { get; set; }
         public bool IsActive { get; set; }
