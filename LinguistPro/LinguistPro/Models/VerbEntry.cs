@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LinguistPro.Models
 {
@@ -6,6 +7,9 @@ namespace LinguistPro.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [ForeignKey(nameof(LanguageProfile))]
+        public int LanguageProfileId { get; set; }
 
         public required string Language { get; set; }
         public required string Infinitive { get; set; }
@@ -23,5 +27,8 @@ namespace LinguistPro.Models
         public string P2Inf { get; set; } = string.Empty;
         public string P2Form { get; set; } = string.Empty;
         public string P3 { get; set; } = string.Empty;
+
+        // Navigation property
+        public LanguageProfile? LanguageProfile { get; set; }
     }
 }

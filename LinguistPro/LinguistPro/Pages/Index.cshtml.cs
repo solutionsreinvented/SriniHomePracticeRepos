@@ -1,23 +1,52 @@
 using LinguistPro.Models;
 using LinguistPro.Services;
 
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace LinguistPro.Pages
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly AppDbContext _db;
         private readonly DictionaryService _dictionary;
         private readonly WiktionaryVerbService _verbs;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public IndexModel(AppDbContext db, DictionaryService dictionary, WiktionaryVerbService verbs)
+        public IndexModel(AppDbContext db, DictionaryService dictionary, WiktionaryVerbService verbs, UserManager<ApplicationUser> userManager)
         {
             _db = db;
             _dictionary = dictionary;
             _verbs = verbs;
+            _userManager = userManager;
+        }
+
+        private int? _currentUserId;
+        private LanguageProfile? _currentLanguageProfile;
+
+        private async Task<int> GetCurrentUserId()
+        {
+            if (_currentUserId == null)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                _currentUserId = user?.Id ?? 0;
+            }
+            return _currentUserId.Value;
+        }
+
+        private async Task<LanguageProfile?> GetCurrentLanguageProfile()
+        {
+            if (_currentLanguageProfile == null)
+            {
+                var userId = await GetCurrentUserId();
+                _currentLanguageProfile = await _db.LanguageProfiles
+                    .FirstOrDefaultAsync(l => l.UserId == userId && l.LanguageCode == SelectedLanguage);
+            }
+            return _currentLanguageProfile;
         }
 
         [BindProperty(SupportsGet = true)]

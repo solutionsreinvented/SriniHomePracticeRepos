@@ -13,13 +13,6 @@ namespace LinguistPro.Models
         [Key]
         public int UserId { get; set; }
 
-        [Required]
-        [StringLength(50, MinimumLength = 3)]
-        public string Username { get; set; } = string.Empty;
-
-        [Required]
-        public string PasswordHash { get; set; } = string.Empty;
-
         [StringLength(100)]
         public string FirstName { get; set; } = string.Empty;
 
@@ -30,9 +23,6 @@ namespace LinguistPro.Models
 
         [StringLength(100)]
         public string Country { get; set; } = string.Empty;
-
-        [StringLength(255)]
-        public string EmailAddress { get; set; } = string.Empty;
 
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 
@@ -45,7 +35,7 @@ namespace LinguistPro.Models
 
         public override string ToString()
         {
-            return $"{Username} ({FirstName} {LastName})";
+            return $"{FirstName} {LastName}";
         }
     }
 }
