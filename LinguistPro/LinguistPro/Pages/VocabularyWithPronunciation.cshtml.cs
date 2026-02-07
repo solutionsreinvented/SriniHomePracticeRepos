@@ -12,16 +12,19 @@ namespace LinguistPro.Pages
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly AppDbContext _context;
-        private readonly PronunciationService _pronunciationService;
+        private readonly PronunciationFetcherService _pronunciationFetcher;
+        private readonly ILogger<VocabularyWithPronunciationModel> _logger;
 
         public VocabularyWithPronunciationModel(
             UserManager<ApplicationUser> userManager,
             AppDbContext context,
-            PronunciationService pronunciationService)
+            PronunciationFetcherService pronunciationFetcher,
+            ILogger<VocabularyWithPronunciationModel> logger)
         {
             _userManager = userManager;
             _context = context;
-            _pronunciationService = pronunciationService;
+            _pronunciationFetcher = pronunciationFetcher;
+            _logger = logger;
         }
 
         public List<VocabularyPronunciationViewModel> VocabularyWithPronunciation { get; set; } = [];
@@ -49,7 +52,7 @@ namespace LinguistPro.Pages
                 .Distinct()
                 .ToList();
 
-            // Get vocabulary with pronunciation
+            // Get vocabulary with real-time pronunciation fetching
             var query = _context.Vocabulary
                 .Include(v => v.LanguageProfile)
                 .Where(v => v.LanguageProfile.UserId == user.Id);
@@ -59,43 +62,66 @@ namespace LinguistPro.Pages
                 query = query.Where(v => v.LanguageProfile.LanguageCode == selectedLanguage);
             }
 
-            var vocabularyItems = await query.ToListAsync();
+            var vocabularyItems = await query
+                .OrderBy(v => v.Term)
+                .Take(100)  // Limit to avoid too many API calls
+                .ToListAsync();
 
-            // Build view models with pronunciation data
+            _logger.LogInformation($"Fetching pronunciation for {vocabularyItems.Count} vocabulary items");
+
+            // Fetch pronunciation in real-time for each vocabulary item
             VocabularyWithPronunciation = new List<VocabularyPronunciationViewModel>();
 
             foreach (var vocab in vocabularyItems)
             {
-                var pronunciation = await _pronunciationService
-                    .GetPronunciationAsync(vocab.Term, vocab.LanguageProfile.LanguageCode);
-
-                VocabularyWithPronunciation.Add(new VocabularyPronunciationViewModel
+                try
                 {
-                    Vocabulary = vocab,
-                    Pronunciation = pronunciation
-                });
+                    // Try to get from cache first
+                    PronunciationData? pronunciation = await _context.PronunciationData
+                        .FirstOrDefaultAsync(p => p.Word.ToLower() == vocab.Term.ToLower() 
+                            && p.LanguageCode == vocab.LanguageProfile.LanguageCode);
+
+                    // If not in cache, fetch from API
+                    if (pronunciation == null)
+                    {
+                        _logger.LogInformation($"Fetching pronunciation for: {vocab.Term}");
+                        pronunciation = await _pronunciationFetcher.FetchComprehensiveAsync(
+                            vocab.Term, 
+                            vocab.LanguageProfile.LanguageCode);
+
+                        // Cache the result
+                        if (pronunciation != null)
+                        {
+                            _context.PronunciationData.Add(pronunciation);
+                            await _context.SaveChangesAsync();
+                            _logger.LogInformation($"✓ Cached pronunciation for: {vocab.Term}");
+                        }
+                    }
+                    else
+                    {
+                        _logger.LogInformation($"✓ Found cached pronunciation for: {vocab.Term}");
+                    }
+
+                    VocabularyWithPronunciation.Add(new VocabularyPronunciationViewModel
+                    {
+                        Vocabulary = vocab,
+                        Pronunciation = pronunciation
+                    });
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError($"Error fetching pronunciation for {vocab.Term}: {ex.Message}");
+                    VocabularyWithPronunciation.Add(new VocabularyPronunciationViewModel
+                    {
+                        Vocabulary = vocab,
+                        Pronunciation = null
+                    });
+                }
             }
 
-            // Sort by whether pronunciation exists (items with pronunciation first)
-            VocabularyWithPronunciation = VocabularyWithPronunciation
-                .OrderByDescending(v => v.Pronunciation != null)
-                .ThenBy(v => v.Vocabulary.Term)
-                .ToList();
-
             VocabularyCount = VocabularyWithPronunciation.Count;
-        }
 
-        public string GetLanguageName(string languageCode)
-        {
-            return languageCode switch
-            {
-                "de" => "🇩🇪 German",
-                "fr" => "🇫🇷 French",
-                "es" => "🇪🇸 Spanish",
-                "ru" => "🇷🇺 Russian",
-                "ko" => "🇰🇷 Korean",
-                _ => languageCode.ToUpper()
-            };
+            _logger.LogInformation($"Loaded {VocabularyCount} vocabulary items with pronunciation");
         }
 
         public string GetLanguageBadge(string languageCode)

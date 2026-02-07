@@ -1,0 +1,456 @@
+@page "/Admin/AutoPopulate"
+@model LinguistPro.Pages.Admin.AutoPopulateModel
+@{
+    ViewData["Title"] = "Auto-Populate Language Data";
+    Layout = "_Layout";
+}
+
+<div class="populate-container">
+    <div class="populate-header">
+        <h1>🚀 Auto-Populate Language Data</h1>
+        <p>Fetch real data from Free APIs - No limits, full details included</p>
+    </div>
+
+    @if (Model.IsSuccess)
+    {
+        <div class="alert alert-success">
+            <h4>✅ Population Complete!</h4>
+            <p>@Model.SuccessMessage</p>
+            <a href="/Index" class="btn btn-primary">View Data →</a>
+        </div>
+    }
+    else if (Model.HasError)
+    {
+        <div class="alert alert-danger">
+            <h4>❌ Error</h4>
+            <p>@Model.ErrorMessage</p>
+            <button type="button" class="btn btn-primary" onclick="location.reload()">Retry</button>
+        </div>
+    }
+    else if (Model.IsProcessing)
+    {
+        <div class="alert alert-info">
+            <h4>🔄 Processing in Progress...</h4>
+            <p>@Model.ProcessingMessage</p>
+            
+            <div class="progress-section">
+                <div class="progress-info">
+                    <span>Progress: <strong>@Model.ProcessedCount</strong> / <strong>@Model.TotalCount</strong></span>
+                    <span class="percentage">@Model.ProgressPercentage.ToString("F1")%</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                         role="progressbar" 
+                         style="width: @Model.ProgressPercentage%">
+                    </div>
+                </div>
+            </div>
+
+            <p class="fetch-note">⏳ Please wait while we fetch real data from Free APIs...</p>
+        </div>
+    }
+    else
+    {
+        <div class="populate-info">
+            <h3>📊 Available Languages</h3>
+            <div class="language-list">
+                @foreach (var lang in Model.AvailableLanguages)
+                {
+                    <div class="language-item">
+                        <span class="lang-flag">@GetLanguageFlag(lang.Key)</span>
+                        <span class="lang-name">@lang.Value</span>
+                    </div>
+                }
+            </div>
+
+            <h3 class="mt-4">📚 What You Can Fetch</h3>
+            <div class="features-grid">
+                <div class="feature-box">
+                    <h4>📚 Vocabulary</h4>
+                    <p>Real definitions and usage examples</p>
+                    <ul>
+                        <li>✅ English meanings</li>
+                        <li>✅ Usage examples (target language)</li>
+                        <li>✅ English translations of examples</li>
+                        <li>✅ No limits - fetch as many as you want</li>
+                    </ul>
+                </div>
+                <div class="feature-box">
+                    <h4>⚡ Verbs</h4>
+                    <p>Proper conjugations without English</p>
+                    <ul>
+                        <li>✅ 1st/2nd/3rd person singular</li>
+                        <li>✅ Plural conjugations</li>
+                        <li>✅ Formal & informal forms</li>
+                        <li>✅ In target language ONLY</li>
+                    </ul>
+                </div>
+                <div class="feature-box">
+                    <h4>🔢 Numbers</h4>
+                    <p>0-100 in all languages</p>
+                    <ul>
+                        <li>✅ Zero to one hundred</li>
+                        <li>✅ Proper pronunciation</li>
+                        <li>✅ English translations</li>
+                    </ul>
+                </div>
+                <div class="feature-box">
+                    <h4>📅 Days</h4>
+                    <p>All 7 days of the week</p>
+                    <ul>
+                        <li>✅ Monday through Sunday</li>
+                        <li>✅ In all 5 languages</li>
+                        <li>✅ With translations</li>
+                    </ul>
+                </div>
+                <div class="feature-box">
+                    <h4>📆 Months</h4>
+                    <p>All 12 months of the year</p>
+                    <ul>
+                        <li>✅ January through December</li>
+                        <li>✅ In all 5 languages</li>
+                        <li>✅ With translations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="mt-4">🔗 Data Sources</h3>
+            <ul>
+                <li><strong>Free Dictionary API</strong> (api.dictionaryapi.dev)
+                    <br/><small>Real definitions, examples, and meanings</small>
+                </li>
+                <li><strong>MyMemory Translation API</strong>
+                    <br/><small>Translates usage examples to English</small>
+                </li>
+                <li><strong>Native Data</strong>
+                    <br/><small>Carefully curated numbers, days, months</small>
+                </li>
+            </ul>
+
+            <form method="post">
+                @Html.AntiForgeryToken()
+                
+                <div class="form-group">
+                    <label for="languageCode">Select Language:</label>
+                    <select id="languageCode" name="languageCode" class="form-control" required>
+                        <option value="">-- Choose Language --</option>
+                        @foreach (var lang in Model.AvailableLanguages)
+                        {
+                            <option value="@lang.Key">@lang.Value</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Select Category:</label>
+                    <select id="category" name="category" class="form-control" required onchange="updateCountLimits()">
+                        <option value="Vocabulary">📚 Vocabulary</option>
+                        <option value="Verbs">⚡ Verbs</option>
+                        <option value="Numbers">🔢 Numbers</option>
+                        <option value="Days">📅 Days</option>
+                        <option value="Months">📆 Months</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="countGroup">
+                    <label for="vocabularyCount">Number of Items to Fetch:</label>
+                    <input type="number" id="vocabularyCount" name="vocabularyCount" 
+                           class="form-control" value="100" min="1" max="1000" />
+                    <small class="form-text text-muted">⚠️ No limits! Fetch as many as you want (may take longer)</small>
+                </div>
+
+                <div class="form-group" id="verbCountGroup" style="display:none;">
+                    <label for="verbCount">Number of Verbs to Fetch:</label>
+                    <input type="number" id="verbCount" name="verbCount" 
+                           class="form-control" value="100" min="1" max="1000" />
+                </div>
+
+                <button type="submit" class="btn btn-lg btn-success">
+                    🚀 Start Fetching Data
+                </button>
+            </form>
+
+            <div class="alert alert-info mt-3">
+                <strong>ℹ️ How It Works:</strong>
+                <ul style="margin-bottom: 0;">
+                    <li>✅ Fetches <strong>real data</strong> from FREE APIs - no pre-seeded data</li>
+                    <li>✅ <strong>Full meanings</strong> and <strong>usage examples</strong> included</li>
+                    <li>✅ <strong>Proper conjugations</strong> without English pronouns</li>
+                    <li>✅ <strong>No limits</strong> - fetch as much as you want</li>
+                    <li>✅ <strong>Progress bar</strong> shows real-time fetching status</li>
+                    <li>✅ Each fetch waits between requests to avoid rate limiting</li>
+                </ul>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .populate-container {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .populate-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .populate-header h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+
+    .populate-info {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .language-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+        margin: 15px 0;
+    }
+
+    .language-item {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px;
+        border-radius: 6px;
+        text-align: center;
+    }
+
+    .lang-flag {
+        font-size: 32px;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .lang-name {
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin: 15px 0;
+    }
+
+    .feature-box {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 15px;
+        border-radius: 6px;
+        border-left: 4px solid #667eea;
+    }
+
+    .feature-box h4 {
+        margin-top: 0;
+        color: #333;
+    }
+
+    .feature-box p {
+        font-size: 12px;
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    .feature-box ul {
+        list-style: none;
+        padding: 0;
+        font-size: 12px;
+    }
+
+    .feature-box li {
+        padding: 3px 0;
+        color: #555;
+    }
+
+    .populate-info h3 {
+        margin-top: 25px;
+        color: #333;
+        font-size: 18px;
+    }
+
+    .populate-info ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .populate-info li {
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+        color: #666;
+    }
+
+    .populate-info li:last-child {
+        border-bottom: none;
+    }
+
+    .populate-info small {
+        display: block;
+        color: #999;
+        margin-top: 3px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 12px 30px;
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .btn-lg {
+        width: 100%;
+        padding: 15px;
+        font-size: 18px;
+    }
+
+    .btn-success {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .btn-success:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-primary {
+        background: #667eea;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background: #764ba2;
+    }
+
+    .alert {
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+    }
+
+    .alert-success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .alert-danger {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .alert-info {
+        background: #d1ecf1;
+        color: #0c5460;
+        border: 1px solid #bee5eb;
+    }
+
+    .progress-section {
+        margin: 20px 0;
+    }
+
+    .progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .percentage {
+        color: #667eea;
+    }
+
+    .progress {
+        height: 30px;
+        margin: 15px 0;
+        background: #e9ecef;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .progress-bar {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+    }
+
+    .fetch-note {
+        text-align: center;
+        color: #667eea;
+        font-weight: 600;
+    }
+
+    .mt-3 { margin-top: 20px; }
+    .mt-4 { margin-top: 30px; }
+</style>
+
+<script>
+    function updateCountLimits() {
+        const category = document.getElementById('category').value;
+        const countGroup = document.getElementById('countGroup');
+        const verbCountGroup = document.getElementById('verbCountGroup');
+
+        if (category === 'Vocabulary') {
+            countGroup.style.display = 'block';
+            countGroup.querySelector('label').textContent = 'Number of Vocabulary Items:';
+            countGroup.querySelector('input').id = 'vocabularyCount';
+            countGroup.querySelector('input').name = 'vocabularyCount';
+            verbCountGroup.style.display = 'none';
+        } else if (category === 'Verbs') {
+            countGroup.style.display = 'block';
+            countGroup.querySelector('label').textContent = 'Number of Verbs:';
+            countGroup.querySelector('input').id = 'verbCount';
+            countGroup.querySelector('input').name = 'verbCount';
+            verbCountGroup.style.display = 'none';
+        } else {
+            countGroup.style.display = 'none';
+            verbCountGroup.style.display = 'none';
+        }
+    }
+</script>
+
+@functions {
+    string GetLanguageFlag(string code) =>
+        code switch
+        {
+            "de" => "🇩🇪",
+            "fr" => "🇫🇷",
+            "es" => "🇪🇸",
+            "ru" => "🇷🇺",
+            "ko" => "🇰🇷",
+            _ => "🌐"
+        };
+}

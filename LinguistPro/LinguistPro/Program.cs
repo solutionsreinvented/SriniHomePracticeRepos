@@ -27,6 +27,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
 builder.Services.AddHttpClient<DictionaryService>();
 builder.Services.AddHttpClient<WiktionaryVerbService>();
 builder.Services.AddHttpClient<PronunciationFetcherService>();
+builder.Services.AddHttpClient<VocabularyAutoFetcherService>();
+builder.Services.AddHttpClient<LanguageDataAutoPopulatorService>();
 builder.Services.AddScoped<LearningStreakService>();
 builder.Services.AddScoped<SpacedRepetitionService>();
 builder.Services.AddScoped<AnalyticsService>();
@@ -34,6 +36,8 @@ builder.Services.AddScoped<UserPreferencesService>();
 builder.Services.AddScoped<QuizService>();
 builder.Services.AddScoped<PronunciationService>();
 builder.Services.AddScoped<PronunciationFetcherService>();
+builder.Services.AddScoped<VocabularyAutoFetcherService>();
+builder.Services.AddScoped<LanguageDataAutoPopulatorService>();
 builder.Services.AddScoped<SearchFilterService>();
 
 // Configure cookie settings

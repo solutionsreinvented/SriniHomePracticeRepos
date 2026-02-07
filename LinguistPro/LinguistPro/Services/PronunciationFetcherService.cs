@@ -19,7 +19,7 @@ namespace LinguistPro.Services
         }
 
         /// <summary>
-        /// Fetch pronunciation data from Free Dictionary API
+        /// Fetch pronunciation data from Free Dictionary API - with better error handling
         /// Supports: en, es, fr, de, it, ko, ja, zh, ar, hin, ur, ja, pt, nl, no, pl, ru, tr
         /// </summary>
         public async Task<PronunciationData?> FetchFromFreeDictionaryAsync(string word, string languageCode)
@@ -44,20 +44,33 @@ namespace LinguistPro.Services
                     return null;
 
                 var apiLangCode = langMap[languageCode];
-                var url = $"https://api.dictionaryapi.dev/api/v2/entries/{apiLangCode}/{word.ToLower()}";
+                var url = $"https://api.dictionaryapi.dev/api/v2/entries/{apiLangCode}/{Uri.EscapeDataString(word.ToLower())}";
+
+                _logger.LogInformation($"Fetching pronunciation from: {url}");
 
                 var response = await _httpClient.GetAsync(url);
+
                 if (!response.IsSuccessStatusCode)
                 {
-                    _logger.LogWarning($"Failed to fetch from Free Dictionary API: {word} ({languageCode})");
+                    _logger.LogWarning($"API returned status {response.StatusCode} for: {word} ({languageCode})");
                     return null;
                 }
 
                 var content = await response.Content.ReadAsStringAsync();
+
+                if (string.IsNullOrEmpty(content))
+                {
+                    _logger.LogWarning($"Empty response from API for: {word}");
+                    return null;
+                }
+
                 using var doc = JsonDocument.Parse(content);
 
                 if (doc.RootElement.ValueKind != JsonValueKind.Array || doc.RootElement.GetArrayLength() == 0)
+                {
+                    _logger.LogWarning($"No entries found for: {word}");
                     return null;
+                }
 
                 var entry = doc.RootElement[0];
 
@@ -72,7 +85,9 @@ namespace LinguistPro.Services
                 // Get IPA from phonetic field
                 if (entry.TryGetProperty("phonetic", out var phoneticElement))
                 {
-                    pronunciation.IPA = phoneticElement.GetString() ?? "";
+                    var phoneticText = phoneticElement.GetString();
+                    if (!string.IsNullOrEmpty(phoneticText))
+                        pronunciation.IPA = phoneticText;
                 }
 
                 // Try to get pronunciation from phonetics array
@@ -80,17 +95,24 @@ namespace LinguistPro.Services
                 {
                     foreach (var phonetic in phoneticsArray.EnumerateArray())
                     {
+                        // Get IPA text
                         if (phonetic.TryGetProperty("text", out var ipaText))
                         {
-                            pronunciation.IPA = ipaText.GetString() ?? pronunciation.IPA;
+                            var ipaValue = ipaText.GetString();
+                            if (!string.IsNullOrEmpty(ipaValue) && string.IsNullOrEmpty(pronunciation.IPA))
+                            {
+                                pronunciation.IPA = ipaValue;
+                            }
                         }
 
-                        if (phonetic.TryGetProperty("audio", out var audioUrl))
+                        // Get audio URL
+                        if (phonetic.TryGetProperty("audio", out var audioUrl) && string.IsNullOrEmpty(pronunciation.AudioUrl))
                         {
                             var audio = audioUrl.GetString();
                             if (!string.IsNullOrEmpty(audio))
                             {
                                 pronunciation.AudioUrl = audio;
+                                _logger.LogInformation($"Found audio for {word}: {audio}");
                             }
                         }
                     }
@@ -105,16 +127,25 @@ namespace LinguistPro.Services
                         var definition = definitionsArray[0];
                         if (definition.TryGetProperty("definition", out var def))
                         {
-                            pronunciation.PronunciationNotes = def.GetString();
+                            var defText = def.GetString();
+                            if (!string.IsNullOrEmpty(defText))
+                                pronunciation.PronunciationNotes = defText;
                         }
                     }
                 }
 
-                return string.IsNullOrEmpty(pronunciation.IPA) ? null : pronunciation;
+                if (!string.IsNullOrEmpty(pronunciation.IPA))
+                {
+                    _logger.LogInformation($"✓ Successfully fetched: {word} - IPA: {pronunciation.IPA}");
+                    return pronunciation;
+                }
+
+                _logger.LogWarning($"No IPA found for: {word}");
+                return null;
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error fetching from Free Dictionary API: {ex.Message}");
+                _logger.LogError($"Error fetching from Free Dictionary API for {word}: {ex.Message}");
                 return null;
             }
         }

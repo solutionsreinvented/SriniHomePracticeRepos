@@ -114,7 +114,7 @@ Home | 🎙️ Pronunciation | 🔍 Search | Privacy
 ### **Step 3: See vocabulary**
 ```
 Hallo (German)    |  Bonjour (French)  |  Hola (Spanish)
-/ˈhaloː/         |  /bɔ̃ʒuʁ/           |  /ˈola/
+ /ˈhaloː/         |  /bɔ̃ʒuʁ/           |  /ˈola/
 HAL-LO           |  BON-JOUR          |  O-LA
 ▶️🐢🐇           |  ▶️🐢🐇            |  ▶️🐢🐇
 [Tips & Guide]   |  [Tips & Guide]    |  [Tips & Guide]
@@ -347,4 +347,15 @@ Your **Pronunciation Guide (T2I7)** is now:
 **Feature Roadmap Status: PROGRESSING ON SCHEDULE**
 
 Next up: T2I9 Phase 2 or T2I8 features!
+
+---
+
+## 📂 ADMIN TASKS - FOR DEVELOPER
+
+To seed pronunciations:
+```
+$ dotnet run
+Visit: /Admin/SeedPronunciation
+Click: "Start Seeding"
+View: /VocabularyWithPronunciation
 
