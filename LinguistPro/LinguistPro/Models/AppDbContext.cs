@@ -19,6 +19,9 @@ namespace LinguistPro.Models
         public DbSet<ProgressSnapshot> ProgressSnapshots => Set<ProgressSnapshot>();
         public DbSet<UserPreferences> UserPreferences => Set<UserPreferences>();
         public DbSet<PronunciationData> PronunciationData => Set<PronunciationData>();
+        public DbSet<QuizAttempt> QuizAttempts => Set<QuizAttempt>();
+        public DbSet<QuizQuestion> QuizQuestions => Set<QuizQuestion>();
+        public DbSet<QuizStatistics> QuizStatistics => Set<QuizStatistics>();
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

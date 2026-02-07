@@ -1,0 +1,168 @@
+@page "/Admin/SeedPronunciation"
+@model LinguistPro.Pages.Admin.SeedPronunciationModel
+@{
+    ViewData["Title"] = "Seed Pronunciation Data";
+    Layout = "_Layout";
+}
+
+<div class="seed-container">
+    <div class="seed-header">
+        <h1>🎙️ Seed Pronunciation Data</h1>
+        <p>Populate pronunciation database from free APIs</p>
+    </div>
+
+    @if (Model.IsComplete)
+    {
+        <div class="alert alert-success">
+            <h4>✅ Seeding Complete!</h4>
+            <p>@Model.Message</p>
+            <a href="/VocabularyWithPronunciation" class="btn btn-primary">View Pronunciations →</a>
+        </div>
+    }
+    else if (Model.HasError)
+    {
+        <div class="alert alert-danger">
+            <h4>❌ Error</h4>
+            <p>@Model.ErrorMessage</p>
+            <button type="button" class="btn btn-primary" onclick="location.reload()">Retry</button>
+        </div>
+    }
+    else if (Model.IsSeeding)
+    {
+        <div class="alert alert-info">
+            <h4>🔄 Seeding in Progress...</h4>
+            <p>This may take a few minutes. Please don't refresh the page.</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%"></div>
+            </div>
+            <p class="mt-3">@Model.Status</p>
+        </div>
+    }
+    else
+    {
+        <div class="seed-info">
+            <h3>📊 What will be seeded?</h3>
+            <ul>
+                <li>🇩🇪 <strong>German:</strong> hallo, danke, schön, guten, morgen, and more</li>
+                <li>🇫🇷 <strong>French:</strong> bonjour, merci, oui, non, s'il vous plaît, and more</li>
+                <li>🇪🇸 <strong>Spanish:</strong> hola, gracias, sí, no, por favor, and more</li>
+                <li>🇷🇺 <strong>Russian:</strong> привет, спасибо, да, нет, пожалуйста, and more</li>
+                <li>🇰🇷 <strong>Korean:</strong> 안녕하세요, 감사합니다, 네, 아니오, 제발, and more</li>
+            </ul>
+
+            <h3 class="mt-4">🔗 Data Sources</h3>
+            <ul>
+                <li>✅ <strong>Free Dictionary API</strong> - IPA & audio (api.dictionaryapi.dev)</li>
+                <li>✅ <strong>Google Translate TTS</strong> - Audio pronunciation (translate.google.com)</li>
+                <li>✅ <strong>Wiktionary</strong> - Fallback IPA source</li>
+                <li>✅ <strong>100% FREE</strong> - No API keys required!</li>
+            </ul>
+
+            <h3 class="mt-4">⏱️ Time Estimate</h3>
+            <p>About 2-3 minutes to fetch ~50 words with pronunciation data</p>
+
+            <form method="post">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-lg btn-success">
+                    🚀 Start Seeding Pronunciation Data
+                </button>
+            </form>
+
+            <div class="alert alert-warning mt-3">
+                <strong>⚠️ Note:</strong> This will only run if there's no existing pronunciation data. If you want to re-seed, contact your admin.
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .seed-container {
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .seed-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .seed-header h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+
+    .seed-header p {
+        color: #666;
+        font-size: 16px;
+    }
+
+    .seed-info {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .seed-info h3 {
+        margin-top: 20px;
+        color: #333;
+        font-size: 18px;
+    }
+
+    .seed-info ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .seed-info li {
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .seed-info li:last-child {
+        border-bottom: none;
+    }
+
+    .btn {
+        margin-top: 20px;
+        padding: 12px 30px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .progress {
+        height: 20px;
+        margin: 20px 0;
+    }
+
+    .alert {
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+    }
+
+    .alert-success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .alert-danger {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .alert-warning {
+        background: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeeba;
+    }
+
+    .alert-info {
+        background: #d1ecf1;
+        color: #0c5460;
+        border: 1px solid #bee5eb;
+    }
+</style>
