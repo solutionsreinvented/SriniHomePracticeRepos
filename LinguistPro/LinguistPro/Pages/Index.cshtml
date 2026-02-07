@@ -110,6 +110,23 @@
                     </div>
                 </header>
 
+            <!-- QUICK STATS BAR -->
+            <div class="bg-white border-b px-6 py-4 flex items-center gap-6 text-sm">
+                <div class="flex items-center gap-2">
+                    <span class="text-xl">📚</span>
+                    <span class="text-gray-600"><strong>@Model.Vocabulary.Count</strong> vocab items</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xl">⚡</span>
+                    <span class="text-gray-600"><strong>@Model.VerbList.Count</strong> verbs</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xl">🎓</span>
+                    <span class="text-gray-600">Mastery: <strong>@Model.GlobalMastery%</strong></span>
+                </div>
+                <a href="/Dashboard" class="ml-auto text-indigo-600 hover:text-indigo-700 font-semibold">View Dashboard →</a>
+            </div>
+
             <!-- CONTENT -->
             <div class="flex-1 overflow-y-auto p-4">
 
