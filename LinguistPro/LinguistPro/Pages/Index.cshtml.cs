@@ -60,7 +60,8 @@ namespace LinguistPro.Pages
             { "de", "German" },
             { "fr", "French" },
             { "es", "Spanish" },
-            { "ru", "Russian" }
+            { "ru", "Russian" },
+            { "ko", "Korean" }
         };
 
         public int GlobalMastery { get; private set; }

@@ -314,6 +314,65 @@ var keyboardLayouts = {
             { key: "'", shift: '"' },
             { key: '/', shift: '?' }
         ]
+    },
+    ko: {
+        name: 'Korean',
+        rows: [
+            [
+                { key: '1', shift: '!' },
+                { key: '2', shift: '@' },
+                { key: '3', shift: '#' },
+                { key: '4', shift: '$' },
+                { key: '5', shift: '%' },
+                { key: '6', shift: '^' },
+                { key: '7', shift: '&' },
+                { key: '8', shift: '*' },
+                { key: '9', shift: '(' },
+                { key: '0', shift: ')' }
+            ],
+            [
+                { key: 'ㅂ' },
+                { key: 'ㅈ' },
+                { key: 'ㄷ' },
+                { key: 'ㄱ' },
+                { key: 'ㅅ' },
+                { key: 'ㅛ' },
+                { key: 'ㅕ' },
+                { key: 'ㅑ' },
+                { key: 'ㅐ' },
+                { key: 'ㅔ' }
+            ],
+            [
+                { key: 'ㅁ' },
+                { key: 'ㄴ' },
+                { key: 'ㅇ' },
+                { key: 'ㄹ' },
+                { key: 'ㅎ' },
+                { key: 'ㅗ' },
+                { key: 'ㅓ' },
+                { key: 'ㅏ' },
+                { key: 'ㅣ' }
+            ],
+            [
+                { key: 'ㅋ' },
+                { key: 'ㅌ' },
+                { key: 'ㅊ' },
+                { key: 'ㅉ' },
+                { key: 'ㅆ' },
+                { key: 'ㅂ' },
+                { key: '.', shift: ',' }
+            ]
+        ],
+        symbols: [
+            { key: '-', shift: '_' },
+            { key: '=', shift: '+' },
+            { key: '[', shift: '{' },
+            { key: ']', shift: '}' },
+            { key: '\\', shift: '|' },
+            { key: ';', shift: ':' },
+            { key: "'", shift: '"' },
+            { key: '/', shift: '?' }
+        ]
     }
 };
 
