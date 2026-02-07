@@ -16,6 +16,7 @@ namespace LinguistPro.Models
         public DbSet<LearningStreak> LearningStreaks => Set<LearningStreak>();
         public DbSet<DailyLearningLog> DailyLearningLogs => Set<DailyLearningLog>();
         public DbSet<ReviewSchedule> ReviewSchedules => Set<ReviewSchedule>();
+        public DbSet<ProgressSnapshot> ProgressSnapshots => Set<ProgressSnapshot>();
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -95,6 +96,20 @@ namespace LinguistPro.Models
             builder.Entity<DailyLearningLog>()
                 .HasIndex(d => new { d.LanguageProfileId, d.LearningDate })
                 .IsUnique();
+
+            // Progress Snapshot relationships
+            builder.Entity<ProgressSnapshot>()
+                .HasOne(p => p.LanguageProfile)
+                .WithMany()
+                .HasForeignKey(p => p.LanguageProfileId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Index for efficient querying of snapshots
+            builder.Entity<ProgressSnapshot>()
+                .HasIndex(p => new { p.LanguageProfileId, p.SnapshotDate });
+
+            builder.Entity<ProgressSnapshot>()
+                .HasIndex(p => p.PeriodType);
         }
     }
 }

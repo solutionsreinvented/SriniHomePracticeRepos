@@ -28,6 +28,7 @@ builder.Services.AddHttpClient<DictionaryService>();
 builder.Services.AddHttpClient<WiktionaryVerbService>();
 builder.Services.AddScoped<LearningStreakService>();
 builder.Services.AddScoped<SpacedRepetitionService>();
+builder.Services.AddScoped<AnalyticsService>();
 
 // Configure cookie settings
 builder.Services.ConfigureApplicationCookie(options =>

@@ -67,11 +67,9 @@ select.custom-select {
 }
 
 .custom-select-icon {
-    font-size: 16px;
-    width: 28px;
-    height: 20px;
+    width: 32px;
+    height: 22px;
     flex-shrink: 0;
-    line-height: 1;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -185,22 +183,12 @@ select.custom-select {
 }
 
 .custom-select-option-icon {
-    font-size: 0;
     width: 32px;
     height: 22px;
     flex-shrink: 0;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-}
-
-.custom-select-option-text {
-    flex: 1;
-}
-
-.custom-select-option-icon {
-    font-size: 20px;
-    flex-shrink: 0;
 }
 
 .custom-select-option-text {

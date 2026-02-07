@@ -232,7 +232,7 @@ namespace LinguistPro.Services
         /// <summary>
         /// Get detailed review schedule information for UI display
         /// </summary>
-        public async Task<ReviewScheduleInfo> GetReviewScheduleInfoAsync(int scheduleId)
+        public async Task<ReviewScheduleInfo?> GetReviewScheduleInfoAsync(int scheduleId)
         {
             var schedule = await _context.ReviewSchedules
                 .Include(s => s.VocabularyItem)
@@ -312,8 +312,8 @@ namespace LinguistPro.Services
     public class ReviewScheduleInfo
     {
         public int ScheduleId { get; set; }
-        public string Term { get; set; }
-        public string Meaning { get; set; }
+        public required string Term { get; set; }
+        public required string Meaning { get; set; }
         public int CurrentBox { get; set; }
         public int CorrectCount { get; set; }
         public int IncorrectCount { get; set; }

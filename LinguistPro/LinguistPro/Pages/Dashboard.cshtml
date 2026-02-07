@@ -3,6 +3,15 @@
 @{
     ViewData["Title"] = "Dashboard";
     Layout = "_Layout";
+
+    var languageFlagMap = new Dictionary<string, string>
+    {
+        { "de", "/images/flags/de.svg" },
+        { "fr", "/images/flags/fr.svg" },
+        { "es", "/images/flags/es.svg" },
+        { "ru", "/images/flags/ru.svg" },
+        { "ko", "/images/flags/ko.svg" }
+    };
 }
 
 <link rel="stylesheet" href="~/css/dashboard.css">
@@ -10,7 +19,8 @@
 <div class="dashboard-header">
     <div class="dashboard-header-content">
         <nav class="dashboard-nav">
-            <a href="/Dashboard" class="active">Dashboard</a>
+            <a href="/Dashboard" class="active">📊 Dashboard</a>
+            <a href="/Analytics">📈 Analytics</a>
             <a href="/Account/Profile">👤 Profile</a>
             <a href="/Index">📚 Learning</a>
         </nav>
@@ -109,13 +119,12 @@
             <div class="language-list">
                 @foreach (var lang in Model.LanguageStats)
                 {
+                    var flagPath = languageFlagMap.ContainsKey(lang.LanguageCode) 
+                        ? languageFlagMap[lang.LanguageCode] 
+                        : "/images/flags/de.svg";
+
                     <div class="language-item">
-                        <span class="language-flag">
-                            @if (lang.LanguageCode == "de") { <span>🇩🇪</span> }
-                            else if (lang.LanguageCode == "fr") { <span>🇫🇷</span> }
-                            else if (lang.LanguageCode == "es") { <span>🇪🇸</span> }
-                            else if (lang.LanguageCode == "ru") { <span>🇷🇺</span> }
-                        </span>
+                        <img class="language-flag" src="@flagPath" alt="@lang.LanguageName" title="@lang.LanguageName" />
 
                         <div class="language-info">
                             <div class="language-name">@lang.LanguageName</div>
