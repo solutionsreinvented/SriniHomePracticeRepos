@@ -196,6 +196,9 @@ namespace LinguistPro.Pages
         [BindProperty]
         public string EditP3 { get; set; } = string.Empty;
 
+        [BindProperty]
+        public List<int> selectedIds { get; set; } = new();
+
         public async Task OnGetAsync()
         {
             // Get current user and their language profile
@@ -601,7 +604,7 @@ namespace LinguistPro.Pages
         /// <summary>
         /// Bulk delete vocabulary items (admin only)
         /// </summary>
-        public async Task<IActionResult> OnPostBulkDeleteVocabularyAsync(List<int> selectedIds)
+        public async Task<IActionResult> OnPostBulkDeleteVocabularyAsync()
         {
             // Security: Only admin can bulk delete
             if (!IsAdminUser())
@@ -633,7 +636,7 @@ namespace LinguistPro.Pages
         /// <summary>
         /// Bulk delete verbs (admin only)
         /// </summary>
-        public async Task<IActionResult> OnPostBulkDeleteVerbsAsync(List<int> selectedIds)
+        public async Task<IActionResult> OnPostBulkDeleteVerbsAsync()
         {
             // Security: Only admin can bulk delete
             if (!IsAdminUser())
@@ -665,7 +668,7 @@ namespace LinguistPro.Pages
         /// <summary>
         /// Bulk delete language items - Numbers/Days/Months (admin only)
         /// </summary>
-        public async Task<IActionResult> OnPostBulkDeleteLanguageItemsAsync(List<int> selectedIds)
+        public async Task<IActionResult> OnPostBulkDeleteLanguageItemsAsync()
         {
             // Security: Only admin can bulk delete
             if (!IsAdminUser())

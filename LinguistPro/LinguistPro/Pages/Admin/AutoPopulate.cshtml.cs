@@ -15,6 +15,11 @@ namespace LinguistPro.Pages.Admin
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<AutoPopulateModel> _logger;
 
+        // Static progress tracking for real-time updates
+        private static int _currentProcessedCount = 0;
+        private static int _currentTotalCount = 0;
+        private static string _currentProcessingMessage = "";
+
         public Dictionary<string, string> AvailableLanguages { get; set; } = new();
         public List<string> Categories { get; set; } = new() { "Vocabulary", "Verbs", "Numbers", "Days", "Months" };
 
@@ -124,6 +129,8 @@ namespace LinguistPro.Pages.Admin
                     {
                         ProgressPercentage = (double)args.ProcessedCount / args.TotalCount * 100;
                     }
+                    // Update static progress for real-time updates
+                    UpdateProgress(args.ProcessedCount, args.TotalCount, args.Status);
                     _logger.LogInformation($"Progress: {args.ProcessedCount}/{args.TotalCount} - {args.CurrentItem}");
                 });
 
@@ -216,5 +223,30 @@ namespace LinguistPro.Pages.Admin
                 _ => code.ToUpper()
             };
         }
+
+        /// <summary>
+        /// Get current progress for real-time updates
+        /// </summary>
+        public IActionResult OnGetProgress()
+        {
+            return new JsonResult(new
+            {
+                processedCount = _currentProcessedCount,
+                totalCount = _currentTotalCount,
+                progressPercentage = _currentTotalCount > 0 ? (_currentProcessedCount * 100.0 / _currentTotalCount) : 0,
+                currentItem = _currentProcessingMessage
+            });
+        }
+
+        /// <summary>
+        /// Update progress statically (called by autoPopulator)
+        /// </summary>
+        public static void UpdateProgress(int processed, int total, string message)
+        {
+            _currentProcessedCount = processed;
+            _currentTotalCount = total;
+            _currentProcessingMessage = message;
+        }
     }
 }
+

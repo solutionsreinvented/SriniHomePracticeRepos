@@ -31,15 +31,16 @@
     {
         <div class="alert alert-info">
             <h4>🔄 Processing in Progress...</h4>
-            <p>@Model.ProcessingMessage</p>
-            
+            <p id="statusMessage">@Model.ProcessingMessage</p>
+
             <div class="progress-section">
                 <div class="progress-info">
-                    <span>Progress: <strong>@Model.ProcessedCount</strong> / <strong>@Model.TotalCount</strong></span>
-                    <span class="percentage">@Model.ProgressPercentage.ToString("F1")%</span>
+                    <span>Progress: <strong id="processedCount">@Model.ProcessedCount</strong> / <strong id="totalCount">@Model.TotalCount</strong></span>
+                    <span class="percentage" id="percentage">@Model.ProgressPercentage.ToString("F1")%</span>
                 </div>
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                         id="progressBar"
                          role="progressbar" 
                          style="width: @Model.ProgressPercentage%">
                     </div>
@@ -47,6 +48,29 @@
             </div>
 
             <p class="fetch-note">⏳ Please wait while we fetch real data from Free APIs...</p>
+
+            <!-- Real-time progress updater -->
+            <script>
+                // Poll server for progress updates every 1 second
+                const progressInterval = setInterval(function() {
+                    fetch('/Admin/AutoPopulate?handler=GetProgress')
+                        .then(response => response.json())
+                        .then(data => {
+                            document.getElementById('processedCount').textContent = data.processedCount;
+                            document.getElementById('totalCount').textContent = data.totalCount;
+                            document.getElementById('percentage').textContent = data.progressPercentage.toFixed(1) + '%';
+                            document.getElementById('progressBar').style.width = data.progressPercentage + '%';
+                            document.getElementById('statusMessage').textContent = data.currentItem;
+
+                            // Stop polling when complete
+                            if (data.progressPercentage >= 100) {
+                                clearInterval(progressInterval);
+                                setTimeout(() => location.reload(), 1000);
+                            }
+                        })
+                        .catch(err => console.error('Progress update failed:', err));
+                }, 1000);
+            </script>
         </div>
     }
     else

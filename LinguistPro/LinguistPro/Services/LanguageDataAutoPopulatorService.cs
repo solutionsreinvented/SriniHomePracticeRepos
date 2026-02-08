@@ -92,6 +92,14 @@ namespace LinguistPro.Services
                     // Fetch comprehensive data from API
                     var (meaning, usageExample, usageExampleMeaning) = await GetWordDetailsAsync(word, languageCode);
 
+                    // Skip if fetching failed
+                    if (string.IsNullOrEmpty(meaning))
+                    {
+                        _logger.LogWarning($"⚠️ Failed to fetch details for word: {word}");
+                        processed++;
+                        continue;
+                    }
+
                     // Create vocabulary item with ALL details
                     var vocabItem = new VocabularyItem
                     {
@@ -404,23 +412,45 @@ namespace LinguistPro.Services
                     return ("", "", "");
                 }
 
-                // Create a simple usage example in the target language
-                string usageExample = $"Das ist {word}.";  // Generic example
-                string usageExampleEnglish = $"This is {englishMeaning}.";
+                // Create usage examples specific to the target language
+                string usageExample = "";
+                string usageExampleEnglish = "";
 
-                // Generate better example for German
-                if (languageCode == "de")
+                // Generate language-specific examples
+                switch (languageCode)
                 {
-                    if (word.ToLower().EndsWith("e"))
-                        usageExample = $"Die {word} ist wichtig.";
-                    else if (word.ToLower().EndsWith("er"))
-                        usageExample = $"Der {word} ist hier.";
-                    else
-                        usageExample = $"Das {word} ist da.";
-                    usageExampleEnglish = await TranslateTextAsync(usageExample, "de", "en");
+                    case "de": // German
+                        usageExample = GenerateGermanExample(word);
+                        break;
+                    case "fr": // French
+                        usageExample = GenerateFrenchExample(word);
+                        break;
+                    case "es": // Spanish
+                        usageExample = GenerateSpanishExample(word);
+                        break;
+                    case "ru": // Russian
+                        usageExample = GenerateRussianExample(word);
+                        break;
+                    case "ko": // Korean
+                        usageExample = GenerateKoreanExample(word);
+                        break;
+                    default:
+                        usageExample = $"{word} ist ein wichtiges Wort.";
+                        break;
                 }
 
-                _logger.LogInformation($"✓ Translated word: {word} -> {englishMeaning}");
+                // Translate the usage example to English
+                if (!string.IsNullOrEmpty(usageExample))
+                {
+                    usageExampleEnglish = await TranslateTextAsync(usageExample, GetLanguageCode(languageCode), "en");
+                }
+
+                if (string.IsNullOrEmpty(usageExampleEnglish))
+                {
+                    usageExampleEnglish = $"'{word}' is an important word in {GetLanguageName(languageCode)}.";
+                }
+
+                _logger.LogInformation($"✓ Translated word: {word} -> {englishMeaning} | Example: {usageExample}");
                 return (englishMeaning, usageExample, usageExampleEnglish);
             }
             catch (Exception ex)
@@ -428,6 +458,59 @@ namespace LinguistPro.Services
                 _logger.LogError($"Error in GetLocalizedWordDetailsAsync for {word}: {ex.Message}");
                 return ("", "", "");
             }
+        }
+
+        private string GenerateGermanExample(string word)
+        {
+            return word.ToLower().EndsWith("e") ? $"Die {word} ist wichtig." :
+                   word.ToLower().EndsWith("er") ? $"Der {word} ist interessant." :
+                   word.ToLower().EndsWith("in") ? $"Die {word} ist eine gute Person." :
+                   $"Das {word} ist sehr nützlich.";
+        }
+
+        private string GenerateFrenchExample(string word)
+        {
+            // French articles: le, la, l', les
+            bool startsWithVowel = "aeiouAEIOU".Contains(word[0]);
+            string article = startsWithVowel ? "L'" : word.EndsWith("e") ? "La" : "Le";
+
+            return word.EndsWith("e") ? $"La {word} est importante." :
+                   $"{article} {word} est très intéressant.";
+        }
+
+        private string GenerateSpanishExample(string word)
+        {
+            // Spanish articles: el, la, los, las
+            bool endsWithA = word.EndsWith("a");
+            string article = endsWithA ? "La" : "El";
+
+            return endsWithA ? $"La {word} es importante." : 
+                   $"El {word} es muy útil.";
+        }
+
+        private string GenerateRussianExample(string word)
+        {
+            // Russian examples - simplified
+            return $"Слово \"{word}\" очень полезно."; // The word "X" is very useful.
+        }
+
+        private string GenerateKoreanExample(string word)
+        {
+            // Korean examples - simplified
+            return $"\"{word}\"은 매우 유용합니다."; // "X" is very useful.
+        }
+
+        private string GetLanguageName(string code)
+        {
+            return code switch
+            {
+                "de" => "German",
+                "fr" => "French",
+                "es" => "Spanish",
+                "ru" => "Russian",
+                "ko" => "Korean",
+                _ => code.ToUpper()
+            };
         }
 
         /// <summary>
