@@ -30,9 +30,7 @@ namespace ProdActivity.UI.Base
         #region Private Helpers
         protected IUser GetUser(string userId)
         {
-            _ = int.TryParse(userId, out int result);
-
-            return _usersRepository.GetById(result);
+            return _usersRepository.GetByEmployeeId(userId);
         }
         #endregion
 

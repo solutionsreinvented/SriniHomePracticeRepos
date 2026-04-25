@@ -1,57 +1,85 @@
-﻿<UserControl
+<UserControl
     x:Class="ProdActivity.UI.UserControls.WindowButtonsControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="50"
-    d:DesignWidth="800"
+    d:DesignHeight="52"
+    d:DesignWidth="120"
     mc:Ignorable="d">
 
-    <!--#region Window Controls-->
-
-    <StackPanel
-        HorizontalAlignment="Right"
-        VerticalAlignment="Center"
-        Orientation="Horizontal">
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
 
         <StackPanel.Resources>
-
-            <Style TargetType="{x:Type Image}">
-                <Setter Property="Width" Value="16" />
+            <Style x:Key="WinBtnStyle" TargetType="Button">
+                <Setter Property="Width" Value="46"/>
+                <Setter Property="Height" Value="52"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{DynamicResource WindowButtonForegroundBrush}"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Bd" Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource MinMaxButtonHoverBrush}"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Bd" Property="Opacity" Value="0.7"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
 
+            <Style x:Key="CloseBtnStyle" TargetType="Button" BasedOn="{StaticResource WinBtnStyle}">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="White"/>
+                    </Trigger>
+                </Style.Triggers>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Bd" Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource CloseButtonHoverBrush}"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Bd" Property="Opacity" Value="0.8"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </StackPanel.Resources>
 
-        <Button
-            Margin="5,0"
-            Padding="5"
-            Background="Transparent"
-            BorderThickness="0"
-            Click="OnMinimizeButtonClick">
-            <Image Source="/Assets/Images/minimize-light.png" />
-        </Button>
-        <Button
-            x:Name="btnMaximizeOrRestore"
-            Margin="5,0"
-            Padding="5"
-            Background="Transparent"
-            BorderThickness="0"
-            Click="OnMaximizeOrRestoreButtonClick">
-            <Image Width="12" Source="/Assets/Images/maximize-light.png" />
+        <!-- Minimize -->
+        <Button Style="{StaticResource WinBtnStyle}" Click="OnMinimizeButtonClick" ToolTip="Minimize">
+            <TextBlock Text="&#xE921;" FontFamily="Segoe MDL2 Assets" FontSize="10" VerticalAlignment="Center"/>
         </Button>
 
-        <Button
-            Margin="5,0"
-            Padding="5"
-            Background="Transparent"
-            BorderThickness="0"
-            Click="OnCloseButtonClick">
-            <Image Width="14" Source="/Assets/Images/close-light.png" />
+        <!-- Maximize / Restore -->
+        <Button x:Name="btnMaximizeOrRestore" Style="{StaticResource WinBtnStyle}" Click="OnMaximizeOrRestoreButtonClick" ToolTip="Maximize">
+            <TextBlock Text="&#xE922;" FontFamily="Segoe MDL2 Assets" FontSize="10" VerticalAlignment="Center"/>
+        </Button>
+
+        <!-- Close -->
+        <Button Style="{StaticResource CloseBtnStyle}" Click="OnCloseButtonClick" ToolTip="Close">
+            <TextBlock Text="&#xE8BB;" FontFamily="Segoe MDL2 Assets" FontSize="10" VerticalAlignment="Center"/>
         </Button>
 
     </StackPanel>
-
-    <!--#endregion-->
-
 </UserControl>
+

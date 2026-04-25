@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Input;
 
 namespace ProdActivity.UI.Commands
@@ -6,9 +6,8 @@ namespace ProdActivity.UI.Commands
     public class RelayCommand : ICommand
     {
         private readonly Action _execute;
+        private readonly Action<object> _executeWithParam;
         private readonly bool _canExecute;
-        private object onLogout;
-        private bool v;
 
         public RelayCommand(Action execute, bool canExecute)
         {
@@ -16,10 +15,10 @@ namespace ProdActivity.UI.Commands
             _canExecute = canExecute;
         }
 
-        public RelayCommand(object onLogout, bool v)
+        public RelayCommand(Action<object> executeWithParam, bool canExecute)
         {
-            this.onLogout = onLogout;
-            this.v = v;
+            _executeWithParam = executeWithParam;
+            _canExecute = canExecute;
         }
 
         public bool CanExecute(object parameter)
@@ -29,7 +28,10 @@ namespace ProdActivity.UI.Commands
 
         public void Execute(object parameter)
         {
-            _execute();
+            if (_executeWithParam != null)
+                _executeWithParam(parameter);
+            else
+                _execute?.Invoke();
         }
 
         public event EventHandler CanExecuteChanged

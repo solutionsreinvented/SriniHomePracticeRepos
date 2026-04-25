@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
@@ -47,6 +47,8 @@ namespace ProdActivity.UI.ViewModels
 
         public ICommand DeleteSelectedActivityCommand { get => Get<ICommand>(); private set => Set(value); }
 
+        public ICommand ManageUsersCommand { get => Get<ICommand>(); private set => Set(value); }
+
         #endregion
 
         #region Command Handlers
@@ -86,6 +88,12 @@ namespace ProdActivity.UI.ViewModels
             SelectedActivity = SelectedProject?.Activities.FirstOrDefault();
         }
 
+        private void OnManageUsers()
+        {
+            _navigationStore.ManageUserViewModel = new UserManagementViewModel(_navigationStore);
+            _navigationStore.DashboardViewModel = null;
+        }
+
         #endregion
 
         #region Private Helpers
@@ -104,6 +112,7 @@ namespace ProdActivity.UI.ViewModels
             CreateProjectCommand = new RelayCommand(OnCreateProject, true);
             DeleteSelectedProjectCommand = new RelayCommand(OnDeleteSelectedProject, true);
             DeleteSelectedActivityCommand = new RelayCommand(OnDeleteSelectedActivity, true);
+            ManageUsersCommand = new RelayCommand(OnManageUsers, true);
         }
 
         #endregion

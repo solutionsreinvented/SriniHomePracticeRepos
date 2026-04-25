@@ -1,37 +1,77 @@
-﻿using System.Collections.Generic;
-using System.IO;
+using System.Collections.Generic;
 using System.Linq;
 
 using ProdActivity.Domain.Base;
+using ProdActivity.Domain.Data;
 using ProdActivity.Domain.Interfaces;
-using ProdActivity.Domain.Mappers;
-using ProdActivity.Domain.Services;
-
-using ReInvented.DataAccess;
 
 namespace ProdActivity.Domain.Repositories
 {
     public class UserRepository
     {
-        private const string _fileName = @"users.json";
-
-        private readonly JsonDataSerializer<List<User>> _jsonDataSerializer;
-
         public UserRepository()
         {
-            _jsonDataSerializer = new();
         }
 
         public IUser GetById(int id)
         {
-            return GetAllUsers().FirstOrDefault(u => u.Id == id);
+            using var context = new AppDbContext();
+            context.Database.EnsureCreated();
+            return context.Users.FirstOrDefault(u => u.Id == id);
+        }
+
+        public IUser GetByEmployeeId(string employeeId)
+        {
+            using var context = new AppDbContext();
+            context.Database.EnsureCreated();
+            return context.Users.FirstOrDefault(u => u.EmployeeId == employeeId);
         }
 
         public List<IUser> GetAllUsers()
         {
-            string fileFullPath = Path.Combine(FileServiceProvider.DataDirectory, _fileName);
+            using var context = new AppDbContext();
+            context.Database.EnsureCreated();
 
-            return ClassToInterfaceMapper<User, IUser>.Map(_jsonDataSerializer.Deserialize(fileFullPath));
+            var users = context.Users.ToList();
+
+            if (users == null || users.Count == 0)
+            {
+                var adminUser = new User 
+                { 
+                    EmployeeId = "admin", 
+                    FullName = "admin", 
+                    Password = "admin", 
+                    UserRole = ProdActivity.Domain.Enums.UserRole.Admin 
+                };
+                context.Users.Add(adminUser);
+                context.SaveChanges();
+                users.Add(adminUser);
+            }
+
+            return users.Cast<IUser>().ToList();
+        }
+
+        public void SaveUsers(List<IUser> users)
+        {
+            using var context = new AppDbContext();
+            context.Database.EnsureCreated();
+
+            // Clear existing users and replace
+            context.Users.RemoveRange(context.Users);
+
+            var domainUsers = users.Select(u => new User 
+            { 
+                Id = u.Id, 
+                EmployeeId = u.EmployeeId, 
+                FullName = u.FullName, 
+                Password = u.Password, 
+                UserRole = u.UserRole 
+            }).ToList();
+            
+            // Need to reset IDs when re-inserting, or let SQLite generate them.
+            // Since we might rely on specific IDs, we'll insert them as is.
+            context.Users.AddRange(domainUsers);
+            context.SaveChanges();
         }
     }
 }

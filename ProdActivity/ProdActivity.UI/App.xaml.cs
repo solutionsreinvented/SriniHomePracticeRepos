@@ -49,6 +49,7 @@ namespace ProdActivity.UI
 
             dialogService.Register<CreateProjectViewModel, CreateProjectView>();
             dialogService.Register<CreateActivityViewModel, CreateActivityView>();
+            dialogService.Register<AddUserViewModel, AddUserView>();
 
             NavigationStore navigationStore = new(dialogService);
             
