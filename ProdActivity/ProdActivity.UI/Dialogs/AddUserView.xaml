@@ -7,11 +7,12 @@
              xmlns:enums="clr-namespace:ProdActivity.Domain.Enums;assembly=ProdActivity.Domain"
              xmlns:shared="http://schemas.reinvented.com/shared"
              mc:Ignorable="d" 
-             Width="350" Height="400"
+             Width="350" SizeToContent="Height"
              WindowStartupLocation="CenterOwner"
              WindowStyle="None"
              ResizeMode="NoResize"
-             Background="{DynamicResource WindowBackgroundBrush}">
+             Background="Transparent"
+             AllowsTransparency="True">
     
     <Window.Resources>
         <ObjectDataProvider x:Key="UserRoles" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
@@ -21,34 +22,51 @@
         </ObjectDataProvider>
     </Window.Resources>
 
-    <Grid Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <Border Background="{DynamicResource WindowBackgroundBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="12" Margin="15">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="25" ShadowDepth="5" Opacity="0.3" Direction="270" Color="Black"/>
+        </Border.Effect>
+        <Grid Margin="25">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <TextBlock Text="Add New User" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource PrimaryTextBrush}" Margin="0,0,0,20"/>
+            <TextBlock Text="Add New User" FontSize="22" FontWeight="Bold" Foreground="{DynamicResource PrimaryTextBrush}" Margin="0,0,0,25"/>
 
-        <StackPanel Grid.Row="1">
-            <TextBlock Text="Employee ID (Username)" Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,5"/>
-            <TextBox Text="{Binding NewUser.EmployeeId, UpdateSourceTrigger=PropertyChanged}" Background="{DynamicResource InputBackgroundBrush}" Foreground="{DynamicResource PrimaryTextBrush}" Margin="0,0,0,15" Padding="5"/>
+            <StackPanel Grid.Row="1">
+                <TextBlock Text="Employee ID (Username)" Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,8"/>
+                <TextBox Text="{Binding NewUser.EmployeeId, UpdateSourceTrigger=PropertyChanged}" Background="{DynamicResource InputBackgroundBrush}" Foreground="{DynamicResource PrimaryTextBrush}" Margin="0,0,0,20"/>
 
-            <TextBlock Text="Full Name" Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,5"/>
-            <TextBox Text="{Binding NewUser.FullName, UpdateSourceTrigger=PropertyChanged}" Background="{DynamicResource InputBackgroundBrush}" Foreground="{DynamicResource PrimaryTextBrush}" Margin="0,0,0,15" Padding="5"/>
+                <TextBlock Text="Full Name" Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,8"/>
+                <TextBox Text="{Binding NewUser.FullName, UpdateSourceTrigger=PropertyChanged}" Background="{DynamicResource InputBackgroundBrush}" Foreground="{DynamicResource PrimaryTextBrush}" Margin="0,0,0,20"/>
 
-            <TextBlock Text="Password" Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,5"/>
-            <TextBox Text="{Binding NewUser.Password, UpdateSourceTrigger=PropertyChanged}" Background="{DynamicResource InputBackgroundBrush}" Foreground="{DynamicResource PrimaryTextBrush}" Margin="0,0,0,15" Padding="5"/>
+                <TextBlock Text="Password" Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,8"/>
+                <TextBox Text="{Binding NewUser.Password, UpdateSourceTrigger=PropertyChanged}" Background="{DynamicResource InputBackgroundBrush}" Foreground="{DynamicResource PrimaryTextBrush}" Margin="0,0,0,20"/>
 
-            <TextBlock Text="Role" Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,5"/>
-            <ComboBox ItemsSource="{Binding Source={StaticResource UserRoles}}" SelectedItem="{Binding NewUser.UserRole}" Background="{DynamicResource InputBackgroundBrush}" Foreground="{DynamicResource PrimaryTextBrush}" Margin="0,0,0,15" Padding="5"/>
+                <TextBlock Text="Role" Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,8"/>
+                <ComboBox ItemsSource="{Binding Source={StaticResource UserRoles}}" SelectedItem="{Binding NewUser.UserRole}" Background="{DynamicResource InputBackgroundBrush}" Foreground="{DynamicResource PrimaryTextBrush}" Margin="0,0,0,20"/>
 
-            <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" Visibility="{Binding HasError, Converter={shared:BoolToVisibilityConverter}}" TextWrapping="Wrap"/>
-        </StackPanel>
+                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" Visibility="{Binding HasError, Converter={shared:BoolToVisibilityConverter}}" TextWrapping="Wrap"/>
+            </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
-            <Button Content="Cancel" Command="{Binding DiscardCommand}" Width="80" Height="30" Margin="0,0,10,0" Background="Transparent" Foreground="{DynamicResource SecondaryTextBrush}" BorderThickness="1" BorderBrush="{DynamicResource BorderBrush}"/>
-            <Button Content="Save User" Command="{Binding SaveCommand}" Width="100" Height="30" Background="{DynamicResource AccentBrush}" Foreground="White" BorderThickness="0"/>
-        </StackPanel>
-    </Grid>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                <Button Content="Cancel" Command="{Binding DiscardCommand}" Width="80" Height="36" Margin="0,0,12,0" Background="Transparent" Foreground="{DynamicResource SecondaryTextBrush}" BorderThickness="1" BorderBrush="{DynamicResource BorderBrush}">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="8"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Content="Save User" Command="{Binding SaveCommand}" Width="100" Height="36" Background="{DynamicResource AccentBrush}" Foreground="White" BorderThickness="0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="8"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>

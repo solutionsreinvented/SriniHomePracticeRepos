@@ -18,6 +18,7 @@ namespace ProdActivity.UI.ViewModels
         public ICommand AddUserCommand { get; private set; }
         public ICommand DeleteUserCommand { get; private set; }
         public ICommand SaveCommand { get; private set; }
+        public ICommand BackCommand { get; private set; }
 
         public User SelectedUser
         {
@@ -36,6 +37,13 @@ namespace ProdActivity.UI.ViewModels
             AddUserCommand = new RelayCommand(OnAddUser, true);
             DeleteUserCommand = new RelayCommand(OnDeleteUser, true);
             SaveCommand = new RelayCommand(OnSave, true);
+            BackCommand = new RelayCommand(OnBack, true);
+        }
+
+        private void OnBack()
+        {
+            _navigationStore.ManageUserViewModel = null;
+            _navigationStore.DashboardViewModel = new AdminDashboardViewModel(_navigationStore);
         }
 
         private void LoadUsers()

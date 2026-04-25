@@ -36,6 +36,13 @@
             </StackPanel>
 
             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button Command="{Binding BackCommand}" Content="Back to Dashboard" Height="40" Padding="15,0" Margin="0,0,15,0" Background="Transparent" Foreground="{DynamicResource SecondaryTextBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" FontWeight="SemiBold">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="8"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
                 <Button Command="{Binding SaveCommand}" Content="Save Changes" Height="40" Padding="20,0" Margin="0,0,15,0" Background="Transparent" Foreground="{DynamicResource AccentBrush}" BorderBrush="{DynamicResource AccentBrush}" BorderThickness="1" FontWeight="SemiBold">
                     <Button.Resources>
                         <Style TargetType="Border">
@@ -55,52 +62,7 @@
 
         <!-- DataGrid Section -->
         <Border Grid.Row="1" Background="{DynamicResource CardBackgroundBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="12" Padding="10">
-            <DataGrid ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" AutoGenerateColumns="False" CanUserAddRows="False" Background="Transparent" BorderThickness="0" RowHeaderWidth="0" HeadersVisibility="Column" GridLinesVisibility="None" RowHeight="55" VerticalContentAlignment="Center">
-                
-                <DataGrid.Resources>
-                    <!-- Header Style -->
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="Transparent" />
-                        <Setter Property="Foreground" Value="{DynamicResource SecondaryTextBrush}" />
-                        <Setter Property="FontWeight" Value="SemiBold" />
-                        <Setter Property="FontSize" Value="13" />
-                        <Setter Property="Padding" Value="15,10" />
-                        <Setter Property="BorderThickness" Value="0,0,0,1" />
-                        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
-                    </Style>
-
-                    <!-- Row Style -->
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="Background" Value="Transparent" />
-                        <Setter Property="Margin" Value="0,2" />
-                        <Setter Property="BorderThickness" Value="0" />
-                        <Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}" />
-                        <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
-                                <Setter Property="Foreground" Value="White" />
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#1A5840D8" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-
-                    <!-- Cell Style -->
-                    <Style TargetType="DataGridCell">
-                        <Setter Property="BorderThickness" Value="0" />
-                        <Setter Property="Padding" Value="15,0" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="DataGridCell">
-                                    <Border Background="Transparent" Padding="{TemplateBinding Padding}">
-                                        <ContentPresenter VerticalAlignment="Center" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </DataGrid.Resources>
+            <DataGrid ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" AutoGenerateColumns="False" CanUserAddRows="False" RowHeaderWidth="0" RowHeight="45" VerticalContentAlignment="Center">
 
                 <DataGrid.Columns>
                     
@@ -129,12 +91,7 @@
                     <DataGridTemplateColumn Header="Position" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <ComboBox ItemsSource="{Binding Source={StaticResource UserRoles}}" SelectedItem="{Binding UserRole, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderThickness="0" Margin="-5,0,0,0">
-                                    <ComboBox.ItemContainerStyle>
-                                        <Style TargetType="ComboBoxItem">
-                                            <Setter Property="Foreground" Value="Black"/>
-                                        </Style>
-                                    </ComboBox.ItemContainerStyle>
+                                <ComboBox ItemsSource="{Binding Source={StaticResource UserRoles}}" SelectedItem="{Binding UserRole, UpdateSourceTrigger=PropertyChanged}" Margin="-5,0,0,0">
                                 </ComboBox>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
