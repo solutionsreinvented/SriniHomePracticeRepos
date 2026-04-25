@@ -1,4 +1,4 @@
-﻿<Window
+<Window
     x:Class="ProdActivity.UI.Home"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,18 +6,18 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shared="http://schemas.reinvented.com/shared"
-    xmlns:theme="http://schemas.reinvented.com/ui/themes"
     x:Name="Root"
     Width="{StaticResource MainWindowWidth}"
     Height="{StaticResource MainWindowHeight}"
-    Background="#4a4e69"
+    Background="{DynamicResource WindowBackgroundBrush}"
     Focusable="False"
-    FontFamily="{StaticResource DefaultFontFamily}"
-    MouseDown="OnMouseDown"
-    ResizeMode="NoResize"
+    FontFamily="Segoe UI, Roboto, Tahoma, sans-serif"
     WindowStartupLocation="CenterScreen"
-    WindowStyle="None"
     mc:Ignorable="d">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="45" CornerRadius="12" GlassFrameThickness="0" ResizeBorderThickness="5" UseAeroCaptionButtons="False" />
+    </WindowChrome.WindowChrome>
 
     <Grid>
 
@@ -29,8 +29,8 @@
 
         <!--#region Window Header-->
 
-        <Grid Height="38" Background="{theme:ThemeResource ResourceKey=StaticBackgroundBrush}">
-
+        <Grid Height="45" Background="{DynamicResource CardBackgroundBrush}">
+            
             <!--#region Title-->
 
             <StackPanel
@@ -39,27 +39,48 @@
                 Orientation="Horizontal">
                 <TextBlock
                     VerticalAlignment="Center"
-                    FontWeight="DemiBold"
-                    Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    Foreground="{DynamicResource PrimaryTextBrush}"
                     Text="Project Activities Manager" />
             </StackPanel>
 
             <!--#endregion-->
 
-
-            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" WindowChrome.IsHitTestVisibleInChrome="True">
                 <Button
                     Margin="10,0"
+                    Padding="15,0"
                     Background="Transparent"
                     BorderThickness="0"
+                    Foreground="{DynamicResource AccentBrush}"
+                    FontWeight="SemiBold"
+                    Command="{Binding AdminLoginCommand}"
+                    Content="Switch / Admin Login" />
+                <Button
+                    Margin="10,0"
+                    Padding="15,0"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Foreground="{DynamicResource AccentBrush}"
+                    FontWeight="SemiBold"
+                    Command="{Binding ToggleThemeCommand}"
+                    Content="🌓 Theme" />
+                <Button
+                    Margin="10,0"
+                    Padding="15,0"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Foreground="{DynamicResource AccentBrush}"
+                    FontWeight="SemiBold"
                     Command="{Binding LogoutCommand}"
                     Content="Logout"
                     IsEnabled="{Binding ManageUserViewModel.IsLoggedIn}" />
                 <controls:WindowButtonsControl />
             </StackPanel>
 
-
         </Grid>
+
 
         <!--#endregion-->
 
@@ -68,39 +89,48 @@
             Margin="50,25,50,30"
             Visibility="{Binding ManageUserViewModel.IsLoggedIn, Converter={shared:BoolToVisibilityConverter}}">
 
-            <Border Style="{StaticResource BorderEffectStyle}" />
-            <ContentControl Content="{Binding DashboardViewModel}" Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}" />
+            <Border Background="{DynamicResource CardBackgroundBrush}" 
+                    CornerRadius="12" 
+                    BorderThickness="1" 
+                    BorderBrush="{DynamicResource BorderBrush}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="25" Direction="270" Opacity="0.1" ShadowDepth="10" Color="Black" />
+                </Border.Effect>
+            </Border>
+            
+            <ContentControl Content="{Binding DashboardViewModel}" Foreground="{DynamicResource PrimaryTextBrush}" Margin="10" />
         </Grid>
 
-        <!--<Grid
-            Grid.Row="1"
-            Margin="50,25,50,30"
-            Visibility="{Binding ManageUserViewModel.IsLoggedIn, Converter={shared:BoolToVisibilityConverter IsInverse=True}}">
-
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <Border Style="{StaticResource BorderEffectStyle}" />-->
         <ContentControl
             Grid.Row="1"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Content="{Binding ManageUserViewModel}"
-            Foreground="{theme:ThemeResource ResourceKey=StaticForegroundBrush}"
+            Foreground="{DynamicResource PrimaryTextBrush}"
             IsTabStop="False"
             Visibility="{Binding ManageUserViewModel.IsLoggedIn, Converter={shared:BoolToVisibilityConverter IsInverse=True}}" />
-        <!--</Grid>-->
 
-
-        <!--<ContentControl
-            Grid.Row="1"
-            VerticalAlignment="Center"
-            Content="{Binding CurrentViewModel}"
-            FocusVisualStyle="{x:Null}" />-->
+        <!--#region In-App Toast Notification-->
+        <Border Grid.RowSpan="2"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,60,20,0"
+                Padding="15,10"
+                Background="{DynamicResource AccentBrush}"
+                CornerRadius="8"
+                Visibility="{Binding IsNotificationVisible, Converter={shared:BoolToVisibilityConverter}}"
+                Panel.ZIndex="100">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" Direction="270" Opacity="0.3" ShadowDepth="5" Color="Black" />
+            </Border.Effect>
+            <StackPanel>
+                <TextBlock Text="{Binding NotificationTitle}" FontWeight="Bold" FontSize="14" Foreground="#FFFFFF" Margin="0,0,0,5" />
+                <TextBlock Text="{Binding NotificationMessage}" FontSize="12" Foreground="#EEEEEE" TextWrapping="Wrap" MaxWidth="250" />
+            </StackPanel>
+        </Border>
+        <!--#endregion-->
 
     </Grid>
 
-
 </Window>
+

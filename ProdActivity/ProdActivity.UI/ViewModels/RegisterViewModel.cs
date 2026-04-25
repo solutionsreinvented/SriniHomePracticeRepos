@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Windows.Input;
 
@@ -55,47 +55,91 @@ namespace ProdActivity.UI.ViewModels
 
         private void OnSelectLicenseFile()
         {
-            throw new NotImplementedException();
+            var dialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "ProdActivity License (*.pamlic)|*.pamlic|All Files (*.*)|*.*",
+                Title = "Select License File"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                LicenseFilePath = dialog.FileName;
+            }
         }
 
         private void OnRegister()
         {
-            string regFilename = "reg.json";
-            string licFilename = "license.sal";
-            string appDataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "tmg");
-            string regFilePath = Path.Combine(appDataDirectory, regFilename);
-            string licFilePath = Path.Combine(appDataDirectory, licFilename);
+            string appDataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ReInvented");
+            string registrationFile = Path.Combine(appDataDirectory, "Registration.sareg");
 
-            Registration registration = new()
+            ReInvented.Licensing.Core.Models.License license = ReInvented.DataAccess.Services.PersistenceService.TryReadFromFile<ReInvented.Licensing.Core.Models.License>(LicenseFilePath);
+
+            if (license == null)
             {
-                UserId = UserId,
-                Password = Password,
-                LicenseFilePath = LicenseFilePath,
-                RegistrationKey = RegistrationKey
-            };
-
-            IDataSerializer<Registration> serializer = SerializerFactory.GetSerializer<Registration>();
-
-            string seializedData = serializer.Serialize(registration);
-
-            if (!Directory.Exists(Path.GetDirectoryName(regFilePath)))
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(regFilePath));
+                System.Windows.MessageBox.Show("The selected license file could not be read. Please select a valid license file.", "Invalid license file", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                return;
             }
 
-            //if (!File.Exists(regFilePath))
-            //{
+            if (ReInvented.Licensing.Core.Services.AuthenticationService.ValidateRegistrationKey(RegistrationKey, LicenseFilePath))
+            {
+                ReInvented.Licensing.Core.Models.Registration registration;
 
-            //}
+                if (File.Exists(registrationFile))
+                {
+                    registration = ReInvented.DataAccess.Services.PersistenceService.TryReadFromFile<ReInvented.Licensing.Core.Models.Registration>(registrationFile);
+                }
+                else
+                {
+                    registration = new ReInvented.Licensing.Core.Models.Registration();
+                }
 
-            File.WriteAllText(regFilePath, seializedData);
+                if (registration == null)
+                {
+                    registration = new ReInvented.Licensing.Core.Models.Registration();
+                }
 
-            RedirectToLogin();
+                if (registration.Records == null)
+                {
+                    registration.Records = new System.Collections.Generic.HashSet<ReInvented.Licensing.Core.Models.RegistrationRecord>();
+                }
+
+                string targetLicenseFilePath = Path.Combine(appDataDirectory, "license.pamlic");
+
+                var regRecord = new ReInvented.Licensing.Core.Models.RegistrationRecord()
+                { 
+                    Module =  license.ModuleType, 
+                    Type = license.LicenseType,
+                    LicenseFilePath = targetLicenseFilePath, 
+                    RegistrationKey = RegistrationKey 
+                };
+
+                registration.Records.Add(regRecord);
+
+                if (!string.Equals(LicenseFilePath, targetLicenseFilePath, StringComparison.OrdinalIgnoreCase))
+                {
+                    if (!Directory.Exists(appDataDirectory))
+                    {
+                        Directory.CreateDirectory(appDataDirectory);
+                    }
+                    File.Copy(LicenseFilePath, targetLicenseFilePath, true);
+                }
+
+                ReInvented.DataAccess.Services.PersistenceService.WriteToFile(registrationFile, registration);
+
+                System.Windows.MessageBox.Show("The registration is successfully completed. You can start using the product. You will now be redirected to the dashboard.", "Registration successful", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+
+                RedirectToLogin();
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("The registration key provided is invalid. Please contact the publisher.", "Invalid registration key", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
         }
 
         private void OnRequestLicense()
         {
-            throw new NotImplementedException();
+            var window = new ReInvented.Licensing.Core.Views.LicenseInputGenerationView();
+            window.ShowDialog();
         }
 
         private void RedirectToLogin()

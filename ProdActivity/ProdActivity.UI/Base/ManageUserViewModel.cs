@@ -1,4 +1,4 @@
-﻿using ProdActivity.Domain.Interfaces;
+using ProdActivity.Domain.Interfaces;
 using ProdActivity.Domain.Repositories;
 using ProdActivity.UI.Stores;
 
@@ -20,7 +20,7 @@ namespace ProdActivity.UI.Base
         #region Public Properties
         public IUser User { get => Get<IUser>(); protected set => Set(value); }
 
-        public bool IsLoggedIn { get => Get<bool>(); protected set => Set(value); }
+        public bool IsLoggedIn { get => Get<bool>(); set => Set(value); }
         #endregion
 
         #region Readonly Properties

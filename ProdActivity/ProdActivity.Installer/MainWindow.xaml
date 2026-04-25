@@ -1,0 +1,72 @@
+<Window x:Class="ProdActivity.Installer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ProdActivity.Installer"
+        Title="ProdActivity Installer" Height="400" Width="600"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Segoe UI, Roboto, Tahoma, sans-serif"
+        Background="#F5F5F5">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
+
+    <Window.DataContext>
+        <local:WizardViewModel />
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Background="#2B2B40" Padding="20">
+            <TextBlock Text="ProdActivity Setup" Foreground="White" FontSize="20" FontWeight="Bold" />
+        </Border>
+
+        <!-- Content -->
+        <Grid Grid.Row="1" Margin="20">
+            
+            <StackPanel Visibility="{Binding IsStep1, Converter={StaticResource BoolToVis}}">
+                <TextBlock Text="Welcome to the ProdActivity Setup Wizard" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,20" />
+                <TextBlock Text="This wizard will guide you through the installation of ProdActivity, the premier Project Activities Manager." TextWrapping="Wrap" Margin="0,0,0,10" />
+                <TextBlock Text="Click Next to continue." Margin="0,20,0,0" />
+            </StackPanel>
+
+            <StackPanel Visibility="{Binding IsStep2, Converter={StaticResource BoolToVis}}">
+                <TextBlock Text="Installation Settings" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,20" />
+                
+                <TextBlock Text="Select Installation Folder:" FontWeight="SemiBold" Margin="0,0,0,5" />
+                <TextBox Text="{Binding InstallPath, UpdateSourceTrigger=PropertyChanged}" Padding="5" Margin="0,0,0,20" />
+                
+                <TextBlock Text="A desktop shortcut will be created automatically." Foreground="#666" FontStyle="Italic" />
+            </StackPanel>
+
+            <StackPanel Visibility="{Binding IsStep3, Converter={StaticResource BoolToVis}}">
+                <TextBlock Text="Installation Progress" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,20" />
+                
+                <ProgressBar Minimum="0" Maximum="100" Value="{Binding Progress}" Height="25" Margin="0,0,0,10" />
+                
+                <TextBlock Text="{Binding StatusMessage}" />
+            </StackPanel>
+
+        </Grid>
+
+        <!-- Footer / Navigation -->
+        <Border Grid.Row="2" Background="White" BorderBrush="#E0E0E0" BorderThickness="0,1,0,0" Padding="15">
+            <Grid>
+                <Button Content="Next &gt;" Command="{Binding NextCommand}" Width="100" Height="30" HorizontalAlignment="Right" 
+                        Visibility="{Binding IsStep1, Converter={StaticResource BoolToVis}}" />
+                
+                <Button Content="{Binding ActionButtonText}" Command="{Binding InstallCommand}" Width="100" Height="30" HorizontalAlignment="Right" 
+                        Visibility="{Binding IsStep2, Converter={StaticResource BoolToVis}}" />
+
+                <Button Content="Finish" Command="{Binding CloseCommand}" Width="100" Height="30" HorizontalAlignment="Right" 
+                        Visibility="{Binding IsStep3, Converter={StaticResource BoolToVis}}" />
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

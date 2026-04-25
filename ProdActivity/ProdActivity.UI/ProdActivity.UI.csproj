@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net5.0-windows10.0.19041.0</TargetFramework>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
@@ -24,6 +25,15 @@
   <ItemGroup>
     <Reference Include="ReInvented.DataAccess">
       <HintPath>F:\06. ReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\x64\Debug\ReInvented.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="ReInvented.Licensing.Core">
+      <HintPath>F:\06. ReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Licensing.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ReInvented.Licensing.Core.UI">
+      <HintPath>F:\06. ReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Licensing.Core.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="ReInvented.Licensing.Security">
+      <HintPath>F:\06. ReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\Debug\ReInvented.Licensing.Security.dll</HintPath>
     </Reference>
     <Reference Include="ReInvented.Shared">
       <HintPath>F:\06. ReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.ThickenerModelGenerator.UI\bin\x64\Debug\ReInvented.Shared.dll</HintPath>
