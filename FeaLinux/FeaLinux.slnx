@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/FeaLinux.App/FeaLinux.App.csproj" />
+    <Project Path="src/FeaLinux.Core/FeaLinux.Core.csproj" />
+    <Project Path="src/FeaLinux.Design/FeaLinux.Design.csproj" />
+    <Project Path="src/FeaLinux.Engine/FeaLinux.Engine.csproj" />
+    <Project Path="src/FeaLinux.Visualization/FeaLinux.Visualization.csproj" />
+  </Folder>
+</Solution>
