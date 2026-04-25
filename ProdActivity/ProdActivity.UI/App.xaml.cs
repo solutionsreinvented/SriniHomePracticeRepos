@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Windows;
 using System.Threading;
+using System.Windows.Threading;
 
 using ProdActivity.UI.Commands;
 using ProdActivity.UI.Dialogs;
@@ -18,11 +19,32 @@ namespace ProdActivity.UI
 {
     public partial class App : Application
     {
-        private Timer _notificationTimer;
+        private DispatcherTimer _licenseMonitorTimer;
+        private DispatcherTimer _backgroundServiceTimer;
         private HomeViewModel _homeViewModel;
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            // Check for background startup flag
+            bool isBackgroundService = false;
+            foreach (var arg in e.Args)
+            {
+                if (arg.Equals("--background", StringComparison.OrdinalIgnoreCase))
+                {
+                    isBackgroundService = true;
+                    break;
+                }
+            }
+
+            if (isBackgroundService)
+            {
+                RunAsBackgroundService();
+                return;
+            }
+
+            // Normal Startup
+            RegisterBackgroundServiceInStartup();
+
             IDialogService dialogService = new DialogService(MainWindow);
 
             dialogService.Register<CreateProjectViewModel, CreateProjectView>();
@@ -51,7 +73,6 @@ namespace ProdActivity.UI
                     // Directly proceed to the application as Standard User
                     navigationStore.ManageUserViewModel = new LoginViewModel(navigationStore) { IsLoggedIn = true };
                     navigationStore.DashboardViewModel = new StandardDashboardViewModel(navigationStore);
-                    StartBackgroundService();
                 }
                 else
                 {
@@ -67,12 +88,91 @@ namespace ProdActivity.UI
             dialogService.SetOrChangeOwner(MainWindow);
 
             MainWindow.Show();
+
+            StartContinuousLicenseMonitor(navigationStore);
+        }
+
+        private void RunAsBackgroundService()
+        {
+            this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
+            // Check immediately on startup
+            CheckAndShowDesktopNotification();
+
+            // Check every minute if it's 5:30 PM
+            _backgroundServiceTimer = new DispatcherTimer { Interval = TimeSpan.FromMinutes(1) };
+            _backgroundServiceTimer.Tick += (s, e) =>
+            {
+                var now = DateTime.Now;
+                if (now.Hour == 17 && now.Minute >= 30 && now.Minute <= 35) // 5:30 PM window
+                {
+                    CheckAndShowDesktopNotification();
+                }
+            };
+            _backgroundServiceTimer.Start();
+        }
+
+        private void CheckAndShowDesktopNotification()
+        {
+            var reg = LoadRegistration();
+            if (reg == null || !KeyIsVerified(reg)) return; // Don't notify if unregistered
+
+            // Check if completed today
+            try
+            {
+                using var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\ReInvented\ProdActivity");
+                if (key != null)
+                {
+                    var lastDateStr = key.GetValue("LastNotificationCompletedDate") as string;
+                    if (!string.IsNullOrEmpty(lastDateStr) && lastDateStr == DateTime.Now.Date.ToString("yyyy-MM-dd"))
+                    {
+                        return; // Already completed today
+                    }
+                }
+            }
+            catch { }
+
+            // Ensure only one window exists
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w is ProdActivity.UI.Views.DesktopNotifierWindow) return;
+            }
+
+            var notifier = new ProdActivity.UI.Views.DesktopNotifierWindow();
+            notifier.Show();
+        }
+
+        private void RegisterBackgroundServiceInStartup()
+        {
+            try
+            {
+                using var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+                string exePath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+                string command = $"\"{exePath}\" --background";
+                key?.SetValue("ProdActivityNotifier", command);
+            }
+            catch { }
+        }
+
+        private void StartContinuousLicenseMonitor(NavigationStore navigationStore)
+        {
+            _licenseMonitorTimer = new DispatcherTimer { Interval = TimeSpan.FromMinutes(10) };
+            _licenseMonitorTimer.Tick += (s, e) =>
+            {
+                var reg = LoadRegistration();
+                if (!KeyIsVerified(reg))
+                {
+                    // Kick out to register screen
+                    navigationStore.DashboardViewModel = null;
+                    navigationStore.ManageUserViewModel = new RegisterViewModel(navigationStore);
+                }
+            };
+            _licenseMonitorTimer.Start();
         }
 
         private void StartBackgroundService()
         {
-            // Check every 5 minutes if it's time to notify
-            _notificationTimer = new Timer(CheckNotificationTime, null, TimeSpan.Zero, TimeSpan.FromMinutes(5));
+            // Deprecated - using RunAsBackgroundService for desktop notification
         }
 
         private DateTime _lastMorningNotification = DateTime.MinValue;
@@ -80,28 +180,12 @@ namespace ProdActivity.UI
 
         private void CheckNotificationTime(object state)
         {
-            var reg = LoadRegistration();
-            if (reg == null || !KeyIsVerified(reg)) return;
-
-            var now = DateTime.Now;
-
-            // Morning Notification around 9:00 AM
-            if (now.Hour >= 9 && now.Hour < 12 && _lastMorningNotification.Date != now.Date)
-            {
-                ShowInAppToast("Good Morning!", "Don't forget to review and log your planned activities for today.");
-                _lastMorningNotification = now;
-            }
-
-            // Evening Notification around 5:00 PM (17:00)
-            if (now.Hour >= 17 && _lastEveningNotification.Date != now.Date)
-            {
-                ShowInAppToast("Evening Reminder", "Please update the progress of the activities you worked on today before logging off.");
-                _lastEveningNotification = now;
-            }
+            // Deprecated in favor of the new DesktopNotifierWindow
         }
 
         private void ShowInAppToast(string title, string message)
         {
+            // Keep if needed elsewhere, but no longer driven by timer
             Application.Current.Dispatcher.Invoke(() =>
             {
                 _homeViewModel?.ShowNotification(title, message);

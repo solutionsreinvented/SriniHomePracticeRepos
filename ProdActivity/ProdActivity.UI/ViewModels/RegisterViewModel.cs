@@ -4,11 +4,7 @@ using System.Windows.Input;
 
 using ProdActivity.UI.Base;
 using ProdActivity.UI.Commands;
-using ProdActivity.UI.Models;
 using ProdActivity.UI.Stores;
-
-using ReInvented.DataAccess.Factories;
-using ReInvented.DataAccess.Interfaces;
 
 namespace ProdActivity.UI.ViewModels
 {
@@ -22,12 +18,6 @@ namespace ProdActivity.UI.ViewModels
         #endregion
 
         #region Public Properties
-
-        public string UserId { get => Get<string>(); set { Set(value); User = GetUser(value); } }
-
-        public string Password { get => Get<string>(); set { Set(value); RaisePropertyChanged(nameof(CanRegister)); } }
-
-        public string ConfirmPassword { get => Get<string>(); set { Set(value); RaisePropertyChanged(nameof(CanRegister)); } }
 
         public string LicenseFilePath { get => Get<string>(); set => Set(value); }
 
@@ -46,9 +36,7 @@ namespace ProdActivity.UI.ViewModels
         #endregion
 
         #region Readonly Properties
-        public bool CanRegister => !string.IsNullOrWhiteSpace(UserId) && !string.IsNullOrWhiteSpace(Password) &&
-                                   !string.IsNullOrWhiteSpace(ConfirmPassword) && Password == ConfirmPassword &&
-                                   !string.IsNullOrWhiteSpace(RegistrationKey);
+        public bool CanRegister => !string.IsNullOrWhiteSpace(RegistrationKey);
         #endregion
 
         #region Command Handlers
@@ -144,7 +132,8 @@ namespace ProdActivity.UI.ViewModels
 
         private void RedirectToLogin()
         {
-            _navigationStore.ManageUserViewModel = new LoginViewModel(_navigationStore) { UserId = User.Id.ToString() };
+            _navigationStore.ManageUserViewModel = new LoginViewModel(_navigationStore) { IsLoggedIn = true };
+            _navigationStore.DashboardViewModel = new StandardDashboardViewModel(_navigationStore);
         }
 
         #endregion
