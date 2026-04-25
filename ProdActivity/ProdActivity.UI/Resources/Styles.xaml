@@ -23,7 +23,7 @@
     <!--#endregion-->
 
 
-    <!--#region TextBox-->
+    <!--#region TextBoxes & Inputs-->
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="behaviors:TextBoxFocusBehavior.SelectAllOnFocus" Value="True"/>
         <Setter Property="Padding"                   Value="10,0"/>
@@ -59,12 +59,66 @@
                             <Setter TargetName="Bd" Property="BorderThickness" Value="1.5"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Bd" Property="Opacity" Value="0.5"/>
+                            <Setter TargetName="Bd" Property="Opacity" Value="0.6"/>
+                            <Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type PasswordBox}">
+        <Setter Property="Padding"                   Value="10,0"/>
+        <Setter Property="Height"                    Value="36"/>
+        <Setter Property="VerticalContentAlignment"  Value="Center"/>
+        <Setter Property="FontSize"                  Value="13"/>
+        <Setter Property="Background"                Value="{DynamicResource InputBackgroundBrush}"/>
+        <Setter Property="Foreground"                Value="{DynamicResource PrimaryTextBrush}"/>
+        <Setter Property="CaretBrush"                Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="SelectionBrush"            Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="BorderBrush"               Value="{DynamicResource BorderBrush}"/>
+        <Setter Property="BorderThickness"           Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type PasswordBox}">
+                    <Border x:Name="Bd"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="8"
+                            SnapsToDevicePixels="True">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Margin="{TemplateBinding Padding}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Focusable="False"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                            <Setter TargetName="Bd" Property="BorderThickness" Value="1.5"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Bd" Property="Opacity" Value="0.6"/>
+                            <Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type DatePicker}">
+        <Setter Property="Height"                    Value="36"/>
+        <Setter Property="VerticalContentAlignment"  Value="Center"/>
+        <Setter Property="FontSize"                  Value="13"/>
+        <Setter Property="Background"                Value="{DynamicResource InputBackgroundBrush}"/>
+        <Setter Property="Foreground"                Value="{DynamicResource PrimaryTextBrush}"/>
+        <Setter Property="BorderBrush"               Value="{DynamicResource BorderBrush}"/>
+        <Setter Property="BorderThickness"           Value="1"/>
     </Style>
     <!--#endregion-->
 
@@ -79,6 +133,12 @@
         <Setter Property="Foreground"               Value="{DynamicResource PrimaryTextBrush}"/>
         <Setter Property="BorderBrush"              Value="{DynamicResource BorderBrush}"/>
         <Setter Property="BorderThickness"          Value="1"/>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
     <!--#endregion-->
 
@@ -130,7 +190,7 @@
 
 
     <!--#region DataGrid — Modern Borderless Style-->
-    <Style x:Key="SelectorDataGridStyle" TargetType="{x:Type DataGrid}">
+    <Style TargetType="{x:Type DataGrid}">
         <Setter Property="AutoGenerateColumns"          Value="False"/>
         <Setter Property="Background"                   Value="Transparent"/>
         <Setter Property="BorderThickness"              Value="0"/>
@@ -149,8 +209,8 @@
         <Setter Property="HorizontalGridLinesBrush"     Value="{DynamicResource BorderBrush}"/>
     </Style>
 
-    <Style x:Key="SelectorDataGridColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
-        <Setter Property="Background"               Value="Transparent"/>
+    <Style TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="Background"               Value="{DynamicResource HoverBackgroundBrush}"/>
         <Setter Property="Foreground"               Value="{DynamicResource SecondaryTextBrush}"/>
         <Setter Property="FontWeight"               Value="SemiBold"/>
         <Setter Property="FontSize"                 Value="12"/>
@@ -161,7 +221,7 @@
         <Setter Property="Height"                   Value="38"/>
     </Style>
 
-    <Style x:Key="SelectorDataGridCellStyle" TargetType="{x:Type DataGridCell}">
+    <Style TargetType="{x:Type DataGridCell}">
         <Setter Property="Background"       Value="Transparent"/>
         <Setter Property="Foreground"       Value="{DynamicResource PrimaryTextBrush}"/>
         <Setter Property="BorderThickness"  Value="0"/>
@@ -183,7 +243,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="SelectorDataGridRowStyle" TargetType="{x:Type DataGridRow}">
+    <Style TargetType="{x:Type DataGridRow}">
         <Setter Property="Background"       Value="Transparent"/>
         <Setter Property="BorderThickness"  Value="0,0,0,1"/>
         <Setter Property="BorderBrush"      Value="{DynamicResource BorderBrush}"/>
