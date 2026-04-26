@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="RakeMechanism.Geometry/RakeMechanism.Geometry.csproj" />
+  <Project Path="RakeMechanism.UI/RakeMechanism.UI.csproj" />
+</Solution>

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="ReInvented.StaadPro.Interop">
+      <HintPath>F:\06. ReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.StaadPro.Interop\bin\Debug\ReInvented.StaadPro.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="ReInvented.Shared">
+      <HintPath>F:\06. ReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.StaadPro.Interop\bin\Debug\ReInvented.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="ReInvented.Units">
+      <HintPath>F:\06. ReInvented\MainProjects\SRi.XamlUIThickenerApp\ReInvented.StaadPro.Interop\bin\Debug\ReInvented.Units.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

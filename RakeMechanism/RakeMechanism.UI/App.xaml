@@ -1,0 +1,429 @@
+<Application x:Class="RakeMechanism.UI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:RakeMechanism.UI"
+             xmlns:vm="clr-namespace:RakeMechanism.UI.ViewModels"
+             xmlns:geom="clr-namespace:RakeMechanism.Geometry.Domain;assembly=RakeMechanism.Geometry"
+             xmlns:conv="clr-namespace:RakeMechanism.UI.Converters"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+            <conv:EnumToBooleanConverter x:Key="EnumToBoolConverter" />
+
+            <!-- ═══════════════════ COLOR PALETTE ═══════════════════ -->
+            <SolidColorBrush x:Key="SidebarBg"        Color="#1565C0"/>
+            <SolidColorBrush x:Key="SidebarDark"      Color="#0D47A1"/>
+            <SolidColorBrush x:Key="AccentBlue"       Color="#1976D2"/>
+            <SolidColorBrush x:Key="AccentLight"      Color="#42A5F5"/>
+            <SolidColorBrush x:Key="AppBackground"    Color="#F0F4F8"/>
+            <SolidColorBrush x:Key="CardBg"           Color="#FFFFFF"/>
+            <SolidColorBrush x:Key="CardBorder"       Color="#E3EAF2"/>
+            <SolidColorBrush x:Key="TextPrimary"      Color="#0F1B2E"/>
+            <SolidColorBrush x:Key="TextSecondary"    Color="#334155"/>
+            <SolidColorBrush x:Key="TextMuted"        Color="#475569"/>
+            <SolidColorBrush x:Key="InputBorder"      Color="#CBD5E1"/>
+            <SolidColorBrush x:Key="InputBorderFocus" Color="#1976D2"/>
+            <SolidColorBrush x:Key="SuccessGreen"     Color="#27AE60"/>
+            <SolidColorBrush x:Key="DangerRed"        Color="#E74C3C"/>
+            <SolidColorBrush x:Key="ListItemHover"    Color="#EBF3FF"/>
+            <SolidColorBrush x:Key="ListItemSelected" Color="#D0E8FF"/>
+
+            <!-- ═══════════════════ TYPOGRAPHY ═══════════════════ -->
+            <FontFamily x:Key="AppFont">Segoe UI</FontFamily>
+
+            <!-- ═══════════════════ GLOBAL TEXTBOX STYLE ═══════════════════ -->
+            <Style x:Key="PremiumTextBox" TargetType="TextBox">
+                <Setter Property="FontFamily"    Value="{StaticResource AppFont}"/>
+                <Setter Property="FontSize"      Value="14"/>
+                <Setter Property="Foreground"    Value="{StaticResource TextPrimary}"/>
+                <Setter Property="Background"    Value="White"/>
+                <Setter Property="BorderThickness" Value="1.5"/>
+                <Setter Property="BorderBrush"   Value="{StaticResource InputBorder}"/>
+                <Setter Property="Padding"       Value="10,8"/>
+                <Setter Property="Height"        Value="38"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TextBox">
+                            <Border x:Name="border"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="6">
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                              Margin="{TemplateBinding Padding}"
+                                              VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter TargetName="border" Property="BorderBrush"
+                                            Value="{StaticResource InputBorderFocus}"/>
+                                    <Setter TargetName="border" Property="BorderThickness" Value="2"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="BorderBrush"
+                                            Value="{StaticResource AccentBlue}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <EventSetter Event="GotKeyboardFocus"         Handler="TextBox_GotKeyboardFocus"/>
+                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="TextBox_PreviewMouseLeftButtonDown"/>
+            </Style>
+
+            <!-- Apply globally -->
+            <Style TargetType="TextBox" BasedOn="{StaticResource PremiumTextBox}"/>
+
+            <!-- ═══════════════════ LABEL STYLE ═══════════════════ -->
+            <Style x:Key="FieldLabel" TargetType="TextBlock">
+                <Setter Property="FontFamily"  Value="{StaticResource AppFont}"/>
+                <Setter Property="FontSize"    Value="13"/>
+                <Setter Property="FontWeight"  Value="Bold"/>
+                <Setter Property="Foreground"  Value="{StaticResource TextSecondary}"/>
+                <Setter Property="Margin"      Value="0,0,0,6"/>
+            </Style>
+
+            <!-- ═══════════════════ CARD STYLE ═══════════════════ -->
+            <Style x:Key="Card" TargetType="Border">
+                <Setter Property="Background"       Value="{StaticResource CardBg}"/>
+                <Setter Property="BorderBrush"      Value="{StaticResource CardBorder}"/>
+                <Setter Property="BorderThickness"  Value="1"/>
+                <Setter Property="CornerRadius"     Value="12"/>
+                <Setter Property="Padding"          Value="24"/>
+                <Setter Property="Margin"           Value="0,0,0,16"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect BlurRadius="12" ShadowDepth="2" Opacity="0.07" Direction="270" Color="#1A2B4A"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- ═══════════════════ SECTION HEADER ═══════════════════ -->
+            <Style x:Key="SectionHeader" TargetType="TextBlock">
+                <Setter Property="FontFamily"  Value="{StaticResource AppFont}"/>
+                <Setter Property="FontSize"    Value="12"/>
+                <Setter Property="FontWeight"  Value="ExtraBold"/>
+                <Setter Property="Foreground"  Value="{StaticResource TextMuted}"/>
+                <Setter Property="Margin"      Value="0,0,0,12"/>
+            </Style>
+
+            <!-- ═══════════════════ CARD TITLE ═══════════════════ -->
+            <Style x:Key="CardTitle" TargetType="TextBlock">
+                <Setter Property="FontFamily"  Value="{StaticResource AppFont}"/>
+                <Setter Property="FontSize"    Value="16"/>
+                <Setter Property="FontWeight"  Value="Bold"/>
+                <Setter Property="Foreground"  Value="{StaticResource TextPrimary}"/>
+                <Setter Property="Margin"      Value="0,0,0,16"/>
+            </Style>
+
+            <!-- ═══════════════════ CHECKBOX / RADIO STYLE ═══════════════════ -->
+            <Style x:Key="PremiumCheckBox" TargetType="CheckBox">
+                <Setter Property="FontFamily"  Value="{StaticResource AppFont}"/>
+                <Setter Property="FontSize"    Value="14"/>
+                <Setter Property="FontWeight"  Value="SemiBold"/>
+                <Setter Property="Foreground"  Value="{StaticResource TextPrimary}"/>
+                <Setter Property="Margin"      Value="0,8,0,0"/>
+            </Style>
+            <Style TargetType="CheckBox" BasedOn="{StaticResource PremiumCheckBox}"/>
+            
+            <Style TargetType="RadioButton">
+                <Setter Property="FontFamily"  Value="{StaticResource AppFont}"/>
+                <Setter Property="FontSize"    Value="14"/>
+                <Setter Property="FontWeight"  Value="SemiBold"/>
+                <Setter Property="Foreground"  Value="{StaticResource TextPrimary}"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+
+            <!-- ═══════════════════ LISTBOX ITEM STYLE ═══════════════════ -->
+            <Style x:Key="SegmentListItem" TargetType="ListBoxItem">
+                <Setter Property="Padding"          Value="12,10"/>
+                <Setter Property="Margin"           Value="0,2"/>
+                <Setter Property="Background"       Value="Transparent"/>
+                <Setter Property="BorderThickness"  Value="0"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+                            <Border x:Name="ItemBorder"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="8"
+                                    Padding="{TemplateBinding Padding}">
+                                <ContentPresenter/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="ItemBorder" Property="Background"
+                                            Value="{StaticResource ListItemHover}"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="ItemBorder" Property="Background"
+                                            Value="{StaticResource ListItemSelected}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- ═══════════════════════════════════════════════════
+                 FRAME PROFILE EDITOR TEMPLATE
+            ═══════════════════════════════════════════════════ -->
+            <DataTemplate DataType="{x:Type vm:FrameProfileViewModel}">
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="Frame Profile Configuration" Style="{StaticResource CardTitle}"/>
+
+                        <!-- Row 1: Shape + Dimension Input side by side -->
+                        <Grid Margin="0,0,0,16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="SHAPE" Style="{StaticResource FieldLabel}"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                    <RadioButton Content="Square" Margin="0,0,20,0"
+                                                 IsChecked="{Binding Shape, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static geom:FrameShape.Square}}"/>
+                                    <RadioButton Content="Octagonal" 
+                                                 IsChecked="{Binding Shape, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static geom:FrameShape.Octagonal}}"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="DIMENSION INPUT TYPE" Style="{StaticResource FieldLabel}"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                    <RadioButton Content="Side Dimension" Margin="0,0,20,0"
+                                                 IsChecked="{Binding InputMethod, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static vm:DimensionInputMethod.SideDimension}}"/>
+                                    <RadioButton Content="Radius"
+                                                 ToolTip="Radius input is available for square frames and is treated as the corner radius."
+                                                 IsEnabled="{Binding CanUseRadiusInput}"
+                                                 IsChecked="{Binding InputMethod, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static vm:DimensionInputMethod.Radius}}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- Row 2: Dynamic Value Label + Input -->
+                        <StackPanel Margin="0,0,0,16">
+                            <TextBlock Text="{Binding DimensionValueLabel}" Style="{StaticResource FieldLabel}"/>
+                            <TextBox Text="{Binding DimensionValue, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="{Binding RadiusInputHint}"
+                                       FontSize="11"
+                                       Foreground="{StaticResource TextMuted}"
+                                       Margin="0,8,0,0"
+                                       TextWrapping="Wrap"
+                                       Visibility="{Binding UsesRadiusInput, Converter={StaticResource BoolToVisConverter}}"/>
+                        </StackPanel>
+
+                        <!-- Octagonal only: Corner Offset + Connectivity side by side -->
+                        <Grid Margin="0,0,0,16"
+                              Visibility="{Binding IsOctagonal, Converter={StaticResource BoolToVisConverter}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="CORNER OFFSET (m)" Style="{StaticResource FieldLabel}"/>
+                                <TextBox Text="{Binding CornerOffset, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="CONNECTIVITY RULE" Style="{StaticResource FieldLabel}"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                    <RadioButton Content="From Vertices" Margin="0,0,20,0"
+                                                 IsChecked="{Binding Connectivity, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static vm:OctagonalConnectivity.ContinueFromVertices}}"/>
+                                    <RadioButton Content="From Corners" 
+                                                 IsChecked="{Binding Connectivity, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static vm:OctagonalConnectivity.ContinueFromCorners}}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- Octagonal only: Close Corners -->
+                        <CheckBox Content="Close Corners at Octagonal Chamfer"
+                                  IsChecked="{Binding CloseCorners}"
+                                  Visibility="{Binding IsOctagonal, Converter={StaticResource BoolToVisConverter}}"/>
+                    </StackPanel>
+                </Border>
+            </DataTemplate>
+
+            <!-- ═══════════════════════════════════════════════════
+                 CAGE SEGMENT EDITOR TEMPLATE
+            ═══════════════════════════════════════════════════ -->
+            <DataTemplate DataType="{x:Type vm:CageSegmentViewModel}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Margin="28,24,28,24">
+
+                        <!-- Page header -->
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,24">
+                            <Border Width="5" CornerRadius="2" Background="{StaticResource AccentBlue}" Margin="0,2,16,2"/>
+                            <StackPanel>
+                                <TextBlock Text="CAGE SEGMENT"
+                                           FontFamily="{StaticResource AppFont}"
+                                           FontSize="13" FontWeight="Bold"
+                                           Foreground="{StaticResource AccentBlue}"/>
+                                <TextBlock Text="Configuration"
+                                           FontFamily="{StaticResource AppFont}"
+                                           FontSize="26" FontWeight="Bold"
+                                           Foreground="{StaticResource TextPrimary}"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- General Settings Card -->
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="GENERAL SETTINGS" Style="{StaticResource SectionHeader}"/>
+
+                                <Grid Margin="0,0,0,16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="SEGMENT HEIGHT (m)" Style="{StaticResource FieldLabel}"/>
+                                        <TextBox Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="VERTICAL SUBDIVISIONS" Style="{StaticResource FieldLabel}"/>
+                                        <TextBox Text="{Binding VerticalDivisions, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <StackPanel>
+                                    <TextBlock Text="ELEVATION BRACING TYPE" Style="{StaticResource FieldLabel}"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                        <RadioButton Content="None" Margin="0,0,20,0"
+                                                     IsChecked="{Binding ElevationBracing, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static geom:BracingType.None}}"/>
+                                        <RadioButton Content="Single Diagonal" Margin="0,0,20,0"
+                                                     IsChecked="{Binding ElevationBracing, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static geom:BracingType.SingleDiagonal}}"/>
+                                        <RadioButton Content="Cross Bracing" 
+                                                     IsChecked="{Binding ElevationBracing, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static geom:BracingType.CrossBracing}}"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <CheckBox Content="Reserve this segment for future rake-arm connections"
+                                          IsChecked="{Binding HostsRakeArms}"
+                                          Margin="0,16,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Start Frame Card -->
+                        <StackPanel Margin="0,0,0,4">
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                <Border Width="8" Height="8" CornerRadius="4"
+                                        Background="{StaticResource SuccessGreen}"
+                                        VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                <TextBlock Text="Bottom Frame Profile (Start)"
+                                           FontFamily="{StaticResource AppFont}"
+                                           FontSize="13" FontWeight="SemiBold"
+                                           Foreground="{StaticResource TextPrimary}"/>
+                            </StackPanel>
+                            <ContentControl Content="{Binding StartFrame}"/>
+                        </StackPanel>
+
+                        <!-- End Frame Card -->
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                <Border Width="8" Height="8" CornerRadius="4"
+                                        Background="{StaticResource AccentLight}"
+                                        VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                <TextBlock Text="Top Frame Profile (End)"
+                                           FontFamily="{StaticResource AppFont}"
+                                           FontSize="13" FontWeight="SemiBold"
+                                           Foreground="{StaticResource TextPrimary}"/>
+                            </StackPanel>
+                            <ContentControl Content="{Binding EndFrame}"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </DataTemplate>
+
+            <!-- ═══════════════════════════════════════════════════
+                 TUBE SEGMENT EDITOR TEMPLATE
+            ═══════════════════════════════════════════════════ -->
+            <DataTemplate DataType="{x:Type vm:TubeSegmentViewModel}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Margin="28,24,28,24">
+
+                        <!-- Page header -->
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,24">
+                            <Border Width="4" CornerRadius="2" Background="{StaticResource AccentLight}" Margin="0,2,12,2"/>
+                            <StackPanel>
+                                <TextBlock Text="TUBE SEGMENT"
+                                           FontFamily="{StaticResource AppFont}"
+                                           FontSize="11" FontWeight="Bold"
+
+                                           Foreground="{StaticResource AccentLight}"/>
+                                <TextBlock Text="Configuration"
+                                           FontFamily="{StaticResource AppFont}"
+                                           FontSize="22" FontWeight="Bold"
+                                           Foreground="{StaticResource TextPrimary}"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- Dimensions Card -->
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="DIMENSIONS" Style="{StaticResource SectionHeader}"/>
+
+                                <!-- Height -->
+                                <StackPanel Margin="0,0,0,12">
+                                    <TextBlock Text="SEGMENT HEIGHT (m)" Style="{StaticResource FieldLabel}"/>
+                                    <TextBox Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}"/>
+                                </StackPanel>
+
+                                <!-- Radii side by side -->
+                                <Grid Margin="0,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="16"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="BOTTOM RADIUS (m)" Style="{StaticResource FieldLabel}"/>
+                                        <TextBox Text="{Binding StartRadius, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="TOP RADIUS (m)" Style="{StaticResource FieldLabel}"/>
+                                        <TextBox Text="{Binding EndRadius, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <CheckBox Content="Reserve this segment for future rake-arm connections"
+                                          IsChecked="{Binding HostsRakeArms}"
+                                          Margin="0,16,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Meshing Card -->
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="MESH SUBDIVISIONS" Style="{StaticResource SectionHeader}"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="16"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="VERTICAL" Style="{StaticResource FieldLabel}"/>
+                                        <TextBox Text="{Binding VerticalDivisions, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="CIRCUMFERENTIAL" Style="{StaticResource FieldLabel}"/>
+                                        <TextBox Text="{Binding CircumferentialDivisions, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

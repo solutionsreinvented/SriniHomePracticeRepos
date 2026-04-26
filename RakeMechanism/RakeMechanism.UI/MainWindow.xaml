@@ -1,0 +1,370 @@
+<Window x:Class="RakeMechanism.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:RakeMechanism.UI.ViewModels"
+        Title="Rake Mechanism - Central Structure Generator"
+        Height="780"
+        Width="1100"
+        MinHeight="600"
+        MinWidth="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#F0F4F8"
+        FontFamily="Segoe UI">
+
+    <Window.DataContext>
+        <vm:CentralStructureViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="#1565C0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Background="#0D47A1" Padding="22,24">
+                    <StackPanel>
+                        <TextBlock Text="RAKE MECHANISM"
+                                   FontSize="11"
+                                   FontWeight="Bold"
+                                   Foreground="#90CAF9"
+                                   Margin="0,0,0,4"/>
+                        <TextBlock Text="Central Structure"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   Foreground="White"/>
+                        <TextBlock Text="Generator"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   Foreground="#90CAF9"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="1" Padding="20,18,20,12">
+                    <StackPanel>
+                        <TextBlock Text="BASE ELEVATION"
+                                   FontSize="10"
+                                   FontWeight="Bold"
+                                   Foreground="#90CAF9"
+                                   Margin="0,0,0,6"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Column="0"
+                                     Text="{Binding BaseElevation, UpdateSourceTrigger=LostFocus}"
+                                     Background="#1976D2"
+                                     Foreground="White"
+                                     BorderBrush="#42A5F5"
+                                     CaretBrush="White"
+                                     Padding="10,8"
+                                     Height="38"/>
+
+                            <Border Grid.Column="1"
+                                    Background="#42A5F5"
+                                    CornerRadius="0,6,6,0"
+                                    Padding="10,0"
+                                    Margin="-1,0,0,0">
+                                <TextBlock Text="m"
+                                           Foreground="White"
+                                           FontWeight="SemiBold"
+                                           VerticalAlignment="Center"
+                                           FontSize="13"/>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="2" Padding="20,4,20,8">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="SEGMENTS"
+                                   FontSize="10"
+                                   FontWeight="Bold"
+                                   Foreground="#90CAF9"
+                                   VerticalAlignment="Center"/>
+                        <Border Background="#42A5F5"
+                                CornerRadius="10"
+                                Padding="7,2"
+                                Margin="8,0,0,0">
+                            <TextBlock Text="{Binding Segments.Count}"
+                                       FontSize="10"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <ListBox Grid.Row="3"
+                         ItemsSource="{Binding Segments}"
+                         SelectedItem="{Binding SelectedSegment}"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         Padding="10,0"
+                         ItemContainerStyle="{StaticResource SegmentListItem}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0"
+                                        Width="6"
+                                        Height="6"
+                                        CornerRadius="3"
+                                        VerticalAlignment="Center"
+                                        Margin="0,0,10,0">
+                                    <Border.Background>
+                                        <SolidColorBrush Color="#42A5F5"/>
+                                    </Border.Background>
+                                </Border>
+
+                                <StackPanel Grid.Column="1">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding SegmentType}"
+                                                   FontSize="13"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="White"/>
+                                        <Border Background="#90CAF9"
+                                                CornerRadius="9"
+                                                Padding="6,2"
+                                                Margin="8,0,0,0"
+                                                Visibility="{Binding HostsRakeArms, Converter={StaticResource BoolToVisConverter}}">
+                                            <TextBlock Text="Arm Carrier"
+                                                       FontSize="9"
+                                                       FontWeight="Bold"
+                                                       Foreground="#0D47A1"/>
+                                        </Border>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+                                        <TextBlock Text="Base "
+                                                   Foreground="#90CAF9"
+                                                   FontSize="11"/>
+                                        <TextBlock Text="{Binding ComputedStartElevation, StringFormat={}{0:0.##}}"
+                                                   Foreground="#90CAF9"
+                                                   FontSize="11"/>
+                                        <TextBlock Text=" m  |  H = "
+                                                   Foreground="#64B5F6"
+                                                   FontSize="11"/>
+                                        <TextBlock Text="{Binding Height, StringFormat={}{0:0.##}}"
+                                                   Foreground="#90CAF9"
+                                                   FontSize="11"/>
+                                        <TextBlock Text=" m"
+                                                   Foreground="#64B5F6"
+                                                   FontSize="11"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <StackPanel Grid.Row="4" Margin="12,12,12,20">
+                    <Button Content="+ Add Segment"
+                            Click="BtnAddSegment_Click"
+                            Height="40"
+                            FontSize="13"
+                            FontWeight="SemiBold"
+                            Cursor="Hand"
+                            Margin="0,0,0,8">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#27AE60"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="bg"
+                                                    Background="{TemplateBinding Background}"
+                                                    CornerRadius="8">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="bg" Property="Background" Value="#2ECC71"/>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter TargetName="bg" Property="Background" Value="#219A52"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Content="Remove Selected"
+                            Command="{Binding RemoveSelectedCommand}"
+                            Height="36"
+                            FontSize="12"
+                            FontWeight="SemiBold"
+                            Cursor="Hand">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="#EF9A9A"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="BorderBrush" Value="#EF9A9A"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="bg"
+                                                    Background="{TemplateBinding Background}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    CornerRadius="8">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="bg" Property="Background" Value="#C62828"/>
+                                                    <Setter TargetName="bg" Property="BorderBrush" Value="#C62828"/>
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Column="1" Background="#F0F4F8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedSegment}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <StackPanel HorizontalAlignment="Center">
+                    <Border Width="72"
+                            Height="72"
+                            CornerRadius="36"
+                            Background="#DCE8F7"
+                            HorizontalAlignment="Center"
+                            Margin="0,0,0,16">
+                        <TextBlock Text="CS"
+                                   FontSize="26"
+                                   FontWeight="Bold"
+                                   Foreground="#6B7B99"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Border>
+                    <TextBlock Text="Select a segment from the sidebar to configure it"
+                               FontSize="15"
+                               Foreground="#A0B0C8"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="or click '+ Add Segment' to get started"
+                               FontSize="13"
+                               Foreground="#C0CDD8"
+                               HorizontalAlignment="Center"
+                               Margin="0,6,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <ContentControl Grid.Row="0"
+                            Content="{Binding SelectedSegment}"/>
+
+            <Border Grid.Row="1"
+                    Background="White"
+                    BorderBrush="#E3EAF2"
+                    BorderThickness="0,1,0,0"
+                    Padding="28,16">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                        <TextBlock Text="Ready to generate?"
+                                   FontSize="13"
+                                   FontWeight="SemiBold"
+                                   Foreground="#1A2B4A"/>
+                        <TextBlock Text="Validates interfaces, then exports the central structure to STAAD.Pro (.std)."
+                                   FontSize="11"
+                                   Foreground="#6B7B99"
+                                   Margin="0,2,0,0"/>
+                    </StackPanel>
+
+                    <Button Grid.Column="1"
+                            Content="Validate and Export to STAAD (.std)"
+                            Command="{Binding GenerateAndExportCommand}"
+                            Height="44"
+                            Padding="28,0"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            Cursor="Hand">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#1565C0"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="bg"
+                                                    Background="{TemplateBinding Background}"
+                                                    CornerRadius="10">
+                                                <Border.Effect>
+                                                    <DropShadowEffect BlurRadius="16"
+                                                                      ShadowDepth="4"
+                                                                      Opacity="0.25"
+                                                                      Direction="270"
+                                                                      Color="#1565C0"/>
+                                                </Border.Effect>
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="bg" Property="Background" Value="#1976D2"/>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter TargetName="bg" Property="Background" Value="#0D47A1"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
